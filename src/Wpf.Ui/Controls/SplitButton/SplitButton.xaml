@@ -42,6 +42,8 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border
                         x:Name="ContentBorder"
+                        Margin="0,-1,-1,-1"
+                        Padding="11,0"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -119,14 +121,13 @@
                             <Border
                                 Grid.Column="1"
                                 Margin="0"
-                                Padding="{TemplateBinding Padding}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness,
                                                                   Converter={StaticResource RightSplitThicknessConverter}}"
                                 CornerRadius="{TemplateBinding CornerRadius,
                                                                Converter={StaticResource RightSplitCornerRadiusConverter}}">
                                 <ToggleButton
-                                    Name="ToggleButton"
+                                    Name="PART_ToggleButton"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     ClickMode="Press"

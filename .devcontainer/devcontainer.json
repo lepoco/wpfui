@@ -1,0 +1,16 @@
+{
+  "name": "WPF UI Docs Dev Container",
+  "image": "mcr.microsoft.com/dotnet/sdk:9.0",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+  "postCreateCommand": "./.devcontainer/post-create.sh",
+  "forwardPorts": [
+    8080
+  ],
+  "remoteEnv": {
+    "NODE_ENV": "development"
+  }
+}

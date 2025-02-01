@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Extensions;
-
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -14,7 +12,7 @@ namespace Wpf.Ui.Controls;
 internal class EventIdentifier
 {
     /// <summary>
-    /// Current identifier.
+    /// Gets or sets the current identifier.
     /// </summary>
     public long Current { get; internal set; } = 0;
 

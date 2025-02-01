@@ -3,10 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Wpf.Ui.Tray;
@@ -17,17 +15,17 @@ namespace Wpf.Ui.Tray;
 internal interface INotifyIcon
 {
     /// <summary>
-    /// Notify icon shell data.
+    /// Gets or sets the notify icon shell data.
     /// </summary>
     public Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; }
 
     /// <summary>
-    /// Whether the icon is currently registered in the tray area.
+    /// Gets or sets a value indicating whether the icon is currently registered in the tray area.
     /// </summary>
     bool IsRegistered { get; set; }
 
     /// <summary>
-    /// Gets the Shell identifier of the icon.
+    /// Gets or sets the Shell identifier of the icon.
     /// </summary>
     int Id { get; set; }
 
@@ -49,15 +47,15 @@ internal interface INotifyIcon
     /// <summary>
     /// Gets or sets the menu displayed when the icon is right-clicked.
     /// </summary>
-    ContextMenu ContextMenu { get; set; }
+    ContextMenu? ContextMenu { get; set; }
 
     /// <summary>
-    /// Gets or sets the value indicating whether to focus the <see cref="Application.MainWindow"/> on single left click.
+    /// Gets or sets a value indicating whether to focus the <see cref="Application.MainWindow"/> on single left click.
     /// </summary>
     bool FocusOnLeftClick { get; set; }
 
     /// <summary>
-    /// Gets or sets the value indicating whether to show the <see cref="Menu"/> on single right click.
+    /// Gets or sets a value indicating whether to show the <see cref="Menu"/> on single right click.
     /// </summary>
     bool MenuOnRightClick { get; set; }
 
@@ -81,6 +79,11 @@ internal interface INotifyIcon
     /// Tries to modify the icon of the <see cref="INotifyIcon"/> in the shell.
     /// </summary>
     bool ModifyIcon();
+
+    /// <summary>
+    /// Tries to modify the tooltip of the <see cref="INotifyIcon"/> in the shell.
+    /// </summary>
+    bool ModifyToolTip();
 
     /// <summary>
     /// Tries to remove the <see cref="INotifyIcon"/> from the shell.

@@ -5,7 +5,9 @@
 
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using Microsoft.Extensions.Localization;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Gallery.Resources;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
 using Wpf.Ui.Gallery.Views.Pages.Collections;
@@ -22,14 +24,14 @@ using Wpf.Ui.Gallery.Views.Pages.Windows;
 
 namespace Wpf.Ui.Gallery.ViewModels.Windows;
 
-public partial class MainWindowViewModel : ObservableObject
+public partial class MainWindowViewModel(IStringLocalizer<Translations> localizer) : ViewModel
 {
     [ObservableProperty]
-    private string _applicationTitle = "WPF UI Gallery";
+    private string _applicationTitle = localizer["WPF UI Gallery"];
 
     [ObservableProperty]
-    private ICollection<object> _menuItems = new ObservableCollection<object>
-    {
+    private ObservableCollection<object> _menuItems =
+    [
         new NavigationViewItem("Home", SymbolRegular.Home24, typeof(DashboardPage)),
         new NavigationViewItem()
         {
@@ -171,19 +173,18 @@ public partial class MainWindowViewModel : ObservableObject
             }
         },
         new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
-    };
+    ];
 
     [ObservableProperty]
-    private ICollection<object> _footerMenuItems = new ObservableCollection<object>()
-    {
+    private ObservableCollection<object> _footerMenuItems =
+    [
         new NavigationViewItem("Settings", SymbolRegular.Settings24, typeof(SettingsPage))
-    };
+    ];
 
     [ObservableProperty]
     private ObservableCollection<Wpf.Ui.Controls.MenuItem> _trayMenuItems =
-        new()
-        {
-            new Wpf.Ui.Controls.MenuItem { Header = "Home", Tag = "tray_home" },
-            new Wpf.Ui.Controls.MenuItem { Header = "Close", Tag = "tray_close" }
-        };
+    [
+        new Wpf.Ui.Controls.MenuItem { Header = "Home", Tag = "tray_home" },
+        new Wpf.Ui.Controls.MenuItem { Header = "Close", Tag = "tray_close" }
+    ];
 }

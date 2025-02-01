@@ -3,10 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
-// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
-// Copyright (C) S. Bäumlisberger
-// All Rights Reserved.
+/* Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
+   https://github.com/sbaeumlisberger/VirtualizingWrapPanel
+   Copyright (C) S. Bäumlisberger
+   All Rights Reserved. */
 
 namespace Wpf.Ui.Controls;
 

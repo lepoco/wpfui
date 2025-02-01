@@ -6,15 +6,15 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+/// <content>
+/// Defines events for <see cref="NavigationView"/>.
+/// </content>
 public partial class NavigationView
 {
-    /// <summary>
-    /// Property for <see cref="PaneOpened"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PaneOpened"/> routed event.</summary>
     public static readonly RoutedEvent PaneOpenedEvent = EventManager.RegisterRoutedEvent(
         nameof(PaneOpened),
         RoutingStrategy.Bubble,
@@ -22,9 +22,7 @@ public partial class NavigationView
         typeof(NavigationView)
     );
 
-    /// <summary>
-    /// Property for <see cref="PaneClosed"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PaneClosed"/> routed event.</summary>
     public static readonly RoutedEvent PaneClosedEvent = EventManager.RegisterRoutedEvent(
         nameof(PaneClosed),
         RoutingStrategy.Bubble,
@@ -32,9 +30,7 @@ public partial class NavigationView
         typeof(NavigationView)
     );
 
-    /// <summary>
-    /// Property for <see cref="SelectionChanged"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SelectionChanged"/> routed event.</summary>
     public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
         nameof(SelectionChanged),
         RoutingStrategy.Bubble,
@@ -42,9 +38,7 @@ public partial class NavigationView
         typeof(NavigationView)
     );
 
-    /// <summary>
-    /// Property for <see cref="ItemInvoked"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ItemInvoked"/> routed event.</summary>
     public static readonly RoutedEvent ItemInvokedEvent = EventManager.RegisterRoutedEvent(
         nameof(ItemInvoked),
         RoutingStrategy.Bubble,
@@ -52,9 +46,7 @@ public partial class NavigationView
         typeof(NavigationView)
     );
 
-    /// <summary>
-    /// Property for <see cref="BackRequested"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="BackRequested"/> routed event.</summary>
     public static readonly RoutedEvent BackRequestedEvent = EventManager.RegisterRoutedEvent(
         nameof(BackRequested),
         RoutingStrategy.Bubble,
@@ -62,9 +54,7 @@ public partial class NavigationView
         typeof(NavigationView)
     );
 
-    /// <summary>
-    /// Property for <see cref="Navigating"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Navigating"/> routed event.</summary>
     public static readonly RoutedEvent NavigatingEvent = EventManager.RegisterRoutedEvent(
         nameof(Navigating),
         RoutingStrategy.Bubble,
@@ -72,9 +62,7 @@ public partial class NavigationView
         typeof(NavigationView)
     );
 
-    /// <summary>
-    /// Property for <see cref="NavigatedEvent"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Navigated"/> routed event.</summary>
     public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(
         nameof(Navigated),
         RoutingStrategy.Bubble,
@@ -174,8 +162,6 @@ public partial class NavigationView
     /// <summary>
     /// Raises the navigating requested event.
     /// </summary>
-    /// <param name="sourcePage"></param>
-    /// <returns></returns>
     protected virtual bool OnNavigating(object sourcePage)
     {
         var eventArgs = new NavigatingCancelEventArgs(NavigatingEvent, this) { Page = sourcePage };
@@ -188,7 +174,6 @@ public partial class NavigationView
     /// <summary>
     /// Raises the navigated requested event.
     /// </summary>
-    /// <param name="page"></param>
     protected virtual void OnNavigated(object page)
     {
         var eventArgs = new NavigatedEventArgs(NavigatedEvent, this) { Page = page };

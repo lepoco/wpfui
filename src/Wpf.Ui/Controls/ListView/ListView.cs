@@ -1,3 +1,8 @@
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -21,6 +26,8 @@ namespace Wpf.Ui.Controls;
 /// </example>
 public class ListView : System.Windows.Controls.ListView
 {
+    private DependencyPropertyDescriptor? _descriptor;
+
     /// <summary>Identifies the <see cref="ViewState"/> dependency property.</summary>
     public static readonly DependencyProperty ViewStateProperty = DependencyProperty.Register(
         nameof(ViewState),
@@ -57,6 +64,7 @@ public class ListView : System.Windows.Controls.ListView
     public ListView()
     {
         Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -64,12 +72,19 @@ public class ListView : System.Windows.Controls.ListView
         Loaded -= OnLoaded; // prevent memory leaks
 
         // Setup initial ViewState and hook into View property changes
-        var descriptor = DependencyPropertyDescriptor.FromProperty(
+        _descriptor = DependencyPropertyDescriptor.FromProperty(
             System.Windows.Controls.ListView.ViewProperty,
             typeof(System.Windows.Controls.ListView)
         );
-        descriptor?.AddValueChanged(this, OnViewPropertyChanged);
+        _descriptor?.AddValueChanged(this, OnViewPropertyChanged);
         UpdateViewState(); // set the initial state
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        Unloaded -= OnUnloaded;
+
+        _descriptor?.RemoveValueChanged(this, OnViewPropertyChanged);
     }
 
     private void OnViewPropertyChanged(object? sender, EventArgs e)

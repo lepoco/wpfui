@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
-
 namespace Wpf.Ui.Tray;
 
 /// <summary>
@@ -13,7 +11,7 @@ namespace Wpf.Ui.Tray;
 internal static class TrayData
 {
     /// <summary>
-    /// Collection of registered tray icons.
+    /// Gets or sets the collection of registered tray icons.
     /// </summary>
     public static List<INotifyIcon> NotifyIcons { get; set; } = new();
 }

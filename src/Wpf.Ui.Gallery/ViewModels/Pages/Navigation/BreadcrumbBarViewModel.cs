@@ -7,19 +7,19 @@ using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
-public partial class BreadcrumbBarViewModel : ObservableObject
+public partial class BreadcrumbBarViewModel : ViewModel
 {
-    private readonly IEnumerable<Folder> _baseFoldersCollection = new Folder[]
-    {
+    private readonly Folder[] _baseFoldersCollection =
+    [
         new("Home"),
         new("Folder1"),
         new("Folder2"),
         new("Folder3"),
-    };
+    ];
 
     [ObservableProperty]
-    private ObservableCollection<string> _strings = new ObservableCollection<string>
-    {
+    private ObservableCollection<string> _strings =
+    [
         "Home",
         "Document",
         "Design",
@@ -28,10 +28,10 @@ public partial class BreadcrumbBarViewModel : ObservableObject
         "Folder1",
         "Folder2",
         "Folder3"
-    };
+    ];
 
     [ObservableProperty]
-    private ObservableCollection<Folder> _folders = new ObservableCollection<Folder> { };
+    private ObservableCollection<Folder> _folders = new();
 
     public BreadcrumbBarViewModel()
     {
@@ -45,17 +45,21 @@ public partial class BreadcrumbBarViewModel : ObservableObject
     private void OnFolderSelected(object item)
     {
         if (item is not Folder selectedFolder)
+        {
             return;
+        }
 
         var index = Folders.IndexOf(selectedFolder);
 
         Folders.Clear();
 
         var counter = 0;
-        foreach (var folder in _baseFoldersCollection)
+        foreach (Folder folder in _baseFoldersCollection)
         {
             if (counter++ > index)
+            {
                 break;
+            }
 
             Folders.Add(folder);
         }
@@ -71,7 +75,9 @@ public partial class BreadcrumbBarViewModel : ObservableObject
     {
         Folders.Clear();
 
-        foreach (var folder in _baseFoldersCollection)
+        foreach (Folder folder in _baseFoldersCollection)
+        {
             Folders.Add(folder);
+        }
     }
 }

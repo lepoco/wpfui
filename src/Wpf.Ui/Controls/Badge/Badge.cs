@@ -18,13 +18,9 @@ namespace Wpf.Ui.Controls;
 /// &lt;/ui:Badge&gt;
 /// </code>
 /// </example>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(Badge), "Badge.bmp")]
 public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
 {
-    /// <summary>
-    /// Property for <see cref="Appearance"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Appearance"/> dependency property.</summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
         nameof(Appearance),
         typeof(Controls.ControlAppearance),

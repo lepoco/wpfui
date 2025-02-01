@@ -7,7 +7,7 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 
-public partial class InfoBadgeViewModel : ObservableObject
+public partial class InfoBadgeViewModel : ViewModel
 {
     [ObservableProperty]
     private InfoBadgeSeverity _infoBadgeSeverity = InfoBadgeSeverity.Attention;
@@ -24,7 +24,7 @@ public partial class InfoBadgeViewModel : ObservableObject
         }
     }
 
-    private InfoBadgeSeverity ConvertIndexToInfoBadgeSeverity(int value)
+    private static InfoBadgeSeverity ConvertIndexToInfoBadgeSeverity(int value)
     {
         return value switch
         {

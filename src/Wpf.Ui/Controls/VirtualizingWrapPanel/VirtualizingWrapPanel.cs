@@ -1,12 +1,12 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
-// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
-// Copyright (C) S. Bäumlisberger
-// All Rights Reserved.
+/* Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
+   https://github.com/sbaeumlisberger/VirtualizingWrapPanel
+   Copyright (C) S. Bäumlisberger
+   All Rights Reserved. */
 
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -20,30 +20,24 @@ namespace Wpf.Ui.Controls;
 /// Extended base class for <see cref="VirtualizingPanel"/>.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
-// [ToolboxItem(true)]
-// [ToolboxBitmap(typeof(VirtualizingWrapPanel), "VirtualizingWrapPanel.bmp")]
-// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
-// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 public class VirtualizingWrapPanel : VirtualizingPanelBase
 {
     /// <summary>
-    /// Size of the single child element.
+    /// Gets or sets the size of the single child element.
     /// </summary>
-    protected Size ChildSize;
+    protected Size ChildSize { get; set; }
 
     /// <summary>
-    /// Amount of the displayed rows.
+    /// Gets or sets the amount of the displayed rows.
     /// </summary>
-    protected int RowCount;
+    protected int RowCount { get; set; }
 
     /// <summary>
-    /// Amount of displayed items per row.
+    /// Gets or sets the amount of displayed items per row.
     /// </summary>
-    protected int ItemsPerRowCount;
+    protected int ItemsPerRowCount { get; set; }
 
-    /// <summary>
-    /// Property for <see cref="SpacingMode"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SpacingMode"/> dependency property.</summary>
     public static readonly DependencyProperty SpacingModeProperty = DependencyProperty.Register(
         nameof(SpacingMode),
         typeof(SpacingMode),
@@ -51,9 +45,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         new FrameworkPropertyMetadata(SpacingMode.Uniform, FrameworkPropertyMetadataOptions.AffectsMeasure)
     );
 
-    /// <summary>
-    /// Property for <see cref="Orientation"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Orientation"/> dependency property.</summary>
     public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(
         nameof(Orientation),
         typeof(Orientation),
@@ -65,9 +57,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="ItemSize"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ItemSize"/> dependency property.</summary>
     public static readonly DependencyProperty ItemSizeProperty = DependencyProperty.Register(
         nameof(ItemSize),
         typeof(Size),
@@ -75,9 +65,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         new FrameworkPropertyMetadata(Size.Empty, FrameworkPropertyMetadataOptions.AffectsMeasure)
     );
 
-    /// <summary>
-    /// Property for <see cref="StretchItems"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="StretchItems"/> dependency property.</summary>
     public static readonly DependencyProperty StretchItemsProperty = DependencyProperty.Register(
         nameof(StretchItems),
         typeof(bool),
@@ -114,7 +102,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     }
 
     /// <summary>
-    /// Gets or sets a value that specifies if the items get stretched to fill up remaining space. The default value is false.
+    /// Gets or sets a value indicating whether the items get stretched to fill up remaining space. The default value is false.
     /// </summary>
     /// <remarks>
     /// The MaxWidth and MaxHeight properties of the ItemContainerStyle can be used to limit the stretching.
@@ -141,7 +129,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     private static void OnOrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not VirtualizingWrapPanel panel)
+        {
             return;
+        }
 
         panel.OnOrientationChanged();
     }
@@ -177,13 +167,19 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         }
 
         if (ItemSize != Size.Empty)
+        {
             ChildSize = ItemSize;
+        }
         else if (InternalChildren.Count != 0)
+        {
             ChildSize = InternalChildren[0].DesiredSize;
+        }
         else
+        {
             ChildSize = CalculateChildSize(availableSize);
+        }
 
-        ItemsPerRowCount = Double.IsInfinity(GetWidth(availableSize))
+        ItemsPerRowCount = double.IsInfinity(GetWidth(availableSize))
             ? Items.Count
             : Math.Max(1, (int)Math.Floor(GetWidth(availableSize) / GetWidth(ChildSize)));
 
@@ -193,12 +189,15 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     /// <summary>
     /// Calculates child size.
     /// </summary>
-    private Size CalculateChildSize(Size availableSize)
+    private Size CalculateChildSize(Size _)
     {
+        // REVIEW: this method comes with side effects. code smell
         if (Items.Count == 0)
+        {
             return new Size(0, 0);
+        }
 
-        var startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(0);
+        GeneratorPosition startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(0);
 
         using IDisposable at = ItemContainerGenerator.StartAt(
             startPosition,
@@ -222,11 +221,13 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
                 ? GetWidth(availableSize)
                 : GetWidth(ChildSize) * ItemsPerRowCount;
 
-        if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo groupItem)
+        if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo)
+        {
             extentWidth =
                 Orientation == Orientation.Vertical
                     ? Math.Max(extentWidth - (Margin.Left + Margin.Right), 0)
                     : Math.Max(extentWidth - (Margin.Top + Margin.Bottom), 0);
+        }
 
         var extentHeight = GetHeight(ChildSize) * RowCount;
 
@@ -278,8 +279,10 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         var offsetY = GetY(Offset);
 
         /* When the items owner is a group item offset is handled by the parent panel. */
-        if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo groupItem)
+        if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo)
+        {
             offsetY = 0;
+        }
 
         Size childSize = CalculateChildArrangeSize(finalSize);
 
@@ -294,7 +297,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             int columnIndex = itemIndex % ItemsPerRowCount;
             int rowIndex = itemIndex / ItemsPerRowCount;
 
-            double x = outerSpacing + columnIndex * (GetWidth(childSize) + innerSpacing);
+            double x = outerSpacing + (columnIndex * (GetWidth(childSize) + innerSpacing));
             double y = rowIndex * GetHeight(childSize);
 
             if (GetHeight(finalSize) == 0.0)
@@ -320,7 +323,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     protected Size CalculateChildArrangeSize(Size finalSize)
     {
         if (!StretchItems)
+        {
             return ChildSize;
+        }
 
         if (Orientation == Orientation.Vertical)
         {
@@ -339,12 +344,12 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     }
 
     /// <summary>
-    /// Gets container style of the <see cref="ItemsControl"/>.
+    /// Gets the style property value for item containers within the <see cref="ItemsControl"/>.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="property"></param>
-    /// <param name="fallbackValue"></param>
-    /// <returns></returns>
+    /// <typeparam name="T">The expected type of the property value.</typeparam>
+    /// <param name="property">The <see cref="DependencyProperty"/> to retrieve the value for.</param>
+    /// <param name="fallbackValue">The value to return if the property is not set.</param>
+    /// <returns>The value of the specified property if found; otherwise, the <paramref name="fallbackValue"/>.</returns>
     private T ReadItemContainerStyle<T>(DependencyProperty property, T fallbackValue)
         where T : notnull
     {
@@ -359,7 +364,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     protected override ItemRange UpdateItemRange()
     {
         if (!IsVirtualizing)
+        {
             return new ItemRange(0, Items.Count - 1);
+        }
 
         int startIndex;
         int endIndex;
@@ -367,7 +374,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo groupItem)
         {
             if (!VirtualizingPanel.GetIsVirtualizingWhenGrouping(ItemsControl))
+            {
                 return new ItemRange(0, Items.Count - 1);
+            }
 
             var offset = new Point(Offset.X, groupItem.Constraints.Viewport.Location.Y);
 
@@ -422,8 +431,8 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
                             )
                     ) - (int)Math.Ceiling((offsetInPixel + viewportHeight) / GetHeight(ChildSize));
 
-                startIndex = Math.Max(startIndex - rowCountInCacheBefore * ItemsPerRowCount, 0);
-                endIndex = Math.Min(endIndex + rowCountInCacheAfter * ItemsPerRowCount, Items.Count - 1);
+                startIndex = Math.Max(startIndex - (rowCountInCacheBefore * ItemsPerRowCount), 0);
+                endIndex = Math.Min(endIndex + (rowCountInCacheAfter * ItemsPerRowCount), Items.Count - 1);
             }
             else if (CacheLengthUnit == VirtualizationCacheLengthUnit.Item)
             {
@@ -446,14 +455,14 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             startIndex = startRowIndex * ItemsPerRowCount;
 
             int endRowIndex = GetRowIndex(viewportEndPos);
-            endIndex = Math.Min(endRowIndex * ItemsPerRowCount + (ItemsPerRowCount - 1), Items.Count - 1);
+            endIndex = Math.Min((endRowIndex * ItemsPerRowCount) + (ItemsPerRowCount - 1), Items.Count - 1);
 
             if (CacheLengthUnit == VirtualizationCacheLengthUnit.Page)
             {
                 int itemsPerPage = endIndex - startIndex + 1;
-                startIndex = Math.Max(startIndex - (int)CacheLength.CacheBeforeViewport * itemsPerPage, 0);
+                startIndex = Math.Max(startIndex - ((int)CacheLength.CacheBeforeViewport * itemsPerPage), 0);
                 endIndex = Math.Min(
-                    endIndex + (int)CacheLength.CacheAfterViewport * itemsPerPage,
+                    endIndex + ((int)CacheLength.CacheAfterViewport * itemsPerPage),
                     Items.Count - 1
                 );
             }
@@ -482,20 +491,28 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     protected override void BringIndexIntoView(int index)
     {
         if (index < 0 || index >= Items.Count)
+        {
             throw new ArgumentOutOfRangeException(
                 nameof(index),
                 $"The argument {nameof(index)} must be >= 0 and < the number of items."
             );
+        }
 
         if (ItemsPerRowCount == 0)
+        {
             throw new InvalidOperationException();
+        }
 
         var offset = (index / ItemsPerRowCount) * GetHeight(ChildSize);
 
         if (Orientation == Orientation.Horizontal)
+        {
             SetHorizontalOffset(offset);
+        }
         else
+        {
             SetVerticalOffset(offset);
+        }
     }
 
     /// <inheritdoc />

@@ -3,8 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
+/* Based on Windows UI Library
+   Copyright(c) Microsoft Corporation.All rights reserved. */
 
 using System.Collections.Specialized;
 using System.Windows.Controls.Primitives;
@@ -25,9 +25,7 @@ namespace Wpf.Ui.Controls;
 [StyleTypedProperty(Property = nameof(ItemContainerStyle), StyleTargetType = typeof(BreadcrumbBarItem))]
 public class BreadcrumbBar : System.Windows.Controls.ItemsControl
 {
-    /// <summary>
-    /// Property for <see cref="Command"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Command"/> dependency property.</summary>
     public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
         nameof(Command),
         typeof(ICommand),
@@ -35,9 +33,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="TemplateButtonCommand"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(IRelayCommand),
@@ -50,10 +46,8 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
-    /// <summary>
-    /// Property for <see cref="ItemClicked"/>.
-    /// </summary>
-    public static readonly RoutedEvent ItemClickedRoutedEvent = EventManager.RegisterRoutedEvent(
+    /// <summary>Identifies the <see cref="ItemClicked"/> routed event.</summary>
+    public static readonly RoutedEvent ItemClickedEvent = EventManager.RegisterRoutedEvent(
         nameof(ItemClicked),
         RoutingStrategy.Bubble,
         typeof(TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs>),
@@ -66,9 +60,9 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     [Bindable(true)]
     [Category("Action")]
     [Localizability(LocalizationCategory.NeverLocalize)]
-    public ICommand Command
+    public ICommand? Command
     {
-        get => (ICommand)GetValue(CommandProperty);
+        get => (ICommand?)GetValue(CommandProperty);
         set => SetValue(CommandProperty, value);
     }
 
@@ -77,8 +71,8 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// </summary>
     public event TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs> ItemClicked
     {
-        add => AddHandler(ItemClickedRoutedEvent, value);
-        remove => RemoveHandler(ItemClickedRoutedEvent, value);
+        add => AddHandler(ItemClickedEvent, value);
+        remove => RemoveHandler(ItemClickedEvent, value);
     }
 
     /// <summary>
@@ -94,7 +88,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
 
     protected virtual void OnItemClicked(object item, int index)
     {
-        var args = new BreadcrumbBarItemClickedEventArgs(ItemClickedRoutedEvent, this, item, index);
+        var args = new BreadcrumbBarItemClickedEventArgs(ItemClickedEvent, this, item, index);
         RaiseEvent(args);
 
         if (Command?.CanExecute(item) ?? false)
@@ -149,7 +143,10 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
             return;
         }
 
-        InteractWithItemContainer(2, static item => item.IsLast = false);
+        InteractWithItemContainer(
+            2,
+            static item => item.SetCurrentValue(BreadcrumbBarItem.IsLastProperty, false)
+        );
         UpdateLastContainer();
     }
 
@@ -179,7 +176,9 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     private void InteractWithItemContainer(int offsetFromEnd, Action<BreadcrumbBarItem> action)
     {
         if (ItemContainerGenerator.Items.Count <= 0)
+        {
             return;
+        }
 
         var item = ItemContainerGenerator.Items[^offsetFromEnd];
         var container = (BreadcrumbBarItem)ItemContainerGenerator.ContainerFromItem(item);
@@ -187,5 +186,9 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         action.Invoke(container);
     }
 
-    private void UpdateLastContainer() => InteractWithItemContainer(1, static item => item.IsLast = true);
+    private void UpdateLastContainer() =>
+        InteractWithItemContainer(
+            1,
+            static item => item.SetCurrentValue(BreadcrumbBarItem.IsLastProperty, true)
+        );
 }

@@ -8,7 +8,7 @@ using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 
-public partial class ListViewViewModel : ObservableObject
+public partial class ListViewViewModel : ViewModel
 {
     private int _listViewSelectionModeComboBoxSelectedIndex = 0;
 
@@ -17,7 +17,7 @@ public partial class ListViewViewModel : ObservableObject
         get => _listViewSelectionModeComboBoxSelectedIndex;
         set
         {
-            SetProperty<int>(ref _listViewSelectionModeComboBoxSelectedIndex, value);
+            _ = SetProperty(ref _listViewSelectionModeComboBoxSelectedIndex, value);
             UpdateListViewSelectionMode(value);
         }
     }
@@ -26,14 +26,9 @@ public partial class ListViewViewModel : ObservableObject
     private SelectionMode _listViewSelectionMode = SelectionMode.Single;
 
     [ObservableProperty]
-    private ObservableCollection<Person> _basicListViewItems;
+    private ObservableCollection<Person> _basicListViewItems = GeneratePersons();
 
-    public ListViewViewModel()
-    {
-        _basicListViewItems = GeneratePersons();
-    }
-
-    private ObservableCollection<Person> GeneratePersons()
+    private static ObservableCollection<Person> GeneratePersons()
     {
         var random = new Random();
         var persons = new ObservableCollection<Person>();
@@ -83,6 +78,7 @@ public partial class ListViewViewModel : ObservableObject
         };
 
         for (int i = 0; i < 50; i++)
+        {
             persons.Add(
                 new Person(
                     names[random.Next(0, names.Length)],
@@ -90,6 +86,7 @@ public partial class ListViewViewModel : ObservableObject
                     companies[random.Next(0, companies.Length)]
                 )
             );
+        }
 
         return persons;
     }

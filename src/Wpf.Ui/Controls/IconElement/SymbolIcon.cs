@@ -3,21 +3,15 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Extensions;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents a text element containing an icon glyph.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
 public class SymbolIcon : FontIcon
 {
-    /// <summary>
-    /// Property for <see cref="Symbol"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Symbol"/> dependency property.</summary>
     public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
         nameof(Symbol),
         typeof(SymbolRegular),
@@ -25,9 +19,7 @@ public class SymbolIcon : FontIcon
         new PropertyMetadata(SymbolRegular.Empty, static (o, _) => ((SymbolIcon)o).OnGlyphChanged())
     );
 
-    /// <summary>
-    /// Property for <see cref="Filled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Filled"/> dependency property.</summary>
     public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(
         nameof(Filled),
         typeof(bool),
@@ -45,7 +37,7 @@ public class SymbolIcon : FontIcon
     }
 
     /// <summary>
-    /// Defines whether or not we should use the <see cref="SymbolFilled"/>.
+    /// Gets or sets a value indicating whether or not we should use the <see cref="SymbolFilled"/>.
     /// </summary>
     public bool Filled
     {
@@ -72,9 +64,13 @@ public class SymbolIcon : FontIcon
     private void OnGlyphChanged()
     {
         if (Filled)
-            Glyph = Symbol.Swap().GetString();
+        {
+            SetCurrentValue(GlyphProperty, Symbol.Swap().GetString());
+        }
         else
-            Glyph = Symbol.GetString();
+        {
+            SetCurrentValue(GlyphProperty, Symbol.GetString());
+        }
     }
 
     private void SetFontReference()

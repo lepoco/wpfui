@@ -5,7 +5,7 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
-public partial class FlyoutViewModel : ObservableObject
+public partial class FlyoutViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isFlyoutOpen = false;
@@ -14,6 +14,8 @@ public partial class FlyoutViewModel : ObservableObject
     private void OnButtonClick(object sender)
     {
         if (!IsFlyoutOpen)
+        {
             IsFlyoutOpen = true;
+        }
     }
 }

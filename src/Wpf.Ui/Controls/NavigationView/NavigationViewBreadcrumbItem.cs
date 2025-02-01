@@ -18,5 +18,6 @@ internal class NavigationViewBreadcrumbItem
     }
 
     public object Content { get; }
+
     public string PageId { get; }
 }

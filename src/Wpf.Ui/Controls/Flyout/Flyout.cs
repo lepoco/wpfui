@@ -18,9 +18,7 @@ public class Flyout : System.Windows.Controls.ContentControl
 
     private System.Windows.Controls.Primitives.Popup? _popup = default;
 
-    /// <summary>
-    /// Property for <see cref="IsOpen"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
         nameof(IsOpen),
         typeof(bool),
@@ -28,9 +26,7 @@ public class Flyout : System.Windows.Controls.ContentControl
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="Placement"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Placement"/> dependency property.</summary>
     public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(
         nameof(Placement),
         typeof(PlacementMode),
@@ -38,9 +34,7 @@ public class Flyout : System.Windows.Controls.ContentControl
         new PropertyMetadata(PlacementMode.Top)
     );
 
-    /// <summary>
-    /// Routed event for <see cref="Opened"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Opened"/> routed event.</summary>
     public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(
         nameof(Opened),
         RoutingStrategy.Bubble,
@@ -48,9 +42,7 @@ public class Flyout : System.Windows.Controls.ContentControl
         typeof(Flyout)
     );
 
-    /// <summary>
-    /// Routed event for <see cref="Closed"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Closed"/> routed event.</summary>
     public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(
         nameof(Closed),
         RoutingStrategy.Bubble,

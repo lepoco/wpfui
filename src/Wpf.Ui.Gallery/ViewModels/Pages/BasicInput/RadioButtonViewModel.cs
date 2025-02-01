@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
-public partial class RadioButtonViewModel : ObservableObject
+public partial class RadioButtonViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isRadioButtonEnabled = true;
@@ -16,7 +16,9 @@ public partial class RadioButtonViewModel : ObservableObject
     private void OnRadioButtonCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsRadioButtonEnabled = !(checkbox?.IsChecked ?? false);
     }

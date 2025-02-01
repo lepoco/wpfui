@@ -14,7 +14,7 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <Thickness x:Key="NumberBoxBorderThemeThickness">1,1,1,0</Thickness>
+    <Thickness x:Key="NumberBoxBorderThemeThickness">1,1,1,1</Thickness>
     <Thickness x:Key="NumberBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
     <Thickness x:Key="NumberBoxLeftIconMargin">10,8,0,0</Thickness>
     <Thickness x:Key="NumberBoxRightIconMargin">0,8,10,0</Thickness>
@@ -32,6 +32,7 @@
         <!--  Universal WPF UI ContextMenu  -->
         <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}" />
         <Setter Property="CaretBrush" Value="{DynamicResource TextControlForeground}" />
+        <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Background" Value="{DynamicResource TextControlBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource NumberBoxBorderThemeThickness}" />
@@ -54,10 +55,10 @@
                     <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <Border
                             x:Name="ContentBorder"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
                             Padding="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
@@ -71,115 +72,104 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <ContentControl
-                                    x:Name="ControlIconLeft"
-                                    Grid.Column="0"
-                                    Margin="{StaticResource NumberBoxLeftIconMargin}"
-                                    Padding="0"
-                                    VerticalAlignment="Top"
-                                    Content="{TemplateBinding Icon}"
-                                    FontSize="16"
-                                    IsTabStop="False"
-                                    Foreground="{TemplateBinding Foreground}" />
-                                <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
-                                    <controls:PassiveScrollViewer
-                                        x:Name="PART_ContentHost"
-                                        Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
-                                        TextElement.Foreground="{TemplateBinding Foreground}" />
-                                    <TextBlock
-                                        x:Name="PlaceholderTextBox"
-                                        Margin="0"
-                                        Padding="1,0"
+                                <Grid Grid.Column="0" Background="Transparent">
+                                    <ContentControl
+                                        x:Name="ControlIconLeft"
+                                        Margin="{StaticResource NumberBoxLeftIconMargin}"
+                                        Padding="0"
                                         VerticalAlignment="Top"
-                                        Foreground="{DynamicResource TextControlPlaceholderForeground}"
-                                        Text="{TemplateBinding PlaceholderText}" />
+                                        Content="{TemplateBinding Icon}"
+                                        FontSize="16"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        IsTabStop="False" />
+                                </Grid>
+                                <Grid
+                                    x:Name="TextContentArea"
+                                    Grid.Column="1"
+                                    Background="Transparent">
+                                    <Grid Margin="{TemplateBinding Padding}">
+                                        <controls:PassiveScrollViewer
+                                            x:Name="PART_ContentHost"
+                                            Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
+                                            TextElement.Foreground="{TemplateBinding Foreground}" />
+                                        <TextBlock
+                                            x:Name="PlaceholderTextBox"
+                                            Margin="0"
+                                            Padding="1,0"
+                                            VerticalAlignment="Top"
+                                            Foreground="{DynamicResource TextControlPlaceholderForeground}"
+                                            Text="{TemplateBinding PlaceholderText}" />
+                                    </Grid>
                                 </Grid>
                                 <!--  Buttons and Icons have no padding from the main element to allow absolute positions if height is larger than the text entry zone  -->
-                                <controls:Button
-                                    x:Name="ClearButton"
+                                <StackPanel
                                     Grid.Column="2"
-                                    Width="{StaticResource NumberBoxButtonHeight}"
-                                    Height="{StaticResource NumberBoxButtonHeight}"
-                                    Margin="{StaticResource NumberBoxButtonMargin}"
-                                    Padding="{StaticResource NumberBoxButtonPadding}"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Top"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    Appearance="Secondary"
                                     Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                    CommandParameter="clear"
-                                    Cursor="Arrow"
-                                    IsTabStop="False"
-                                    Foreground="{DynamicResource TextControlButtonForeground}">
-                                    <controls:Button.Icon>
+                                    Orientation="Horizontal">
+                                    <Button
+                                        x:Name="PART_ClearButton"
+                                        Width="{StaticResource NumberBoxButtonHeight}"
+                                        Height="{StaticResource NumberBoxButtonHeight}"
+                                        Margin="{StaticResource NumberBoxButtonMargin}"
+                                        Padding="{StaticResource NumberBoxButtonPadding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Focusable="False"
+                                        Foreground="{DynamicResource TextControlButtonForeground}"
+                                        IsTabStop="False">
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="Dismiss24" />
-                                    </controls:Button.Icon>
-                                </controls:Button>
-                                <controls:Button
-                                    x:Name="InlineIncrementButton"
-                                    Grid.Column="3"
-                                    Width="{StaticResource NumberBoxButtonHeight}"
-                                    Height="{StaticResource NumberBoxButtonHeight}"
-                                    Margin="{StaticResource NumberBoxButtonMargin}"
-                                    Padding="{StaticResource NumberBoxButtonPadding}"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Top"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    Appearance="Secondary"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                    CommandParameter="increment"
-                                    Cursor="Arrow"
-                                    Foreground="{DynamicResource TextControlButtonForeground}"
-                                    IsTabStop="False"
-                                    Visibility="Collapsed">
-                                    <controls:Button.Icon>
+                                    </Button>
+                                    <RepeatButton
+                                        x:Name="PART_InlineIncrementButton"
+                                        Width="{StaticResource NumberBoxButtonHeight}"
+                                        Height="{StaticResource NumberBoxButtonHeight}"
+                                        Margin="{StaticResource NumberBoxButtonMargin}"
+                                        Padding="{StaticResource NumberBoxButtonPadding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="{DynamicResource TextControlButtonForeground}"
+                                        IsTabStop="False"
+                                        Visibility="Collapsed">
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronUp24" />
-                                    </controls:Button.Icon>
-                                </controls:Button>
-                                <controls:Button
-                                    x:Name="InlineDecrementButton"
-                                    Grid.Column="4"
-                                    Width="{StaticResource NumberBoxButtonHeight}"
-                                    Height="{StaticResource NumberBoxButtonHeight}"
-                                    Margin="{StaticResource NumberBoxButtonMargin}"
-                                    Padding="{StaticResource NumberBoxButtonPadding}"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Top"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    Appearance="Secondary"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                    CommandParameter="decrement"
-                                    Cursor="Arrow"
-                                    FontSize="{StaticResource NumberBoxButtonIconSize}"
-                                    Foreground="{DynamicResource TextControlButtonForeground}"
-                                    IsTabStop="False"
-                                    Visibility="Collapsed">
-                                    <controls:Button.Icon>
+                                    </RepeatButton>
+                                    <RepeatButton
+                                        x:Name="PART_InlineDecrementButton"
+                                        Width="{StaticResource NumberBoxButtonHeight}"
+                                        Height="{StaticResource NumberBoxButtonHeight}"
+                                        Margin="{StaticResource NumberBoxButtonMargin}"
+                                        Padding="{StaticResource NumberBoxButtonPadding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        FontSize="{StaticResource NumberBoxButtonIconSize}"
+                                        Foreground="{DynamicResource TextControlButtonForeground}"
+                                        IsTabStop="False"
+                                        Visibility="Collapsed">
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronDown24" />
-                                    </controls:Button.Icon>
-                                </controls:Button>
+                                    </RepeatButton>
+                                </StackPanel>
                                 <ContentControl
                                     x:Name="ControlIconRight"
-                                    Grid.Column="5"
+                                    Grid.Column="3"
                                     Margin="{StaticResource NumberBoxRightIconMargin}"
                                     Padding="0"
                                     VerticalAlignment="Top"
                                     Content="{TemplateBinding Icon}"
                                     FontSize="16"
-                                    IsTabStop="False"
-                                    Foreground="{TemplateBinding Foreground}" />
+                                    Foreground="{TemplateBinding Foreground}"
+                                    IsTabStop="False" />
                             </Grid>
                         </Border>
                         <!--  The Accent Border is a separate element so that changes to the border thickness do not affect the position of the element  -->
@@ -192,24 +182,24 @@
                             CornerRadius="{TemplateBinding Border.CornerRadius}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="PlaceholderEnabled" Value="False">
+                        <Trigger Property="CurrentPlaceholderEnabled" Value="False">
                             <Setter TargetName="PlaceholderTextBox" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowClearButton" Value="False">
-                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_ClearButton" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="ClearButtonEnabled" Value="False">
-                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_ClearButton" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="SpinButtonPlacementMode" Value="Hidden">
-                            <Setter TargetName="InlineIncrementButton" Property="Margin" Value="0" />
-                            <Setter TargetName="InlineDecrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_InlineIncrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_InlineDecrementButton" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="SpinButtonPlacementMode" Value="Inline">
-                            <Setter TargetName="InlineIncrementButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="InlineDecrementButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_InlineIncrementButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_InlineDecrementButton" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IconPlacement" Value="Left">
                             <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
@@ -240,13 +230,14 @@
                         </MultiTrigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="SpinButtonPlacementMode" Value="Hidden" />
-                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_ClearButton" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="True">
-                            <Setter Property="Cursor" Value="IBeam" />
+                            <Setter TargetName="TextContentArea" Property="Cursor" Value="IBeam" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TextContentArea" Property="Cursor" Value="Arrow" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource TextControlBackgroundDisabled}" />
                             <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushDisabled}" />
                             <Setter TargetName="AccentBorder" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushDisabled}" />

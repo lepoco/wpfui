@@ -3,11 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
+/* Based on Windows UI Library
+   Copyright(c) Microsoft Corporation.All rights reserved. */
 
 using System.Collections;
 using System.Windows.Controls;
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Animations;
 
 // ReSharper disable once CheckNamespace
@@ -29,7 +30,7 @@ public interface INavigationView
     Visibility HeaderVisibility { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the header is always visible.
+    /// Gets or sets a value indicating whether the header is always visible.
     /// </summary>
     bool AlwaysShowHeader { get; set; }
 
@@ -64,7 +65,7 @@ public interface INavigationView
     object? ContentOverlay { get; set; }
 
     /// <summary>
-    /// Gets a value that indicates whether the back button is enabled or disabled.
+    /// Gets a value indicating whether the back button is enabled or disabled.
     /// </summary>
     bool IsBackEnabled { get; }
 
@@ -75,17 +76,17 @@ public interface INavigationView
     NavigationViewBackButtonVisible IsBackButtonVisible { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the toggle button is visible.
+    /// Gets or sets a value indicating whether the toggle button is visible.
     /// </summary>
     bool IsPaneToggleVisible { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that specifies whether the NavigationView pane is expanded to its full width.
+    /// Gets or sets a value indicating whether the NavigationView pane is expanded to its full width.
     /// </summary>
     bool IsPaneOpen { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that determines whether the pane is shown.
+    /// Gets or sets a value indicating whether the pane is shown.
     /// </summary>
     bool IsPaneVisible { get; set; }
 
@@ -115,7 +116,7 @@ public interface INavigationView
     object? PaneFooter { get; set; }
 
     /// <summary>
-    /// Gets a value that specifies how the pane and content areas of a NavigationView are being shown.
+    /// Gets or sets a value that specifies how the pane and content areas of a NavigationView are being shown.
     /// <para>It is not the same PaneDisplayMode as in WinUi.</para>
     /// </summary>
     NavigationViewPaneDisplayMode PaneDisplayMode { get; set; }
@@ -136,7 +137,7 @@ public interface INavigationView
     BreadcrumbBar? BreadcrumbBar { get; set; }
 
     /// <summary>
-    /// Template Property for <see cref="MenuItems"/> and <see cref="FooterMenuItems"/>.
+    /// Gets or sets the template property for <see cref="MenuItems"/> and <see cref="FooterMenuItems"/>.
     /// </summary>
     ControlTemplate? ItemTemplate { get; set; }
 
@@ -191,7 +192,7 @@ public interface INavigationView
     event TypedEventHandler<NavigationView, NavigatedEventArgs> Navigated;
 
     /// <summary>
-    /// Gets a value that indicates whether there is at least one entry in back navigation history.
+    /// Gets a value indicating whether there is at least one entry in back navigation history.
     /// </summary>
     bool CanGoBack { get; }
 
@@ -210,9 +211,6 @@ public interface INavigationView
     /// <summary>
     /// Synchronously adds an element to the navigation stack and navigates current navigation Frame to the
     /// </summary>
-    /// <param name="pageType"></param>
-    /// <param name="dataContext"></param>
-    /// <returns></returns>
     bool NavigateWithHierarchy(Type pageType, object? dataContext = null);
 
     /// <summary>
@@ -245,7 +243,7 @@ public interface INavigationView
     /// <summary>
     /// Allows you to assign to the NavigationView a special service responsible for retrieving the page instances.
     /// </summary>
-    void SetPageService(IPageService pageService);
+    void SetPageProviderService(INavigationViewPageProvider navigationViewPageProvider);
 
     /// <summary>
     /// Allows you to assign a general <see cref="IServiceProvider"/> to the NavigationView that will be used to retrieve page instances and view models.

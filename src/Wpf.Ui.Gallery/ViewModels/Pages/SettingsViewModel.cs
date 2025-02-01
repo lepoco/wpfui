@@ -9,14 +9,12 @@ using Wpf.Ui.Extensions;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages;
 
-public sealed partial class SettingsViewModel : ObservableObject, INavigationAware
+public sealed partial class SettingsViewModel(INavigationService navigationService) : ViewModel
 {
-    private readonly INavigationService _navigationService;
-
     private bool _isInitialized = false;
 
     [ObservableProperty]
-    private string _appVersion = String.Empty;
+    private string _appVersion = string.Empty;
 
     [ObservableProperty]
     private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
@@ -25,20 +23,13 @@ public sealed partial class SettingsViewModel : ObservableObject, INavigationAwa
     private NavigationViewPaneDisplayMode _currentApplicationNavigationStyle =
         NavigationViewPaneDisplayMode.Left;
 
-    public SettingsViewModel(INavigationService navigationService)
-    {
-        _navigationService = navigationService;
-    }
-
-    public void OnNavigatedTo()
+    public override void OnNavigatedTo()
     {
         if (!_isInitialized)
         {
             InitializeViewModel();
         }
     }
-
-    public void OnNavigatedFrom() { }
 
     partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
     {
@@ -50,7 +41,7 @@ public sealed partial class SettingsViewModel : ObservableObject, INavigationAwa
         NavigationViewPaneDisplayMode newValue
     )
     {
-        _ = _navigationService.SetPaneDisplayMode(newValue);
+        _ = navigationService.SetPaneDisplayMode(newValue);
     }
 
     private void InitializeViewModel()
@@ -72,8 +63,8 @@ public sealed partial class SettingsViewModel : ObservableObject, INavigationAwa
         }
     }
 
-    private string GetAssemblyVersion()
+    private static string GetAssemblyVersion()
     {
-        return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
+        return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? string.Empty;
     }
 }

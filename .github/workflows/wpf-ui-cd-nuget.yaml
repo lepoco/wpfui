@@ -2,7 +2,11 @@ name: wpf-ui-cd-nuget
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - release/*
+    paths:
+      - 'src/**'
 
   workflow_dispatch:
 
@@ -11,28 +15,47 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v1.3
+      - uses: microsoft/setup-msbuild@v2
         with:
           msbuild-architecture: x64
       - uses: nuget/setup-nuget@v2
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-      - name: Setup .NET Core SDK 8.x
+      - name: Setup .NET Core SDK 9.x
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
+
+      - name: Fetch the certificate
+        run: |
+          $signing_keys_payload = [System.Convert]::FromBase64String("${{ secrets.STRONG_NAME_KEY }}")
+          $currentDirectory = Get-Location
+          $certificatePath = Join-Path -Path $currentDirectory -ChildPath "src/lepo.snk"
+          [IO.File]::WriteAllBytes("$certificatePath", $signing_keys_payload)
 
       - name: Install dependencies
         run: dotnet restore
 
       - name: Build
-        run: dotnet build src\Wpf.Ui\Wpf.Ui.csproj --configuration Release --no-restore
+        run: dotnet build src\Wpf.Ui\Wpf.Ui.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Build
-        run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore
+        run: dotnet build src\Wpf.Ui.Abstractions\Wpf.Ui.Abstractions.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
+
+      - name: Build
+        run: dotnet build src\Wpf.Ui.DependencyInjection\Wpf.Ui.DependencyInjection.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
+
+      - name: Build
+        run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Publish the package to NuGet.org
         run: nuget push **\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
 
       - name: Publish the symbols to NuGet.org
         run: nuget push **\*.snupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
+
+      - name: Upload NuGet packages as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: '**\*.nupkg'

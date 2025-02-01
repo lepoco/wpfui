@@ -13,10 +13,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class Image : Control
 {
-    /// <summary>
-    /// Gets or sets the Source on this Image.
-    /// The Source property is the ImageSource that holds the actual image drawn.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Source"/> dependency property.</summary>
     public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
         nameof(Source),
         typeof(ImageSource),
@@ -30,9 +27,7 @@ public class Image : Control
         null
     );
 
-    /// <summary>
-    /// DependencyProperty for CornerRadius property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
         nameof(CornerRadius),
         typeof(CornerRadius),
@@ -40,9 +35,7 @@ public class Image : Control
         new PropertyMetadata(new CornerRadius(0), new PropertyChangedCallback(OnCornerRadiusChanged))
     );
 
-    /// <summary>
-    /// DependencyProperty for StretchDirection property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Stretch"/> dependency property.</summary>
     /// <seealso cref="Viewbox.Stretch" />
     public static readonly DependencyProperty StretchProperty = DependencyProperty.Register(
         nameof(Stretch),
@@ -55,9 +48,7 @@ public class Image : Control
         null
     );
 
-    /// <summary>
-    /// DependencyProperty for Stretch property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="StretchDirection"/> dependency property.</summary>
     public static readonly DependencyProperty StretchDirectionProperty = DependencyProperty.Register(
         nameof(StretchDirection),
         typeof(StretchDirection),
@@ -69,9 +60,7 @@ public class Image : Control
         null
     );
 
-    /// <summary>
-    /// DependencyPropertyKey for InnerCornerRadius property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="InnerCornerRadius"/> dependency property.</summary>
     public static readonly DependencyPropertyKey InnerCornerRadiusPropertyKey =
         DependencyProperty.RegisterReadOnly(
             nameof(InnerCornerRadius),
@@ -80,9 +69,7 @@ public class Image : Control
             new PropertyMetadata(new CornerRadius(0))
         );
 
-    /// <summary>
-    /// DependencyProperty for InnerCornerRadius property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="InnerCornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty InnerCornerRadiusProperty =
         InnerCornerRadiusPropertyKey.DependencyProperty;
 

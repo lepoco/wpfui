@@ -8,14 +8,9 @@ using Wpf.Ui.Controls;
 namespace Wpf.Ui.Gallery.ControlsLookup;
 
 [AttributeUsage(AttributeTargets.Class)]
-class GalleryPageAttribute : Attribute
+internal sealed class GalleryPageAttribute(string description, SymbolRegular icon) : Attribute
 {
-    public string Description { get; }
-    public SymbolRegular Icon { get; }
+    public string Description { get; } = description;
 
-    public GalleryPageAttribute(string description, SymbolRegular icon)
-    {
-        Description = description;
-        Icon = icon;
-    }
+    public SymbolRegular Icon { get; } = icon;
 }

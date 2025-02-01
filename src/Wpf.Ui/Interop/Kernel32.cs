@@ -6,12 +6,14 @@
 // This Source Code is partially based on reverse engineering of the Windows Operating System,
 // and is intended for use on Windows systems only.
 // This Source Code is partially based on the source code provided by the .NET Foundation.
-
-// NOTE
+//
+// NOTE:
 // I split unmanaged code stuff into the NativeMethods library.
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
 
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
 using System.Runtime.InteropServices;
 
 namespace Wpf.Ui.Interop;
@@ -19,8 +21,6 @@ namespace Wpf.Ui.Interop;
 /// <summary>
 /// Used by multiple technologies.
 /// </summary>
-// ReSharper disable IdentifierTypo
-// ReSharper disable InconsistentNaming
 internal class Kernel32
 {
     /// <summary>

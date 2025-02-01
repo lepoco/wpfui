@@ -36,6 +36,10 @@ themes:
 - changed-files:
   - any-glob-to-any-file: 'src/Wpf.Ui/Appearance/**'
 
+titlebar:
+- changed-files:
+  - any-glob-to-any-file: 'src/Wpf.Ui/Controls/TitleBar/**'
+
 tray:
 - changed-files:
   - any-glob-to-any-file: 'src/Wpf.Ui.Tray/**'

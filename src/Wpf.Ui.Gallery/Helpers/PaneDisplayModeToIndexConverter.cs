@@ -11,41 +11,23 @@ internal sealed class PaneDisplayModeToIndexConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is NavigationViewPaneDisplayMode.LeftFluent)
+        return value switch
         {
-            return 1;
-        }
-
-        if (value is NavigationViewPaneDisplayMode.Top)
-        {
-            return 2;
-        }
-
-        if (value is NavigationViewPaneDisplayMode.Bottom)
-        {
-            return 3;
-        }
-
-        return 0;
+            NavigationViewPaneDisplayMode.LeftFluent => 1,
+            NavigationViewPaneDisplayMode.Top => 2,
+            NavigationViewPaneDisplayMode.Bottom => 3,
+            _ => 0
+        };
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is 1)
+        return value switch
         {
-            return NavigationViewPaneDisplayMode.LeftFluent;
-        }
-
-        if (value is 2)
-        {
-            return NavigationViewPaneDisplayMode.Top;
-        }
-
-        if (value is 3)
-        {
-            return NavigationViewPaneDisplayMode.Bottom;
-        }
-
-        return NavigationViewPaneDisplayMode.Left;
+            1 => NavigationViewPaneDisplayMode.LeftFluent,
+            2 => NavigationViewPaneDisplayMode.Top,
+            3 => NavigationViewPaneDisplayMode.Bottom,
+            _ => NavigationViewPaneDisplayMode.Left
+        };
     }
 }

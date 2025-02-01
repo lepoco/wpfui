@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui;
@@ -10,31 +11,12 @@ namespace Wpf.Ui;
 /// <summary>
 /// A service that provides methods related to navigation.
 /// </summary>
-public partial class NavigationService : INavigationService
+public partial class NavigationService(INavigationViewPageProvider pageProvider) : INavigationService
 {
     /// <summary>
-    /// Locally attached service provider.
+    /// Gets or sets the control representing navigation.
     /// </summary>
-    private readonly IServiceProvider _serviceProvider;
-
-    /// <summary>
-    /// Locally attached page service.
-    /// </summary>
-    private IPageService? _pageService;
-
-    /// <summary>
-    /// Control representing navigation.
-    /// </summary>
-    protected INavigationView? NavigationControl;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="NavigationService"/> class.
-    /// </summary>
-    /// <param name="serviceProvider">Service provider providing page instances.</param>
-    public NavigationService(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
+    protected INavigationView? NavigationControl { get; set; }
 
     /// <inheritdoc />
     public INavigationView GetNavigationControl()
@@ -46,30 +28,7 @@ public partial class NavigationService : INavigationService
     public void SetNavigationControl(INavigationView navigation)
     {
         NavigationControl = navigation;
-
-        if (_pageService != null)
-        {
-            NavigationControl.SetPageService(_pageService);
-
-            return;
-        }
-
-        NavigationControl.SetServiceProvider(_serviceProvider);
-    }
-
-    /// <inheritdoc />
-    public void SetPageService(IPageService pageService)
-    {
-        if (NavigationControl == null)
-        {
-            _pageService = pageService;
-
-            return;
-        }
-
-        ThrowIfPageServiceIsNull();
-
-        NavigationControl.SetPageService(_pageService!);
+        NavigationControl.SetPageProviderService(pageProvider);
     }
 
     /// <inheritdoc />
@@ -133,14 +92,6 @@ public partial class NavigationService : INavigationService
         if (NavigationControl is null)
         {
             throw new ArgumentNullException(nameof(NavigationControl));
-        }
-    }
-
-    protected void ThrowIfPageServiceIsNull()
-    {
-        if (_pageService is null)
-        {
-            throw new ArgumentNullException(nameof(_pageService));
         }
     }
 }

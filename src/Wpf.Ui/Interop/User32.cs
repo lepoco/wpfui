@@ -3,27 +3,28 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// This Source Code is partially based on reverse engineering of the Windows Operating System,
-// and is intended for use on Windows systems only.
-// This Source Code is partially based on the source code provided by the .NET Foundation.
+/* This Source Code is partially based on reverse engineering of the Windows Operating System,
+   and is intended for use on Windows systems only.
+   This Source Code is partially based on the source code provided by the .NET Foundation.
 
-// NOTE
-// I split unmanaged code stuff into the NativeMethods library.
-// If you have suggestions for the code below, please submit your changes there.
-// https://github.com/lepoco/nativemethods
+   NOTE:
+   I split unmanaged code stuff into the NativeMethods library.
+   If you have suggestions for the code below, please submit your changes there.
+   https://github.com/lepoco/nativemethods */
+
 using System.Runtime.InteropServices;
 
-// ReSharper disable InconsistentNaming
 namespace Wpf.Ui.Interop;
 
-/// <summary>
-/// USER procedure declarations, constant definitions and macros.
-/// </summary>
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1300 // Element should begin with upper-case letter
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
 #pragma warning disable SA1401 // Fields should be private
+
+/// <summary>
+/// USER procedure declarations, constant definitions and macros.
+/// </summary>
 internal static class User32
 {
     /// <summary>
@@ -35,14 +36,14 @@ internal static class User32
         ASYNCWINDOWPOS = 0x4000,
         DEFERERASE = 0x2000,
         DRAWFRAME = 0x0020,
-        FRAMECHANGED = 0x0020,
+        FRAMECHANGED = DRAWFRAME,
         HIDEWINDOW = 0x0080,
         NOACTIVATE = 0x0010,
         NOCOPYBITS = 0x0100,
         NOMOVE = 0x0002,
         NOOWNERZORDER = 0x0200,
         NOREDRAW = 0x0008,
-        NOREPOSITION = 0x0200,
+        NOREPOSITION = NOOWNERZORDER,
         NOSENDCHANGING = 0x0400,
         NOSIZE = 0x0001,
         NOZORDER = 0x0004,
@@ -60,7 +61,7 @@ internal static class User32
         /// </summary>
         DOES_NOT_EXIST = unchecked((uint)-1),
         ENABLED = 0,
-        BYCOMMAND = 0,
+        BYCOMMAND = ENABLED,
         GRAYED = 1,
         DISABLED = 2,
     }
@@ -436,7 +437,7 @@ internal static class User32
         SHOWWINDOW = 0x0018,
         CTLCOLOR = 0x0019,
         WININICHANGE = 0x001A,
-        SETTINGCHANGE = 0x001A,
+        SETTINGCHANGE = WININICHANGE,
         ACTIVATEAPP = 0x001C,
         SETCURSOR = 0x0020,
         MOUSEACTIVATE = 0x0021,
@@ -563,7 +564,7 @@ internal static class User32
         /// This is the hard-coded message value used by WinForms for Shell_NotifyIcon.
         /// It's relatively safe to reuse.
         /// </summary>
-        TRAYMOUSEMESSAGE = 0x800, //WM_USER + 1024
+        TRAYMOUSEMESSAGE = 0x800, // WM_USER + 1024
         APP = 0x8000,
     }
 
@@ -591,16 +592,17 @@ internal static class User32
         GROUP = 0x00020000,
         TABSTOP = 0x00010000,
 
-        MINIMIZEBOX = 0x00020000,
-        MAXIMIZEBOX = 0x00010000,
+        MINIMIZEBOX = GROUP,
+        MAXIMIZEBOX = TABSTOP,
 
         CAPTION = BORDER | DLGFRAME,
         TILED = OVERLAPPED,
         ICONIC = MINIMIZE,
         SIZEBOX = THICKFRAME,
-        TILEDWINDOW = OVERLAPPEDWINDOW,
 
         OVERLAPPEDWINDOW = OVERLAPPED | CAPTION | SYSMENU | THICKFRAME | MINIMIZEBOX | MAXIMIZEBOX,
+        TILEDWINDOW = OVERLAPPEDWINDOW,
+
         POPUPWINDOW = POPUP | BORDER | SYSMENU,
         CHILDWINDOW = CHILD,
     }
@@ -611,7 +613,7 @@ internal static class User32
     [Flags]
     public enum WS_EX : long
     {
-        NONE = 0,
+        NONE = 0x00000000,
         DLGMODALFRAME = 0x00000001,
         NOPARENTNOTIFY = 0x00000004,
         TOPMOST = 0x00000008,
@@ -623,11 +625,11 @@ internal static class User32
         CLIENTEDGE = 0x00000200,
         CONTEXTHELP = 0x00000400,
         RIGHT = 0x00001000,
-        LEFT = 0x00000000,
+        LEFT = NONE,
         RTLREADING = 0x00002000,
-        LTRREADING = 0x00000000,
+        LTRREADING = NONE,
         LEFTSCROLLBAR = 0x00004000,
-        RIGHTSCROLLBAR = 0x00000000,
+        RIGHTSCROLLBAR = NONE,
         CONTROLPARENT = 0x00010000,
         STATICEDGE = 0x00020000,
         APPWINDOW = 0x00040000,
@@ -636,8 +638,8 @@ internal static class User32
         LAYOUTRTL = 0x00400000, // Right to left mirroring
         COMPOSITED = 0x02000000,
         NOACTIVATE = 0x08000000,
-        OVERLAPPEDWINDOW = (WINDOWEDGE | CLIENTEDGE),
-        PALETTEWINDOW = (WINDOWEDGE | TOOLWINDOW | TOPMOST),
+        OVERLAPPEDWINDOW = WINDOWEDGE | CLIENTEDGE,
+        PALETTEWINDOW = WINDOWEDGE | TOOLWINDOW | TOPMOST,
     }
 
     /// <summary>
@@ -739,10 +741,10 @@ internal static class User32
     {
         HIDE = 0,
         SHOWNORMAL = 1,
-        NORMAL = 1,
+        NORMAL = SHOWNORMAL,
         SHOWMINIMIZED = 2,
         SHOWMAXIMIZED = 3,
-        MAXIMIZE = 3,
+        MAXIMIZE = SHOWMAXIMIZED,
         SHOWNOACTIVATE = 4,
         SHOW = 5,
         MINIMIZE = 6,
@@ -911,7 +913,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -929,7 +931,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -946,7 +948,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -963,7 +965,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure will receive the message.</param>
     /// <param name="wMsg">The message to be sent.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int SendMessage(
@@ -1098,7 +1100,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode)]
     public static extern IntPtr DefWindowProcW(
@@ -1116,7 +1118,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr DefWindowProcA(
@@ -1133,7 +1135,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr DefWindowProc(
@@ -1146,7 +1148,7 @@ internal static class User32
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// <para>Unicode declaration for <see cref="GetWindowLong(IntPtr, Int32)"/></para>
+    /// <para>Unicode declaration for <see cref="GetWindowLong(IntPtr, int)"/></para>
     /// </summary>
     /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
     /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
@@ -1157,7 +1159,7 @@ internal static class User32
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// <para>ANSI declaration for <see cref="GetWindowLong(IntPtr, Int32)"/></para>
+    /// <para>ANSI declaration for <see cref="GetWindowLong(IntPtr, int)"/></para>
     /// </summary>
     /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
     /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
@@ -1592,6 +1594,7 @@ internal static class User32
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
     public static extern uint GetDpiForWindow([In] HandleRef hwnd);
 }
+
 #pragma warning restore SA1300 // Element should begin with upper-case letter
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
 #pragma warning restore SA1401 // Fields should be private

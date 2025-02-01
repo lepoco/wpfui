@@ -14,11 +14,15 @@ namespace Wpf.Ui.Controls;
 /// A DataGrid control that displays data in rows and columns and allows
 /// for the entering and editing of data.
 /// </summary>
+[StyleTypedProperty(Property = nameof(CheckBoxColumnElementStyle), StyleTargetType = typeof(CheckBox))]
+[StyleTypedProperty(Property = nameof(CheckBoxColumnEditingElementStyle), StyleTargetType = typeof(CheckBox))]
+[StyleTypedProperty(Property = nameof(ComboBoxColumnElementStyle), StyleTargetType = typeof(ComboBox))]
+[StyleTypedProperty(Property = nameof(ComboBoxColumnEditingElementStyle), StyleTargetType = typeof(ComboBox))]
+[StyleTypedProperty(Property = nameof(TextColumnElementStyle), StyleTargetType = typeof(TextBlock))]
+[StyleTypedProperty(Property = nameof(TextColumnEditingElementStyle), StyleTargetType = typeof(TextBox))]
 public class DataGrid : System.Windows.Controls.DataGrid
 {
-    /// <summary>
-    /// The DependencyProperty that represents the <see cref="CheckBoxColumnElementStyle"/> property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CheckBoxColumnElementStyle"/> dependency property.</summary>
     public static readonly DependencyProperty CheckBoxColumnElementStyleProperty =
         DependencyProperty.Register(
             nameof(CheckBoxColumnElementStyle),
@@ -27,9 +31,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
             new FrameworkPropertyMetadata(null)
         );
 
-    /// <summary>
-    /// The DependencyProperty that represents the <see cref="CheckBoxColumnEditingElementStyle"/> property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CheckBoxColumnEditingElementStyle"/> dependency property.</summary>
     public static readonly DependencyProperty CheckBoxColumnEditingElementStyleProperty =
         DependencyProperty.Register(
             nameof(CheckBoxColumnEditingElementStyle),
@@ -38,22 +40,94 @@ public class DataGrid : System.Windows.Controls.DataGrid
             new FrameworkPropertyMetadata(null)
         );
 
+    /// <summary>Identifies the <see cref="ComboBoxColumnElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty ComboBoxColumnElementStyleProperty =
+        DependencyProperty.Register(
+            nameof(ComboBoxColumnElementStyle),
+            typeof(Style),
+            typeof(DataGrid),
+            new FrameworkPropertyMetadata(null)
+        );
+
+    /// <summary>Identifies the <see cref="ComboBoxColumnEditingElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty ComboBoxColumnEditingElementStyleProperty =
+        DependencyProperty.Register(
+            nameof(ComboBoxColumnEditingElementStyle),
+            typeof(Style),
+            typeof(DataGrid),
+            new FrameworkPropertyMetadata(null)
+        );
+
+    /// <summary>Identifies the <see cref="TextColumnElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty TextColumnElementStyleProperty =
+        DependencyProperty.Register(
+            nameof(TextColumnElementStyle),
+            typeof(Style),
+            typeof(DataGrid),
+            new FrameworkPropertyMetadata(null)
+        );
+
+    /// <summary>Identifies the <see cref="TextColumnEditingElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty TextColumnEditingElementStyleProperty =
+        DependencyProperty.Register(
+            nameof(TextColumnEditingElementStyle),
+            typeof(Style),
+            typeof(DataGrid),
+            new FrameworkPropertyMetadata(null)
+        );
+
     /// <summary>
-    /// A style to apply to all checkbox column in the DataGrid
+    /// Gets or sets the style which is applied to all checkbox column in the DataGrid
     /// </summary>
-    public Style CheckBoxColumnElementStyle
+    public Style? CheckBoxColumnElementStyle
     {
-        get => (Style)GetValue(CheckBoxColumnElementStyleProperty);
+        get => (Style?)GetValue(CheckBoxColumnElementStyleProperty);
         set => SetValue(CheckBoxColumnElementStyleProperty, value);
     }
 
     /// <summary>
-    /// A style to apply to all checkbox column in the DataGrid
+    /// Gets or sets the style for all the column checkboxes in the DataGrid
     /// </summary>
-    public Style CheckBoxColumnEditingElementStyle
+    public Style? CheckBoxColumnEditingElementStyle
     {
-        get => (Style)GetValue(CheckBoxColumnEditingElementStyleProperty);
+        get => (Style?)GetValue(CheckBoxColumnEditingElementStyleProperty);
         set => SetValue(CheckBoxColumnEditingElementStyleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the style which is applied to all combobox column in the DataGrid
+    /// </summary>
+    public Style? ComboBoxColumnElementStyle
+    {
+        get => (Style?)GetValue(ComboBoxColumnElementStyleProperty);
+        set => SetValue(ComboBoxColumnElementStyleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the style for all the column comboboxes in the DataGrid
+    /// </summary>
+    public Style? ComboBoxColumnEditingElementStyle
+    {
+        get => (Style?)GetValue(ComboBoxColumnEditingElementStyleProperty);
+        set => SetValue(ComboBoxColumnEditingElementStyleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the style which is applied to all textbox column in the DataGrid
+    /// </summary>
+    public Style? TextColumnElementStyle
+    {
+        get => (Style?)GetValue(TextColumnElementStyleProperty);
+        set => SetValue(TextColumnElementStyleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the style for all the column textboxes in the DataGrid
+    /// </summary>
+    public Style? TextColumnEditingElementStyle
+    {
+        get => (Style?)GetValue(TextColumnEditingElementStyleProperty);
+        set => SetValue(TextColumnEditingElementStyleProperty, value);
     }
 
     protected override void OnInitialized(EventArgs e)
@@ -72,37 +146,117 @@ public class DataGrid : System.Windows.Controls.DataGrid
 
     private void UpdateColumnElementStyles()
     {
-        foreach (var singleColumn in Columns)
+        foreach (DataGridColumn singleColumn in Columns)
+        {
             UpdateSingleColumn(singleColumn);
+        }
     }
 
     private void UpdateSingleColumn(DataGridColumn dataGridColumn)
     {
-        if (dataGridColumn is DataGridCheckBoxColumn checkBoxColumn)
+        switch (dataGridColumn)
         {
-            if (
-                checkBoxColumn.ReadLocalValue(DataGridCheckBoxColumn.ElementStyleProperty)
-                == DependencyProperty.UnsetValue
-            )
-                BindingOperations.SetBinding(
-                    checkBoxColumn,
-                    DataGridCheckBoxColumn.ElementStyleProperty,
-                    new Binding { Path = new PropertyPath(CheckBoxColumnElementStyleProperty), Source = this }
-                );
+            case DataGridCheckBoxColumn checkBoxColumn:
+                if (
+                    checkBoxColumn.ReadLocalValue(DataGridBoundColumn.ElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        checkBoxColumn,
+                        DataGridBoundColumn.ElementStyleProperty,
+                        new Binding { Path = new PropertyPath(CheckBoxColumnElementStyleProperty), Source = this }
+                    );
+                }
 
-            if (
-                checkBoxColumn.ReadLocalValue(DataGridCheckBoxColumn.EditingElementStyleProperty)
-                == DependencyProperty.UnsetValue
-            )
-                BindingOperations.SetBinding(
-                    checkBoxColumn,
-                    DataGridCheckBoxColumn.EditingElementStyleProperty,
-                    new Binding
-                    {
-                        Path = new PropertyPath(CheckBoxColumnEditingElementStyleProperty),
-                        Source = this
-                    }
-                );
+                if (
+                    checkBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        checkBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding
+                        {
+                            Path = new PropertyPath(CheckBoxColumnEditingElementStyleProperty), Source = this
+                        }
+                    );
+                }
+
+                break;
+
+            case DataGridComboBoxColumn comboBoxColumn:
+                if (
+                    comboBoxColumn.ReadLocalValue(DataGridBoundColumn.ElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        comboBoxColumn,
+                        DataGridBoundColumn.ElementStyleProperty,
+                        new Binding { Path = new PropertyPath(ComboBoxColumnElementStyleProperty), Source = this }
+                    );
+                }
+
+                if (
+                    comboBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        comboBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding
+                        {
+                            Path = new PropertyPath(ComboBoxColumnEditingElementStyleProperty), Source = this
+                        }
+                    );
+                }
+
+                if (
+                    comboBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        comboBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding
+                        {
+                            Path = new PropertyPath(ComboBoxColumnEditingElementStyleProperty), Source = this
+                        }
+                    );
+                }
+
+                break;
+
+            case DataGridTextColumn textBoxColumn:
+                if (
+                    textBoxColumn.ReadLocalValue(DataGridBoundColumn.ElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        textBoxColumn,
+                        DataGridBoundColumn.ElementStyleProperty,
+                        new Binding { Path = new PropertyPath(TextColumnElementStyleProperty), Source = this }
+                    );
+                }
+
+                if (
+                    textBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        textBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding { Path = new PropertyPath(TextColumnEditingElementStyleProperty), Source = this }
+                    );
+                }
+
+                break;
         }
     }
 }

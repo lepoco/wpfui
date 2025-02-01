@@ -7,7 +7,7 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 
-public partial class InfoBarViewModel : ObservableObject
+public partial class InfoBarViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isShortInfoBarOpened = true;
@@ -22,30 +22,32 @@ public partial class InfoBarViewModel : ObservableObject
     private InfoBarSeverity _longInfoBarSeverity = InfoBarSeverity.Informational;
 
     private int _shortInfoBarSeverityComboBoxSelectedIndex = 0;
+
     public int ShortInfoBarSeverityComboBoxSelectedIndex
     {
         get => _shortInfoBarSeverityComboBoxSelectedIndex;
         set
         {
-            SetProperty<int>(ref _shortInfoBarSeverityComboBoxSelectedIndex, value);
+            _ = SetProperty(ref _shortInfoBarSeverityComboBoxSelectedIndex, value);
 
             ShortInfoBarSeverity = ConvertIndexToInfoBarSeverity(value);
         }
     }
 
     private int _longInfoBarSeverityComboBoxSelectedIndex = 0;
+
     public int LongInfoBarSeverityComboBoxSelectedIndex
     {
         get => _longInfoBarSeverityComboBoxSelectedIndex;
         set
         {
-            SetProperty<int>(ref _longInfoBarSeverityComboBoxSelectedIndex, value);
+            _ = SetProperty(ref _longInfoBarSeverityComboBoxSelectedIndex, value);
 
             LongInfoBarSeverity = ConvertIndexToInfoBarSeverity(value);
         }
     }
 
-    private InfoBarSeverity ConvertIndexToInfoBarSeverity(int value)
+    private static InfoBarSeverity ConvertIndexToInfoBarSeverity(int value)
     {
         return value switch
         {

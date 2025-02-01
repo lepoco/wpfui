@@ -7,7 +7,7 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
-public partial class SnackbarViewModel(ISnackbarService snackbarService) : ObservableObject
+public partial class SnackbarViewModel(ISnackbarService snackbarService) : ViewModel
 {
     private ControlAppearance _snackbarAppearance = ControlAppearance.Secondary;
 
@@ -21,7 +21,7 @@ public partial class SnackbarViewModel(ISnackbarService snackbarService) : Obser
         get => _snackbarAppearanceComboBoxSelectedIndex;
         set
         {
-            SetProperty<int>(ref _snackbarAppearanceComboBoxSelectedIndex, value);
+            _ = SetProperty(ref _snackbarAppearanceComboBoxSelectedIndex, value);
             UpdateSnackbarAppearance(value);
         }
     }

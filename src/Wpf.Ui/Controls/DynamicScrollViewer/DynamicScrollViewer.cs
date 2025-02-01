@@ -11,8 +11,6 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Custom <see cref="System.Windows.Controls.ScrollViewer"/> with events depending on actions taken by the user.
 /// </summary>
-// [ToolboxItem(true)]
-// [ToolboxBitmap(typeof(DynamicScrollViewer), "DynamicScrollViewer.bmp")]
 [DefaultEvent("ScrollChangedEvent")]
 public class DynamicScrollViewer : PassiveScrollViewer
 {
@@ -29,44 +27,36 @@ public class DynamicScrollViewer : PassiveScrollViewer
 
     private double _minimalChange = 40d;
 
-    /// <summary>
-    /// Property for <see cref="IsScrollingVertically"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsScrollingVertically"/> dependency property.</summary>
     public static readonly DependencyProperty IsScrollingVerticallyProperty = DependencyProperty.Register(
         nameof(IsScrollingVertically),
         typeof(bool),
         typeof(DynamicScrollViewer),
-        new PropertyMetadata(false, IsScrollingVerticallyProperty_OnChanged)
+        new PropertyMetadata(false, OnIsScrollingVerticallyChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsScrollingHorizontally"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsScrollingHorizontally"/> dependency property.</summary>
     public static readonly DependencyProperty IsScrollingHorizontallyProperty = DependencyProperty.Register(
         nameof(IsScrollingHorizontally),
         typeof(bool),
         typeof(DynamicScrollViewer),
-        new PropertyMetadata(false, IsScrollingHorizontally_OnChanged)
+        new PropertyMetadata(false, OnIsScrollingHorizontallyChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="MinimalChange"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MinimalChange"/> dependency property.</summary>
     public static readonly DependencyProperty MinimalChangeProperty = DependencyProperty.Register(
         nameof(MinimalChange),
         typeof(double),
         typeof(DynamicScrollViewer),
-        new PropertyMetadata(40d, MinimalChangeProperty_OnChanged)
+        new PropertyMetadata(40d, OnMinimalChangeChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="Timeout"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Timeout"/> dependency property.</summary>
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(
         nameof(Timeout),
         typeof(int),
         typeof(DynamicScrollViewer),
-        new PropertyMetadata(1200, TimeoutProperty_OnChanged)
+        new PropertyMetadata(1200, OnTimeoutChanged)
     );
 
     /// <summary>
@@ -175,7 +165,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         }
     }
 
-    private static void IsScrollingVerticallyProperty_OnChanged(
+    private static void OnIsScrollingVerticallyChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
@@ -188,7 +178,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         scroll._scrollingVertically = scroll.IsScrollingVertically;
     }
 
-    private static void IsScrollingHorizontally_OnChanged(
+    private static void OnIsScrollingHorizontallyChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
@@ -201,10 +191,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         scroll._scrollingHorizontally = scroll.IsScrollingHorizontally;
     }
 
-    private static void MinimalChangeProperty_OnChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnMinimalChangeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollViewer scroll)
         {
@@ -214,7 +201,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         scroll._minimalChange = scroll.MinimalChange;
     }
 
-    private static void TimeoutProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnTimeoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollViewer scroll)
         {

@@ -3,17 +3,18 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 
 namespace Wpf.Ui.Tray.Interop;
 
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable SA1401 // Fields should be private
+
 /// <summary>
 /// The Windows UI provides users with access to a wide variety of objects necessary to run applications and manage the operating system.
 /// </summary>
-// ReSharper disable IdentifierTypo
-// ReSharper disable InconsistentNaming
 internal static class Shell32
 {
     /// <summary>
@@ -105,7 +106,7 @@ internal static class Shell32
         /// 0x00000004. The szTip member is valid.
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x80)] // 128
-        public string szTip;
+        public string? szTip;
 
         /// <summary>
         /// The state of the icon.  There are two flags that can be set independently.
@@ -117,7 +118,7 @@ internal static class Shell32
         public uint dwStateMask;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x100)] // 256
-        public string szInfo;
+        public string? szInfo;
 
         /// <summary>
         /// Prior to Vista this was a union of uTimeout and uVersion.  As of Vista, uTimeout has been deprecated.
@@ -125,14 +126,14 @@ internal static class Shell32
         public uint uVersion; // Used with Shell_NotifyIcon flag NIM_SETVERSION.
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x40)] // 64
-        public string szInfoTitle;
+        public string? szInfoTitle;
 
         public uint dwInfoFlags;
 
         public Guid guidItem;
 
         // Vista only
-        IntPtr hBalloonIcon;
+        public IntPtr hBalloonIcon;
     }
 
     [DllImport(Libraries.Shell32, PreserveSig = false)]
@@ -158,7 +159,7 @@ internal static class Shell32
     /// <summary>
     /// Sets the User Model AppID for the current process, enabling Windows to retrieve this ID
     /// </summary>
-    /// <param name="AppID"></param>
+    /// <param name="AppID">The string ID to be assigned</param>
     [DllImport(Libraries.Shell32, PreserveSig = false)]
     public static extern void SetCurrentProcessExplicitAppUserModelID(
         [MarshalAs(UnmanagedType.LPWStr)] string AppID
@@ -167,9 +168,13 @@ internal static class Shell32
     /// <summary>
     /// Retrieves the User Model AppID that has been explicitly set for the current process via SetCurrentProcessExplicitAppUserModelID
     /// </summary>
-    /// <param name="AppID"></param>
+    /// <param name="AppID">Out parameter that receives the string ID.</param>
+    /// <returns>An HRESULT indicating success (S_OK) or failure of the operation. If the function fails, the returned AppID is null.</returns>
     [DllImport(Libraries.Shell32)]
     public static extern int GetCurrentProcessExplicitAppUserModelID(
         [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID
     );
 }
+
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore SA1401 // Fields should be private

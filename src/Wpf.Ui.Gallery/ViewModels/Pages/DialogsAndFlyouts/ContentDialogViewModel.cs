@@ -9,10 +9,10 @@ using Wpf.Ui.Gallery.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
-public partial class ContentDialogViewModel(IContentDialogService contentDialogService) : ObservableObject
+public partial class ContentDialogViewModel(IContentDialogService contentDialogService) : ViewModel
 {
     [ObservableProperty]
-    private string _dialogResultText = String.Empty;
+    private string _dialogResultText = string.Empty;
 
     [RelayCommand]
     private async Task OnShowDialog(object content)
@@ -39,7 +39,7 @@ public partial class ContentDialogViewModel(IContentDialogService contentDialogS
     [RelayCommand]
     private async Task OnShowSignInContentDialog()
     {
-        var termsOfUseContentDialog = new TermsOfUseContentDialog(contentDialogService.GetContentPresenter());
+        var termsOfUseContentDialog = new TermsOfUseContentDialog(contentDialogService.GetDialogHost());
 
         _ = await termsOfUseContentDialog.ShowAsync();
     }

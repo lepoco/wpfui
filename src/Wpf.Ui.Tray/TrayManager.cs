@@ -3,9 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
-using System.Windows.Interop;
 
 namespace Wpf.Ui.Tray;
 
@@ -32,6 +30,11 @@ internal static class TrayManager
 {
     public static bool Register(INotifyIcon notifyIcon)
     {
+        if (notifyIcon is null)
+        {
+            return false;
+        }
+
         return Register(notifyIcon, GetParentSource());
     }
 
@@ -45,7 +48,7 @@ internal static class TrayManager
         return Register(notifyIcon, (HwndSource)PresentationSource.FromVisual(parentWindow));
     }
 
-    public static bool Register(INotifyIcon notifyIcon, HwndSource parentSource)
+    public static bool Register(INotifyIcon notifyIcon, HwndSource? parentSource)
     {
         if (parentSource is null)
         {
@@ -54,7 +57,7 @@ internal static class TrayManager
                 return false;
             }
 
-            Unregister(notifyIcon);
+            _ = Unregister(notifyIcon);
 
             return false;
         }
@@ -66,7 +69,7 @@ internal static class TrayManager
 
         if (notifyIcon.IsRegistered)
         {
-            Unregister(notifyIcon);
+            _ = Unregister(notifyIcon);
         }
 
         notifyIcon.Id = TrayData.NotifyIcons.Count + 1;
@@ -88,7 +91,7 @@ internal static class TrayManager
             dwState = 0x2
         };
 
-        if (!String.IsNullOrEmpty(notifyIcon.TooltipText))
+        if (!string.IsNullOrEmpty(notifyIcon.TooltipText))
         {
             notifyIcon.ShellIconData.szTip = notifyIcon.TooltipText;
             notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.TIP;
@@ -98,7 +101,7 @@ internal static class TrayManager
 
         notifyIcon.HookWindow.AddHook(notifyIcon.WndProc);
 
-        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, notifyIcon.ShellIconData);
+        _ = Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, notifyIcon.ShellIconData);
 
         TrayData.NotifyIcons.Add(notifyIcon);
 
@@ -119,6 +122,19 @@ internal static class TrayManager
         return Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.MODIFY, notifyIcon.ShellIconData);
     }
 
+    public static bool ModifyToolTip(INotifyIcon notifyIcon)
+    {
+        if (!notifyIcon.IsRegistered)
+        {
+            return true;
+        }
+
+        notifyIcon.ShellIconData.szTip = notifyIcon.TooltipText;
+        notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.TIP;
+
+        return Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.MODIFY, notifyIcon.ShellIconData);
+    }
+
     /// <summary>
     /// Tries to remove the <see cref="INotifyIcon"/> from the shell.
     /// </summary>
@@ -129,7 +145,7 @@ internal static class TrayManager
             return false;
         }
 
-        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIcon.ShellIconData);
+        _ = Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIcon.ShellIconData);
 
         notifyIcon.IsRegistered = false;
 
@@ -139,7 +155,7 @@ internal static class TrayManager
     /// <summary>
     /// Gets application source.
     /// </summary>
-    private static HwndSource GetParentSource()
+    private static HwndSource? GetParentSource()
     {
         Window mainWindow = Application.Current.MainWindow;
 
@@ -153,7 +169,7 @@ internal static class TrayManager
 
     private static void ReloadHicon(INotifyIcon notifyIcon)
     {
-        var hIcon = IntPtr.Zero;
+        IntPtr hIcon = IntPtr.Zero;
 
         if (notifyIcon.Icon is not null)
         {

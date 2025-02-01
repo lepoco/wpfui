@@ -1,8 +1,12 @@
-namespace Wpf.Ui.Gallery.UnitTests
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+namespace Wpf.Ui.Gallery.UnitTests;
+
+public class UnitTest1
 {
-    public class UnitTest1
-    {
-        [Fact]
-        public void Test1() { }
-    }
+    [Fact]
+    public void Test1() { }
 }

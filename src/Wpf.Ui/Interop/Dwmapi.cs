@@ -6,23 +6,25 @@
 // This Source Code is partially based on reverse engineering of the Windows Operating System,
 // and is intended for use on Windows systems only.
 // This Source Code is partially based on the source code provided by the .NET Foundation.
-
-// NOTE
+//
+// NOTE:
 // I split unmanaged code stuff into the NativeMethods library.
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
+//
+// Windows Kits\10\Include\10.0.22000.0\um\dwmapi.h
+
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
 
 using System.Runtime.InteropServices;
 
 namespace Wpf.Ui.Interop;
 
-// Windows Kits\10\Include\10.0.22000.0\um\dwmapi.h
-
 /// <summary>
 /// Desktop Window Manager (DWM).
 /// </summary>
-// ReSharper disable IdentifierTypo
-// ReSharper disable InconsistentNaming
 internal static class Dwmapi
 {
     /// <summary>
@@ -618,6 +620,22 @@ internal static class Dwmapi
     );
 
     /// <summary>
+    /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
+    /// </summary>
+    /// <param name="hWnd">The handle to the window for which the attribute value is to be set.</param>
+    /// <param name="dwAttribute">A flag describing which value to set, specified as a value of the DWMWINDOWATTRIBUTE enumeration.</param>
+    /// <param name="pvAttribute">A pointer to an object containing the attribute value to set.</param>
+    /// <param name="cbAttribute">The size, in bytes, of the attribute value being set via the <c>pvAttribute</c> parameter.</param>
+    /// <returns>If the function succeeds, it returns <c>S_OK</c>. Otherwise, it returns an <c>HRESULT</c> error code.</returns>
+    [DllImport(Libraries.Dwmapi)]
+    public static extern int DwmSetWindowAttribute(
+        [In] IntPtr hWnd,
+        [In] DWMWINDOWATTRIBUTE dwAttribute,
+        [In] ref uint pvAttribute,
+        [In] int cbAttribute
+    );
+
+    /// <summary>
     /// Retrieves the current value of a specified Desktop Window Manager (DWM) attribute applied to a window. For programming guidance, and code examples, see Controlling non-client region rendering.
     /// </summary>
     /// <param name="hWnd">The handle to the window from which the attribute value is to be retrieved.</param>
@@ -656,3 +674,5 @@ internal static class Dwmapi
     [DllImport(Libraries.Dwmapi, EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
     public static extern void DwmGetColorizationParameters([Out] out DWMCOLORIZATIONPARAMS dwParameters);
 }
+
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter

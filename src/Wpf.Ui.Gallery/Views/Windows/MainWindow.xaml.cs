@@ -29,9 +29,7 @@ public partial class MainWindow : IWindow
 
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         navigationService.SetNavigationControl(NavigationView);
-        contentDialogService.SetContentPresenter(RootContentDialog);
-
-        NavigationView.SetServiceProvider(serviceProvider);
+        contentDialogService.SetDialogHost(RootContentDialog);
     }
 
     public MainWindowViewModel ViewModel { get; }
@@ -47,10 +45,12 @@ public partial class MainWindow : IWindow
             return;
         }
 
-        NavigationView.HeaderVisibility =
+        NavigationView.SetCurrentValue(
+            NavigationView.HeaderVisibilityProperty,
             navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
                 ? Visibility.Visible
-                : Visibility.Collapsed;
+                : Visibility.Collapsed
+        );
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
@@ -61,7 +61,7 @@ public partial class MainWindow : IWindow
         }
 
         _isPaneOpenedOrClosedFromCode = true;
-        NavigationView.IsPaneOpen = !(e.NewSize.Width <= 1200);
+        NavigationView.SetCurrentValue(NavigationView.IsPaneOpenProperty, e.NewSize.Width > 1200);
         _isPaneOpenedOrClosedFromCode = false;
     }
 

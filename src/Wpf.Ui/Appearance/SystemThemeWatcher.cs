@@ -25,7 +25,7 @@ namespace Wpf.Ui.Appearance;
 /// </example>
 public static class SystemThemeWatcher
 {
-    private static readonly ICollection<ObservedWindow> _observedWindows = new List<ObservedWindow>();
+    private static readonly List<ObservedWindow> _observedWindows = [];
 
     /// <summary>
     /// Watches the <see cref="Window"/> and applies the background effect and theme according to the system theme.
@@ -33,12 +33,10 @@ public static class SystemThemeWatcher
     /// <param name="window">The window that will be updated.</param>
     /// <param name="backdrop">Background effect to be applied when changing the theme.</param>
     /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
-    /// <param name="forceBackgroundReplace">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
     public static void Watch(
         Window? window,
         WindowBackdropType backdrop = WindowBackdropType.Mica,
-        bool updateAccents = true,
-        bool forceBackgroundReplace = false
+        bool updateAccents = true
     )
     {
         if (window is null)
@@ -48,31 +46,24 @@ public static class SystemThemeWatcher
 
         if (window.IsLoaded)
         {
-            ObserveLoadedWindow(window, backdrop, updateAccents, forceBackgroundReplace);
+            ObserveLoadedWindow(window, backdrop, updateAccents);
         }
         else
         {
-            ObserveWindowWhenLoaded(window, backdrop, updateAccents, forceBackgroundReplace);
+            ObserveWindowWhenLoaded(window, backdrop, updateAccents);
         }
 
-        if (!_observedWindows.Any())
+        if (_observedWindows.Count == 0)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"INFO | {typeof(SystemThemeWatcher)} changed the app theme on initialization.",
                 nameof(SystemThemeWatcher)
             );
-#endif
             ApplicationThemeManager.ApplySystemTheme(updateAccents);
         }
     }
 
-    private static void ObserveLoadedWindow(
-        Window window,
-        WindowBackdropType backdrop,
-        bool updateAccents,
-        bool forceBackgroundReplace
-    )
+    private static void ObserveLoadedWindow(Window window, WindowBackdropType backdrop, bool updateAccents)
     {
         IntPtr hWnd =
             (hWnd = new WindowInteropHelper(window).Handle) == IntPtr.Zero
@@ -84,14 +75,13 @@ public static class SystemThemeWatcher
             throw new InvalidOperationException("Window handle cannot be empty");
         }
 
-        ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, forceBackgroundReplace, updateAccents));
+        ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, updateAccents));
     }
 
     private static void ObserveWindowWhenLoaded(
         Window window,
         WindowBackdropType backdrop,
-        bool updateAccents,
-        bool forceBackgroundReplace
+        bool updateAccents
     )
     {
         window.Loaded += (_, _) =>
@@ -106,7 +96,7 @@ public static class SystemThemeWatcher
                 throw new InvalidOperationException("Window handle cannot be empty");
             }
 
-            ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, forceBackgroundReplace, updateAccents));
+            ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, updateAccents));
         };
     }
 
@@ -114,12 +104,10 @@ public static class SystemThemeWatcher
     {
         if (!observedWindow.HasHook)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"INFO | {observedWindow.Handle} ({observedWindow.RootVisual?.Title}) registered as watched window.",
                 nameof(SystemThemeWatcher)
             );
-#endif
             observedWindow.AddHook(WndProc);
             _observedWindows.Add(observedWindow);
         }
@@ -187,20 +175,17 @@ public static class SystemThemeWatcher
         ApplicationThemeManager.ApplySystemTheme(observedWindow.UpdateAccents);
         ApplicationTheme currentApplicationTheme = ApplicationThemeManager.GetAppTheme();
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {observedWindow.Handle} ({observedWindow.RootVisual?.Title}) triggered the application theme change to {ApplicationThemeManager.GetSystemTheme()}.",
             nameof(SystemThemeWatcher)
         );
-#endif
 
         if (observedWindow.RootVisual is not null)
         {
             WindowBackgroundManager.UpdateBackground(
                 observedWindow.RootVisual,
                 currentApplicationTheme,
-                observedWindow.Backdrop,
-                observedWindow.ForceBackgroundReplace
+                observedWindow.Backdrop
             );
         }
     }

@@ -3,9 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// This Source Code is partially based on reverse engineering of the Windows Operating System,
-// and is intended for use on Windows systems only.
-// This Source Code is partially based on the source code provided by the .NET Foundation.
+/* This Source Code is partially based on reverse engineering of the Windows Operating System,
+   and is intended for use on Windows systems only.
+   This Source Code is partially based on the source code provided by the .NET Foundation. */
 
 using Wpf.Ui.Controls;
 using Wpf.Ui.TaskBar;
@@ -18,7 +18,7 @@ namespace Wpf.Ui.Interop;
 internal static class UnsafeReflection
 {
     /// <summary>
-    /// Casts <see cref="BackgroundType"/> to <see cref="Dwmapi.DWMSBT"/>.
+    /// Casts <see cref="WindowBackdropType"/> to <see cref="Dwmapi.DWMSBT"/>.
     /// </summary>
     public static Dwmapi.DWMSBT Cast(WindowBackdropType backgroundType)
     {
