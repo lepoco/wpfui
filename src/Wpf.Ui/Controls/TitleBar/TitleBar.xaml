@@ -142,13 +142,13 @@
                             <ContentPresenter
                                 Grid.Column="0"
                                 HorizontalAlignment="Left"
-                                Content="{TemplateBinding HeaderLeft}" />
+                                Content="{TemplateBinding Header}" />
                             
                             <!--  Additional header content  -->
                             <ContentPresenter
                                 Grid.Column="1"
                                 HorizontalAlignment="Right"
-                                Content="{TemplateBinding HeaderRight}" />
+                                Content="{TemplateBinding TrailingContent}" />
 
                             <!--  Navigation buttons - Close, Restore, Maximize, Minimize  -->
                             <Grid

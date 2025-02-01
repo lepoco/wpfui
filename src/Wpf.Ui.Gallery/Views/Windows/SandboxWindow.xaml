@@ -30,7 +30,7 @@
             <ui:TitleBar.Icon>
                 <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
             </ui:TitleBar.Icon>
-            <ui:TitleBar.HeaderLeft>
+            <ui:TitleBar.Header>
                 <Menu>
                     <MenuItem Header="File">
                         <MenuItem
@@ -72,8 +72,8 @@
                             Header="Select All" />
                     </ui:MenuItem>
                 </Menu>
-            </ui:TitleBar.HeaderLeft>
-            <ui:TitleBar.HeaderRight>
+            </ui:TitleBar.Header>
+            <ui:TitleBar.TrailingContent>
                 <Menu>
                     <ui:MenuItem
                         Foreground="{DynamicResource PaletteDeepOrangeBrush}"
@@ -88,7 +88,7 @@
                         Foreground="{DynamicResource PaletteLightBlueBrush}"
                         Icon="{ui:SymbolIcon ArrowClockwise24}" />
                 </Menu>
-            </ui:TitleBar.HeaderRight>
+            </ui:TitleBar.TrailingContent>
         </ui:TitleBar>
 
         <StackPanel Margin="24">

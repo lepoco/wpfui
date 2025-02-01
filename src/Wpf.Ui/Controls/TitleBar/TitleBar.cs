@@ -54,20 +54,20 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     );
 
     /// <summary>
-    /// Property for <see cref="HeaderLeft"/>.
+    /// Property for <see cref="Header"/>.
     /// </summary>
-    public static readonly DependencyProperty HeaderLeftProperty = DependencyProperty.Register(
-        nameof(HeaderLeft),
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+        nameof(Header),
         typeof(object),
         typeof(TitleBar),
         new PropertyMetadata(null)
     );
     
     /// <summary>
-    /// Property for <see cref="HeaderRight"/>.
+    /// Property for <see cref="TrailingContent"/>.
     /// </summary>
-    public static readonly DependencyProperty HeaderRightProperty = DependencyProperty.Register(
-        nameof(HeaderRight),
+    public static readonly DependencyProperty TrailingContentProperty = DependencyProperty.Register(
+        nameof(TrailingContent),
         typeof(object),
         typeof(TitleBar),
         new PropertyMetadata(null)
@@ -224,19 +224,19 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Gets or sets the content displayed in the left side of the <see cref="TitleBar"/>.
     /// </summary>
-    public object HeaderLeft
+    public object Header
     {
-        get => GetValue(HeaderLeftProperty);
-        set => SetValue(HeaderLeftProperty, value);
+        get => GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
     }
     
     /// <summary>
     /// Gets or sets the content displayed in right side of the <see cref="TitleBar"/>.
     /// </summary>
-    public object HeaderRight
+    public object TrailingContent
     {
-        get => GetValue(HeaderRightProperty);
-        set => SetValue(HeaderRightProperty, value);
+        get => GetValue(TrailingContentProperty);
+        set => SetValue(TrailingContentProperty, value);
     }
 
     /// <summary>
@@ -398,7 +398,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     /*private System.Windows.Controls.Grid _mainGrid = null!;*/
     private System.Windows.Controls.ContentPresenter _icon = null!;
-    private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
     private readonly TextBlock _titleBlock;
 
     /// <summary>
@@ -414,7 +413,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         _titleBlock.VerticalAlignment = VerticalAlignment.Center;
         _titleBlock.SetBinding(System.Windows.Controls.TextBlock.TextProperty, new Binding(nameof(Title)) { Source = this });
         _titleBlock.SetBinding(System.Windows.Controls.TextBlock.FontSizeProperty, new Binding(nameof(FontSize)) { Source = this });
-        HeaderLeft = _titleBlock;
+        Header = _titleBlock;
 
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
@@ -647,10 +646,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         bool isMouseOverHeaderContent = false;
 
-        if (message == User32.WM.NCHITTEST && (HeaderRight is UIElement || HeaderLeft is UIElement))
+        if (message == User32.WM.NCHITTEST && (TrailingContent is UIElement || Header is UIElement))
         {
-            UIElement? headerLeftUIElement = HeaderLeft as UIElement;
-            UIElement? headerRightUiElement = HeaderRight as UIElement;
+            UIElement? headerLeftUIElement = Header as UIElement;
+            UIElement? headerRightUiElement = TrailingContent as UIElement;
 
             if (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock)
             {
