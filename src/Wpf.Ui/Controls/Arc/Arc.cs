@@ -52,13 +52,14 @@ public class Arc : Shape
         new PropertyMetadata(SweepDirection.Clockwise, PropertyChangedCallback)
     );
 
-    /// <summary>Identifies the <see cref="StrokeStartLineCap"/> dependency property.</summary>
-    public static readonly DependencyProperty StrokeStartLineCapProperty = DependencyProperty.Register(
-        nameof(StrokeStartLineCap),
-        typeof(PenLineCap),
-        typeof(Arc),
-        new PropertyMetadata(PenLineCap.Round, PropertyChangedCallback)
-    );
+    static Arc()
+    {
+        // Modify the metadata of the StrokeStartLineCap dependency property.
+        StrokeStartLineCapProperty.OverrideMetadata(
+            typeof(Arc),
+            new PropertyMetadata(PenLineCap.Round, PropertyChangedCallback));
+
+    }
 
     /// <summary>
     /// Gets or sets the initial angle from which the arc will be drawn.
@@ -85,13 +86,6 @@ public class Arc : Shape
     {
         get => (SweepDirection)GetValue(SweepDirectionProperty);
         set => SetValue(SweepDirectionProperty, value);
-    }
-
-    // TODO: Should we?
-    public new PenLineCap StrokeStartLineCap
-    {
-        get { return (PenLineCap)GetValue(StrokeStartLineCapProperty); }
-        set { SetValue(StrokeStartLineCapProperty, value); }
     }
 
     /// <summary>
