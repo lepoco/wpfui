@@ -56,7 +56,7 @@ public class MonacoController
         var languageId =
             monacoLanguage == MonacoLanguage.ObjectiveC ? "objective-c" : monacoLanguage.ToString().ToLower();
 
-        await _webView.ExecuteScriptAsync(
+        _ = await _webView.ExecuteScriptAsync(
             "monaco.editor.setModelLanguage(" + EditorObject + $".getModel(), \"{languageId}\");"
         );
     }
@@ -65,7 +65,7 @@ public class MonacoController
     {
         var literalContents = SymbolDisplay.FormatLiteral(contents, false);
 
-        await _webView.ExecuteScriptAsync(EditorObject + $".setValue(\"{literalContents}\");");
+        _ = await _webView.ExecuteScriptAsync(EditorObject + $".setValue(\"{literalContents}\");");
     }
 
     public void DispatchScript(string script)
@@ -75,6 +75,6 @@ public class MonacoController
             return;
         }
 
-        Application.Current.Dispatcher.InvokeAsync(async () => await _webView!.ExecuteScriptAsync(script));
+        _ = Application.Current.Dispatcher.InvokeAsync(async () => await _webView!.ExecuteScriptAsync(script));
     }
 }

@@ -177,7 +177,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
         }
 
         // Without setting the handler window at the front, menu may appear behind the taskbar
-        Interop.User32.SetForegroundWindow(HookWindow.Handle);
+        _ = Interop.User32.SetForegroundWindow(HookWindow.Handle);
         ContextMenuService.SetPlacement(ContextMenu, PlacementMode.MousePoint);
 
         // ContextMenu.ApplyMica();
@@ -259,7 +259,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
             "Wpf.Ui.NotifyIcon"
         );
 
-        Unregister();
+        _ = Unregister();
     }
 
     /// <inheritdoc />

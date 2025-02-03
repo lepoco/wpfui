@@ -9,7 +9,7 @@
 // TODO: Constant decimals when formatting. Although this can actually be done with NumberFormatter.
 // TODO: Disable expression by default
 // TODO: Lock to digit characters only by property
-
+//
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;

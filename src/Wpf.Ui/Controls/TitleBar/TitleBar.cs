@@ -224,7 +224,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Gets or sets the content displayed in the left side of the <see cref="TitleBar"/>.
     /// </summary>
-    public object Header
+    public object? Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
@@ -233,7 +233,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Gets or sets the content displayed in right side of the <see cref="TitleBar"/>.
     /// </summary>
-    public object TrailingContent
+    public object? TrailingContent
     {
         get => GetValue(TrailingContentProperty);
         set => SetValue(TrailingContentProperty, value);
@@ -394,11 +394,11 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     public Action<TitleBar, System.Windows.Window>? MinimizeActionOverride { get; set; }
 
     private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
+    private readonly TextBlock _titleBlock;
     private System.Windows.Window _currentWindow = null!;
 
     /*private System.Windows.Controls.Grid _mainGrid = null!;*/
     private System.Windows.Controls.ContentPresenter _icon = null!;
-    private readonly TextBlock _titleBlock;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TitleBar"/> class and sets the default <see cref="FrameworkElement.Loaded"/> event.
@@ -411,11 +411,11 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         _titleBlock = new TextBlock();
         _titleBlock.VerticalAlignment = VerticalAlignment.Center;
-        _titleBlock.SetBinding(
+        _ = _titleBlock.SetBinding(
             System.Windows.Controls.TextBlock.TextProperty,
             new Binding(nameof(Title)) { Source = this }
         );
-        _titleBlock.SetBinding(
+        _ = _titleBlock.SetBinding(
             System.Windows.Controls.TextBlock.FontSizeProperty,
             new Binding(nameof(FontSize)) { Source = this }
         );

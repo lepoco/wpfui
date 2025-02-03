@@ -40,21 +40,21 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     );
 
     /// <summary>
-    /// Formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.
+    /// Gets the formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.
     /// </summary>
-    public object SyntaxContent
+    public object? SyntaxContent
     {
         get => GetValue(SyntaxContentProperty);
         internal set => SetValue(SyntaxContentProperty, value);
     }
 
     /// <summary>
-    /// Command triggered after clicking the control button.
+    /// Gets the command triggered after clicking the control button.
     /// </summary>
     public IRelayCommand ButtonCommand => (IRelayCommand)GetValue(ButtonCommandProperty);
 
     /// <summary>
-    /// Creates new instance and assigns <see cref="ButtonCommand"/> default action.
+    /// Initializes a new instance of the <see cref="CodeBlock"/> class, and assigns <see cref="ButtonCommand"/> default action.
     /// </summary>
     public CodeBlock()
     {
@@ -94,7 +94,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
         richTextBox.Document.Blocks.Clear();
         richTextBox.Document.Blocks.Add(Highlighter.FormatAsParagraph(_sourceCode));
 
-        SyntaxContent = richTextBox;
+        SetCurrentValue(SyntaxContentProperty, richTextBox);
     }
 
     private void OnTemplateButtonClick(string? _)

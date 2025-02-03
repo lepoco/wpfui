@@ -14,7 +14,6 @@ public interface INavigationAware
     /// Asynchronously handles the event that is fired after the component is navigated to.
     /// </summary>
     /// <returns>A task that represents the asynchronous operation.</returns>
-
     Task OnNavigatedToAsync();
 
     /// <summary>

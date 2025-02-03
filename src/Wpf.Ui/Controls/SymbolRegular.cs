@@ -18,7 +18,6 @@ public enum SymbolRegular
     Empty = 0x0,
 
     // Automatically generated, may contain bugs.
-
     AccessTime20 = 0xE000,
     Accessibility32 = 0xE001,
     Accessibility48 = 0xE002,

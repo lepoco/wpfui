@@ -58,7 +58,6 @@ public class Arc : Shape
         StrokeStartLineCapProperty.OverrideMetadata(
             typeof(Arc),
             new PropertyMetadata(PenLineCap.Round, PropertyChangedCallback));
-
     }
 
     /// <summary>

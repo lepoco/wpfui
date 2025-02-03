@@ -16,6 +16,7 @@
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
 #pragma warning disable SA1401 // Fields should be private
+#pragma warning disable CA1060 // Move pinvokes to native methods class
 
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
@@ -188,3 +189,4 @@ internal static class Shell32
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
 #pragma warning restore SA1401 // Fields should be private
+#pragma warning restore CA1060 // Move pinvokes to native methods class

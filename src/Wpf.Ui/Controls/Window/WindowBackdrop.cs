@@ -241,11 +241,11 @@ public static class WindowBackdrop
             // Specifying DWMWA_COLOR_DEFAULT (value 0xFFFFFFFF) for the color will reset the window back to using the system's default behavior for the caption color.
             uint titlebarPvAttribute = 0xFFFFFFFE;
 
-            Dwmapi.DwmSetWindowAttribute(
+            _ = Dwmapi.DwmSetWindowAttribute(
                 windowSource.Handle,
                 Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR,
                 ref titlebarPvAttribute,
-                Marshal.SizeOf(typeof(uint))
+                sizeof(uint)
             );
         }
 
