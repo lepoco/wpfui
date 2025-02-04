@@ -54,7 +54,7 @@ public partial class MonacoWindowViewModel : ViewModel
         Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e
     )
     {
-        DispatchAsync(InitializeEditorAsync);
+        _ = DispatchAsync(InitializeEditorAsync);
     }
 
     private static DispatcherOperation<TResult> DispatchAsync<TResult>(Func<TResult> callback)

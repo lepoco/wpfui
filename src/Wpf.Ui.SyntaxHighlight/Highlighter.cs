@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 // TODO: This class is work in progress.
-
+//
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -38,17 +38,18 @@ internal static class Highlighter
     private const string EntityPattern = /* language=regex */
         @"(&[a-zA-Z0-9#]+;)";
 
-    //private const string PunctuationPattern = /* language=regex */
+    // private const string PunctuationPattern = /* language=regex */
     //    @"(!==?|(?:[[\\] ()\{\}.:;,+\\-?=!]|&lt;|&gt;)+|&&|\\|\\|)";
 
-    //private const string NumberPattern = /* language=regex */
+    // private const string NumberPattern = /* language=regex */
     //    @"(-? (?:\.\d+|\d+(?:\.\d+)?))";
 
-    //private const string BooleanPattern = /* language=regex */
+    // private const string BooleanPattern = /* language=regex */
     //    "\b(true|false)\b";
 
-    //private const string AttributePattern = /* language=regex */
-    //    "(\\s*)([a-zA-Z\\d\\-:]+)=(\" | ')(.*?)\\3";
+    // private const string AttributePattern = /* language=regex */
+    //     "(\\s*)([a-zA-Z\\d\\-:]+)=(\" | ')(.*?)\\3";
+    ////
 
     public static Paragraph FormatAsParagraph(
         string code,

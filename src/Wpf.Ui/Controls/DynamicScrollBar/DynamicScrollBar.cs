@@ -81,7 +81,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     {
         base.OnMouseEnter(e);
 
-        UpdateScroll().GetAwaiter();
+        _ = UpdateScrollAsync();
     }
 
     /// <summary>
@@ -91,10 +91,10 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     {
         base.OnMouseLeave(e);
 
-        UpdateScroll().GetAwaiter();
+        _ = UpdateScrollAsync();
     }
 
-    private async Task UpdateScroll()
+    private async Task UpdateScrollAsync()
     {
         var currentEvent = _interactiveIdentifier.GetNext();
         var shouldScroll = IsMouseOver || _isScrolling;
@@ -131,7 +131,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
 
         bar._isScrolling = !bar._isScrolling;
 
-        bar.UpdateScroll().GetAwaiter();
+        _ = bar.UpdateScrollAsync();
     }
 
     private static void OnIsInteractedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -148,6 +148,6 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
 
         bar._isInteracted = !bar._isInteracted;
 
-        bar.UpdateScroll().GetAwaiter();
+        _ = bar.UpdateScrollAsync();
     }
 }

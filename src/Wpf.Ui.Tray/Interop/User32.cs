@@ -11,6 +11,7 @@ namespace Wpf.Ui.Tray.Interop;
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1300 // Element should begin with upper-case letter
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable CA1060 // Move pinvokes to native methods class
 
 /// <summary>
 /// USER procedure declarations, constant definitions and macros.
@@ -1546,3 +1547,4 @@ internal static class User32
 
 #pragma warning restore SA1300 // Element should begin with upper-case letter
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore CA1060 // Move pinvokes to native methods class

@@ -77,7 +77,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 
         if (Content is null)
         {
-            ShowQueuedSnackbars(); // TODO: Fix detached process
+            _ = ShowQueuedSnackbarsAsync(); // TODO: Fix detached process
         }
     }
 
@@ -86,7 +86,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         await HideCurrent();
         await ShowSnackbar(snackbar);
 
-        await ShowQueuedSnackbars();
+        await ShowQueuedSnackbarsAsync();
     }
 
     public virtual async Task HideCurrent()
@@ -101,7 +101,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         ResetCancellationTokenSource();
     }
 
-    private async Task ShowQueuedSnackbars()
+    private async Task ShowQueuedSnackbarsAsync()
     {
         while (Queue.Count > 0 && !CancellationTokenSource.IsCancellationRequested)
         {

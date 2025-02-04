@@ -5,8 +5,6 @@
 
 /* Based on Windows UI Library */
 
-
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
