@@ -74,16 +74,18 @@
                         ContentSource="Header"
                         RecognizesAccessKey="True"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
-                    <!-- TextBlock added so that screen readers don't try to read Icon -->
-                    <TextBlock Grid.Column="0"
+                    <!--  TextBlock added so that screen readers don't try to read Icon  -->
+                    <TextBlock
+                        Grid.Column="0"
                         Grid.ColumnSpan="3"
                         Width="{TemplateBinding Width}"
                         Height="{TemplateBinding Height}"
                         Margin="-10"
+                        Background="Black"
                         FontSize="1"
+                        IsHitTestVisible="False"
                         Opacity="0"
-                        Text="{TemplateBinding AutomationProperties.Name}"
-                        Background="Black"/>
+                        Text="{TemplateBinding AutomationProperties.Name}" />
                 </Grid>
 
                 <Popup
@@ -191,16 +193,18 @@
                     ContentSource="Header"
                     RecognizesAccessKey="True"
                     TextElement.Foreground="{TemplateBinding Foreground}" />
-                <!-- TextBlock added so that screen readers don't try to read Icon -->
-                <TextBlock Grid.Column="0"
-                   Grid.ColumnSpan="3"
-                   Width="{TemplateBinding Width}"
-                   Height="{TemplateBinding Height}"
-                   Margin="-10"
-                   FontSize="1"
-                   Opacity="0"
-                   Text="{TemplateBinding AutomationProperties.Name}"
-                   Background="Black"/>
+                <!--  TextBlock added so that screen readers don't try to read Icon  -->
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="{TemplateBinding Width}"
+                    Height="{TemplateBinding Height}"
+                    Margin="-10"
+                    Background="Black"
+                    FontSize="1"
+                    IsHitTestVisible="False"
+                    Opacity="0"
+                    Text="{TemplateBinding AutomationProperties.Name}" />
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -284,17 +288,19 @@
                     FontSize="11"
                     Foreground="{DynamicResource TextFillColorDisabledBrush}"
                     Text="{TemplateBinding InputGestureText}" />
-                
-                <!-- TextBlock added so that screen readers don't try to read Icon -->
-                <TextBlock Grid.Column="0"
-                   Grid.ColumnSpan="5"
-                   Width="{TemplateBinding Width}"
-                   Height="{TemplateBinding Height}"
-                   Margin="-10"
-                   FontSize="1"
-                   Opacity="0"
-                   Text="{TemplateBinding AutomationProperties.Name}"
-                   Background="Black"/>
+
+                <!--  TextBlock added so that screen readers don't try to read Icon  -->
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    Width="{TemplateBinding Width}"
+                    Height="{TemplateBinding Height}"
+                    Margin="-10"
+                    Background="Black"
+                    FontSize="1"
+                    IsHitTestVisible="False"
+                    Opacity="0"
+                    Text="{TemplateBinding AutomationProperties.Name}" />
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -365,17 +371,19 @@
                             FontSize="{TemplateBinding FontSize}"
                             Symbol="ChevronRight20" />
                     </Grid>
-                    
-                    <!-- Fix double narration from mousing over the button and then the associated text -->
-                    <TextBlock Grid.Column="0"
+
+                    <!--  Fix double narration from mousing over the button and then the associated text  -->
+                    <TextBlock
+                        Grid.Column="0"
                         Grid.ColumnSpan="3"
                         Width="{TemplateBinding Width}"
                         Height="{TemplateBinding Height}"
                         Margin="-10"
+                        Background="Black"
                         FontSize="1"
+                        IsHitTestVisible="False"
                         Opacity="0"
-                        Text="{TemplateBinding AutomationProperties.Name}"
-                        Background="Black"/>
+                        Text="{TemplateBinding AutomationProperties.Name}" />
                 </Grid>
             </Border>
 
