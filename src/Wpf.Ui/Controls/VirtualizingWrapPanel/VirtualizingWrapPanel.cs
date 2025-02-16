@@ -425,8 +425,10 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
                 int rowCountInCacheBefore = (int)(cacheBeforeInPixel / GetHeight(ChildSize));
                 int rowCountInCacheAfter =
                     (
-                        (int)Math.Ceiling(
-                            (offsetInPixel + viewportHeight + cacheAfterInPixel) / GetHeight(ChildSize))
+                        (int)
+                            Math.Ceiling(
+                                (offsetInPixel + viewportHeight + cacheAfterInPixel) / GetHeight(ChildSize)
+                            )
                     ) - (int)Math.Ceiling((offsetInPixel + viewportHeight) / GetHeight(ChildSize));
 
                 startIndex = Math.Max(startIndex - (rowCountInCacheBefore * ItemsPerRowCount), 0);
