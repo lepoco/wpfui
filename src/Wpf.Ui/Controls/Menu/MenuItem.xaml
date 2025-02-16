@@ -74,16 +74,6 @@
                         ContentSource="Header"
                         RecognizesAccessKey="True"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
-                    <!-- TextBlock added so that screen readers don't try to read Icon -->
-                    <TextBlock Grid.Column="0"
-                        Grid.ColumnSpan="3"
-                        Width="{Binding Width, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                        Height="{Binding Height, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                        Margin="-10"
-                        FontSize="1"
-                        Opacity="0"
-                        Text="{Binding AutomationProperties.Name, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                        Background="Black"/>
                 </Grid>
 
                 <Popup
@@ -191,16 +181,6 @@
                     ContentSource="Header"
                     RecognizesAccessKey="True"
                     TextElement.Foreground="{TemplateBinding Foreground}" />
-                <!-- TextBlock added so that screen readers don't try to read Icon -->
-                <TextBlock Grid.Column="0"
-                   Grid.ColumnSpan="3"
-                   Width="{Binding Width, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                   Height="{Binding Height, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                   Margin="-10"
-                   FontSize="1"
-                   Opacity="0"
-                   Text="{Binding AutomationProperties.Name, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                   Background="Black"/>
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -284,17 +264,6 @@
                     FontSize="11"
                     Foreground="{DynamicResource TextFillColorDisabledBrush}"
                     Text="{TemplateBinding InputGestureText}" />
-                
-                <!-- TextBlock added so that screen readers don't try to read Icon -->
-                <TextBlock Grid.Column="0"
-                   Grid.ColumnSpan="5"
-                   Width="{Binding Width, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                   Height="{Binding Height, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                   Margin="-10"
-                   FontSize="1"
-                   Opacity="0"
-                   Text="{Binding AutomationProperties.Name, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                   Background="Black"/>
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -365,17 +334,6 @@
                             FontSize="{TemplateBinding FontSize}"
                             Symbol="ChevronRight20" />
                     </Grid>
-                    
-                    <!-- Fix double narration from mousing over the button and then the associated text -->
-                    <TextBlock Grid.Column="0"
-                        Grid.ColumnSpan="3"
-                        Width="{Binding Width, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                        Height="{Binding Height, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                        Margin="-10"
-                        FontSize="1"
-                        Opacity="0"
-                        Text="{Binding AutomationProperties.Name, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}"
-                        Background="Black"/>
                 </Grid>
             </Border>
 
