@@ -121,7 +121,6 @@
                         Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                        Background="Transparent"
                         BorderBrush="Transparent"
                         BorderThickness="0"
                         SnapsToDevicePixels="True">
@@ -157,7 +156,6 @@
     <Style x:Key="DefaultDataGridRowStyle" TargetType="{x:Type DataGridRow}">
         <Setter Property="Margin" Value="0,2" />
         <Setter Property="Padding" Value="4" />
-        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -182,7 +180,6 @@
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
                     <Border
                         x:Name="DGR_Border"
-                        Background="Transparent"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{DynamicResource ControlCornerRadius}"
@@ -376,7 +373,14 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Border>
+
                     <ControlTemplate.Triggers>
+                        <Trigger Property="AlternationIndex" Value="0">
+                            <Setter TargetName="DGR_Border" Property="Background" Value="{Binding RowBackground, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                        </Trigger>
+                        <Trigger Property="AlternationIndex" Value="1">
+                            <Setter TargetName="DGR_Border" Property="Background" Value="{Binding AlternatingRowBackground, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsEnabled" Value="True" />
