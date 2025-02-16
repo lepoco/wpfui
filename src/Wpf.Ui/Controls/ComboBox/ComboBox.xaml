@@ -253,7 +253,6 @@
                                 </Grid>
                                 <Popup
                                     x:Name="Popup"
-                                    MinWidth="{TemplateBinding ActualWidth}"
                                     VerticalAlignment="Center"
                                     AllowsTransparency="True"
                                     Focusable="False"
@@ -263,6 +262,7 @@
                                     VerticalOffset="1">
                                     <Border
                                         x:Name="DropDownBorder"
+                                        MinWidth="{TemplateBinding ActualWidth}"
                                         Margin="0"
                                         Padding="0,4,0,6"
                                         Background="{DynamicResource ComboBoxDropDownBackground}"
