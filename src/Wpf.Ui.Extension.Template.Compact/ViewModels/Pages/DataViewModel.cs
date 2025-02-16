@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 using $safeprojectname$.Models;
-using Wpf.Ui.Controls;
+using Wpf.Ui.Abstractions.Controls;
 
 namespace $safeprojectname$.ViewModels.Pages
 {
@@ -11,13 +11,15 @@ namespace $safeprojectname$.ViewModels.Pages
         [ObservableProperty]
         private IEnumerable<DataColor> _colors;
 
-        public void OnNavigatedTo()
+        public Task OnNavigatedToAsync()
         {
             if (!_isInitialized)
                 InitializeViewModel();
+            
+            return Task.CompletedTask;
         }
 
-        public void OnNavigatedFrom() { }
+        public Task OnNavigatedFromAsync() => Task.CompletedTask;
 
         private void InitializeViewModel()
         {
