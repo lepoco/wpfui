@@ -1,15 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(PackagesCommonFrameworks)</TargetFrameworks>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wpf.Ui.SyntaxHighlight</RootNamespace>
-    <AssemblyName>Wpf.Ui.SyntaxHighlight</AssemblyName>
     <PackageId>WPF-UI.SyntaxHighlight</PackageId>
-    <Product>Wpf.Ui.SyntaxHighlight</Product>
-    <Title>Wpf.Ui.SyntaxHighlight</Title>
-    <NeutralLanguage>en-US</NeutralLanguage>
+    <TargetFrameworks>net462;net472;net481;net6.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
+    <OutputType>Library</OutputType>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>

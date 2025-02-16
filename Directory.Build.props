@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>3.1.0</Version>
+    <Version>3.1.1</Version>
     <AssemblyVersion>3.0.0</AssemblyVersion>
-    <PackagesCommonFrameworks>net9.0-windows;net8.0-windows;net7.0-windows;net6.0-windows;net481;net472;net462</PackagesCommonFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
