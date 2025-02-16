@@ -38,17 +38,17 @@
                                     </ui:CardAction.Icon>
                                     <StackPanel>
                                         <ui:TextBlock
+                                            FontSize="16"
                                             FontTypography="BodyStrong"
                                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                             Text="{Binding Name, Mode=OneTime}"
-                                            TextWrapping="Wrap" 
-                                            FontSize="16"/>
+                                            TextWrapping="Wrap" />
                                         <ui:TextBlock
                                             Appearance="Secondary"
+                                            FontSize="12"
                                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                             Text="{Binding Description, Mode=OneTime}"
-                                            TextWrapping="Wrap" 
-                                            FontSize="12"/>
+                                            TextWrapping="Wrap" />
                                     </StackPanel>
                                 </ui:CardAction>
                             </DataTemplate>
