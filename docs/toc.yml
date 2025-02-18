@@ -28,5 +28,14 @@ items:
       href: documentation/releases.md
   - name: API v4.0
     href: api/
+  - name: Migration
+    href: /migration
+    items:
+    - name: Key changes in v4
+      href: migration/v4-migration.md
+    - name: Key changes in v3
+      href: migration/v3-migration.md
+    - name: Key changes in v2
+      href: migration/v2-migration.md
   - name: Support plans
     href: https://lepo.co/support

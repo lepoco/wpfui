@@ -29,10 +29,12 @@ public static class Design
     /// </summary>
     private static bool InDesignMode =>
         _inDesignMode ??=
-            (bool)DependencyPropertyDescriptor
-                .FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement))
-                .Metadata.DefaultValue
-            || System.Diagnostics.Process.GetCurrentProcess()
+            (bool)
+                DependencyPropertyDescriptor
+                    .FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement))
+                    .Metadata.DefaultValue
+            || System
+                .Diagnostics.Process.GetCurrentProcess()
                 .ProcessName.StartsWith(DesignProcessName, StringComparison.Ordinal);
 
     public static readonly DependencyProperty BackgroundProperty = DependencyProperty.RegisterAttached(
