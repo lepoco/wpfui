@@ -57,7 +57,7 @@ public class Arc : Shape
         // Modify the metadata of the StrokeStartLineCap dependency property.
         StrokeStartLineCapProperty.OverrideMetadata(
             typeof(Arc),
-            new PropertyMetadata(PenLineCap.Round, PropertyChangedCallback)
+            new FrameworkPropertyMetadata(PenLineCap.Round, PropertyChangedCallback)
         );
     }
 
