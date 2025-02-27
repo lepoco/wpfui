@@ -25,6 +25,16 @@ internal static class UiElementExtensions
             var bounds = new Rect(default, element.RenderSize);
 
             Point mousePosRelative = element.PointFromScreen(mousePosScreen);
+            if (bounds.Contains(mousePosRelative) && element.IsHitTestVisible && element is Panel)
+            {
+                foreach (UIElement child in (element as Panel).Children)
+                {
+                    if (new Rect(default, element.RenderSize).Contains(mousePosRelative))
+                    {
+                        return child.IsHitTestVisible;
+                    }
+                }
+            }
 
             return bounds.Contains(mousePosRelative) && element.IsHitTestVisible;
         }
