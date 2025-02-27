@@ -26,7 +26,7 @@ internal static class UiElementExtensions
 
             Point mousePosRelative = element.PointFromScreen(mousePosScreen);
 
-            return bounds.Contains(mousePosRelative);
+            return bounds.Contains(mousePosRelative) && element.IsHitTestVisible;
         }
         catch
         {
