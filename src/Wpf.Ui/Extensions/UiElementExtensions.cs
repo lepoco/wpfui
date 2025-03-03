@@ -23,20 +23,13 @@ internal static class UiElementExtensions
         {
             var mousePosScreen = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
             var bounds = new Rect(default, element.RenderSize);
-
             Point mousePosRelative = element.PointFromScreen(mousePosScreen);
-            if (bounds.Contains(mousePosRelative) && element.IsHitTestVisible && element is Panel)
-            {
-                foreach (UIElement child in (element as Panel).Children)
-                {
-                    if (new Rect(default, element.RenderSize).Contains(mousePosRelative))
-                    {
-                        return child.IsHitTestVisible;
-                    }
-                }
-            }
-
-            return bounds.Contains(mousePosRelative) && element.IsHitTestVisible;
+            
+            return bounds.Contains(mousePosRelative) && element.IsHitTestVisible && 
+                (!(element is System.Windows.Controls.Panel) || // If element is Panel, check if children at mousePosRelative is with IsHitTestVisible false.
+                 (((System.Windows.Controls.Panel)element).Children.OfType<UIElement>()
+                  .FirstOrDefault(child => new Rect(default, child.RenderSize).Contains(mousePosRelative))
+                  ?.IsHitTestVisible ?? false));
         }
         catch
         {
