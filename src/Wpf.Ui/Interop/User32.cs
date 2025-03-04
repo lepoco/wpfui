@@ -1450,7 +1450,7 @@ internal static class User32
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool GetCursorPos([Out] out WinDef.POINT lpPoint);
-    [DllImport(Libraries.User32), SetLastError = true)]
+    [DllImport(Libraries.User32, SetLastError = true)]
 	public static extern bool GetCursorPos(out System.Drawing.Point lpPoint);
     
 
