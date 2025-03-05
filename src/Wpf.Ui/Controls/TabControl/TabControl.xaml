@@ -76,7 +76,7 @@
                     <Grid x:Name="Root">
                         <Border
                             x:Name="Border"
-                            MinWidth="180"
+                            MinWidth="120"
                             MinHeight="36"
                             Margin="0"
                             Padding="6"
