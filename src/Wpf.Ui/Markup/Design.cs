@@ -20,7 +20,8 @@ namespace Wpf.Ui.Markup;
 /// </example>
 public static class Design
 {
-    private const string DesignProcessName = "devenv";
+    private static readonly string DesignVsProcessName = "devenv";
+    private static readonly string DesignRiderProcessName = "dotnet";
 
     private static bool? _inDesignMode;
 
@@ -35,7 +36,10 @@ public static class Design
                     .Metadata.DefaultValue
             || System
                 .Diagnostics.Process.GetCurrentProcess()
-                .ProcessName.StartsWith(DesignProcessName, StringComparison.Ordinal);
+                .ProcessName.StartsWith(DesignVsProcessName, StringComparison.Ordinal)
+            || System
+                .Diagnostics.Process.GetCurrentProcess()
+                .ProcessName.StartsWith(DesignRiderProcessName, StringComparison.Ordinal);
 
     public static readonly DependencyProperty BackgroundProperty = DependencyProperty.RegisterAttached(
         "Background",
