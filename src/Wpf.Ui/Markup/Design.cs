@@ -37,7 +37,7 @@ public static class Design
                 DependencyPropertyDescriptor
                     .FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement))
                     .Metadata.DefaultValue
-            || DesignProcesses.All(process => System
+            || DesignProcesses.Any(process => System
                 .Diagnostics.Process.GetCurrentProcess()
                 .ProcessName.StartsWith(process, StringComparison.Ordinal));
 
