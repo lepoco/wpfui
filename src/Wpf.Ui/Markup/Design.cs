@@ -23,7 +23,8 @@ public static class Design
     private static readonly string[] DesignProcesses =
     [
         "devenv",
-        "dotnet"
+        "dotnet",
+        "RiderWpfPreviewerLauncher64"
     ];
 
     private static bool? _inDesignMode;
