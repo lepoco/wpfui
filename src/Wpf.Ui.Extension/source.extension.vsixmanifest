@@ -29,8 +29,7 @@
         <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="%CurrentProject%.Template.Fluent" d:TargetPath="|Wpf.Ui.Extension.Template.Fluent;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
     </Assets>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.NetCore.Component.Runtime.9.0" Version="[17.14.35806.103,18.0)" DisplayName=".NET 9.0 Runtime" />
-        <Prerequisite Id="Microsoft.VisualStudio.Component.ManagedDesktop.Prerequisites" Version="[17.14.35806.103,18.0)" DisplayName=".NET desktop development tools" />
-        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.14.35806.103,18.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.ManagedDesktop.Prerequisites" Version="[17.3.32708.82,18.0)" DisplayName=".NET desktop development tools" />
     </Prerequisites>
 </PackageManifest>
