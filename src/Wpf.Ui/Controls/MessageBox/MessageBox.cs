@@ -115,6 +115,14 @@ public class MessageBox : System.Windows.Window
         new PropertyMetadata(true)
     );
 
+    /// <summary>Identifies the <see cref="IsCloseButtonEnabled"/> dependency property.</summary>
+    public static readonly DependencyProperty IsCloseButtonEnabledProperty = DependencyProperty.Register(
+        nameof(IsCloseButtonEnabled),
+        typeof(bool),
+        typeof(MessageBox),
+        new PropertyMetadata(true)
+    );
+
     /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
@@ -214,7 +222,16 @@ public class MessageBox : System.Windows.Window
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> primary button is enabled.
+    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> close button is enabled.
+    /// </summary>
+    public bool IsCloseButtonEnabled
+    {
+        get => (bool)GetValue(IsCloseButtonEnabledProperty);
+        set => SetValue(IsCloseButtonEnabledProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> secondary button is enabled.
     /// </summary>
     public bool IsSecondaryButtonEnabled
     {
@@ -223,7 +240,7 @@ public class MessageBox : System.Windows.Window
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> secondary button is enabled.
+    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> primary button is enabled.
     /// </summary>
     public bool IsPrimaryButtonEnabled
     {
