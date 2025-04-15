@@ -63,6 +63,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary { get; } = [];
 
+    protected Dictionary<FrameworkElement, INavigationViewItem> PageToNavigationItemDictionary { get; } = [];
+
     private readonly ObservableCollection<string> _autoSuggestBoxItems = [];
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = [];
 
@@ -126,6 +128,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
         PageIdOrTargetTagNavigationViewsDictionary.Clear();
         PageTypeNavigationViewsDictionary.Clear();
+        PageToNavigationItemDictionary.Clear();
 
         ClearJournal();
 
@@ -507,6 +510,16 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(e), e.Action, $"Unsupported action: {e.Action}");
+        }
+
+        UpdateBreadcrumbContents();
+    }
+
+    private void UpdateBreadcrumbContents()
+    {
+        foreach (var breadcrumbItem in _breadcrumbBarItems)
+        {
+            breadcrumbItem.UpdateFromSource();
         }
     }
 }

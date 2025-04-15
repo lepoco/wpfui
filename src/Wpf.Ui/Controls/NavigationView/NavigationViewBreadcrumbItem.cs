@@ -9,15 +9,33 @@
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
-internal class NavigationViewBreadcrumbItem
+internal class NavigationViewBreadcrumbItem : DependencyObject
 {
+    public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(
+        nameof(Content),
+        typeof(object),
+        typeof(NavigationViewBreadcrumbItem),
+        new PropertyMetadata(null));
+
     public NavigationViewBreadcrumbItem(INavigationViewItem item)
     {
-        Content = item.Content;
         PageId = item.Id;
+        SourceItem = item;
+        Content = item.Content;
     }
 
-    public object Content { get; }
+    public object Content
+    {
+        get => GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
+    }
 
     public string PageId { get; }
+
+    public INavigationViewItem SourceItem { get; }
+
+    public void UpdateFromSource()
+    {
+        SetCurrentValue(ContentProperty, SourceItem.Content);
+    }
 }
