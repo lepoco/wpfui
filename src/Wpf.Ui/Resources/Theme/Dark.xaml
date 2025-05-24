@@ -681,4 +681,12 @@
     <SolidColorBrush x:Key="TreeViewItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
     <SolidColorBrush x:Key="TreeViewItemForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="TreeViewItemSelectionIndicatorForeground" Color="{DynamicResource SystemAccentColorPrimary}" />
+
+    <!--  LeftNavigationViewTemplate  -->
+    <LinearGradientBrush x:Key="LeftNavigationViewSeparatorBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Offset="0" Color="Transparent" />
+        <GradientStop Offset="0.3" Color="#555555" />
+        <GradientStop Offset="0.7" Color="#555555" />
+        <GradientStop Offset="1" Color="Transparent" />
+    </LinearGradientBrush>
 </ResourceDictionary>
