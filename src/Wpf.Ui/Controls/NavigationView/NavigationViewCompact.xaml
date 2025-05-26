@@ -289,11 +289,13 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <!--  Back and Toggle buttons  -->
+                        <!--  Pane Header (Fixed)  -->
                         <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -331,7 +333,7 @@
                                 </controls:Button.Content>
                             </controls:Button>
 
-                            <!--  Pane header  -->
+                            <!--  Pane Header  -->
                             <ContentPresenter
                                 Grid.Row="2"
                                 Margin="0"
@@ -341,7 +343,7 @@
                             <ContentPresenter
                                 x:Name="AutoSuggestBoxContentPresenter"
                                 Grid.Row="3"
-                                Margin="0"
+                                Margin="0,0,0,6"
                                 Content="{TemplateBinding AutoSuggestBox}" />
 
                             <controls:Button
@@ -353,57 +355,74 @@
                                 Visibility="Collapsed" />
                         </Grid>
 
-                        <!--  Menu items  -->
-                        <controls:DynamicScrollViewer
+                        <!--  Separator/Shadow for Top  -->
+                        <Border
                             Grid.Row="1"
+                            Height="1"
+                            Margin="0,4,0,4"
+                            Background="{DynamicResource LeftNavigationViewSeparatorBrush}" />
+
+                        <!--  Scrollable Menu Items  -->
+                        <controls:DynamicScrollViewer
+                            x:Name="PART_ScrollViewer"
+                            Grid.Row="2"
                             Margin="0,0,-4,0"
                             Padding="0,0,4,0"
                             CanContentScroll="True"
                             HorizontalScrollBarVisibility="Disabled"
                             VerticalScrollBarVisibility="Auto">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <ItemsControl
-                                    x:Name="PART_MenuItemsItemsControl"
-                                    Grid.Row="0"
-                                    Focusable="False"
-                                    KeyboardNavigation.DirectionalNavigation="Contained"
-                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Margin="0" IsItemsHost="True" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                                <ItemsControl
-                                    x:Name="PART_FooterMenuItemsItemsControl"
-                                    Grid.Row="1"
-                                    Margin="0,0,0,4"
-                                    Focusable="False"
-                                    KeyboardNavigation.DirectionalNavigation="Contained"
-                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Margin="0" IsItemsHost="True" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </Grid>
+                            <ItemsControl
+                                x:Name="PART_MenuItemsItemsControl"
+                                Focusable="False"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Margin="0" IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
                         </controls:DynamicScrollViewer>
 
-                        <!--  Pane footer  -->
-                        <ContentPresenter
-                            Grid.Row="2"
-                            Margin="0"
-                            Content="{TemplateBinding PaneFooter}" />
+                        <!--  Separator/Shadow for Footer  -->
+                        <Border
+                            Grid.Row="3"
+                            Height="1"
+                            Margin="0,4,0,4"
+                            Background="{DynamicResource LeftNavigationViewSeparatorBrush}" />
+
+                        <!--  Footer (Fixed)  -->
+                        <Grid Grid.Row="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <ItemsControl
+                                x:Name="PART_FooterMenuItemsItemsControl"
+                                Grid.Row="0"
+                                Margin="0,0,0,4"
+                                Focusable="False"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Margin="0" IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+
+                            <ContentPresenter
+                                Grid.Row="1"
+                                Margin="0"
+                                Content="{TemplateBinding PaneFooter}" />
+                        </Grid>
                     </Grid>
                 </Border>
             </Grid>
+
             <Border
                 Grid.Column="1"
                 Margin="{TemplateBinding FrameMargin}"
@@ -417,7 +436,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <!--  Header  -->
+                    <!--  Header (e.g., BreadcrumbBar)  -->
                     <ContentPresenter
                         Grid.Row="0"
                         Margin="0"
@@ -432,7 +451,7 @@
                         Transition="{TemplateBinding Transition}"
                         TransitionDuration="{TemplateBinding TransitionDuration}" />
 
-                    <!--  Overlay  -->
+                    <!--  Overlay (e.g., SnackbarPresenter)  -->
                     <ContentPresenter
                         Grid.Row="0"
                         Grid.RowSpan="2"
