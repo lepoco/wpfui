@@ -419,6 +419,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             System.Windows.Controls.TextBlock.FontSizeProperty,
             new Binding(nameof(FontSize)) { Source = this }
         );
+        _ = _titleBlock.SetBinding(
+            System.Windows.Controls.TextBlock.FontWeightProperty,
+            new Binding(nameof(FontWeight)) { Source = this }
+        );
         Header = _titleBlock;
 
         Loaded += OnLoaded;
