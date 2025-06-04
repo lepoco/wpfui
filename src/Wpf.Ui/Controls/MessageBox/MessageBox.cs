@@ -356,7 +356,7 @@ public class MessageBox : System.Windows.Window
             case WindowStartupLocation.CenterOwner:
                 if (
                     !CanCenterOverWPFOwner()
-                    || Owner.WindowState is WindowState.Maximized or WindowState.Minimized
+                    || Owner.WindowState is WindowState.Minimized
                 )
                 {
                     CenterWindowOnScreen();
