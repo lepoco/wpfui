@@ -92,7 +92,8 @@
     </Style>
 
     <Style x:Key="DefaultUiAutoSuggestBoxStyle" TargetType="{x:Type controls:AutoSuggestBox}">
-        <Setter Property="Focusable" Value="False" /> <!-- ensure that the outer control is not focusable-->
+        <!--  Ensure that the outer control is not focusable  -->
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="MaxSuggestionListHeight" Value="240" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -117,15 +118,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:AutoSuggestBox}">
-                    <Grid >
+                    <Grid>
                         <controls:TextBox
                             x:Name="PART_TextBox"
-                            TabIndex="{TemplateBinding TabIndex}"
-                            IsTabStop="{TemplateBinding IsTabStop}"
                             Grid.Row="0"
+                            ClearButtonEnabled="{TemplateBinding ClearButtonEnabled}"
                             Icon="{TemplateBinding Icon}"
                             IconPlacement="Right"
+                            IsTabStop="{TemplateBinding IsTabStop}"
                             PlaceholderText="{TemplateBinding PlaceholderText}"
+                            TabIndex="{TemplateBinding TabIndex}"
                             Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         <Popup
