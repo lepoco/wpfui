@@ -38,6 +38,6 @@ public partial class AutoSuggestBoxViewModel : ViewModel
             return;
         }
 
-        ShowClearButton = !(checkbox?.IsChecked ?? false);
+        ShowClearButton = !(checkbox.IsChecked ?? false);
     }
 }
