@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows.Controls;
+
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Text;
 
 public partial class AutoSuggestBoxViewModel : ViewModel
@@ -25,4 +27,17 @@ public partial class AutoSuggestBoxViewModel : ViewModel
         "Jamie",
         "Alexzander",
     };
+
+    [ObservableProperty] private bool _showClearButton = true;
+
+    [RelayCommand]
+    private void OnShowClearButtonChecked(object sender)
+    {
+        if (sender is not CheckBox checkbox)
+        {
+            return;
+        }
+
+        ShowClearButton = !(checkbox?.IsChecked ?? false);
+    }
 }
