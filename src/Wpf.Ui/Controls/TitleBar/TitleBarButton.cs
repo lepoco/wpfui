@@ -233,33 +233,33 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         };
     }
 
-    PresentationSource presentationSource = null;
+    // TODO: Incorrectly calculates mouse position for high DPI displays.
+    // PresentationSource presentationSource = null;
+    // protected bool IsMouseOverElement(nint lParam)
+    // {
+    //    System.Drawing.Point winPoint;
+    //    bool gotCursorPos = User32.GetCursorPos(out winPoint);
 
-    protected bool IsMouseOverElement(nint lParam)
-    {
-        System.Drawing.Point winPoint;
-        bool gotCursorPos = User32.GetCursorPos(out winPoint);
+    //    if (!gotCursorPos)
+    //    {
+    //        int fallbackX = unchecked((short)((long)lParam & 0xFFFF));
+    //        int fallbackY = unchecked((short)(((long)lParam >> 16) & 0xFFFF));
+    //        winPoint = new System.Drawing.Point(fallbackX, fallbackY);
+    //    }
 
-        if (!gotCursorPos)
-        {
-            int fallbackX = unchecked((short)((long)lParam & 0xFFFF));
-            int fallbackY = unchecked((short)(((long)lParam >> 16) & 0xFFFF));
-            winPoint = new System.Drawing.Point(fallbackX, fallbackY);
-        }
+    //    var screenPoint = new System.Windows.Point(winPoint.X, winPoint.Y);
 
-        var screenPoint = new System.Windows.Point(winPoint.X, winPoint.Y);
+    //    presentationSource ??= PresentationSource.FromVisual(this);
 
-        presentationSource ??= PresentationSource.FromVisual(this);
+    //    if (presentationSource?.CompositionTarget != null)
+    //    {
+    //        screenPoint = presentationSource.CompositionTarget.TransformFromDevice.Transform(screenPoint);
+    //    }
 
-        if (presentationSource?.CompositionTarget != null)
-        {
-            screenPoint = presentationSource.CompositionTarget.TransformFromDevice.Transform(screenPoint);
-        }
+    //    var localPoint = this.PointFromScreen(screenPoint);
 
-        var localPoint = this.PointFromScreen(screenPoint);
+    //    var hitTestRect = new System.Windows.Rect(0, 0, this.ActualWidth, this.ActualHeight);
 
-        var hitTestRect = new System.Windows.Rect(0, 0, this.ActualWidth, this.ActualHeight);
-
-        return hitTestRect.Contains(localPoint);
-    }
+    //    return hitTestRect.Contains(localPoint);
+    //}
 }
