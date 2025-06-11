@@ -595,7 +595,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    ///     Listening window hooks after rendering window content to SizeToContent support
+    ///  Listening window hooks after rendering window content to SizeToContent support
     /// </summary>
     private void OnWindowContentRendered(object? sender, EventArgs e)
     {
@@ -607,8 +607,17 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         window.ContentRendered -= OnWindowContentRendered;
 
         IntPtr handle = new WindowInteropHelper(window).Handle;
-        HwndSource windowSource =
-            HwndSource.FromHwnd(handle) ?? throw new InvalidOperationException("Window source is null");
+        if (handle == IntPtr.Zero)
+        {
+            return;
+        }
+
+        HwndSource? windowSource = HwndSource.FromHwnd(handle);
+        if (windowSource == null)
+        {
+            return;
+        }
+
         windowSource.AddHook(HwndSourceHook);
     }
 
