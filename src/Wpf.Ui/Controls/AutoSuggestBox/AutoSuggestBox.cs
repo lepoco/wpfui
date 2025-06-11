@@ -30,7 +30,7 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
 [TemplatePart(Name = ElementSuggestionsPopup, Type = typeof(Popup))]
 [TemplatePart(Name = ElementSuggestionsList, Type = typeof(ListView))]
-public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
+public class AutoSuggestBox : ItemsControl, IIconControl
 {
     protected const string ElementTextBox = "PART_TextBox";
     protected const string ElementSuggestionsPopup = "PART_SuggestionsPopup";
@@ -100,6 +100,14 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         new PropertyMetadata(null)
     );
 
+    /// <summary>Identifies the <see cref="ClearButtonEnabled"/> dependency property.</summary>
+    public static readonly DependencyProperty ClearButtonEnabledProperty = DependencyProperty.Register(
+        nameof(ClearButtonEnabled),
+        typeof(bool),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(false)
+    );
+
     /// <summary>
     /// Gets or sets your items here if you want to use the default filtering
     /// </summary>
@@ -167,6 +175,15 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to show the clear button when <see cref="AutoSuggestBox"/> is focused.
+    /// </summary>
+    public bool ClearButtonEnabled
+    {
+        get => (bool)GetValue(ClearButtonEnabledProperty);
+        set => SetValue(ClearButtonEnabledProperty, value);
     }
 
     /// <summary>
