@@ -15,7 +15,8 @@ internal class NavigationViewBreadcrumbItem : DependencyObject
         nameof(Content),
         typeof(object),
         typeof(NavigationViewBreadcrumbItem),
-        new PropertyMetadata(null));
+        new PropertyMetadata(null)
+    );
 
     public NavigationViewBreadcrumbItem(INavigationViewItem item)
     {

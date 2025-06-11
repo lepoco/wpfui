@@ -17,7 +17,7 @@ public partial class DashboardPage
     public DashboardPage()
     {
         App.ApplyTheme(this);
-        
+
         DataContext = this;
         InitializeComponent();
 

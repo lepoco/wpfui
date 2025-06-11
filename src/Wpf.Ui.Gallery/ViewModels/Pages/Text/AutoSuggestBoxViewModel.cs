@@ -28,7 +28,8 @@ public partial class AutoSuggestBoxViewModel : ViewModel
         "Alexzander",
     };
 
-    [ObservableProperty] private bool _showClearButton = true;
+    [ObservableProperty]
+    private bool _showClearButton = true;
 
     [RelayCommand]
     private void OnShowClearButtonChecked(object sender)

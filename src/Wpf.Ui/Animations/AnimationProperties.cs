@@ -11,9 +11,8 @@ internal static class AnimationProperties
         "AnimationTagValue",
         typeof(double),
         typeof(AnimationProperties),
-        new FrameworkPropertyMetadata(
-            0.0,
-            FrameworkPropertyMetadataOptions.Inherits));
+        new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.Inherits)
+    );
 
     public static double GetAnimationTagValue(DependencyObject dp)
     {

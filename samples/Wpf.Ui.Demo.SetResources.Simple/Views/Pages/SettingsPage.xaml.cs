@@ -16,7 +16,7 @@ public partial class SettingsPage
     public SettingsPage()
     {
         App.ApplyTheme(this);
-        
+
         InitializeComponent();
 
         AppVersionTextBlock.Text = $"WPF UI - Simple Demo - {GetAssemblyVersion()}";

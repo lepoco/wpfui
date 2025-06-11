@@ -18,9 +18,9 @@ public partial class MainWindow
     public MainWindow()
     {
         DataContext = this;
-        
+
         App.ApplyTheme(this);
-        
+
         InitializeComponent();
 
         Loaded += (_, _) => RootNavigation.Navigate(typeof(DashboardPage));
