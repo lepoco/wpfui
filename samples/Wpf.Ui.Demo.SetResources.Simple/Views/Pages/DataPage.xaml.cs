@@ -20,7 +20,7 @@ public partial class DataPage
     public DataPage()
     {
         App.ApplyTheme(this);
-        
+
         InitializeData();
         InitializeComponent();
 
