@@ -188,10 +188,7 @@ public class SplitButton : Button
 
         _contextMenu.SetCurrentValue(MinWidthProperty, ActualWidth);
         _contextMenu.SetCurrentValue(ContextMenu.PlacementTargetProperty, this);
-        _contextMenu.SetCurrentValue(
-            ContextMenu.PlacementProperty,
-            PlacementMode.Bottom
-        );
+        _contextMenu.SetCurrentValue(ContextMenu.PlacementProperty, PlacementMode.Bottom);
         _contextMenu.SetCurrentValue(ContextMenu.IsOpenProperty, true);
     }
 }

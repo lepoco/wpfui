@@ -130,7 +130,7 @@
                                 Focusable="False"
                                 RenderOptions.BitmapScalingMode="HighQuality" />
                         </Grid>
-                        
+
                         <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -143,7 +143,7 @@
                                 Grid.Column="0"
                                 HorizontalAlignment="Left"
                                 Content="{TemplateBinding Header}" />
-                            
+
                             <!--  Additional header content  -->
                             <ContentPresenter
                                 Grid.Column="1"
@@ -176,7 +176,8 @@
                                 <controls:TitleBarButton
                                     x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
-                                    ButtonType="Maximize" />
+                                    ButtonType="Maximize"
+                                    IsHitTestVisible="True" />
 
                                 <controls:TitleBarButton
                                     x:Name="PART_CloseButton"

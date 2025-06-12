@@ -29,12 +29,11 @@ namespace Wpf.Ui.Controls;
 public class GridViewColumn : System.Windows.Controls.GridViewColumn
 {
     // use reflection to get the `_desiredWidth` private field.
-    private static readonly Lazy<FieldInfo> _desiredWidthField = new(
-        () =>
-            typeof(System.Windows.Controls.GridViewColumn).GetField(
-                "_desiredWidth",
-                BindingFlags.NonPublic | BindingFlags.Instance
-            ) ?? throw new InvalidOperationException("The `_desiredWidth` field was not found.")
+    private static readonly Lazy<FieldInfo> _desiredWidthField = new(() =>
+        typeof(System.Windows.Controls.GridViewColumn).GetField(
+            "_desiredWidth",
+            BindingFlags.NonPublic | BindingFlags.Instance
+        ) ?? throw new InvalidOperationException("The `_desiredWidth` field was not found.")
     );
 
     private static FieldInfo DesiredWidthField => _desiredWidthField.Value;
