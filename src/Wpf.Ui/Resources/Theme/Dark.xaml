@@ -507,8 +507,10 @@
 
     <!--  Menu  -->
     <SolidColorBrush x:Key="MenuBarBackground" Color="{StaticResource SubtleFillColorTransparent}" />
-    <SolidColorBrush x:Key="MenuBarItemBackgroundSelected" Color="{StaticResource SubtleFillColorTertiary}" />
+    <SolidColorBrush x:Key="MenuBarItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
+    <SolidColorBrush x:Key="MenuBarItemBackgroundPressed" Color="{StaticResource SubtleFillColorTertiary}" />
     <SolidColorBrush x:Key="MenuBarItemBorderBrush" Color="{StaticResource ControlAltFillColorTertiary}" />
+    <SolidColorBrush x:Key="MenuBarItemTextForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
 
     <!--  MessageDialog  -->
     <SolidColorBrush x:Key="MessageBoxBackground" Color="{StaticResource SolidBackgroundFillColorBase}" />

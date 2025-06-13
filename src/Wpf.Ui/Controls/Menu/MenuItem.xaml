@@ -68,7 +68,7 @@
                         VerticalAlignment="Center"
                         Content="{TemplateBinding Icon}" />
                     <ContentPresenter
-                        x:Name="HeaderPresenter"
+                        x:Name="Header"
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         ContentSource="Header"
@@ -117,12 +117,28 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+                <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+            </MultiTrigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="Header" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Margin" Value="0" />
-                <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
@@ -175,7 +191,7 @@
                     Content="{TemplateBinding Icon}"
                     KeyboardNavigation.IsTabStop="False" />
                 <ContentPresenter
-                    x:Name="HeaderPresenter"
+                    x:Name="Header"
                     Grid.Column="1"
                     VerticalAlignment="Center"
                     ContentSource="Header"
@@ -187,12 +203,28 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+                <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+            </MultiTrigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="Header" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Margin" Value="0" />
-                <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground">
@@ -218,7 +250,6 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
                 </Grid.ColumnDefinitions>
-
                 <Border
                     x:Name="CheckBoxIconBorder"
                     Grid.Column="0"
@@ -250,13 +281,14 @@
                     KeyboardNavigation.IsTabStop="False" />
 
                 <ContentPresenter
+                    x:Name="Header"
                     Grid.Column="2"
                     ContentSource="Header"
                     RecognizesAccessKey="True"
                     TextElement.Foreground="{TemplateBinding Foreground}" />
 
                 <TextBlock
-                    x:Name="InputGestureText"
+                    x:Name="InputGesture"
                     Grid.Column="3"
                     Margin="25,0,0,0"
                     VerticalAlignment="Bottom"
@@ -267,6 +299,23 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+                <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="InputGesture" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+            </MultiTrigger>
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
@@ -287,7 +336,7 @@
                 </Setter>
             </Trigger>
             <Trigger Property="InputGestureText" Value="">
-                <Setter TargetName="InputGestureText" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="InputGesture" Property="Visibility" Value="Collapsed" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -321,7 +370,7 @@
                         KeyboardNavigation.IsTabStop="False" />
 
                     <ContentPresenter
-                        x:Name="HeaderHost"
+                        x:Name="Header"
                         Grid.Column="1"
                         ContentSource="Header"
                         RecognizesAccessKey="True" />
@@ -382,6 +431,22 @@
             <Trigger Property="IsHighlighted" Value="true">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+                <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+            </MultiTrigger>
             <!--<Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
                 <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="4" />
                 <Setter TargetName="SubmenuBorder" Property="Padding" Value="0,3,0,3" />
@@ -470,16 +535,15 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <ContentControl
-                        x:Name="IconElement"
+                        x:Name="Icon"
                         Grid.Column="0"
                         Margin="0,0,6,0"
                         VerticalAlignment="Center"
                         Content="{TemplateBinding Icon}"
                         FontSize="{TemplateBinding FontSize}"
                         KeyboardNavigation.IsTabStop="False" />
-
                     <ContentPresenter
-                        x:Name="HeaderPresenter"
+                        x:Name="Header"
                         Grid.Column="2"
                         VerticalAlignment="Center"
                         ContentSource="Header"
@@ -530,16 +594,32 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconElement" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="IconElement" Property="Margin" Value="0" />
+                <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Icon" Property="Margin" Value="0" />
             </Trigger>
             <Trigger Property="Header" Value="{x:Null}">
-                <Setter TargetName="IconElement" Property="Margin" Value="0" />
-                <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Icon" Property="Margin" Value="0" />
+                <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+                <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground">
                     <Setter.Value>
@@ -583,7 +663,7 @@
                 </Grid.ColumnDefinitions>
 
                 <ContentControl
-                    x:Name="IconElement"
+                    x:Name="Icon"
                     Grid.Column="0"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
@@ -592,7 +672,7 @@
                     KeyboardNavigation.IsTabStop="False" />
 
                 <ContentPresenter
-                    x:Name="HeaderPresenter"
+                    x:Name="Header"
                     Grid.Column="2"
                     VerticalAlignment="Center"
                     ContentSource="Header"
@@ -604,13 +684,29 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+                <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+            </MultiTrigger>
             <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconElement" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="IconElement" Property="Margin" Value="0" />
+                <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Icon" Property="Margin" Value="0" />
             </Trigger>
             <Trigger Property="Header" Value="{x:Null}">
-                <Setter TargetName="IconElement" Property="Margin" Value="0" />
-                <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Icon" Property="Margin" Value="0" />
+                <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground">
@@ -661,7 +757,7 @@
                 </Border>
 
                 <ContentControl
-                    x:Name="IconElement"
+                    x:Name="Icon"
                     Grid.Column="1"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
@@ -670,13 +766,14 @@
                     KeyboardNavigation.IsTabStop="False" />
 
                 <ContentPresenter
+                    x:Name="Header"
                     Grid.Column="3"
                     ContentSource="Header"
                     RecognizesAccessKey="True"
                     TextElement.Foreground="{TemplateBinding Foreground}" />
 
                 <TextBlock
-                    x:Name="InputGestureText"
+                    x:Name="InputGesture"
                     Grid.Column="4"
                     Margin="25,0,0,0"
                     VerticalAlignment="Bottom"
@@ -690,9 +787,26 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+                <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="InputGesture" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+            </MultiTrigger>
             <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconElement" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="IconElement" Property="Margin" Value="0" />
+                <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Icon" Property="Margin" Value="0" />
             </Trigger>
             <Trigger Property="IsCheckable" Value="True">
                 <Setter TargetName="CheckBoxIconBorder" Property="Visibility" Value="Visible" />
@@ -709,7 +823,7 @@
                 </Setter>
             </Trigger>
             <Trigger Property="InputGestureText" Value="">
-                <Setter TargetName="InputGestureText" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="InputGesture" Property="Visibility" Value="Collapsed" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -737,7 +851,7 @@
                     </Grid.ColumnDefinitions>
 
                     <ContentControl
-                        x:Name="IconElement"
+                        x:Name="Icon"
                         Grid.Column="0"
                         Margin="0,0,6,0"
                         VerticalAlignment="Center"
@@ -746,7 +860,7 @@
                         KeyboardNavigation.IsTabStop="False" />
 
                     <ContentPresenter
-                        x:Name="HeaderHost"
+                        x:Name="Header"
                         Grid.Column="2"
                         ContentSource="Header"
                         RecognizesAccessKey="True" />
@@ -801,12 +915,28 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconElement" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="IconElement" Property="Margin" Value="0" />
+                <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="Icon" Property="Margin" Value="0" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+                <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+                <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource MenuBarItemTextForegroundPressed}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundPressed}" />
+            </MultiTrigger>
             <!--<Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
                 <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="4" />
                 <Setter TargetName="SubmenuBorder" Property="Padding" Value="0,3,0,3" />
