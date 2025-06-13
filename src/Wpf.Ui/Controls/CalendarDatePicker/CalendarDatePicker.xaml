@@ -17,17 +17,17 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Button/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <controls:SymbolIcon
+        x:Key="CalendarPickerIcon"
+        x:Shared="False"
+        Symbol="CalendarRtl24" />
+
     <Style
         x:Key="DefaultUiCalendarDatePickerStyle"
         BasedOn="{StaticResource DefaultUiButtonStyle}"
         TargetType="{x:Type controls:CalendarDatePicker}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <controls:SymbolIcon Symbol="CalendarRtl24" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Icon" Value="{StaticResource CalendarPickerIcon}" />
     </Style>
 
     <Style BasedOn="{StaticResource DefaultUiCalendarDatePickerStyle}" TargetType="{x:Type controls:CalendarDatePicker}" />
-
 </ResourceDictionary>
