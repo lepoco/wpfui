@@ -391,9 +391,11 @@
     <SolidColorBrush x:Key="LoadingScreenForeground" Color="{StaticResource SystemColorWindowTextColor}" />
 
     <!--  Menu  -->
-    <SolidColorBrush x:Key="MenuBarBackground" Color="Transparent" />
-    <SolidColorBrush x:Key="MenuBarItemBackgroundSelected" Color="{StaticResource SystemColorButtonFaceColor}" />
-    <SolidColorBrush x:Key="MenuBarItemBorderBrush" Color="{StaticResource SystemColorWindowColor}" />
+    <SolidColorBrush x:Key="MenuBarBackground" Color="{StaticResource SubtleFillColorTransparent}" />
+    <SolidColorBrush x:Key="MenuBarItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
+    <SolidColorBrush x:Key="MenuBarItemBackgroundPressed" Color="{StaticResource SubtleFillColorTertiary}" />
+    <SolidColorBrush x:Key="MenuBarItemBorderBrush" Color="{StaticResource ControlAltFillColorTertiary}" />
+    <SolidColorBrush x:Key="MenuBarItemTextForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
 
     <!--  MessageDialog  -->
     <SolidColorBrush x:Key="MessageBoxBackground" Color="{StaticResource SystemColorWindowColor}" />
