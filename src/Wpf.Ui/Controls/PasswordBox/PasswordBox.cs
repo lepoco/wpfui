@@ -93,7 +93,7 @@ public partial class PasswordBox : TextBox
     }
 
     /// <summary>
-    /// Gets a value indicating whether gets whether the password is currently revealed.
+    /// Gets a value indicating whether the password is currently revealed.
     /// </summary>
     public bool IsPasswordRevealed
     {
@@ -102,7 +102,7 @@ public partial class PasswordBox : TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether gets or sets whether the password reveal button is enabled.
+    /// Gets or sets whether the password reveal button is enabled.
     /// </summary>
     public bool RevealButtonEnabled
     {
