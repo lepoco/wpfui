@@ -22,6 +22,7 @@
       <Item Type="Wpf.Ui.Controls.FluentWindow" />
       <Item Type="Wpf.Ui.Controls.Flyout" />
       <Item Type="Wpf.Ui.Controls.FontIcon" />
+      <Item Type="Wpf.Ui.Controls.Gauge" />
       <Item Type="Wpf.Ui.Controls.HyperlinkButton" />
       <Item Type="Wpf.Ui.Controls.Image" />
       <Item Type="Wpf.Ui.Controls.ImageIcon" />
