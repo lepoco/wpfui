@@ -173,11 +173,13 @@
                                     Grid.Column="1"
                                     ButtonType="Minimize" />
 
+                                <!-- This button has HitTestVisible=false to workaround an issue with touch input firing twice. -->
+                                <!-- Maximizing is handled through the WM_NCLBUTTONUP hwndhook, so this button is only cosmetic. --> 
                                 <controls:TitleBarButton
                                     x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
                                     ButtonType="Maximize"
-                                    IsHitTestVisible="True" />
+                                    IsHitTestVisible="False" />
 
                                 <controls:TitleBarButton
                                     x:Name="PART_CloseButton"
