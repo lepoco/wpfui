@@ -357,6 +357,7 @@
 
                         <!--  Separator/Shadow for Top  -->
                         <Border
+                            x:Name="PART_TopSeparator"
                             Grid.Row="1"
                             Height="1"
                             Margin="0,4,0,4"
@@ -387,6 +388,7 @@
 
                         <!--  Separator/Shadow for Footer  -->
                         <Border
+                            x:Name="PART_FooterSeparator"
                             Grid.Row="3"
                             Height="1"
                             Margin="0,4,0,4"
@@ -500,6 +502,10 @@
             <Trigger Property="PaneTitle" Value="{x:Null}">
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
                 <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
+            </Trigger>
+            <Trigger Property="IsTopAndFooterSeparatorVisible" Value="False">
+                <Setter TargetName="PART_TopSeparator" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_FooterSeparator" Property="Visibility" Value="Collapsed" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
