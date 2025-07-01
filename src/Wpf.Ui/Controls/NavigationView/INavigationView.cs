@@ -55,9 +55,14 @@ public interface INavigationView
     object? FooterMenuItemsSource { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the top and footer separators is visible.
+    /// Gets or sets a value indicating whether the top separators is visible.
     /// </summary>
-    bool IsTopAndFooterSeparatorVisible { get; set; }
+    bool IsTopSeparatorVisible { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the footer separators is visible.
+    /// </summary>
+    bool IsFooterSeparatorVisible { get; set; }
 
     /// <summary>
     /// Gets the selected item.

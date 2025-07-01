@@ -503,8 +503,10 @@
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
                 <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
             </Trigger>
-            <Trigger Property="IsTopAndFooterSeparatorVisible" Value="False">
+            <Trigger Property="IsTopSeparatorVisible" Value="False">
                 <Setter TargetName="PART_TopSeparator" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsFooterSeparatorVisible" Value="False">
                 <Setter TargetName="PART_FooterSeparator" Property="Visibility" Value="Collapsed" />
             </Trigger>
         </ControlTemplate.Triggers>
