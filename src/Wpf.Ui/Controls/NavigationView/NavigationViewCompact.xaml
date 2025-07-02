@@ -26,7 +26,7 @@
                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                 <Border.Style>
                     <Style TargetType="{x:Type Border}">
-                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackground}" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}" />
