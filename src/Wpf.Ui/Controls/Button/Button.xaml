@@ -15,6 +15,7 @@
 
     <Thickness x:Key="ButtonPadding">11,5,11,6</Thickness>
     <Thickness x:Key="ButtonBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="ButtonBorderThemeAltThickness">0,0,0,1</Thickness>
     <Thickness x:Key="ButtonIconMargin">0,0,8,0</Thickness>
 
     <Style x:Key="DefaultRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
@@ -242,10 +243,10 @@
                         Height="{TemplateBinding Height}"
                         MinWidth="{TemplateBinding MinWidth}"
                         MinHeight="{TemplateBinding MinHeight}"
+                        Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
-                        Padding="{TemplateBinding Padding}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
@@ -323,17 +324,20 @@
 
             <!--  PRIMARY  -->
             <Trigger Property="Appearance" Value="Primary">
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
                 <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}" />
                 <Setter Property="MouseOverBackground" Value="{DynamicResource AccentButtonBackgroundPointerOver}" />
                 <Setter Property="PressedBackground" Value="{DynamicResource AccentButtonBackgroundPressed}" />
                 <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}" />
                 <Setter Property="PressedForeground" Value="{DynamicResource AccentButtonForegroundPointerOver}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
                 <Setter Property="PressedBorderBrush" Value="{DynamicResource AccentButtonBorderBrushPressed}" />
             </Trigger>
 
             <!--  DARK  -->
             <Trigger Property="Appearance" Value="Dark">
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDark}" />
@@ -392,6 +396,7 @@
 
             <!--  INFO  -->
             <Trigger Property="Appearance" Value="Info">
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteLightBlueColor}" />
@@ -416,6 +421,7 @@
 
             <!--  DANGER  -->
             <Trigger Property="Appearance" Value="Danger">
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteRedColor}" />
@@ -435,6 +441,7 @@
 
             <!--  SUCCESS  -->
             <Trigger Property="Appearance" Value="Success">
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteGreenColor}" />
@@ -454,6 +461,7 @@
 
             <!--  CAUTION  -->
             <Trigger Property="Appearance" Value="Caution">
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteOrangeColor}" />
