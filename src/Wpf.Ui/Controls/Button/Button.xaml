@@ -353,6 +353,11 @@
                         <SolidColorBrush Color="#52000000" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#52000000" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Foreground">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
@@ -412,6 +417,11 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteLightBlueColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteLightBlueColor}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Foreground">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
@@ -437,6 +447,11 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteRedColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteRedColor}" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
 
             <!--  SUCCESS  -->
@@ -457,6 +472,11 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteGreenColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteGreenColor}" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
 
             <!--  CAUTION  -->
@@ -473,6 +493,11 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property="PressedBackground">
+                    <Setter.Value>
+                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteOrangeColor}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="PressedBorderBrush">
                     <Setter.Value>
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteOrangeColor}" />
                     </Setter.Value>
