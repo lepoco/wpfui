@@ -126,6 +126,7 @@
                                     <Border
                                         x:Name="MainBorder"
                                         Height="40"
+                                        Background="Transparent"
                                         HorizontalAlignment="Stretch"
                                         BorderThickness="1"
                                         CornerRadius="4">
