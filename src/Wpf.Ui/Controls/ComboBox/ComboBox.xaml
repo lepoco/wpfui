@@ -270,6 +270,7 @@
                                         Background="{DynamicResource ComboBoxDropDownBackground}"
                                         BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}"
                                         BorderThickness="1"
+                                        IsHitTestVisible="False"
                                         CornerRadius="{DynamicResource PopupCornerRadius}"
                                         SnapsToDevicePixels="True">
                                         <Border.RenderTransform>
@@ -315,6 +316,10 @@
                                             From="0"
                                             To="180"
                                             Duration="00:00:00.167" />
+                                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DropDownBorder" Storyboard.TargetProperty="IsHitTestVisible">
+                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                            <DiscreteBooleanKeyFrame KeyTime="00:00:00.167" Value="True" />
+                                        </BooleanAnimationUsingKeyFrames>
                                         <DoubleAnimation
                                             Storyboard.TargetName="DropDownBorder"
                                             Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
