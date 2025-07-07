@@ -14,7 +14,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
     <Thickness x:Key="ComboBoxPadding">10,8,10,8</Thickness>
     <Thickness x:Key="ComboBoxBorderThemeThickness">1,1,1,1</Thickness>
@@ -181,10 +184,10 @@
                         <Border
                             x:Name="ContentBorder"
                             Grid.Row="0"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"                            
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
                             Padding="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
@@ -204,6 +207,16 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0" Margin="{TemplateBinding Padding}">
+                                        <ContentPresenter
+                                            Name="PART_Placeholder"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Content="{TemplateBinding controls:ComboBoxHelper.Placeholder}"
+                                            IsHitTestVisible="False"
+                                            TextElement.Foreground="{TemplateBinding Foreground}"
+                                            Visibility="{TemplateBinding SelectionBoxItem,
+                                                                         Converter={StaticResource NullToVisibilityConverter},
+                                                                         ConverterParameter=invert}" />
                                         <ContentPresenter
                                             Name="PART_ContentPresenter"
                                             HorizontalAlignment="Stretch"
@@ -270,8 +283,8 @@
                                         Background="{DynamicResource ComboBoxDropDownBackground}"
                                         BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}"
                                         BorderThickness="1"
-                                        IsHitTestVisible="False"
                                         CornerRadius="{DynamicResource PopupCornerRadius}"
+                                        IsHitTestVisible="False"
                                         SnapsToDevicePixels="True">
                                         <Border.RenderTransform>
                                             <TranslateTransform />

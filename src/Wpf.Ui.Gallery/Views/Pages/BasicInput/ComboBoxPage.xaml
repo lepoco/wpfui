@@ -58,9 +58,21 @@
             <ComboBox
                 MinWidth="200"
                 HorizontalAlignment="Left"
+                ui:ComboBoxHelper.Placeholder="Placeholder text"
                 IsEditable="True"
                 ItemsSource="{Binding ViewModel.ComboBoxFontSizes, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ComboBoxPage}, Mode=OneWay}"
                 SelectedIndex="0" />
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="A ComboBox with a placeholder."
+            XamlCode="&lt;ComboBox ui:ComboBoxHelper.Placeholder=&quot;Placeholder text&quot; /&gt;">
+            <ComboBox
+                MinWidth="200"
+                HorizontalAlignment="Left"
+                ui:ComboBoxHelper.Placeholder="Placeholder text"
+                IsEnabled="False" />
         </controls:ControlExample>
     </StackPanel>
 </Page>
