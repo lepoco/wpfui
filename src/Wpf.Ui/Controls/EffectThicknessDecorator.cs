@@ -13,11 +13,29 @@ public class EffectThicknessDecorator : Decorator
     public static readonly DependencyProperty ThicknessProperty =
         DependencyProperty.Register(nameof(Thickness), typeof(Thickness), typeof(EffectThicknessDecorator), new PropertyMetadata(new Thickness(35), OnThicknessChanged));
 
+    public static readonly DependencyProperty AnimationDelayProperty =
+        DependencyProperty.Register(nameof(AnimationDelay), typeof(TimeSpan), typeof(EffectThicknessDecorator), new PropertyMetadata(TimeSpan.Zero));
+
+    public static readonly DependencyProperty AnimationElementProperty =
+        DependencyProperty.Register(nameof(AnimationElement), typeof(UIElement), typeof(EffectThicknessDecorator), new PropertyMetadata(default(UIElement)));
+
     private PopupContainer? _popupContainer;
 
     public EffectThicknessDecorator()
     {
         SizeChanged += (_, _) => UpdateLayout();
+    }
+
+    public TimeSpan AnimationDelay
+    {
+        get { return (TimeSpan)GetValue(AnimationDelayProperty); }
+        set { SetValue(AnimationDelayProperty, value); }
+    }
+
+    public UIElement? AnimationElement
+    {
+        get { return (UIElement?)GetValue(AnimationElementProperty); }
+        set { SetValue(AnimationElementProperty, value); }
     }
 
     /// <summary>
@@ -79,10 +97,20 @@ public class EffectThicknessDecorator : Decorator
                 break;
         }
 
-        if (_popupContainer?.FrameworkElement == popupContainer?.FrameworkElement)
+        if (popupContainer == null || _popupContainer?.FrameworkElement == popupContainer.FrameworkElement)
         {
             return;
         }
+
+        popupContainer.Opened += (_, _) =>
+        {
+            if (AnimationElement is { Effect: { } effect } animationElement && AnimationDelay.Ticks > 0)
+            {
+                animationElement.Effect = null;
+
+                Task.Delay(AnimationDelay).ContinueWith(_ => Dispatcher.Invoke(() => animationElement.Effect = effect));
+            }
+        };
 
         _popupContainer = popupContainer;
         ApplyMargin();
@@ -130,22 +158,27 @@ public class EffectThicknessDecorator : Decorator
         private readonly Popup? _popup;
         private readonly ToolTip? _toolTip;
 
-        public FrameworkElement? FrameworkElement => _contextMenu ?? _toolTip ?? _popup?.Child as FrameworkElement;
-
         public PopupContainer(ContextMenu contextMenu)
         {
             _contextMenu = contextMenu;
+            contextMenu.Opened += (sender, args) => Opened?.Invoke(sender, args);
         }
 
         public PopupContainer(ToolTip toolTip)
         {
             _toolTip = toolTip;
+            toolTip.Opened += (sender, args) => Opened?.Invoke(sender, args);
         }
 
         public PopupContainer(Popup popup)
         {
             _popup = popup;
+            popup.Opened += (sender, args) => Opened?.Invoke(sender, args);
         }
+
+        public event EventHandler Opened;
+
+        public FrameworkElement? FrameworkElement => _contextMenu ?? _toolTip ?? _popup?.Child as FrameworkElement;
 
         public void SetMargin(Thickness margin)
         {
