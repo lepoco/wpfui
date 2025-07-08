@@ -25,7 +25,7 @@ internal class NullToVisibilityConverter : IValueConverter
             value = false;
         }
 
-        if (parameter is "invert")
+        if (parameter is "negate")
         {
             return (bool)value ? Visibility.Visible : Visibility.Collapsed;
         }

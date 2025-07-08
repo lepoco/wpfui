@@ -216,7 +216,7 @@
                                             TextElement.Foreground="{TemplateBinding Foreground}"
                                             Visibility="{TemplateBinding SelectionBoxItem,
                                                                          Converter={StaticResource NullToVisibilityConverter},
-                                                                         ConverterParameter=invert}" />
+                                                                         ConverterParameter=negate}" />
                                         <ContentPresenter
                                             Name="PART_ContentPresenter"
                                             HorizontalAlignment="Stretch"
