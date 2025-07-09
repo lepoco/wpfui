@@ -10,12 +10,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
+    <SolidColorBrush x:Key="ListViewItemBackground">Transparent</SolidColorBrush>
+
     <ControlTemplate x:Key="NullViewItemTemplate" TargetType="{x:Type controls:ListViewItem}">
         <Border
             x:Name="Border"
             Margin="0"
             Padding="0"
-            Background="Transparent"
+            Background="{DynamicResource ListViewItemBackground}"
             BorderThickness="1"
             CornerRadius="{TemplateBinding Border.CornerRadius}">
             <Grid>
@@ -53,7 +55,7 @@
             x:Name="Border"
             Margin="0"
             Padding="0"
-            Background="Transparent"
+            Background="{DynamicResource ListViewItemBackground}"
             BorderBrush="{TemplateBinding Border.BorderBrush}"
             BorderThickness="{TemplateBinding Border.BorderThickness}"
             CornerRadius="{TemplateBinding Border.CornerRadius}">
