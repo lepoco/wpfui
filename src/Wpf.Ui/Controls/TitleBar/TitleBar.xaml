@@ -136,6 +136,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <!--  Title text or other header content  -->
@@ -144,15 +145,21 @@
                                 HorizontalAlignment="Left"
                                 Content="{TemplateBinding Header}" />
 
-                            <!--  Additional header content  -->
+                            <!--  Centered content  -->
                             <ContentPresenter
                                 Grid.Column="1"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Content="{TemplateBinding CenterContent}" />
+
+                            <!--  Additional header content  -->
+                            <ContentPresenter
+                                Grid.Column="2"
                                 HorizontalAlignment="Right"
                                 Content="{TemplateBinding TrailingContent}" />
 
                             <!--  Navigation buttons - Close, Restore, Maximize, Minimize  -->
                             <Grid
-                                Grid.Column="2"
+                                Grid.Column="3"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top">
                                 <Grid.ColumnDefinitions>
