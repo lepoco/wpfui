@@ -67,8 +67,8 @@
                         <BulletDecorator.Bullet>
                             <Border
                                 x:Name="ControlBorderIconPresenter"
-                                Width="{StaticResource CheckBoxHeight}"
-                                Height="{StaticResource CheckBoxWidth}"
+                                Width="{DynamicResource CheckBoxHeight}"
+                                Height="{DynamicResource CheckBoxWidth}"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Background="{TemplateBinding Background}"
@@ -84,7 +84,7 @@
                                             Margin="0"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            FontSize="{StaticResource CheckBoxIconSize}"
+                                            FontSize="{DynamicResource CheckBoxIconSize}"
                                             FontWeight="Bold"
                                             Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
                                             Symbol="Checkmark48"
