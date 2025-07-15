@@ -149,6 +149,7 @@
                             <ContentPresenter
                                 Grid.Column="1"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Content="{TemplateBinding CenterContent}" />
 
                             <!--  Additional header content  -->
