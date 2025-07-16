@@ -58,7 +58,6 @@
             <ComboBox
                 MinWidth="200"
                 HorizontalAlignment="Left"
-                ui:ComboBoxHelper.Placeholder="Placeholder text"
                 IsEditable="True"
                 ItemsSource="{Binding ViewModel.ComboBoxFontSizes, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ComboBoxPage}, Mode=OneWay}"
                 SelectedIndex="0" />
