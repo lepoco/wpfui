@@ -140,6 +140,14 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(true)
     );
 
+    /// <summary>Identifies the <see cref="CanClose"/> dependency property.</summary>
+    public static readonly DependencyProperty CanCloseProperty = DependencyProperty.Register(
+        nameof(CanClose),
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(true)
+    );
+
     /// <summary>Identifies the <see cref="CanMaximize"/> dependency property.</summary>
     public static readonly DependencyProperty CanMaximizeProperty = DependencyProperty.Register(
         nameof(CanMaximize),
@@ -313,6 +321,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         get => (bool)GetValue(ShowCloseProperty);
         set => SetValue(ShowCloseProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the closing window functionality is enabled.
+    /// </summary>
+    public bool CanClose
+    {
+        get => (bool)GetValue(CanCloseProperty);
+        set => SetValue(CanCloseProperty, value);
     }
 
     /// <summary>
@@ -508,6 +525,11 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private void CloseWindow()
     {
+        if (!CanClose)
+        {
+            return;
+        }
+
         Debug.WriteLine(
             $"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
             "Wpf.Ui.TitleBar"
