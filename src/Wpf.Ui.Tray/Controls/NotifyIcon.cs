@@ -443,7 +443,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
             return;
         }
 
-        notifyIcon.internalNotifyIconManager.MenuOnRightClick = newValue;
+        notifyIcon.MenuOnRightClick = newValue;
     }
 
     private static void OnMenuChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
