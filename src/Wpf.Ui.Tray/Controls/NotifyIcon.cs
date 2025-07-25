@@ -427,7 +427,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
             return;
         }
 
-        notifyIcon.internalNotifyIconManager.FocusOnLeftClick = newValue;
+        notifyIcon.FocusOnLeftClick = newValue;
     }
 
     private static void OnMenuOnRightClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
