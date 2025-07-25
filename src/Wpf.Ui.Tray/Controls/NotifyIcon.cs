@@ -423,7 +423,6 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         if (e.NewValue is not bool newValue)
         {
             notifyIcon.FocusOnLeftClick = false;
-            notifyIcon.internalNotifyIconManager.FocusOnLeftClick = false;
             return;
         }
 
