@@ -115,6 +115,7 @@
                                         Grid.Column="1"
                                         VerticalAlignment="Center"
                                         Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
                                         TextElement.Foreground="{TemplateBinding Foreground}" />
                                 </Grid>
                             </Border>
