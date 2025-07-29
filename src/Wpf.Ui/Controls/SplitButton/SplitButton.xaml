@@ -42,7 +42,6 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border
                         x:Name="ContentBorder"
-                        Margin="0,-1,-1,-1"
                         Padding="11,0"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
@@ -137,7 +136,7 @@
                                     Focusable="False"
                                     Foreground="{TemplateBinding Foreground}"
                                     IsChecked="{TemplateBinding IsDropDownOpen}"
-                                    Style="{StaticResource DefaultSplitButtonToggleButtonStyle}">
+                                    Style="{DynamicResource DefaultSplitButtonToggleButtonStyle}">
                                     <controls:SymbolIcon FontSize="10" Symbol="ChevronDown24" />
                                 </ToggleButton>
                             </Border>
