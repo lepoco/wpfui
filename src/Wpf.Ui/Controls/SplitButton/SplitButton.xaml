@@ -86,9 +86,9 @@
                             <Border
                                 Name="PART_Content"
                                 Grid.Column="0"
-                                Background="{TemplateBinding Background}"
                                 Margin="0"
                                 Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness,
                                                                   Converter={StaticResource LeftSplitThicknessConverter}}"
@@ -120,9 +120,9 @@
                             </Border>
                             <Border
                                 Name="PART_Toggle"
-                                Background="{TemplateBinding Background}"
                                 Grid.Column="1"
                                 Margin="0"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness,
                                                                   Converter={StaticResource RightSplitThicknessConverter}}"
@@ -145,7 +145,7 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition SourceName="PART_ToggleButton" Property="IsMouseOver" Value="True" />
+                                <Condition SourceName="PART_Toggle" Property="Tag" Value="IsMouseOver" />
                                 <Condition Property="IsPressed" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Toggle" Property="Background" Value="{Binding MouseOverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -153,7 +153,7 @@
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition SourceName="PART_Content" Property="IsMouseOver" Value="True" />
+                                <Condition SourceName="PART_Content" Property="Tag" Value="IsMouseOver" />
                                 <Condition Property="IsPressed" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Content" Property="Background" Value="{Binding MouseOverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -161,15 +161,15 @@
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition SourceName="PART_ToggleButton" Property="IsMouseOver" Value="True" />
-                                <Condition Property="IsPressed" Value="True" />
+                                <Condition SourceName="PART_Toggle" Property="Tag" Value="IsMouseOver" />
+                                <Condition SourceName="PART_ToggleButton" Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Toggle" Property="Background" Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="PART_Toggle" Property="BorderBrush" Value="{Binding PressedBorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition SourceName="PART_Content" Property="IsMouseOver" Value="True" />
+                                <Condition SourceName="PART_Content" Property="Tag" Value="IsMouseOver" />
                                 <Condition Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Content" Property="Background" Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
