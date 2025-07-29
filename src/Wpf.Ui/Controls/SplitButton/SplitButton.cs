@@ -5,6 +5,7 @@
 
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -12,9 +13,14 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a button with two parts that can be invoked separately. One part behaves like a standard button and the other part invokes a flyout.
 /// </summary>
+[TemplatePart(Name = TemplateElementToggle, Type = typeof(Border))]
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(ToggleButton))]
+[TemplatePart(Name = TemplateElementContent, Type = typeof(Border))]
 public class SplitButton : Button
 {
+    private const string TemplateElementContent = "PART_Content";
+    private const string TemplateElementToggle = "PART_Toggle";
+
     /// <summary>
     /// Template element represented by the <c>ToggleButton</c> name.
     /// </summary>
@@ -26,6 +32,9 @@ public class SplitButton : Button
     /// Gets or sets control responsible for toggling the drop-down button.
     /// </summary>
     protected ToggleButton SplitButtonToggleButton { get; set; } = null!;
+
+    private Border _splitButtonToggleBorder;
+    private Border _splitButtonContentBorder;
 
     /// <summary>Identifies the <see cref="Flyout"/> dependency property.</summary>
     public static readonly DependencyProperty FlyoutProperty = DependencyProperty.Register(
@@ -85,29 +94,12 @@ public class SplitButton : Button
         };
     }
 
-    protected virtual void AttachTemplateResources()
-    {
-        base.OnApplyTemplate();
-
-        if (GetTemplateChild(TemplateElementToggleButton) is ToggleButton toggleButton)
-        {
-            SplitButtonToggleButton = toggleButton;
-            AttachToggleButtonClick();
-        }
-        else
-        {
-            throw new NullReferenceException(
-                $"Element {nameof(TemplateElementToggleButton)} of type {typeof(ToggleButton)} not found in {typeof(SplitButton)}"
-            );
-        }
-    }
-
     private void AttachToggleButtonClick()
     {
         if (SplitButtonToggleButton != null)
         {
-            SplitButtonToggleButton.Click -= OnSplitButtonToggleButtonOnClick;
-            SplitButtonToggleButton.Click += OnSplitButtonToggleButtonOnClick;
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp -= OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp += OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
         }
     }
 
@@ -169,6 +161,49 @@ public class SplitButton : Button
                 $"Element {nameof(TemplateElementToggleButton)} of type {typeof(ToggleButton)} not found in {typeof(SplitButton)}"
             );
         }
+
+        if (GetTemplateChild(TemplateElementContent) is Border contentBorder)
+        {
+            _splitButtonContentBorder = contentBorder;
+        }
+
+        if (GetTemplateChild(TemplateElementToggle) is Border toggleBorder)
+        {
+            _splitButtonToggleBorder = toggleBorder;
+        }
+
+        PreviewMouseMove += OnPreviewMouseMove;
+        MouseLeave += OnMouseLeave;
+    }
+
+    private void OnMouseLeave(object sender, MouseEventArgs e)
+    {
+        if (_splitButtonToggleBorder != null)
+        {
+            _splitButtonToggleBorder.Tag = null;
+        }
+
+        if (_splitButtonContentBorder != null)
+        {
+            _splitButtonContentBorder.Tag = null;
+        }
+    }
+
+    private void OnPreviewMouseMove(object sender, MouseEventArgs args)
+    {
+        if (_splitButtonToggleBorder != null)
+        {
+            var position = args.GetPosition(_splitButtonToggleBorder);
+            HitTestResult hitTestResult = VisualTreeHelper.HitTest(_splitButtonToggleBorder, position);
+            _splitButtonToggleBorder.Tag = hitTestResult?.VisualHit != null ? "IsMouseOver" : null;
+        }
+
+        if (_splitButtonContentBorder != null)
+        {
+            var position = args.GetPosition(_splitButtonContentBorder);
+            HitTestResult hitTestResult = VisualTreeHelper.HitTest(_splitButtonContentBorder, position);
+            _splitButtonContentBorder.Tag = hitTestResult?.VisualHit != null ? "IsMouseOver" : null;
+        }
     }
 
     /// <summary>
@@ -176,12 +211,24 @@ public class SplitButton : Button
     /// </summary>
     protected virtual void ReleaseTemplateResources()
     {
-        SplitButtonToggleButton.Click -= OnSplitButtonToggleButtonOnClick;
+        if (SplitButtonToggleButton != null)
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp -= OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
+
+        PreviewMouseMove -= OnPreviewMouseMove;
+        MouseLeave -= OnMouseLeave;
     }
 
-    private void OnSplitButtonToggleButtonOnClick(object sender, RoutedEventArgs e)
+    private void OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp(object sender, MouseEventArgs e)
     {
         if (sender is not ToggleButton || _contextMenu is null)
+        {
+            return;
+        }
+
+        //  Ensure mouse up actually happened inside the toggler, and not outside.
+        var position = e.GetPosition(_splitButtonToggleBorder);
+        HitTestResult hitTestResult = VisualTreeHelper.HitTest(_splitButtonToggleBorder, position);
+        if (hitTestResult?.VisualHit == null)
         {
             return;
         }
