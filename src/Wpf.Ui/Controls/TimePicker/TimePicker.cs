@@ -59,7 +59,7 @@ public class TimePicker : ButtonBase
 
     /// <summary>Identifies the <see cref="SelectedTime"/> dependency property.</summary>
     public static readonly DependencyProperty SelectedTimeProperty = DependencyProperty.Register(
-        nameof(SelectedTime), typeof(TimeSpan?), typeof(TimePicker), new PropertyMetadata(null));
+        nameof(SelectedTime), typeof(TimeSpan?), typeof(TimePicker), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
     /// <summary>Identifies the <see cref="MinuteIncrement"/> dependency property.</summary>
     public static readonly DependencyProperty MinuteIncrementProperty = DependencyProperty.Register(
