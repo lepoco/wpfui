@@ -102,7 +102,7 @@ public partial class PasswordBox : TextBox
     }
 
     /// <summary>
-    /// Gets or sets whether the password reveal button is enabled.
+    /// Gets or sets a value indicating whether gets or sets whether the password reveal button is enabled.
     /// </summary>
     public bool RevealButtonEnabled
     {
@@ -123,12 +123,12 @@ public partial class PasswordBox : TextBox
     protected override void OnTextChanged(TextChangedEventArgs e)
     {
         UpdateTextContents(isTriggeredByTextInput: true);
+        SetPlaceholderTextVisibility();
+        RevealClearButton();
 
         if (!_isUpdating)
         {
             base.OnTextChanged(e);
-            SetPlaceholderTextVisibility();
-            RevealClearButton();
         }
     }
 
@@ -261,9 +261,9 @@ public partial class PasswordBox : TextBox
     /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> containing the event data.</param>
     private static void OnPasswordChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
     {
-        if (dependencyObject is PasswordBox passwodBox)
+        if (dependencyObject is PasswordBox passwordBox)
         {
-            passwodBox.OnPasswordChanged();
+            passwordBox.OnPasswordChanged();
         }
     }
 
@@ -274,9 +274,9 @@ public partial class PasswordBox : TextBox
     /// <param name="e">Event data that contains information about the property change.</param>
     private static void OnPasswordCharChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
     {
-        if (dependencyObject is PasswordBox passwodBox)
+        if (dependencyObject is PasswordBox passwordBox)
         {
-            passwodBox.OnPasswordCharChanged();
+            passwordBox.OnPasswordCharChanged();
         }
     }
 
@@ -287,9 +287,9 @@ public partial class PasswordBox : TextBox
     /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> containing the old and new values.</param>
     private static void OnIsPasswordRevealedChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
     {
-        if (dependencyObject is PasswordBox passwodBox)
+        if (dependencyObject is PasswordBox passwordBox)
         {
-            passwodBox.OnIsPasswordRevealedChanged();
+            passwordBox.OnIsPasswordRevealedChanged();
         }
     }
 }
