@@ -75,6 +75,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem(nameof(System.Windows.Controls.DataGrid), typeof(DataGridPage)),
                 new NavigationViewItem(nameof(ListBox), typeof(ListBoxPage)),
                 new NavigationViewItem(nameof(Ui.Controls.ListView), typeof(ListViewPage)),
+                new NavigationViewItem("ListViewNoPageScroll", typeof(ListViewScrollPage)),
                 new NavigationViewItem(nameof(TreeView), typeof(TreeViewPage)),
 #if DEBUG
                 new NavigationViewItem("TreeList", typeof(TreeListPage)),
