@@ -46,6 +46,41 @@ public partial class NavigationView
         target.SetValue(HeaderContentProperty, headerContent);
 
     // ============================================================
+    // IsScrollable Attached Property
+    // ============================================================
+
+    /// <summary>
+    /// Identifies the <see cref="IsScrollable"/> attached property.
+    /// </summary>
+    public static readonly DependencyProperty IsScrollableProperty = DependencyProperty.RegisterAttached(
+        "IsScrollable",
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(true)
+    );
+
+    /// <summary>
+    /// Gets the value of the <see cref="IsScrollableProperty"/> attached property for a specified element.
+    /// </summary>
+    /// <param name="element">The element from which to read the property value.</param>
+    /// <returns><see langword="true"/> if the content of the page hosted in <see cref="NavigationView"/> should be scrollable; otherwise, <see langword="false"/>.</returns>
+    [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
+    public static bool GetIsScrollable(DependencyObject element)
+    {
+        return (bool)element.GetValue(IsScrollableProperty);
+    }
+
+    /// <summary>
+    /// Sets the value of the <see cref="IsScrollableProperty"/> attached property for a specified element.
+    /// </summary>
+    /// <param name="element">The element on which to set the property value.</param>
+    /// <param name="value">The value to set. <see langword="false"/> to disable scrolling on the <see cref="NavigationView"/> content presenter.</param>
+    public static void SetIsScrollable(DependencyObject element, bool value)
+    {
+        element.SetValue(IsScrollableProperty, value);
+    }
+
+    // ============================================================
     // NavigationParent Attached Property
     // ============================================================
 

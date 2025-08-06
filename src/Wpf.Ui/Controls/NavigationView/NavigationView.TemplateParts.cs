@@ -6,7 +6,10 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
+using System.Windows.Controls;
+
 // ReSharper disable once CheckNamespace
+
 namespace Wpf.Ui.Controls;
 
 /// <content>
@@ -30,10 +33,11 @@ namespace Wpf.Ui.Controls;
     Name = TemplateElementAutoSuggestBoxSymbolButton,
     Type = typeof(System.Windows.Controls.Button)
 )]
+[TemplatePart(Name = TemplateElementContentScrollViewer, Type = typeof(ScrollViewer))]
 public partial class NavigationView
 {
     /// <summary>
-    /// Template element represented by the <c>PART_MenuItemsItemsControl</c> name.
+    /// Template element represented by the <c>PART_NavigationViewContentPresenter</c> name.
     /// </summary>
     private const string TemplateElementNavigationViewContentPresenter =
         "PART_NavigationViewContentPresenter";
@@ -62,6 +66,11 @@ public partial class NavigationView
     /// Template element represented by the <c>PART_AutoSuggestBoxSymbolButton</c> name.
     /// </summary>
     private const string TemplateElementAutoSuggestBoxSymbolButton = "PART_AutoSuggestBoxSymbolButton";
+
+    /// <summary>
+    /// Template element represented by the <c>PART_ContentScrollViewer</c> name.
+    /// </summary>
+    private const string TemplateElementContentScrollViewer = "PART_ContentScrollViewer";
 
     /// <summary>
     /// Gets or sets the control responsible for rendering the content.
@@ -93,6 +102,11 @@ public partial class NavigationView
     /// </summary>
     protected System.Windows.Controls.Button? AutoSuggestBoxSymbolButton { get; set; }
 
+    /// <summary>
+    /// Gets or sets the <see cref="ScrollViewer"/> that hosts the content of the <see cref="Page"/>.
+    /// </summary>
+    protected ScrollViewer? ContentScrollViewer { get; set; }
+
     /// <inheritdoc />
     public override void OnApplyTemplate()
     {
@@ -121,6 +135,11 @@ public partial class NavigationView
         {
             NavigationViewContentPresenter.Navigated -= OnNavigationViewContentPresenterNavigated;
             NavigationViewContentPresenter.Navigated += OnNavigationViewContentPresenterNavigated;
+            
+            // We need to wait for the NavigationViewContentPresenter to apply its template
+            // so we can find the ContentScrollViewer
+            NavigationViewContentPresenter.ApplyTemplate();
+            FindContentScrollViewer();
         }
 
         if (
@@ -148,6 +167,20 @@ public partial class NavigationView
 
             ToggleButton.Click -= OnToggleButtonClick;
             ToggleButton.Click += OnToggleButtonClick;
+        }
+    }
+
+    private void FindContentScrollViewer()
+    {
+        if (NavigationViewContentPresenter?.Template is null)
+        {
+            return;
+        }
+
+        // Try to find the ContentScrollViewer within the NavigationViewContentPresenter's template
+        if (NavigationViewContentPresenter.Template.FindName(TemplateElementContentScrollViewer, NavigationViewContentPresenter) is ScrollViewer scrollViewer)
+        {
+            ContentScrollViewer = scrollViewer;
         }
     }
 
