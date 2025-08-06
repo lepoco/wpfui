@@ -233,6 +233,7 @@
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Appearance" Value="Secondary" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -332,7 +333,7 @@
                 <Setter Property="PressedForeground" Value="{DynamicResource AccentButtonForegroundPointerOver}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
                 <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
-                <Setter Property="PressedBorderBrush" Value="{DynamicResource AccentButtonBorderBrushPressed}" />
+                <Setter Property="PressedBorderBrush" Value="{DynamicResource AccentButtonBackgroundPressed}" />
             </Trigger>
 
             <!--  DARK  -->
