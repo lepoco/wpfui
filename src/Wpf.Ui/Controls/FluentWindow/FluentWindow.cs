@@ -103,7 +103,7 @@ public class FluentWindow : System.Windows.Window
     protected override void OnSourceInitialized(EventArgs e)
     {
         OnCornerPreferenceChanged(default, WindowCornerPreference);
-        OnExtendsContentIntoTitleBarChanged(default, ExtendsContentIntoTitleBar);
+        OnExtendsContentIntoTitleBarChanged(false, ExtendsContentIntoTitleBar);
         OnBackdropTypeChanged(default, WindowBackdropType);
 
         base.OnSourceInitialized(e);
@@ -182,10 +182,11 @@ public class FluentWindow : System.Windows.Window
             return;
         }
 
+        SetWindowChrome();
+
         if (newValue == WindowBackdropType.None)
         {
             _ = WindowBackdrop.RemoveBackdrop(this);
-
             return;
         }
 
@@ -233,20 +234,23 @@ public class FluentWindow : System.Windows.Window
         // AllowsTransparency = true;
         SetCurrentValue(WindowStyleProperty, WindowStyle.SingleBorderWindow);
 
-        WindowChrome.SetWindowChrome(
-            this,
-            new WindowChrome
-            {
-                CaptionHeight = 0,
-                CornerRadius = default,
-                GlassFrameThickness = new Thickness(-1),
-                ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
-                UseAeroCaptionButtons = false,
-            }
-        );
-
         // WindowStyleProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(WindowStyle.SingleBorderWindow));
         // AllowsTransparencyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(false));
         _ = UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
+    }
+
+    private void SetWindowChrome()
+    {
+        WindowChrome.SetWindowChrome(
+                                     this,
+                                     new WindowChrome
+                                     {
+                                         CaptionHeight = 0,
+                                         CornerRadius = default,
+                                         GlassFrameThickness = WindowBackdropType == WindowBackdropType.None ? new Thickness(1) : new Thickness(-1),
+                                         ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                                         UseAeroCaptionButtons = false,
+                                     }
+                                    );
     }
 }
