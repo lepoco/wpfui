@@ -6,6 +6,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using Wpf.Ui.Interop;
+using Wpf.Ui.Win32;
 using static Wpf.Ui.Appearance.UISettingsRCW;
 
 namespace Wpf.Ui.Appearance;
@@ -39,7 +40,7 @@ public static class ApplicationAccentColorManager
         try
         {
             _uisettings = GetWinRTInstance() as IUISettings3;
-            _isSupported = true;
+            _isSupported = _uisettings != null;
         }
         catch (COMException)
         {
@@ -358,6 +359,11 @@ public static class ApplicationAccentColorManager
     /// </summary>
     private static object? GetWinRTInstance()
     {
+        if (!Utilities.IsOSWindows10OrNewer)
+        {
+            return null;
+        }
+
         object? winRtInstance;
 
         try
