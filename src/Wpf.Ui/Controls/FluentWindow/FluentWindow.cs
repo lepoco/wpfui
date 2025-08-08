@@ -110,7 +110,7 @@ public class FluentWindow : System.Windows.Window
 
         if (Utilities.IsOSWindows11OrNewer)
         {
-            UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.PrimaryAccent);
+            UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
         }
 
         base.OnSourceInitialized(e);
