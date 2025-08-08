@@ -105,15 +105,33 @@ public class FluentWindow : System.Windows.Window
     protected override void OnSourceInitialized(EventArgs e)
     {
         OnCornerPreferenceChanged(default, WindowCornerPreference);
-        OnExtendsContentIntoTitleBarChanged(default, ExtendsContentIntoTitleBar);
+        OnExtendsContentIntoTitleBarChanged(false, ExtendsContentIntoTitleBar);
         OnBackdropTypeChanged(default, WindowBackdropType);
+
+        base.OnSourceInitialized(e);
+    }
+
+    /// <inheritdoc />
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
 
         if (Utilities.IsOSWindows11OrNewer)
         {
             UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
         }
+    }
 
-        base.OnSourceInitialized(e);
+    /// <inheritdoc />
+    protected override void OnDeactivated(EventArgs e)
+    {
+        base.OnDeactivated(e);
+
+        if (Utilities.IsOSWindows11OrNewer)
+        {
+            // DWMWA_COLOR_DEFAULT.
+            UnsafeNativeMethods.ApplyBorderColor(this, unchecked((int)0xFFFFFFFF));
+        }
     }
 
     /// <summary>
@@ -189,10 +207,11 @@ public class FluentWindow : System.Windows.Window
             return;
         }
 
+        SetWindowChrome();
+
         if (newValue == WindowBackdropType.None)
         {
             _ = WindowBackdrop.RemoveBackdrop(this);
-
             return;
         }
 
@@ -240,20 +259,26 @@ public class FluentWindow : System.Windows.Window
         // AllowsTransparency = true;
         SetCurrentValue(WindowStyleProperty, WindowStyle.SingleBorderWindow);
 
-        WindowChrome.SetWindowChrome(
-            this,
-            new WindowChrome
-            {
-                CaptionHeight = 0,
-                CornerRadius = default,
-                GlassFrameThickness = new Thickness(-1),
-                ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
-                UseAeroCaptionButtons = false,
-            }
-        );
-
         // WindowStyleProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(WindowStyle.SingleBorderWindow));
         // AllowsTransparencyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(false));
         _ = UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
+    }
+
+    /// <summary>
+    /// This virtual method is called when <see cref="WindowBackdropType"/> is changed.
+    /// </summary>
+    protected virtual void SetWindowChrome()
+    {
+        WindowChrome.SetWindowChrome(
+                                     this,
+                                     new WindowChrome
+                                     {
+                                         CaptionHeight = 0,
+                                         CornerRadius = default,
+                                         GlassFrameThickness = WindowBackdropType == WindowBackdropType.None ? new Thickness(0.00001) : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
+                                         ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                                         UseAeroCaptionButtons = false,
+                                     }
+                                    );
     }
 }
