@@ -239,7 +239,10 @@ public class FluentWindow : System.Windows.Window
         _ = UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
     }
 
-    private void SetWindowChrome()
+    /// <summary>
+    /// This virtual method is called when <see cref="WindowBackdropType"/> is changed.
+    /// </summary>
+    protected virtual void SetWindowChrome()
     {
         WindowChrome.SetWindowChrome(
                                      this,
@@ -247,7 +250,7 @@ public class FluentWindow : System.Windows.Window
                                      {
                                          CaptionHeight = 0,
                                          CornerRadius = default,
-                                         GlassFrameThickness = WindowBackdropType == WindowBackdropType.None ? new Thickness(1) : new Thickness(-1),
+                                         GlassFrameThickness = WindowBackdropType == WindowBackdropType.None ? new Thickness(0.00001) : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
                                          ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
                                          UseAeroCaptionButtons = false,
                                      }
