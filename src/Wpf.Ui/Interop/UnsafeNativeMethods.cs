@@ -70,10 +70,32 @@ public static class UnsafeNativeMethods
     /// <summary>
     /// Tries to apply the color of the border.
     /// </summary>
+    /// <param name="window">The window.</param>
+    /// <param name="color">The color.</param>
+    /// <returns><see langword="true" /> if invocation of native Windows function succeeds.</returns>
+    public static bool ApplyBorderColor(Window window, int color) =>
+        GetHandle(window, out IntPtr windowHandle)
+     && ApplyBorderColor(windowHandle, color);
+
+    /// <summary>
+    /// Tries to apply the color of the border.
+    /// </summary>
     /// <param name="handle">The handle.</param>
     /// <param name="color">The color.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyBorderColor(IntPtr handle, Color color)
+    {
+        int colorNum = (color.B << 16) | (color.G << 8) | color.R;
+        return ApplyBorderColor(handle, colorNum);
+    }
+
+    /// <summary>
+    /// Tries to apply the color of the border.
+    /// </summary>
+    /// <param name="handle">The handle.</param>
+    /// <param name="color">The color.</param>
+    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
+    public static bool ApplyBorderColor(IntPtr handle, int color)
     {
         if (handle == IntPtr.Zero)
         {
@@ -85,8 +107,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        int colorNum = (color.B << 16) | (color.G << 8) | color.R;
-        return Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR, ref colorNum, sizeof(int)) == 0;
+        return Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR, ref color, sizeof(int)) == 0;
     }
 
     /// <summary>
