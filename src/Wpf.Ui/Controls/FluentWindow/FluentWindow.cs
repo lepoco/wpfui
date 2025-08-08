@@ -4,7 +4,9 @@
 // All Rights Reserved.
 
 using System.Windows.Shell;
+using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
+using Wpf.Ui.Win32;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -105,6 +107,11 @@ public class FluentWindow : System.Windows.Window
         OnCornerPreferenceChanged(default, WindowCornerPreference);
         OnExtendsContentIntoTitleBarChanged(default, ExtendsContentIntoTitleBar);
         OnBackdropTypeChanged(default, WindowBackdropType);
+
+        if (Utilities.IsOSWindows11OrNewer)
+        {
+            UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.PrimaryAccent);
+        }
 
         base.OnSourceInitialized(e);
     }
