@@ -49,15 +49,44 @@ public static class UnsafeNativeMethods
 
         int pvAttribute = (int)UnsafeReflection.Cast(cornerPreference);
 
-        // TODO: Validate HRESULT
-        _ = Dwmapi.DwmSetWindowAttribute(
+        return Dwmapi.DwmSetWindowAttribute(
             handle,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE,
             ref pvAttribute,
             Marshal.SizeOf(typeof(int))
-        );
+        ) == 0;
+    }
 
-        return true;
+    /// <summary>
+    /// Tries to apply the color of the border.
+    /// </summary>
+    /// <param name="window">The window.</param>
+    /// <param name="color">The color.</param>
+    /// <returns><see langword="true" /> if invocation of native Windows function succeeds.</returns>
+    public static bool ApplyBorderColor(Window window, Color color) =>
+        GetHandle(window, out IntPtr windowHandle)
+     && ApplyBorderColor(windowHandle, color);
+
+    /// <summary>
+    /// Tries to apply the color of the border.
+    /// </summary>
+    /// <param name="handle">The handle.</param>
+    /// <param name="color">The color.</param>
+    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
+    public static bool ApplyBorderColor(IntPtr handle, Color color)
+    {
+        if (handle == IntPtr.Zero)
+        {
+            return false;
+        }
+
+        if (!User32.IsWindow(handle))
+        {
+            return false;
+        }
+
+        int colorNum = (color.B << 16) | (color.G << 8) | color.R;
+        return Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR, ref colorNum, sizeof(int)) == 0;
     }
 
     /// <summary>
@@ -93,10 +122,7 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        // TODO: Validate HRESULT
-        _ = Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)));
-
-        return true;
+        return Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int))) == 0;
     }
 
     /// <summary>
@@ -132,10 +158,7 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        // TODO: Validate HRESULT
-        _ = Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)));
-
-        return true;
+        return Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int))) == 0;
     }
 
     /// <summary>
@@ -214,15 +237,12 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        // TODO: Validate HRESULT
-        _ = Dwmapi.DwmSetWindowAttribute(
+        return Dwmapi.DwmSetWindowAttribute(
             handle,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
             ref backdropPvAttribute,
             Marshal.SizeOf(typeof(int))
-        );
-
-        return true;
+        ) == 0;
     }
 
     /// <summary>
@@ -296,15 +316,12 @@ public static class UnsafeNativeMethods
     {
         var backdropPvAttribute = 0x1; // Enable
 
-        // TODO: Validate HRESULT
-        _ = Dwmapi.DwmSetWindowAttribute(
+        return Dwmapi.DwmSetWindowAttribute(
             handle,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
             ref backdropPvAttribute,
             Marshal.SizeOf(typeof(int))
-        );
-
-        return true;
+        ) == 0;
     }
 
     /// <summary>
