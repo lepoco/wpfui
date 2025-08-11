@@ -91,7 +91,7 @@
                                             Margin="0"
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Top"
-                                            FontSize="{DynamicResource CheckBoxIconSize}"
+                                            FontSize="{StaticResource CheckBoxIconSize}"
                                             FontWeight="Bold"
                                             Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
                                             Symbol="Checkmark48"
