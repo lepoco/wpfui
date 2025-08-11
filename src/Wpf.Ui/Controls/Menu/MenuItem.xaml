@@ -10,10 +10,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/DefaultFocusVisualStyle.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <Style
         x:Key="UiMenuItemScrollViewer"
         BasedOn="{StaticResource {x:Type ScrollViewer}}"
@@ -112,8 +108,9 @@
                                 <DropShadowEffect
                                     BlurRadius="20"
                                     Direction="270"
-                                    Opacity="0.25"
-                                    ShadowDepth="6" />
+                                    Opacity="0.135"
+                                    ShadowDepth="10"
+                                    Color="#202020" />
                             </Border.Effect>
                         </Border>
                     </Grid>
@@ -403,7 +400,7 @@
                 <Grid>
                     <Border
                         x:Name="SubmenuBorder"
-                        Margin="12,10,12,18"
+                        Margin="12,10,12,30"
                         Padding="0,3,0,3"
                         Background="{DynamicResource FlyoutBackground}"
                         BorderBrush="{DynamicResource FlyoutBorderBrush}"
@@ -420,8 +417,9 @@
                             <DropShadowEffect
                                 BlurRadius="20"
                                 Direction="270"
-                                Opacity="0.5"
-                                ShadowDepth="6" />
+                                Opacity="0.135"
+                                ShadowDepth="10"
+                                Color="#202020" />
                         </Border.Effect>
                     </Border>
                 </Grid>
@@ -492,9 +490,7 @@
         <Setter Property="FocusVisualStyle">
             <Setter.Value>
                 <Style BasedOn="{StaticResource DefaultControlFocusVisualStyle}">
-                    <Style.Resources>
-                        <Thickness x:Key="KeyboardFocusMargin">4,1,4,1</Thickness>
-                    </Style.Resources>
+                    <Setter Property="Control.Margin" Value="4,1" />
                 </Style>
             </Setter.Value>
         </Setter>
@@ -596,8 +592,9 @@
                                 <DropShadowEffect
                                     BlurRadius="20"
                                     Direction="270"
-                                    Opacity="0.25"
-                                    ShadowDepth="6" />
+                                    Opacity="0.135"
+                                    ShadowDepth="10"
+                                    Color="#202020" />
                             </Border.Effect>
                         </Border>
                     </Grid>
@@ -918,8 +915,9 @@
                             <DropShadowEffect
                                 BlurRadius="20"
                                 Direction="270"
-                                Opacity="0.5"
-                                ShadowDepth="6" />
+                                Opacity="0.135"
+                                ShadowDepth="10"
+                                Color="#202020" />
                         </Border.Effect>
                     </Border>
                 </Grid>
@@ -989,7 +987,13 @@
     <!--  MenuItem Style  -->
     <Style x:Key="WpfUiMenuItem" TargetType="{x:Type controls:MenuItem}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource DefaultControlFocusVisualStyle}">
+                    <Setter Property="Control.Margin" Value="4,1" />
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
         <Setter Property="Focusable" Value="True" />
         <Style.Triggers>
