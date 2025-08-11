@@ -15,10 +15,8 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [TemplatePart(Name = TemplateElementToggle, Type = typeof(Border))]
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(ToggleButton))]
-[TemplatePart(Name = TemplateElementContent, Type = typeof(Border))]
 public class SplitButton : Button
 {
-    private const string TemplateElementContent = "PART_Content";
     private const string TemplateElementToggle = "PART_Toggle";
 
     /// <summary>
@@ -34,7 +32,6 @@ public class SplitButton : Button
     protected ToggleButton? SplitButtonToggleButton { get; set; }
 
     private Border? _splitButtonToggleBorder;
-    private Border? _splitButtonContentBorder;
 
     /// <summary>Identifies the <see cref="Flyout"/> dependency property.</summary>
     public static readonly DependencyProperty FlyoutProperty = DependencyProperty.Register(
@@ -162,40 +159,9 @@ public class SplitButton : Button
             );
         }
 
-        if (GetTemplateChild(TemplateElementContent) is Border contentBorder)
-        {
-            _splitButtonContentBorder = contentBorder;
-        }
-
         if (GetTemplateChild(TemplateElementToggle) is Border toggleBorder)
         {
             _splitButtonToggleBorder = toggleBorder;
-        }
-
-        PreviewMouseMove += OnPreviewMouseMove;
-        MouseLeave += OnMouseLeave;
-    }
-
-    private void OnMouseLeave(object sender, MouseEventArgs e)
-    {
-        _splitButtonToggleBorder?.SetCurrentValue(TagProperty, null);
-        _splitButtonContentBorder?.SetCurrentValue(TagProperty, null);
-    }
-
-    private void OnPreviewMouseMove(object sender, MouseEventArgs args)
-    {
-        if (_splitButtonToggleBorder != null)
-        {
-            var position = args.GetPosition(_splitButtonToggleBorder);
-            HitTestResult hitTestResult = VisualTreeHelper.HitTest(_splitButtonToggleBorder, position);
-            _splitButtonToggleBorder.SetCurrentValue(TagProperty, hitTestResult?.VisualHit != null ? "IsMouseOver" : null);
-        }
-
-        if (_splitButtonContentBorder != null)
-        {
-            var position = args.GetPosition(_splitButtonContentBorder);
-            HitTestResult hitTestResult = VisualTreeHelper.HitTest(_splitButtonContentBorder, position);
-            _splitButtonContentBorder.SetCurrentValue(TagProperty, hitTestResult?.VisualHit != null ? "IsMouseOver" : null);
         }
     }
 
