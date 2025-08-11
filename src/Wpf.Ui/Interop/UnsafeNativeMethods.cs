@@ -85,8 +85,7 @@ public static class UnsafeNativeMethods
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyBorderColor(IntPtr handle, Color color)
     {
-        int colorNum = (color.B << 16) | (color.G << 8) | color.R;
-        return ApplyBorderColor(handle, colorNum);
+        return ApplyBorderColor(handle, (color.B << 16) | (color.G << 8) | color.R);
     }
 
     /// <summary>
