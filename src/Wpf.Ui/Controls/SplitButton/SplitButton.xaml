@@ -66,7 +66,6 @@
         <!--  WPF doesn't like centering, the animation is ugly and the mouse button sometimes clicks right away.  -->
         <Setter Property="Popup.Placement" Value="Bottom" />
         <Setter Property="IsDropDownOpen" Value="False" />
-        <Setter Property="PressedBorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SplitButton}">
