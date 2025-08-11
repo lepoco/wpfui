@@ -353,8 +353,8 @@
     <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
     <!--<SolidColorBrush x:Key="ButtonBorderBrush" Color="{StaticResource ControlElevationBorder}" />-->
     <!--<SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="{StaticResource ControlElevationBorder}" />-->
-    <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{StaticResource ControlFillColorTransparent}" />
-    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{StaticResource ControlFillColorTransparent}" />
+    <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{StaticResource ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
 
     <!--  Calendar  -->
     <SolidColorBrush x:Key="CalendarViewForeground" Color="{StaticResource TextFillColorPrimary}" />
