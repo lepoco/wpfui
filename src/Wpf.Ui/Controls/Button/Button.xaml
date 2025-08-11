@@ -329,7 +329,6 @@
 
             <!--  PRIMARY  -->
             <Trigger Property="Appearance" Value="Primary">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}" />
                 <Setter Property="MouseOverBackground" Value="{DynamicResource AccentButtonBackgroundPointerOver}" />
                 <Setter Property="PressedBackground" Value="{DynamicResource AccentButtonBackgroundPressed}" />
@@ -342,7 +341,6 @@
 
             <!--  DARK  -->
             <Trigger Property="Appearance" Value="Dark">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDark}" />
@@ -358,21 +356,11 @@
                         <SolidColorBrush Color="#52000000" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="PressedBorderBrush">
-                    <Setter.Value>
-                        <SolidColorBrush Color="Transparent" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="PressedForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorLightPrimaryBrush}" />
+                <Setter Property="PressedForeground" Value="{DynamicResource TextFillColorLightSecondaryBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  LIGHT  -->
@@ -392,21 +380,12 @@
                         <SolidColorBrush Color="#F3FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorDarkPrimary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="PressedForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorDarkSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorDarkPrimaryBrush}" />
+                <Setter Property="PressedForeground" Value="{DynamicResource TextFillColorDarkSecondaryBrush}" />
             </Trigger>
 
             <!--  INFO  -->
             <Trigger Property="Appearance" Value="Info">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteLightBlueColor}" />
@@ -422,21 +401,14 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteLightBlueColor}" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="PressedBorderBrush">
-                    <Setter.Value>
-                        <SolidColorBrush Color="Transparent" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorLightPrimaryBrush}" />
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  DANGER  -->
             <Trigger Property="Appearance" Value="Danger">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteRedColor}" />
@@ -452,16 +424,13 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteRedColor}" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="PressedBorderBrush">
-                    <Setter.Value>
-                        <SolidColorBrush Color="Transparent" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  SUCCESS  -->
             <Trigger Property="Appearance" Value="Success">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteGreenColor}" />
@@ -477,16 +446,13 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteGreenColor}" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="PressedBorderBrush">
-                    <Setter.Value>
-                        <SolidColorBrush Color="Transparent" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  CAUTION  -->
             <Trigger Property="Appearance" Value="Caution">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteOrangeColor}" />
@@ -502,11 +468,9 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteOrangeColor}" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="PressedBorderBrush">
-                    <Setter.Value>
-                        <SolidColorBrush Color="Transparent" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>
