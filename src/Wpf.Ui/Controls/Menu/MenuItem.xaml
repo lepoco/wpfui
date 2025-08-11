@@ -108,9 +108,8 @@
                                 <DropShadowEffect
                                     BlurRadius="20"
                                     Direction="270"
-                                    Opacity="0.135"
-                                    ShadowDepth="10"
-                                    Color="#202020" />
+                                    Opacity="0.25"
+                                    ShadowDepth="6" />
                             </Border.Effect>
                         </Border>
                     </Grid>
@@ -400,7 +399,7 @@
                 <Grid>
                     <Border
                         x:Name="SubmenuBorder"
-                        Margin="12,10,12,30"
+                        Margin="12,10,12,18"
                         Padding="0,3,0,3"
                         Background="{DynamicResource FlyoutBackground}"
                         BorderBrush="{DynamicResource FlyoutBorderBrush}"
@@ -417,9 +416,8 @@
                             <DropShadowEffect
                                 BlurRadius="20"
                                 Direction="270"
-                                Opacity="0.135"
-                                ShadowDepth="10"
-                                Color="#202020" />
+                                Opacity="0.5"
+                                ShadowDepth="6" />
                         </Border.Effect>
                     </Border>
                 </Grid>
@@ -592,9 +590,8 @@
                                 <DropShadowEffect
                                     BlurRadius="20"
                                     Direction="270"
-                                    Opacity="0.135"
-                                    ShadowDepth="10"
-                                    Color="#202020" />
+                                    Opacity="0.25"	
+                                    ShadowDepth="6" />
                             </Border.Effect>
                         </Border>
                     </Grid>
