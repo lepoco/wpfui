@@ -15,7 +15,6 @@
 
     <Thickness x:Key="ButtonPadding">11,5,11,6</Thickness>
     <Thickness x:Key="ButtonBorderThemeThickness">1</Thickness>
-    <Thickness x:Key="ButtonBorderThemeAltThickness">0,0,0,1</Thickness>
     <Thickness x:Key="ButtonIconMargin">0,0,8,0</Thickness>
 
     <Style x:Key="DefaultRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
@@ -244,37 +243,43 @@
                         Height="{TemplateBinding Height}"
                         MinWidth="{TemplateBinding MinWidth}"
                         MinHeight="{TemplateBinding MinHeight}"
-                        Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="InsetBorder"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <ContentPresenter
-                                x:Name="ControlIcon"
-                                Grid.Column="0"
-                                Margin="{StaticResource ButtonIconMargin}"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Icon}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Focusable="False"
-                                TextElement.FontSize="{TemplateBinding FontSize}"
-                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                                <ContentPresenter
+                                    x:Name="ControlIcon"
+                                    Grid.Column="0"
+                                    Margin="{StaticResource ButtonIconMargin}"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Icon}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    Focusable="False"
+                                    TextElement.FontSize="{TemplateBinding FontSize}"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                            <ContentPresenter
-                                x:Name="ContentPresenter"
-                                Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Content}"
-                                TextElement.Foreground="{TemplateBinding Foreground}" />
-                        </Grid>
+                                <ContentPresenter
+                                    x:Name="ContentPresenter"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Content}"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
+                            </Grid>
+                        </Border>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
@@ -285,7 +290,7 @@
                             <!--<Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{Binding MouseOverForeground, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="ControlIcon" Property="TextElement.Foreground" Value="{Binding MouseOverForeground, RelativeSource={RelativeSource TemplatedParent}}" />-->
                             <Setter TargetName="ContentBorder" Property="Background" Value="{Binding MouseOverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{Binding MouseOverBorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="InsetBorder" Property="BorderBrush" Value="{Binding MouseOverBorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -293,13 +298,13 @@
                                 <Condition Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ContentBorder" Property="Background" Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{Binding PressedBorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="InsetBorder" Property="BorderBrush" Value="{Binding PressedBorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="ControlIcon" Property="TextElement.Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
-                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
+                            <Setter TargetName="InsetBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
                             <Setter TargetName="ControlIcon" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
                         </Trigger>
@@ -325,7 +330,7 @@
 
             <!--  PRIMARY  -->
             <Trigger Property="Appearance" Value="Primary">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}" />
                 <Setter Property="MouseOverBackground" Value="{DynamicResource AccentButtonBackgroundPointerOver}" />
                 <Setter Property="PressedBackground" Value="{DynamicResource AccentButtonBackgroundPressed}" />
@@ -333,12 +338,12 @@
                 <Setter Property="PressedForeground" Value="{DynamicResource AccentButtonForegroundPointerOver}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
                 <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
-                <Setter Property="PressedBorderBrush" Value="{DynamicResource AccentButtonBackgroundPressed}" />
+                <Setter Property="PressedBorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}" />
             </Trigger>
 
             <!--  DARK  -->
             <Trigger Property="Appearance" Value="Dark">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDark}" />
@@ -356,7 +361,7 @@
                 </Setter>
                 <Setter Property="PressedBorderBrush">
                     <Setter.Value>
-                        <SolidColorBrush Color="#52000000" />
+                        <SolidColorBrush Color="Transparent" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Foreground">
@@ -402,7 +407,7 @@
 
             <!--  INFO  -->
             <Trigger Property="Appearance" Value="Info">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteLightBlueColor}" />
@@ -420,7 +425,7 @@
                 </Setter>
                 <Setter Property="PressedBorderBrush">
                     <Setter.Value>
-                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteLightBlueColor}" />
+                        <SolidColorBrush Color="Transparent" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Foreground">
@@ -432,7 +437,7 @@
 
             <!--  DANGER  -->
             <Trigger Property="Appearance" Value="Danger">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteRedColor}" />
@@ -450,14 +455,14 @@
                 </Setter>
                 <Setter Property="PressedBorderBrush">
                     <Setter.Value>
-                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteRedColor}" />
+                        <SolidColorBrush Color="Transparent" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
 
             <!--  SUCCESS  -->
             <Trigger Property="Appearance" Value="Success">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteGreenColor}" />
@@ -475,14 +480,14 @@
                 </Setter>
                 <Setter Property="PressedBorderBrush">
                     <Setter.Value>
-                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteGreenColor}" />
+                        <SolidColorBrush Color="Transparent" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
 
             <!--  CAUTION  -->
             <Trigger Property="Appearance" Value="Caution">
-                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeAltThickness}" />
+                <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteOrangeColor}" />
@@ -500,7 +505,7 @@
                 </Setter>
                 <Setter Property="PressedBorderBrush">
                     <Setter.Value>
-                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteOrangeColor}" />
+                        <SolidColorBrush Color="Transparent" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
