@@ -590,7 +590,7 @@
                                 <DropShadowEffect
                                     BlurRadius="20"
                                     Direction="270"
-                                    Opacity="0.25"	
+                                    Opacity="0.25"
                                     ShadowDepth="6" />
                             </Border.Effect>
                         </Border>
@@ -912,9 +912,8 @@
                             <DropShadowEffect
                                 BlurRadius="20"
                                 Direction="270"
-                                Opacity="0.135"
-                                ShadowDepth="10"
-                                Color="#202020" />
+                                Opacity="0.5"
+                                ShadowDepth="6" />
                         </Border.Effect>
                     </Border>
                 </Grid>
