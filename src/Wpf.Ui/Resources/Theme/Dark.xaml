@@ -463,7 +463,7 @@
     <SolidColorBrush x:Key="HyperlinkButtonForeground" Color="{DynamicResource SystemAccentColorTertiary}" />
     <SolidColorBrush x:Key="HyperlinkButtonForegroundPointerOver" Color="{DynamicResource SystemAccentColorTertiary}" />
     <SolidColorBrush x:Key="HyperlinkButtonForegroundPressed" Color="{DynamicResource SystemAccentColorSecondary}" />
-    <SolidColorBrush x:Key="HyperlinkButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="HyperlinkButtonForegroundDisabled" Color="{StaticResource AccentTextFillColorDisabled}" />
 
     <!--  InfoBadge  -->
     <SolidColorBrush x:Key="InfoBadgeValueForeground" Color="{StaticResource TextFillColorInverse}" />
