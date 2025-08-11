@@ -11,7 +11,7 @@ using Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 
 namespace Wpf.Ui.Gallery.Views.Pages.Collections;
 /// <summary>
-/// ListViewScrollPage.xaml 的交互逻辑
+/// Interaction logic for ListViewScrollPage.xaml
 /// </summary>
 [GalleryPage("Selectable list.", SymbolRegular.GroupList24)]
 public partial class ListViewScrollPage : INavigableView<ListViewScrollViewModel>
