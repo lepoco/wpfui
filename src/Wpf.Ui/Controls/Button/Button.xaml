@@ -266,7 +266,6 @@
                                     Margin="{StaticResource ButtonIconMargin}"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
-                                    ContentTemplate="{TemplateBinding ContentTemplate}"
                                     Focusable="False"
                                     TextElement.FontSize="{TemplateBinding FontSize}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
@@ -276,6 +275,7 @@
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
