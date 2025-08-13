@@ -32,6 +32,8 @@
     <system:Double x:Key="CheckBoxIconSize">14</system:Double>
     <system:Double x:Key="CheckBoxHeight">22</system:Double>
     <system:Double x:Key="CheckBoxWidth">22</system:Double>
+    <system:TimeSpan x:Key="CheckBoxAnimationOffset">00:00:00.250</system:TimeSpan>
+    <Duration x:Key="CheckBoxAnimationDuration">00:00:00.250</Duration>
 
     <Style x:Key="DefaultCheckBoxStyle" TargetType="{x:Type CheckBox}">
         <!--  Universal WPF UI focus  -->
@@ -78,18 +80,19 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding Border.CornerRadius}">
-                                    <Grid>
-                                        <controls:SymbolIcon
-                                            x:Name="ControlIcon"
-                                            Margin="0"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontSize="{StaticResource CheckBoxIconSize}"
-                                            FontWeight="Bold"
-                                            Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
-                                            Symbol="Checkmark48"
-                                            Visibility="Collapsed" />
-                                    </Grid>
+                                    <controls:SymbolIcon
+                                        x:Name="ControlIcon"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="{DynamicResource CheckBoxIconSize}"
+                                        FontWeight="Bold"
+                                        Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
+                                        Symbol="Checkmark48"
+                                        Visibility="Collapsed">
+                                        <controls:SymbolIcon.Opacity>
+                                            <system:Double>1</system:Double>
+                                        </controls:SymbolIcon.Opacity>
+                                    </controls:SymbolIcon>
                                 </Border>
                             </Border>
                         </BulletDecorator.Bullet>
@@ -119,7 +122,33 @@
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Visible" />
                             <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillChecked}" />
                             <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Name="FadeIn">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ControlIcon"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0"
+                                            To="1"
+                                            Duration="{StaticResource CheckBoxAnimationDuration}">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
                         </Trigger>
+                        <!--  Skip the animation when it becomes visible  -->
+                        <Trigger Property="Visibility" Value="Visible">
+                            <Trigger.EnterActions>
+                                <SeekStoryboard BeginStoryboardName="FadeIn" Offset="{StaticResource CheckBoxAnimationOffset}" />
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <!--  Skip the animation on load  -->
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <SeekStoryboard BeginStoryboardName="FadeIn" Offset="{StaticResource CheckBoxAnimationOffset}" />
+                        </EventTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
