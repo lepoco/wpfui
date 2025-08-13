@@ -80,19 +80,32 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding Border.CornerRadius}">
-                                    <controls:SymbolIcon
-                                        x:Name="ControlIcon"
+                                    <Grid
+                                        Width="{DynamicResource CheckBoxIconSize}"
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="{DynamicResource CheckBoxIconSize}"
-                                        FontWeight="Bold"
-                                        Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
-                                        Symbol="Checkmark48"
-                                        Visibility="Collapsed">
-                                        <controls:SymbolIcon.Opacity>
-                                            <system:Double>1</system:Double>
-                                        </controls:SymbolIcon.Opacity>
-                                    </controls:SymbolIcon>
+                                        VerticalAlignment="Center">
+                                        <controls:SymbolIcon
+                                            x:Name="ControlIcon"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            FontSize="{DynamicResource CheckBoxIconSize}"
+                                            FontWeight="Bold"
+                                            Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
+                                            Symbol="Checkmark48"
+                                            Visibility="Collapsed">
+                                            <controls:SymbolIcon.Tag>
+                                                <system:Double>1</system:Double>
+                                            </controls:SymbolIcon.Tag>
+                                            <controls:SymbolIcon.Width>
+                                                <MultiBinding Converter="{StaticResource CheckBoxAnimationFactorToValueConverter}">
+                                                    <MultiBinding.Bindings>
+                                                        <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                                        <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
+                                                    </MultiBinding.Bindings>
+                                                </MultiBinding>
+                                            </controls:SymbolIcon.Width>
+                                        </controls:SymbolIcon>
+                                    </Grid>
                                 </Border>
                             </Border>
                         </BulletDecorator.Bullet>
@@ -127,7 +140,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ControlIcon"
-                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetProperty="Tag"
                                             From="0"
                                             To="1"
                                             Duration="{StaticResource CheckBoxAnimationDuration}">
