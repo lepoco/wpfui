@@ -84,6 +84,17 @@ public class FluentWindow : System.Windows.Window
     public FluentWindow()
     {
         SetResourceReference(StyleProperty, typeof(FluentWindow));
+
+        if (Utilities.IsOSWindows11OrNewer)
+        {
+            ApplicationThemeManager.Changed += (_, _) =>
+            {
+                if (IsActive)
+                {
+                    UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
+                }
+            };
+        }
     }
 
     /// <summary>
