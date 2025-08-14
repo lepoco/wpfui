@@ -134,7 +134,7 @@
                             <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillChecked}" />
                             <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
                             <Trigger.EnterActions>
-                                <BeginStoryboard Name="FadeIn">
+                                <BeginStoryboard Name="SlideIn">
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ControlIcon"
@@ -153,12 +153,12 @@
                         <!--  Skip the animation when it becomes visible  -->
                         <Trigger Property="Visibility" Value="Visible">
                             <Trigger.EnterActions>
-                                <SeekStoryboard BeginStoryboardName="FadeIn" Offset="{StaticResource CheckBoxAnimationOffset}" />
+                                <SeekStoryboard BeginStoryboardName="SlideIn" Offset="{StaticResource CheckBoxAnimationOffset}" />
                             </Trigger.EnterActions>
                         </Trigger>
                         <!--  Skip the animation on load  -->
                         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                            <SeekStoryboard BeginStoryboardName="FadeIn" Offset="{StaticResource CheckBoxAnimationOffset}" />
+                            <SeekStoryboard BeginStoryboardName="SlideIn" Offset="{StaticResource CheckBoxAnimationOffset}" />
                         </EventTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
