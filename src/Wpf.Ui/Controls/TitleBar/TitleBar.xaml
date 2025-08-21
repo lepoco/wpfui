@@ -147,7 +147,7 @@
                             <!--  Additional header content  -->
                             <ContentPresenter
                                 Grid.Column="1"
-                                HorizontalAlignment="Right"
+                                HorizontalAlignment="Stretch"
                                 Content="{TemplateBinding TrailingContent}" />
 
                             <!--  Navigation buttons - Close, Restore, Maximize, Minimize  -->
