@@ -70,7 +70,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     private static readonly Thickness TitleBarPaneOpenMarginDefault = new(35, 0, 0, 0);
     private static readonly Thickness TitleBarPaneCompactMarginDefault = new(35, 0, 0, 0);
-    private static readonly Thickness AutoSuggestBoxMarginDefault = new(8, 8, 8, 16);
+    private static readonly Thickness AutoSuggestBoxMarginDefault = new(8, 0, 8, 6);
     private static readonly Thickness FrameMarginDefault = new(0, 50, 0, 0);
 
     protected static void UpdateVisualState(NavigationView navigationView)
