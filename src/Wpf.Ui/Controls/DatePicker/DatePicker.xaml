@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -25,7 +25,7 @@
 
     <Style x:Key="DefaultDatePickerTextBoxStyle" TargetType="{x:Type DatePickerTextBox}">
         <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <!--  Universal WPF UI focus  -->
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -56,14 +56,11 @@
     </Style>
 
     <Style x:Key="DefaultDatePickerStyle" TargetType="{x:Type DatePicker}">
-        <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
-        <!--  Universal WPF UI focus  -->
         <!--  Universal WPF UI ContextMenu  -->
         <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
         <!--  Universal WPF UI ContextMenu  -->
         <!--  Default WPF UI Calendar style  -->
-        <Setter Property="CalendarStyle" Value="{DynamicResource DefaultCalendarStyle}" />
+        <Setter Property="CalendarStyle" Value="{DynamicResource DefaultCalendarDropShadowStyle}" />
         <!--  Default WPF UI Calendar style  -->
         <Setter Property="Foreground">
             <Setter.Value>
@@ -88,6 +85,7 @@
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DatePicker}">
@@ -125,7 +123,8 @@
                                             VerticalAlignment="Stretch"
                                             ContextMenu="{TemplateBinding ContextMenu}"
                                             Focusable="{TemplateBinding Focusable}"
-                                            Foreground="{TemplateBinding Foreground}" />
+                                            Foreground="{TemplateBinding Foreground}"
+                                            KeyboardNavigation.TabIndex="0" />
                                     </Grid>
                                     <!--  Buttons and Icons have no padding from the main element to allow absolute positions if height is larger than the text entry zone  -->
                                     <controls:Button
@@ -142,7 +141,8 @@
                                         Appearance="Secondary"
                                         Background="Transparent"
                                         BorderBrush="Transparent"
-                                        Cursor="Arrow">
+                                        Cursor="Arrow"
+                                        KeyboardNavigation.TabIndex="1">
                                         <!--  WPF overrides paddings for button  -->
                                         <controls:SymbolIcon
                                             Margin="{StaticResource DatePickerCalendarButtonPadding}"
@@ -172,7 +172,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Top"
                             AllowsTransparency="True"
-                            Placement="Mouse"
+                            Placement="Bottom"
                             PlacementTarget="{Binding ElementName=PART_TextBox}"
                             StaysOpen="False" />
                     </Grid>
