@@ -423,7 +423,7 @@
                     </Grid>
                 </Border>
 
-                <!-- リサイズハンドル -->
+                <!-- Resize handle -->
                 <controls:NavigationViewResizeHandle
                     x:Name="PART_ResizeHandle"
                     HorizontalAlignment="Right"

@@ -11,7 +11,7 @@ using System.Windows.Media;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// NavigationViewのリサイズハンドルコントロール
+/// NavigationView resize handle control
 /// </summary>
 public class NavigationViewResizeHandle : Control
 {
@@ -24,7 +24,7 @@ public class NavigationViewResizeHandle : Control
     }
 
     /// <summary>
-    /// リサイズ可能な最小幅
+    /// Minimum resizable width
     /// </summary>
     public static readonly DependencyProperty MinWidthProperty = DependencyProperty.Register(
         nameof(MinWidth),
@@ -34,7 +34,7 @@ public class NavigationViewResizeHandle : Control
     );
 
     /// <summary>
-    /// リサイズ可能な最大幅
+    /// Maximum resizable width
     /// </summary>
     public static readonly DependencyProperty MaxWidthProperty = DependencyProperty.Register(
         nameof(MaxWidth),
@@ -44,7 +44,7 @@ public class NavigationViewResizeHandle : Control
     );
 
     /// <summary>
-    /// 現在の幅
+    /// Current width
     /// </summary>
     public static readonly DependencyProperty CurrentWidthProperty = DependencyProperty.Register(
         nameof(CurrentWidth),
@@ -54,7 +54,7 @@ public class NavigationViewResizeHandle : Control
     );
 
     /// <summary>
-    /// リサイズ可能な最小幅を取得または設定します
+    /// Gets or sets the minimum resizable width
     /// </summary>
     public double MinWidth
     {
@@ -63,7 +63,7 @@ public class NavigationViewResizeHandle : Control
     }
 
     /// <summary>
-    /// リサイズ可能な最大幅を取得または設定します
+    /// Gets or sets the maximum resizable width
     /// </summary>
     public double MaxWidth
     {
@@ -72,7 +72,7 @@ public class NavigationViewResizeHandle : Control
     }
 
     /// <summary>
-    /// 現在の幅を取得または設定します
+    /// Gets or sets the current width
     /// </summary>
     public double CurrentWidth
     {
@@ -81,7 +81,7 @@ public class NavigationViewResizeHandle : Control
     }
 
     /// <summary>
-    /// マウスダウン中の状態を取得します
+    /// Gets a value indicating whether the mouse button is pressed
     /// </summary>
     public bool IsPressed
     {
@@ -108,7 +108,7 @@ public class NavigationViewResizeHandle : Control
         {
             _isResizing = true;
             IsPressed = true;
-            // 親要素（NavigationView）に対する位置を取得
+            // Get position relative to parent element (NavigationView)
             _startPoint = e.GetPosition(this.Parent as FrameworkElement ?? this);
             _startWidth = CurrentWidth;
             _lastWidth = _startWidth;
@@ -123,15 +123,15 @@ public class NavigationViewResizeHandle : Control
     {
         if (_isResizing)
         {
-            // 親要素（NavigationView）に対する位置を取得
+            // Get position relative to parent element (NavigationView)
             Point currentPoint = e.GetPosition(this.Parent as FrameworkElement ?? this);
             double deltaX = currentPoint.X - _startPoint.X;
             double newWidth = _startWidth + deltaX;
 
-            // 最小・最大幅の制限を適用
+            // Apply minimum and maximum width constraints
             newWidth = Math.Max(MinWidth, Math.Min(MaxWidth, newWidth));
 
-            // 幅の変更が最小単位（1px）以上の場合のみ更新
+            // Only update if width change is at least 1px to prevent flickering
             if (Math.Abs(newWidth - _lastWidth) >= 1.0)
             {
                 SetCurrentValue(CurrentWidthProperty, newWidth);
@@ -142,7 +142,7 @@ public class NavigationViewResizeHandle : Control
         }
         else
         {
-            // マウスカーソルをリサイズカーソルに変更
+            // Change mouse cursor to resize cursor
             SetCurrentValue(CursorProperty, Cursors.SizeWE);
         }
 

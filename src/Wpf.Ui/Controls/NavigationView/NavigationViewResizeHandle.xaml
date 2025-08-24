@@ -24,7 +24,7 @@
                         BorderBrush="Transparent"
                         BorderThickness="0">
                         
-                        <!-- リサイズハンドルの視覚的なインジケーター（透明） -->
+                        <!-- Visual indicator for resize handle (transparent) -->
                         <Rectangle
                             x:Name="ResizeIndicator"
                             Width="2"
