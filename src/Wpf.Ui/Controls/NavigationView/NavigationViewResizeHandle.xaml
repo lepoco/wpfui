@@ -39,9 +39,9 @@
                     
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ResizeIndicator" Property="Fill" Value="{DynamicResource NavigationViewItemForeground}" />
-                            <Setter TargetName="ResizeIndicator" Property="Opacity" Value="0.3" />
-                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}" />
+                            <Setter TargetName="ResizeIndicator" Property="Fill" Value="Transparent" />
+                            <Setter TargetName="ResizeIndicator" Property="Opacity" Value="0.0" />
+                            <Setter TargetName="PART_Border" Property="Background" Value="Transparent" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="ResizeIndicator" Property="Fill" Value="Transparent" />
