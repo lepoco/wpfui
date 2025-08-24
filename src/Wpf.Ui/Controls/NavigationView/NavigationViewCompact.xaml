@@ -6,6 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewItemDefaultStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewConstants.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewResizeHandle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="LeftCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
@@ -421,6 +422,16 @@
                         </Grid>
                     </Grid>
                 </Border>
+
+                <!-- リサイズハンドル -->
+                <controls:NavigationViewResizeHandle
+                    x:Name="PART_ResizeHandle"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Stretch"
+                    MinWidth="{TemplateBinding PaneResizeMinWidth}"
+                    MaxWidth="{TemplateBinding PaneResizeMaxWidth}"
+                    CurrentWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=OpenPaneLength, Mode=TwoWay}"
+                    Visibility="{TemplateBinding IsPaneResizable, Converter={StaticResource BoolToVisibilityConverter}}" />
             </Grid>
 
             <Border

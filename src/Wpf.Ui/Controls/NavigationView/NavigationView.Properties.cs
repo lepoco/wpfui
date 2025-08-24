@@ -243,6 +243,30 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(default(Thickness))
     );
 
+    /// <summary>Identifies the <see cref="IsPaneResizable"/> dependency property.</summary>
+    public static readonly DependencyProperty IsPaneResizableProperty = DependencyProperty.Register(
+        nameof(IsPaneResizable),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(true)
+    );
+
+    /// <summary>Identifies the <see cref="PaneResizeMinWidth"/> dependency property.</summary>
+    public static readonly DependencyProperty PaneResizeMinWidthProperty = DependencyProperty.Register(
+        nameof(PaneResizeMinWidth),
+        typeof(double),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(200.0)
+    );
+
+    /// <summary>Identifies the <see cref="PaneResizeMaxWidth"/> dependency property.</summary>
+    public static readonly DependencyProperty PaneResizeMaxWidthProperty = DependencyProperty.Register(
+        nameof(PaneResizeMaxWidth),
+        typeof(double),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(500.0)
+    );
+
     /// <summary>
     /// Gets or sets a value indicating whether debugging messages for this control are enabled
     /// </summary>
@@ -448,6 +472,33 @@ public partial class NavigationView
     {
         get => (Thickness)GetValue(FrameMarginProperty);
         set => SetValue(FrameMarginProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the navigation pane is resizable.
+    /// </summary>
+    public bool IsPaneResizable
+    {
+        get => (bool)GetValue(IsPaneResizableProperty);
+        set => SetValue(IsPaneResizableProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the minimum width for resizing the navigation pane.
+    /// </summary>
+    public double PaneResizeMinWidth
+    {
+        get => (double)GetValue(PaneResizeMinWidthProperty);
+        set => SetValue(PaneResizeMinWidthProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the maximum width for resizing the navigation pane.
+    /// </summary>
+    public double PaneResizeMaxWidth
+    {
+        get => (double)GetValue(PaneResizeMaxWidthProperty);
+        set => SetValue(PaneResizeMaxWidthProperty, value);
     }
 
     private void OnMenuItemsSource_CollectionChanged(
