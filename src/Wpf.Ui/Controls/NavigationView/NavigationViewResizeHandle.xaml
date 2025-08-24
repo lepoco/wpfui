@@ -13,32 +13,40 @@
     <Style x:Key="DefaultNavigationViewResizeHandleStyle" TargetType="{x:Type controls:NavigationViewResizeHandle}">
         <Setter Property="Width" Value="4" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NavigationViewResizeHandle}">
                     <Border
                         x:Name="PART_Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0">
                         
-                        <!-- リサイズハンドルの視覚的なインジケーター -->
+                        <!-- リサイズハンドルの視覚的なインジケーター（透明） -->
                         <Rectangle
                             x:Name="ResizeIndicator"
                             Width="2"
                             Height="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Fill="{DynamicResource NavigationViewItemForeground}"
-                            Opacity="0.3"
+                            Fill="Transparent"
+                            Opacity="0.0"
                             RadiusX="1"
                             RadiusY="1" />
                     </Border>
                     
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ResizeIndicator" Property="Opacity" Value="0.6" />
+                            <Setter TargetName="ResizeIndicator" Property="Fill" Value="{DynamicResource NavigationViewItemForeground}" />
+                            <Setter TargetName="ResizeIndicator" Property="Opacity" Value="0.3" />
                             <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ResizeIndicator" Property="Fill" Value="Transparent" />
+                            <Setter TargetName="ResizeIndicator" Property="Opacity" Value="0.0" />
+                            <Setter TargetName="PART_Border" Property="Background" Value="Transparent" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

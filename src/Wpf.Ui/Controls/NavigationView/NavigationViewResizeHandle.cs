@@ -80,17 +80,38 @@ public class NavigationViewResizeHandle : Control
         set => SetValue(CurrentWidthProperty, value);
     }
 
+    /// <summary>
+    /// マウスダウン中の状態を取得します
+    /// </summary>
+    public bool IsPressed
+    {
+        get => (bool)GetValue(IsPressedProperty);
+        private set => SetValue(IsPressedProperty, value);
+    }
+
+    /// <summary>Identifies the <see cref="IsPressed"/> dependency property.</summary>
+    public static readonly DependencyProperty IsPressedProperty = DependencyProperty.Register(
+        nameof(IsPressed),
+        typeof(bool),
+        typeof(NavigationViewResizeHandle),
+        new FrameworkPropertyMetadata(false)
+    );
+
     private bool _isResizing;
     private Point _startPoint;
     private double _startWidth;
+    private double _lastWidth;
 
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
     {
         if (e.ButtonState == MouseButtonState.Pressed)
         {
             _isResizing = true;
-            _startPoint = e.GetPosition(this);
+            IsPressed = true;
+            // 親要素（NavigationView）に対する位置を取得
+            _startPoint = e.GetPosition(this.Parent as FrameworkElement ?? this);
             _startWidth = CurrentWidth;
+            _lastWidth = _startWidth;
             CaptureMouse();
             e.Handled = true;
         }
@@ -102,20 +123,27 @@ public class NavigationViewResizeHandle : Control
     {
         if (_isResizing)
         {
-            Point currentPoint = e.GetPosition(this);
+            // 親要素（NavigationView）に対する位置を取得
+            Point currentPoint = e.GetPosition(this.Parent as FrameworkElement ?? this);
             double deltaX = currentPoint.X - _startPoint.X;
             double newWidth = _startWidth + deltaX;
 
             // 最小・最大幅の制限を適用
             newWidth = Math.Max(MinWidth, Math.Min(MaxWidth, newWidth));
 
-            CurrentWidth = newWidth;
+            // 幅の変更が最小単位（1px）以上の場合のみ更新
+            if (Math.Abs(newWidth - _lastWidth) >= 1.0)
+            {
+                SetCurrentValue(CurrentWidthProperty, newWidth);
+                _lastWidth = newWidth;
+            }
+            
             e.Handled = true;
         }
         else
         {
             // マウスカーソルをリサイズカーソルに変更
-            Cursor = Cursors.SizeWE;
+            SetCurrentValue(CursorProperty, Cursors.SizeWE);
         }
 
         base.OnMouseMove(e);
@@ -126,6 +154,7 @@ public class NavigationViewResizeHandle : Control
         if (_isResizing)
         {
             _isResizing = false;
+            IsPressed = false;
             ReleaseMouseCapture();
             e.Handled = true;
         }
@@ -137,7 +166,7 @@ public class NavigationViewResizeHandle : Control
     {
         if (!_isResizing)
         {
-            Cursor = Cursors.Arrow;
+            SetCurrentValue(CursorProperty, Cursors.Arrow);
         }
 
         base.OnMouseLeave(e);
@@ -146,6 +175,8 @@ public class NavigationViewResizeHandle : Control
     protected override void OnLostMouseCapture(MouseEventArgs e)
     {
         _isResizing = false;
+        IsPressed = false;
         base.OnLostMouseCapture(e);
     }
 }
+
