@@ -240,7 +240,7 @@ public partial class NavigationView
         nameof(FrameMargin),
         typeof(Thickness),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(default(Thickness))
+        new FrameworkPropertyMetadata(FrameMarginDefault)
     );
 
     /// <summary>
@@ -650,7 +650,6 @@ public partial class NavigationView
 
         if (e.NewValue is null && e.OldValue is TitleBar oldValue)
         {
-            navigationView.FrameMargin = new Thickness(0);
             oldValue.Margin = new Thickness(0);
 
             if (navigationView.AutoSuggestBox?.Margin == AutoSuggestBoxMarginDefault)
@@ -666,7 +665,6 @@ public partial class NavigationView
             return;
         }
 
-        navigationView.FrameMargin = FrameMarginDefault;
         titleBar.Margin = TitleBarPaneOpenMarginDefault;
 
         if (navigationView.AutoSuggestBox?.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
