@@ -12,20 +12,24 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <Thickness x:Key="DatePickerBorderThemeThickness">1,1,1,0</Thickness>
     <Thickness x:Key="DatePickerAccentBorderThemeThickness">0,0,0,1</Thickness>
     <Thickness x:Key="DatePickerLeftIconMargin">10,8,0,0</Thickness>
     <Thickness x:Key="DatePickerRightIconMargin">0,8,10,0</Thickness>
-    <Thickness x:Key="DatePickerCalendarButtonMargin">0,5,4,0</Thickness>
+    <Thickness x:Key="DatePickerCalendarButtonMargin">0,2,3,3</Thickness>
     <Thickness x:Key="DatePickerCalendarButtonPadding">0,0,0,0</Thickness>
     <system:Double x:Key="DatePickerCalendarButtonHeight">24</system:Double>
     <system:Double x:Key="DatePickerCalendarButtonIconSize">14</system:Double>
 
+    <converters:NegativeThicknessConverter x:Key="DatePickerNegativeThicknessConverter" />
+    <converters:DatePickerButtonPaddingConverter x:Key="DatePickerButtonPaddingConverter" />
+
     <Style x:Key="DefaultDatePickerTextBoxStyle" TargetType="{x:Type DatePickerTextBox}">
         <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -110,32 +114,32 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                                 <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <DatePickerTextBox
-                                            x:Name="PART_TextBox"
-                                            Margin="0"
-                                            Padding="{TemplateBinding Padding}"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            ContextMenu="{TemplateBinding ContextMenu}"
-                                            Focusable="{TemplateBinding Focusable}"
-                                            Foreground="{TemplateBinding Foreground}"
-                                            KeyboardNavigation.TabIndex="0" />
-                                    </Grid>
+                                    <DatePickerTextBox
+                                        x:Name="PART_TextBox"
+                                        Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=BorderThickness, Converter={StaticResource DatePickerNegativeThicknessConverter}}"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        ContextMenu="{TemplateBinding ContextMenu}"
+                                        Focusable="{TemplateBinding Focusable}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        KeyboardNavigation.TabIndex="0">
+                                        <DatePickerTextBox.Padding>
+                                            <MultiBinding Converter="{StaticResource DatePickerButtonPaddingConverter}">
+                                                <Binding Path="Padding" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                <Binding Source="{StaticResource DatePickerCalendarButtonMargin}" />
+                                                <Binding Source="{StaticResource DatePickerCalendarButtonHeight}" />
+                                            </MultiBinding>
+                                        </DatePickerTextBox.Padding>
+                                    </DatePickerTextBox>
                                     <!--  Buttons and Icons have no padding from the main element to allow absolute positions if height is larger than the text entry zone  -->
                                     <controls:Button
                                         x:Name="PART_Button"
-                                        Grid.Column="1"
                                         Width="{StaticResource DatePickerCalendarButtonHeight}"
                                         Height="{StaticResource DatePickerCalendarButtonHeight}"
                                         Margin="{StaticResource DatePickerCalendarButtonMargin}"
                                         Padding="{StaticResource DatePickerCalendarButtonPadding}"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         Appearance="Secondary"
