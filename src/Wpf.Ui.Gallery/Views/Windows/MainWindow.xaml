@@ -40,7 +40,7 @@
             BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
             EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
-            FrameMargin="0"
+            FrameMargin="0,100"
             IsBackButtonVisible="Visible"
             IsPaneToggleVisible="True"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
@@ -50,11 +50,37 @@
             PaneOpened="NavigationView_OnPaneOpened"
             SelectionChanged="OnNavigationSelectionChanged"
             TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}"
-            Transition="FadeInWithSlide">
+            Transition="FadeInWithSlide"
+            IsPaneResizable="True"
+            PaneResizeMinWidth="200"
+            PaneResizeMaxWidth="500">
             <ui:NavigationView.Header>
                 <StackPanel Margin="42,32,42,20">
                     <ui:BreadcrumbBar x:Name="BreadcrumbBar" />
                     <controls:PageControlDocumentation Margin="0,10,0,0" NavigationView="{Binding ElementName=NavigationView}" />
+                    
+                    <!-- Slider for changing navigation bar width -->
+                    <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Navigation Bar Width:" VerticalAlignment="Center" Margin="0,0,10,0" />
+                        <Slider
+                            x:Name="PaneWidthSlider"
+                            Width="150"
+                            Minimum="200"
+                            Maximum="500"
+                            Value="310"
+                            TickFrequency="10"
+                            ValueChanged="PaneWidthSlider_ValueChanged" />
+                        <TextBlock Text="{Binding ElementName=NavigationView, Path=OpenPaneLength, StringFormat='{}{0:0}px'}" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                    <!-- Display of resize functionality status -->
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Resizable:" VerticalAlignment="Center" Margin="0,0,10,0" />
+                        <CheckBox IsChecked="{Binding ElementName=NavigationView, Path=IsPaneResizable}" VerticalAlignment="Center" />
+                        <TextBlock Text="Min Width:" VerticalAlignment="Center" Margin="20,0,10,0" />
+                        <TextBlock Text="{Binding ElementName=NavigationView, Path=PaneResizeMinWidth}" VerticalAlignment="Center" />
+                        <TextBlock Text="Max Width:" VerticalAlignment="Center" Margin="20,0,10,0" />
+                        <TextBlock Text="{Binding ElementName=NavigationView, Path=PaneResizeMaxWidth}" VerticalAlignment="Center" />
+                    </StackPanel>
                 </StackPanel>
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
