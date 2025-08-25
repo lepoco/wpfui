@@ -120,7 +120,11 @@
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Cursor="Arrow"
-                                KeyboardNavigation.TabIndex="1">
+                                KeyboardNavigation.TabIndex="1"
+                                MouseOverBackground="{DynamicResource SubtleFillColorSecondaryBrush}"
+                                MouseOverBorderBrush="Transparent"
+                                PressedBackground="{DynamicResource SubtleFillColorTertiaryBrush}"
+                                PressedBorderBrush="Transparent">
                                 <!--  WPF overrides paddings for button  -->
                                 <controls:SymbolIcon
                                     Margin="{StaticResource DatePickerCalendarButtonPadding}"
