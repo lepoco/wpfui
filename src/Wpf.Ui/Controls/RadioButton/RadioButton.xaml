@@ -38,6 +38,7 @@
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="MinWidth" Value="120" />
+        <Setter Property="MinHeight" Value="32" />
         <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
         <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -46,7 +47,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <Grid
-                        MinHeight="32"
+                        MinHeight="{TemplateBinding MinHeight}"
                         Margin="{TemplateBinding Padding}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
