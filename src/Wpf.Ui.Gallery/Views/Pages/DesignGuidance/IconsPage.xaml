@@ -139,8 +139,9 @@
                         Grid.Row="2"
                         FontTypography="BodyStrong"
                         Text="Icon name" />
-                    <ui:TextBlock
+                    <ui:TextBox
                         Grid.Row="3"
+                        IsTextSelectionEnabled="True"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                         Text="{Binding ViewModel.SelectedSymbolName, Mode=OneWay}" />
                     <ui:TextBlock
@@ -148,8 +149,9 @@
                         Margin="0,8,0,0"
                         FontTypography="BodyStrong"
                         Text="Unicode point" />
-                    <ui:TextBlock
+                    <ui:TextBox
                         Grid.Row="5"
+                        IsTextSelectionEnabled="True"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                         Text="{Binding ViewModel.SelectedSymbolUnicodePoint, Mode=OneWay}" />
                     <ui:TextBlock
@@ -157,8 +159,9 @@
                         Margin="0,8,0,0"
                         FontTypography="BodyStrong"
                         Text="Text glyph" />
-                    <ui:TextBlock
+                    <ui:TextBox
                         Grid.Row="7"
+                        IsTextSelectionEnabled="True"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                         Text="{Binding ViewModel.SelectedSymbolTextGlyph, Mode=OneWay}" />
                     <ui:TextBlock
@@ -166,8 +169,9 @@
                         Margin="0,8,0,0"
                         FontTypography="BodyStrong"
                         Text="XAML" />
-                    <ui:TextBlock
+                    <ui:TextBox
                         Grid.Row="9"
+                        IsTextSelectionEnabled="True"
                         MaxWidth="250"
                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                         Text="{Binding ViewModel.SelectedSymbolXaml, Mode=OneWay}"
