@@ -62,7 +62,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
@@ -78,7 +81,7 @@
                                         Storyboard.TargetName="IconScaleTransform"
                                         Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
                                         From="1.0"
-                                        To="0.85"
+                                        To="0.66"
                                         Duration="0:0:0.08" />
                                 </Storyboard>
                             </BeginStoryboard>
@@ -89,7 +92,7 @@
                                     <DoubleAnimation
                                         Storyboard.TargetName="IconScaleTransform"
                                         Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                        From="0.85"
+                                        From="0.66"
                                         To="1.0"
                                         Duration="0:0:0.08" />
                                 </Storyboard>
