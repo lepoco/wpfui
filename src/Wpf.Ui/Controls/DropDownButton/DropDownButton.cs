@@ -18,7 +18,7 @@ public class DropDownButton : Button
 
     public DropDownButton()
     {
-        PreviewMouseLeftButtonUp += OnDropDownButtonOnPreviewMouseLeftButtonUp;
+        PreviewMouseLeftButtonUp += OnPreviewMouseLeftButtonUp;
     }
 
     /// <summary>Identifies the <see cref="Flyout"/> dependency property.</summary>
@@ -93,7 +93,7 @@ public class DropDownButton : Button
 
     protected virtual void OnIsDropDownOpenChanged(bool currentValue) { }
 
-    private void OnDropDownButtonOnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    private void OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         if (_contextMenu is null)
         {
