@@ -189,6 +189,7 @@
                         Appearance="Secondary"
                         Background="Transparent"
                         BorderBrush="Transparent"
+                        BorderThickness="0"
                         Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                         Cursor="Arrow"
                         Foreground="{DynamicResource TextControlButtonForeground}"
