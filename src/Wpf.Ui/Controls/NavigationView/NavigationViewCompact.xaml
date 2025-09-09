@@ -22,7 +22,7 @@
                 Margin="0"
                 Padding="0"
                 BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="1"
+                BorderThickness="{DynamicResource NavigationViewItemThickness}"
                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                 <Border.Style>
                     <Style TargetType="{x:Type Border}">
@@ -127,7 +127,7 @@
                                         x:Name="MainBorder"
                                         Height="40"
                                         HorizontalAlignment="Stretch"
-                                        BorderThickness="1"
+                                        BorderThickness="{DynamicResource NavigationViewItemThickness}"
                                         CornerRadius="4">
                                         <Grid Margin="30,0,0,0" HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
