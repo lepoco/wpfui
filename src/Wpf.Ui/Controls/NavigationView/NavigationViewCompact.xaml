@@ -357,6 +357,7 @@
 
                         <!--  Separator/Shadow for Top  -->
                         <Border
+                            x:Name="PART_TopSeparator"
                             Grid.Row="1"
                             Height="1"
                             Margin="0,4,0,4"
@@ -494,8 +495,18 @@
                 <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsBackButtonVisible" Value="Collapsed" />
+                    <Condition Property="IsPaneToggleVisible" Value="False" />
+                    <Condition Property="AutoSuggestBox" Value="{x:Null}" />
+                    <Condition Property="PaneHeader" Value="{x:Null}" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="PART_TopSeparator" Property="Visibility" Value="Collapsed" />
+            </MultiTrigger>
             <Trigger Property="AutoSuggestBox" Value="{x:Null}">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="PaneTitle" Value="{x:Null}">
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
