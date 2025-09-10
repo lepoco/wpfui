@@ -29,7 +29,7 @@ internal static class UiElementExtensions
 
             var mousePosition = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
 
-            // If element is Panel, check if children at mousePosRelative is with IsHitTestVisible false.
+            // If element is Panel, check if children at mousePosition is with IsHitTestVisible false.
             return new Rect(default, element.RenderSize).Contains(element.PointFromScreen(mousePosition)) &&
                    element.IsHitTestVisible &&
                    (element is not System.Windows.Controls.Panel panel || IsChildHitTestVisibleAtPointFromScreen(panel, mousePosition));
