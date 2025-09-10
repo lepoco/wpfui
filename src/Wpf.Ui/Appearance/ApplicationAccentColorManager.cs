@@ -185,18 +185,9 @@ public static class ApplicationAccentColorManager
 
         Color GetColor(UIColorType colorType, float brightnessFactor, float saturationFactor = 0.0f)
         {
-            if (_isSupported)
+            if (GetUiColor(colorType) is { } color)
             {
-                try
-                {
-                    var uiColor = _uisettings!.GetColorValue(colorType);
-                    return Color.FromArgb(uiColor.A, uiColor.R, uiColor.G, uiColor.B);
-                }
-                catch (COMException)
-                {
-                    // We don't want to throw any exceptions here.
-                    // If we can't get the instance, we will use the default accent color.
-                }
+                return color;
             }
 
             return systemAccent.Update(brightnessFactor, saturationFactor);
@@ -234,7 +225,12 @@ public static class ApplicationAccentColorManager
     /// </summary>
     public static Color GetColorizationColor()
     {
-        return UnsafeNativeMethods.GetDwmColor();
+        if (GetUiColor(UIColorType.Accent) is { } accentColor)
+        {
+            return accentColor;
+        }
+
+        return UnsafeNativeMethods.GetAccentColor();
     }
 
     /// <summary>
@@ -352,6 +348,29 @@ public static class ApplicationAccentColorManager
         UiApplication.Current.Resources["AccentFillColorSecondaryBrush"] = themeAccent.ToBrush(0.9);
         UiApplication.Current.Resources["AccentFillColorTertiary"] = Color.FromArgb(204, themeAccent.R, themeAccent.G, themeAccent.B); // 204 = 0.8 * 255
         UiApplication.Current.Resources["AccentFillColorTertiaryBrush"] = themeAccent.ToBrush(0.8);
+    }
+
+    /// <summary>
+    /// Gets the color of the UI.
+    /// </summary>
+    /// <param name="colorType">Type of the color.</param>
+    private static Color? GetUiColor(UIColorType colorType)
+    {
+        if (_isSupported)
+        {
+            try
+            {
+                UIColor uiColor = _uisettings!.GetColorValue(colorType);
+                return Color.FromArgb(uiColor.A, uiColor.R, uiColor.G, uiColor.B);
+            }
+            catch (COMException)
+            {
+                // We don't want to throw any exceptions here.
+                // If we can't get the instance, we can fallback to another method.
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
