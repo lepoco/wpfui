@@ -365,48 +365,6 @@ internal static class Dwmapi
     }
 
     /// <summary>
-    /// Represents the current DWM color accent settings.
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DWMCOLORIZATIONPARAMS
-    {
-        /// <summary>
-        /// ColorizationColor
-        /// </summary>
-        public uint clrColor;
-
-        /// <summary>
-        /// ColorizationAfterglow.
-        /// </summary>
-        public uint clrAfterGlow;
-
-        /// <summary>
-        /// ColorizationColorBalance.
-        /// </summary>
-        public uint nIntensity;
-
-        /// <summary>
-        /// ColorizationAfterglowBalance.
-        /// </summary>
-        public uint clrAfterGlowBalance;
-
-        /// <summary>
-        /// ColorizationBlurBalance.
-        /// </summary>
-        public uint clrBlurBalance;
-
-        /// <summary>
-        /// ColorizationGlassReflectionIntensity.
-        /// </summary>
-        public uint clrGlassReflectionIntensity;
-
-        /// <summary>
-        /// ColorizationOpaqueBlend.
-        /// </summary>
-        public bool fOpaque;
-    }
-
-    /// <summary>
     /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It represents a generic ratio and is used for different purposes and units even within a single API.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
@@ -667,13 +625,6 @@ internal static class Dwmapi
         [In] ref int pvAttributeValue,
         [In] int cbAttribute
     );
-
-    /// <summary>
-    /// The feature is not included in the Microsoft documentation. Reads Desktop Window Manager (DWM) color information.
-    /// </summary>
-    /// <param name="dwParameters">A pointer to a reference value that will hold the color information.</param>
-    [DllImport(Libraries.Dwmapi, EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
-    public static extern void DwmGetColorizationParameters([Out] out DWMCOLORIZATIONPARAMS dwParameters);
 }
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
