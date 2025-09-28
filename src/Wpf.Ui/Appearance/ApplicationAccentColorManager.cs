@@ -363,7 +363,7 @@ public static class ApplicationAccentColorManager
                 UIColor uiColor = _uisettings!.GetColorValue(colorType);
                 return Color.FromArgb(uiColor.A, uiColor.R, uiColor.G, uiColor.B);
             }
-            catch (COMException)
+            catch
             {
                 // We don't want to throw any exceptions here.
                 // If we can't get the instance, we can fallback to another method.
