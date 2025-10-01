@@ -13,6 +13,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
+    xmlns:markup="clr-namespace:Wpf.Ui.Markup"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:animations="clr-namespace:Wpf.Ui.Animations">
 
@@ -106,6 +107,7 @@
                 <ControlTemplate TargetType="{x:Type controls:CardExpander}">
                     <ControlTemplate.Resources>
                         <converters:AnimationFactorToValueConverter x:Key="AnimationFactorToValueConverter" />
+                        <converters:CornerRadiusSplitConverter x:Key="CornerRadiusSplitConverter" />
                     </ControlTemplate.Resources>
 
                     <Grid>
@@ -120,8 +122,13 @@
                             Grid.Row="0"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{TemplateBinding CornerRadius}">
+                            BorderThickness="1">
+                            <Border.CornerRadius>
+                                <MultiBinding Converter="{StaticResource CornerRadiusSplitConverter}" ConverterParameter="Top">
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CornerRadius"/>
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsExpanded"/>
+                                </MultiBinding>
+                            </Border.CornerRadius>
                             <ToggleButton
                                 x:Name="ExpanderToggleButton"
                                 Margin="0"
@@ -171,8 +178,13 @@
                                 Background="{DynamicResource CardBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="1,0,1,1"
-                                CornerRadius="0,0,4,4"
                                 Visibility="Collapsed">
+                                <Border.CornerRadius>
+                                    <MultiBinding Converter="{StaticResource CornerRadiusSplitConverter}" ConverterParameter="Bottom">
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CornerRadius"/>
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsExpanded"/>
+                                    </MultiBinding>
+                                </Border.CornerRadius>
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
                                     Margin="{TemplateBinding ContentPadding}"
@@ -195,7 +207,6 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="True">
                             <!--  TODO: Update  -->
-                            <Setter TargetName="ToggleButtonBorder" Property="CornerRadius" Value="4,4,0,0" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
