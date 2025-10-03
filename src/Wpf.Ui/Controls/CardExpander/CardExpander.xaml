@@ -13,7 +13,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:markup="clr-namespace:Wpf.Ui.Markup"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:animations="clr-namespace:Wpf.Ui.Animations">
 
