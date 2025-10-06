@@ -20,7 +20,7 @@
 
     <Grid>
         <ui:Button
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Click="OnShowDialogClick"
             Content="Show dialog" />
