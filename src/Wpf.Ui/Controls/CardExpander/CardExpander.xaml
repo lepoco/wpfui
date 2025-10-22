@@ -26,7 +26,7 @@
 
     <ControlTemplate x:Key="DefaultUiCardExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
         <Border Padding="{TemplateBinding Padding}" Background="Transparent">
-            <Grid Background="Transparent">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
