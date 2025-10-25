@@ -86,9 +86,7 @@ internal sealed class Utilities
                 return false;
             }
 
-            _ = Interop.Dwmapi.DwmIsCompositionEnabled(out var pfEnabled);
-
-            return pfEnabled != 0;
+            return Interop.Dwmapi.DwmIsCompositionEnabled(out var pfEnabled) == 0 && pfEnabled != 0;
         }
     }
 
