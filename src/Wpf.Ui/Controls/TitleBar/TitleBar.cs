@@ -447,6 +447,11 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         _currentWindow =
             System.Windows.Window.GetWindow(this) ?? throw new InvalidOperationException("Window is null");
+        if (_currentWindow.WindowState == WindowState.Maximized)
+        {
+            SetCurrentValue(IsMaximizedProperty, true);
+            _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Maximized);
+        }
         _currentWindow.StateChanged += OnParentWindowStateChanged;
         _currentWindow.ContentRendered += OnWindowContentRendered;
     }
