@@ -285,10 +285,7 @@
                                                 TextElement.FontWeight="{TemplateBinding FontWeight}"
                                                 TextElement.Foreground="{TemplateBinding Foreground}"
                                                 VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-                                                <StackPanel
-                                                    IsItemsHost="True"
-                                                    KeyboardNavigation.DirectionalNavigation="Contained"
-                                                    TextElement.FontSize="{TemplateBinding FontSize}" />
+                                                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" TextElement.FontSize="{TemplateBinding FontSize}" />
                                             </controls:DynamicScrollViewer>
                                         </Grid>
                                     </Border>
