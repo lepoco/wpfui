@@ -96,6 +96,50 @@
 
         <controls:ControlExample
             Margin="0,32,0,0"
+            HeaderText="WPF UI Brush icon."
+            XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;">
+            <controls:ControlExample.Resources>
+                <DrawingBrush x:Key="JSPhone">
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <DrawingGroup.Children>
+                                <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                                <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M3,16L14.001,16 14.001,0 3,0z" />
+                                <GeometryDrawing Brush="#FFF16320" Geometry="F1M12,12L5,12 5,2 12,2z M12,14L11,14 11,13 12,13z M9,14L8,14 8,13 9,13z M6,14L5,14 5,13 6,13z M4,15L13,15 13,1 4,1z" />
+                                <GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M12,12L5,12 5,2 12,2z" />
+                                <GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M5,14L6,14 6,13 5,13z" />
+                                <GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M8,14L9,14 9,13 8,13z" />
+                                <GeometryDrawing Brush="#FFF0EFF1" Geometry="F1M11,14L12,14 12,13 11,13z" />
+                            </DrawingGroup.Children>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+
+                <DrawingBrush x:Key="StatusCriticalError" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <DrawingGroup.Children>
+                                <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                                <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M16,8C16,12.418 12.418,16 8,16 3.582,16 0,12.418 0,8 0,3.582 3.582,0 8,0 12.418,0 16,3.582 16,8" />
+                                <GeometryDrawing Brush="#FFE41400" Geometry="F1M12.4141,11L11.0001,12.414 8.0001,9.414 5.0001,12.414 3.5871,11 6.5861,8 3.5871,5 5.0001,3.586 8.0001,6.586 11.0001,3.586 12.4141,5 9.4141,8z M8.0001,1C4.1351,1 1.0001,4.135 1.0001,8 1.0001,11.865 4.1351,15 8.0001,15 11.8651,15 15.0001,11.865 15.0001,8 15.0001,4.135 11.8651,1 8.0001,1" />
+                                <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1M9.4141,8L12.4141,11 11.0001,12.414 8.0001,9.414 5.0001,12.414 3.5861,11 6.5861,8 3.5861,5 5.0001,3.586 8.0001,6.586 11.0001,3.586 12.4141,5z" />
+                            </DrawingGroup.Children>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </controls:ControlExample.Resources>
+            <StackPanel>
+
+                <ui:Button
+                Appearance="Primary"
+                Content="WPF UI button"  FontSize="20" FontWeight="Black"       
+                Icon="{ui:DrawingBrushIcon {StaticResource StatusCriticalError}, Size=24}">
+                </ui:Button>
+            </StackPanel>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
             HeaderText="WPF UI button with FontIcon."
             XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;">
             <ui:Button

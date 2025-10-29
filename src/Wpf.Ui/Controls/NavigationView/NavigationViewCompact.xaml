@@ -17,8 +17,8 @@
             <Border
                 x:Name="MainBorder"
                 Grid.Row="0"
-                MinWidth="40"
-                MinHeight="40"
+                MinWidth="{DynamicResource PaneLeftButtonWidth}"
+                MinHeight="{DynamicResource PaneLeftButtonHeight}"
                 Margin="0"
                 Padding="0"
                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -36,14 +36,15 @@
                 </Border.Style>
                 <Grid Background="Transparent">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0">
-                        <ContentPresenter
+                    <Grid Grid.Column="0" Width="{DynamicResource PaneLeftButtonWidth}">
+                        <Viewbox Width="{DynamicResource NavigationViewLeftIconSize}">
+                            <ContentPresenter
                             x:Name="IconContentPresenter"
                             Margin="-1,0,0,0"
                             HorizontalAlignment="Center"
@@ -52,13 +53,14 @@
                             Focusable="False"
                             TextElement.FontSize="16"
                             TextElement.Foreground="{DynamicResource NavigationViewItemForeground}" />
+                        </Viewbox>
                     </Grid>
 
                     <Rectangle
                         x:Name="ActiveRectangle"
                         Grid.Column="0"
                         Width="3"
-                        Height="16"
+                        Height="{DynamicResource NavigationViewItemActiveRectangleHeight}"
                         Margin="0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -125,7 +127,7 @@
                                 <ControlTemplate TargetType="{x:Type controls:NavigationViewItem}">
                                     <Border
                                         x:Name="MainBorder"
-                                        Height="40"
+                                        Height="{DynamicResource PaneLeftButtonHeight}"
                                         HorizontalAlignment="Stretch"
                                         BorderThickness="1"
                                         CornerRadius="4">
@@ -211,7 +213,7 @@
             </Trigger>
             <Trigger Property="HasMenuItems" Value="True">
                 <Setter TargetName="PART_ChevronGrid" Property="Visibility" Value="Visible" />
-                <Setter TargetName="PART_ChevronGrid" Property="Width" Value="40" />
+                <Setter TargetName="PART_ChevronGrid" Property="Width" Value="{DynamicResource PaneLeftButtonWidth}" />
             </Trigger>
             <Trigger Property="IsExpanded" Value="True">
                 <Setter TargetName="MenuItemsPresenter" Property="Visibility" Value="Visible" />
@@ -309,6 +311,8 @@
                                 Grid.Row="0"
                                 Margin="0,5,0,5"
                                 HorizontalAlignment="Left"
+                                Width="{DynamicResource PaneLeftButtonWidth}"
+                                Height="{DynamicResource PaneLeftButtonHeight}"
                                 IsEnabled="{TemplateBinding IsBackEnabled}"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsBackButtonVisible,
@@ -318,20 +322,30 @@
                                 </controls:Button.Icon>
                             </controls:Button>
 
-                            <controls:Button
-                                x:Name="PART_ToggleButton"
+                            <Grid x:Name="PART_ToggleButtonGrid" Grid.Row="1" HorizontalAlignment="Left" 
+                                                                  Visibility="{TemplateBinding IsPaneToggleVisible,
+                                                             Converter={StaticResource BoolToVisibilityConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Width="{DynamicResource PaneLeftButtonWidth}">
+                                    <controls:Button
+                                 x:Name="PART_ToggleButton"
                                 Grid.Row="1"
                                 Margin="0,0,0,5"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
                                                              Converter={StaticResource BoolToVisibilityConverter}}">
-                                <controls:Button.Icon>
-                                    <controls:SymbolIcon Symbol="LineHorizontal320" />
-                                </controls:Button.Icon>
-                                <controls:Button.Content>
-                                    <TextBlock FontWeight="Medium" Text="{TemplateBinding PaneTitle}" />
-                                </controls:Button.Content>
-                            </controls:Button>
+                                        <controls:Button.Icon>
+                                            <controls:SymbolIcon Symbol="LineHorizontal320"/>
+                                        </controls:Button.Icon>
+                                    </controls:Button>
+                                </Viewbox>
+
+                                <TextBlock x:Name="PART_PaneTitle" Grid.Column="1" FontWeight="Medium" Text="{TemplateBinding PaneTitle}" />
+                            </Grid>
 
                             <!--  Pane Header  -->
                             <ContentPresenter
@@ -473,7 +487,7 @@
                                 AccelerationRatio="0.4"
                                 Storyboard.TargetName="PaneGrid"
                                 Storyboard.TargetProperty="Width"
-                                From="40"
+                                From="{DynamicResource PaneLeftButtonWidth}"
                                 To="{TemplateBinding OpenPaneLength}"
                                 Duration="0:0:.16" />
                             <DoubleAnimation
@@ -506,7 +520,7 @@
                                 Storyboard.TargetName="PaneGrid"
                                 Storyboard.TargetProperty="Width"
                                 From="{TemplateBinding OpenPaneLength}"
-                                To="40"
+                                To="{DynamicResource PaneLeftButtonWidth}"
                                 Duration="0:0:.16" />
                             <ObjectAnimationUsingKeyFrames
                                 Storyboard.TargetName="AutoSuggestBoxContentPresenter"
@@ -524,6 +538,7 @@
             <Trigger Property="IsPaneOpen" Value="False">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
+                <Setter TargetName="PART_PaneTitle" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="AutoSuggestBox" Value="{x:Null}">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
@@ -532,6 +547,7 @@
             <Trigger Property="PaneTitle" Value="{x:Null}">
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
                 <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
+                <Setter TargetName="PART_PaneTitle" Property="Visibility" Value="Visible" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
