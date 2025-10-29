@@ -528,7 +528,15 @@
             <Trigger Property="AutoSuggestBox" Value="{x:Null}">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Margin" Value="0" />
+                <Setter TargetName="PART_ToggleButton" Property="Margin" Value="0" />
             </Trigger>
+            <DataTrigger Binding="{Binding Content.(UIElement.Visibility), ElementName=AutoSuggestBoxContentPresenter}" Value="Collapsed">
+                <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Margin" Value="0" />
+                <Setter TargetName="PART_ToggleButton" Property="Margin" Value="0" />
+            </DataTrigger>
             <Trigger Property="PaneTitle" Value="{x:Null}">
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
                 <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
