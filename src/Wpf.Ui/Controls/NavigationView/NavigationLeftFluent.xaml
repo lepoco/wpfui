@@ -53,6 +53,7 @@
                             x:Name="ElementContentPresenter"
                             HorizontalAlignment="Center"
                             Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
                             TextElement.FontSize="{TemplateBinding FontSize}"
                             TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}" />
                     </Grid>

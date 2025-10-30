@@ -73,6 +73,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
@@ -169,6 +170,7 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 
