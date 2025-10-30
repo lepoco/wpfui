@@ -12,6 +12,8 @@
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="TextElement.FontSize" Value="12" />
+        <Setter Property="TextElement.FontWeight" Value="Normal" />
+        <Setter Property="TextBlock.LineHeight" Value="16" />
         <Setter Property="TextBlock.TextAlignment" Value="Justify" />
         <Setter Property="TextElement.Foreground" Value="{DynamicResource ToolTipForeground}" />
         <Setter Property="Foreground" Value="{DynamicResource ToolTipForeground}" />
