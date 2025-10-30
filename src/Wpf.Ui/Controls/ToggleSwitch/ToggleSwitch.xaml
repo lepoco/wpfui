@@ -19,7 +19,7 @@
     <system:Double x:Key="RadioButtonBorderThemeThickness">1</system:Double>
     <system:Double x:Key="ToggleButtonWidth">40</system:Double>
     <system:Double x:Key="ToggleButtonHeight">20</system:Double>
-    <Thickness x:Key="ToggleSwitchPadding">8,6,0,0</Thickness>
+    <Thickness x:Key="ToggleSwitchPadding">0,0,0,0</Thickness>
     <Thickness x:Key="ToggleSwitchBorderThemeThickness">1</Thickness>
     <Thickness x:Key="ToggleSwitchContentMargin">8,0,0,0</Thickness>
 
@@ -43,7 +43,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ToggleSwitch}">
-                    <Grid Background="Transparent">
+                    <Grid Margin="{TemplateBinding Padding}" Background="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
