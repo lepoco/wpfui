@@ -11,6 +11,7 @@
     <system:Double x:Key="PaneFluentButtonWidth">60</system:Double>
     <system:Double x:Key="NavigationViewItemChevronSize">12</system:Double>
     <Thickness x:Key="PaneToggleButtonThickness">1,1,1,1</Thickness>
+    <Thickness x:Key="NavigationViewItemThickness">1</Thickness>
 
     <converters:BackButtonVisibilityToVisibilityConverter x:Key="BackButtonVisibilityToVisibilityConverter" />
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
