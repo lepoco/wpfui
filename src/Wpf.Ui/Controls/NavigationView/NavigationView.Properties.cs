@@ -541,6 +541,8 @@ public partial class NavigationView
 
     private void OnMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        UpdateAutoSuggestBoxSuggestions();
+
         if (e.NewItems is null)
         {
             return;
@@ -580,6 +582,8 @@ public partial class NavigationView
 
     private void OnFooterMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        UpdateAutoSuggestBoxSuggestions();
+
         if (e.NewItems is null)
         {
             return;
