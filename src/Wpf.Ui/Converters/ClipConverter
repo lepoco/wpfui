@@ -1,0 +1,34 @@
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+using System.Windows.Data;
+
+namespace Wpf.Ui.Converters;
+
+public class ClipConverter : IMultiValueConverter
+{
+    /// <inheritdoc />
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (values.Length != 3)
+        {
+            return null;
+        }
+
+        if (values[0] is not double width || values[1] is not double height || values[2] is not double percentage)
+        {
+            return null;
+        }
+
+        double clippedWidth = width * percentage;
+        return new RectangleGeometry(new Rect(0, 0, clippedWidth, height));
+    }
+
+    /// <inheritdoc />
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
