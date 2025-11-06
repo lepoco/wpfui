@@ -36,7 +36,8 @@ internal static class UiElementExtensions
                                     child.PointFromScreen(mousePosScreen)
                                 )
                             )
-                            ?.IsHitTestVisible ?? false
+                            ?.IsHitTestVisible
+                        ?? false
                     )
                 );
         }

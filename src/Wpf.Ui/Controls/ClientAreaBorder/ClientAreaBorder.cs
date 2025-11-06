@@ -147,7 +147,9 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
             newWindow.StateChanged -= OnWindowStateChanged; // Unsafe
             newWindow.StateChanged += OnWindowStateChanged;
             Thickness padding =
-            newWindow.WindowState == WindowState.Maximized ? WindowChromeNonClientFrameThickness : default;
+                newWindow.WindowState == WindowState.Maximized
+                    ? WindowChromeNonClientFrameThickness
+                    : default;
             SetCurrentValue(PaddingProperty, padding);
             newWindow.Closing += OnWindowClosing;
         }

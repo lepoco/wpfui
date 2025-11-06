@@ -577,8 +577,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         switch (buttonType)
         {
-            case TitleBarButtonType.Maximize
-            or TitleBarButtonType.Restore:
+            case TitleBarButtonType.Maximize or TitleBarButtonType.Restore:
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                 MaximizeWindow();
                 break;
