@@ -59,7 +59,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     public INavigationViewItem? SelectedItem { get; protected set; }
 
     protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary { get; } =
-        [];
+    [];
 
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary { get; } = [];
 

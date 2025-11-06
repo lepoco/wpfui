@@ -1,116 +1,117 @@
 <ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime">
-
-    <Thickness x:Key="TimePickerBorderThemeThickness">1,1,1,1</Thickness>
-
-    <Style x:Key="DefaultUiTimePickerStyle" TargetType="{x:Type controls:TimePicker}">
-        <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
-        <!--  Universal WPF UI focus  -->
-        <!--  Universal WPF UI ContextMenu  -->
-        <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
-        <!--  Universal WPF UI ContextMenu  -->
-        <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundDefault}" />
-        <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        <Setter Property="BorderThickness" Value="{StaticResource TimePickerBorderThemeThickness}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
-        <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
-        <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}" />
-        <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:TimePicker}">
-                    <Grid
-                        Width="{TemplateBinding Width}"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border
-                            x:Name="ContentBorder"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"
-                            Padding="0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Grid x:Name="GridColumnHour" Grid.Column="0">
-                                    <TextBlock
-                                        Margin="6"
-                                        HorizontalAlignment="Center"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Text="hour" />
-                                </Grid>
-                                <Border
-                                    x:Name="GridColumnMinute"
-                                    Grid.Column="1"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="1,0,1,0">
-                                    <TextBlock
-                                        Margin="6"
-                                        HorizontalAlignment="Center"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Text="minute" />
-                                </Border>
-                                <Grid x:Name="GridColumnType" Grid.Column="2">
-                                    <TextBlock
-                                        Margin="6"
-                                        HorizontalAlignment="Center"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Text="AM" />
-                                </Grid>
-                            </Grid>
-                        </Border>
-
-                        <Popup x:Name="TimePickerPopup">
-                            <Border>
-                                <TextBlock Text="Todo" />
-                            </Border>
-                        </Popup>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundPointerOver}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundPointerOver}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundDisabled}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource TimePickerButtonBorderBrushDisabled}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundDisabled}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundPressed}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource TimePickerButtonBorderBrushPressed}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundPressed}" />
-                        </Trigger>
-                        <Trigger Property="ClockIdentifier" Value="Clock24Hour">
-                            <Setter TargetName="GridColumnType" Property="Visibility" Value="Hidden" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style BasedOn="{StaticResource DefaultUiTimePickerStyle}" TargetType="{x:Type controls:TimePicker}" />
-
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+  xmlns:system="clr-namespace:System;assembly=System.Runtime"
+>
+  <Thickness x:Key="TimePickerBorderThemeThickness">1,1,1,1</Thickness>
+  <Style x:Key="DefaultUiTimePickerStyle" TargetType="{x:Type controls:TimePicker}">
+    <!--  Universal WPF UI focus  -->
+    <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+    <!--  Universal WPF UI focus  -->
+    <!--  Universal WPF UI ContextMenu  -->
+    <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
+    <!--  Universal WPF UI ContextMenu  -->
+    <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundDefault}" />
+    <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackground}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{StaticResource TimePickerBorderThemeThickness}" />
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Top" />
+    <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
+    <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}" />
+    <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
+    <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:TimePicker}">
+          <Grid
+            Width="{TemplateBinding Width}"
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+          >
+            <Border
+              x:Name="ContentBorder"
+              MinWidth="{TemplateBinding MinWidth}"
+              MinHeight="{TemplateBinding MinHeight}"
+              Padding="0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}"
+              CornerRadius="{TemplateBinding Border.CornerRadius}"
+            >
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="GridColumnHour" Grid.Column="0">
+                  <TextBlock
+                    Margin="6"
+                    HorizontalAlignment="Center"
+                    Foreground="{TemplateBinding Foreground}"
+                    Text="hour"
+                  />
+                </Grid>
+                <Border
+                  x:Name="GridColumnMinute"
+                  Grid.Column="1"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="1,0,1,0"
+                >
+                  <TextBlock
+                    Margin="6"
+                    HorizontalAlignment="Center"
+                    Foreground="{TemplateBinding Foreground}"
+                    Text="minute"
+                  />
+                </Border>
+                <Grid x:Name="GridColumnType" Grid.Column="2">
+                  <TextBlock
+                    Margin="6"
+                    HorizontalAlignment="Center"
+                    Foreground="{TemplateBinding Foreground}"
+                    Text="AM"
+                  />
+                </Grid>
+              </Grid>
+            </Border>
+            <Popup x:Name="TimePickerPopup">
+              <Border>
+                <TextBlock Text="Todo" />
+              </Border>
+            </Popup>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundPointerOver}" />
+              <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundPointerOver}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundDisabled}" />
+              <Setter Property="BorderBrush" Value="{DynamicResource TimePickerButtonBorderBrushDisabled}" />
+              <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundDisabled}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundPressed}" />
+              <Setter Property="BorderBrush" Value="{DynamicResource TimePickerButtonBorderBrushPressed}" />
+              <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundPressed}" />
+            </Trigger>
+            <Trigger Property="ClockIdentifier" Value="Clock24Hour">
+              <Setter TargetName="GridColumnType" Property="Visibility" Value="Hidden" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style BasedOn="{StaticResource DefaultUiTimePickerStyle}" TargetType="{x:Type controls:TimePicker}" />
 </ResourceDictionary>

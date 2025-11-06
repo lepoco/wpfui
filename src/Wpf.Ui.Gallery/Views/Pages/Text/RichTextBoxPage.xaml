@@ -1,28 +1,25 @@
 <Page
-    x:Class="Wpf.Ui.Gallery.Views.Pages.Text.RichTextBoxPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Text"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="RichTextBoxPage"
-    controls:PageControlDocumentation.DocumentationType="{x:Type ui:RichTextBox}"
-    d:DataContext="{d:DesignInstance local:RichTextBoxPage,
+  x:Class="Wpf.Ui.Gallery.Views.Pages.Text.RichTextBoxPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Text"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:system="clr-namespace:System;assembly=System.Runtime"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  Title="RichTextBoxPage"
+  controls:PageControlDocumentation.DocumentationType="{x:Type ui:RichTextBox}"
+  d:DataContext="{d:DesignInstance local:RichTextBoxPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    mc:Ignorable="d">
-
-    <controls:ControlExample
-        Margin="0"
-        HeaderText="A simple RichTextBox"
-        XamlCode="&lt;RichTextBox /&gt;">
-        <RichTextBox />
-    </controls:ControlExample>
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  mc:Ignorable="d"
+>
+  <controls:ControlExample Margin="0" HeaderText="A simple RichTextBox" XamlCode="&lt;RichTextBox /&gt;">
+    <RichTextBox />
+  </controls:ControlExample>
 </Page>

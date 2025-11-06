@@ -1,191 +1,238 @@
 <ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
-
-    <CornerRadius x:Key="ValueInfoBadgeStyleCornerRadius">8</CornerRadius>
-    <Thickness x:Key="IconBadgeMargin">2</Thickness>
-
-    <Style x:Key="DotInfoBadgeStyle" TargetType="{x:Type controls:InfoBadge}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource InfoBadgeInformationSeverityBackgroundBrush}" />
-            </Setter.Value>
-        </Setter>
-
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:InfoBadge}">
-                    <Grid x:Name="InfoBadgeRoot">
-                        <Border
-                            x:Name="ContentBorder"
-                            Width="6"
-                            Height="6"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="0"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            Opacity="{TemplateBinding Opacity}" />
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Severity" Value="Attention">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeAttentionSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Informational">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeInformationalSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Success">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeSuccessSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Caution">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeCautionSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Critical">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeCriticalSeverityBackgroundBrush}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-    </Style>
-
-    <Style x:Key="IconInfoBadgeStyle" TargetType="{x:Type controls:InfoBadge}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource InfoBadgeInformationSeverityBackgroundBrush}" />
-            </Setter.Value>
-        </Setter>
-
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="FontWeight" Value="Normal" />
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:InfoBadge}">
-                    <Grid x:Name="InfoBadgeRoot">
-                        <Border
-                            x:Name="ContentBorder"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="0"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            Opacity="{TemplateBinding Opacity}">
-                            <ContentPresenter
-                                x:Name="ControlIcon"
-                                Margin="10"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Icon}"
-                                Focusable="False"
-                                TextElement.FontSize="{TemplateBinding FontSize}"
-                                TextElement.Foreground="{DynamicResource InfoBadgeValueForeground}" />
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Severity" Value="Attention">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeAttentionSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Informational">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeInformationalSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Success">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeSuccessSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Caution">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeCautionSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Critical">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeCriticalSeverityBackgroundBrush}" />
-                        </Trigger>
-
-                    </ControlTemplate.Triggers>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-    </Style>
-
-    <Style x:Key="ValueInfoBadgeStyle" TargetType="{x:Type controls:InfoBadge}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource InfoBadgeInformationSeverityBackgroundBrush}" />
-            </Setter.Value>
-        </Setter>
-
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:InfoBadge}">
-                    <Grid x:Name="InfoBadgeRoot">
-                        <Border
-                            x:Name="ContentBorder"
-                            Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}"
-                            MinWidth="16"
-                            MinHeight="16"
-                            Margin="{StaticResource IconBadgeMargin}"
-                            Padding="3,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="0"
-                            CornerRadius="{StaticResource ValueInfoBadgeStyleCornerRadius}"
-                            Opacity="{TemplateBinding Opacity}">
-                            <TextBlock
-                                x:Name="TextBlock"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Focusable="False"
-                                FontSize="{TemplateBinding FontSize}"
-                                Foreground="{DynamicResource InfoBadgeValueForeground}"
-                                Text="{TemplateBinding Value}"
-                                TextWrapping="Wrap" />
-
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Severity" Value="Attention">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeAttentionSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Informational">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeInformationalSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Success">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeSuccessSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Caution">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeCautionSeverityBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="Severity" Value="Critical">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBadgeCriticalSeverityBackgroundBrush}" />
-                        </Trigger>
-
-
-                    </ControlTemplate.Triggers>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style BasedOn="{StaticResource ValueInfoBadgeStyle}" TargetType="{x:Type controls:InfoBadge}" />
-
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+>
+  <CornerRadius x:Key="ValueInfoBadgeStyleCornerRadius">8</CornerRadius>
+  <Thickness x:Key="IconBadgeMargin">2</Thickness>
+  <Style x:Key="DotInfoBadgeStyle" TargetType="{x:Type controls:InfoBadge}">
+    <Setter Property="Background">
+      <Setter.Value>
+        <SolidColorBrush Color="{DynamicResource InfoBadgeInformationSeverityBackgroundBrush}" />
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:InfoBadge}">
+          <Grid x:Name="InfoBadgeRoot">
+            <Border
+              x:Name="ContentBorder"
+              Width="6"
+              Height="6"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Background="{TemplateBinding Background}"
+              BorderThickness="0"
+              CornerRadius="{TemplateBinding CornerRadius}"
+              Opacity="{TemplateBinding Opacity}"
+            />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="Severity" Value="Attention">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeAttentionSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Informational">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeInformationalSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Success">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeSuccessSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Caution">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeCautionSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Critical">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeCriticalSeverityBackgroundBrush}"
+              />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="IconInfoBadgeStyle" TargetType="{x:Type controls:InfoBadge}">
+    <Setter Property="Background">
+      <Setter.Value>
+        <SolidColorBrush Color="{DynamicResource InfoBadgeInformationSeverityBackgroundBrush}" />
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:InfoBadge}">
+          <Grid x:Name="InfoBadgeRoot">
+            <Border
+              x:Name="ContentBorder"
+              Background="{TemplateBinding Background}"
+              BorderThickness="0"
+              CornerRadius="{TemplateBinding CornerRadius}"
+              Opacity="{TemplateBinding Opacity}"
+            >
+              <ContentPresenter
+                x:Name="ControlIcon"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="{TemplateBinding Icon}"
+                Focusable="False"
+                TextElement.FontSize="{TemplateBinding FontSize}"
+                TextElement.Foreground="{DynamicResource InfoBadgeValueForeground}"
+              />
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="Severity" Value="Attention">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeAttentionSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Informational">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeInformationalSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Success">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeSuccessSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Caution">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeCautionSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Critical">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeCriticalSeverityBackgroundBrush}"
+              />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="ValueInfoBadgeStyle" TargetType="{x:Type controls:InfoBadge}">
+    <Setter Property="Background">
+      <Setter.Value>
+        <SolidColorBrush Color="{DynamicResource InfoBadgeInformationSeverityBackgroundBrush}" />
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:InfoBadge}">
+          <Grid x:Name="InfoBadgeRoot">
+            <Border
+              x:Name="ContentBorder"
+              Width="{TemplateBinding Width}"
+              Height="{TemplateBinding Height}"
+              MinWidth="16"
+              MinHeight="16"
+              Margin="{StaticResource IconBadgeMargin}"
+              Padding="3,0"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Background="{TemplateBinding Background}"
+              BorderThickness="0"
+              CornerRadius="{StaticResource ValueInfoBadgeStyleCornerRadius}"
+              Opacity="{TemplateBinding Opacity}"
+            >
+              <TextBlock
+                x:Name="TextBlock"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Focusable="False"
+                FontSize="{TemplateBinding FontSize}"
+                Foreground="{DynamicResource InfoBadgeValueForeground}"
+                Text="{TemplateBinding Value}"
+                TextWrapping="Wrap"
+              />
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="Severity" Value="Attention">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeAttentionSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Informational">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeInformationalSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Success">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeSuccessSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Caution">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeCautionSeverityBackgroundBrush}"
+              />
+            </Trigger>
+            <Trigger Property="Severity" Value="Critical">
+              <Setter
+                TargetName="ContentBorder"
+                Property="Background"
+                Value="{DynamicResource InfoBadgeCriticalSeverityBackgroundBrush}"
+              />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style BasedOn="{StaticResource ValueInfoBadgeStyle}" TargetType="{x:Type controls:InfoBadge}" />
 </ResourceDictionary>
