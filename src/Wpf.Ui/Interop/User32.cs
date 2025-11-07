@@ -1368,7 +1368,7 @@ internal static class User32
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool GetWindowRect([In] IntPtr hWnd, [Out] out Wpf.Ui.Interop.WinDef.RECT lpRect);
+    public static extern bool GetWindowRect([In] IntPtr hWnd, [Out] out WinDef.RECT lpRect);
 
     /// <summary>
     /// Determines the visibility state of the specified window.
