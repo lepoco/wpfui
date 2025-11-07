@@ -38,5 +38,5 @@ public enum NavigationViewPaneDisplayMode
     /// <summary>
     /// The pane is shown at the bottom of the control.
     /// </summary>
-    Bottom
+    Bottom,
 }

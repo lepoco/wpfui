@@ -68,5 +68,5 @@ public enum SystemTheme
     /// <summary>
     /// Light theme: Flow
     /// </summary>
-    Flow
+    Flow,
 }

@@ -26,7 +26,7 @@ public partial class SandboxWindow
                 NavigationView.MenuItemsSourceProperty,
                 new ObservableCollection<object>()
                 {
-                    new NavigationViewItem("Home", SymbolRegular.Home24, typeof(SamplePage1))
+                    new NavigationViewItem("Home", SymbolRegular.Home24, typeof(SamplePage1)),
                 }
             );
 

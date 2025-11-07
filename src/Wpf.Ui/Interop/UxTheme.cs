@@ -20,6 +20,7 @@ namespace Wpf.Ui.Interop;
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable CA1060 // Move pinvokes to native methods class
 
 internal static class UxTheme
 {
@@ -174,3 +175,4 @@ internal static class UxTheme
 }
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore CA1060 // Move pinvokes to native methods class

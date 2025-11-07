@@ -15,7 +15,7 @@ internal class ObservedWindow
     private readonly HwndSource _source;
 
     /// <summary>
-    /// Initializes a new instance of the ObservedWindow class.
+    /// Initializes a new instance of the <see cref="ObservedWindow"/> class.
     /// </summary>
     /// <param name="handle">The handle of the window.</param>
     /// <param name="backdrop">The backdrop type of the window.</param>

@@ -50,7 +50,7 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
 
         if (pageType is not null)
         {
-            navigationService.Navigate(pageType);
+            _ = navigationService.Navigate(pageType);
         }
 
         System.Diagnostics.Debug.WriteLine(

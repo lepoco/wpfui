@@ -51,7 +51,7 @@ namespace RtfDocumentProcessors
                 EnvironmentContext.FileAbstractLayer.GetPhysicalPath(file.File)
             );
 
-            return new FileModel(file, content) { LocalPathFromRoot = localPathFromRoot, };
+            return new FileModel(file, content) { LocalPathFromRoot = localPathFromRoot };
         }
         #endregion
 

@@ -34,5 +34,5 @@ public enum TaskBarProgressState
     /// <summary>
     /// A yellow progress indicator is displayed in the task bar area.
     /// </summary>
-    Paused = 0x8
+    Paused = 0x8,
 }

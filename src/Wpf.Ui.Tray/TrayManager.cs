@@ -79,7 +79,7 @@ internal static class TrayManager
             parentSource.Handle
         )
         {
-            ElementId = notifyIcon.Id
+            ElementId = notifyIcon.Id,
         };
 
         notifyIcon.ShellIconData = new Interop.Shell32.NOTIFYICONDATA
@@ -88,7 +88,7 @@ internal static class TrayManager
             uFlags = Interop.Shell32.NIF.MESSAGE,
             uCallbackMessage = (int)Interop.User32.WM.TRAYMOUSEMESSAGE,
             hWnd = notifyIcon.HookWindow.Handle,
-            dwState = 0x2
+            dwState = 0x2,
         };
 
         if (!string.IsNullOrEmpty(notifyIcon.TooltipText))

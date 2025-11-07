@@ -3,10 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Gallery.UnitTests;
-
-public class UnitTest1
-{
-    [Fact]
-    public void Test1() { }
-}
+global using System.Collections.Generic;
+global using System.Linq;
+global using FlaUI.Core;
+global using FlaUI.Core.AutomationElements;
+global using FlaUI.Core.Exceptions;
+global using FlaUI.Core.Input;
+global using FlaUI.Core.Patterns;
+global using FlaUI.Core.WindowsAPI;

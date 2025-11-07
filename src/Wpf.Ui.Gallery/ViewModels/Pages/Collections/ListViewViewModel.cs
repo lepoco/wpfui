@@ -48,7 +48,7 @@ public partial class ListViewViewModel : ViewModel
             "Arielle",
             "Arielle",
             "Jamie",
-            "Alexzander"
+            "Alexzander",
         };
         var surnames = new[]
         {
@@ -64,7 +64,7 @@ public partial class ListViewViewModel : ViewModel
             "Banks",
             "Hood",
             "Fry",
-            "Carroll"
+            "Carroll",
         };
         var companies = new[]
         {
@@ -74,7 +74,7 @@ public partial class ListViewViewModel : ViewModel
             "Megabyte Computers Inc",
             "Roude Mics",
             "XD Projekt Red S.A.",
-            "Lepo.co"
+            "Lepo.co",
         };
 
         for (int i = 0; i < 50; i++)
@@ -97,7 +97,7 @@ public partial class ListViewViewModel : ViewModel
         {
             1 => SelectionMode.Multiple,
             2 => SelectionMode.Extended,
-            _ => SelectionMode.Single
+            _ => SelectionMode.Single,
         };
     }
 }

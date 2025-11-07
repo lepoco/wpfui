@@ -21,5 +21,5 @@ public enum NumberBoxValidationMode
     /// <summary>
     /// Invalid input is replaced by <see cref="NumberBox"/> PlaceholderText text.
     /// </summary>
-    Disabled
+    Disabled,
 }

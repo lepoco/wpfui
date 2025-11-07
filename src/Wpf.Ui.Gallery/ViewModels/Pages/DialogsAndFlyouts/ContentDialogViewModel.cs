@@ -32,7 +32,7 @@ public partial class ContentDialogViewModel(IContentDialogService contentDialogS
         {
             ContentDialogResult.Primary => "User saved their work",
             ContentDialogResult.Secondary => "User did not save their work",
-            _ => "User cancelled the dialog"
+            _ => "User cancelled the dialog",
         };
     }
 

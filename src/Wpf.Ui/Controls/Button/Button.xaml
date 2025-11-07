@@ -17,6 +17,78 @@
     <Thickness x:Key="ButtonBorderThemeThickness">1</Thickness>
     <Thickness x:Key="ButtonIconMargin">0,0,8,0</Thickness>
 
+    <Style x:Key="DefaultRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+        <!--  Universal WPF UI focus  -->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <!--  Universal WPF UI focus  -->
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThemeThickness}" />
+        <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border
+                        x:Name="ContentBorder"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        MinWidth="{TemplateBinding MinWidth}"
+                        MinHeight="{TemplateBinding MinHeight}"
+                        Padding="{TemplateBinding Padding}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding Border.CornerRadius}">
+                        <ContentPresenter
+                            x:Name="ContentPresenter"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="DefaultButtonStyle" TargetType="{x:Type Button}">
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
@@ -109,20 +181,27 @@
                         -->
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -166,10 +245,16 @@
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="0"
                         CornerRadius="{TemplateBinding CornerRadius}">
+                        <!--  The inset border is only used for appearances other than Secondary  -->
                         <Border
+                            x:Name="InsetBorder"
                             Padding="{TemplateBinding Padding}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            BorderBrush="{Binding ElementName=ContentBorder, Path=BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
                             <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -184,7 +269,6 @@
                                     Margin="{StaticResource ButtonIconMargin}"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
-                                    ContentTemplate="{TemplateBinding ContentTemplate}"
                                     Focusable="False"
                                     TextElement.FontSize="{TemplateBinding FontSize}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
@@ -194,6 +278,7 @@
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
@@ -235,6 +320,10 @@
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
+                        <Trigger Property="Appearance" Value="Secondary">
+                            <Setter TargetName="InsetBorder" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -253,7 +342,8 @@
                 <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}" />
                 <Setter Property="PressedForeground" Value="{DynamicResource AccentButtonForegroundPointerOver}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
-                <Setter Property="PressedBorderBrush" Value="{DynamicResource AccentButtonBorderBrushPressed}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="PressedBorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}" />
             </Trigger>
 
             <!--  DARK  -->
@@ -273,16 +363,11 @@
                         <SolidColorBrush Color="#52000000" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="PressedForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorLightPrimaryBrush}" />
+                <Setter Property="PressedForeground" Value="{DynamicResource TextFillColorLightSecondaryBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  LIGHT  -->
@@ -302,16 +387,8 @@
                         <SolidColorBrush Color="#F3FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorDarkPrimary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="PressedForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorDarkSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorDarkPrimaryBrush}" />
+                <Setter Property="PressedForeground" Value="{DynamicResource TextFillColorDarkSecondaryBrush}" />
             </Trigger>
 
             <!--  INFO  -->
@@ -331,11 +408,10 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteLightBlueColor}" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorLightPrimaryBrush}" />
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  DANGER  -->
@@ -355,6 +431,9 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteRedColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  SUCCESS  -->
@@ -374,6 +453,9 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteGreenColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  CAUTION  -->
@@ -393,10 +475,14 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteOrangeColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
+    <Style BasedOn="{StaticResource DefaultRepeatButtonStyle}" TargetType="{x:Type RepeatButton}" />
     <Style BasedOn="{StaticResource DefaultButtonStyle}" TargetType="{x:Type Button}" />
     <Style BasedOn="{StaticResource DefaultUiButtonStyle}" TargetType="{x:Type controls:Button}" />
 

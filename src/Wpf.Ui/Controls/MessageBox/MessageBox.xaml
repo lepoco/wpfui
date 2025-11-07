@@ -15,6 +15,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="{DynamicResource MessageBoxBackground}" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="12" />
         <Setter Property="Foreground" Value="{DynamicResource MessageBoxForeground}" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="WindowStyle" Value="ToolWindow" />
@@ -56,10 +57,11 @@
                                 <TextBlock
                                     x:Name="Title"
                                     Grid.Row="0"
-                                    Margin="12,12,12,0"
+                                    Margin="12,12,35,0"
                                     FontWeight="SemiBold"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Text="{TemplateBinding Title}" />
+                                    Text="{TemplateBinding Title}"
+                                    TextWrapping="Wrap" />
 
                                 <controls:TitleBar
                                     Grid.Row="0"
@@ -84,7 +86,7 @@
 
                                 <Border
                                     Grid.Row="2"
-                                    Padding="12"
+                                    Padding="{TemplateBinding Padding}"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Bottom"
                                     BorderBrush="{DynamicResource MessageBoxSeparatorBorderBrush}"
@@ -138,6 +140,7 @@
                         </Trigger>
                         <Trigger Property="IsPrimaryButtonEnabled" Value="False">
                             <Setter TargetName="PrimaryColumn" Property="Width" Value="0" />
+                            <Setter TargetName="FirstSpacer" Property="Width" Value="0" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -151,6 +154,10 @@
                         <Trigger Property="IsSecondaryButtonEnabled" Value="False">
                             <Setter TargetName="FirstSpacer" Property="Width" Value="0" />
                             <Setter TargetName="SecondaryColumn" Property="Width" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IsCloseButtonEnabled" Value="False">
+                            <Setter TargetName="CloseColumn" Property="Width" Value="0" />
+                            <Setter TargetName="SecondSpacer" Property="Width" Value="0" />
                         </Trigger>
                         <Trigger Property="PrimaryButtonText" Value="">
                             <Setter Property="IsPrimaryButtonEnabled" Value="False" />

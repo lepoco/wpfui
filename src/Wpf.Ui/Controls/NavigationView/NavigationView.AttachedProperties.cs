@@ -20,8 +20,18 @@ public partial class NavigationView
         "HeaderContent",
         typeof(object),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(null)
+        new FrameworkPropertyMetadata(null, OnHeaderContentChanged)
     );
+
+    private static void OnHeaderContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not FrameworkElement frameworkElement)
+        {
+            return;
+        }
+
+        GetNavigationParent(frameworkElement)?.NotifyHeaderContentChanged(frameworkElement, e.NewValue);
+    }
 
     /// <summary>Helper for getting <see cref="HeaderContentProperty"/> from <paramref name="target"/>.</summary>
     /// <param name="target"><see cref="FrameworkElement"/> to read <see cref="HeaderContentProperty"/> from.</param>

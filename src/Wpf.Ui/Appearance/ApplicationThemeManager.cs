@@ -142,7 +142,7 @@ public static class ApplicationThemeManager
 
         ResourceDictionary[] resourcesRemove = frameworkElement
             .Resources.MergedDictionaries.Where(e => e.Source is not null)
-            .Where(e => e.Source.ToString().ToLower().Contains(LibraryNamespace))
+            .Where(e => e.Source.ToString().Contains(LibraryNamespace, StringComparison.OrdinalIgnoreCase))
             .ToArray();
 
         foreach (ResourceDictionary? resource in UiApplication.Current.Resources.MergedDictionaries)
@@ -235,11 +235,15 @@ public static class ApplicationThemeManager
 
         return appApplicationTheme switch
         {
-            ApplicationTheme.Dark
-                => sysTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow,
-            ApplicationTheme.Light
-                => sysTheme is SystemTheme.Light or SystemTheme.Flow or SystemTheme.Sunrise,
-            _ => appApplicationTheme == ApplicationTheme.HighContrast && SystemThemeManager.HighContrast
+            ApplicationTheme.Dark => sysTheme
+                is SystemTheme.Dark
+                    or SystemTheme.CapturedMotion
+                    or SystemTheme.Glow,
+            ApplicationTheme.Light => sysTheme
+                is SystemTheme.Light
+                    or SystemTheme.Flow
+                    or SystemTheme.Sunrise,
+            _ => appApplicationTheme == ApplicationTheme.HighContrast && SystemThemeManager.HighContrast,
         };
     }
 
@@ -288,19 +292,19 @@ public static class ApplicationThemeManager
             return;
         }
 
-        string themeUri = themeDictionary.Source.ToString().Trim().ToLower();
+        string themeUri = themeDictionary.Source.ToString();
 
-        if (themeUri.Contains("light"))
+        if (themeUri.Contains("light", StringComparison.OrdinalIgnoreCase))
         {
             _cachedApplicationTheme = ApplicationTheme.Light;
         }
 
-        if (themeUri.Contains("dark"))
+        if (themeUri.Contains("dark", StringComparison.OrdinalIgnoreCase))
         {
             _cachedApplicationTheme = ApplicationTheme.Dark;
         }
 
-        if (themeUri.Contains("highcontrast"))
+        if (themeUri.Contains("highcontrast", StringComparison.OrdinalIgnoreCase))
         {
             _cachedApplicationTheme = ApplicationTheme.HighContrast;
         }

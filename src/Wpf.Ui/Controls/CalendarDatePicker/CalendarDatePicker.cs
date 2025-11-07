@@ -117,7 +117,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
             {
                 Source = this,
                 Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
             }
         );
         _ = calendar.SetBinding(
@@ -126,7 +126,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
             {
                 Source = this,
                 Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
             }
         );
         _ = calendar.SetBinding(
@@ -135,7 +135,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
             {
                 Source = this,
                 Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
             }
         );
 
@@ -151,7 +151,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
             VerticalOffset = 1D,
             VerticalAlignment = VerticalAlignment.Center,
             PopupAnimation = PopupAnimation.None,
-            AllowsTransparency = true
+            AllowsTransparency = true,
         };
 
         _ = _popup.SetBinding(
@@ -160,7 +160,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
             {
                 Source = this,
                 Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
             }
         );
     }

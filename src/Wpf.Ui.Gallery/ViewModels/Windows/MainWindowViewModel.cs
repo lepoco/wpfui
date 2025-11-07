@@ -41,8 +41,8 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
             {
                 new NavigationViewItem("Typography", SymbolRegular.TextFont24, typeof(TypographyPage)),
                 new NavigationViewItem("Icons", SymbolRegular.Diversity24, typeof(IconsPage)),
-                new NavigationViewItem("Colors", SymbolRegular.Color24, typeof(ColorsPage))
-            }
+                new NavigationViewItem("Colors", SymbolRegular.Color24, typeof(ColorsPage)),
+            },
         },
         new NavigationViewItem("All samples", SymbolRegular.List24, typeof(AllControlsPage)),
         new NavigationViewItemSeparator(),
@@ -79,7 +79,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
 #if DEBUG
                 new NavigationViewItem("TreeList", typeof(TreeListPage)),
 #endif
-            }
+            },
         },
         new NavigationViewItem("Date & time", SymbolRegular.CalendarClock24, typeof(DateAndTimePage))
         {
@@ -88,8 +88,8 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem(nameof(CalendarDatePicker), typeof(CalendarDatePickerPage)),
                 new NavigationViewItem(nameof(System.Windows.Controls.Calendar), typeof(CalendarPage)),
                 new NavigationViewItem(nameof(DatePicker), typeof(DatePickerPage)),
-                new NavigationViewItem(nameof(TimePicker), typeof(TimePickerPage))
-            }
+                new NavigationViewItem(nameof(TimePicker), typeof(TimePickerPage)),
+            },
         },
         new NavigationViewItem("Dialogs & flyouts", SymbolRegular.Chat24, typeof(DialogsAndFlyoutsPage))
         {
@@ -99,7 +99,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem(nameof(ContentDialog), typeof(ContentDialogPage)),
                 new NavigationViewItem(nameof(Flyout), typeof(FlyoutPage)),
                 new NavigationViewItem(nameof(Wpf.Ui.Controls.MessageBox), typeof(MessageBoxPage)),
-            }
+            },
         },
 #if DEBUG
         new NavigationViewItem("Layout", SymbolRegular.News24, typeof(LayoutPage))
@@ -108,7 +108,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
             {
                 new NavigationViewItem("Expander", typeof(ExpanderPage)),
                 new NavigationViewItem("CardControl", typeof(CardControlPage)),
-                new NavigationViewItem("CardAction", typeof(CardActionPage))
+                new NavigationViewItem("CardAction", typeof(CardActionPage)),
             },
         },
 #endif
@@ -122,8 +122,8 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem("Image", typeof(ImagePage)),
                 new NavigationViewItem("Canvas", typeof(CanvasPage)),
                 new NavigationViewItem("WebView", typeof(WebViewPage)),
-                new NavigationViewItem("WebBrowser", typeof(WebBrowserPage))
-            }
+                new NavigationViewItem("WebBrowser", typeof(WebBrowserPage)),
+            },
         },
         new NavigationViewItem("Navigation", SymbolRegular.Navigation24, typeof(NavigationPage))
         {
@@ -133,8 +133,8 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem("NavigationView", typeof(NavigationViewPage)),
                 new NavigationViewItem("Menu", typeof(MenuPage)),
                 new NavigationViewItem("Multilevel navigation", typeof(MultilevelNavigationPage)),
-                new NavigationViewItem("TabControl", typeof(TabControlPage))
-            }
+                new NavigationViewItem("TabControl", typeof(TabControlPage)),
+            },
         },
         new NavigationViewItem(
             "Status & info",
@@ -148,8 +148,8 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem("InfoBar", typeof(InfoBarPage)),
                 new NavigationViewItem("ProgressBar", typeof(ProgressBarPage)),
                 new NavigationViewItem("ProgressRing", typeof(ProgressRingPage)),
-                new NavigationViewItem("ToolTip", typeof(ToolTipPage))
-            }
+                new NavigationViewItem("ToolTip", typeof(ToolTipPage)),
+            },
         },
         new NavigationViewItem("Text", SymbolRegular.DrawText24, typeof(TextPage))
         {
@@ -162,7 +162,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem(nameof(Label), typeof(LabelPage)),
                 new NavigationViewItem(nameof(Wpf.Ui.Controls.TextBlock), typeof(TextBlockPage)),
                 new NavigationViewItem(nameof(Wpf.Ui.Controls.TextBox), typeof(TextBoxPage)),
-            }
+            },
         },
         new NavigationViewItem("System", SymbolRegular.Desktop24, typeof(OpSystemPage))
         {
@@ -170,21 +170,38 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
             {
                 new NavigationViewItem("Clipboard", typeof(ClipboardPage)),
                 new NavigationViewItem("FilePicker", typeof(FilePickerPage)),
-            }
+            },
         },
-        new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
+        new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage)),
     ];
 
     [ObservableProperty]
     private ObservableCollection<object> _footerMenuItems =
     [
-        new NavigationViewItem("Settings", SymbolRegular.Settings24, typeof(SettingsPage))
+        new NavigationViewItem("Settings", SymbolRegular.Settings24, typeof(SettingsPage)),
     ];
 
     [ObservableProperty]
-    private ObservableCollection<Wpf.Ui.Controls.MenuItem> _trayMenuItems =
+    private ObservableCollection<Control> _trayMenuItems =
     [
-        new Wpf.Ui.Controls.MenuItem { Header = "Home", Tag = "tray_home" },
-        new Wpf.Ui.Controls.MenuItem { Header = "Close", Tag = "tray_close" }
+        new Wpf.Ui.Controls.MenuItem()
+        { 
+            Header = "Home", 
+            Tag = "tray_home",
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 }
+        },
+        new Wpf.Ui.Controls.MenuItem()
+        { 
+            Header = "Settings", 
+            Tag = "tray_settings",
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 }
+        },
+        new Separator(),
+        new Wpf.Ui.Controls.MenuItem()
+        { 
+            Header = "Close", 
+            Tag = "tray_close",
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Dismiss24 }
+        },
     ];
 }

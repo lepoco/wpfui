@@ -20,7 +20,7 @@ public partial class MediaViewModel : ViewModel
                 Name = x.Name,
                 Icon = x.Icon,
                 Description = x.Description,
-                PageType = x.PageType
+                PageType = x.PageType,
             })
     );
 }

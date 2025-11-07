@@ -34,7 +34,7 @@
                     Content="WPF UI hyperlink"
                     Icon="{ui:SymbolIcon Link24}"
                     IsEnabled="{Binding ViewModel.IsHyperlinkEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkButtonPage}, Mode=OneWay}"
-                    NavigateUri="https://dev.lepo.co/" />
+                    NavigateUri="https://lepo.co/" />
                 <CheckBox
                     Grid.Column="1"
                     Command="{Binding ViewModel.HyperlinkCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkButtonPage}, Mode=OneWay}"
@@ -52,7 +52,7 @@
                 Content="WPF UI hyperlink"
                 Icon="{ui:FontIcon '&#x1F308;'}"
                 IsEnabled="{Binding ViewModel.IsHyperlinkEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkButtonPage}, Mode=OneWay}"
-                NavigateUri="https://dev.lepo.co/" />
+                NavigateUri="https://lepo.co/" />
         </controls:ControlExample>
 
         <controls:ControlExample
@@ -64,7 +64,7 @@
                 Content="WPF UI hyperlink"
                 Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png'}"
                 IsEnabled="{Binding ViewModel.IsHyperlinkEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkButtonPage}, Mode=OneWay}"
-                NavigateUri="https://dev.lepo.co/" />
+                NavigateUri="https://lepo.co/" />
         </controls:ControlExample>
     </StackPanel>
 </Page>

@@ -21,36 +21,61 @@
     <Grid Margin="0,0,0,24">
         <controls:ControlExample Margin="0" HeaderText="Standard Menu.">
             <controls:ControlExample.XamlCode>
-                &lt;Menu&gt;\n
-                \t&lt;MenuItem Header=&quot;File&quot; /&gt;\n
-                \t&lt;MenuItem Header=&quot;Edit&quot; /&gt;\n
-                \t&lt;ui:MenuItem Header=&quot;Icon&quot; SymbolIcon=&quot;Fluent24&quot; /&gt;\n
-                \t&lt;ui:MenuItem SymbolIcon=&quot;Fluent24&quot; /&gt;\n
+                &lt;Menu FontSize="14"&gt;\n
+                \t\t\t&lt;ui:MenuItem Header="File" Icon="{ui:SymbolIcon Symbol=Document24}"&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="New" InputGestureText="CTRL+N" /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Open..." InputGestureText="CTRL+O" /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Save" InputGestureText="CTRL+S" /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Save As..." InputGestureText="CTRL+SHIFT+S" /&gt;\n
+                \t\t\t\t\t\t&lt;Separator /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Exit" /&gt;\n
+                \t\t\t&lt;/ui:MenuItem&gt;\n
+                \t\t\t&lt;ui:MenuItem Header="Edit" Icon="{ui:SymbolIcon DocumentEdit20}"&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Undo" InputGestureText="CTRL+Z" /&gt;\n
+                \t\t\t\t\t\t&lt;Separator /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Cut" InputGestureText="CTRL+X" /&gt;\n
+                \t\t\t\t\t\t &lt;ui:MenuItem Header="Copy" InputGestureText="CTRL+C" /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Paste" InputGestureText="CTRL+V" /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem IsEnabled="False" /&gt;\n
+                \t\t\t\t\t\t&lt;Separator /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Word wrap" InputGestureText="CTRL+SHIFT+W" IsCheckable="True"IsChecked="True" /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Find..." InputGestureText="CTRL+F" /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Find next" InputGestureText="F3" /&gt;\n
+                \t\t\t\t\t\t&lt;Separator /&gt;\n
+                \t\t\t\t\t\t&lt;ui:MenuItem Header="Select All" InputGestureText="CTRL+A" /&gt;\n
+                \t\t\t&lt;/ui:MenuItem&gt;\n
+                \t\t\t&lt;Separator /&gt;\n
+                \t\t\t&lt;ui:MenuItem Icon="{ui:SymbolIcon TextBold20}" /&gt;\n
+                \t\t\t&lt;ui:MenuItem Icon="{ui:SymbolIcon TextItalic20}" /&gt;\n
+                \t\t\t&lt;ui:MenuItem Icon="{ui:SymbolIcon TextUnderline20}" /&gt;\n
                 &lt;/Menu&gt;
             </controls:ControlExample.XamlCode>
             <Menu FontSize="14">
-                <ui:MenuItem Header="File" Icon="{ui:SymbolIcon DocumentSplitHint20}">
-                    <MenuItem Header="New" />
-                    <MenuItem Header="New window" />
-                    <MenuItem Header="Open..." />
-                    <MenuItem Header="Save" />
-                    <MenuItem Header="Save As..." />
+                <ui:MenuItem Header="File" Icon="{ui:SymbolIcon Symbol=Document24}">
+                    <ui:MenuItem Header="New" InputGestureText="CTRL+N" />
+                    <ui:MenuItem Header="Open..." InputGestureText="CTRL+O" />
+                    <ui:MenuItem Header="Save" InputGestureText="CTRL+S" />
+                    <ui:MenuItem Header="Save As..." InputGestureText="CTRL+SHIFT+S" />
                     <Separator />
-                    <MenuItem Header="Exit" />
+                    <ui:MenuItem Header="Exit" />
                 </ui:MenuItem>
                 <ui:MenuItem Header="Edit" Icon="{ui:SymbolIcon DocumentEdit20}">
-                    <MenuItem Header="Undo" />
+                    <ui:MenuItem Header="Undo" InputGestureText="CTRL+Z" />
                     <Separator />
-                    <MenuItem Header="Cut" />
-                    <MenuItem Header="Copy" />
-                    <MenuItem Header="Paste" />
-                    <MenuItem IsEnabled="False" />
+                    <ui:MenuItem Header="Cut" InputGestureText="CTRL+X" />
+                    <ui:MenuItem Header="Copy" InputGestureText="CTRL+C" />
+                    <ui:MenuItem Header="Paste" InputGestureText="CTRL+V" />
+                    <ui:MenuItem IsEnabled="False" />
                     <Separator />
-                    <MenuItem Header="Search with browser" />
-                    <MenuItem Header="Find..." />
-                    <MenuItem Header="Find next" />
+                    <ui:MenuItem
+                        Header="Word wrap"
+                        InputGestureText="CTRL+SHIFT+W"
+                        IsCheckable="True"
+                        IsChecked="True" />
+                    <ui:MenuItem Header="Find..." InputGestureText="CTRL+F" />
+                    <ui:MenuItem Header="Find next" InputGestureText="F3" />
                     <Separator />
-                    <MenuItem Header="Select All" />
+                    <ui:MenuItem Header="Select All" InputGestureText="CTRL+A" />
                 </ui:MenuItem>
                 <Separator />
                 <ui:MenuItem Icon="{ui:SymbolIcon TextBold20}" />

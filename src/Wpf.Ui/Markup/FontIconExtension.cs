@@ -49,7 +49,7 @@ public class FontIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        FontIcon fontIcon = new() { Glyph = Glyph, FontFamily = FontFamily };
+        FontIcon fontIcon = new() { Glyph = Glyph!, FontFamily = FontFamily };
 
         if (FontSize > 0)
         {

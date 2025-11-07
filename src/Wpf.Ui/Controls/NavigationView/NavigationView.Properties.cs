@@ -87,6 +87,22 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null, OnFooterMenuItemsSourceChanged)
     );
 
+    /// <summary>Identifies the <see cref="IsTopSeparatorVisible"/> dependency property.</summary>
+    public static readonly DependencyProperty IsTopSeparatorVisibleProperty = DependencyProperty.Register(
+        nameof(IsTopSeparatorVisible),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(true)
+    );
+
+    /// <summary>Identifies the <see cref="IsFooterSeparatorVisible"/> dependency property.</summary>
+    public static readonly DependencyProperty IsFooterSeparatorVisibleProperty = DependencyProperty.Register(
+        nameof(IsFooterSeparatorVisible),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(true)
+    );
+
     /// <summary>Identifies the <see cref="ContentOverlay"/> dependency property.</summary>
     public static readonly DependencyProperty ContentOverlayProperty = DependencyProperty.Register(
         nameof(ContentOverlay),
@@ -316,6 +332,20 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
+    public bool IsTopSeparatorVisible
+    {
+        get => (bool)GetValue(IsTopSeparatorVisibleProperty);
+        set => SetValue(IsTopSeparatorVisibleProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public bool IsFooterSeparatorVisible
+    {
+        get => (bool)GetValue(IsFooterSeparatorVisibleProperty);
+        set => SetValue(IsFooterSeparatorVisibleProperty, value);
+    }
+
+    /// <inheritdoc/>
     public object? ContentOverlay
     {
         get => GetValue(ContentOverlayProperty);
@@ -464,20 +494,28 @@ public partial class NavigationView
         switch (e.Action)
         {
             case NotifyCollectionChangedAction.Add:
-                foreach (var item in e.NewItems)
+                if (e.NewItems is not null)
                 {
-                    collection.Add(item);
+                    foreach (var item in e.NewItems)
+                    {
+                        _ = collection.Add(item);
+                    }
                 }
+
                 break;
 
             case NotifyCollectionChangedAction.Remove:
-                foreach (var item in e.OldItems)
+                if (e.OldItems is not null && e.NewItems is not null)
                 {
-                    if (!e.NewItems.Contains(item))
+                    foreach (var item in e.OldItems)
                     {
-                        collection.Remove(item);
+                        if (!e.NewItems.Contains(item))
+                        {
+                            collection.Remove(item);
+                        }
                     }
                 }
+
                 break;
 
             case NotifyCollectionChangedAction.Move:
@@ -488,7 +526,11 @@ public partial class NavigationView
 
             case NotifyCollectionChangedAction.Replace:
                 collection.RemoveAt(e.OldStartingIndex);
-                collection.Insert(e.OldStartingIndex, e.NewItems[0]);
+                if (e.NewItems is not null)
+                {
+                    collection.Insert(e.OldStartingIndex, e.NewItems[0]);
+                }
+
                 break;
 
             case NotifyCollectionChangedAction.Reset:
@@ -521,12 +563,12 @@ public partial class NavigationView
         {
             foreach (var item in newItemsSource)
             {
-                navigationView.MenuItems.Add(item);
+                _ = navigationView.MenuItems.Add(item);
             }
         }
         else if (e.NewValue != null)
         {
-            navigationView.MenuItems.Add(e.NewValue);
+            _ = navigationView.MenuItems.Add(e.NewValue);
         }
 
         if (e.NewValue is INotifyCollectionChanged oc)
@@ -563,12 +605,12 @@ public partial class NavigationView
         {
             foreach (var item in newItemsSource)
             {
-                navigationView.FooterMenuItems.Add(item);
+                _ = navigationView.FooterMenuItems.Add(item);
             }
         }
         else if (e.NewValue != null)
         {
-            navigationView.FooterMenuItems.Add(e.NewValue);
+            _ = navigationView.FooterMenuItems.Add(e.NewValue);
         }
 
         if (e.NewValue is INotifyCollectionChanged oc)

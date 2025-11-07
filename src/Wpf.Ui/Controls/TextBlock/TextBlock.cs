@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Extensions;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
@@ -40,6 +38,12 @@ public class TextBlock : System.Windows.Controls.TextBlock
             }
         )
     );
+
+    public TextBlock()
+    {
+        var defaultFontTypography = (FontTypography)FontTypographyProperty.DefaultMetadata.DefaultValue;
+        SetResourceReference(StyleProperty, defaultFontTypography.ToResourceValue());
+    }
 
     /// <summary>
     /// Gets or sets the <see cref="FontTypography"/> of the text.

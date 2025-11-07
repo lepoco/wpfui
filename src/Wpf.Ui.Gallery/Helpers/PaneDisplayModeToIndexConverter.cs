@@ -16,7 +16,7 @@ internal sealed class PaneDisplayModeToIndexConverter : IValueConverter
             NavigationViewPaneDisplayMode.LeftFluent => 1,
             NavigationViewPaneDisplayMode.Top => 2,
             NavigationViewPaneDisplayMode.Bottom => 3,
-            _ => 0
+            _ => 0,
         };
     }
 
@@ -27,7 +27,7 @@ internal sealed class PaneDisplayModeToIndexConverter : IValueConverter
             1 => NavigationViewPaneDisplayMode.LeftFluent,
             2 => NavigationViewPaneDisplayMode.Top,
             3 => NavigationViewPaneDisplayMode.Bottom,
-            _ => NavigationViewPaneDisplayMode.Left
+            _ => NavigationViewPaneDisplayMode.Left,
         };
     }
 }

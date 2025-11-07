@@ -26,6 +26,8 @@ namespace Wpf.Ui.Controls;
 /// </example>
 public class ListView : System.Windows.Controls.ListView
 {
+    private DependencyPropertyDescriptor? _descriptor;
+
     /// <summary>Identifies the <see cref="ViewState"/> dependency property.</summary>
     public static readonly DependencyProperty ViewStateProperty = DependencyProperty.Register(
         nameof(ViewState),
@@ -62,6 +64,7 @@ public class ListView : System.Windows.Controls.ListView
     public ListView()
     {
         Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -69,12 +72,19 @@ public class ListView : System.Windows.Controls.ListView
         Loaded -= OnLoaded; // prevent memory leaks
 
         // Setup initial ViewState and hook into View property changes
-        var descriptor = DependencyPropertyDescriptor.FromProperty(
+        _descriptor = DependencyPropertyDescriptor.FromProperty(
             System.Windows.Controls.ListView.ViewProperty,
             typeof(System.Windows.Controls.ListView)
         );
-        descriptor?.AddValueChanged(this, OnViewPropertyChanged);
+        _descriptor?.AddValueChanged(this, OnViewPropertyChanged);
         UpdateViewState(); // set the initial state
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        Unloaded -= OnUnloaded;
+
+        _descriptor?.RemoveValueChanged(this, OnViewPropertyChanged);
     }
 
     private void OnViewPropertyChanged(object? sender, EventArgs e)
@@ -88,7 +98,7 @@ public class ListView : System.Windows.Controls.ListView
         {
             System.Windows.Controls.GridView => ListViewViewState.GridView,
             null => ListViewViewState.Default,
-            _ => ListViewViewState.Default
+            _ => ListViewViewState.Default,
         };
 
         SetCurrentValue(ViewStateProperty, viewState);

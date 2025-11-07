@@ -16,6 +16,8 @@
 // ReSharper disable InconsistentNaming
 using System.Runtime.InteropServices;
 
+#pragma warning disable CA1060 // Move pinvokes to native methods class
+
 namespace Wpf.Ui.Interop;
 
 /// <summary>
@@ -45,3 +47,5 @@ internal class Kernel32
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool IsDebuggerPresent();
 }
+
+#pragma warning restore CA1060 // Move pinvokes to native methods class

@@ -11,6 +11,7 @@ namespace Wpf.Ui.Tray.Interop;
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1300 // Element should begin with upper-case letter
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable CA1060 // Move pinvokes to native methods class
 
 /// <summary>
 /// USER procedure declarations, constant definitions and macros.
@@ -186,7 +187,7 @@ internal static class User32
         HTSIZELAST = HTBOTTOMRIGHT,
         HTOBJECT = 19,
         HTCLOSE = 20,
-        HTHELP = 21
+        HTHELP = 21,
     }
 
     /// <summary>
@@ -246,7 +247,7 @@ internal static class User32
         /// <summary>
         /// Sets the new address of the dialog box procedure.
         /// </summary>
-        DWLP_DLGPROC = 0x4
+        DWLP_DLGPROC = 0x4,
     }
 
     /// <summary>
@@ -284,7 +285,7 @@ internal static class User32
         WCA_CORNER_STYLE = 27,
         WCA_PART_COLOR = 28,
         WCA_DISABLE_MOVESIZE_FEEDBACK = 29,
-        WCA_LAST = 30
+        WCA_LAST = 30,
     }
 
     [Flags]
@@ -294,7 +295,7 @@ internal static class User32
         DrawTopBorder = 0x40,
         DrawRightBorder = 0x80,
         DrawBottomBorder = 0x100,
-        DrawAllBorders = DrawLeftBorder | DrawTopBorder | DrawRightBorder | DrawBottomBorder
+        DrawAllBorders = DrawLeftBorder | DrawTopBorder | DrawRightBorder | DrawBottomBorder,
     }
 
     /// <summary>
@@ -307,7 +308,7 @@ internal static class User32
         ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
         ACCENT_ENABLE_BLURBEHIND = 3,
         ACCENT_ENABLE_ACRYLICBLURBEHIND = 4,
-        ACCENT_INVALID_STATE = 5
+        ACCENT_INVALID_STATE = 5,
     }
 
     /// <summary>
@@ -348,7 +349,7 @@ internal static class User32
         BYTEALIGNWINDOW = 0x2000,
         GLOBALCLASS = 0x4000,
         IME = 0x00010000,
-        DROPSHADOW = 0x00020000
+        DROPSHADOW = 0x00020000,
     }
 
     /// <summary>
@@ -1546,3 +1547,4 @@ internal static class User32
 
 #pragma warning restore SA1300 // Element should begin with upper-case letter
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore CA1060 // Move pinvokes to native methods class

@@ -1,0 +1,42 @@
+<Page
+  x:Class="Wpf.Ui.Demo.SetResources.Simple.Views.Pages.DataPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  xmlns:models="clr-namespace:Wpf.Ui.Demo.SetResources.Simple.Models"
+  Title="DataPage"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  ScrollViewer.CanContentScroll="False"
+  mc:Ignorable="d"
+>
+  <Grid Margin="42">
+    <ui:VirtualizingItemsControl
+      x:Name="ColorsItemsControl"
+      Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+      VirtualizingPanel.CacheLengthUnit="Item"
+    >
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="{x:Type models:DataColor}">
+          <ui:Button
+            Width="80"
+            Height="80"
+            Margin="2"
+            Padding="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Appearance="Secondary"
+            Background="{Binding Color, Mode=OneWay}"
+            FontSize="25"
+            Icon="Fluent24"
+          />
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ui:VirtualizingItemsControl>
+  </Grid>
+</Page>

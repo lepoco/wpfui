@@ -5,6 +5,7 @@
 
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -12,9 +13,12 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a button with two parts that can be invoked separately. One part behaves like a standard button and the other part invokes a flyout.
 /// </summary>
+[TemplatePart(Name = TemplateElementToggle, Type = typeof(Border))]
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(ToggleButton))]
-public class SplitButton : Wpf.Ui.Controls.Button
+public class SplitButton : Button
 {
+    private const string TemplateElementToggle = "PART_Toggle";
+
     /// <summary>
     /// Template element represented by the <c>ToggleButton</c> name.
     /// </summary>
@@ -25,7 +29,9 @@ public class SplitButton : Wpf.Ui.Controls.Button
     /// <summary>
     /// Gets or sets control responsible for toggling the drop-down button.
     /// </summary>
-    protected ToggleButton SplitButtonToggleButton { get; set; } = null!;
+    protected ToggleButton? SplitButtonToggleButton { get; set; }
+
+    private Border? _splitButtonToggleBorder;
 
     /// <summary>Identifies the <see cref="Flyout"/> dependency property.</summary>
     public static readonly DependencyProperty FlyoutProperty = DependencyProperty.Register(
@@ -75,6 +81,23 @@ public class SplitButton : Wpf.Ui.Controls.Button
 
             self.ReleaseTemplateResources();
         };
+        Loaded += static (sender, _) =>
+        {
+            var self = (SplitButton)sender;
+            if (self.SplitButtonToggleButton != null)
+            {
+                self.AttachToggleButtonClick();
+            }
+        };
+    }
+
+    private void AttachToggleButtonClick()
+    {
+        if (SplitButtonToggleButton != null)
+        {
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp -= OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp += OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
+        }
     }
 
     private static void OnFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -127,15 +150,18 @@ public class SplitButton : Wpf.Ui.Controls.Button
         if (GetTemplateChild(TemplateElementToggleButton) is ToggleButton toggleButton)
         {
             SplitButtonToggleButton = toggleButton;
-
-            SplitButtonToggleButton.Click -= OnSplitButtonToggleButtonOnClick;
-            SplitButtonToggleButton.Click += OnSplitButtonToggleButtonOnClick;
+            AttachToggleButtonClick();
         }
         else
         {
             throw new NullReferenceException(
                 $"Element {nameof(TemplateElementToggleButton)} of type {typeof(ToggleButton)} not found in {typeof(SplitButton)}"
             );
+        }
+
+        if (GetTemplateChild(TemplateElementToggle) is Border toggleBorder)
+        {
+            _splitButtonToggleBorder = toggleBorder;
         }
     }
 
@@ -144,22 +170,30 @@ public class SplitButton : Wpf.Ui.Controls.Button
     /// </summary>
     protected virtual void ReleaseTemplateResources()
     {
-        SplitButtonToggleButton.Click -= OnSplitButtonToggleButtonOnClick;
+        if (SplitButtonToggleButton != null)
+        {
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp -= OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
+        }
     }
 
-    private void OnSplitButtonToggleButtonOnClick(object sender, RoutedEventArgs e)
+    private void OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp(object sender, MouseEventArgs e)
     {
-        if (sender is not ToggleButton || _contextMenu is null)
+        if (sender is not ToggleButton || _contextMenu is null || _splitButtonToggleBorder is null)
+        {
+            return;
+        }
+
+        // Ensure mouse up actually happened inside the toggler, and not outside.
+        var position = e.GetPosition(_splitButtonToggleBorder);
+        HitTestResult hitTestResult = VisualTreeHelper.HitTest(_splitButtonToggleBorder, position);
+        if (hitTestResult?.VisualHit == null)
         {
             return;
         }
 
         _contextMenu.SetCurrentValue(MinWidthProperty, ActualWidth);
         _contextMenu.SetCurrentValue(ContextMenu.PlacementTargetProperty, this);
-        _contextMenu.SetCurrentValue(
-            ContextMenu.PlacementProperty,
-            System.Windows.Controls.Primitives.PlacementMode.Bottom
-        );
+        _contextMenu.SetCurrentValue(ContextMenu.PlacementProperty, PlacementMode.Bottom);
         _contextMenu.SetCurrentValue(ContextMenu.IsOpenProperty, true);
     }
 }

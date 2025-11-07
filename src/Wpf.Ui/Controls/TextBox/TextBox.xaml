@@ -56,7 +56,9 @@
                         <Border
                             x:Name="ContentBorder"
                             MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"
+                            MinHeight="{TemplateBinding MinHeight}"                            
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
                             Padding="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
@@ -124,6 +126,8 @@
                 x:Name="ContentBorder"
                 MinWidth="{TemplateBinding MinWidth}"
                 MinHeight="{TemplateBinding MinHeight}"
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}"
                 Padding="0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
@@ -185,10 +189,15 @@
                         Appearance="Secondary"
                         Background="Transparent"
                         BorderBrush="Transparent"
+                        BorderThickness="0"
                         Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                         Cursor="Arrow"
                         Foreground="{DynamicResource TextControlButtonForeground}"
-                        IsTabStop="False">
+                        IsTabStop="False"
+                        MouseOverBackground="{DynamicResource SubtleFillColorSecondaryBrush}"
+                        MouseOverBorderBrush="Transparent"
+                        PressedBackground="{DynamicResource SubtleFillColorTertiaryBrush}"
+                        PressedBorderBrush="Transparent">
                         <controls:Button.Icon>
                             <controls:SymbolIcon FontSize="{TemplateBinding FontSize}" Symbol="Dismiss24" />
                         </controls:Button.Icon>
@@ -249,6 +258,7 @@
                     <Condition Property="IsEnabled" Value="True" />
                     <Condition Property="IsMouseOver" Value="True" />
                     <Condition Property="IsFocused" Value="False" />
+                    <Condition SourceName="ClearButton" Property="IsFocused" Value="False" />
                 </MultiTrigger.Conditions>
                 <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource TextControlBackgroundPointerOver}" />
             </MultiTrigger>
@@ -278,6 +288,8 @@
                 x:Name="ContentBorder"
                 MinWidth="{TemplateBinding MinWidth}"
                 MinHeight="{TemplateBinding MinHeight}"
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}"
                 Padding="0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"

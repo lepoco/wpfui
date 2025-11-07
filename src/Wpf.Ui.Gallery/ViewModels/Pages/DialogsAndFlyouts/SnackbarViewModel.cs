@@ -50,7 +50,7 @@ public partial class SnackbarViewModel(ISnackbarService snackbarService) : ViewM
             6 => ControlAppearance.Light,
             7 => ControlAppearance.Dark,
             8 => ControlAppearance.Transparent,
-            _ => ControlAppearance.Primary
+            _ => ControlAppearance.Primary,
         };
     }
 }

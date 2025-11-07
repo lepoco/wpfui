@@ -1,5 +1,5 @@
 ﻿using $safeprojectname$.ViewModels.Pages;
-using Wpf.Ui.Controls;
+using Wpf.Ui.Abstractions.Controls;
 
 namespace $safeprojectname$.Views.Pages
 {

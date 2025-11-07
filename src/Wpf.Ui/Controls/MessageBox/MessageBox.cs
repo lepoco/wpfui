@@ -115,6 +115,14 @@ public class MessageBox : System.Windows.Window
         new PropertyMetadata(true)
     );
 
+    /// <summary>Identifies the <see cref="IsCloseButtonEnabled"/> dependency property.</summary>
+    public static readonly DependencyProperty IsCloseButtonEnabledProperty = DependencyProperty.Register(
+        nameof(IsCloseButtonEnabled),
+        typeof(bool),
+        typeof(MessageBox),
+        new PropertyMetadata(true)
+    );
+
     /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
@@ -214,7 +222,16 @@ public class MessageBox : System.Windows.Window
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> primary button is enabled.
+    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> close button is enabled.
+    /// </summary>
+    public bool IsCloseButtonEnabled
+    {
+        get => (bool)GetValue(IsCloseButtonEnabledProperty);
+        set => SetValue(IsCloseButtonEnabledProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> secondary button is enabled.
     /// </summary>
     public bool IsSecondaryButtonEnabled
     {
@@ -223,7 +240,7 @@ public class MessageBox : System.Windows.Window
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> secondary button is enabled.
+    /// Gets or sets a value indicating whether the <see cref="MessageBox"/> primary button is enabled.
     /// </summary>
     public bool IsPrimaryButtonEnabled
     {
@@ -236,10 +253,12 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
+#if !NET8_0_OR_GREATER
     private static readonly PropertyInfo CanCenterOverWPFOwnerPropertyInfo = typeof(Window).GetProperty(
         "CanCenterOverWPFOwner",
         BindingFlags.NonPublic | BindingFlags.Instance
     )!;
+#endif
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageBox"/> class.
@@ -335,10 +354,7 @@ public class MessageBox : System.Windows.Window
                 CenterWindowOnScreen();
                 break;
             case WindowStartupLocation.CenterOwner:
-                if (
-                    !CanCenterOverWPFOwner()
-                    || Owner.WindowState is WindowState.Maximized or WindowState.Minimized
-                )
+                if (!CanCenterOverWPFOwner() || Owner.WindowState is WindowState.Minimized)
                 {
                     CenterWindowOnScreen();
                 }
@@ -426,7 +442,7 @@ public class MessageBox : System.Windows.Window
         {
             MessageBoxButton.Primary => MessageBoxResult.Primary,
             MessageBoxButton.Secondary => MessageBoxResult.Secondary,
-            _ => MessageBoxResult.None
+            _ => MessageBoxResult.None,
         };
 
         _ = Tcs?.TrySetResult(result);
