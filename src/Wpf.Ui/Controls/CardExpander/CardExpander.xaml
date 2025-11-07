@@ -192,7 +192,6 @@
                 Background="{DynamicResource CardBackground}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="1,0,1,1"
-                CornerRadius="0,0,4,4"
                 Visibility="Collapsed"
               >
                 <Border.CornerRadius>
@@ -239,7 +238,6 @@
           <ControlTemplate.Triggers>
             <Trigger Property="IsExpanded" Value="True">
               <!--  TODO: Update  -->
-              <Setter TargetName="ToggleButtonBorder" Property="CornerRadius" Value="4,4,0,0" />
               <Trigger.EnterActions>
                 <BeginStoryboard>
                   <Storyboard>
