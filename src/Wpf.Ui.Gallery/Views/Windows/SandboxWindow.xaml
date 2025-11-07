@@ -1,126 +1,107 @@
 <ui:FluentWindow
-    x:Class="Wpf.Ui.Gallery.Views.Windows.SandboxWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Windows"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="SandboxWindow"
-    Width="1450"
-    Height="802"
-    MinWidth="900"
-    d:DataContext="{d:DesignInstance local:SandboxWindow,
+  x:Class="Wpf.Ui.Gallery.Views.Windows.SandboxWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Windows"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  Title="SandboxWindow"
+  Width="1450"
+  Height="802"
+  MinWidth="900"
+  d:DataContext="{d:DesignInstance local:SandboxWindow,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="650"
-    d:DesignWidth="1000"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    ExtendsContentIntoTitleBar="True"
-    WindowBackdropType="Mica"
-    WindowCornerPreference="Default"
-    WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
-    <StackPanel>
-        <ui:TitleBar
-            x:Name="TitleBar"
-            Title="WPF UI Gallery - Sandbox"
-            Margin="0"
-            CloseWindowByDoubleClickOnIcon="True">
-            <ui:TitleBar.Icon>
-                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
-            </ui:TitleBar.Icon>
-            <ui:TitleBar.Header>
-                <Menu>
-                    <MenuItem Header="File">
-                        <MenuItem
-                            Header="New" />
-                        <MenuItem
-                            Header="New window" />
-                        <MenuItem
-                            Header="Open..." />
-                        <MenuItem
-                            Header="Save" />
-                        <MenuItem
-                            Header="Save As..." />
-                        <Separator />
-                        <MenuItem
-                            Header="Exit" />
-                    </MenuItem>
-                    <ui:MenuItem Header="Debug">
-                        <MenuItem
-                            Header="Undo" />
-                        <Separator />
-                        <MenuItem
-                            Header="Cut" />
-                        <MenuItem
-                            Header="Copy" />
-                        <MenuItem
-                            Header="Paste" />
-                        <MenuItem
-                            Header="Delete"
-                            IsEnabled="False" />
-                        <Separator />
-                        <MenuItem
-                            Header="Search with browser" />
-                        <MenuItem
-                            Header="Find..." />
-                        <MenuItem
-                            Header="Find next" />
-                        <Separator />
-                        <MenuItem
-                            Header="Select All" />
-                    </ui:MenuItem>
-                </Menu>
-            </ui:TitleBar.Header>
-            <ui:TitleBar.TrailingContent>
-                <Menu>
-                    <ui:MenuItem
-                        Foreground="{DynamicResource PaletteDeepOrangeBrush}"
-                        Icon="{ui:SymbolIcon Fire24, True}" />
-                    <ui:MenuItem
-                        Foreground="{DynamicResource PaletteGreenBrush}"
-                        Icon="{ui:SymbolIcon Play24}" />
-                    <ui:MenuItem
-                        Foreground="{DynamicResource PaletteRedBrush}"
-                        Icon="{ui:SymbolIcon Stop24}" />
-                    <ui:MenuItem
-                        Foreground="{DynamicResource PaletteLightBlueBrush}"
-                        Icon="{ui:SymbolIcon ArrowClockwise24}" />
-                </Menu>
-            </ui:TitleBar.TrailingContent>
-        </ui:TitleBar>
-
-        <StackPanel Margin="24">
-            <TextBlock Text="Hello World!" />
-
-            <ui:AutoSuggestBox
-                Margin="0,24,0,0"
-                Text="{Binding ViewModel.AutoSuggestBoxText, Mode=TwoWay}"
-                TextChanged="OnAutoSuggestBoxTextChanged" />
-
-            <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
-                <ui:DropDownButton.Flyout>
-                    <ContextMenu>
-                        <MenuItem Command="ApplicationCommands.Undo" />
-                        <MenuItem Command="ApplicationCommands.Redo" />
-                        <Separator />
-                        <MenuItem Command="ApplicationCommands.Cut" />
-                        <MenuItem Command="ApplicationCommands.Copy" />
-                        <MenuItem Command="ApplicationCommands.Paste" />
-                        <MenuItem Header="OCR Paste" InputGestureText="Ctrl + Shift + V" />
-                        <Separator />
-                        <MenuItem Header="Isolate Selected Text" InputGestureText="Ctrl + I" />
-                        <MenuItem Header="Select Line" InputGestureText="Ctrl + L" />
-                        <MenuItem Header="Toggle Case" InputGestureText="Shift + F3" />
-                        <Separator />
-                        <MenuItem Header="Move Selection _Up" InputGestureText="Alt + Up" />
-                        <MenuItem Header="Move Selection _Down" InputGestureText="Alt + Down" />
-                    </ContextMenu>
-                </ui:DropDownButton.Flyout>
-            </ui:DropDownButton>
-        </StackPanel>
-
-        <ui:NavigationView x:Name="MyTestNavigationView" />
+  d:DesignHeight="650"
+  d:DesignWidth="1000"
+  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  ExtendsContentIntoTitleBar="True"
+  WindowBackdropType="Mica"
+  WindowCornerPreference="Default"
+  WindowStartupLocation="CenterScreen"
+  mc:Ignorable="d"
+>
+  <StackPanel>
+    <ui:TitleBar
+      x:Name="TitleBar"
+      Title="WPF UI Gallery - Sandbox"
+      Margin="0"
+      CloseWindowByDoubleClickOnIcon="True"
+    >
+      <ui:TitleBar.Icon>
+        <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+      </ui:TitleBar.Icon>
+      <ui:TitleBar.Header>
+        <Menu>
+          <MenuItem Header="File">
+            <MenuItem Header="New" />
+            <MenuItem Header="New window" />
+            <MenuItem Header="Open..." />
+            <MenuItem Header="Save" />
+            <MenuItem Header="Save As..." />
+            <Separator />
+            <MenuItem Header="Exit" />
+          </MenuItem>
+          <ui:MenuItem Header="Debug">
+            <MenuItem Header="Undo" />
+            <Separator />
+            <MenuItem Header="Cut" />
+            <MenuItem Header="Copy" />
+            <MenuItem Header="Paste" />
+            <MenuItem Header="Delete" IsEnabled="False" />
+            <Separator />
+            <MenuItem Header="Search with browser" />
+            <MenuItem Header="Find..." />
+            <MenuItem Header="Find next" />
+            <Separator />
+            <MenuItem Header="Select All" />
+          </ui:MenuItem>
+        </Menu>
+      </ui:TitleBar.Header>
+      <ui:TitleBar.TrailingContent>
+        <Menu>
+          <ui:MenuItem
+            Foreground="{DynamicResource PaletteDeepOrangeBrush}"
+            Icon="{ui:SymbolIcon Fire24, True}"
+          />
+          <ui:MenuItem Foreground="{DynamicResource PaletteGreenBrush}" Icon="{ui:SymbolIcon Play24}" />
+          <ui:MenuItem Foreground="{DynamicResource PaletteRedBrush}" Icon="{ui:SymbolIcon Stop24}" />
+          <ui:MenuItem
+            Foreground="{DynamicResource PaletteLightBlueBrush}"
+            Icon="{ui:SymbolIcon ArrowClockwise24}"
+          />
+        </Menu>
+      </ui:TitleBar.TrailingContent>
+    </ui:TitleBar>
+    <StackPanel Margin="24">
+      <TextBlock Text="Hello World!" />
+      <ui:AutoSuggestBox
+        Margin="0,24,0,0"
+        Text="{Binding ViewModel.AutoSuggestBoxText, Mode=TwoWay}"
+        TextChanged="OnAutoSuggestBoxTextChanged"
+      />
+      <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
+        <ui:DropDownButton.Flyout>
+          <ContextMenu>
+            <MenuItem Command="ApplicationCommands.Undo" />
+            <MenuItem Command="ApplicationCommands.Redo" />
+            <Separator />
+            <MenuItem Command="ApplicationCommands.Cut" />
+            <MenuItem Command="ApplicationCommands.Copy" />
+            <MenuItem Command="ApplicationCommands.Paste" />
+            <MenuItem Header="OCR Paste" InputGestureText="Ctrl + Shift + V" />
+            <Separator />
+            <MenuItem Header="Isolate Selected Text" InputGestureText="Ctrl + I" />
+            <MenuItem Header="Select Line" InputGestureText="Ctrl + L" />
+            <MenuItem Header="Toggle Case" InputGestureText="Shift + F3" />
+            <Separator />
+            <MenuItem Header="Move Selection _Up" InputGestureText="Alt + Up" />
+            <MenuItem Header="Move Selection _Down" InputGestureText="Alt + Down" />
+          </ContextMenu>
+        </ui:DropDownButton.Flyout>
+      </ui:DropDownButton>
     </StackPanel>
+    <ui:NavigationView x:Name="MyTestNavigationView" />
+  </StackPanel>
 </ui:FluentWindow>
