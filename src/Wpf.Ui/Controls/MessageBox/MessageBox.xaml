@@ -57,10 +57,11 @@
                                 <TextBlock
                                     x:Name="Title"
                                     Grid.Row="0"
-                                    Margin="12,12,12,0"
+                                    Margin="12,12,35,0"
                                     FontWeight="SemiBold"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Text="{TemplateBinding Title}" />
+                                    Text="{TemplateBinding Title}"
+                                    TextWrapping="Wrap" />
 
                                 <controls:TitleBar
                                     Grid.Row="0"

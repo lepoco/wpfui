@@ -176,7 +176,8 @@ public class SplitButton : Button
     /// </summary>
     protected virtual void ReleaseTemplateResources()
     {
-        SplitButtonToggleButton.Click -= OnSplitButtonToggleButtonOnClick;
+        if (SplitButtonToggleButton != null)
+            SplitButtonToggleButton.Click -= OnSplitButtonToggleButtonOnClick;
     }
 
     private void OnSplitButtonToggleButtonOnClick(object sender, RoutedEventArgs e)
