@@ -1,107 +1,107 @@
 <ui:FluentWindow
-    x:Class="Wpf.Ui.Demo.SetResources.Simple.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:pages="clr-namespace:Wpf.Ui.Demo.SetResources.Simple.Views.Pages"
-    Title="WPF UI - Simple Demo"
-    Width="1100"
-    Height="650"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    ExtendsContentIntoTitleBar="True"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    WindowBackdropType="Mica"
-    WindowCornerPreference="Round"
-    WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
-
-    <ui:FluentWindow.InputBindings>
-        <KeyBinding
-            Key="F"
-            Command="{Binding ElementName=AutoSuggestBox, Path=FocusCommand}"
-            Modifiers="Control" />
-    </ui:FluentWindow.InputBindings>
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
-            <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
-                    <ui:AutoSuggestBox.Icon>
-                        <ui:IconSourceElement>
-                            <ui:SymbolIconSource Symbol="Search24" />
-                        </ui:IconSourceElement>
-                    </ui:AutoSuggestBox.Icon>
-                </ui:AutoSuggestBox>
-            </ui:NavigationView.AutoSuggestBox>
-            <ui:NavigationView.Header>
-                <ui:BreadcrumbBar
-                    Margin="42,32,0,0"
-                    FontSize="28"
-                    FontWeight="DemiBold" />
-            </ui:NavigationView.Header>
-            <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem
-                    Content="Dashboard"
-                    NavigationCacheMode="Enabled"
-                    TargetPageType="{x:Type pages:DashboardPage}">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Home24" />
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-                <ui:NavigationViewItem
-                    Content="Data"
-                    NavigationCacheMode="Enabled"
-                    TargetPageType="{x:Type pages:DataPage}">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="DataHistogram24" />
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-                <ui:NavigationViewItem
-                    Content="Expanders"
-                    NavigationCacheMode="Enabled"
-                    TargetPageType="{x:Type pages:ExpanderPage}">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="ExpandUpLeft24" />
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-            </ui:NavigationView.MenuItems>
-            <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem
-                    Content="Settings"
-                    NavigationCacheMode="Disabled"
-                    TargetPageType="{x:Type pages:SettingsPage}">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Settings24" />
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-            </ui:NavigationView.FooterMenuItems>
-        </ui:NavigationView>
-
-        <ui:TitleBar
-            Title="WPF UI - Simple Demo"
-            Grid.Row="0"
-            Icon="pack://application:,,,/Assets/applicationIcon-256.png" />
-
-        <tray:NotifyIcon
-            Grid.Row="0"
-            FocusOnLeftClick="True"
-            Icon="pack://application:,,,/Assets/applicationIcon-256.png"
-            MenuOnRightClick="True"
-            TooltipText="Wpf.Ui.Demo.Simple">
-            <tray:NotifyIcon.Menu>
-                <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
-            </tray:NotifyIcon.Menu>
-        </tray:NotifyIcon>
-    </Grid>
+  x:Class="Wpf.Ui.Demo.SetResources.Simple.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  xmlns:pages="clr-namespace:Wpf.Ui.Demo.SetResources.Simple.Views.Pages"
+  Title="WPF UI - Simple Demo"
+  Width="1100"
+  Height="650"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  ExtendsContentIntoTitleBar="True"
+  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  WindowBackdropType="Mica"
+  WindowCornerPreference="Round"
+  WindowStartupLocation="CenterScreen"
+  mc:Ignorable="d"
+>
+  <ui:FluentWindow.InputBindings>
+    <KeyBinding
+      Key="F"
+      Command="{Binding ElementName=AutoSuggestBox, Path=FocusCommand}"
+      Modifiers="Control"
+    />
+  </ui:FluentWindow.InputBindings>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
+      <ui:NavigationView.AutoSuggestBox>
+        <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
+          <ui:AutoSuggestBox.Icon>
+            <ui:IconSourceElement>
+              <ui:SymbolIconSource Symbol="Search24" />
+            </ui:IconSourceElement>
+          </ui:AutoSuggestBox.Icon>
+        </ui:AutoSuggestBox>
+      </ui:NavigationView.AutoSuggestBox>
+      <ui:NavigationView.Header>
+        <ui:BreadcrumbBar Margin="42,32,0,0" FontSize="28" FontWeight="DemiBold" />
+      </ui:NavigationView.Header>
+      <ui:NavigationView.MenuItems>
+        <ui:NavigationViewItem
+          Content="Dashboard"
+          NavigationCacheMode="Enabled"
+          TargetPageType="{x:Type pages:DashboardPage}"
+        >
+          <ui:NavigationViewItem.Icon>
+            <ui:SymbolIcon Symbol="Home24" />
+          </ui:NavigationViewItem.Icon>
+        </ui:NavigationViewItem>
+        <ui:NavigationViewItem
+          Content="Data"
+          NavigationCacheMode="Enabled"
+          TargetPageType="{x:Type pages:DataPage}"
+        >
+          <ui:NavigationViewItem.Icon>
+            <ui:SymbolIcon Symbol="DataHistogram24" />
+          </ui:NavigationViewItem.Icon>
+        </ui:NavigationViewItem>
+        <ui:NavigationViewItem
+          Content="Expanders"
+          NavigationCacheMode="Enabled"
+          TargetPageType="{x:Type pages:ExpanderPage}"
+        >
+          <ui:NavigationViewItem.Icon>
+            <ui:SymbolIcon Symbol="ExpandUpLeft24" />
+          </ui:NavigationViewItem.Icon>
+        </ui:NavigationViewItem>
+      </ui:NavigationView.MenuItems>
+      <ui:NavigationView.FooterMenuItems>
+        <ui:NavigationViewItem
+          Content="Settings"
+          NavigationCacheMode="Disabled"
+          TargetPageType="{x:Type pages:SettingsPage}"
+        >
+          <ui:NavigationViewItem.Icon>
+            <ui:SymbolIcon Symbol="Settings24" />
+          </ui:NavigationViewItem.Icon>
+        </ui:NavigationViewItem>
+      </ui:NavigationView.FooterMenuItems>
+    </ui:NavigationView>
+    <ui:TitleBar
+      Title="WPF UI - Simple Demo"
+      Grid.Row="0"
+      Icon="pack://application:,,,/Assets/applicationIcon-256.png"
+    />
+    <tray:NotifyIcon
+      Grid.Row="0"
+      FocusOnLeftClick="True"
+      Icon="pack://application:,,,/Assets/applicationIcon-256.png"
+      MenuOnRightClick="True"
+      TooltipText="Wpf.Ui.Demo.Simple"
+    >
+      <tray:NotifyIcon.Menu>
+        <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
+      </tray:NotifyIcon.Menu>
+    </tray:NotifyIcon>
+  </Grid>
 </ui:FluentWindow>

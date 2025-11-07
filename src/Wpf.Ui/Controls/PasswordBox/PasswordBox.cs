@@ -155,7 +155,12 @@ public partial class PasswordBox : TextBox
     /// </summary>
     protected virtual void OnIsPasswordRevealedChanged()
     {
-        UpdateWithLock(() => SetCurrentValue(TextProperty, IsPasswordRevealed ? Password : new string(PasswordChar, Password?.Length ?? 0)));
+        UpdateWithLock(() =>
+            SetCurrentValue(
+                TextProperty,
+                IsPasswordRevealed ? Password : new string(PasswordChar, Password?.Length ?? 0)
+            )
+        );
     }
 
     /// <inheritdoc/>
@@ -249,7 +254,10 @@ public partial class PasswordBox : TextBox
     /// </summary>
     /// <param name="dependencyObject">The <see cref="DependencyObject"/> that raised the event.</param>
     /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> containing the event data.</param>
-    private static void OnPasswordChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+    private static void OnPasswordChanged(
+        DependencyObject dependencyObject,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (dependencyObject is PasswordBox passwordBox)
         {
@@ -262,7 +270,10 @@ public partial class PasswordBox : TextBox
     /// </summary>
     /// <param name="dependencyObject">The <see cref="DependencyObject"/> instance where the change occurred.</param>
     /// <param name="e">Event data that contains information about the property change.</param>
-    private static void OnPasswordCharChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+    private static void OnPasswordCharChanged(
+        DependencyObject dependencyObject,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (dependencyObject is PasswordBox passwordBox)
         {
@@ -275,7 +286,10 @@ public partial class PasswordBox : TextBox
     /// </summary>
     /// <param name="dependencyObject">The <see cref="DependencyObject"/> instance where the property changed.</param>
     /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> containing the old and new values.</param>
-    private static void OnIsPasswordRevealedChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+    private static void OnIsPasswordRevealedChanged(
+        DependencyObject dependencyObject,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (dependencyObject is PasswordBox passwordBox)
         {

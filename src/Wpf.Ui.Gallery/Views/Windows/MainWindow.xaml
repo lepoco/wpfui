@@ -58,7 +58,10 @@
                 </StackPanel>
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="{i18n:StringLocalizer 'Search'}">
+                <ui:AutoSuggestBox
+                    x:Name="AutoSuggestBox"
+                    AutomationProperties.AutomationId="NavigationAutoSuggestBox"
+                    PlaceholderText="{i18n:StringLocalizer 'Search'}">
                     <ui:AutoSuggestBox.Icon>
                         <ui:IconSourceElement>
                             <ui:SymbolIconSource Symbol="Search24" />
