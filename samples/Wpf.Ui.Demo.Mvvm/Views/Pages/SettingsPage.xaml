@@ -1,51 +1,45 @@
 ﻿<Page
-    x:Class="Wpf.Ui.Demo.Mvvm.Views.Pages.SettingsPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:helpers="clr-namespace:Wpf.Ui.Demo.Mvvm.Helpers"
-    xmlns:local="clr-namespace:Wpf.Ui.Demo.Mvvm.Views.Pages"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="SettingsPage"
-    d:DataContext="{d:DesignInstance local:SettingsPage,
+  x:Class="Wpf.Ui.Demo.Mvvm.Views.Pages.SettingsPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:helpers="clr-namespace:Wpf.Ui.Demo.Mvvm.Helpers"
+  xmlns:local="clr-namespace:Wpf.Ui.Demo.Mvvm.Views.Pages"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  Title="SettingsPage"
+  d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    mc:Ignorable="d">
-    <Page.Resources>
-        <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-    </Page.Resources>
-
-    <StackPanel Margin="42">
-        <TextBlock
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Personalization" />
-        <TextBlock Margin="0,12,0,0" Text="Theme" />
-        <RadioButton
-            Margin="0,12,0,0"
-            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-            CommandParameter="theme_light"
-            Content="Light"
-            GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
-        <RadioButton
-            Margin="0,8,0,0"
-            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-            CommandParameter="theme_dark"
-            Content="Dark"
-            GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
-
-        <TextBlock
-            Margin="0,24,0,0"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="About Wpf.Ui.Demo.Mvvm" />
-        <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
-    </StackPanel>
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  mc:Ignorable="d"
+>
+  <Page.Resources>
+    <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+  </Page.Resources>
+  <StackPanel Margin="42">
+    <TextBlock FontSize="20" FontWeight="Medium" Text="Personalization" />
+    <TextBlock Margin="0,12,0,0" Text="Theme" />
+    <RadioButton
+      Margin="0,12,0,0"
+      Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
+      CommandParameter="theme_light"
+      Content="Light"
+      GroupName="themeSelect"
+      IsChecked="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
+    />
+    <RadioButton
+      Margin="0,8,0,0"
+      Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
+      CommandParameter="theme_dark"
+      Content="Dark"
+      GroupName="themeSelect"
+      IsChecked="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
+    />
+    <TextBlock Margin="0,24,0,0" FontSize="20" FontWeight="Medium" Text="About Wpf.Ui.Demo.Mvvm" />
+    <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+  </StackPanel>
 </Page>

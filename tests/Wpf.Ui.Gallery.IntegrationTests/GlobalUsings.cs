@@ -3,10 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Gallery.UnitTests;
-
-public class UnitTest1
-{
-    [Fact]
-    public void Test1() { }
-}
+global using System.Reflection;
+global using AwesomeAssertions;
+global using FlaUI.Core.AutomationElements;
+global using Wpf.Ui.FlaUI;
+global using Wpf.Ui.Gallery.IntegrationTests.Fixtures;
