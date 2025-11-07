@@ -106,6 +106,7 @@
             <ItemsControl
                 x:Name="MenuItemsPresenter"
                 Grid.Row="1"
+                AutomationProperties.AutomationId="NavigationItemItems"
                 Focusable="False"
                 ItemsSource="{TemplateBinding MenuItems}"
                 KeyboardNavigation.DirectionalNavigation="Contained"
@@ -309,6 +310,7 @@
                                 Grid.Row="0"
                                 Margin="0,5,0,5"
                                 HorizontalAlignment="Left"
+                                AutomationProperties.AutomationId="NavigationBackButton"
                                 IsEnabled="{TemplateBinding IsBackEnabled}"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsBackButtonVisible,
@@ -322,6 +324,7 @@
                                 x:Name="PART_ToggleButton"
                                 Grid.Row="1"
                                 Margin="0,0,0,5"
+                                AutomationProperties.AutomationId="NavigationToggleButton"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
                                                              Converter={StaticResource BoolToVisibilityConverter}}">
@@ -350,9 +353,10 @@
                                 x:Name="PART_AutoSuggestBoxSymbolButton"
                                 Grid.Row="3"
                                 Margin="0,0,0,6"
+                                AutomationProperties.AutomationId="NavigationAutoSuggestBoxButton"
                                 Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AutoSuggestBox.Icon}"
                                 Style="{StaticResource BasePaneButtonStyle}"
-                                Visibility="Collapsed" />
+                                Visibility="Hidden" />
                         </Grid>
 
                         <!--  Separator/Shadow for Top  -->
@@ -373,6 +377,7 @@
                             VerticalScrollBarVisibility="Auto">
                             <ItemsControl
                                 x:Name="PART_MenuItemsItemsControl"
+                                AutomationProperties.AutomationId="NavigationItems"
                                 Focusable="False"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -403,6 +408,7 @@
                                 x:Name="PART_FooterMenuItemsItemsControl"
                                 Grid.Row="0"
                                 Margin="0,0,0,4"
+                                AutomationProperties.AutomationId="NavigationFooterItems"
                                 Focusable="False"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -464,6 +470,9 @@
                 <VisualStateGroup Name="PaneStates">
                     <VisualState Name="PaneOpen">
                         <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AutoSuggestBoxContentPresenter" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
+                            </ObjectAnimationUsingKeyFrames>
                             <DoubleAnimation
                                 AccelerationRatio="0.4"
                                 Storyboard.TargetName="PaneGrid"
@@ -471,10 +480,31 @@
                                 From="40"
                                 To="{TemplateBinding OpenPaneLength}"
                                 Duration="0:0:.16" />
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="AutoSuggestBoxContentPresenter"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0"
+                                To="1"
+                                Duration="0:0:.16" />
                         </Storyboard>
                     </VisualState>
                     <VisualState Name="PaneCompact">
                         <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="AutoSuggestBoxContentPresenter"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="PART_AutoSuggestBoxSymbolButton"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0"
+                                To="1"
+                                Duration="0:0:.16" />
                             <DoubleAnimation
                                 AccelerationRatio="0.4"
                                 Storyboard.TargetName="PaneGrid"
@@ -482,6 +512,12 @@
                                 From="{TemplateBinding OpenPaneLength}"
                                 To="40"
                                 Duration="0:0:.16" />
+                            <ObjectAnimationUsingKeyFrames
+                                BeginTime="0:0:0.16"
+                                Storyboard.TargetName="AutoSuggestBoxContentPresenter"
+                                Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Hidden}" />
+                            </ObjectAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualState>
                 </VisualStateGroup>
@@ -491,11 +527,11 @@
         <ControlTemplate.Triggers>
             <Trigger Property="IsPaneOpen" Value="False">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
-                <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
             </Trigger>
             <Trigger Property="AutoSuggestBox" Value="{x:Null}">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="PaneTitle" Value="{x:Null}">
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
