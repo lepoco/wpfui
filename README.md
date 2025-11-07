@@ -3,7 +3,7 @@
 
 # WPF UI
 
-[Created with ❤ in Poland by lepo.co](https://lepo.co/) and [wonderful open-source community](https://github.com/lepoco/wpfui/graphs/contributors)  
+[Created with ❤ in Poland by Leszek Pomianowski](https://lepo.co/) and [wonderful open-source community](https://github.com/lepoco/wpfui/graphs/contributors).  
 WPF UI provides the Fluent experience in your known and loved WPF framework. Intuitive design, themes, navigation and new immersive controls. All natively and effortlessly. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
 
 [![Discord](https://img.shields.io/discord/1071051348348514375?label=discord)](https://discord.gg/AR9ywDUwGq) [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget)](https://www.nuget.org/packages/WPF-UI/)
@@ -85,7 +85,7 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ui:ThemesDictionary Theme="Dark" />
+        <ui:ThemesDictionary Theme="Light" />
         <ui:ControlsDictionary />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
@@ -120,18 +120,6 @@ Now you can create fantastic apps, e.g. with one button:
   </StackPanel>
 </ui:FluentWindow>
 ```
-
-## Special thanks
-
-Crafting apps for .NET without the creators of tools like ReSharper or XAML Styler would never be such a fantastic adventure.
-
-- [🔗 JetBrains ReSharper](https://www.jetbrains.com/resharper/)
-- [🔗 XAML Styler](https://github.com/Xavalon/XamlStyler)
-
-JetBrains was kind enough to lend a license for the open-source **dotUltimate** for WPF UI development. Learn more here:
-
-- https://www.jetbrains.com/dotnet/
-- https://www.jetbrains.com/opensource/
 
 ## Microsoft Property
 

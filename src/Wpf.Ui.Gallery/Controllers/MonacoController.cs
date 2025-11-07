@@ -75,7 +75,8 @@ public class MonacoController
             return;
         }
 
-        _ = Application.Current.Dispatcher.InvokeAsync(async () => await _webView!.ExecuteScriptAsync(script)
+        _ = Application.Current.Dispatcher.InvokeAsync(async () =>
+            await _webView!.ExecuteScriptAsync(script)
         );
     }
 }
