@@ -23,6 +23,7 @@ public class ClipConverter : IMultiValueConverter
         }
 
         double clippedWidth = width * percentage;
+
         return new RectangleGeometry(new Rect(0, 0, clippedWidth, height));
     }
 

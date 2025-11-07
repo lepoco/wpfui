@@ -533,15 +533,19 @@
     <SolidColorBrush x:Key="ToggleSwitchContentForegroundDisabled" Color="{StaticResource SystemColorGrayTextColor}" />
     <SolidColorBrush x:Key="ToggleSwitchStrokeOff" Color="{StaticResource SystemColorWindowTextColor}" />
     <SolidColorBrush x:Key="ToggleSwitchStrokeOffPointerOver" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="ToggleSwitchStrokeOffPressed" Color="{StaticResource SystemColorHighlightColor}" />
     <SolidColorBrush x:Key="ToggleSwitchStrokeOffDisabled" Color="{StaticResource SystemColorGrayTextColor}" />
     <SolidColorBrush x:Key="ToggleSwitchStrokeOn" Color="{StaticResource SystemColorHighlightColor}" />
     <SolidColorBrush x:Key="ToggleSwitchStrokeOnPointerOver" Color="{StaticResource SystemColorWindowTextColor}" />
+    <SolidColorBrush x:Key="ToggleSwitchStrokeOnPressed" Color="{StaticResource SystemColorWindowTextColor}" />
     <SolidColorBrush x:Key="ToggleSwitchStrokeOnDisabled" Color="{StaticResource SystemColorGrayTextColor}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOn" Color="{StaticResource SystemColorHighlightColor}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOnPointerOver" Color="{StaticResource SystemColorWindowColor}" />
+    <SolidColorBrush x:Key="ToggleSwitchFillOnPressed" Color="{StaticResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOnDisabled" Color="{StaticResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOff" Color="{StaticResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOffPointerOver" Color="{StaticResource SystemColorHighlightTextColor}" />
+    <SolidColorBrush x:Key="ToggleSwitchFillOffPressed" Color="{StaticResource SystemColorHighlightTextColor}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOffDisabled" Color="{StaticResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="ToggleSwitchKnobFillOff" Color="{StaticResource SystemColorWindowTextColor}" />
     <SolidColorBrush x:Key="ToggleSwitchKnobFillOffPointerOver" Color="{StaticResource SystemColorHighlightColor}" />

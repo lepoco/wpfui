@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Runtime.InteropServices;
 using System.Windows.Shell;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
