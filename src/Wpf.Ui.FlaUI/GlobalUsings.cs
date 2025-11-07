@@ -3,4 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-global using Xunit;
+global using System.Collections.Generic;
+global using System.Linq;
+global using FlaUI.Core;
+global using FlaUI.Core.AutomationElements;
+global using FlaUI.Core.Exceptions;
+global using FlaUI.Core.Input;
+global using FlaUI.Core.Patterns;
+global using FlaUI.Core.WindowsAPI;
