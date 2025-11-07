@@ -65,25 +65,29 @@ public partial class TitleBar
         uint hit = 0u;
 
 #pragma warning disable
-        if (x <  windowRect.Left   + _borderX) hit |= 0b0001u; // left
-        if (x >= windowRect.Right  - _borderX) hit |= 0b0010u; // right
-        if (y <  windowRect.Top    + _borderY) hit |= 0b0100u; // top
-        if (y >= windowRect.Bottom - _borderY) hit |= 0b1000u; // bottom
+        if (x < windowRect.Left + _borderX)
+            hit |= 0b0001u; // left
+        if (x >= windowRect.Right - _borderX)
+            hit |= 0b0010u; // right
+        if (y < windowRect.Top + _borderY)
+            hit |= 0b0100u; // top
+        if (y >= windowRect.Bottom - _borderY)
+            hit |= 0b1000u; // bottom
 #pragma warning restore
 
         return hit switch
         {
-            0b0101u => (IntPtr)User32.WM_NCHITTEST.HTTOPLEFT,     // top    + left  (0b0100 | 0b0001)
-            0b0110u => (IntPtr)User32.WM_NCHITTEST.HTTOPRIGHT,    // top    + right (0b0100 | 0b0010)
-            0b1001u => (IntPtr)User32.WM_NCHITTEST.HTBOTTOMLEFT,  // bottom + left  (0b1000 | 0b0001)
+            0b0101u => (IntPtr)User32.WM_NCHITTEST.HTTOPLEFT, // top    + left  (0b0100 | 0b0001)
+            0b0110u => (IntPtr)User32.WM_NCHITTEST.HTTOPRIGHT, // top    + right (0b0100 | 0b0010)
+            0b1001u => (IntPtr)User32.WM_NCHITTEST.HTBOTTOMLEFT, // bottom + left  (0b1000 | 0b0001)
             0b1010u => (IntPtr)User32.WM_NCHITTEST.HTBOTTOMRIGHT, // bottom + right (0b1000 | 0b0010)
-            0b0100u => (IntPtr)User32.WM_NCHITTEST.HTTOP,         // top
-            0b0001u => (IntPtr)User32.WM_NCHITTEST.HTLEFT,        // left
-            0b1000u => (IntPtr)User32.WM_NCHITTEST.HTBOTTOM,      // bottom
-            0b0010u => (IntPtr)User32.WM_NCHITTEST.HTRIGHT,       // right
+            0b0100u => (IntPtr)User32.WM_NCHITTEST.HTTOP, // top
+            0b0001u => (IntPtr)User32.WM_NCHITTEST.HTLEFT, // left
+            0b1000u => (IntPtr)User32.WM_NCHITTEST.HTBOTTOM, // bottom
+            0b0010u => (IntPtr)User32.WM_NCHITTEST.HTRIGHT, // right
 
             // no match = HTNOWHERE (stop processing)
-            _ => (IntPtr)User32.WM_NCHITTEST.HTNOWHERE
+            _ => (IntPtr)User32.WM_NCHITTEST.HTNOWHERE,
         };
     }
 
@@ -158,9 +162,11 @@ public partial class TitleBar
             int borderX;
             int borderY;
 
-            if (TryComputeFromPresentationSource(win, dipBorderX, dipBorderY, out borderX, out borderY) ||
-                TryComputeFromDpiApi(hwnd, dipBorderX, dipBorderY, out borderX, out borderY) ||
-                TryGetFromSystemMetrics(out borderX, out borderY))
+            if (
+                TryComputeFromPresentationSource(win, dipBorderX, dipBorderY, out borderX, out borderY)
+                || TryComputeFromDpiApi(hwnd, dipBorderX, dipBorderY, out borderX, out borderY)
+                || TryGetFromSystemMetrics(out borderX, out borderY)
+            )
             {
                 _borderX = borderX;
                 _borderY = borderY;
@@ -182,7 +188,13 @@ public partial class TitleBar
     }
 
     // Try to compute border sizes from PresentationSource (per-monitor DPI-aware path).
-    private static bool TryComputeFromPresentationSource(Window? win, double dipBorderX, double dipBorderY, out int borderX, out int borderY)
+    private static bool TryComputeFromPresentationSource(
+        Window? win,
+        double dipBorderX,
+        double dipBorderY,
+        out int borderX,
+        out int borderY
+    )
     {
         if (win is not null)
         {
@@ -213,7 +225,13 @@ public partial class TitleBar
     }
 
     // Try to compute border sizes using GetDpiForWindow (if available).
-    private static bool TryComputeFromDpiApi(IntPtr hwnd, double dipBorderX, double dipBorderY, out int borderX, out int borderY)
+    private static bool TryComputeFromDpiApi(
+        IntPtr hwnd,
+        double dipBorderX,
+        double dipBorderY,
+        out int borderX,
+        out int borderY
+    )
     {
         try
         {
@@ -244,8 +262,12 @@ public partial class TitleBar
     {
         try
         {
-            int sx = User32.GetSystemMetrics(User32.SM.CXSIZEFRAME) + User32.GetSystemMetrics(User32.SM.CXPADDEDBORDER);
-            int sy = User32.GetSystemMetrics(User32.SM.CYSIZEFRAME) + User32.GetSystemMetrics(User32.SM.CXPADDEDBORDER);
+            int sx =
+                User32.GetSystemMetrics(User32.SM.CXSIZEFRAME)
+                + User32.GetSystemMetrics(User32.SM.CXPADDEDBORDER);
+            int sy =
+                User32.GetSystemMetrics(User32.SM.CYSIZEFRAME)
+                + User32.GetSystemMetrics(User32.SM.CXPADDEDBORDER);
 
             borderX = Math.Max(2, sx);
             borderY = Math.Max(2, sy);
