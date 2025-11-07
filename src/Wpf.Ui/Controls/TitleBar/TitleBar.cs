@@ -23,7 +23,7 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = ElementMaximizeButton, Type = typeof(TitleBarButton))]
 [TemplatePart(Name = ElementRestoreButton, Type = typeof(TitleBarButton))]
 [TemplatePart(Name = ElementCloseButton, Type = typeof(TitleBarButton))]
-public class TitleBar : System.Windows.Controls.Control, IThemeControl
+public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 {
     private const string ElementIcon = "PART_Icon";
     private const string ElementMainGrid = "PART_MainGrid";
@@ -36,6 +36,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private static DpiScale? dpiScale;
 
     private DependencyObject? _parentWindow;
+
+    public event EventHandler<HwndProcEventArgs>? WndProcInvoked;
 
     /// <summary>Identifies the <see cref="ApplicationTheme"/> dependency property.</summary>
     public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
@@ -447,8 +449,16 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         _currentWindow =
             System.Windows.Window.GetWindow(this) ?? throw new InvalidOperationException("Window is null");
+        if (_currentWindow.WindowState == WindowState.Maximized)
+        {
+            SetCurrentValue(IsMaximizedProperty, true);
+            _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Maximized);
+        }
+
         _currentWindow.StateChanged += OnParentWindowStateChanged;
         _currentWindow.ContentRendered += OnWindowContentRendered;
+
+        SubscribeToSystemParameters();
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -457,6 +467,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         Unloaded -= OnUnloaded;
 
         Appearance.ApplicationThemeManager.Changed -= OnThemeChanged;
+        UnsubscribeToSystemParameters();
     }
 
     /// <summary>
@@ -572,8 +583,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         switch (buttonType)
         {
-            case TitleBarButtonType.Maximize
-            or TitleBarButtonType.Restore:
+            case TitleBarButtonType.Maximize or TitleBarButtonType.Restore:
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                 MaximizeWindow();
                 break;
@@ -625,6 +635,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         var message = (User32.WM)msg;
 
+        // Invalidate cached border size on DPI change message
+        if (message == User32.WM.DPICHANGED)
+        {
+            InvalidateBorderCache();
+        }
+
         if (
             message
             is not (
@@ -664,22 +680,37 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
 
         bool isMouseOverHeaderContent = false;
+        IntPtr htResult = (IntPtr)User32.WM_NCHITTEST.HTNOWHERE;
 
-        if (message == User32.WM.NCHITTEST && (TrailingContent is UIElement || Header is UIElement))
+        if (message == User32.WM.NCHITTEST)
         {
-            UIElement? headerLeftUIElement = Header as UIElement;
-            UIElement? headerRightUiElement = TrailingContent as UIElement;
+            if (TrailingContent is UIElement || Header is UIElement)
+            {
+                UIElement? headerLeftUIElement = Header as UIElement;
+                UIElement? headerRightUiElement = TrailingContent as UIElement;
 
-            if (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock)
-            {
-                isMouseOverHeaderContent =
-                    headerLeftUIElement.IsMouseOverElement(lParam)
-                    || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+                if (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock)
+                {
+                    isMouseOverHeaderContent =
+                        headerLeftUIElement.IsMouseOverElement(lParam)
+                        || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+                }
+                else
+                {
+                    isMouseOverHeaderContent = headerRightUiElement?.IsMouseOverElement(lParam) ?? false;
+                }
             }
-            else
-            {
-                isMouseOverHeaderContent = headerRightUiElement?.IsMouseOverElement(lParam) ?? false;
-            }
+
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+        }
+
+        var e = new HwndProcEventArgs(hwnd, msg, wParam, lParam, isMouseOverHeaderContent);
+        WndProcInvoked?.Invoke(this, e);
+
+        if (e.ReturnValue != null)
+        {
+            handled = e.Handled;
+            return e.ReturnValue ?? IntPtr.Zero;
         }
 
         switch (message)
@@ -688,6 +719,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                 // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
+            case User32.WM.NCHITTEST when htResult != (IntPtr)User32.WM_NCHITTEST.HTNOWHERE:
+                handled = true;
+                return htResult;
             case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
                 handled = true;
                 return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
