@@ -95,7 +95,7 @@
             MenuOnRightClick="True"
             TooltipText="WPF UI Gallery">
             <tray:NotifyIcon.Menu>
-                <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
+                <ContextMenu DataContext="{Binding DataContext, Source={x:Reference NavigationView}}" ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
             </tray:NotifyIcon.Menu>
         </tray:NotifyIcon>
     </Grid>
