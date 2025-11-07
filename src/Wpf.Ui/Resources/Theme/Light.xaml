@@ -332,9 +332,9 @@
     <SolidColorBrush x:Key="BreadcrumbBarCurrentNormalForegroundBrush" Color="{StaticResource TextFillColorPrimary}" />
 
     <!--  Button  -->
-    <SolidColorBrush x:Key="AccentButtonBackground" Color="{DynamicResource SystemAccentColorPrimary}" />
-    <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="{DynamicResource SystemAccentColorSecondary}" />
-    <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="{DynamicResource SystemAccentColorTertiary}" />
+    <SolidColorBrush x:Key="AccentButtonBackground" Color="{DynamicResource AccentFillColorDefault}" />
+    <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="{DynamicResource AccentFillColorSecondary}" />
+    <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="{DynamicResource AccentFillColorTertiary}" />
     <!--<SolidColorBrush x:Key="AccentButtonBackgroundDisabled" ResourceKey="AccentFillColorDisabledBrush" />-->
     <SolidColorBrush x:Key="AccentButtonForeground" Color="{StaticResource TextOnAccentFillColorPrimary}" />
     <SolidColorBrush x:Key="AccentButtonForegroundPointerOver" Color="{StaticResource TextOnAccentFillColorPrimary}" />
@@ -342,7 +342,7 @@
     <!--<SolidColorBrush x:Key="AccentButtonForegroundDisabled" ResourceKey="TextOnAccentFillColorDisabled" />-->
     <!--<SolidColorBrush x:Key="AccentButtonBorderBrush" Color="{DynamicResource AccentControlElevationBorder}" />-->
     <!--<SolidColorBrush x:Key="AccentButtonBorderBrushPointerOver" Color="{DynamicResource AccentControlElevationBorder}" />-->
-    <SolidColorBrush x:Key="AccentButtonBorderBrushPressed" Color="{DynamicResource ControlFillColorTransparent}" />
+    <SolidColorBrush x:Key="AccentButtonBorderBrushPressed" Color="{StaticResource ControlFillColorTransparent}" />
     <!--<SolidColorBrush x:Key="AccentButtonBorderBrushDisabled" Color="{DynamicResource ControlFillColorTransparentBrush}" />-->
     <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
