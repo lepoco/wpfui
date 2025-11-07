@@ -1,89 +1,85 @@
 <Page
-  x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.BreadcrumbBarPage"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
-  xmlns:system="clr-namespace:System;assembly=System.Runtime"
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-  Title="BreadcrumbBar"
-  controls:PageControlDocumentation.DocumentationType="{x:Type ui:BreadcrumbBar}"
-  d:DataContext="{d:DesignInstance local:BreadcrumbBarPage,
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.BreadcrumbBarPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="BreadcrumbBar"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:BreadcrumbBar}"
+    d:DataContext="{d:DesignInstance local:BreadcrumbBarPage,
                                      IsDesignTimeCreatable=False}"
-  d:DesignHeight="450"
-  d:DesignWidth="850"
-  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  WindowWidth="850"
-  mc:Ignorable="d"
->
-  <Page.Resources>
-    <ResourceDictionary>
-      <Style
-        BasedOn="{StaticResource {x:Type ui:BreadcrumbBarItem}}"
-        TargetType="{x:Type ui:BreadcrumbBarItem}"
-      >
-        <Setter Property="Icon">
-          <Setter.Value>
-            <ui:IconSourceElement>
-              <ui:IconSourceElement.IconSource>
-                <ui:SymbolIconSource FontSize="16" FontWeight="Regular" Symbol="ChevronRight24" />
-              </ui:IconSourceElement.IconSource>
-            </ui:IconSourceElement>
-          </Setter.Value>
-        </Setter>
-        <Setter Property="FontWeight" Value="Regular" />
-      </Style>
-    </ResourceDictionary>
-  </Page.Resources>
-  <StackPanel Margin="0,0,0,24">
-    <controls:ControlExample
-      Margin="0"
-      HeaderText="A BreadcrumbBar control."
-      XamlCode="&lt;ui:BreadcrumbBar ItemsSource=&quot;{Binding ViewModel.Strings, Mode=OneWay}&quot; /&gt;"
-    >
-      <ui:BreadcrumbBar
-        Command="{Binding ViewModel.StringSelectedCommand, Mode=OneWay}"
-        ItemsSource="{Binding ViewModel.Strings, Mode=OneWay}"
-      />
-    </controls:ControlExample>
-    <controls:ControlExample Margin="0,32,0,0" HeaderText="BreadcrumbBar Control with Custom DataTemplate.">
-      <controls:ControlExample.XamlCode>
-                &lt;ui:BreadcrumbBar ItemsSource="{Binding ViewModel.Folders, Mode=OneWay}" &gt;\n
+    d:DesignHeight="450"
+    d:DesignWidth="850"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    WindowWidth="850"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style BasedOn="{StaticResource {x:Type ui:BreadcrumbBarItem}}" TargetType="{x:Type ui:BreadcrumbBarItem}">
+                <Setter Property="Icon">
+                    <Setter.Value>
+                        <ui:IconSourceElement>
+                            <ui:IconSourceElement.IconSource>
+                                <ui:SymbolIconSource
+                                    FontSize="16"
+                                    FontWeight="Regular"
+                                    Symbol="ChevronRight24" />
+                            </ui:IconSourceElement.IconSource>
+                        </ui:IconSourceElement>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontWeight" Value="Regular" />
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="A BreadcrumbBar control."
+            XamlCode="&lt;ui:BreadcrumbBar ItemsSource=&quot;{Binding ViewModel.Strings, Mode=OneWay}&quot; /&gt;">
+            <ui:BreadcrumbBar Command="{Binding ViewModel.StringSelectedCommand, Mode=OneWay}" ItemsSource="{Binding ViewModel.Strings, Mode=OneWay}" />
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,32,0,0" HeaderText="BreadcrumbBar Control with Custom DataTemplate.">
+            <controls:ControlExample.XamlCode>
+                &lt;ui:BreadcrumbBar ItemsSource=&quot;{Binding ViewModel.Folders, Mode=OneWay}&quot; &gt;\n
                 \t&lt;ui:BreadcrumbBar.ItemTemplate&gt;\n
-                \t\t&lt;ui:DataTemplate DataType="{x:Type models:Folder}" &gt;\n
-                \t\t\t&lt;TextBlock Text="{Binding Name, Mode=OneTime}" /&gt;\n
+                \t\t&lt;ui:DataTemplate DataType=&quot;{x:Type models:Folder}&quot; &gt;\n
+                \t\t\t&lt;TextBlock Text=&quot;{Binding Name, Mode=OneTime}&quot; /&gt;\n
                 \t\t&lt;/ui:DataTemplate&gt;\n
                 \t&lt;/ui:BreadcrumbBar.ItemTemplate&gt;\n
                 &lt;/ui:BreadcrumbBar&gt;
             </controls:ControlExample.XamlCode>
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <ui:BreadcrumbBar
-          x:Name="BreadcrumbBar2"
-          Grid.Column="0"
-          Command="{Binding ViewModel.FolderSelectedCommand, Mode=OneWay}"
-          ItemsSource="{Binding ViewModel.Folders, Mode=OneWay}"
-        >
-          <ui:BreadcrumbBar.ItemTemplate>
-            <DataTemplate DataType="{x:Type models:Folder}">
-              <TextBlock Text="{Binding Name, Mode=OneTime}" />
-            </DataTemplate>
-          </ui:BreadcrumbBar.ItemTemplate>
-        </ui:BreadcrumbBar>
-        <Button
-          Grid.Column="1"
-          Command="{Binding ViewModel.ResetFoldersCommand, Mode=OneWay}"
-          Content="Reset"
-        />
-      </Grid>
-    </controls:ControlExample>
-  </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:BreadcrumbBar
+                    x:Name="BreadcrumbBar2"
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.FolderSelectedCommand, Mode=OneWay}"
+                    ItemsSource="{Binding ViewModel.Folders, Mode=OneWay}">
+                    <ui:BreadcrumbBar.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:Folder}">
+                            <TextBlock Text="{Binding Name, Mode=OneTime}" />
+                        </DataTemplate>
+                    </ui:BreadcrumbBar.ItemTemplate>
+                </ui:BreadcrumbBar>
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding ViewModel.ResetFoldersCommand, Mode=OneWay}"
+                    Content="Reset" />
+            </Grid>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

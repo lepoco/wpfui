@@ -38,7 +38,8 @@ public abstract class UiTest : IAsyncLifetime
     /// </summary>
     /// <param name="automationId">The automation id.</param>
     /// <returns>The found element or null if no element was found.</returns>
-    protected AutomationElement? FindFirst(string automationId) => app.MainWindow?.FindFirstDescendant(automationId);
+    protected AutomationElement? FindFirst(string automationId) =>
+        app.MainWindow?.FindFirstDescendant(automationId);
 
     /// <summary>Finds the first descendant with the condition.</summary>
     /// <param name="conditionFunc">The condition method.</param>
@@ -76,7 +77,7 @@ public abstract class UiTest : IAsyncLifetime
             Keyboard.Type(text);
         }
 
-        FlaUI.Core.Input.Wait.UntilInputIsProcessed();
+        global::FlaUI.Core.Input.Wait.UntilInputIsProcessed();
     }
 
     /// <summary>
@@ -85,7 +86,7 @@ public abstract class UiTest : IAsyncLifetime
     protected void Press(VirtualKeyShort virtualKey)
     {
         Keyboard.Type(virtualKey);
-        
-        FlaUI.Core.Input.Wait.UntilInputIsProcessed();
+
+        global::FlaUI.Core.Input.Wait.UntilInputIsProcessed();
     }
 }

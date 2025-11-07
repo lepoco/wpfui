@@ -1,140 +1,135 @@
 <Page
-  x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.SliderPage"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:system="clr-namespace:System;assembly=System.Runtime"
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-  Title="SliderPage"
-  d:DataContext="{d:DesignInstance local:SliderPage,
+    x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.SliderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="SliderPage"
+    d:DataContext="{d:DesignInstance local:SliderPage,
                                      IsDesignTimeCreatable=False}"
-  d:DesignHeight="450"
-  d:DesignWidth="800"
-  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  mc:Ignorable="d"
->
-  <StackPanel Margin="0,0,0,24">
-    <controls:ControlExample
-      Margin="0"
-      HeaderText="A simple slider."
-      XamlCode="&lt;Slider Width=&quot;200&quot; /&gt;"
-    >
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Slider
-          Width="200"
-          Margin="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Maximum="100"
-          Minimum="0"
-          Value="{Binding ViewModel.SimpleSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=TwoWay}"
-        />
-        <Grid Grid.Column="1">
-          <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="Output:" />
-            <TextBlock Text="{Binding ViewModel.SimpleSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=OneWay}" />
-          </StackPanel>
-        </Grid>
-      </Grid>
-    </controls:ControlExample>
-    <controls:ControlExample
-      Margin="0,32,0,0"
-      HeaderText="A slider with steps and range specified."
-      XamlCode="&lt;Slider TickFrequency=&quot;20&quot; IsSnapToTickEnabled=&quot;True&quot; /&gt;"
-    >
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Slider
-          Width="200"
-          Margin="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          IsSnapToTickEnabled="True"
-          Maximum="1000"
-          Minimum="500"
-          TickFrequency="20"
-          Value="{Binding ViewModel.RangeSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=TwoWay}"
-        />
-        <Grid Grid.Column="1">
-          <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="Output:" />
-            <TextBlock Text="{Binding ViewModel.RangeSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=OneWay}" />
-          </StackPanel>
-        </Grid>
-      </Grid>
-    </controls:ControlExample>
-    <controls:ControlExample
-      Margin="0,32,0,0"
-      HeaderText="A slider with tick marks."
-      XamlCode="&lt;Slider TickPlacement=&quot;Both&quot; /&gt;"
-    >
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Slider
-          Width="200"
-          Margin="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          IsSnapToTickEnabled="True"
-          Maximum="100"
-          Minimum="0"
-          TickFrequency="20"
-          TickPlacement="Both"
-          Value="{Binding ViewModel.MarksSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=TwoWay}"
-        />
-        <Grid Grid.Column="1">
-          <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="Output:" />
-            <TextBlock Text="{Binding ViewModel.MarksSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=OneWay}" />
-          </StackPanel>
-        </Grid>
-      </Grid>
-    </controls:ControlExample>
-    <controls:ControlExample
-      Margin="0,32,0,0"
-      HeaderText="A vertical slider with range and tick marks specified."
-      XamlCode="&lt;Slider Orientation=&quot;Vertical&quot; /&gt;"
-    >
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Slider
-          Width="200"
-          Margin="0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          IsSnapToTickEnabled="True"
-          Maximum="100"
-          Minimum="0"
-          Orientation="Vertical"
-          TickFrequency="20"
-          TickPlacement="Both"
-          Value="{Binding ViewModel.VerticalSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=TwoWay}"
-        />
-        <Grid Grid.Column="1">
-          <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="Output:" />
-            <TextBlock Text="{Binding ViewModel.VerticalSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=OneWay}" />
-          </StackPanel>
-        </Grid>
-      </Grid>
-    </controls:ControlExample>
-  </StackPanel>
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="A simple slider."
+            XamlCode="&lt;Slider Width=&quot;200&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Slider
+                    Width="200"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Maximum="100"
+                    Minimum="0"
+                    Value="{Binding ViewModel.SimpleSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=TwoWay}" />
+                <Grid Grid.Column="1">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Output:" />
+                        <TextBlock Text="{Binding ViewModel.SimpleSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=OneWay}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="A slider with steps and range specified."
+            XamlCode="&lt;Slider TickFrequency=&quot;20&quot; IsSnapToTickEnabled=&quot;True&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Slider
+                    Width="200"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    IsSnapToTickEnabled="True"
+                    Maximum="1000"
+                    Minimum="500"
+                    TickFrequency="20"
+                    Value="{Binding ViewModel.RangeSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=TwoWay}" />
+                <Grid Grid.Column="1">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Output:" />
+                        <TextBlock Text="{Binding ViewModel.RangeSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=OneWay}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="A slider with tick marks."
+            XamlCode="&lt;Slider TickPlacement=&quot;Both&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Slider
+                    Width="200"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="0"
+                    TickFrequency="20"
+                    TickPlacement="Both"
+                    Value="{Binding ViewModel.MarksSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=TwoWay}" />
+                <Grid Grid.Column="1">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Output:" />
+                        <TextBlock Text="{Binding ViewModel.MarksSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=OneWay}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="A vertical slider with range and tick marks specified."
+            XamlCode="&lt;Slider Orientation=&quot;Vertical&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Slider
+                    Width="200"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    IsSnapToTickEnabled="True"
+                    Maximum="100"
+                    Minimum="0"
+                    Orientation="Vertical"
+                    TickFrequency="20"
+                    TickPlacement="Both"
+                    Value="{Binding ViewModel.VerticalSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=TwoWay}" />
+                <Grid Grid.Column="1">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Output:" />
+                        <TextBlock Text="{Binding ViewModel.VerticalSliderValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SliderPage}, Mode=OneWay}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>
