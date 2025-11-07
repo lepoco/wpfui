@@ -736,7 +736,7 @@
         <Border
             x:Name="Border"
             Margin="4,1,4,1"
-            Background="Transparent"
+            Background="{TemplateBinding Background}"
             CornerRadius="4">
             <Grid Margin="8,6,8,6">
                 <Grid.ColumnDefinitions>
