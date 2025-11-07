@@ -13,13 +13,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
-    <system:Double x:Key="RadioButtonCheckGlyphSize">12</system:Double>
+    <system:Double x:Key="RadioButtonCheckGlyphSize">11</system:Double>
     <system:Double x:Key="RadioButtonOuterEllipseSize">20</system:Double>
     <!--
     <system:Double x:Key="RadioButtonCheckGlyphPointerOverSize">14</system:Double>
     <system:Double x:Key="RadioButtonCheckGlyphPressedOverSize">10</system:Double>-->
     <system:Double x:Key="RadioButtonStrokeThickness">1</system:Double>
-    <Thickness x:Key="RadioButtonPadding">8,6,0,0</Thickness>
+    <Thickness x:Key="RadioButtonPadding">0,0,0,0</Thickness>
+    <Thickness x:Key="RadioButtonContentMargin">8,0,0,0</Thickness>
 
     <Style x:Key="DefaultRadioButtonStyle" TargetType="{x:Type RadioButton}">
         <!--  Universal WPF UI focus  -->
@@ -30,14 +31,14 @@
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="{StaticResource RadioButtonPadding}" />
-        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="MinWidth" Value="120" />
+        <Setter Property="MinHeight" Value="32" />
         <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
         <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -46,6 +47,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <Grid
+                        MinHeight="{TemplateBinding MinHeight}"
+                        Margin="{TemplateBinding Padding}"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="Transparent">
@@ -53,12 +56,13 @@
                             <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Grid Height="32" VerticalAlignment="Top">
+                        <Grid Height="20">
                             <Ellipse
                                 x:Name="OuterEllipse"
                                 Width="{StaticResource RadioButtonOuterEllipseSize}"
                                 Height="{StaticResource RadioButtonOuterEllipseSize}"
                                 Fill="{DynamicResource RadioButtonOuterEllipseFill}"
+                                SnapsToDevicePixels="False"
                                 Stroke="{DynamicResource RadioButtonOuterEllipseStroke}"
                                 StrokeThickness="{StaticResource RadioButtonStrokeThickness}"
                                 UseLayoutRounding="False" />
@@ -69,6 +73,7 @@
                                 Height="{StaticResource RadioButtonOuterEllipseSize}"
                                 Fill="{TemplateBinding Background}"
                                 Opacity="0"
+                                SnapsToDevicePixels="False"
                                 Stroke="{TemplateBinding Background}"
                                 StrokeThickness="{StaticResource RadioButtonStrokeThickness}"
                                 UseLayoutRounding="False" />
@@ -78,28 +83,18 @@
                                 Height="{StaticResource RadioButtonCheckGlyphSize}"
                                 Fill="{DynamicResource RadioButtonCheckGlyphFill}"
                                 Opacity="0"
-                                Stroke="{DynamicResource CircleElevationBorderBrush}"
+                                SnapsToDevicePixels="False"
                                 UseLayoutRounding="False">
                                 <Ellipse.LayoutTransform>
                                     <ScaleTransform ScaleX="1.0" ScaleY="1.0" />
                                 </Ellipse.LayoutTransform>
                             </Ellipse>
-                            <!--  A separate element is added since the two orthogonal state groups that cannot touch the same property  -->
-                            <Border
-                                x:Name="PressedCheckGlyph"
-                                Width="4"
-                                Height="4"
-                                Background="{DynamicResource RadioButtonCheckGlyphFill}"
-                                BorderBrush="{DynamicResource CircleElevationBorderBrush}"
-                                CornerRadius="6"
-                                Opacity="0"
-                                UseLayoutRounding="False" />
-
                         </Grid>
+
                         <ContentPresenter
                             x:Name="ContentPresenter"
                             Grid.Column="1"
-                            Margin="{TemplateBinding Padding}"
+                            Margin="{StaticResource RadioButtonContentMargin}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Content}"
@@ -107,7 +102,6 @@
                             TextElement.Foreground="{TemplateBinding Foreground}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <!-- Clunky, todo
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
@@ -115,43 +109,44 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard>
+                                <StopStoryboard BeginStoryboardName="IsPressedEnlarge" />
+                                <StopStoryboard BeginStoryboardName="IsPressedReduce" />
+                                <StopStoryboard BeginStoryboardName="IsPressedUndo" />
+                                <BeginStoryboard Name="IsMouseOverEnlarge">
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
-                                            From="1.0"
                                             To="1.2"
                                             Duration="00:00:00.167" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
-                                            From="1.0"
                                             To="1.2"
                                             Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard>
+                                <StopStoryboard BeginStoryboardName="IsPressedEnlarge" />
+                                <StopStoryboard BeginStoryboardName="IsPressedReduce" />
+                                <StopStoryboard BeginStoryboardName="IsPressedUndo" />
+                                <BeginStoryboard Name="IsMouseOverReduce">
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
-                                            From="1.2"
                                             To="1.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="0" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
-                                            From="1.2"
                                             To="1.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="0" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsPressed" Value="True" />
@@ -161,6 +156,72 @@
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="1.0" />
                             <Setter TargetName="OuterEllipse" Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillPressed}" />
                             <Setter TargetName="OuterEllipse" Property="Stroke" Value="{DynamicResource RadioButtonOuterEllipseStrokePressed}" />
+                            <MultiTrigger.EnterActions>
+                                <StopStoryboard BeginStoryboardName="IsMouseOverReduce" />
+                                <StopStoryboard BeginStoryboardName="IsMouseOverEnlarge" />
+                                <StopStoryboard BeginStoryboardName="IsPressedReduce" />
+                                <StopStoryboard BeginStoryboardName="IsPressedUndo" />
+                                <BeginStoryboard Name="IsPressedEnlarge">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CheckGlyph"
+                                            Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
+                                            From="0.7"
+                                            To="1.0"
+                                            Duration="00:00:00.167" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CheckGlyph"
+                                            Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
+                                            From="0.7"
+                                            To="1.0"
+                                            Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <StopStoryboard BeginStoryboardName="IsMouseOverReduce" />
+                                <StopStoryboard BeginStoryboardName="IsMouseOverEnlarge" />
+                                <StopStoryboard BeginStoryboardName="IsPressedEnlarge" />
+                                <BeginStoryboard Name="IsPressedReduce">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CheckGlyph"
+                                            Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
+                                            From="1.2"
+                                            To=".95"
+                                            Duration="00:00:00.167" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CheckGlyph"
+                                            Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
+                                            From="1.2"
+                                            To=".95"
+                                            Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard Name="IsPressedUndo">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CheckGlyph"
+                                            Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
+                                            To="1.2"
+                                            Duration="00:00:00.167" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CheckGlyph"
+                                            Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
+                                            To="1.2"
+                                            Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
                         </MultiTrigger>
 
                         <Trigger Property="IsChecked" Value="True">
@@ -207,8 +268,6 @@
                             <Setter Property="Foreground" Value="{DynamicResource RadioButtonForegroundDisabled}" />
                             <Setter TargetName="OuterEllipse" Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillDisabled}" />
                             <Setter TargetName="OuterEllipse" Property="Stroke" Value="{DynamicResource RadioButtonOuterEllipseCheckedStrokeDisabled}" />
-
-
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="0.7" />
                             <Setter TargetName="CheckOuterEllipse" Property="Opacity" Value="0.7" />
                         </MultiTrigger>
