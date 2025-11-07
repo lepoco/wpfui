@@ -39,8 +39,8 @@
                         CornerRadius="{TemplateBinding Border.CornerRadius}">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition x:Name="GridColumn1" Width="Auto" />
+                                <ColumnDefinition x:Name="GridColumn2" Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <ContentPresenter
@@ -70,6 +70,8 @@
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="Icon" Property="Margin" Value="0" />
+                            <Setter TargetName="GridColumn1" Property="Width" Value="*" />
+                            <Setter TargetName="GridColumn2" Property="Width" Value="0" />
                         </Trigger>
                         <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
                             <BeginStoryboard>
