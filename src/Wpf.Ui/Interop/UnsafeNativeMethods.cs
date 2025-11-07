@@ -387,34 +387,26 @@ public static class UnsafeNativeMethods
     /// <summary>
     /// Tries to get currently selected Window accent color.
     /// </summary>
-    public static Color GetDwmColor()
+    public static Color GetAccentColor()
     {
         try
         {
-            Dwmapi.DwmGetColorizationParameters(out Dwmapi.DWMCOLORIZATIONPARAMS dwmParams);
-            var values = BitConverter.GetBytes(dwmParams.clrColor);
+            var accentColorValue = Registry.GetValue(
+                                                     @"HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM",
+                                                     "AccentColor",
+                                                     null);
 
-            return Color.FromArgb(255, values[2], values[1], values[0]);
+            if (accentColorValue is not null)
+            {
+                var accentColor = (uint)(int)accentColorValue;
+                var values = BitConverter.GetBytes(accentColor);
+
+                return Color.FromArgb(255, values[0], values[1], values[2]);
+            }
         }
         catch
         {
-            var colorizationColorValue = Registry.GetValue(
-                @"HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM",
-                "ColorizationColor",
-                null
-            );
-
-            if (colorizationColorValue is not null)
-            {
-                try
-                {
-                    var colorizationColor = (uint)(int)colorizationColorValue;
-                    var values = BitConverter.GetBytes(colorizationColor);
-
-                    return Color.FromArgb(255, values[2], values[1], values[0]);
-                }
-                catch { }
-            }
+            // Ignored.
         }
 
         return GetDefaultWindowsAccentColor();
