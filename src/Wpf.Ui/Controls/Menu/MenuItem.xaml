@@ -10,6 +10,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/DefaultFocusVisualStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <Style
         x:Key="UiMenuItemScrollViewer"
         BasedOn="{StaticResource {x:Type ScrollViewer}}"
@@ -487,7 +491,13 @@
     </ControlTemplate>
 
     <Style x:Key="UiMenuItem" TargetType="{x:Type MenuItem}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource DefaultControlFocusVisualStyle}">
+                    <Setter Property="Control.Margin" Value="4,1" />
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
         <Setter Property="Focusable" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -981,7 +991,13 @@
     <!--  MenuItem Style  -->
     <Style x:Key="WpfUiMenuItem" TargetType="{x:Type controls:MenuItem}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource DefaultControlFocusVisualStyle}">
+                    <Setter Property="Control.Margin" Value="4,1" />
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
         <Setter Property="Focusable" Value="True" />
         <Style.Triggers>
