@@ -127,7 +127,6 @@
               Background="{TemplateBinding Background}"
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="1"
-              CornerRadius="{TemplateBinding CornerRadius}"
             >
               <Border.CornerRadius>
                   <MultiBinding 
