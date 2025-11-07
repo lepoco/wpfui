@@ -39,8 +39,8 @@
                         CornerRadius="{TemplateBinding Border.CornerRadius}">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition x:Name="GridColumn1" Width="Auto" />
+                                <ColumnDefinition x:Name="GridColumn2" Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <ContentPresenter
@@ -57,12 +57,18 @@
                                 </ContentPresenter.RenderTransform>
                             </ContentPresenter>
 
-                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
+                            <ContentPresenter
+                                Grid.Column="1"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
@@ -70,6 +76,8 @@
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="Icon" Property="Margin" Value="0" />
+                            <Setter TargetName="GridColumn1" Property="Width" Value="*" />
+                            <Setter TargetName="GridColumn2" Property="Width" Value="0" />
                         </Trigger>
                         <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
                             <BeginStoryboard>
@@ -78,7 +86,7 @@
                                         Storyboard.TargetName="IconScaleTransform"
                                         Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
                                         From="1.0"
-                                        To="0.85"
+                                        To="0.66"
                                         Duration="0:0:0.08" />
                                 </Storyboard>
                             </BeginStoryboard>
@@ -89,7 +97,7 @@
                                     <DoubleAnimation
                                         Storyboard.TargetName="IconScaleTransform"
                                         Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                        From="0.85"
+                                        From="0.66"
                                         To="1.0"
                                         Duration="0:0:0.08" />
                                 </Storyboard>
