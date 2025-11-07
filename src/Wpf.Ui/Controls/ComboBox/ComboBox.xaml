@@ -260,6 +260,7 @@
                                     Focusable="False"
                                     IsOpen="{TemplateBinding IsDropDownOpen}"
                                     Placement="{TemplateBinding Popup.Placement}"
+                                    PlacementTarget="{Binding ElementName=ContentBorder}"
                                     PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
                                     VerticalOffset="1">
                                     <controls:EffectThicknessDecorator
