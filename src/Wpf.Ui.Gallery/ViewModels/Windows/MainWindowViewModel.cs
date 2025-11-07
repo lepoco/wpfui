@@ -183,7 +183,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
     ];
 
     [ObservableProperty]
-    private ObservableCollection<object> _trayMenuItems =
+    private ObservableCollection<Control> _trayMenuItems =
     [
         new Wpf.Ui.Controls.MenuItem()
         { 

@@ -4,13 +4,13 @@
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
     All Rights Reserved.
 -->
-
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <!--  https://github.com/tonsky/FiraCode  -->
-    <FontFamily x:Key="FiraCode">pack://application:,,,/Wpf.Ui;component/Fonts/#Fira Code</FontFamily>
-
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui.SyntaxHighlight;component/Controls/CodeBlock.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+  <!--  https://github.com/tonsky/FiraCode  -->
+  <FontFamily x:Key="FiraCode">pack://application:,,,/Wpf.Ui;component/Fonts/#Fira Code</FontFamily>
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/Wpf.Ui.SyntaxHighlight;component/Controls/CodeBlock.xaml" />
+  </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
