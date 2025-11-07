@@ -58,7 +58,10 @@
                 </StackPanel>
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="{i18n:StringLocalizer 'Search'}">
+                <ui:AutoSuggestBox
+                    x:Name="AutoSuggestBox"
+                    AutomationProperties.AutomationId="NavigationAutoSuggestBox"
+                    PlaceholderText="{i18n:StringLocalizer 'Search'}">
                     <ui:AutoSuggestBox.Icon>
                         <ui:IconSourceElement>
                             <ui:SymbolIconSource Symbol="Search24" />
@@ -92,7 +95,7 @@
             MenuOnRightClick="True"
             TooltipText="WPF UI Gallery">
             <tray:NotifyIcon.Menu>
-                <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
+                <ContextMenu DataContext="{Binding DataContext, Source={x:Reference NavigationView}}" ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
             </tray:NotifyIcon.Menu>
         </tray:NotifyIcon>
     </Grid>
