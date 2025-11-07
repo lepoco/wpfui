@@ -20,48 +20,31 @@ public abstract class UiTest : IAsyncLifetime
     /// <summary>
     /// Gets the wrapper for an application which should be automated.
     /// </summary>
-    internal Application? Application
-    {
-        get => app.Application;
-    }
+    internal Application? Application => app.Application;
 
     /// <summary>
     /// Gets the main window of the applications process.
     /// </summary>
-    internal Window? MainWindow
-    {
-        get => app.MainWindow;
-    }
+    internal Window? MainWindow => app.MainWindow;
 
     /// <inheritdoc />
-    public ValueTask InitializeAsync()
-    {
-        return app.InitializeAsync();
-    }
+    public ValueTask InitializeAsync() => app.InitializeAsync();
 
     /// <inheritdoc />
-    public ValueTask DisposeAsync()
-    {
-        return app.DisposeAsync();
-    }
+    public ValueTask DisposeAsync() => app.DisposeAsync();
 
     /// <summary>
     /// Finds the first descendant with the given automation id.
     /// </summary>
     /// <param name="automationId">The automation id.</param>
     /// <returns>The found element or null if no element was found.</returns>
-    protected AutomationElement? FindFirst(string automationId)
-    {
-        return app.MainWindow?.FindFirstDescendant(automationId);
-    }
+    protected AutomationElement? FindFirst(string automationId) => app.MainWindow?.FindFirstDescendant(automationId);
 
     /// <summary>Finds the first descendant with the condition.</summary>
     /// <param name="conditionFunc">The condition method.</param>
     /// <returns>The found element or null if no element was found.</returns>
-    protected AutomationElement? FindFirst(Func<ConditionFactory, ConditionBase> conditionFunc)
-    {
-        return app.MainWindow?.FindFirstDescendant(conditionFunc);
-    }
+    protected AutomationElement? FindFirst(Func<ConditionFactory, ConditionBase> conditionFunc) =>
+        app.MainWindow?.FindFirstDescendant(conditionFunc);
 
     /// <summary>
     /// Creates a Task that will complete after a time delay.
@@ -71,10 +54,7 @@ public abstract class UiTest : IAsyncLifetime
     /// <remarks>
     /// After the specified time delay, the Task is completed in RanToCompletion state.
     /// </remarks>
-    protected Task Wait(int seconds)
-    {
-        return Task.Delay(TimeSpan.FromSeconds(seconds));
-    }
+    protected Task Wait(int seconds) => Task.Delay(TimeSpan.FromSeconds(seconds));
 
     /// <summary>
     /// Simulate typing in text. This is slower than setting <see cref="P:FlaUI.Core.AutomationElements.TextBox.Text" /> but raises more events.
@@ -105,6 +85,7 @@ public abstract class UiTest : IAsyncLifetime
     protected void Press(VirtualKeyShort virtualKey)
     {
         Keyboard.Type(virtualKey);
+        
         FlaUI.Core.Input.Wait.UntilInputIsProcessed();
     }
 }
