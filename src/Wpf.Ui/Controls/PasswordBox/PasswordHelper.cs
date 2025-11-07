@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Diagnostics;
+using System.Windows.Controls;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -37,6 +37,7 @@ public partial class PasswordBox
         /// <summary>
         /// Calculates and returns the new password value based on current input.
         /// </summary>
+        /// <param name="textChanges">The text changes.</param>
         /// <returns>The updated password string.</returns>
         /// <remarks>
         /// Handles three scenarios:
@@ -44,19 +45,11 @@ public partial class PasswordBox
         /// 2. When password is revealed (plain text mode)
         /// 3. When password is hidden (masked character mode)
         /// </remarks>
-        public string GetNewPassword()
+        public string GetNewPassword(ICollection<TextChange> textChanges)
         {
             _currentPassword = _passwordBox.Password;
             _newPassword = _currentPassword;
             _currentText = _passwordBox.Text;
-            int selectionIndex = _passwordBox.SelectionStart;
-
-            if (IsDeletingText())
-            {
-                int charsToRemove = _currentPassword.Length - _currentText.Length;
-                _newPassword = _currentPassword.Remove(selectionIndex, charsToRemove);
-                return _newPassword;
-            }
 
             if (_passwordBox.IsPasswordRevealed)
             {
@@ -64,64 +57,33 @@ public partial class PasswordBox
                 return _newPassword;
             }
 
-            return HandleHiddenModeChanges(selectionIndex);
+            return HandleHiddenModeChanges(textChanges);
         }
 
         /// <summary>
         /// Handles password changes when in hidden (masked) mode.
         /// </summary>
-        /// <param name="selectionIndex">Current caret position in the text box.</param>
+        /// <param name="textChanges">The text changes.</param>
         /// <returns>The updated password string.</returns>
-        /// <remarks>
-        /// Manages three cases:
-        /// 1. Characters were inserted
-        /// 2. Character was replaced (overwrite)
-        /// 3. Characters were removed
-        /// </remarks>
-        private string HandleHiddenModeChanges(int selectionIndex)
+        private string HandleHiddenModeChanges(ICollection<TextChange> textChanges)
         {
-            char passwordChar = _passwordBox.PasswordChar;
-            int currentLength = _currentPassword.Length;
+            string password = _currentPassword ?? "";
 
-            if (_currentText.Length > currentLength)
+            foreach (TextChange textChange in textChanges)
             {
-                // Characters were inserted
-                int insertedCount = _currentText.Length - currentLength;
-                string insertedText = _currentText.Substring(selectionIndex - insertedCount, insertedCount);
-                _newPassword = _currentPassword.Insert(selectionIndex - insertedCount, insertedText);
-            }
-            else if (_currentText.Length == currentLength)
-            {
-                // Character was replaced (overwrite)
-                for (int i = 0; i < _currentText.Length; i++)
+                if (textChange.RemovedLength > 0)
                 {
-                    if (_currentText[i] != passwordChar && i < _newPassword.Length)
-                    {
-                        _newPassword = _newPassword.Remove(i, 1).Insert(i, _currentText[i].ToString());
-                        break;
-                    }
+                    password = password.Remove(textChange.Offset, textChange.RemovedLength);
+                }
+
+                if (textChange.AddedLength > 0)
+                {
+                    string insertedText = _currentText.Substring(textChange.Offset, textChange.AddedLength);
+                    password = password.Insert(textChange.Offset, insertedText);
                 }
             }
-            else if (_currentText.Length < currentLength)
-            {
-                // Characters were removed (fallback)
-                int removedCount = currentLength - _currentText.Length;
-                _newPassword = _currentPassword.Remove(selectionIndex, removedCount);
-            }
 
-            return _newPassword;
-        }
-
-        /// <summary>
-        /// Determines if the current operation is deleting text.
-        /// </summary>
-        /// <returns>True if text is being deleted; otherwise, false.</returns>
-        private bool IsDeletingText()
-        {
-            Debug.Assert(_currentText == _passwordBox.Text, "Text mismatch");
-            Debug.Assert(_currentPassword == _passwordBox.Password, "Password mismatch");
-
-            return _currentText.Length < _currentPassword.Length;
+            return password;
         }
     }
 }

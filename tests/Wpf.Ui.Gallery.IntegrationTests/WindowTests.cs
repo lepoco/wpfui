@@ -12,6 +12,6 @@ public sealed class WindowTests() : UiTest
     {
         string? title = MainWindow?.Title;
 
-        title.Should().Be("WPF UI Gallery", "because the main window title should match the predefined one.");
+        title.Should().Be("WPF UI Gallery", "because the main window title should match the predefined one");
     }
 }
