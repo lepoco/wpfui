@@ -181,10 +181,10 @@
                         <Border
                             x:Name="ContentBorder"
                             Grid.Row="0"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"                            
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
                             Padding="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
@@ -262,36 +262,47 @@
                                     Placement="{TemplateBinding Popup.Placement}"
                                     PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
                                     VerticalOffset="1">
-                                    <Border
-                                        x:Name="DropDownBorder"
-                                        MinWidth="{TemplateBinding ActualWidth}"
-                                        Margin="0"
-                                        Padding="0,4,0,6"
-                                        Background="{DynamicResource ComboBoxDropDownBackground}"
-                                        BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="{DynamicResource PopupCornerRadius}"
-                                        SnapsToDevicePixels="True">
-                                        <Border.RenderTransform>
-                                            <TranslateTransform />
-                                        </Border.RenderTransform>
-                                        <Grid>
-                                            <controls:DynamicScrollViewer
-                                                MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                                Margin="0"
-                                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                                SnapsToDevicePixels="True"
-                                                TextElement.FontSize="{TemplateBinding FontSize}"
-                                                TextElement.FontWeight="{TemplateBinding FontWeight}"
-                                                TextElement.Foreground="{TemplateBinding Foreground}"
-                                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-                                                <StackPanel
-                                                    IsItemsHost="True"
-                                                    KeyboardNavigation.DirectionalNavigation="Contained"
-                                                    TextElement.FontSize="{TemplateBinding FontSize}" />
-                                            </controls:DynamicScrollViewer>
-                                        </Grid>
-                                    </Border>
+                                    <controls:EffectThicknessDecorator
+                                        AnimationDelay="00:00:00.167"
+                                        AnimationElement="{Binding ElementName=DropDownBorder}"
+                                        Thickness="30,0,30,30">
+                                        <Border
+                                            x:Name="DropDownBorder"
+                                            MinWidth="{TemplateBinding ActualWidth}"
+                                            Margin="0"
+                                            Padding="0,4,0,6"
+                                            Background="{DynamicResource ComboBoxDropDownBackground}"
+                                            BorderBrush="{DynamicResource ComboBoxDropDownBorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="{DynamicResource PopupCornerRadius}"
+                                            SnapsToDevicePixels="True">
+                                            <Border.RenderTransform>
+                                                <TranslateTransform />
+                                            </Border.RenderTransform>
+                                            <Border.Effect>
+                                                <DropShadowEffect
+                                                    BlurRadius="20"
+                                                    Direction="270"
+                                                    Opacity="0.135"
+                                                    ShadowDepth="10"
+                                                    Color="#202020" />
+                                            </Border.Effect>
+
+                                            <Grid>
+                                                <controls:DynamicScrollViewer
+                                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                                    Margin="0"
+                                                    HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                    SnapsToDevicePixels="True"
+                                                    TextElement.FontSize="{TemplateBinding FontSize}"
+                                                    TextElement.FontWeight="{TemplateBinding FontWeight}"
+                                                    TextElement.Foreground="{TemplateBinding Foreground}"
+                                                    VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" TextElement.FontSize="{TemplateBinding FontSize}" />
+                                                </controls:DynamicScrollViewer>
+                                            </Grid>
+                                        </Border>
+                                    </controls:EffectThicknessDecorator>
                                 </Popup>
                             </Grid>
                         </Border>

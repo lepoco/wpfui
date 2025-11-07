@@ -348,6 +348,8 @@ dotnet_diagnostic.CA2242.severity = warning
 # Require file header OR A source file contains a header that does not match the required text
 dotnet_diagnostic.IDE0073.severity = error
 
+dotnet_diagnostic.IDE0058.severity = silent
+
 # StyleCop Code Analysis
 
 # Closing parenthesis should be spaced correctly: "foo()!"
