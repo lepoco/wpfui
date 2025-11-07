@@ -3,6 +3,7 @@
     <PackageVersion Include="AwesomeAssertions" Version="9.3.0" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="FlaUI.Core" Version="5.0.0" />
     <PackageVersion Include="FlaUI.UIA3" Version="5.0.0" />
     <PackageVersion Include="Lepo.i18n" Version="2.0.0" />
     <PackageVersion Include="Lepo.i18n.DependencyInjection" Version="2.0.0" />

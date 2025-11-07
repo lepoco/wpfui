@@ -1,123 +1,123 @@
 <Page
-  x:Class="Wpf.Ui.Gallery.Views.Pages.Layout.ExpanderPage"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Layout"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:system="clr-namespace:System;assembly=System.Runtime"
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-  Title="ExpanderPage"
-  d:DesignHeight="450"
-  d:DesignWidth="800"
-  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  mc:Ignorable="d"
->
-  <StackPanel Margin="0,0,0,24">
-    <controls:ControlExample
-      Margin="0"
-      HeaderText="An Expander with text in the header and content areas"
-      XamlCode="&lt;Expander Header=&quot;This text is in the header&quot; Content=&quot;This is in the content&quot; /&gt;"
-    >
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Expander Grid.Column="0" Content="This is in the content" Header="This text is in the header" />
-        <!--  TODO: ExpandDirection  -->
-      </Grid>
-    </controls:ControlExample>
-    <controls:ControlExample
-      Margin="0,32,0,0"
-      HeaderText="An Expander with an Icon, a header text, a description, a control, and content areas"
-      XamlCode="&lt;Expander Icon=&quot;{ui:SymbolIcon PlaySettings20}&quot;/&gt;"
-    >
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <ui:CardExpander Grid.Column="0" Icon="{ui:SymbolIcon PlaySettings20}">
-          <ui:CardExpander.Header>
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Layout.ExpanderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Layout"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="ExpanderPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="An Expander with text in the header and content areas"
+            XamlCode="&lt;Expander Header=&quot;This text is in the header&quot; Content=&quot;This is in the content&quot; /&gt;">
             <Grid>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-              </Grid.RowDefinitions>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-              </Grid.ColumnDefinitions>
-              <ui:TextBlock
-                Grid.Row="0"
-                Grid.Column="0"
-                FontSize="16"
-                FontTypography="Body"
-                Text="This is a header text"
-              />
-              <ui:TextBlock
-                Grid.Row="1"
-                Grid.Column="0"
-                FontSize="12"
-                Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                Text="This is a description text"
-              />
-              <ui:ToggleSwitch
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                Margin="0,0,16,0"
-                OffContent="Off"
-                OnContent="On"
-              />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Expander
+                    Grid.Column="0"
+                    Content="This is in the content"
+                    Header="This text is in the header" />
+                <!--  TODO: ExpandDirection  -->
             </Grid>
-          </ui:CardExpander.Header>
-          <StackPanel Margin="24,0.5,24,0">
-            <ui:CardControl Padding="20,10,20,10" Header="This is an item">
-              <ui:ToggleSwitch
-                HorizontalContentAlignment="Left"
-                IsEnabled="True"
-                OffContent="Off"
-                OnContent="On"
-              />
-            </ui:CardControl>
-            <ui:CardControl Margin="0,0.5,0,0" Padding="20,10,20,10" Icon="{ui:SymbolIcon FlashSettings24}">
-              <ui:CardControl.Header>
-                <StackPanel>
-                  <ui:TextBlock
-                    Margin="0"
-                    FontTypography="BodyStrong"
-                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="This is a header text"
-                    TextWrapping="WrapWithOverflow"
-                  />
-                  <ui:TextBlock
-                    Appearance="Secondary"
-                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                    Text="This is a description text."
-                    TextWrapping="WrapWithOverflow"
-                  />
-                </StackPanel>
-              </ui:CardControl.Header>
-              <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
-                <ui:DropDownButton.Flyout>
-                  <ContextMenu>
-                    <MenuItem Header="Add" />
-                    <MenuItem Header="Remove" />
-                    <MenuItem Header="Send" />
-                    <MenuItem Header="Hello" />
-                  </ContextMenu>
-                </ui:DropDownButton.Flyout>
-              </ui:DropDownButton>
-            </ui:CardControl>
-          </StackPanel>
-        </ui:CardExpander>
-        <!--  TODO: ExpandDirection  -->
-      </Grid>
-    </controls:ControlExample>
-  </StackPanel>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="An Expander with an Icon, a header text, a description, a control, and content areas"
+            XamlCode="&lt;Expander Icon=&quot;{ui:SymbolIcon PlaySettings20}&quot;/&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:CardExpander Grid.Column="0" Icon="{ui:SymbolIcon PlaySettings20}">
+                    <ui:CardExpander.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ui:TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                FontSize="16"
+                                FontTypography="Body"
+                                Text="This is a header text" />
+                            <ui:TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                FontSize="12"
+                                Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                Text="This is a description text" />
+                            <ui:ToggleSwitch
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="1"
+                                Margin="0,0,16,0"
+                                OffContent="Off"
+                                OnContent="On" />
+                        </Grid>
+                    </ui:CardExpander.Header>
+                    <StackPanel Margin="24,0.5,24,0">
+                        <ui:CardControl Padding="20,10,20,10" Header="This is an item">
+                            <ui:ToggleSwitch
+                                HorizontalContentAlignment="Left"
+                                IsEnabled="True"
+                                OffContent="Off"
+                                OnContent="On" />
+                        </ui:CardControl>
+                        <ui:CardControl
+                            Margin="0,0.5,0,0"
+                            Padding="20,10,20,10"
+                            Icon="{ui:SymbolIcon FlashSettings24}">
+                            <ui:CardControl.Header>
+                                <StackPanel>
+                                    <ui:TextBlock
+                                        Margin="0"
+                                        FontTypography="BodyStrong"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="This is a header text"
+                                        TextWrapping="WrapWithOverflow" />
+                                    <ui:TextBlock
+                                        Appearance="Secondary"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="This is a description text."
+                                        TextWrapping="WrapWithOverflow" />
+                                </StackPanel>
+                            </ui:CardControl.Header>
+                            <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
+                                <ui:DropDownButton.Flyout>
+                                    <ContextMenu>
+                                        <MenuItem Header="Add" />
+                                        <MenuItem Header="Remove" />
+                                        <MenuItem Header="Send" />
+                                        <MenuItem Header="Hello" />
+                                    </ContextMenu>
+                                </ui:DropDownButton.Flyout>
+                            </ui:DropDownButton>
+
+                        </ui:CardControl>
+                    </StackPanel>
+                </ui:CardExpander>
+                <!--  TODO: ExpandDirection  -->
+            </Grid>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>
