@@ -3,4 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-global using Xunit;
+global using System.Reflection;
+global using AwesomeAssertions;
+global using FlaUI.Core.AutomationElements;
+global using Wpf.Ui.Gallery.IntegrationTests.Fixtures;

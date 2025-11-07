@@ -1,41 +1,46 @@
 <Page
-    x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.DataGridPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Collections"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="DataGridPage"
-    controls:PageControlDocumentation.DocumentationType="{x:Type ui:DataGrid}"
-    d:DataContext="{d:DesignInstance local:DataGridPage,
+  x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.DataGridPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Collections"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:system="clr-namespace:System;assembly=System.Runtime"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  Title="DataGridPage"
+  controls:PageControlDocumentation.DocumentationType="{x:Type ui:DataGrid}"
+  d:DataContext="{d:DesignInstance local:DataGridPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Resources/Controls/DataGrid.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/DataGrid.cs</system:String>
-    </Page.Resources>
-
-    <StackPanel Margin="0,0,0,24">
-        <controls:ControlExample
-            Margin="0"
-            HeaderText="Default DataGrid with ItemsSource."
-            XamlCode="&lt;DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;">
-            <DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
-        </controls:ControlExample>
-
-        <controls:ControlExample
-            Margin="0,36,0,0"
-            HeaderText="WPF UI DataGrid with ItemsSource."
-            XamlCode="&lt;ui:DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;">
-            <ui:DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
-        </controls:ControlExample>
-    </StackPanel>
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+  mc:Ignorable="d"
+>
+  <Page.Resources>
+    <system:String x:Key="PageXamlUrl"
+      >https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Resources/Controls/DataGrid.xaml</system:String
+    >
+    <system:String x:Key="PageCsharpUrl"
+      >https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/DataGrid.cs</system:String
+    >
+  </Page.Resources>
+  <StackPanel Margin="0,0,0,24">
+    <controls:ControlExample
+      Margin="0"
+      HeaderText="Default DataGrid with ItemsSource."
+      XamlCode="&lt;DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;"
+    >
+      <DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
+    </controls:ControlExample>
+    <controls:ControlExample
+      Margin="0,36,0,0"
+      HeaderText="WPF UI DataGrid with ItemsSource."
+      XamlCode="&lt;ui:DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;"
+    >
+      <ui:DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
+    </controls:ControlExample>
+  </StackPanel>
 </Page>
