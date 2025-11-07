@@ -3,8 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Extensions;
+using System.IO;
+using System.Runtime.InteropServices;
 using Wpf.Ui.Interop;
+using Wpf.Ui.Win32;
+using static Wpf.Ui.Appearance.UISettingsRCW;
 
 namespace Wpf.Ui.Appearance;
 
@@ -29,6 +32,23 @@ namespace Wpf.Ui.Appearance;
 /// </example>
 public static class ApplicationAccentColorManager
 {
+    private static readonly IUISettings3? _uisettings;
+    private static readonly bool _isSupported;
+
+    static ApplicationAccentColorManager()
+    {
+        try
+        {
+            _uisettings = GetWinRTInstance() as IUISettings3;
+            _isSupported = _uisettings != null;
+        }
+        catch (COMException)
+        {
+            // We don't want to throw any exceptions here.
+            // If we can't get the instance, we will use the fallback accent color.
+        }
+    }
+
     /// <summary>
     /// The maximum value of the background HSV brightness after which the text on the accent will be turned dark.
     /// </summary>
@@ -150,18 +170,28 @@ public static class ApplicationAccentColorManager
 
         if (applicationTheme == ApplicationTheme.Dark)
         {
-            primaryAccent = systemAccent.Update(15f, -12f);
-            secondaryAccent = systemAccent.Update(30f, -24f);
-            tertiaryAccent = systemAccent.Update(45f, -36f);
+            primaryAccent = GetColor(UIColorType.AccentLight1, 17, -30f);
+            secondaryAccent = GetColor(UIColorType.AccentLight2, 17, -45f);
+            tertiaryAccent = GetColor(UIColorType.AccentLight3, 17, -65f);
         }
         else
         {
-            primaryAccent = systemAccent.UpdateBrightness(-5f);
-            secondaryAccent = systemAccent.UpdateBrightness(-10f);
-            tertiaryAccent = systemAccent.UpdateBrightness(-15f);
+            primaryAccent = GetColor(UIColorType.AccentDark1, -10);
+            secondaryAccent = GetColor(UIColorType.AccentDark2, -25);
+            tertiaryAccent = GetColor(UIColorType.AccentDark3, -40);
         }
 
-        UpdateColorResources(systemAccent, primaryAccent, secondaryAccent, tertiaryAccent);
+        UpdateColorResources(applicationTheme, systemAccent, primaryAccent, secondaryAccent, tertiaryAccent);
+
+        Color GetColor(UIColorType colorType, float brightnessFactor, float saturationFactor = 0.0f)
+        {
+            if (GetUiColor(colorType) is { } color)
+            {
+                return color;
+            }
+
+            return systemAccent.Update(brightnessFactor, saturationFactor);
+        }
     }
 
     /// <summary>
@@ -178,7 +208,7 @@ public static class ApplicationAccentColorManager
         Color tertiaryAccent
     )
     {
-        UpdateColorResources(systemAccent, primaryAccent, secondaryAccent, tertiaryAccent);
+        UpdateColorResources(ApplicationThemeManager.GetAppTheme(), systemAccent, primaryAccent, secondaryAccent, tertiaryAccent);
     }
 
     /// <summary>
@@ -195,18 +225,24 @@ public static class ApplicationAccentColorManager
     /// </summary>
     public static Color GetColorizationColor()
     {
-        return UnsafeNativeMethods.GetDwmColor();
+        if (GetUiColor(UIColorType.Accent) is { } accentColor)
+        {
+            return accentColor;
+        }
+
+        return UnsafeNativeMethods.GetAccentColor();
     }
 
     /// <summary>
     /// Updates application resources.
     /// </summary>
-    private static void UpdateColorResources(
+    private static void UpdateColorResources
+    (
+        ApplicationTheme applicationTheme,
         Color systemAccent,
         Color primaryAccent,
         Color secondaryAccent,
-        Color tertiaryAccent
-    )
+        Color tertiaryAccent)
     {
         System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColor: " + systemAccent, "Wpf.Ui.Accent");
         System.Diagnostics.Debug.WriteLine(
@@ -296,16 +332,68 @@ public static class ApplicationAccentColorManager
         UiApplication.Current.Resources["SystemAccentColorSecondary"] = secondaryAccent;
         UiApplication.Current.Resources["SystemAccentColorTertiary"] = tertiaryAccent;
 
-        UiApplication.Current.Resources["SystemAccentBrush"] = secondaryAccent.ToBrush();
+        UiApplication.Current.Resources["SystemAccentBrush"] = systemAccent.ToBrush();
         UiApplication.Current.Resources["SystemFillColorAttentionBrush"] = secondaryAccent.ToBrush();
-        UiApplication.Current.Resources["AccentTextFillColorPrimaryBrush"] = tertiaryAccent.ToBrush();
-        UiApplication.Current.Resources["AccentTextFillColorSecondaryBrush"] = tertiaryAccent.ToBrush();
-        UiApplication.Current.Resources["AccentTextFillColorTertiaryBrush"] = secondaryAccent.ToBrush();
-        UiApplication.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] =
-            systemAccent.ToBrush();
-        UiApplication.Current.Resources["AccentFillColorDefaultBrush"] = secondaryAccent.ToBrush();
 
-        UiApplication.Current.Resources["AccentFillColorSecondaryBrush"] = secondaryAccent.ToBrush(0.9);
-        UiApplication.Current.Resources["AccentFillColorTertiaryBrush"] = secondaryAccent.ToBrush(0.8);
+        UiApplication.Current.Resources["AccentTextFillColorPrimaryBrush"] = secondaryAccent.ToBrush();
+        UiApplication.Current.Resources["AccentTextFillColorSecondaryBrush"] = tertiaryAccent.ToBrush();
+        UiApplication.Current.Resources["AccentTextFillColorTertiaryBrush"] = primaryAccent.ToBrush();
+
+        UiApplication.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] = systemAccent.ToBrush();
+
+        var themeAccent = applicationTheme == ApplicationTheme.Dark ? secondaryAccent : primaryAccent;
+        UiApplication.Current.Resources["AccentFillColorDefault"] = themeAccent;
+        UiApplication.Current.Resources["AccentFillColorDefaultBrush"] = themeAccent.ToBrush();
+        UiApplication.Current.Resources["AccentFillColorSecondary"] = Color.FromArgb(229, themeAccent.R, themeAccent.G, themeAccent.B); // 229 = 0.9 * 255
+        UiApplication.Current.Resources["AccentFillColorSecondaryBrush"] = themeAccent.ToBrush(0.9);
+        UiApplication.Current.Resources["AccentFillColorTertiary"] = Color.FromArgb(204, themeAccent.R, themeAccent.G, themeAccent.B); // 204 = 0.8 * 255
+        UiApplication.Current.Resources["AccentFillColorTertiaryBrush"] = themeAccent.ToBrush(0.8);
+    }
+
+    /// <summary>
+    /// Gets the color of the UI.
+    /// </summary>
+    /// <param name="colorType">Type of the color.</param>
+    private static Color? GetUiColor(UIColorType colorType)
+    {
+        if (_isSupported)
+        {
+            try
+            {
+                UIColor uiColor = _uisettings!.GetColorValue(colorType);
+                return Color.FromArgb(uiColor.A, uiColor.R, uiColor.G, uiColor.B);
+            }
+            catch
+            {
+                // We don't want to throw any exceptions here.
+                // If we can't get the instance, we can fallback to another method.
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    ///   Gets the WinRT instance of UISettings.
+    /// </summary>
+    private static object? GetWinRTInstance()
+    {
+        if (!Utilities.IsOSWindows10OrNewer)
+        {
+            return null;
+        }
+
+        object? winRtInstance;
+
+        try
+        {
+            winRtInstance = GetUISettingsInstance();
+        }
+        catch (Exception e) when (e is TypeLoadException or FileNotFoundException)
+        {
+            winRtInstance = null;
+        }
+
+        return winRtInstance;
     }
 }

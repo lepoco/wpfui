@@ -17,5 +17,5 @@ public enum FontTypography
     Subtitle,
     Title,
     TitleLarge,
-    Display
+    Display,
 }

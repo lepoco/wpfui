@@ -53,5 +53,5 @@ public enum ControlAppearance
     /// <summary>
     /// Transparent color theme.
     /// </summary>
-    Transparent
+    Transparent,
 }

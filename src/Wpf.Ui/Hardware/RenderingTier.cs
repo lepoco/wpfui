@@ -29,5 +29,5 @@ public enum RenderingTier
     /// necessary system resources have not been exhausted.
     /// This corresponds to a DirectX version that is greater than or equal to 9.0.
     /// </summary>
-    FullAcceleration = 0x2
+    FullAcceleration = 0x2,
 }

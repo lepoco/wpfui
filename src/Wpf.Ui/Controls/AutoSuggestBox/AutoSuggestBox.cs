@@ -30,7 +30,7 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
 [TemplatePart(Name = ElementSuggestionsPopup, Type = typeof(Popup))]
 [TemplatePart(Name = ElementSuggestionsList, Type = typeof(ListView))]
-public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
+public class AutoSuggestBox : ItemsControl, IIconControl
 {
     protected const string ElementTextBox = "PART_TextBox";
     protected const string ElementSuggestionsPopup = "PART_SuggestionsPopup";
@@ -100,6 +100,14 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         new PropertyMetadata(null)
     );
 
+    /// <summary>Identifies the <see cref="ClearButtonEnabled"/> dependency property.</summary>
+    public static readonly DependencyProperty ClearButtonEnabledProperty = DependencyProperty.Register(
+        nameof(ClearButtonEnabled),
+        typeof(bool),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(false)
+    );
+
     /// <summary>
     /// Gets or sets your items here if you want to use the default filtering
     /// </summary>
@@ -167,6 +175,15 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to show the clear button when <see cref="AutoSuggestBox"/> is focused.
+    /// </summary>
+    public bool ClearButtonEnabled
+    {
+        get => (bool)GetValue(ClearButtonEnabledProperty);
+        set => SetValue(ClearButtonEnabledProperty, value);
     }
 
     /// <summary>
@@ -358,7 +375,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this)
         {
-            QueryText = queryText
+            QueryText = queryText,
         };
 
         RaiseEvent(args);
@@ -372,7 +389,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         var args = new AutoSuggestBoxSuggestionChosenEventArgs(SuggestionChosenEvent, this)
         {
-            SelectedItem = selectedItem
+            SelectedItem = selectedItem,
         };
 
         RaiseEvent(args);
@@ -393,7 +410,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this)
         {
             Reason = reason,
-            Text = text
+            Text = text,
         };
 
         RaiseEvent(args);
@@ -551,13 +568,15 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             return;
         }
 
-        var splitText = text.ToLowerInvariant().Split(' ');
+        var splitText = text.Split(' ');
         var suitableItems = OriginalItemsSource
             .Cast<object>()
             .Where(item =>
             {
-                var itemText = GetStringFromObj(item)?.ToLowerInvariant();
-                return splitText.All(key => itemText?.Contains(key) ?? false);
+                var itemText = GetStringFromObj(item);
+                return splitText.All(key =>
+                    itemText?.Contains(key, StringComparison.OrdinalIgnoreCase) ?? false
+                );
             })
             .ToList();
 

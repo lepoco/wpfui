@@ -29,9 +29,13 @@
     <Thickness x:Key="CheckBoxPadding">11,5,11,6</Thickness>
     <Thickness x:Key="CheckBoxBorderThemeThickness">1</Thickness>
     <Thickness x:Key="CheckBoxContentMargin">8,0,0,0</Thickness>
-    <system:Double x:Key="CheckBoxIconSize">14</system:Double>
-    <system:Double x:Key="CheckBoxHeight">22</system:Double>
-    <system:Double x:Key="CheckBoxWidth">22</system:Double>
+    <system:Double x:Key="CheckBoxIconSize">13</system:Double>
+    <system:Double x:Key="CheckBoxHeight">20</system:Double>
+    <system:Double x:Key="CheckBoxWidth">20</system:Double>
+    <system:TimeSpan x:Key="CheckBoxAnimationOffset">00:00:00.250</system:TimeSpan>
+    <Duration x:Key="CheckBoxAnimationDuration">00:00:00.250</Duration>
+    <converters:AnimationFactorToValueConverter x:Key="CheckBoxAnimationFactorToValueConverter" />
+    <converters:ClipConverter x:Key="ClipConverter" />
 
     <Style x:Key="DefaultCheckBoxStyle" TargetType="{x:Type CheckBox}">
         <!--  Universal WPF UI focus  -->
@@ -60,14 +64,15 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <BulletDecorator
+                        Margin="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="Transparent">
                         <BulletDecorator.Bullet>
                             <Border
                                 x:Name="ControlBorderIconPresenter"
-                                Width="{StaticResource CheckBoxHeight}"
-                                Height="{StaticResource CheckBoxWidth}"
+                                Width="{DynamicResource CheckBoxHeight}"
+                                Height="{DynamicResource CheckBoxWidth}"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Background="{TemplateBinding Background}"
@@ -77,18 +82,28 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding Border.CornerRadius}">
-                                    <Grid>
-                                        <controls:SymbolIcon
-                                            x:Name="ControlIcon"
-                                            Margin="0"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontSize="{StaticResource CheckBoxIconSize}"
-                                            FontWeight="Bold"
-                                            Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
-                                            Symbol="Checkmark48"
-                                            Visibility="Collapsed" />
-                                    </Grid>
+                                    <controls:SymbolIcon
+                                        x:Name="ControlIcon"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="{DynamicResource CheckBoxIconSize}"
+                                        FontWeight="Bold"
+                                        Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
+                                        Symbol="Checkmark48"
+                                        Visibility="Collapsed">
+                                        <controls:SymbolIcon.Clip>
+                                            <MultiBinding Converter="{StaticResource ClipConverter}">
+                                                <MultiBinding.Bindings>
+                                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
+                                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
+                                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                                </MultiBinding.Bindings>
+                                            </MultiBinding>
+                                        </controls:SymbolIcon.Clip>
+                                        <controls:SymbolIcon.Tag>
+                                            <system:Double>1</system:Double>
+                                        </controls:SymbolIcon.Tag>
+                                    </controls:SymbolIcon>
                                 </Border>
                             </Border>
                         </BulletDecorator.Bullet>
@@ -118,10 +133,37 @@
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Visible" />
                             <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillChecked}" />
                             <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Name="SlideIn">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ControlIcon"
+                                            Storyboard.TargetProperty="Tag"
+                                            From="0"
+                                            To="1"
+                                            Duration="{StaticResource CheckBoxAnimationDuration}">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
                         </Trigger>
+                        <!--  Skip the animation when it becomes visible  -->
+                        <Trigger Property="Visibility" Value="Visible">
+                            <Trigger.EnterActions>
+                                <SeekStoryboard BeginStoryboardName="SlideIn" Offset="{StaticResource CheckBoxAnimationOffset}" />
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <!--  Skip the animation on load  -->
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <SeekStoryboard BeginStoryboardName="SlideIn" Offset="{StaticResource CheckBoxAnimationOffset}" />
+                        </EventTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
                                 <Condition Property="IsChecked" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="StrokeBorder" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillUncheckedPointerOver}" />
@@ -129,6 +171,15 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="StrokeBorder" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillUncheckedPressed}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
                                 <Condition Property="IsChecked" Value="{x:Null}" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedPointerOver}" />
@@ -137,9 +188,28 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedPressed}" />
+                            <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
                                 <Condition Property="IsChecked" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedPointerOver}" />
+                            <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedPressed}" />
                             <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -157,4 +227,3 @@
     <Style BasedOn="{StaticResource DefaultCheckBoxStyle}" TargetType="{x:Type CheckBox}" />
 
 </ResourceDictionary>
-

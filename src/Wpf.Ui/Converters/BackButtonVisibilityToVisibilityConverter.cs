@@ -18,7 +18,7 @@ internal class BackButtonVisibilityToVisibilityConverter : IValueConverter
             NavigationViewBackButtonVisible.Collapsed => Visibility.Collapsed,
             NavigationViewBackButtonVisible.Visible => Visibility.Visible,
             NavigationViewBackButtonVisible.Auto => Visibility.Visible,
-            _ => Visibility.Collapsed
+            _ => Visibility.Collapsed,
         };
     }
 

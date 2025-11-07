@@ -15,7 +15,7 @@ internal class FallbackBrushConverter : IValueConverter
         {
             SolidColorBrush brush => brush,
             Color color => new SolidColorBrush(color),
-            _ => new SolidColorBrush(Colors.Red)
+            _ => new SolidColorBrush(Colors.Red),
         };
     }
 

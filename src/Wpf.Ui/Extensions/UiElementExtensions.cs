@@ -10,7 +10,7 @@ internal static class UiElementExtensions
     /// <summary>
     /// Do not call it outside of NCHITTEST, NCLBUTTONUP, NCLBUTTONDOWN messages!
     /// </summary>
-    /// <returns><see langword="true"/> if mouse is over the element. <see langword="false"/> otherwise.</returns>
+    /// <returns><see langword="true" /> if mouse is over the element. <see langword="false" /> otherwise.</returns>
     public static bool IsMouseOverElement(this UIElement element, IntPtr lParam)
     {
         // This method will be invoked very often and must be as simple as possible.
@@ -21,12 +21,18 @@ internal static class UiElementExtensions
 
         try
         {
-            var mousePosScreen = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
-            var bounds = new Rect(default, element.RenderSize);
+            // Ensure the visual is connected to a presentation source (needed for PointFromScreen).
+            if (PresentationSource.FromVisual(element) == null)
+            {
+                return false;
+            }
 
-            Point mousePosRelative = element.PointFromScreen(mousePosScreen);
+            var mousePosition = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
 
-            return bounds.Contains(mousePosRelative);
+            // If element is Panel, check if children at mousePosition is with IsHitTestVisible false.
+            return new Rect(default, element.RenderSize).Contains(element.PointFromScreen(mousePosition)) &&
+                   element.IsHitTestVisible &&
+                   (element is not System.Windows.Controls.Panel panel || IsChildHitTestVisibleAtPointFromScreen(panel, mousePosition));
         }
         catch
         {
@@ -42,5 +48,18 @@ internal static class UiElementExtensions
     private static int Get_Y_LParam(IntPtr lParam)
     {
         return (short)(lParam.ToInt32() >> 16);
+    }
+
+    private static bool IsChildHitTestVisibleAtPointFromScreen(System.Windows.Controls.Panel panel, Point mousePosition)
+    {
+        foreach (UIElement child in panel.Children)
+        {
+            if (new Rect(default, child.RenderSize).Contains(child.PointFromScreen(mousePosition)))
+            {
+                return child.IsHitTestVisible;
+            }
+        }
+
+        return false;
     }
 }

@@ -28,7 +28,7 @@ internal static class UnsafeReflection
             WindowBackdropType.Mica => Dwmapi.DWMSBT.DWMSBT_MAINWINDOW,
             WindowBackdropType.Acrylic => Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW,
             WindowBackdropType.Tabbed => Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW,
-            _ => Dwmapi.DWMSBT.DWMSBT_DISABLE
+            _ => Dwmapi.DWMSBT.DWMSBT_DISABLE,
         };
     }
 
@@ -42,7 +42,7 @@ internal static class UnsafeReflection
             WindowCornerPreference.Round => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.ROUND,
             WindowCornerPreference.RoundSmall => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.ROUNDSMALL,
             WindowCornerPreference.DoNotRound => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DONOTROUND,
-            _ => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DEFAULT
+            _ => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DEFAULT,
         };
     }
 
@@ -57,7 +57,7 @@ internal static class UnsafeReflection
             TaskBarProgressState.Error => ShObjIdl.TBPFLAG.TBPF_ERROR,
             TaskBarProgressState.Paused => ShObjIdl.TBPFLAG.TBPF_PAUSED,
             TaskBarProgressState.Normal => ShObjIdl.TBPFLAG.TBPF_NORMAL,
-            _ => Wpf.Ui.Interop.ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
+            _ => Wpf.Ui.Interop.ShObjIdl.TBPFLAG.TBPF_NOPROGRESS,
         };
     }
 
@@ -72,7 +72,7 @@ internal static class UnsafeReflection
             ShObjIdl.TBPFLAG.TBPF_ERROR => TaskBarProgressState.Error,
             ShObjIdl.TBPFLAG.TBPF_PAUSED => TaskBarProgressState.Paused,
             ShObjIdl.TBPFLAG.TBPF_NORMAL => TaskBarProgressState.Normal,
-            _ => TaskBarProgressState.None
+            _ => TaskBarProgressState.None,
         };
     }
 }

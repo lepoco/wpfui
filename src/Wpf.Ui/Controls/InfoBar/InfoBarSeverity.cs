@@ -28,5 +28,5 @@ public enum InfoBarSeverity
     /// <summary>
     /// Communicates that the InfoBar is displaying information regarding an error or problem that has occurred.
     /// </summary>
-    Error = 3
+    Error = 3,
 }

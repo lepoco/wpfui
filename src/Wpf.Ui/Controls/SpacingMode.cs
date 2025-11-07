@@ -34,5 +34,5 @@ public enum SpacingMode
     /// <summary>
     /// The remaining space is evenly distributed between start and end of each row.
     /// </summary>
-    StartAndEndOnly
+    StartAndEndOnly,
 }

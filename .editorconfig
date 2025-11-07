@@ -348,6 +348,8 @@ dotnet_diagnostic.CA2242.severity = warning
 # Require file header OR A source file contains a header that does not match the required text
 dotnet_diagnostic.IDE0073.severity = error
 
+dotnet_diagnostic.IDE0058.severity = silent
+
 # StyleCop Code Analysis
 
 # Closing parenthesis should be spaced correctly: "foo()!"
@@ -355,7 +357,6 @@ dotnet_diagnostic.SA1009.severity = none
 
 # Hide warnings when using the new() expression from C# 9.
 dotnet_diagnostic.SA1000.severity = none
-
 dotnet_diagnostic.SA1011.severity = none
 dotnet_diagnostic.SA1101.severity = none
 
@@ -389,12 +390,16 @@ dotnet_diagnostic.SA1634.severity = none
 dotnet_diagnostic.SA1652.severity = none
 
 
-
 # Additional Stylecop Analyzers
 dotnet_diagnostic.SA1111.severity = none
 dotnet_diagnostic.SA1121.severity = none
 dotnet_diagnostic.SA1204.severity = none
 dotnet_diagnostic.SA1208.severity = none
+dotnet_diagnostic.CS1591.severity = none # Missing XML comment for publicly visible type or member
+                                         # 15000+ warnings in the solution
+dotnet_diagnostic.CA1510.severity = none # Use ArgumentNullException throw helper
+                                         # doesn't work with older versions of .NET
+                                         
 dotnet_diagnostic.SA1518.severity = none
 dotnet_diagnostic.SA1615.severity = none
 dotnet_diagnostic.SA1502.severity = none
@@ -407,9 +412,5 @@ dotnet_diagnostic.WPF0071.severity = none # Add ValueConversion attribute
 dotnet_diagnostic.WPF0070.severity = none # Add default field to converter
 
 # Suppress some IDE warnings
+dotnet_diagnostic.IDE0130.severity = none # Hide warnings about namespaces not matching folder structure
 dotnet_diagnostic.IDE0290.severity = none # Use primary constructor
-dotnet_diagnostic.CS1591.severity = none # Missing XML comment for publicly visible type or member
-                                         # 15000+ warnings in the solution
-dotnet_diagnostic.CA1510.severity = none # Use ArgumentNullException throw helper
-                                         # doesn't work with older versions of .NET
-                                         

@@ -19,7 +19,7 @@ public partial class DataGridViewModel : ViewModel
 
         var adjectives = new[] { "Red", "Blueberry" };
         var names = new[] { "Marmalade", "Dumplings", "Soup" };
-        /*var units = new[] { "grams", "kilograms", "milliliters" };*/
+        Unit[] units = [Unit.Grams, Unit.Kilograms, Unit.Milliliters];
 
         for (int i = 0; i < 50; i++)
         {
@@ -32,9 +32,10 @@ public partial class DataGridViewModel : ViewModel
                         adjectives[random.Next(0, adjectives.Length)]
                         + " "
                         + names[random.Next(0, names.Length)],
+                    Unit = units[random.Next(0, units.Length)],
                     UnitPrice = Math.Round(random.NextDouble() * 20.0, 3),
                     UnitsInStock = random.Next(0, 100),
-                    IsVirtual = random.Next(0, 2) == 1
+                    IsVirtual = random.Next(0, 2) == 1,
                 }
             );
         }

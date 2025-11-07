@@ -59,16 +59,18 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     public INavigationViewItem? SelectedItem { get; protected set; }
 
     protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary { get; } =
-        [];
+    [];
 
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary { get; } = [];
+
+    protected Dictionary<FrameworkElement, INavigationViewItem> PageToNavigationItemDictionary { get; } = [];
 
     private readonly ObservableCollection<string> _autoSuggestBoxItems = [];
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = [];
 
     private static readonly Thickness TitleBarPaneOpenMarginDefault = new(35, 0, 0, 0);
-    private static readonly Thickness TitleBarPaneCompactMarginDefault = new(55, 0, 0, 0);
-    private static readonly Thickness AutoSuggestBoxMarginDefault = new(8, 8, 8, 16);
+    private static readonly Thickness TitleBarPaneCompactMarginDefault = new(35, 0, 0, 0);
+    private static readonly Thickness AutoSuggestBoxMarginDefault = new(8, 0, 8, 0);
     private static readonly Thickness FrameMarginDefault = new(0, 50, 0, 0);
 
     protected static void UpdateVisualState(NavigationView navigationView)
@@ -126,6 +128,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
         PageIdOrTargetTagNavigationViewsDictionary.Clear();
         PageTypeNavigationViewsDictionary.Clear();
+        PageToNavigationItemDictionary.Clear();
 
         ClearJournal();
 
@@ -198,7 +201,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected virtual void AutoSuggestBoxSymbolButtonOnClick(object sender, RoutedEventArgs e)
     {
         SetCurrentValue(IsPaneOpenProperty, !IsPaneOpen);
-        _ = AutoSuggestBox?.Focus();
+
+        // Should not call .Focus() immediately.
+        _ = Dispatcher.BeginInvoke(
+            () => AutoSuggestBox?.Focus(),
+            System.Windows.Threading.DispatcherPriority.Input
+        );
     }
 
     /// <summary>
@@ -507,6 +515,16 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(e), e.Action, $"Unsupported action: {e.Action}");
+        }
+
+        UpdateBreadcrumbContents();
+    }
+
+    private void UpdateBreadcrumbContents()
+    {
+        foreach (var breadcrumbItem in _breadcrumbBarItems)
+        {
+            breadcrumbItem.UpdateFromSource();
         }
     }
 }

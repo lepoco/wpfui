@@ -14,11 +14,18 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:GalleryNavigationPresenter}">
                     <ItemsControl ItemsSource="{TemplateBinding ItemsSource}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type models:NavigationCard}">
                                 <ui:CardAction
+                                    Width="320"
+                                    Height="90"
                                     Margin="4"
-                                    HorizontalAlignment="Stretch"
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Stretch"
                                     Command="{Binding TemplateButtonCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:GalleryNavigationPresenter}, Mode=OneWay}"
                                     CommandParameter="{Binding PageType, Mode=OneTime}"
@@ -31,30 +38,21 @@
                                     </ui:CardAction.Icon>
                                     <StackPanel>
                                         <ui:TextBlock
-                                            Margin="0"
+                                            FontSize="16"
                                             FontTypography="BodyStrong"
                                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                             Text="{Binding Name, Mode=OneTime}"
-                                            TextWrapping="WrapWithOverflow" />
+                                            TextWrapping="Wrap" />
                                         <ui:TextBlock
                                             Appearance="Secondary"
+                                            FontSize="12"
                                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                             Text="{Binding Description, Mode=OneTime}"
-                                            TextWrapping="WrapWithOverflow" />
+                                            TextWrapping="Wrap" />
                                     </StackPanel>
                                 </ui:CardAction>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ui:VirtualizingWrapPanel
-                                    IsItemsHost="True"
-                                    ItemSize="290,80"
-                                    Orientation="Vertical"
-                                    SpacingMode="Uniform"
-                                    StretchItems="True" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </ControlTemplate>
             </Setter.Value>

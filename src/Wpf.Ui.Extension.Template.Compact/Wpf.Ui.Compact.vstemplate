@@ -39,7 +39,6 @@
       </Folder>
       <Folder Name="Services" TargetFolderName="Services">
         <ProjectItem ReplaceParameters="true" TargetFileName="ApplicationHostService.cs">ApplicationHostService.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="PageService.cs">PageService.cs</ProjectItem>
       </Folder>
       <Folder Name="ViewModels" TargetFolderName="ViewModels">
         <Folder Name="Pages" TargetFolderName="Pages">

@@ -54,7 +54,7 @@ public partial class InfoBarViewModel : ViewModel
             1 => InfoBarSeverity.Success,
             2 => InfoBarSeverity.Warning,
             3 => InfoBarSeverity.Error,
-            _ => InfoBarSeverity.Informational
+            _ => InfoBarSeverity.Informational,
         };
     }
 }

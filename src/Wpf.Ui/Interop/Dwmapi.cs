@@ -17,6 +17,7 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable CA1060 // Move pinvokes to native methods class
 
 using System.Runtime.InteropServices;
 
@@ -34,7 +35,7 @@ internal static class Dwmapi
     {
         DWM_CLOAKED_APP = 0x00000001,
         DWM_CLOAKED_SHELL = 0x00000002,
-        DWM_CLOAKED_INHERITED = 0x00000004
+        DWM_CLOAKED_INHERITED = 0x00000004,
     }
 
     /// <summary>
@@ -121,7 +122,7 @@ internal static class Dwmapi
         /// This is set if app compat has blocked tabs for this window. Can be overridden per window by setting
         /// DWMWA_TABBING_ENABLED to TRUE. That does not override any other tabbing requirements.
         /// </summary>
-        DWMTWR_APP_COMPAT = 0x0200
+        DWMTWR_APP_COMPAT = 0x0200,
     }
 
     /// <summary>
@@ -133,7 +134,7 @@ internal static class Dwmapi
         DEFAULT = 0,
         DONOTROUND = 1,
         ROUND = 2,
-        ROUNDSMALL = 3
+        ROUNDSMALL = 3,
     }
 
     /// <summary>
@@ -165,7 +166,7 @@ internal static class Dwmapi
         /// <summary>
         /// Sets blurred wallpaper effect, like Mica without tint.
         /// </summary>
-        DWMSBT_TABBEDWINDOW = 4
+        DWMSBT_TABBEDWINDOW = 4,
     }
 
     /// <summary>
@@ -191,7 +192,7 @@ internal static class Dwmapi
         /// <summary>
         /// Sentinel value.
         /// </summary>
-        DWMNCRP_LAST
+        DWMNCRP_LAST,
     }
 
     /// <summary>
@@ -217,7 +218,7 @@ internal static class Dwmapi
         /// <summary>
         /// Sentinel value.
         /// </summary>
-        DWMFLIP3D_LAST
+        DWMFLIP3D_LAST,
     }
 
     /// <summary>
@@ -360,49 +361,7 @@ internal static class Dwmapi
         /// Indicates whether the window should use the Mica effect.
         /// <para>Windows 11 and above.</para>
         /// </summary>
-        DWMWA_MICA_EFFECT = 1029
-    }
-
-    /// <summary>
-    /// Represents the current DWM color accent settings.
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DWMCOLORIZATIONPARAMS
-    {
-        /// <summary>
-        /// ColorizationColor
-        /// </summary>
-        public uint clrColor;
-
-        /// <summary>
-        /// ColorizationAfterglow.
-        /// </summary>
-        public uint clrAfterGlow;
-
-        /// <summary>
-        /// ColorizationColorBalance.
-        /// </summary>
-        public uint nIntensity;
-
-        /// <summary>
-        /// ColorizationAfterglowBalance.
-        /// </summary>
-        public uint clrAfterGlowBalance;
-
-        /// <summary>
-        /// ColorizationBlurBalance.
-        /// </summary>
-        public uint clrBlurBalance;
-
-        /// <summary>
-        /// ColorizationGlassReflectionIntensity.
-        /// </summary>
-        public uint clrGlassReflectionIntensity;
-
-        /// <summary>
-        /// ColorizationOpaqueBlend.
-        /// </summary>
-        public bool fOpaque;
+        DWMWA_MICA_EFFECT = 1029,
     }
 
     /// <summary>
@@ -433,7 +392,7 @@ internal static class Dwmapi
         DWMSC_HOLD,
         DWMSC_PENBARREL,
         DWMSC_NONE,
-        DWMSC_ALL
+        DWMSC_ALL,
     }
 
     /// <summary>
@@ -455,7 +414,7 @@ internal static class Dwmapi
         /// <summary>
         /// Sentinel value.
         /// </summary>
-        DWM_SOURCE_FRAME_SAMPLING_LAST
+        DWM_SOURCE_FRAME_SAMPLING_LAST,
     }
 
     /// <summary>
@@ -666,13 +625,7 @@ internal static class Dwmapi
         [In] ref int pvAttributeValue,
         [In] int cbAttribute
     );
-
-    /// <summary>
-    /// The feature is not included in the Microsoft documentation. Reads Desktop Window Manager (DWM) color information.
-    /// </summary>
-    /// <param name="dwParameters">A pointer to a reference value that will hold the color information.</param>
-    [DllImport(Libraries.Dwmapi, EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
-    public static extern void DwmGetColorizationParameters([Out] out DWMCOLORIZATIONPARAMS dwParameters);
 }
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore CA1060 // Move pinvokes to native methods class

@@ -5,7 +5,6 @@
 
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
-using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 
 // ReSharper disable once CheckNamespace
@@ -226,12 +225,41 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
             TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
             TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
-            _
-                => throw new ArgumentOutOfRangeException(
-                    "e.NewValue",
-                    buttonType,
-                    $"Unsupported button type: {buttonType}."
-                )
+            _ => throw new ArgumentOutOfRangeException(
+                "e.NewValue",
+                buttonType,
+                $"Unsupported button type: {buttonType}."
+            ),
         };
     }
+
+    // TODO: Incorrectly calculates mouse position for high DPI displays.
+    // PresentationSource presentationSource = null;
+    // protected bool IsMouseOverElement(nint lParam)
+    // {
+    //    System.Drawing.Point winPoint;
+    //    bool gotCursorPos = User32.GetCursorPos(out winPoint);
+
+    //    if (!gotCursorPos)
+    //    {
+    //        int fallbackX = unchecked((short)((long)lParam & 0xFFFF));
+    //        int fallbackY = unchecked((short)(((long)lParam >> 16) & 0xFFFF));
+    //        winPoint = new System.Drawing.Point(fallbackX, fallbackY);
+    //    }
+
+    //    var screenPoint = new System.Windows.Point(winPoint.X, winPoint.Y);
+
+    //    presentationSource ??= PresentationSource.FromVisual(this);
+
+    //    if (presentationSource?.CompositionTarget != null)
+    //    {
+    //        screenPoint = presentationSource.CompositionTarget.TransformFromDevice.Transform(screenPoint);
+    //    }
+
+    //    var localPoint = this.PointFromScreen(screenPoint);
+
+    //    var hitTestRect = new System.Windows.Rect(0, 0, this.ActualWidth, this.ActualHeight);
+
+    //    return hitTestRect.Contains(localPoint);
+    //}
 }

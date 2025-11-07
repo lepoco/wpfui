@@ -5,11 +5,12 @@
 
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
-/* TODO: Mask (with placeholder); Clipboard paste; */
-/* TODO: Constant decimals when formatting. Although this can actually be done with NumberFormatter. */
-/* TODO: Disable expression by default */
-/* TODO: Lock to digit characters only by property */
-
+// TODO: Mask (with placeholder); Clipboard paste;
+// TODO: Constant decimals when formatting. Although this can actually be done with NumberFormatter.
+// TODO: Disable expression by default
+// TODO: Lock to digit characters only by property
+//
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -19,8 +20,16 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a control that can be used to display and edit numbers.
 /// </summary>
-public class NumberBox : Wpf.Ui.Controls.TextBox
+[TemplatePart(Name = PART_ClearButton, Type = typeof(Button))]
+[TemplatePart(Name = PART_InlineIncrementButton, Type = typeof(RepeatButton))]
+[TemplatePart(Name = PART_InlineDecrementButton, Type = typeof(RepeatButton))]
+public partial class NumberBox : Wpf.Ui.Controls.TextBox
 {
+    // Template part names
+    private const string PART_ClearButton = nameof(PART_ClearButton);
+    private const string PART_InlineIncrementButton = nameof(PART_InlineIncrementButton);
+    private const string PART_InlineDecrementButton = nameof(PART_InlineDecrementButton);
+
     private bool _valueUpdating;
 
     /// <summary>Identifies the <see cref="Value"/> dependency property.</summary>
@@ -114,7 +123,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
         nameof(ValueChanged),
         RoutingStrategy.Bubble,
-        typeof(RoutedEventHandler),
+        typeof(NumberBoxValueChangedEvent),
         typeof(NumberBox)
     );
 
@@ -211,7 +220,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Occurs after the user triggers evaluation of new input by pressing the Enter key, clicking a spin button, or by changing focus.
     /// </summary>
-    public event RoutedEventHandler ValueChanged
+    public event NumberBoxValueChangedEvent ValueChanged
     {
         add => AddHandler(ValueChangedEvent, value);
         remove => RemoveHandler(ValueChangedEvent, value);
@@ -233,10 +242,8 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <inheritdoc />
-    protected override void OnKeyUp(KeyEventArgs e)
+    protected override void OnPreviewKeyDown(KeyEventArgs e)
     {
-        base.OnKeyUp(e);
-
         if (IsReadOnly)
         {
             return;
@@ -246,16 +253,30 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         {
             case Key.PageUp:
                 StepValue(LargeChange);
+                e.Handled = true;
                 break;
             case Key.PageDown:
                 StepValue(-LargeChange);
+                e.Handled = true;
                 break;
             case Key.Up:
                 StepValue(SmallChange);
+                e.Handled = true;
                 break;
             case Key.Down:
                 StepValue(-SmallChange);
+                e.Handled = true;
                 break;
+        }
+
+        base.OnPreviewKeyDown(e);
+    }
+
+    /// <inheritdoc />
+    protected override void OnPreviewKeyUp(KeyEventArgs e)
+    {
+        switch (e.Key)
+        {
             case Key.Enter:
                 if (TextWrapping != TextWrapping.Wrap)
                 {
@@ -263,36 +284,16 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
                     MoveCaretToTextEnd();
                 }
 
+                e.Handled = true;
                 break;
-        }
-    }
 
-    /// <inheritdoc />
-    protected override void OnTemplateButtonClick(string? parameter)
-    {
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO: {typeof(NumberBox)} button clicked with param: {parameter}",
-            "Wpf.Ui.NumberBox"
-        );
-
-        switch (parameter)
-        {
-            case "clear":
-                OnClearButtonClick();
-
-                break;
-            case "increment":
-                StepValue(SmallChange);
-
-                break;
-            case "decrement":
-                StepValue(-SmallChange);
-
+            case Key.Escape:
+                UpdateTextToValue();
+                e.Handled = true;
                 break;
         }
 
-        // NOTE: Focus looks and works well with mouse and Clear button. But it sucks for spin buttons
-        _ = Focus();
+        base.OnPreviewKeyUp(e);
     }
 
     /// <inheritdoc />
@@ -316,12 +317,14 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }*/
 
     /// <inheritdoc />
-    protected override void OnTemplateChanged(
-        System.Windows.Controls.ControlTemplate oldTemplate,
-        System.Windows.Controls.ControlTemplate newTemplate
-    )
+    public override void OnApplyTemplate()
     {
-        base.OnTemplateChanged(oldTemplate, newTemplate);
+        SubscribeToButtonClickEvent<System.Windows.Controls.Button>(
+            PART_ClearButton,
+            () => OnClearButtonClick()
+        );
+        SubscribeToButtonClickEvent<RepeatButton>(PART_InlineIncrementButton, () => StepValue(SmallChange));
+        SubscribeToButtonClickEvent<RepeatButton>(PART_InlineDecrementButton, () => StepValue(-SmallChange));
 
         // If Text has been set, but Value hasn't, update Value based on Text.
         if (string.IsNullOrEmpty(Text) && Value != null)
@@ -331,6 +334,21 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         else
         {
             UpdateTextToValue();
+        }
+
+        base.OnApplyTemplate();
+    }
+
+    private void SubscribeToButtonClickEvent<TButton>(string elementName, Action action)
+        where TButton : ButtonBase
+    {
+        if (GetTemplateChild(elementName) is TButton button)
+        {
+            button.Click += (s, e) =>
+            {
+                Debug.InfoWriteLineForButtonClick(s);
+                action();
+            };
         }
     }
 
@@ -360,7 +378,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
         if (!Equals(newValue, oldValue))
         {
-            RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
+            RaiseEvent(new NumberBoxValueChangedEventArgs(oldValue, newValue, this));
         }
 
         UpdateTextToValue();
@@ -384,10 +402,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
     private void StepValue(double? change)
     {
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO: {typeof(NumberBox)} {nameof(StepValue)} raised, change {change}",
-            "Wpf.Ui.NumberBox"
-        );
+        Debug.InfoWriteLine($"{typeof(NumberBox)} {nameof(StepValue)} raised, change {change}");
 
         // Before adjusting the value, validate the contents of the textbox so we don't override it.
         ValidateInput();
@@ -469,12 +484,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
     private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not NumberBox numberBox)
+        if (d is NumberBox numberBox)
         {
-            return;
+            numberBox.OnValueChanged(d, (double?)e.OldValue);
         }
-
-        numberBox.OnValueChanged(d, (double?)e.OldValue);
     }
 
     private static void OnNumberFormatterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -485,5 +498,41 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
                 $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}"
             );
         }
+    }
+
+    private static partial class Debug
+    {
+        public static partial void InfoWriteLine(string debugLine);
+
+        public static partial void InfoWriteLineForButtonClick(object sender);
+
+#if DEBUG
+        public static partial void InfoWriteLine(string debugLine)
+        {
+            System.Diagnostics.Debug.WriteLine($"INFO: {debugLine}", "Wpf.Ui.NumberBox");
+        }
+
+        public static partial void InfoWriteLineForButtonClick(object sender)
+        {
+            var buttonName =
+                (sender is System.Windows.Controls.Primitives.ButtonBase element)
+                    ? element.Name
+                    : throw new InvalidCastException(nameof(sender));
+
+            InfoWriteLine($"{typeof(NumberBox)} {buttonName} clicked");
+        }
+
+#else
+        public static partial void InfoWriteLine(string debugLine)
+        {
+            // Do nothing in non-DEBUG builds
+        }
+
+        public static partial void InfoWriteLineForButtonClick(object sender)
+        {
+            // Do nothing in non-DEBUG builds
+        }
+
+#endif // DEBUG
     }
 }

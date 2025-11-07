@@ -15,6 +15,8 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable CA1060 // Move pinvokes to native methods class
+
 using System.Runtime.InteropServices;
 
 namespace Wpf.Ui.Interop;
@@ -35,7 +37,7 @@ internal static class ShObjIdl
         THBF_DISMISSONCLICK = 0x2,
         THBF_NOBACKGROUND = 0x4,
         THBF_HIDDEN = 0x8,
-        THBF_NONINTERACTIVE = 0x10
+        THBF_NONINTERACTIVE = 0x10,
     }
 
     /// <summary>
@@ -47,7 +49,7 @@ internal static class ShObjIdl
         THB_BITMAP = 0x1,
         THB_ICON = 0x2,
         THB_TOOLTIP = 0x4,
-        THB_FLAGS = 0x8
+        THB_FLAGS = 0x8,
     }
 
     /// <summary>
@@ -60,7 +62,7 @@ internal static class ShObjIdl
         TBPF_INDETERMINATE = 0x1,
         TBPF_NORMAL = 0x2,
         TBPF_ERROR = 0x4,
-        TBPF_PAUSED = 0x8
+        TBPF_PAUSED = 0x8,
     }
 
     /// <summary>
@@ -73,7 +75,7 @@ internal static class ShObjIdl
         STPF_USEAPPTHUMBNAILALWAYS = 0x1,
         STPF_USEAPPTHUMBNAILWHENACTIVE = 0x2,
         STPF_USEAPPPEEKALWAYS = 0x4,
-        STPF_USEAPPPEEKWHENACTIVE = 0x8
+        STPF_USEAPPPEEKWHENACTIVE = 0x8,
     }
 
     /// <summary>
@@ -89,7 +91,7 @@ internal static class ShObjIdl
         EBO_NOWRAPPERWINDOW = 0x10,
         EBO_HTMLSHAREPOINTVIEW = 0x20,
         EBO_NOBORDER = 0x40,
-        EBO_NOPERSISTVIEWSTATE = 0x80
+        EBO_NOPERSISTVIEWSTATE = 0x80,
     }
 
     /// <summary>
@@ -99,7 +101,7 @@ internal static class ShObjIdl
     {
         EBF_NONE = 0,
         EBF_SELECTFROMDATAOBJECT = 0x100,
-        EBF_NODROPTARGET = 0x200
+        EBF_NODROPTARGET = 0x200,
     }
 
     /// <summary>
@@ -238,3 +240,4 @@ internal static class ShObjIdl
 }
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore CA1060 // Move pinvokes to native methods class
