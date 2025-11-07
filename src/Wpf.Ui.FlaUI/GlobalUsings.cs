@@ -3,8 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-global using System.Reflection;
-global using AwesomeAssertions;
+global using System.Collections.Generic;
+global using System.Linq;
+global using FlaUI.Core;
 global using FlaUI.Core.AutomationElements;
-global using Wpf.Ui.FlaUI;
-global using Wpf.Ui.Gallery.IntegrationTests.Fixtures;
+global using FlaUI.Core.Exceptions;
+global using FlaUI.Core.Input;
+global using FlaUI.Core.Patterns;
+global using FlaUI.Core.WindowsAPI;

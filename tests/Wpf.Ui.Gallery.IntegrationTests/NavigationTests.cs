@@ -17,17 +17,15 @@ public sealed class NavigationTests : UiTest
 
         autoSuggestBox
             .Should()
-            .NotBeNull("because NavigationAutoSuggestBox should be present in the main window.");
+            .NotBeNull("because NavigationAutoSuggestBox should be present in the main window");
 
         autoSuggestBox.As<AutoSuggestBox>().Enter("Settings");
 
-        await Wait(5);
+        await Wait(1);
 
-        AutomationElement? aboutHeader = FindFirst(c => c.ByText("About"));
-
-        aboutHeader
+        FindFirst(c => c.ByText("About"))
             .Should()
-            .NotBeNull("because Settings page should be displayed after clicking the Settings button.");
+            .NotBeNull("because Settings page should be displayed after clicking the Settings button");
     }
 
     [Fact]
@@ -36,15 +34,13 @@ public sealed class NavigationTests : UiTest
         AutomationElement? settingsButton = FindFirst("NavigationFooterItems")
             ?.FindFirstDescendant(c => c.ByText("Settings"));
 
-        settingsButton.Should().NotBeNull("because NavigationView should be present in the main window.");
+        settingsButton.Should().NotBeNull("because NavigationView should be present in the main window");
         settingsButton.Click();
 
-        await Wait(5);
+        await Wait(1);
 
-        AutomationElement? aboutHeader = FindFirst(c => c.ByText("About"));
-
-        aboutHeader
+        FindFirst(c => c.ByText("About"))
             .Should()
-            .NotBeNull("because Settings page should be displayed after clicking the Settings button.");
+            .NotBeNull("because Settings page should be displayed after clicking the Settings button");
     }
 }

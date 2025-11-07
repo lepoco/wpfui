@@ -1,49 +1,46 @@
 <Page
-  x:Class="Wpf.Ui.Gallery.Views.Pages.DateAndTime.CalendarDatePickerPage"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.DateAndTime"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-  Title="CalendarDatePickerPage"
-  controls:PageControlDocumentation.DocumentationType="{x:Type ui:CalendarDatePicker}"
-  d:DataContext="{d:DesignInstance local:CalendarDatePickerPage,
+    x:Class="Wpf.Ui.Gallery.Views.Pages.DateAndTime.CalendarDatePickerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.DateAndTime"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="CalendarDatePickerPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:CalendarDatePicker}"
+    d:DataContext="{d:DesignInstance local:CalendarDatePickerPage,
                                      IsDesignTimeCreatable=False}"
-  d:DesignHeight="450"
-  d:DesignWidth="800"
-  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  mc:Ignorable="d"
->
-  <Grid Margin="0,0,0,24">
-    <controls:ControlExample
-      Margin="0"
-      HeaderText="WPF UI CalendarDatePicker."
-      XamlCode="&lt;ui:CalendarDatePicker Date=&quot;{x:Static sys:DateTime.Today}&quot; IsTodayHighlighted=&quot;True&quot; /&gt;"
-    >
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <ui:CalendarDatePicker
-          x:Name="CalendarDatePicker"
-          Grid.Column="0"
-          Content="Pick a date"
-          Date="{x:Static sys:DateTime.Today}"
-          IsTodayHighlighted="True"
-        />
-        <ui:TextBlock
-          Grid.Column="1"
-          Margin="8,0,0,0"
-          VerticalAlignment="Center"
-          Text="{Binding ElementName=CalendarDatePicker, Path=Date}"
-        />
-      </Grid>
-    </controls:ControlExample>
-  </Grid>
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="WPF UI CalendarDatePicker."
+            XamlCode="&lt;ui:CalendarDatePicker Date=&quot;{x:Static sys:DateTime.Today}&quot; IsTodayHighlighted=&quot;True&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:CalendarDatePicker
+                    x:Name="CalendarDatePicker"
+                    Grid.Column="0"
+                    Content="Pick a date"
+                    Date="{x:Static sys:DateTime.Today}"
+                    IsTodayHighlighted="True" />
+                <ui:TextBlock
+                    Grid.Column="1"
+                    Margin="8,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding ElementName=CalendarDatePicker, Path=Date}" />
+            </Grid>
+        </controls:ControlExample>
+    </Grid>
 </Page>

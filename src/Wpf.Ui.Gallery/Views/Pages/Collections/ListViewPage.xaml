@@ -1,154 +1,156 @@
 <Page
-  x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.ListViewPage"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Collections"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
-  xmlns:system="clr-namespace:System;assembly=System.Runtime"
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-  Title="ListViewPage"
-  d:DataContext="{d:DesignInstance local:ListViewPage,
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.ListViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Collections"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="ListViewPage"
+    d:DataContext="{d:DesignInstance local:ListViewPage,
                                      IsDesignTimeCreatable=False}"
-  d:DesignHeight="750"
-  d:DesignWidth="800"
-  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-  mc:Ignorable="d"
->
-  <StackPanel Margin="0,0,0,24">
-    <controls:ControlExample Margin="0" HeaderText="Basic ListView with Simple DataTemplate.">
-      <controls:ControlExample.XamlCode>
-                &lt;ListView ItemsSource="{Binding ViewModel.MyCollection}"&gt;&lt;&gt;\n
+    d:DesignHeight="750"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample Margin="0" HeaderText="Basic ListView with Simple DataTemplate.">
+            <controls:ControlExample.XamlCode>
+                &lt;ListView ItemsSource=&quot;{Binding ViewModel.MyCollection}&quot;&gt;&lt;&gt;\n
                 \t&lt;ListView.ItemTemplate&gt;\n
-                \t\t&lt;DataTemplate DataType="{x:Type models:Person}" &gt;\n
-                \t\t\t&lt;TextBlock Margin="8,4" Text="{Binding Name}"/&gt;\n
+                \t\t&lt;DataTemplate DataType=&quot;{x:Type models:Person}&quot; &gt;\n
+                \t\t\t&lt;TextBlock Margin=&quot;8,4&quot; Text=&quot;{Binding Name}&quot;/&gt;\n
                 \t\t&lt;/DataTemplate&gt;\n
                 \t&lt;/ListView.ItemTemplate&gt;\n
                 &lt;/ListView&gt;
             </controls:ControlExample.XamlCode>
-      <ui:ListView
-        MaxHeight="200"
-        d:ItemsSource="{d:SampleData ItemCount=2}"
-        ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
-        SelectedIndex="2"
-        SelectionMode="Single"
-      >
-        <ui:ListView.ItemTemplate>
-          <DataTemplate DataType="{x:Type models:Person}">
-            <TextBlock Margin="8,4" Text="{Binding Name, Mode=OneWay}" />
-          </DataTemplate>
-        </ui:ListView.ItemTemplate>
-      </ui:ListView>
-    </controls:ControlExample>
-    <controls:ControlExample Margin="0,36,0,0" HeaderText="ListView with Selection Support.">
-      <controls:ControlExample.XamlCode>
-                &lt;ListView ItemsSource="{Binding ViewModel.MyCollection}"&gt;&lt;&gt;\n
+            <ui:ListView
+                MaxHeight="200"
+                d:ItemsSource="{d:SampleData ItemCount=2}"
+                ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
+                SelectedIndex="2"
+                SelectionMode="Single">
+                <ui:ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:Person}">
+                        <TextBlock Margin="8,4" Text="{Binding Name, Mode=OneWay}" />
+                    </DataTemplate>
+                </ui:ListView.ItemTemplate>
+            </ui:ListView>
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="ListView with Selection Support.">
+            <controls:ControlExample.XamlCode>
+                &lt;ListView ItemsSource=&quot;{Binding ViewModel.MyCollection}&quot;&gt;&lt;&gt;\n
                 \t&lt;ListView.ItemTemplate&gt;\n
-                \t\t&lt;DataTemplate DataType="{x:Type models:Person}" &gt;\n
-                \t\t\t&lt;TextBlock Margin="0,5,0,5" Text="{Binding Name}"/&gt;\n
+                \t\t&lt;DataTemplate DataType=&quot;{x:Type models:Person}&quot; &gt;\n
+                \t\t\t&lt;TextBlock Margin=&quot;0,5,0,5&quot; Text=&quot;{Binding Name}&quot;/&gt;\n
                 \t\t&lt;/DataTemplate&gt;\n
                 \t&lt;/ListView.ItemTemplate&gt;\n
                 &lt;/ListView&gt;
             </controls:ControlExample.XamlCode>
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <ui:ListView
-          Grid.Column="0"
-          MaxHeight="200"
-          d:ItemsSource="{d:SampleData ItemCount=2}"
-          ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
-          SelectedIndex="1"
-          SelectionMode="{Binding ViewModel.ListViewSelectionMode, Mode=OneWay}"
-        >
-          <ui:ListView.ItemTemplate>
-            <DataTemplate DataType="{x:Type models:Person}">
-              <Grid Margin="8,0">
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="*" />
-                  <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <Grid>
                 <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto" />
-                  <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Ellipse
-                  x:Name="Ellipse"
-                  Grid.RowSpan="2"
-                  Width="32"
-                  Height="32"
-                  Margin="6"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  Fill="{ui:ThemeResource ControlStrongStrokeColorDefaultBrush}"
-                />
-                <TextBlock
-                  Grid.Row="0"
-                  Grid.Column="1"
-                  Margin="12,6,0,0"
-                  FontWeight="Bold"
-                  Text="{Binding Name, Mode=OneWay}"
-                />
-                <TextBlock
-                  Grid.Row="1"
-                  Grid.Column="1"
-                  Margin="12,0,0,6"
-                  Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                  Text="{Binding Company, Mode=OneWay}"
-                />
-              </Grid>
-            </DataTemplate>
-          </ui:ListView.ItemTemplate>
-        </ui:ListView>
-        <StackPanel Grid.Column="1" MinWidth="120" Margin="12,0,0,0" VerticalAlignment="Top">
-          <Label Content="Selection mode" Target="{Binding ElementName=SelectionModeComboBox}" />
-          <ComboBox
-            x:Name="SelectionModeComboBox"
-            SelectedIndex="{Binding ViewModel.ListViewSelectionModeComboBoxSelectedIndex, Mode=TwoWay}"
-          >
-            <ComboBoxItem Content="Single" />
-            <ComboBoxItem Content="Multiple" />
-            <ComboBoxItem Content="Extended" />
-          </ComboBox>
-        </StackPanel>
-      </Grid>
-    </controls:ControlExample>
-    <controls:ControlExample Margin="0,36,0,0" HeaderText="ListView with GridView">
-      <controls:ControlExample.XamlCode>
-                &lt;ListView ItemsSource="{Binding ViewModel.BasicListViewItems}"&gt;\n
+                <ui:ListView
+                    Grid.Column="0"
+                    MaxHeight="200"
+                    d:ItemsSource="{d:SampleData ItemCount=2}"
+                    ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
+                    SelectedIndex="1"
+                    SelectionMode="{Binding ViewModel.ListViewSelectionMode, Mode=OneWay}">
+                    <ui:ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:Person}">
+                            <Grid Margin="8,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Ellipse
+                                    x:Name="Ellipse"
+                                    Grid.RowSpan="2"
+                                    Width="32"
+                                    Height="32"
+                                    Margin="6"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Fill="{ui:ThemeResource ControlStrongStrokeColorDefaultBrush}" />
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="12,6,0,0"
+                                    FontWeight="Bold"
+                                    Text="{Binding Name, Mode=OneWay}" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="12,0,0,6"
+                                    Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                    Text="{Binding Company, Mode=OneWay}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ui:ListView.ItemTemplate>
+                </ui:ListView>
+                <StackPanel
+                    Grid.Column="1"
+                    MinWidth="120"
+                    Margin="12,0,0,0"
+                    VerticalAlignment="Top">
+                    <Label Content="Selection mode" Target="{Binding ElementName=SelectionModeComboBox}" />
+                    <ComboBox x:Name="SelectionModeComboBox" SelectedIndex="{Binding ViewModel.ListViewSelectionModeComboBoxSelectedIndex, Mode=TwoWay}">
+                        <ComboBoxItem Content="Single" />
+                        <ComboBoxItem Content="Multiple" />
+                        <ComboBoxItem Content="Extended" />
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="ListView with GridView">
+            <controls:ControlExample.XamlCode>
+                &lt;ListView ItemsSource=&quot;{Binding ViewModel.BasicListViewItems}&quot;&gt;\n
                 \t&lt;ListView.View&gt;\n
                 \t\t&lt;ui:GridView&gt;\n
-                \t\t\t&lt;GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="First Name" MinWidth=&amp;quot;100&amp;quot; MaxWidth=&amp;quot;200&amp;quot;/&gt;\n
-                \t\t\t&lt;GridViewColumn DisplayMemberBinding="{Binding LastName}" Header="Last Name"/&gt;\n
-                \t\t\t&lt;GridViewColumn DisplayMemberBinding="{Binding Company}" Header="Company"/&gt;\n
+                \t\t\t&lt;GridViewColumn DisplayMemberBinding=&quot;{Binding FirstName}&quot; Header=&quot;First Name&quot; MinWidth=&amp;quot;100&amp;quot; MaxWidth=&amp;quot;200&amp;quot;/&gt;\n
+                \t\t\t&lt;GridViewColumn DisplayMemberBinding=&quot;{Binding LastName}&quot; Header=&quot;Last Name&quot;/&gt;\n
+                \t\t\t&lt;GridViewColumn DisplayMemberBinding=&quot;{Binding Company}&quot; Header=&quot;Company&quot;/&gt;\n
                 \t\t&lt;/ui:GridView&gt;\n
                 \t&lt;/ListView.View&gt;\n
                 &lt;/ListView&gt;
             </controls:ControlExample.XamlCode>
-      <ui:ListView
-        MaxHeight="200"
-        d:ItemsSource="{d:SampleData ItemCount=2}"
-        BorderThickness="0"
-        ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
-      >
-        <ui:ListView.View>
-          <ui:GridView>
-            <ui:GridViewColumn
-              MinWidth="100"
-              DisplayMemberBinding="{Binding FirstName}"
-              Header="First Name"
-            />
-            <ui:GridViewColumn MinWidth="100" DisplayMemberBinding="{Binding LastName}" Header="Last Name" />
-            <ui:GridViewColumn MinWidth="100" DisplayMemberBinding="{Binding Company}" Header="Company" />
-          </ui:GridView>
-        </ui:ListView.View>
-      </ui:ListView>
-    </controls:ControlExample>
-  </StackPanel>
+            <ui:ListView
+                MaxHeight="200"
+                d:ItemsSource="{d:SampleData ItemCount=2}"
+                BorderThickness="0"
+                ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}">
+                <ui:ListView.View>
+                    <ui:GridView>
+                        <ui:GridViewColumn
+                            MinWidth="100"
+                            DisplayMemberBinding="{Binding FirstName}"
+                            Header="First Name" />
+                        <ui:GridViewColumn
+                            MinWidth="100"
+                            DisplayMemberBinding="{Binding LastName}"
+                            Header="Last Name" />
+                        <ui:GridViewColumn
+                            MinWidth="100"
+                            DisplayMemberBinding="{Binding Company}"
+                            Header="Company" />
+                    </ui:GridView>
+                </ui:ListView.View>
+            </ui:ListView>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>
