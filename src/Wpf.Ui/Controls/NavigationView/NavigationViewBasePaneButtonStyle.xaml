@@ -57,7 +57,10 @@
                                 </ContentPresenter.RenderTransform>
                             </ContentPresenter>
 
-                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
+                            <ContentPresenter
+                                Grid.Column="1"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
