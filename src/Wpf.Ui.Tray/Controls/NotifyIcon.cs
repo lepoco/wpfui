@@ -246,6 +246,9 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         internalNotifyIconManager = new Wpf.Ui.Tray.Internal.InternalNotifyIconManager();
 
         RegisterHandlers();
+
+        // Listen for DataContext changes to update ContextMenu
+        DataContextChanged += OnDataContextChanged;
     }
 
     /// <summary>
@@ -363,6 +366,9 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
 
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIcon)} disposed.", "Wpf.Ui.NotifyIcon");
 
+        // Clean up event handlers
+        DataContextChanged -= OnDataContextChanged;
+
         Unregister();
 
         internalNotifyIconManager.Dispose();
@@ -375,6 +381,13 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     protected virtual void OnMenuChanged(ContextMenu contextMenu)
     {
         internalNotifyIconManager.ContextMenu = contextMenu;
+
+        // Set the DataContext for ContextMenu to enable binding
+        if (contextMenu.DataContext == null && DataContext != null)
+        {
+            contextMenu.DataContext = DataContext;
+        }
+
         internalNotifyIconManager.ContextMenu.SetCurrentValue(Control.FontSizeProperty, MenuFontSize);
     }
 
@@ -410,7 +423,6 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         if (e.NewValue is not bool newValue)
         {
             notifyIcon.FocusOnLeftClick = false;
-
             return;
         }
 
@@ -427,7 +439,6 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         if (e.NewValue is not bool newValue)
         {
             notifyIcon.MenuOnRightClick = false;
-
             return;
         }
 
@@ -455,6 +466,12 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         internalNotifyIconManager.Icon = Icon;
         internalNotifyIconManager.MenuOnRightClick = MenuOnRightClick;
         internalNotifyIconManager.FocusOnLeftClick = FocusOnLeftClick;
+
+        // Add Menu initialization
+        if (Menu != null)
+        {
+            OnMenuChanged(Menu);
+        }
     }
 
     private void RegisterHandlers()
@@ -465,5 +482,14 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
         internalNotifyIconManager.MiddleClick += OnMiddleClick;
         internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
+    }
+
+    private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+        // Menu?.DataContext = e.NewValue;
+        if (Menu != null)
+        {
+            Menu.DataContext = e.NewValue;
+        }
     }
 }

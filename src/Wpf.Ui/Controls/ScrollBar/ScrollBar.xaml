@@ -113,7 +113,7 @@
     </Style>
 
     <ControlTemplate x:Key="UiVerticalScrollBar" TargetType="{x:Type ScrollBar}">
-        <Grid>
+        <Grid HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="14" />
                 <RowDefinition Height="0.00001*" />
@@ -232,7 +232,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="UiHorizontalScrollBar" TargetType="{x:Type ScrollBar}">
-        <Grid>
+        <Grid VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="18" />
                 <ColumnDefinition Width="0.00001*" />

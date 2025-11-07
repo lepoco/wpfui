@@ -126,6 +126,7 @@
                                 Grid.Column="0"
                                 Height="16"
                                 VerticalAlignment="Center"
+                                AutomationProperties.AutomationId="TitleBarIcon"
                                 Content="{TemplateBinding Icon}"
                                 Focusable="False"
                                 RenderOptions.BitmapScalingMode="HighQuality" />
@@ -166,22 +167,26 @@
                                 <controls:TitleBarButton
                                     x:Name="PART_HelpButton"
                                     Grid.Column="0"
+                                    AutomationProperties.AutomationId="TitleBarHelpButton"
                                     ButtonType="Help" />
 
                                 <controls:TitleBarButton
                                     x:Name="PART_MinimizeButton"
                                     Grid.Column="1"
+                                    AutomationProperties.AutomationId="TitleBarMinimizeButton"
                                     ButtonType="Minimize" />
 
                                 <controls:TitleBarButton
                                     x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
+                                    AutomationProperties.AutomationId="TitleBarMaximizeButton"
                                     ButtonType="Maximize"
                                     IsHitTestVisible="True" />
 
                                 <controls:TitleBarButton
                                     x:Name="PART_CloseButton"
                                     Grid.Column="4"
+                                    AutomationProperties.AutomationId="TitleBarCloseButton"
                                     ButtonType="Close"
                                     MouseOverBackground="{DynamicResource PaletteRedBrush}"
                                     MouseOverButtonsForeground="White" />
