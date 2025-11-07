@@ -517,6 +517,47 @@
         </Setter>
     </Style>
 
+    <Style
+        x:Key="DefaultCalendarDropShadowStyle"
+        BasedOn="{StaticResource DefaultCalendarStyle}"
+        TargetType="{x:Type Calendar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Calendar}">
+                    <controls:EffectThicknessDecorator Thickness="30">
+                        <Border
+                            x:Name="PART_Root"
+                            Margin="0"
+                            Padding="0"
+                            Background="{DynamicResource CalendarViewBackground}"
+                            BorderBrush="{DynamicResource CalendarViewBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="20"
+                                    Direction="270"
+                                    Opacity="0.135"
+                                    ShadowDepth="10"
+                                    Color="#202020" />
+                            </Border.Effect>
+                            <CalendarItem
+                                x:Name="PART_CalendarItem"
+                                Margin="0"
+                                Padding="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Style="{TemplateBinding CalendarItemStyle}" />
+                        </Border>
+                    </controls:EffectThicknessDecorator>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style BasedOn="{StaticResource DefaultCalendarStyle}" TargetType="{x:Type Calendar}" />
 
 </ResourceDictionary>
