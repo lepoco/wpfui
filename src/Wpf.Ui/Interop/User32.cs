@@ -882,7 +882,7 @@ internal static class User32
     [DllImport(Libraries.User32, CharSet = CharSet.Auto, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool AdjustWindowRectEx(
-        [In] ref Rect lpRect,
+        [In] ref WinDef.RECT lpRect,
         [In] WS dwStyle,
         [In] [MarshalAs(UnmanagedType.Bool)] bool bMenu,
         [In] WS_EX dwExStyle
