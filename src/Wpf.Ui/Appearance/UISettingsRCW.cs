@@ -23,7 +23,7 @@ internal static class UISettingsRCW
         AccentLight1 = 6,
         AccentLight2 = 7,
         AccentLight3 = 8,
-        Complement = 9
+        Complement = 9,
     }
 
     public static object GetUISettingsInstance()
@@ -55,13 +55,17 @@ internal static class UISettingsRCW
         internal static extern int WindowsCreateString(
             [MarshalAs(UnmanagedType.LPWStr)] string sourceString,
             int length,
-            out IntPtr hstring);
+            out IntPtr hstring
+        );
 
         [DllImport("api-ms-win-core-winrt-string-l1-1-0.dll", CallingConvention = CallingConvention.StdCall)]
         internal static extern int WindowsDeleteString(IntPtr hstring);
 
         [DllImport("api-ms-win-core-winrt-l1-1-0.dll", CallingConvention = CallingConvention.StdCall)]
-        internal static extern int RoActivateInstance(IntPtr runtimeClassId, [MarshalAs(UnmanagedType.Interface)] out object instance);
+        internal static extern int RoActivateInstance(
+            IntPtr runtimeClassId,
+            [MarshalAs(UnmanagedType.Interface)] out object instance
+        );
     }
 
     [Guid("03021BE4-5254-4781-8194-5168F7D06D7B")]
@@ -82,7 +86,7 @@ internal static class UISettingsRCW
     {
         BaseTrust,
         PartialTrust,
-        FullTrust
+        FullTrust,
     }
 
     internal readonly record struct UIColor(byte A, byte R, byte G, byte B);

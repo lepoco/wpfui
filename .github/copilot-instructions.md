@@ -68,7 +68,6 @@ IMPORTANT: You should minimize output tokens as much as possible while maintaini
 IMPORTANT: You should NOT answer with unnecessary preamble or postamble (such as explaining your code or summarizing your action), unless the user asks you to.
 Answer the user's question directly, without elaboration, explanation, or details. One word answers are best. Avoid introductions, conclusions, and explanations.
 </tone_and_style>
-copilot_cache_control: {"type":"ephemeral"}
 
 The section below describes things you can do
 <capabilities>
@@ -139,7 +138,6 @@ public partial class AnchorPage : INavigableView<AnchorViewModel>
 </Page>
 ```
 </code_style>
-copilot_cache_control: {"type":"ephemeral"}
 
 We strive to write code that can be tested. To do this, we use XUnit v3, AwesomeAssertions (formerly FluentAssertions) and FlaUI. When we write unit tests, we write them as shown below.
 

@@ -17,7 +17,11 @@ public class ClipConverter : IMultiValueConverter
             return null;
         }
 
-        if (values[0] is not double width || values[1] is not double height || values[2] is not double percentage)
+        if (
+            values[0] is not double width
+            || values[1] is not double height
+            || values[2] is not double percentage
+        )
         {
             return null;
         }

@@ -207,17 +207,68 @@ Code Snippet Best Practices:
 4. Prefer external files over inline code for examples >20 lines
 </docfx_markdown_extensions>
 
-<response_format>
+<knowledge_crunching_approach>
+Documentation development is iterative. Gather context first, then refine through questions.
+
+Initial Assessment:
+1. What is being documented? (control, feature, workflow, concept)
+2. Who is the target user? (beginner, intermediate, advanced)
+3. What problem does this solve?
+4. What existing documentation exists on related topics?
+
+Ask Clarifying Questions When:
+- Control usage is ambiguous or has multiple scenarios
+- Platform requirements unclear (Windows version, .NET framework)
+- Dependencies or prerequisites not obvious from codebase
+- Breaking changes or migration concerns
+- Performance implications or best practices needed
+
+Example questions to ask:
+- "Should this cover MVVM integration or just basic XAML usage?"
+- "Are there Windows 11-specific features to document separately?"
+- "Is this replacing deprecated functionality? Should I note migration steps?"
+- "Should I document thread safety or async considerations?"
+
+Iterative Refinement:
+1. Present initial draft with core examples
+2. Ask: "Does this cover the primary use case, or should I expand on [specific scenario]?"
+3. Incorporate feedback and refine
+4. Verify technical accuracy by cross-referencing implementation
+5. Request final review of code examples
+
+Breadth vs Depth Strategy:
+- Start broad: Cover the most common 80% use case first
+- Add depth: Expand with edge cases, advanced scenarios, and troubleshooting
+- Link out: Reference related docs rather than duplicating content
+- Iterate: Ask if additional sections are needed before writing them
+
+Documentation Review Questions:
+- "I've covered basic usage and theming. Should I add sections on custom styling or performance optimization?"
+- "The current draft focuses on XAML. Do you need C# code-behind examples?"
+- "Should this include migration steps from WinUI 3 or other UI frameworks?"
+</knowledge_crunching_approach>
+
+<content_creation_workflow>
 When creating documentation:
-1. Check existing docs structure in /docs/documentation/
-2. Verify code examples work (search codebase for class names)
-3. Write content following the structure patterns
-4. No preamble - deliver documentation directly
-5. Ask clarifying questions ONLY if critical information is missing
+1. Search codebase to understand implementation and API surface
+2. Identify primary use case and target audience
+3. Draft core content with minimal but complete examples
+4. Ask clarifying questions about scope and depth
+5. Iterate based on feedback
+6. Verify all code examples execute correctly
+7. Cross-reference with existing documentation for consistency
 
 When updating documentation:
-1. Preserve existing structure and style
-2. Verify changes against current codebase
-3. Maintain consistency with other docs
-4. Update only what's necessary
-</response_format>
+1. Identify what changed in the codebase
+2. Preserve existing structure and style
+3. Update only affected sections
+4. Ask if scope should expand to cover related changes
+5. Verify changes against current codebase
+
+Delivery Format:
+- No preamble - deliver documentation directly
+- Ask questions AFTER presenting initial draft when scope is unclear
+- Present options: "I can expand this with [A, B, C]. Which would be most valuable?"
+- Iterate quickly based on feedback
+</content_creation_workflow>
+

@@ -15,10 +15,11 @@ internal class DatePickerButtonPaddingConverter : IMultiValueConverter
         if (values is [Thickness padding, Thickness buttonMargin, double buttonWidth])
         {
             return new Thickness(
-                                 padding.Left,
-                                 padding.Top,
-                                 padding.Right + buttonMargin.Left + buttonMargin.Right + buttonWidth,
-                                 padding.Bottom);
+                padding.Left,
+                padding.Top,
+                padding.Right + buttonMargin.Left + buttonMargin.Right + buttonWidth,
+                padding.Bottom
+            );
         }
 
         return default(Thickness);
