@@ -22,7 +22,13 @@ public class HwndProcEventArgs : EventArgs
 
     public IntPtr LParam { get; }
 
-    internal HwndProcEventArgs(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, bool isMouseOverDetectedHeaderContent)
+    internal HwndProcEventArgs(
+        IntPtr hwnd,
+        int msg,
+        IntPtr wParam,
+        IntPtr lParam,
+        bool isMouseOverDetectedHeaderContent
+    )
     {
         HWND = hwnd;
         Message = msg;

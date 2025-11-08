@@ -88,17 +88,17 @@
 <div class="row">
     <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
         <div class="stats">
-            <strong id="wpfui-downloads" class="display-4">105K</strong>Downloads
+            <strong id="wpfui-downloads" class="display-4">650K</strong>Downloads
         </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
         <div class="stats">
-            <strong id="wpfui-stars" class="display-4">5K</strong>GitHub Stars
+            <strong id="wpfui-stars" class="display-4">9K</strong>GitHub Stars
         </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
         <div class="stats">
-            <strong id="wpfui-forks" class="display-4">529</strong>Forks
+            <strong id="wpfui-forks" class="display-4">900</strong>Forks
         </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
