@@ -63,7 +63,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem(nameof(ThumbRate), typeof(ThumbRatePage)),
                 new NavigationViewItem(nameof(SplitButton), typeof(SplitButtonPage)),
                 new NavigationViewItem(nameof(Slider), typeof(SliderPage)),
-            }
+            },
         },
         new NavigationViewItem
         {
@@ -185,23 +185,23 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
     private ObservableCollection<Control> _trayMenuItems =
     [
         new Wpf.Ui.Controls.MenuItem()
-        { 
-            Header = "Home", 
+        {
+            Header = "Home",
             Tag = "tray_home",
-            Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 }
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
         },
         new Wpf.Ui.Controls.MenuItem()
-        { 
-            Header = "Settings", 
+        {
+            Header = "Settings",
             Tag = "tray_settings",
-            Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 }
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
         },
         new Separator(),
         new Wpf.Ui.Controls.MenuItem()
-        { 
-            Header = "Close", 
+        {
+            Header = "Close",
             Tag = "tray_close",
-            Icon = new SymbolIcon { Symbol = SymbolRegular.Dismiss24 }
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Dismiss24 },
         },
     ];
 }

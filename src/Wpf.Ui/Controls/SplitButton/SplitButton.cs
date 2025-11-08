@@ -95,8 +95,10 @@ public class SplitButton : Button
     {
         if (SplitButtonToggleButton != null)
         {
-            SplitButtonToggleButton.PreviewMouseLeftButtonUp -= OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
-            SplitButtonToggleButton.PreviewMouseLeftButtonUp += OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp -=
+                OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp +=
+                OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
         }
     }
 
@@ -172,7 +174,8 @@ public class SplitButton : Button
     {
         if (SplitButtonToggleButton != null)
         {
-            SplitButtonToggleButton.PreviewMouseLeftButtonUp -= OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
+            SplitButtonToggleButton.PreviewMouseLeftButtonUp -=
+                OnSplitButtonToggleButtonOnPreviewMouseLeftButtonUp;
         }
     }
 

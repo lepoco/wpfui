@@ -50,11 +50,11 @@ public static class UnsafeNativeMethods
         int pvAttribute = (int)UnsafeReflection.Cast(cornerPreference);
 
         return Dwmapi.DwmSetWindowAttribute(
-            handle,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int))
-        ) == 0;
+                handle,
+                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE,
+                ref pvAttribute,
+                Marshal.SizeOf(typeof(int))
+            ) == 0;
     }
 
     /// <summary>
@@ -64,8 +64,7 @@ public static class UnsafeNativeMethods
     /// <param name="color">The color.</param>
     /// <returns><see langword="true" /> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyBorderColor(Window window, Color color) =>
-        GetHandle(window, out IntPtr windowHandle)
-     && ApplyBorderColor(windowHandle, color);
+        GetHandle(window, out IntPtr windowHandle) && ApplyBorderColor(windowHandle, color);
 
     /// <summary>
     /// Tries to apply the color of the border.
@@ -74,8 +73,7 @@ public static class UnsafeNativeMethods
     /// <param name="color">The color.</param>
     /// <returns><see langword="true" /> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyBorderColor(Window window, int color) =>
-        GetHandle(window, out IntPtr windowHandle)
-     && ApplyBorderColor(windowHandle, color);
+        GetHandle(window, out IntPtr windowHandle) && ApplyBorderColor(windowHandle, color);
 
     /// <summary>
     /// Tries to apply the color of the border.
@@ -106,7 +104,35 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        return Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR, ref color, sizeof(int)) == 0;
+        return Dwmapi.DwmSetWindowAttribute(
+                handle,
+                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR,
+                ref color,
+                sizeof(int)
+            ) == 0;
+    }
+
+    /// <summary>
+    /// Checks whether accent color on title bars and window borders is enabled in Windows settings.
+    /// </summary>
+    /// <returns><see langword="true"/> if accent color on title bars is enabled.</returns>
+    public static bool IsAccentColorOnTitleBarsEnabled()
+    {
+        try
+        {
+            using RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\DWM");
+
+            if (key?.GetValue("ColorPrevalence") is int value)
+            {
+                return value == 1;
+            }
+        }
+        catch
+        {
+            // Ignore registry access errors
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -142,7 +168,8 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        return Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int))) == 0;
+        return Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)))
+            == 0;
     }
 
     /// <summary>
@@ -178,7 +205,8 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        return Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int))) == 0;
+        return Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)))
+            == 0;
     }
 
     /// <summary>
@@ -258,11 +286,11 @@ public static class UnsafeNativeMethods
         }
 
         return Dwmapi.DwmSetWindowAttribute(
-            handle,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-            ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int))
-        ) == 0;
+                handle,
+                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                ref backdropPvAttribute,
+                Marshal.SizeOf(typeof(int))
+            ) == 0;
     }
 
     /// <summary>
@@ -337,11 +365,11 @@ public static class UnsafeNativeMethods
         var backdropPvAttribute = 0x1; // Enable
 
         return Dwmapi.DwmSetWindowAttribute(
-            handle,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-            ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int))
-        ) == 0;
+                handle,
+                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
+                ref backdropPvAttribute,
+                Marshal.SizeOf(typeof(int))
+            ) == 0;
     }
 
     /// <summary>
@@ -392,9 +420,10 @@ public static class UnsafeNativeMethods
         try
         {
             var accentColorValue = Registry.GetValue(
-                                                     @"HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM",
-                                                     "AccentColor",
-                                                     null);
+                @"HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM",
+                "AccentColor",
+                null
+            );
 
             if (accentColorValue is not null)
             {
