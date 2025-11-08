@@ -113,6 +113,29 @@ public static class UnsafeNativeMethods
     }
 
     /// <summary>
+    /// Checks whether accent color on title bars and window borders is enabled in Windows settings.
+    /// </summary>
+    /// <returns><see langword="true"/> if accent color on title bars is enabled.</returns>
+    public static bool IsAccentColorOnTitleBarsEnabled()
+    {
+        try
+        {
+            using RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\DWM");
+
+            if (key?.GetValue("ColorPrevalence") is int value)
+            {
+                return value == 1;
+            }
+        }
+        catch
+        {
+            // Ignore registry access errors
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// Tries to remove ImmersiveDarkMode effect from the <see cref="Window"/>.
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>

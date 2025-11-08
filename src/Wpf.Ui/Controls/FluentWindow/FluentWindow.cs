@@ -90,7 +90,7 @@ public class FluentWindow : System.Windows.Window
         {
             ApplicationThemeManager.Changed += (_, _) =>
             {
-                if (IsActive)
+                if (IsActive && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
                 {
                     UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
                 }
@@ -128,7 +128,7 @@ public class FluentWindow : System.Windows.Window
     {
         base.OnActivated(e);
 
-        if (Utilities.IsOSWindows11OrNewer)
+        if (Utilities.IsOSWindows11OrNewer && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
         {
             UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
         }

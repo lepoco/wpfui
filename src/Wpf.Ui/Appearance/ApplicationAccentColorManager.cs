@@ -147,6 +147,12 @@ public static class ApplicationAccentColorManager
     public static Brush TertiaryAccentBrush => new SolidColorBrush(TertiaryAccent);
 
     /// <summary>
+    /// Gets a value indicating whether the user has enabled accent color on title bars and window borders in Windows settings.
+    /// </summary>
+    public static bool IsAccentColorOnTitleBarsEnabled =>
+        UnsafeNativeMethods.IsAccentColorOnTitleBarsEnabled();
+
+    /// <summary>
     /// Changes the color accents of the application based on the color entered.
     /// </summary>
     /// <param name="systemAccent">Primary accent color.</param>
