@@ -260,6 +260,7 @@
                                     Focusable="False"
                                     IsOpen="{TemplateBinding IsDropDownOpen}"
                                     Placement="{TemplateBinding Popup.Placement}"
+                                    PlacementTarget="{Binding ElementName=ContentBorder}"
                                     PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
                                     VerticalOffset="1">
                                     <controls:EffectThicknessDecorator
@@ -298,10 +299,7 @@
                                                     TextElement.FontWeight="{TemplateBinding FontWeight}"
                                                     TextElement.Foreground="{TemplateBinding Foreground}"
                                                     VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-                                                    <StackPanel
-                                                        IsItemsHost="True"
-                                                        KeyboardNavigation.DirectionalNavigation="Contained"
-                                                        TextElement.FontSize="{TemplateBinding FontSize}" />
+                                                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" TextElement.FontSize="{TemplateBinding FontSize}" />
                                                 </controls:DynamicScrollViewer>
                                             </Grid>
                                         </Border>

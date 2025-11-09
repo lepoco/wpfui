@@ -26,7 +26,7 @@
                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                 <Border.Style>
                     <Style TargetType="{x:Type Border}">
-                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackground}" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}" />
@@ -128,6 +128,7 @@
                                     <Border
                                         x:Name="MainBorder"
                                         Height="40"
+                                        Background="Transparent"
                                         HorizontalAlignment="Stretch"
                                         BorderThickness="{DynamicResource NavigationViewItemThickness}"
                                         CornerRadius="4">
@@ -396,6 +397,7 @@
 
                         <!--  Separator/Shadow for Footer  -->
                         <Border
+                            x:Name="PART_FooterSeparator"
                             Grid.Row="3"
                             Height="1"
                             Margin="0,4,0,4"
@@ -550,6 +552,12 @@
             <Trigger Property="PaneTitle" Value="{x:Null}">
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
                 <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
+            </Trigger>
+            <Trigger Property="IsTopSeparatorVisible" Value="False">
+                <Setter TargetName="PART_TopSeparator" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsFooterSeparatorVisible" Value="False">
+                <Setter TargetName="PART_FooterSeparator" Property="Visibility" Value="Collapsed" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

@@ -34,9 +34,6 @@
             </Rectangle>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsGrouping" Value="True">
-                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
-            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="PART_DisabledVisual" Property="Visibility" Value="Visible" />
             </Trigger>
@@ -145,6 +142,7 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="True" />
         <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Style.Triggers>
@@ -152,7 +150,13 @@
                 <Setter Property="ItemsPanel">
                     <Setter.Value>
                         <ItemsPanelTemplate>
-                            <VirtualizingStackPanel IsVirtualizing="{TemplateBinding VirtualizingPanel.IsVirtualizing}" VirtualizationMode="{TemplateBinding VirtualizingPanel.VirtualizationMode}" />
+                            <VirtualizingStackPanel
+                                CacheLength="{TemplateBinding VirtualizingPanel.CacheLength}"
+                                CacheLengthUnit="{TemplateBinding VirtualizingPanel.CacheLengthUnit}"
+                                IsVirtualizing="{TemplateBinding VirtualizingPanel.IsVirtualizing}"
+                                IsVirtualizingWhenGrouping="{TemplateBinding VirtualizingPanel.IsVirtualizing}"
+                                ScrollUnit="{TemplateBinding VirtualizingPanel.ScrollUnit}"
+                                VirtualizationMode="{TemplateBinding VirtualizingPanel.VirtualizationMode}" />
                         </ItemsPanelTemplate>
                     </Setter.Value>
                 </Setter>

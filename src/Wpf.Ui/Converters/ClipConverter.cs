@@ -7,22 +7,28 @@ using System.Windows.Data;
 
 namespace Wpf.Ui.Converters;
 
-internal class DatePickerButtonPaddingConverter : IMultiValueConverter
+public class ClipConverter : IMultiValueConverter
 {
     /// <inheritdoc />
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values is [Thickness padding, Thickness buttonMargin, double buttonWidth])
+        if (values.Length != 3)
         {
-            return new Thickness(
-                padding.Left,
-                padding.Top,
-                padding.Right + buttonMargin.Left + buttonMargin.Right + buttonWidth,
-                padding.Bottom
-            );
+            return null;
         }
 
-        return default(Thickness);
+        if (
+            values[0] is not double width
+            || values[1] is not double height
+            || values[2] is not double percentage
+        )
+        {
+            return null;
+        }
+
+        double clippedWidth = width * percentage;
+
+        return new RectangleGeometry(new Rect(0, 0, clippedWidth, height));
     }
 
     /// <inheritdoc />

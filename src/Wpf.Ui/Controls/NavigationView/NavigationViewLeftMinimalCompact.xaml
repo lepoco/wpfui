@@ -19,7 +19,7 @@
                 MinHeight="40"
                 Margin="0"
                 Padding="0"
-                Background="Transparent"
+                Background="{DynamicResource NavigationViewItemBackground}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="1"
                 CornerRadius="{TemplateBinding Border.CornerRadius}">
