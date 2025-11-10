@@ -29,103 +29,6 @@ namespace Wpf.Ui.Interop;
 internal static class Dwmapi
 {
     /// <summary>
-    /// Cloaked flags describing why a window is cloaked.
-    /// </summary>
-    public enum DWM_CLOAKED
-    {
-        DWM_CLOAKED_APP = 0x00000001,
-        DWM_CLOAKED_SHELL = 0x00000002,
-        DWM_CLOAKED_INHERITED = 0x00000004,
-    }
-
-    /// <summary>
-    /// GT_*
-    /// </summary>
-    public enum GESTURE_TYPE
-    {
-        GT_PEN_TAP = 0,
-        GT_PEN_DOUBLETAP = 1,
-        GT_PEN_RIGHTTAP = 2,
-        GT_PEN_PRESSANDHOLD = 3,
-        GT_PEN_PRESSANDHOLDABORT = 4,
-        GT_TOUCH_TAP = 5,
-        GT_TOUCH_DOUBLETAP = 6,
-        GT_TOUCH_RIGHTTAP = 7,
-        GT_TOUCH_PRESSANDHOLD = 8,
-        GT_TOUCH_PRESSANDHOLDABORT = 9,
-        GT_TOUCH_PRESSANDTAP = 10,
-    }
-
-    /// <summary>
-    /// DWMTWR_* Tab window requirements.
-    /// </summary>
-    public enum DWM_TAB_WINDOW_REQUIREMENTS
-    {
-        /// <summary>
-        /// This result means the window meets all requirements requested.
-        /// </summary>
-        DWMTWR_NONE = 0x0000,
-
-        /// <summary>
-        /// In some configurations, admin/user setting or mode of the system means that windows won't be tabbed
-        /// This requirement says that the system/mode must implement tabbing and if it does not
-        /// nothing can be done to change this.
-        /// </summary>
-        DWMTWR_IMPLEMENTED_BY_SYSTEM = 0x0001,
-
-        /// <summary>
-        /// The window has an owner or parent so is ineligible for tabbing.
-        /// </summary>
-        DWMTWR_WINDOW_RELATIONSHIP = 0x0002,
-
-        /// <summary>
-        /// The window has styles that make it ineligible for tabbing.
-        /// <para>To be eligible windows must:</para>
-        /// <para>Have the WS_OVERLAPPEDWINDOW (WS_CAPTION, WS_THICKFRAME, etc.) styles set.</para>
-        /// <para>Not have WS_POPUP, WS_CHILD or WS_DLGFRAME set.</para>
-        /// <para>Not have WS_EX_TOPMOST or WS_EX_TOOLWINDOW set.</para>
-        /// </summary>
-        DWMTWR_WINDOW_STYLES = 0x0004,
-
-        // The window has a region (set using SetWindowRgn) making it ineligible.
-        DWMTWR_WINDOW_REGION = 0x0008,
-
-        /// <summary>
-        /// The window is ineligible due to its Dwm configuration.
-        /// It must not extended its client area into the title bar using DwmExtendFrameIntoClientArea
-        /// It must not have DWMWA_NCRENDERING_POLICY set to DWMNCRP_ENABLED
-        /// </summary>
-        DWMTWR_WINDOW_DWM_ATTRIBUTES = 0x0010,
-
-        /// <summary>
-        /// The window is ineligible due to it's margins, most likely due to custom handling in WM_NCCALCSIZE.
-        /// The window must use the default window margins for the non-client area.
-        /// </summary>
-        DWMTWR_WINDOW_MARGINS = 0x0020,
-
-        /// <summary>
-        /// The window has been explicitly opted out by setting DWMWA_TABBING_ENABLED to FALSE.
-        /// </summary>
-        DWMTWR_TABBING_ENABLED = 0x0040,
-
-        /// <summary>
-        /// The user has configured this application to not participate in tabbing.
-        /// </summary>
-        DWMTWR_USER_POLICY = 0x0080,
-
-        /// <summary>
-        /// The group policy has configured this application to not participate in tabbing.
-        /// </summary>
-        DWMTWR_GROUP_POLICY = 0x0100,
-
-        /// <summary>
-        /// This is set if app compat has blocked tabs for this window. Can be overridden per window by setting
-        /// DWMWA_TABBING_ENABLED to TRUE. That does not override any other tabbing requirements.
-        /// </summary>
-        DWMTWR_APP_COMPAT = 0x0200,
-    }
-
-    /// <summary>
     /// Flags used by the DwmSetWindowAttribute function to specify the rounded corner preference for a window.
     /// </summary>
     [Flags]
@@ -167,58 +70,6 @@ internal static class Dwmapi
         /// Sets blurred wallpaper effect, like Mica without tint.
         /// </summary>
         DWMSBT_TABBEDWINDOW = 4,
-    }
-
-    /// <summary>
-    /// Non-client rendering policy attribute values
-    /// </summary>
-    public enum DWMNCRENDERINGPOLICY
-    {
-        /// <summary>
-        /// Enable/disable non-client rendering based on window style
-        /// </summary>
-        DWMNCRP_USEWINDOWSTYLE,
-
-        /// <summary>
-        /// Disabled non-client rendering; window style is ignored
-        /// </summary>
-        DWMNCRP_DISABLED,
-
-        /// <summary>
-        /// Enabled non-client rendering; window style is ignored
-        /// </summary>
-        DWMNCRP_ENABLED,
-
-        /// <summary>
-        /// Sentinel value.
-        /// </summary>
-        DWMNCRP_LAST,
-    }
-
-    /// <summary>
-    /// Values designating how Flip3D treats a given window.
-    /// </summary>
-    public enum DWMFLIP3DWINDOWPOLICY
-    {
-        /// <summary>
-        /// Hide or include the window in Flip3D based on window style and visibility.
-        /// </summary>
-        DWMFLIP3D_DEFAULT,
-
-        /// <summary>
-        /// Display the window under Flip3D and disabled.
-        /// </summary>
-        DWMFLIP3D_EXCLUDEBELOW,
-
-        /// <summary>
-        /// Display the window above Flip3D and enabled.
-        /// </summary>
-        DWMFLIP3D_EXCLUDEABOVE,
-
-        /// <summary>
-        /// Sentinel value.
-        /// </summary>
-        DWMFLIP3D_LAST,
     }
 
     /// <summary>
@@ -382,42 +233,6 @@ internal static class Dwmapi
     }
 
     /// <summary>
-    /// Specifies the input operations for which visual feedback should be provided. This enumeration is used by the DwmShowContact function.
-    /// </summary>
-    public enum DWM_SHOWCONTACT
-    {
-        DWMSC_DOWN,
-        DWMSC_UP,
-        DWMSC_DRAG,
-        DWMSC_HOLD,
-        DWMSC_PENBARREL,
-        DWMSC_NONE,
-        DWMSC_ALL,
-    }
-
-    /// <summary>
-    /// Flags used by the DwmSetPresentParameters function to specify the frame sampling type.
-    /// </summary>
-    public enum DWM_SOURCE_FRAME_SAMPLING
-    {
-        /// <summary>
-        /// Use the first source frame that includes the first refresh of the output frame
-        /// </summary>
-        DWM_SOURCE_FRAME_SAMPLING_POINT,
-
-        /// <summary>
-        /// Use the source frame that includes the most refreshes of out the output frame
-        /// in case of multiple source frames with the same coverage the last will be used
-        /// </summary>
-        DWM_SOURCE_FRAME_SAMPLING_COVERAGE,
-
-        /// <summary>
-        /// Sentinel value.
-        /// </summary>
-        DWM_SOURCE_FRAME_SAMPLING_LAST,
-    }
-
-    /// <summary>
     /// Specifies Desktop Window Manager (DWM) composition timing information. Used by the <see cref="DwmGetCompositionTimingInfo"/> function.
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -466,22 +281,6 @@ internal static class Dwmapi
     }
 
     /// <summary>
-    /// SIT flags.
-    /// </summary>
-    public enum DWM_SIT
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        NONE,
-
-        /// <summary>
-        /// Displays a frame around the provided bitmap.
-        /// </summary>
-        DISPLAYFRAME = 1,
-    }
-
-    /// <summary>
     /// Obtains a value that indicates whether Desktop Window Manager (DWM) composition is enabled.
     /// </summary>
     /// <param name="pfEnabled">A pointer to a value that, when this function returns successfully, receives TRUE if DWM composition is enabled; otherwise, FALSE.</param>
@@ -509,57 +308,6 @@ internal static class Dwmapi
     public static extern void DwmGetCompositionTimingInfo(
         [In] IntPtr hWnd,
         [In] ref DWM_TIMING_INFO pTimingInfo
-    );
-
-    /// <summary>
-    /// Called by an application to indicate that all previously provided iconic bitmaps from a window, both thumbnails and peek representations, should be refreshed.
-    /// </summary>
-    /// <param name="hWnd">A handle to the window or tab whose bitmaps are being invalidated through this call. This window must belong to the calling process.</param>
-    [DllImport(Libraries.Dwmapi, PreserveSig = false)]
-    public static extern void DwmInvalidateIconicBitmaps([In] IntPtr hWnd);
-
-    /// <summary>
-    /// Sets a static, iconic bitmap on a window or tab to use as a thumbnail representation. The taskbar can use this bitmap as a thumbnail switch target for the window or tab.
-    /// </summary>
-    /// <param name="hWnd">A handle to the window or tab. This window must belong to the calling process.</param>
-    /// <param name="hbmp">A handle to the bitmap to represent the window that hwnd specifies.</param>
-    /// <param name="dwSITFlags">The display options for the thumbnail.</param>
-    [DllImport(Libraries.Dwmapi, PreserveSig = false)]
-    public static extern void DwmSetIconicThumbnail(
-        [In] IntPtr hWnd,
-        [In] IntPtr hbmp,
-        [In] DWM_SIT dwSITFlags
-    );
-
-    /// <summary>
-    /// Sets a static, iconic bitmap to display a live preview (also known as a Peek preview) of a window or tab. The taskbar can use this bitmap to show a full-sized preview of a window or tab.
-    /// </summary>
-    /// <param name="hWnd">A handle to the window. This window must belong to the calling process.</param>
-    /// <param name="hbmp">A handle to the bitmap to represent the window that hwnd specifies.</param>
-    /// <param name="pptClient">The offset of a tab window's client region (the content area inside the client window frame) from the host window's frame. This offset enables the tab window's contents to be drawn correctly in a live preview when it is drawn without its frame.</param>
-    /// <param name="dwSITFlags">The display options for the live preview.</param>
-    [DllImport(Libraries.Dwmapi, PreserveSig = false)]
-    public static extern int DwmSetIconicLivePreviewBitmap(
-        [In] IntPtr hWnd,
-        [In] IntPtr hbmp,
-        [In, Optional] WinDef.POINT pptClient,
-        [In] DWM_SIT dwSITFlags
-    );
-
-    /// <summary>
-    /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
-    /// </summary>
-    /// <param name="hWnd">The handle to the window for which the attribute value is to be set.</param>
-    /// <param name="dwAttribute">A flag describing which value to set, specified as a value of the DWMWINDOWATTRIBUTE enumeration.</param>
-    /// <param name="pvAttribute">A pointer to an object containing the attribute value to set.</param>
-    /// <param name="cbAttribute">The size, in bytes, of the attribute value being set via the <c>pvAttribute</c> parameter.</param>
-    /// <returns>If the function succeeds, it returns <c>S_OK</c>. Otherwise, it returns an <c>HRESULT</c> error code.</returns>
-    [DllImport(Libraries.Dwmapi)]
-    public static extern int DwmSetWindowAttribute(
-        [In] IntPtr hWnd,
-        [In] int dwAttribute,
-        [In] ref int pvAttribute,
-        [In] int cbAttribute
     );
 
     /// <summary>
@@ -606,22 +354,6 @@ internal static class Dwmapi
     public static extern int DwmGetWindowAttribute(
         [In] IntPtr hWnd,
         [In] DWMWINDOWATTRIBUTE dwAttributeToGet,
-        [In] ref int pvAttributeValue,
-        [In] int cbAttribute
-    );
-
-    /// <summary>
-    /// Retrieves the current value of a specified Desktop Window Manager (DWM) attribute applied to a window. For programming guidance, and code examples, see Controlling non-client region rendering.
-    /// </summary>
-    /// <param name="hWnd">The handle to the window from which the attribute value is to be retrieved.</param>
-    /// <param name="dwAttributeToGet">A flag describing which value to retrieve, specified as a value of the <see cref="DWMWINDOWATTRIBUTE"/> enumeration.</param>
-    /// <param name="pvAttributeValue">A pointer to a value which, when this function returns successfully, receives the current value of the attribute. The type of the retrieved value depends on the value of the dwAttribute parameter.</param>
-    /// <param name="cbAttribute">The size, in bytes, of the attribute value being received via the pvAttribute parameter.</param>
-    /// <returns>If the function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.</returns>
-    [DllImport(Libraries.Dwmapi)]
-    public static extern int DwmGetWindowAttribute(
-        [In] IntPtr hWnd,
-        [In] int dwAttributeToGet,
         [In] ref int pvAttributeValue,
         [In] int cbAttribute
     );

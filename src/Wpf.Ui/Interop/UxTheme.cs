@@ -144,34 +144,6 @@ internal static class UxTheme
         [In] ref WTA_OPTIONS pvAttribute,
         [In] uint cbAttribute
     );
-
-    /// <summary>
-    /// Tests if a visual style for the current application is active.
-    /// </summary>
-    /// <returns><see langword="true"/> if a visual style is enabled, and windows with visual styles applied should call OpenThemeData to start using theme drawing services.</returns>
-    [DllImport(Libraries.UxTheme)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool IsThemeActive();
-
-    /// <summary>
-    /// Retrieves the name of the current visual style, and optionally retrieves the color scheme name and size name.
-    /// </summary>
-    /// <param name="pszThemeFileName">Pointer to a string that receives the theme path and file name.</param>
-    /// <param name="dwMaxNameChars">Value of type int that contains the maximum number of characters allowed in the theme file name.</param>
-    /// <param name="pszColorBuff">Pointer to a string that receives the color scheme name. This parameter may be set to NULL.</param>
-    /// <param name="cchMaxColorChars">Value of type int that contains the maximum number of characters allowed in the color scheme name.</param>
-    /// <param name="pszSizeBuff">Pointer to a string that receives the size name. This parameter may be set to NULL.</param>
-    /// <param name="cchMaxSizeChars">Value of type int that contains the maximum number of characters allowed in the size name.</param>
-    /// <returns>HRESULT</returns>
-    [DllImport(Libraries.UxTheme, CharSet = CharSet.Unicode)]
-    public static extern int GetCurrentThemeName(
-        [Out] StringBuilder pszThemeFileName,
-        [In] int dwMaxNameChars,
-        [Out] StringBuilder pszColorBuff,
-        [In] int cchMaxColorChars,
-        [Out] StringBuilder pszSizeBuff,
-        [In] int cchMaxSizeChars
-    );
 }
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter

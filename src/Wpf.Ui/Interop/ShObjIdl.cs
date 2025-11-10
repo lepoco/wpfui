@@ -79,32 +79,6 @@ internal static class ShObjIdl
     }
 
     /// <summary>
-    /// EBO_*
-    /// </summary>
-    public enum EXPLORER_BROWSER_OPTIONS
-    {
-        EBO_NONE = 0,
-        EBO_NAVIGATEONCE = 0x1,
-        EBO_SHOWFRAMES = 0x2,
-        EBO_ALWAYSNAVIGATE = 0x4,
-        EBO_NOTRAVELLOG = 0x8,
-        EBO_NOWRAPPERWINDOW = 0x10,
-        EBO_HTMLSHAREPOINTVIEW = 0x20,
-        EBO_NOBORDER = 0x40,
-        EBO_NOPERSISTVIEWSTATE = 0x80,
-    }
-
-    /// <summary>
-    /// EBF_*
-    /// </summary>
-    public enum EXPLORER_BROWSER_FILL_FLAGS
-    {
-        EBF_NONE = 0,
-        EBF_SELECTFROMDATAOBJECT = 0x100,
-        EBF_NODROPTARGET = 0x200,
-    }
-
-    /// <summary>
     /// THUMBBUTTON
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 8, CharSet = CharSet.Unicode)]
@@ -133,14 +107,6 @@ internal static class ShObjIdl
     [ClassInterface(ClassInterfaceType.None)]
     [ComImport]
     public class CTaskbarList { }
-
-    /// <summary>
-    /// Class DECLSPEC_UUID("9ac9fbe1-e0a2-4ad6-b4ee-e212013ea917")
-    /// </summary>
-    [Guid("9ac9fbe1-e0a2-4ad6-b4ee-e212013ea917")]
-    [ClassInterface(ClassInterfaceType.None)]
-    [ComImport]
-    public class ShellItem { }
 
     /// <summary>
     /// MIDL_INTERFACE("c43dc798-95d1-4bea-9030-bb99e2983a1a")
