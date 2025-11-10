@@ -20,21 +20,6 @@ namespace Wpf.Ui.Interop;
 internal static class UnsafeReflection
 {
     /// <summary>
-    /// Casts <see cref="WindowBackdropType" /> to <see cref="DWM_SYSTEMBACKDROP_TYPE" />.
-    /// </summary>
-    public static DWM_SYSTEMBACKDROP_TYPE Cast(WindowBackdropType backgroundType)
-    {
-        return backgroundType switch
-        {
-            WindowBackdropType.Auto => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_AUTO,
-            WindowBackdropType.Mica => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_MAINWINDOW,
-            WindowBackdropType.Acrylic => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TRANSIENTWINDOW,
-            WindowBackdropType.Tabbed => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TABBEDWINDOW,
-            _ => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_NONE,
-        };
-    }
-
-    /// <summary>
     /// Casts <see cref="WindowCornerPreference" /> to <see cref="DWM_WINDOW_CORNER_PREFERENCE" />.
     /// </summary>
     public static DWM_WINDOW_CORNER_PREFERENCE Cast(WindowCornerPreference cornerPreference)
