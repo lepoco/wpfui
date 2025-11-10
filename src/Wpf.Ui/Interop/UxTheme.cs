@@ -25,32 +25,6 @@ namespace Wpf.Ui.Interop;
 internal static class UxTheme
 {
     /// <summary>
-    /// Returned by the GetThemeMargins function to define the margins of windows that have visual styles applied.
-    /// </summary>
-    public struct MARGINS
-    {
-        /// <summary>
-        /// Width of left border that retains its size.
-        /// </summary>
-        public int cxLeftWidth;
-
-        /// <summary>
-        /// Width of right border that retains its size.
-        /// </summary>
-        public int cxRightWidth;
-
-        /// <summary>
-        /// Height of top border that retains its size.
-        /// </summary>
-        public int cyTopHeight;
-
-        /// <summary>
-        /// Height of bottom border that retains its size.
-        /// </summary>
-        public int cyBottomHeight;
-    }
-
-    /// <summary>
     /// Specifies the type of visual style attribute to set on a window.
     /// </summary>
     public enum WINDOWTHEMEATTRIBUTETYPE : uint

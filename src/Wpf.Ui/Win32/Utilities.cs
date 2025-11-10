@@ -8,6 +8,8 @@
 
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace Wpf.Ui.Win32;
 
@@ -86,7 +88,7 @@ internal sealed class Utilities
                 return false;
             }
 
-            return Interop.Dwmapi.DwmIsCompositionEnabled(out var pfEnabled) == 0 && pfEnabled != 0;
+            return PInvoke.DwmIsCompositionEnabled(out BOOL enabled) == HRESULT.S_OK & enabled;
         }
     }
 

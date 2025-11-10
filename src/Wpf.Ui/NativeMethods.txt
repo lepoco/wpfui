@@ -1,0 +1,3 @@
+S_OK
+DwmIsCompositionEnabled
+DwmExtendFrameIntoClientArea

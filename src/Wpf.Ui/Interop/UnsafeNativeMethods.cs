@@ -8,6 +8,9 @@
    This Source Code is partially based on the source code provided by the .NET Foundation. */
 
 using System.Runtime.InteropServices;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.UI.Controls;
 using Microsoft.Win32;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Hardware;
@@ -599,7 +602,7 @@ public static class UnsafeNativeMethods
             windowDpi.DpiScaleY
         );
 
-        var dwmMargin = new UxTheme.MARGINS
+        var dwmMargin = new MARGINS
         {
             // err on the side of pushing in glass an extra pixel.
             cxLeftWidth = (int)Math.Ceiling(deviceGlassThickness.Left),
@@ -609,7 +612,7 @@ public static class UnsafeNativeMethods
         };
 
         // #3 Extend client area
-        Interop.Dwmapi.DwmExtendFrameIntoClientArea(hWnd, ref dwmMargin);
+        PInvoke.DwmExtendFrameIntoClientArea(new HWND(hWnd), dwmMargin);
 
         // #4 Clear rounding region
         Interop.User32.SetWindowRgn(hWnd, IntPtr.Zero, Interop.User32.IsWindowVisible(hWnd));
@@ -622,9 +625,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     public static bool IsCompositionEnabled()
     {
-        _ = Dwmapi.DwmIsCompositionEnabled(out var isEnabled);
-
-        return isEnabled == 0x1;
+        return PInvoke.DwmIsCompositionEnabled(out BOOL enabled) == Windows.Win32.Foundation.HRESULT.S_OK & enabled;
     }
 
     /// <summary>
