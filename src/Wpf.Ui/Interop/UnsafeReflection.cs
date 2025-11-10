@@ -60,19 +60,4 @@ internal static class UnsafeReflection
             _ => Wpf.Ui.Interop.ShObjIdl.TBPFLAG.TBPF_NOPROGRESS,
         };
     }
-
-    /// <summary>
-    /// Casts <see cref="ShObjIdl.TBPFLAG"/> to <see cref="TaskBarProgressState"/>.
-    /// </summary>
-    public static TaskBarProgressState Cast(ShObjIdl.TBPFLAG progressState)
-    {
-        return progressState switch
-        {
-            ShObjIdl.TBPFLAG.TBPF_INDETERMINATE => TaskBarProgressState.Indeterminate,
-            ShObjIdl.TBPFLAG.TBPF_ERROR => TaskBarProgressState.Error,
-            ShObjIdl.TBPFLAG.TBPF_PAUSED => TaskBarProgressState.Paused,
-            ShObjIdl.TBPFLAG.TBPF_NORMAL => TaskBarProgressState.Normal,
-            _ => TaskBarProgressState.None,
-        };
-    }
 }
