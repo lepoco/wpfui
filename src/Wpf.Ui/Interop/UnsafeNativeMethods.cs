@@ -46,7 +46,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(handle))
+        if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
@@ -103,7 +103,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(handle))
+        if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
@@ -159,7 +159,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(handle))
+        if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
@@ -196,7 +196,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(handle))
+        if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
@@ -251,7 +251,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(handle))
+        if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
@@ -277,7 +277,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(handle))
+        if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
@@ -304,7 +304,7 @@ public static class UnsafeNativeMethods
     /// <param name="backdropType">Background backdrop type.</param>
     public static bool IsWindowHasBackdrop(IntPtr handle, WindowBackdropType backdropType)
     {
-        if (!User32.IsWindow(handle))
+        if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
@@ -334,7 +334,7 @@ public static class UnsafeNativeMethods
     /// <param name="handle">Window handle.</param>
     public static bool IsWindowHasLegacyMica(IntPtr handle)
     {
-        if (!User32.IsWindow(handle))
+        if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
@@ -457,7 +457,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(hWnd))
+        if (!PInvoke.IsWindow(new HWND(hWnd)))
         {
             return false;
         }
@@ -488,7 +488,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(hWnd))
+        if (!PInvoke.IsWindow(new HWND(hWnd)))
         {
             return false;
         }
@@ -530,7 +530,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(hWnd))
+        if (!PInvoke.IsWindow(new HWND(hWnd)))
         {
             return false;
         }
@@ -571,7 +571,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        if (!User32.IsWindow(hWnd))
+        if (!PInvoke.IsWindow(new HWND(hWnd)))
         {
             return false;
         }
@@ -612,7 +612,7 @@ public static class UnsafeNativeMethods
         PInvoke.DwmExtendFrameIntoClientArea(new HWND(hWnd), dwmMargin);
 
         // #4 Clear rounding region
-        Interop.User32.SetWindowRgn(hWnd, IntPtr.Zero, PInvoke.IsWindowVisible(new HWND(hWnd)));
+        PInvoke.SetWindowRgn(new HWND(hWnd), null, PInvoke.IsWindowVisible(new HWND(hWnd)));
 
         return true;
     }
@@ -630,7 +630,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     public static bool IsValidWindow(IntPtr hWnd)
     {
-        return User32.IsWindow(hWnd);
+        return PInvoke.IsWindow(new HWND(hWnd));
     }
 
     /// <summary>

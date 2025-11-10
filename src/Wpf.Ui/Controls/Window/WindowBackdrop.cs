@@ -4,8 +4,11 @@
 // All Rights Reserved.
 
 using System.Runtime.InteropServices;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
+using HRESULT = Wpf.Ui.Interop.HRESULT;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -38,7 +41,7 @@ public static class WindowBackdrop
     /// <param name="window">The window to which the backdrop effect will be applied.</param>
     /// <param name="backdropType">The type of backdrop effect to apply. Determines the visual appearance of the window's backdrop.</param>
     /// <returns><see langword="true"/> if the operation was successful; otherwise, <see langword="false"/>.</returns>
-    public static bool ApplyBackdrop(System.Windows.Window? window, WindowBackdropType backdropType)
+    public static bool ApplyBackdrop(Window? window, WindowBackdropType backdropType)
     {
         if (window is null)
         {
@@ -60,7 +63,7 @@ public static class WindowBackdrop
         window.Loaded += (sender, _1) =>
         {
             IntPtr windowHandle =
-                new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle ?? IntPtr.Zero;
+                new WindowInteropHelper(sender as Window)?.Handle ?? IntPtr.Zero;
 
             if (windowHandle == IntPtr.Zero)
             {
@@ -86,7 +89,7 @@ public static class WindowBackdrop
             return false;
         }
 
-        if (!User32.IsWindow(hWnd))
+        if (!PInvoke.IsWindow(new HWND(hWnd)))
         {
             return false;
         }
@@ -130,7 +133,7 @@ public static class WindowBackdrop
     /// Tries to remove backdrop effects if they have been applied to the <see cref="Window"/>.
     /// </summary>
     /// <param name="window">The window from which the effect should be removed.</param>
-    public static bool RemoveBackdrop(System.Windows.Window? window)
+    public static bool RemoveBackdrop(Window? window)
     {
         if (window is null)
         {
@@ -160,7 +163,7 @@ public static class WindowBackdrop
             return false;
         }
 
-        if (!User32.IsWindow(hWnd))
+        if (!PInvoke.IsWindow(new HWND(hWnd)))
         {
             return false;
         }
@@ -190,7 +193,7 @@ public static class WindowBackdrop
     /// </summary>
     /// <param name="window">Window to manipulate.</param>
     /// <returns><see langword="true"/> if operation was successful.</returns>
-    public static bool RemoveBackground(System.Windows.Window? window)
+    public static bool RemoveBackground(Window? window)
     {
         if (window is null)
         {
@@ -218,7 +221,7 @@ public static class WindowBackdrop
         return true;
     }
 
-    public static bool RemoveTitlebarBackground(System.Windows.Window? window)
+    public static bool RemoveTitlebarBackground(Window? window)
     {
         if (window is null)
         {
@@ -259,7 +262,7 @@ public static class WindowBackdrop
             return false;
         }
 
-        if (!User32.IsWindow(hWnd))
+        if (!PInvoke.IsWindow(new HWND(hWnd)))
         {
             return false;
         }
@@ -303,7 +306,7 @@ public static class WindowBackdrop
             return false;
         }
 
-        if (!User32.IsWindow(hWnd))
+        if (!PInvoke.IsWindow(new HWND(hWnd)))
         {
             return false;
         }
@@ -316,7 +319,7 @@ public static class WindowBackdrop
             windowSource.CompositionTarget.BackgroundColor = SystemColors.WindowColor;
         }
 
-        if (windowSource?.RootVisual is System.Windows.Window window)
+        if (windowSource?.RootVisual is Window window)
         {
             var backgroundBrush = window.Resources["ApplicationBackgroundBrush"];
 

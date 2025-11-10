@@ -3,15 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Shell;
 using Windows.Win32;
 using Windows.Win32.Foundation;
+using Windows.Win32.UI.WindowsAndMessaging;
 using Wpf.Ui.Interop;
-using Wpf.Ui.Interop.WinDef;
+using RECT = Windows.Win32.Foundation.RECT;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -28,7 +25,7 @@ namespace Wpf.Ui.Controls;
 /// - The implementation prefers the <see cref="System.Windows.Shell.WindowChrome.ResizeBorderThickness"/>
 ///   value (expressed in device-independent units) when available and translates it into physical pixels;
 /// - If WindowChrome or DPI information is not available, the code falls back to system metrics via
-///   <see cref="Wpf.Ui.Interop.User32.GetSystemMetrics"/>;
+///   <see cref="PInvoke.GetSystemMetrics"/>;
 /// - Because <c>WM_NCHITTEST</c> is raised frequently, computed border pixel sizes are cached to
 ///   reduce overhead; the cache is invalidated when DPI or relevant system parameters change;
 /// - This component only augments the <see cref="TitleBar"/> control's non-client hit-testing to
@@ -49,7 +46,7 @@ public partial class TitleBar
 
     private IntPtr GetWindowBorderHitTestResult(IntPtr hwnd, IntPtr lParam)
     {
-        if (!User32.GetWindowRect(hwnd, out RECT windowRect))
+        if (!PInvoke.GetWindowRect(new HWND(hwnd), out RECT windowRect))
         {
             return (IntPtr)User32.WM_NCHITTEST.HTNOWHERE;
         }
@@ -67,13 +64,13 @@ public partial class TitleBar
         uint hit = 0u;
 
 #pragma warning disable
-        if (x < windowRect.Left + _borderX)
+        if (x < windowRect.left + _borderX)
             hit |= 0b0001u; // left
-        if (x >= windowRect.Right - _borderX)
+        if (x >= windowRect.right - _borderX)
             hit |= 0b0010u; // right
-        if (y < windowRect.Top + _borderY)
+        if (y < windowRect.top + _borderY)
             hit |= 0b0100u; // top
-        if (y >= windowRect.Bottom - _borderY)
+        if (y >= windowRect.bottom - _borderY)
             hit |= 0b1000u; // bottom
 #pragma warning restore
 
@@ -265,11 +262,11 @@ public partial class TitleBar
         try
         {
             int sx =
-                User32.GetSystemMetrics(User32.SM.CXSIZEFRAME)
-                + User32.GetSystemMetrics(User32.SM.CXPADDEDBORDER);
+                PInvoke.GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXSIZEFRAME)
+                + PInvoke.GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXPADDEDBORDER);
             int sy =
-                User32.GetSystemMetrics(User32.SM.CYSIZEFRAME)
-                + User32.GetSystemMetrics(User32.SM.CXPADDEDBORDER);
+                PInvoke.GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CYSIZEFRAME)
+                + PInvoke.GetSystemMetrics(SYSTEM_METRICS_INDEX.SM_CXPADDEDBORDER);
 
             borderX = Math.Max(2, sx);
             borderY = Math.Max(2, sy);

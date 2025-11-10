@@ -6,6 +6,10 @@ GetDpiForWindow
 IsWindowVisible
 SetWindowLong
 GetWindowLong
+SetWindowRgn
+GetWindowRect
+GetSystemMetrics
+IsWindow
 WINDOW_STYLE
 WTA_OPTIONS
 WTNCA_*
