@@ -7,7 +7,6 @@ using System.Windows.Shell;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.UI.WindowsAndMessaging;
-using Wpf.Ui.Interop;
 using RECT = Windows.Win32.Foundation.RECT;
 
 // ReSharper disable once CheckNamespace
@@ -48,7 +47,7 @@ public partial class TitleBar
     {
         if (!PInvoke.GetWindowRect(new HWND(hwnd), out RECT windowRect))
         {
-            return (IntPtr)User32.WM_NCHITTEST.HTNOWHERE;
+            return (IntPtr)PInvoke.HTNOWHERE;
         }
 
         if (!_borderXCached || !_borderYCached)
@@ -76,17 +75,17 @@ public partial class TitleBar
 
         return hit switch
         {
-            0b0101u => (IntPtr)User32.WM_NCHITTEST.HTTOPLEFT, // top    + left  (0b0100 | 0b0001)
-            0b0110u => (IntPtr)User32.WM_NCHITTEST.HTTOPRIGHT, // top    + right (0b0100 | 0b0010)
-            0b1001u => (IntPtr)User32.WM_NCHITTEST.HTBOTTOMLEFT, // bottom + left  (0b1000 | 0b0001)
-            0b1010u => (IntPtr)User32.WM_NCHITTEST.HTBOTTOMRIGHT, // bottom + right (0b1000 | 0b0010)
-            0b0100u => (IntPtr)User32.WM_NCHITTEST.HTTOP, // top
-            0b0001u => (IntPtr)User32.WM_NCHITTEST.HTLEFT, // left
-            0b1000u => (IntPtr)User32.WM_NCHITTEST.HTBOTTOM, // bottom
-            0b0010u => (IntPtr)User32.WM_NCHITTEST.HTRIGHT, // right
+            0b0101u => (IntPtr)PInvoke.HTTOPLEFT, // top    + left  (0b0100 | 0b0001)
+            0b0110u => (IntPtr)PInvoke.HTTOPRIGHT, // top    + right (0b0100 | 0b0010)
+            0b1001u => (IntPtr)PInvoke.HTBOTTOMLEFT, // bottom + left  (0b1000 | 0b0001)
+            0b1010u => (IntPtr)PInvoke.HTBOTTOMRIGHT, // bottom + right (0b1000 | 0b0010)
+            0b0100u => (IntPtr)PInvoke.HTTOP, // top
+            0b0001u => (IntPtr)PInvoke.HTLEFT, // left
+            0b1000u => (IntPtr)PInvoke.HTBOTTOM, // bottom
+            0b0010u => (IntPtr)PInvoke.HTRIGHT, // right
 
             // no match = HTNOWHERE (stop processing)
-            _ => (IntPtr)User32.WM_NCHITTEST.HTNOWHERE,
+            _ => (IntPtr)PInvoke.HTNOWHERE,
         };
     }
 

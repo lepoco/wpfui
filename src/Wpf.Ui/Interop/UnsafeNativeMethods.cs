@@ -7,7 +7,6 @@
    and is intended for use on Windows systems only.
    This Source Code is partially based on the source code provided by the .NET Foundation. */
 
-using System.Runtime.InteropServices;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Dwm;
@@ -16,25 +15,14 @@ using Windows.Win32.UI.Shell;
 using Windows.Win32.UI.WindowsAndMessaging;
 using Microsoft.Win32;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Hardware;
 
 namespace Wpf.Ui.Interop;
 
 /// <summary>
 /// A set of dangerous methods to modify the appearance.
 /// </summary>
-public static class UnsafeNativeMethods
+internal static class UnsafeNativeMethods
 {
-    /// <summary>
-    /// Tries to set the <see cref="Window"/> corner preference.
-    /// </summary>
-    /// <param name="window">Selected window.</param>
-    /// <param name="cornerPreference">Window corner preference.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowCornerPreference(Window window, WindowCornerPreference cornerPreference) =>
-        GetHandle(window, out IntPtr windowHandle)
-        && ApplyWindowCornerPreference(windowHandle, cornerPreference);
-
     /// <summary>
     /// Tries to set the corner preference of the selected window.
     /// </summary>
@@ -60,7 +48,7 @@ public static class UnsafeNativeMethods
                 DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE,
                 &pvAttribute,
                 sizeof(int)
-            ) == Windows.Win32.Foundation.HRESULT.S_OK;
+            ) == HRESULT.S_OK;
     }
 
     /// <summary>
@@ -115,7 +103,7 @@ public static class UnsafeNativeMethods
                 DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR,
                 &color,
                 sizeof(int)
-            ) == Windows.Win32.Foundation.HRESULT.S_OK;
+            ) == HRESULT.S_OK;
     }
 
     /// <summary>
@@ -178,7 +166,7 @@ public static class UnsafeNativeMethods
                                              dwAttribute,
                                              &pvAttribute,
                                              (uint)sizeof(BOOL)) ==
-               Windows.Win32.Foundation.HRESULT.S_OK;
+               HRESULT.S_OK;
     }
 
     /// <summary>
@@ -214,7 +202,7 @@ public static class UnsafeNativeMethods
             dwAttribute = DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        return PInvoke.DwmSetWindowAttribute(new HWND(handle), dwAttribute, &pvAttribute, (uint)sizeof(BOOL)) == Windows.Win32.Foundation.HRESULT.S_OK;
+        return PInvoke.DwmSetWindowAttribute(new HWND(handle), dwAttribute, &pvAttribute, (uint)sizeof(BOOL)) == HRESULT.S_OK;
     }
 
     /// <summary>
@@ -269,156 +257,6 @@ public static class UnsafeNativeMethods
     }
 
     /// <summary>
-    /// Tries to apply selected backdrop type for window handle.
-    /// </summary>
-    /// <param name="handle">Selected window handle.</param>
-    /// <param name="backgroundType">Backdrop type.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static unsafe bool ApplyWindowBackdrop(IntPtr handle, WindowBackdropType backgroundType)
-    {
-        if (handle == IntPtr.Zero)
-        {
-            return false;
-        }
-
-        if (!PInvoke.IsWindow(new HWND(handle)))
-        {
-            return false;
-        }
-
-        DWM_SYSTEMBACKDROP_TYPE backdropPvAttribute = UnsafeReflection.Cast(backgroundType);
-
-        if (backdropPvAttribute == DWM_SYSTEMBACKDROP_TYPE.DWMSBT_NONE)
-        {
-            return false;
-        }
-
-        return PInvoke.DwmSetWindowAttribute(
-                new HWND(handle),
-                DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-                &backdropPvAttribute,
-                sizeof(DWM_SYSTEMBACKDROP_TYPE)
-            ) == Windows.Win32.Foundation.HRESULT.S_OK;
-    }
-
-    /// <summary>
-    /// Tries to determine whether the provided <see cref="Window"/> has applied legacy backdrop effect.
-    /// </summary>
-    /// <param name="handle">Window handle.</param>
-    /// <param name="backdropType">Background backdrop type.</param>
-    public static unsafe bool IsWindowHasBackdrop(IntPtr handle, WindowBackdropType backdropType)
-    {
-        if (!PInvoke.IsWindow(new HWND(handle)))
-        {
-            return false;
-        }
-
-        DWM_SYSTEMBACKDROP_TYPE systemBackdropType = DWM_SYSTEMBACKDROP_TYPE.DWMSBT_AUTO;
-
-        Windows.Win32.Foundation.HRESULT result = PInvoke.DwmGetWindowAttribute(new HWND(handle),
-                                                                                DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-                                                                                &systemBackdropType,
-                                                                                sizeof(uint));
-
-        return result == Windows.Win32.Foundation.HRESULT.S_OK && systemBackdropType == UnsafeReflection.Cast(backdropType);
-    }
-
-    /// <summary>
-    /// Tries to determine whether the provided <see cref="Window"/> has applied legacy Mica effect.
-    /// </summary>
-    /// <param name="window">Window to check.</param>
-    public static bool IsWindowHasLegacyMica(Window? window) =>
-        GetHandle(window, out IntPtr windowHandle) && IsWindowHasLegacyMica(windowHandle);
-
-    /// <summary>
-    /// Tries to determine whether the provided handle has applied legacy Mica effect.
-    /// </summary>
-    /// <param name="handle">Window handle.</param>
-    public static unsafe bool IsWindowHasLegacyMica(IntPtr handle)
-    {
-        if (!PInvoke.IsWindow(new HWND(handle)))
-        {
-            return false;
-        }
-
-        BOOL pvAttribute = false;
-
-        _ = PInvoke.DwmGetWindowAttribute(
-            new HWND(handle),
-            DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-            &pvAttribute,
-            (uint) sizeof(BOOL)
-        );
-
-        return pvAttribute;
-    }
-
-    /// <summary>
-    /// Tries to apply legacy Mica effect for the selected <see cref="Window"/>.
-    /// </summary>
-    /// <param name="window">The window to which the effect is to be applied.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyMicaEffect(Window? window) =>
-        GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyMicaEffect(windowHandle);
-
-    /// <summary>
-    /// Tries to apply legacy Mica effect for the selected <see cref="Window"/>.
-    /// </summary>
-    /// <param name="handle">Window handle.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static unsafe bool ApplyWindowLegacyMicaEffect(IntPtr handle)
-    {
-        BOOL backdropPvAttribute = true;
-
-        return PInvoke.DwmSetWindowAttribute(
-                new HWND(handle),
-                DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-                &backdropPvAttribute,
-                (uint) sizeof(BOOL)
-            ) == Windows.Win32.Foundation.HRESULT.S_OK;
-    }
-
-    /// <summary>
-    /// Tries to apply legacy Acrylic effect for the selected <see cref="Window"/>.
-    /// </summary>
-    /// <param name="window">The window to which the effect is to be applied.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyAcrylicEffect(Window? window) =>
-        GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyAcrylicEffect(windowHandle);
-
-    /// <summary>
-    /// Tries to apply legacy Acrylic effect for the selected <see cref="Window"/>.
-    /// </summary>
-    /// <param name="handle">Window handle</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyAcrylicEffect(IntPtr handle)
-    {
-        var accentPolicy = new Interop.User32.ACCENT_POLICY
-        {
-            nAccentState = User32.ACCENT_STATE.ACCENT_ENABLE_ACRYLICBLURBEHIND,
-            nColor = 0x990000 & 0xFFFFFF,
-        };
-
-        int accentStructSize = Marshal.SizeOf(accentPolicy);
-        IntPtr accentPtr = Marshal.AllocHGlobal(accentStructSize);
-
-        Marshal.StructureToPtr(accentPolicy, accentPtr, false);
-
-        var data = new User32.WINCOMPATTRDATA
-        {
-            Attribute = User32.WCA.WCA_ACCENT_POLICY,
-            SizeOfData = accentStructSize,
-            Data = accentPtr,
-        };
-
-        _ = User32.SetWindowCompositionAttribute(handle, ref data);
-
-        Marshal.FreeHGlobal(accentPtr);
-
-        return true;
-    }
-
-    /// <summary>
     /// Tries to get currently selected Window accent color.
     /// </summary>
     public static Color GetAccentColor()
@@ -444,7 +282,9 @@ public static class UnsafeNativeMethods
             // Ignored.
         }
 
-        return GetDefaultWindowsAccentColor();
+        // Windows default accent color
+        // https://learn.microsoft.com/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup-themes-windowcolor#values
+        return Color.FromArgb(0xff, 0x00, 0x78, 0xd7);
     }
 
     /// <summary>
@@ -463,7 +303,7 @@ public static class UnsafeNativeMethods
         {
             return false;
         }
-        
+
         if (new TaskbarList() is not ITaskbarList4 taskbarList)
         {
             return false;
@@ -513,18 +353,6 @@ public static class UnsafeNativeMethods
         return true;
     }
 
-    public static bool RemoveWindowCaption(Window window)
-    {
-        if (window is null)
-        {
-            return false;
-        }
-
-        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
-
-        return RemoveWindowCaption(windowHandle);
-    }
-
     public static unsafe bool RemoveWindowCaption(IntPtr hWnd)
     {
         if (hWnd == IntPtr.Zero)
@@ -546,85 +374,7 @@ public static class UnsafeNativeMethods
         return PInvoke.SetWindowThemeAttribute(new HWND(hWnd),
                                         WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
                                         &wtaOptions,
-                                        (uint)sizeof(WTA_OPTIONS)) == Windows.Win32.Foundation.HRESULT.S_OK;
-    }
-
-    public static bool ExtendClientAreaIntoTitleBar(Window window)
-    {
-        if (window is null)
-        {
-            return false;
-        }
-
-        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
-
-        return ExtendClientAreaIntoTitleBar(windowHandle);
-    }
-
-    public static unsafe bool ExtendClientAreaIntoTitleBar(IntPtr hWnd)
-    {
-        /*
-         * !! EXPERIMENTAl !!
-         * NOTE: WinRt has ExtendContentIntoTitlebar, but it needs some digging
-         */
-
-        if (hWnd == IntPtr.Zero)
-        {
-            return false;
-        }
-
-        if (!PInvoke.IsWindow(new HWND(hWnd)))
-        {
-            return false;
-        }
-
-        // #1 Remove titlebar elements
-        var wtaOptions = new WTA_OPTIONS()
-        {
-            dwFlags = PInvoke.WTNCA_NODRAWCAPTION | PInvoke.WTNCA_NODRAWICON | PInvoke.WTNCA_NOSYSMENU,
-            dwMask = PInvoke.WTNCA_NODRAWCAPTION | PInvoke.WTNCA_NODRAWICON | PInvoke.WTNCA_NOMIRRORHELP | PInvoke.WTNCA_NOSYSMENU
-        };
-
-        PInvoke.SetWindowThemeAttribute(
-            new HWND(hWnd),
-            WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
-            &wtaOptions,
-            (uint)sizeof(WTA_OPTIONS)
-        );
-
-        DisplayDpi windowDpi = DpiHelper.GetWindowDpi(hWnd);
-
-        // #2 Extend glass frame
-        Thickness deviceGlassThickness = DpiHelper.LogicalThicknessToDevice(
-            new Thickness(-1, -1, -1, -1),
-            windowDpi.DpiScaleX,
-            windowDpi.DpiScaleY
-        );
-
-        var dwmMargin = new MARGINS
-        {
-            // err on the side of pushing in glass an extra pixel.
-            cxLeftWidth = (int)Math.Ceiling(deviceGlassThickness.Left),
-            cxRightWidth = (int)Math.Ceiling(deviceGlassThickness.Right),
-            cyTopHeight = (int)Math.Ceiling(deviceGlassThickness.Top),
-            cyBottomHeight = (int)Math.Ceiling(deviceGlassThickness.Bottom),
-        };
-
-        // #3 Extend client area
-        PInvoke.DwmExtendFrameIntoClientArea(new HWND(hWnd), dwmMargin);
-
-        // #4 Clear rounding region
-        PInvoke.SetWindowRgn(new HWND(hWnd), null, PInvoke.IsWindowVisible(new HWND(hWnd)));
-
-        return true;
-    }
-
-    /// <summary>
-    /// Checks whether the DWM composition is enabled.
-    /// </summary>
-    public static bool IsCompositionEnabled()
-    {
-        return PInvoke.DwmIsCompositionEnabled(out BOOL enabled) == Windows.Win32.Foundation.HRESULT.S_OK & enabled;
+                                        (uint)sizeof(WTA_OPTIONS)) == HRESULT.S_OK;
     }
 
     /// <summary>
@@ -655,18 +405,8 @@ public static class UnsafeNativeMethods
 
     private static IntPtr SetWindowLong(IntPtr handle, WINDOW_LONG_PTR_INDEX nIndex, long windowStyleLong)
     {
-        if (IntPtr.Size == 4)
-        {
-            return new IntPtr(PInvoke.SetWindowLong(new HWND(handle), nIndex, (int)windowStyleLong));
-        }
-
-        return PInvoke.SetWindowLongPtr(new HWND(handle), nIndex, (nint)windowStyleLong);
-    }
-
-    private static Color GetDefaultWindowsAccentColor()
-    {
-        // Windows default accent color
-        // https://learn.microsoft.com/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup-themes-windowcolor#values
-        return Color.FromArgb(0xff, 0x00, 0x78, 0xd7);
+        return IntPtr.Size == 4 
+            ? new IntPtr(PInvoke.SetWindowLong(new HWND(handle), nIndex, (int)windowStyleLong)) 
+            : PInvoke.SetWindowLongPtr(new HWND(handle), nIndex, (nint)windowStyleLong);
     }
 }

@@ -117,14 +117,11 @@ public static class WindowBackdrop
 
         return backdropType switch
         {
-            WindowBackdropType.Auto => ApplyDwmwWindowAttrubute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_AUTO),
-            WindowBackdropType.Mica => ApplyDwmwWindowAttrubute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_MAINWINDOW),
-            WindowBackdropType.Acrylic => ApplyDwmwWindowAttrubute(
-                hWnd,
-                DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TRANSIENTWINDOW
-            ),
-            WindowBackdropType.Tabbed => ApplyDwmwWindowAttrubute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TABBEDWINDOW),
-            _ => ApplyDwmwWindowAttrubute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_NONE),
+            WindowBackdropType.Auto => ApplyDwmwWindowAttribute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_AUTO),
+            WindowBackdropType.Mica => ApplyDwmwWindowAttribute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_MAINWINDOW),
+            WindowBackdropType.Acrylic => ApplyDwmwWindowAttribute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TRANSIENTWINDOW),
+            WindowBackdropType.Tabbed => ApplyDwmwWindowAttribute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TABBEDWINDOW),
+            _ => ApplyDwmwWindowAttribute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_NONE),
         };
     }
 
@@ -248,13 +245,13 @@ public static class WindowBackdrop
                                                  DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR,
                                                  &titlebarPvAttribute,
                                                  sizeof(uint)) ==
-                   Windows.Win32.Foundation.HRESULT.S_OK;
+                   HRESULT.S_OK;
         }
 
         return true;
     }
 
-    private static unsafe bool ApplyDwmwWindowAttrubute(IntPtr hWnd, DWM_SYSTEMBACKDROP_TYPE dwmSbt)
+    private static unsafe bool ApplyDwmwWindowAttribute(IntPtr hWnd, DWM_SYSTEMBACKDROP_TYPE dwmSbt)
     {
         if (hWnd == IntPtr.Zero)
         {
@@ -272,7 +269,7 @@ public static class WindowBackdrop
                                              DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                                              &backdropPvAttribute,
                                              sizeof(DWM_SYSTEMBACKDROP_TYPE)) ==
-               Windows.Win32.Foundation.HRESULT.S_OK;
+               HRESULT.S_OK;
     }
 
     private static unsafe bool ApplyLegacyMicaBackdrop(IntPtr hWnd)
@@ -283,7 +280,7 @@ public static class WindowBackdrop
                                              DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
                                              &backdropPvAttribute,
                                              (uint)sizeof(BOOL)) ==
-               Windows.Win32.Foundation.HRESULT.S_OK;
+               HRESULT.S_OK;
     }
 
     private static bool RestoreContentBackground(IntPtr hWnd)
