@@ -259,27 +259,6 @@ internal static class User32
     }
 
     /// <summary>
-    /// CS_*
-    /// </summary>
-    [Flags]
-    public enum CS : uint
-    {
-        VREDRAW = 0x0001,
-        HREDRAW = 0x0002,
-        DBLCLKS = 0x0008,
-        OWNDC = 0x0020,
-        CLASSDC = 0x0040,
-        PARENTDC = 0x0080,
-        NOCLOSE = 0x0200,
-        SAVEBITS = 0x0800,
-        BYTEALIGNCLIENT = 0x1000,
-        BYTEALIGNWINDOW = 0x2000,
-        GLOBALCLASS = 0x4000,
-        IME = 0x00010000,
-        DROPSHADOW = 0x00020000,
-    }
-
-    /// <summary>
     /// Window message values, WM_*
     /// </summary>
     public enum WM
@@ -448,80 +427,6 @@ internal static class User32
     }
 
     /// <summary>
-    /// WindowStyle values, WS_*
-    /// </summary>
-    [Flags]
-    public enum WS : long
-    {
-        OVERLAPPED = 0x00000000,
-        POPUP = 0x80000000,
-        CHILD = 0x40000000,
-        MINIMIZE = 0x20000000,
-        VISIBLE = 0x10000000,
-        DISABLED = 0x08000000,
-        CLIPSIBLINGS = 0x04000000,
-        CLIPCHILDREN = 0x02000000,
-        MAXIMIZE = 0x01000000,
-        BORDER = 0x00800000,
-        DLGFRAME = 0x00400000,
-        VSCROLL = 0x00200000,
-        HSCROLL = 0x00100000,
-        SYSMENU = 0x00080000,
-        THICKFRAME = 0x00040000,
-        GROUP = 0x00020000,
-        TABSTOP = 0x00010000,
-
-        MINIMIZEBOX = GROUP,
-        MAXIMIZEBOX = TABSTOP,
-
-        CAPTION = BORDER | DLGFRAME,
-        TILED = OVERLAPPED,
-        ICONIC = MINIMIZE,
-        SIZEBOX = THICKFRAME,
-
-        OVERLAPPEDWINDOW = OVERLAPPED | CAPTION | SYSMENU | THICKFRAME | MINIMIZEBOX | MAXIMIZEBOX,
-        TILEDWINDOW = OVERLAPPEDWINDOW,
-
-        POPUPWINDOW = POPUP | BORDER | SYSMENU,
-        CHILDWINDOW = CHILD,
-    }
-
-    /// <summary>
-    /// Window style extended values, WS_EX_*
-    /// </summary>
-    [Flags]
-    public enum WS_EX : long
-    {
-        NONE = 0x00000000,
-        DLGMODALFRAME = 0x00000001,
-        NOPARENTNOTIFY = 0x00000004,
-        TOPMOST = 0x00000008,
-        ACCEPTFILES = 0x00000010,
-        TRANSPARENT = 0x00000020,
-        MDICHILD = 0x00000040,
-        TOOLWINDOW = 0x00000080,
-        WINDOWEDGE = 0x00000100,
-        CLIENTEDGE = 0x00000200,
-        CONTEXTHELP = 0x00000400,
-        RIGHT = 0x00001000,
-        LEFT = NONE,
-        RTLREADING = 0x00002000,
-        LTRREADING = NONE,
-        LEFTSCROLLBAR = 0x00004000,
-        RIGHTSCROLLBAR = NONE,
-        CONTROLPARENT = 0x00010000,
-        STATICEDGE = 0x00020000,
-        APPWINDOW = 0x00040000,
-        LAYERED = 0x00080000,
-        NOINHERITLAYOUT = 0x00100000, // Disable inheritence of mirroring by children
-        LAYOUTRTL = 0x00400000, // Right to left mirroring
-        COMPOSITED = 0x02000000,
-        NOACTIVATE = 0x08000000,
-        OVERLAPPEDWINDOW = WINDOWEDGE | CLIENTEDGE,
-        PALETTEWINDOW = WINDOWEDGE | TOOLWINDOW | TOPMOST,
-    }
-
-    /// <summary>
     /// SystemMetrics.  SM_*
     /// </summary>
     public enum SM
@@ -614,137 +519,9 @@ internal static class User32
     }
 
     /// <summary>
-    /// ShowWindow options
-    /// </summary>
-    public enum SW
-    {
-        HIDE = 0,
-        SHOWNORMAL = 1,
-        NORMAL = SHOWNORMAL,
-        SHOWMINIMIZED = 2,
-        SHOWMAXIMIZED = 3,
-        MAXIMIZE = SHOWMAXIMIZED,
-        SHOWNOACTIVATE = 4,
-        SHOW = 5,
-        MINIMIZE = 6,
-        SHOWMINNOACTIVE = 7,
-        SHOWNA = 8,
-        RESTORE = 9,
-        SHOWDEFAULT = 10,
-        FORCEMINIMIZE = 11,
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public class WINDOWPLACEMENT
-    {
-        public int length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
-        public int flags;
-        public SW showCmd;
-        public WinDef.POINT ptMinPosition;
-        public WinDef.POINT ptMaxPosition;
-        public WinDef.RECT rcNormalPosition;
-    }
-
-    /// <summary>
-    /// Contains window class information. It is used with the <see cref="RegisterClassEx"/> and GetClassInfoEx functions.
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    public struct WNDCLASSEX
-    {
-        /// <summary>
-        /// The size, in bytes, of this structure. Set this member to sizeof(WNDCLASSEX). Be sure to set this member before calling the GetClassInfoEx function.
-        /// </summary>
-        public int cbSize;
-
-        /// <summary>
-        /// The class style(s). This member can be any combination of the Class Styles.
-        /// </summary>
-        public CS style;
-
-        /// <summary>
-        /// A pointer to the window procedure. You must use the CallWindowProc function to call the window procedure. For more information, see WindowProc.
-        /// </summary>
-        public WndProc lpfnWndProc;
-
-        /// <summary>
-        /// The number of extra bytes to allocate following the window-class structure. The system initializes the bytes to zero.
-        /// </summary>
-        public int cbClsExtra;
-
-        /// <summary>
-        /// The number of extra bytes to allocate following the window instance. The system initializes the bytes to zero. If an application uses WNDCLASSEX to register a dialog box created by using the CLASS directive in the resource file, it must set this member to DLGWINDOWEXTRA.
-        /// </summary>
-        public int cbWndExtra;
-
-        /// <summary>
-        /// A handle to the instance that contains the window procedure for the class.
-        /// </summary>
-        public IntPtr hInstance;
-
-        /// <summary>
-        /// A handle to the class icon. This member must be a handle to an icon resource. If this member is NULL, the system provides a default icon.
-        /// </summary>
-        public IntPtr hIcon;
-
-        /// <summary>
-        /// A handle to the class cursor. This member must be a handle to a cursor resource. If this member is NULL, an application must explicitly set the cursor shape whenever the mouse moves into the application's window.
-        /// </summary>
-        public IntPtr hCursor;
-
-        /// <summary>
-        /// A handle to the class background brush. This member can be a handle to the brush to be used for painting the background, or it can be a color value.
-        /// </summary>
-        public IntPtr hbrBackground;
-
-        /// <summary>
-        /// Pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file. If you use an integer to identify the menu, use the MAKEINTRESOURCE macro. If this member is NULL, windows belonging to this class have no default menu.
-        /// </summary>
-        [MarshalAs(UnmanagedType.LPWStr)]
-        public string lpszMenuName;
-
-        /// <summary>
-        /// A pointer to a null-terminated string or is an atom. If this parameter is an atom, it must be a class atom created by a previous call to the RegisterClass or RegisterClassEx function. The atom must be in the low-order word of lpszClassName; the high-order word must be zero.
-        /// </summary>
-        [MarshalAs(UnmanagedType.LPWStr)]
-        public string lpszClassName;
-
-        /// <summary>
-        /// A handle to a small icon that is associated with the window class. If this member is NULL, the system searches the icon resource specified by the hIcon member for an icon of the appropriate size to use as the small icon.
-        /// </summary>
-        public IntPtr hIconSm;
-    }
-
-    /// <summary>
     /// Delegate declaration that matches native WndProc signatures.
     /// </summary>
     public delegate IntPtr WndProc(IntPtr hWnd, WM uMsg, IntPtr wParam, IntPtr lParam);
-
-    /// <summary>
-    /// Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function.
-    /// </summary>
-    /// <param name="lpwcx">A pointer to a <see cref="WNDCLASSEX"/> structure. You must fill the structure with the appropriate class attributes before passing it to the function.</param>
-    /// <returns>If the function succeeds, the return value is a class atom that uniquely identifies the class being registered.</returns>
-    [DllImport(Libraries.User32, SetLastError = true)]
-    public static extern short RegisterClassEx([In] ref WNDCLASSEX lpwcx);
-
-    /// <summary>
-    /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
-    /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// </summary>
-    /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
-    /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
-    /// <returns>If the function succeeds, the return value is the requested value.</returns>
-    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
-    public static extern long GetWindowLong([In] IntPtr hWnd, [In] GWL nIndex);
-
-    /// <summary>
-    /// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
-    /// </summary>
-    /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
-    /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
-    /// <returns>If the function succeeds, the return value is the requested value.</returns>
-    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
-    public static extern IntPtr GetWindowLongPtr([In] IntPtr hWnd, [In] int nIndex);
 
     /// <summary>
     /// Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.
@@ -755,12 +532,6 @@ internal static class User32
     /// <returns>If the function succeeds, the return value is the previous value of the specified offset.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr SetWindowLongPtr([In] IntPtr hWnd, [In] int nIndex, [In] IntPtr dwNewLong);
-
-    /// <summary>
-    /// Changes an attribute of the specified window.
-    /// </summary>
-    [DllImport(Libraries.User32, CharSet = CharSet.Auto, SetLastError = true)]
-    public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
     /// <summary>
     /// Determines whether the specified window handle identifies an existing window.
@@ -780,15 +551,6 @@ internal static class User32
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool GetWindowRect([In] IntPtr hWnd, [Out] out WinDef.RECT lpRect);
-
-    /// <summary>
-    /// Determines the visibility state of the specified window.
-    /// </summary>
-    /// <param name="hWnd">A handle to the window to be tested.</param>
-    /// <returns>If the specified window, its parent window, its parent's parent window, and so forth, have the WS_VISIBLE style, the return value is nonzero. Otherwise, the return value is zero.</returns>
-    [DllImport(Libraries.User32)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool IsWindowVisible([In] IntPtr hWnd);
 
     /// <summary>
     /// Retrieves the specified system metric or system configuration setting.
@@ -832,14 +594,6 @@ internal static class User32
         [In] IntPtr hWnd,
         [In, Out] ref WINCOMPATTRDATA data
     );
-
-    /// <summary>
-    /// Returns the dots per inch (dpi) value for the specified window.
-    /// </summary>
-    /// <param name="hWnd">The window that you want to get information about.</param>
-    /// <returns>The DPI for the window, which depends on the DPI_AWARENESS of the window.</returns>
-    [DllImport(Libraries.User32, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-    public static extern uint GetDpiForWindow([In] IntPtr hWnd);
 }
 
 #pragma warning restore SA1300 // Element should begin with upper-case letter

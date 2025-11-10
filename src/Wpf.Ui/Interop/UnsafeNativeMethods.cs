@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.UI.Controls;
+using Windows.Win32.UI.WindowsAndMessaging;
 using Microsoft.Win32;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Hardware;
@@ -255,10 +256,10 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        var windowStyleLong = User32.GetWindowLong(handle, User32.GWL.GWL_STYLE);
-        windowStyleLong &= ~(int)User32.WS.SYSMENU;
+        var windowStyleLong = PInvoke.GetWindowLong(new HWND(handle), WINDOW_LONG_PTR_INDEX.GWL_STYLE);
+        windowStyleLong &= ~(int)WINDOW_STYLE.WS_SYSMENU;
 
-        IntPtr result = SetWindowLong(handle, User32.GWL.GWL_STYLE, windowStyleLong);
+        IntPtr result = SetWindowLong(handle, WINDOW_LONG_PTR_INDEX.GWL_STYLE, windowStyleLong);
 
         return result.ToInt64() > 0x0;
     }
@@ -611,7 +612,7 @@ public static class UnsafeNativeMethods
         PInvoke.DwmExtendFrameIntoClientArea(new HWND(hWnd), dwmMargin);
 
         // #4 Clear rounding region
-        Interop.User32.SetWindowRgn(hWnd, IntPtr.Zero, Interop.User32.IsWindowVisible(hWnd));
+        Interop.User32.SetWindowRgn(hWnd, IntPtr.Zero, PInvoke.IsWindowVisible(new HWND(hWnd)));
 
         return true;
     }
@@ -650,11 +651,11 @@ public static class UnsafeNativeMethods
         return windowHandle != IntPtr.Zero;
     }
 
-    private static IntPtr SetWindowLong(IntPtr handle, User32.GWL nIndex, long windowStyleLong)
+    private static IntPtr SetWindowLong(IntPtr handle, WINDOW_LONG_PTR_INDEX nIndex, long windowStyleLong)
     {
         if (IntPtr.Size == 4)
         {
-            return new IntPtr(User32.SetWindowLong(handle, (int)nIndex, (int)windowStyleLong));
+            return new IntPtr(PInvoke.SetWindowLong(new HWND(handle), nIndex, (int)windowStyleLong));
         }
 
         return User32.SetWindowLongPtr(handle, (int)nIndex, checked((IntPtr)windowStyleLong));

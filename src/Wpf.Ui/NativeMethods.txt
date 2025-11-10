@@ -2,5 +2,10 @@ S_OK
 DwmIsCompositionEnabled
 DwmExtendFrameIntoClientArea
 SetWindowThemeAttribute
+GetDpiForWindow
+IsWindowVisible
+SetWindowLong
+GetWindowLong
+WINDOW_STYLE
 WTA_OPTIONS
 WTNCA_*

@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Shell;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 using Wpf.Ui.Interop;
 using Wpf.Ui.Interop.WinDef;
 
@@ -235,7 +237,7 @@ public partial class TitleBar
     {
         try
         {
-            uint dpi = User32.GetDpiForWindow(hwnd);
+            uint dpi = PInvoke.GetDpiForWindow(new HWND(hwnd));
             if (dpi == 0)
             {
                 dpi = 96;
