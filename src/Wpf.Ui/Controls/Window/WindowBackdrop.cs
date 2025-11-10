@@ -242,7 +242,7 @@ public static class WindowBackdrop
         {
             // NOTE: https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
             // Specifying DWMWA_COLOR_DEFAULT (value 0xFFFFFFFF) for the color will reset the window back to using the system's default behavior for the caption color.
-            uint titlebarPvAttribute = PInvoke.DWMWA_COLOR_DEFAULT;
+            uint titlebarPvAttribute = PInvoke.DWMWA_COLOR_NONE;
 
             return PInvoke.DwmSetWindowAttribute(new HWND(windowSource.Handle),
                                                  DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR,
