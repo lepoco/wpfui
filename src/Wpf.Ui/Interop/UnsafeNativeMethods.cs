@@ -522,7 +522,7 @@ public static class UnsafeNativeMethods
         return RemoveWindowCaption(windowHandle);
     }
 
-    public static bool RemoveWindowCaption(IntPtr hWnd)
+    public static unsafe bool RemoveWindowCaption(IntPtr hWnd)
     {
         if (hWnd == IntPtr.Zero)
         {
@@ -533,21 +533,17 @@ public static class UnsafeNativeMethods
         {
             return false;
         }
-
-        var wtaOptions = new UxTheme.WTA_OPTIONS()
+        
+        var wtaOptions = new WTA_OPTIONS()
         {
-            dwFlags = UxTheme.WTNCA.NODRAWCAPTION,
-            dwMask = UxTheme.WTNCA.VALIDBITS,
+            dwFlags = PInvoke.WTNCA_NODRAWCAPTION,
+            dwMask = PInvoke.WTNCA_NODRAWCAPTION | PInvoke.WTNCA_NODRAWICON | PInvoke.WTNCA_NOMIRRORHELP | PInvoke.WTNCA_NOSYSMENU,
         };
 
-        UxTheme.SetWindowThemeAttribute(
-            hWnd,
-            UxTheme.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
-            ref wtaOptions,
-            (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
-        );
-
-        return true;
+        return PInvoke.SetWindowThemeAttribute(new HWND(hWnd),
+                                        WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
+                                        &wtaOptions,
+                                        (uint)sizeof(WTA_OPTIONS)) == Windows.Win32.Foundation.HRESULT.S_OK;
     }
 
     public static bool ExtendClientAreaIntoTitleBar(Window window)
@@ -562,7 +558,7 @@ public static class UnsafeNativeMethods
         return ExtendClientAreaIntoTitleBar(windowHandle);
     }
 
-    public static bool ExtendClientAreaIntoTitleBar(IntPtr hWnd)
+    public static unsafe bool ExtendClientAreaIntoTitleBar(IntPtr hWnd)
     {
         /*
          * !! EXPERIMENTAl !!
@@ -580,17 +576,17 @@ public static class UnsafeNativeMethods
         }
 
         // #1 Remove titlebar elements
-        var wtaOptions = new UxTheme.WTA_OPTIONS()
+        var wtaOptions = new WTA_OPTIONS()
         {
-            dwFlags = UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU,
-            dwMask = UxTheme.WTNCA.VALIDBITS,
+            dwFlags = PInvoke.WTNCA_NODRAWCAPTION | PInvoke.WTNCA_NODRAWICON | PInvoke.WTNCA_NOSYSMENU,
+            dwMask = PInvoke.WTNCA_NODRAWCAPTION | PInvoke.WTNCA_NODRAWICON | PInvoke.WTNCA_NOMIRRORHELP | PInvoke.WTNCA_NOSYSMENU
         };
 
-        Interop.UxTheme.SetWindowThemeAttribute(
-            hWnd,
-            UxTheme.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
-            ref wtaOptions,
-            (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
+        PInvoke.SetWindowThemeAttribute(
+            new HWND(hWnd),
+            WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
+            &wtaOptions,
+            (uint)sizeof(WTA_OPTIONS)
         );
 
         DisplayDpi windowDpi = DpiHelper.GetWindowDpi(hWnd);
