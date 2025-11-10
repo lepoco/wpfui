@@ -265,7 +265,7 @@ public static class UnsafeNativeMethods
 
         IntPtr result = SetWindowLong(handle, WINDOW_LONG_PTR_INDEX.GWL_STYLE, windowStyleLong);
 
-        return result.ToInt64() > 0x0;
+        return result.ToInt64() > 0;
     }
 
     /// <summary>
@@ -660,7 +660,7 @@ public static class UnsafeNativeMethods
             return new IntPtr(PInvoke.SetWindowLong(new HWND(handle), nIndex, (int)windowStyleLong));
         }
 
-        return User32.SetWindowLongPtr(handle, (int)nIndex, checked((IntPtr)windowStyleLong));
+        return PInvoke.SetWindowLongPtr(new HWND(handle), nIndex, (nint)windowStyleLong);
     }
 
     private static Color GetDefaultWindowsAccentColor()

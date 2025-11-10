@@ -367,16 +367,6 @@ internal static class User32
     }
 
     /// <summary>
-    /// Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.
-    /// </summary>
-    /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
-    /// <param name="nIndex">The zero-based offset to the value to be set.</param>
-    /// <param name="dwNewLong">The replacement value.</param>
-    /// <returns>If the function succeeds, the return value is the previous value of the specified offset.</returns>
-    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
-    public static extern IntPtr SetWindowLongPtr([In] IntPtr hWnd, [In] int nIndex, [In] IntPtr dwNewLong);
-
-    /// <summary>
     /// Sets various information regarding DWM window attributes.
     /// </summary>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
