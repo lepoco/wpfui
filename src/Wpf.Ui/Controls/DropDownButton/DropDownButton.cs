@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
+using System.Windows.Input;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -14,6 +15,11 @@ namespace Wpf.Ui.Controls;
 public class DropDownButton : Button
 {
     private ContextMenu? _contextMenu;
+
+    public DropDownButton()
+    {
+        PreviewMouseLeftButtonUp += OnPreviewMouseLeftButtonUp;
+    }
 
     /// <summary>Identifies the <see cref="Flyout"/> dependency property.</summary>
     public static readonly DependencyProperty FlyoutProperty = DependencyProperty.Register(
@@ -87,10 +93,8 @@ public class DropDownButton : Button
 
     protected virtual void OnIsDropDownOpenChanged(bool currentValue) { }
 
-    protected override void OnClick()
+    private void OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        base.OnClick();
-
         if (_contextMenu is null)
         {
             return;

@@ -245,34 +245,43 @@
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
-                        Padding="{TemplateBinding Padding}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderThickness="0"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <!--  The inset border is only used for appearances other than Secondary  -->
+                        <Border
+                            x:Name="InsetBorder"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            BorderBrush="{Binding ElementName=ContentBorder, Path=BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <ContentPresenter
-                                x:Name="ControlIcon"
-                                Grid.Column="0"
-                                Margin="{StaticResource ButtonIconMargin}"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Icon}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Focusable="False"
-                                TextElement.FontSize="{TemplateBinding FontSize}"
-                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                                <ContentPresenter
+                                    x:Name="ControlIcon"
+                                    Grid.Column="0"
+                                    Margin="{StaticResource ButtonIconMargin}"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Icon}"
+                                    Focusable="False"
+                                    TextElement.FontSize="{TemplateBinding FontSize}"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                            <ContentPresenter
-                                x:Name="ContentPresenter"
-                                Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Content}"
-                                TextElement.Foreground="{TemplateBinding Foreground}" />
-                        </Grid>
+                                <ContentPresenter
+                                    x:Name="ContentPresenter"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
+                            </Grid>
+                        </Border>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
@@ -311,6 +320,10 @@
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
+                        <Trigger Property="Appearance" Value="Secondary">
+                            <Setter TargetName="InsetBorder" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -329,7 +342,8 @@
                 <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}" />
                 <Setter Property="PressedForeground" Value="{DynamicResource AccentButtonForegroundPointerOver}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
-                <Setter Property="PressedBorderBrush" Value="{DynamicResource AccentButtonBorderBrushPressed}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="PressedBorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}" />
             </Trigger>
 
             <!--  DARK  -->
@@ -349,16 +363,11 @@
                         <SolidColorBrush Color="#52000000" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="PressedForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorLightPrimaryBrush}" />
+                <Setter Property="PressedForeground" Value="{DynamicResource TextFillColorLightSecondaryBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  LIGHT  -->
@@ -378,16 +387,8 @@
                         <SolidColorBrush Color="#F3FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorDarkPrimary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="PressedForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorDarkSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorDarkPrimaryBrush}" />
+                <Setter Property="PressedForeground" Value="{DynamicResource TextFillColorDarkSecondaryBrush}" />
             </Trigger>
 
             <!--  INFO  -->
@@ -407,11 +408,10 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteLightBlueColor}" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorLightPrimaryBrush}" />
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  DANGER  -->
@@ -431,6 +431,9 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteRedColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  SUCCESS  -->
@@ -450,6 +453,9 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteGreenColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
 
             <!--  CAUTION  -->
@@ -469,6 +475,9 @@
                         <SolidColorBrush Opacity="0.7" Color="{DynamicResource PaletteOrangeColor}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="PressedBorderBrush" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
+                <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>

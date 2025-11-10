@@ -26,7 +26,7 @@
                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                 <Border.Style>
                     <Style TargetType="{x:Type Border}">
-                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackground}" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}" />
@@ -73,6 +73,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
@@ -127,6 +128,7 @@
                                     <Border
                                         x:Name="MainBorder"
                                         Height="40"
+                                        Background="Transparent"
                                         HorizontalAlignment="Stretch"
                                         BorderThickness="{DynamicResource NavigationViewItemThickness}"
                                         CornerRadius="4">
@@ -170,6 +172,7 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 
@@ -361,10 +364,10 @@
 
                         <!--  Separator/Shadow for Top  -->
                         <Border
+                            x:Name="PART_TopSeparator"
                             Grid.Row="1"
                             Height="1"
                             Margin="0,4,0,4"
-                            BorderThickness=".5"
                             Background="{DynamicResource LeftNavigationViewSeparatorBrush}" />
 
                         <!--  Scrollable Menu Items  -->
@@ -393,10 +396,10 @@
 
                         <!--  Separator/Shadow for Footer  -->
                         <Border
+                            x:Name="PART_FooterSeparator"
                             Grid.Row="3"
                             Height="1"
                             Margin="0,4,0,4"
-                            BorderThickness=".5"
                             Background="{DynamicResource LeftNavigationViewSeparatorBrush}" />
 
                         <!--  Footer (Fixed)  -->
@@ -531,6 +534,15 @@
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsBackButtonVisible" Value="Collapsed" />
+                    <Condition Property="IsPaneToggleVisible" Value="False" />
+                    <Condition Property="AutoSuggestBox" Value="{x:Null}" />
+                    <Condition Property="PaneHeader" Value="{x:Null}" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="PART_TopSeparator" Property="Visibility" Value="Collapsed" />
+            </MultiTrigger>
             <Trigger Property="AutoSuggestBox" Value="{x:Null}">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
@@ -538,6 +550,12 @@
             <Trigger Property="PaneTitle" Value="{x:Null}">
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
                 <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
+            </Trigger>
+            <Trigger Property="IsTopSeparatorVisible" Value="False">
+                <Setter TargetName="PART_TopSeparator" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsFooterSeparatorVisible" Value="False">
+                <Setter TargetName="PART_FooterSeparator" Property="Visibility" Value="Collapsed" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
