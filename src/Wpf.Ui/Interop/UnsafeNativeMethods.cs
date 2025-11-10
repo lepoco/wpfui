@@ -533,7 +533,7 @@ public static class UnsafeNativeMethods
         {
             return false;
         }
-        
+
         var wtaOptions = new WTA_OPTIONS()
         {
             dwFlags = PInvoke.WTNCA_NODRAWCAPTION,
