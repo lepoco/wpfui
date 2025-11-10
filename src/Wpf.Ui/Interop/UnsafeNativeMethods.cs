@@ -40,7 +40,7 @@ public static class UnsafeNativeMethods
     /// <param name="handle">Selected window handle.</param>
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowCornerPreference(IntPtr handle, WindowCornerPreference cornerPreference)
+    public static unsafe bool ApplyWindowCornerPreference(IntPtr handle, WindowCornerPreference cornerPreference)
     {
         if (handle == IntPtr.Zero)
         {
@@ -52,14 +52,14 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        int pvAttribute = (int)UnsafeReflection.Cast(cornerPreference);
+        DWM_WINDOW_CORNER_PREFERENCE pvAttribute = UnsafeReflection.Cast(cornerPreference);
 
-        return Dwmapi.DwmSetWindowAttribute(
-                handle,
-                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE,
-                ref pvAttribute,
-                Marshal.SizeOf(typeof(int))
-            ) == 0;
+        return PInvoke.DwmSetWindowAttribute(
+                new HWND(handle),
+                DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE,
+                &pvAttribute,
+                sizeof(int)
+            ) == Windows.Win32.Foundation.HRESULT.S_OK;
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ public static class UnsafeNativeMethods
     /// <param name="handle">The handle.</param>
     /// <param name="color">The color.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyBorderColor(IntPtr handle, int color)
+    public static unsafe bool ApplyBorderColor(IntPtr handle, int color)
     {
         if (handle == IntPtr.Zero)
         {
@@ -109,12 +109,12 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        return Dwmapi.DwmSetWindowAttribute(
-                handle,
-                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR,
-                ref color,
+        return PInvoke.DwmSetWindowAttribute(
+                new HWND(handle),
+                DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR,
+                &color,
                 sizeof(int)
-            ) == 0;
+            ) == Windows.Win32.Foundation.HRESULT.S_OK;
     }
 
     /// <summary>
@@ -153,7 +153,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="handle">Window handle.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowDarkMode(IntPtr handle)
+    public static unsafe bool RemoveWindowDarkMode(IntPtr handle)
     {
         if (handle == IntPtr.Zero)
         {
@@ -165,16 +165,19 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        var pvAttribute = 0x0; // Disable
-        Dwmapi.DWMWINDOWATTRIBUTE dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
+        BOOL pvAttribute = false;
+        DWMWINDOWATTRIBUTE dwAttribute = DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
         if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
         {
-            dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
+            dwAttribute = DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        return Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)))
-            == 0;
+        return PInvoke.DwmSetWindowAttribute(new HWND(handle),
+                                             dwAttribute,
+                                             &pvAttribute,
+                                             (uint)sizeof(BOOL)) ==
+               Windows.Win32.Foundation.HRESULT.S_OK;
     }
 
     /// <summary>
@@ -190,7 +193,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="handle">Window handle.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowDarkMode(IntPtr handle)
+    public static unsafe bool ApplyWindowDarkMode(IntPtr handle)
     {
         if (handle == IntPtr.Zero)
         {
@@ -202,16 +205,15 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        var pvAttribute = 0x1; // Enable
-        Dwmapi.DWMWINDOWATTRIBUTE dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
+        BOOL pvAttribute = true;
+        DWMWINDOWATTRIBUTE dwAttribute = DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
         if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
         {
-            dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
+            dwAttribute = DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        return Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)))
-            == 0;
+        return PInvoke.DwmSetWindowAttribute(new HWND(handle), dwAttribute, &pvAttribute, (uint)sizeof(BOOL)) == Windows.Win32.Foundation.HRESULT.S_OK;
     }
 
     /// <summary>
@@ -271,7 +273,7 @@ public static class UnsafeNativeMethods
     /// <param name="handle">Selected window handle.</param>
     /// <param name="backgroundType">Backdrop type.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowBackdrop(IntPtr handle, WindowBackdropType backgroundType)
+    public static unsafe bool ApplyWindowBackdrop(IntPtr handle, WindowBackdropType backgroundType)
     {
         if (handle == IntPtr.Zero)
         {
@@ -283,19 +285,19 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        var backdropPvAttribute = (int)UnsafeReflection.Cast(backgroundType);
+        DWM_SYSTEMBACKDROP_TYPE backdropPvAttribute = UnsafeReflection.Cast(backgroundType);
 
-        if (backdropPvAttribute == (int)Dwmapi.DWMSBT.DWMSBT_DISABLE)
+        if (backdropPvAttribute == DWM_SYSTEMBACKDROP_TYPE.DWMSBT_NONE)
         {
             return false;
         }
 
-        return Dwmapi.DwmSetWindowAttribute(
-                handle,
-                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-                ref backdropPvAttribute,
-                Marshal.SizeOf(typeof(int))
-            ) == 0;
+        return PInvoke.DwmSetWindowAttribute(
+                new HWND(handle),
+                DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                &backdropPvAttribute,
+                sizeof(DWM_SYSTEMBACKDROP_TYPE)
+            ) == Windows.Win32.Foundation.HRESULT.S_OK;
     }
 
     /// <summary>
@@ -312,10 +314,10 @@ public static class UnsafeNativeMethods
 
         DWM_SYSTEMBACKDROP_TYPE systemBackdropType = DWM_SYSTEMBACKDROP_TYPE.DWMSBT_AUTO;
 
-        var result = PInvoke.DwmGetWindowAttribute(new HWND(handle),
-                                                   DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-                                                   &systemBackdropType,
-                                                   sizeof(uint));
+        Windows.Win32.Foundation.HRESULT result = PInvoke.DwmGetWindowAttribute(new HWND(handle),
+                                                                                DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                                                                                &systemBackdropType,
+                                                                                sizeof(uint));
 
         return result == Windows.Win32.Foundation.HRESULT.S_OK && systemBackdropType == UnsafeReflection.Cast(backdropType);
     }
@@ -363,16 +365,16 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="handle">Window handle.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyMicaEffect(IntPtr handle)
+    public static unsafe bool ApplyWindowLegacyMicaEffect(IntPtr handle)
     {
-        var backdropPvAttribute = 0x1; // Enable
+        BOOL backdropPvAttribute = true;
 
-        return Dwmapi.DwmSetWindowAttribute(
-                handle,
-                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-                ref backdropPvAttribute,
-                Marshal.SizeOf(typeof(int))
-            ) == 0;
+        return PInvoke.DwmSetWindowAttribute(
+                new HWND(handle),
+                DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
+                &backdropPvAttribute,
+                (uint) sizeof(BOOL)
+            ) == Windows.Win32.Foundation.HRESULT.S_OK;
     }
 
     /// <summary>

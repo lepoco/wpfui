@@ -19,7 +19,7 @@ namespace Wpf.Ui.Interop;
 internal static class UnsafeReflection
 {
     /// <summary>
-    /// Casts <see cref="WindowBackdropType"/> to <see cref="Dwmapi.DWMSBT"/>.
+    /// Casts <see cref="WindowBackdropType"/> to <see cref="DWM_SYSTEMBACKDROP_TYPE"/>.
     /// </summary>
     public static DWM_SYSTEMBACKDROP_TYPE Cast(WindowBackdropType backgroundType)
     {
@@ -34,16 +34,16 @@ internal static class UnsafeReflection
     }
 
     /// <summary>
-    /// Casts <see cref="WindowCornerPreference"/> to <see cref="Dwmapi.DWM_WINDOW_CORNER_PREFERENCE"/>.
+    /// Casts <see cref="WindowCornerPreference"/> to <see cref="DWM_WINDOW_CORNER_PREFERENCE"/>.
     /// </summary>
-    public static Dwmapi.DWM_WINDOW_CORNER_PREFERENCE Cast(WindowCornerPreference cornerPreference)
+    public static DWM_WINDOW_CORNER_PREFERENCE Cast(WindowCornerPreference cornerPreference)
     {
         return cornerPreference switch
         {
-            WindowCornerPreference.Round => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.ROUND,
-            WindowCornerPreference.RoundSmall => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.ROUNDSMALL,
-            WindowCornerPreference.DoNotRound => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DONOTROUND,
-            _ => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DEFAULT,
+            WindowCornerPreference.Round => DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND,
+            WindowCornerPreference.RoundSmall => DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL,
+            WindowCornerPreference.DoNotRound => DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_DONOTROUND,
+            _ => DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_DEFAULT,
         };
     }
 

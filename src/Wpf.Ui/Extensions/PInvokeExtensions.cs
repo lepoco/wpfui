@@ -9,11 +9,16 @@ namespace Wpf.Ui.Extensions;
 
 internal static class PInvokeExtensions
 {
-    extension(DWMWINDOWATTRIBUTE str)
+    extension(DWMWINDOWATTRIBUTE attr)
     {
         /// <summary>
-        /// Undocumented attribute for enabling Mica effect on a window.
+        /// Gets the undocumented window attribute for enabling Mica effect on a window.
         /// </summary>
         public static DWMWINDOWATTRIBUTE DWMWA_MICA_EFFECT => (DWMWINDOWATTRIBUTE)1029;
+
+        /// <summary>
+        /// Gets the window attribute used to enable immersive dark mode prior to Windows 11.
+        /// </summary>
+        public static DWMWINDOWATTRIBUTE DMWA_USE_IMMERSIVE_DARK_MODE_OLD => DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE - 1;
     }
 }

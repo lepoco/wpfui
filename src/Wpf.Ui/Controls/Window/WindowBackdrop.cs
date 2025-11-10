@@ -3,13 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Runtime.InteropServices;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Dwm;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
-using HRESULT = Wpf.Ui.Interop.HRESULT;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -119,14 +117,14 @@ public static class WindowBackdrop
 
         return backdropType switch
         {
-            WindowBackdropType.Auto => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_AUTO),
-            WindowBackdropType.Mica => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_MAINWINDOW),
+            WindowBackdropType.Auto => ApplyDwmwWindowAttrubute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_AUTO),
+            WindowBackdropType.Mica => ApplyDwmwWindowAttrubute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_MAINWINDOW),
             WindowBackdropType.Acrylic => ApplyDwmwWindowAttrubute(
                 hWnd,
-                Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW
+                DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TRANSIENTWINDOW
             ),
-            WindowBackdropType.Tabbed => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW),
-            _ => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_DISABLE),
+            WindowBackdropType.Tabbed => ApplyDwmwWindowAttrubute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TABBEDWINDOW),
+            _ => ApplyDwmwWindowAttrubute(hWnd, DWM_SYSTEMBACKDROP_TYPE.DWMSBT_NONE),
         };
     }
 
@@ -150,7 +148,7 @@ public static class WindowBackdrop
     /// Tries to remove all effects if they have been applied to the <c>hWnd</c>.
     /// </summary>
     /// <param name="hWnd">Pointer to the window handle.</param>
-    public static bool RemoveBackdrop(IntPtr hWnd)
+    public static unsafe bool RemoveBackdrop(IntPtr hWnd)
     {
         if (hWnd == IntPtr.Zero)
         {
@@ -169,21 +167,22 @@ public static class WindowBackdrop
             return false;
         }
 
-        var pvAttribute = 0; // Disable
-        var backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_DISABLE;
+        BOOL pvAttribute = false;
 
-        _ = Dwmapi.DwmSetWindowAttribute(
-            hWnd,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int))
+        _ = PInvoke.DwmSetWindowAttribute(
+            new HWND(hWnd),
+            DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
+            &pvAttribute,
+            (uint) sizeof(BOOL)
         );
 
-        _ = Dwmapi.DwmSetWindowAttribute(
-            hWnd,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-            ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int))
+        DWM_SYSTEMBACKDROP_TYPE backdropPvAttribute = DWM_SYSTEMBACKDROP_TYPE.DWMSBT_NONE;
+
+        _ = PInvoke.DwmSetWindowAttribute(
+            new HWND(hWnd),
+            DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+            &backdropPvAttribute,
+            sizeof(DWM_SYSTEMBACKDROP_TYPE)
         );
 
         return true;
@@ -255,7 +254,7 @@ public static class WindowBackdrop
         return true;
     }
 
-    private static bool ApplyDwmwWindowAttrubute(IntPtr hWnd, Dwmapi.DWMSBT dwmSbt)
+    private static unsafe bool ApplyDwmwWindowAttrubute(IntPtr hWnd, DWM_SYSTEMBACKDROP_TYPE dwmSbt)
     {
         if (hWnd == IntPtr.Zero)
         {
@@ -267,37 +266,25 @@ public static class WindowBackdrop
             return false;
         }
 
-        int backdropPvAttribute = (int)dwmSbt;
+        DWM_SYSTEMBACKDROP_TYPE backdropPvAttribute = dwmSbt;
 
-        var dwmApiResult = Dwmapi.DwmSetWindowAttribute(
-            hWnd,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-            ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int))
-        );
-
-        return dwmApiResult == HRESULT.S_OK;
+        return PInvoke.DwmSetWindowAttribute(new HWND(hWnd),
+                                             DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                                             &backdropPvAttribute,
+                                             sizeof(DWM_SYSTEMBACKDROP_TYPE)) ==
+               Windows.Win32.Foundation.HRESULT.S_OK;
     }
 
-    private static bool ApplyLegacyMicaBackdrop(IntPtr hWnd)
+    private static unsafe bool ApplyLegacyMicaBackdrop(IntPtr hWnd)
     {
-        var backdropPvAttribute = 1; // Enable
+        BOOL backdropPvAttribute = true;
 
-        // TODO: Validate HRESULT
-        var dwmApiResult = Dwmapi.DwmSetWindowAttribute(
-            hWnd,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-            ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int))
-        );
-
-        return dwmApiResult == HRESULT.S_OK;
+        return PInvoke.DwmSetWindowAttribute(new HWND(hWnd),
+                                             DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
+                                             &backdropPvAttribute,
+                                             (uint)sizeof(BOOL)) ==
+               Windows.Win32.Foundation.HRESULT.S_OK;
     }
-
-    /*private static bool ApplyLegacyAcrylicBackdrop(IntPtr hWnd)
-    {
-        throw new NotImplementedException();
-    }*/
 
     private static bool RestoreContentBackground(IntPtr hWnd)
     {
