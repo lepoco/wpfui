@@ -6,4 +6,5 @@
 global using System.Reflection;
 global using AwesomeAssertions;
 global using FlaUI.Core.AutomationElements;
+global using Wpf.Ui.FlaUI;
 global using Wpf.Ui.Gallery.IntegrationTests.Fixtures;

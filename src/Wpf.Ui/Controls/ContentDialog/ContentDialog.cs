@@ -488,11 +488,16 @@ public class ContentDialog : ContentControl
     {
         SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
 
-        Loaded += static (sender, _) =>
+        // Avoid registering runtime code that triggers designer behavior or throws exceptions
+        // at design time (to reduce the possibility of designer crashes/rendering failures).
+        if (!Wpf.Ui.Designer.DesignerHelper.IsInDesignMode)
         {
-            var self = (ContentDialog)sender;
-            self.OnLoaded();
-        };
+            Loaded += static (sender, _) =>
+            {
+                var self = (ContentDialog)sender;
+                self.OnLoaded();
+            };
+        }
     }
 
     /// <summary>
@@ -510,11 +515,16 @@ public class ContentDialog : ContentControl
 
         SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
 
-        Loaded += static (sender, _) =>
+        // Avoid registering runtime code that triggers designer behavior or throws exceptions
+        // at design time (to reduce the possibility of designer crashes/rendering failures).
+        if (!Wpf.Ui.Designer.DesignerHelper.IsInDesignMode)
         {
-            var self = (ContentDialog)sender;
-            self.OnLoaded();
-        };
+            Loaded += static (sender, _) =>
+            {
+                var self = (ContentDialog)sender;
+                self.OnLoaded();
+            };
+        }
     }
 
     /// <summary>
@@ -576,9 +586,9 @@ public class ContentDialog : ContentControl
     }
 
     /// <summary>
-    /// Hides the dialog with result and animation
+    /// Hides the dialog with result
     /// </summary>
-    public virtual async void Hide(ContentDialogResult result = ContentDialogResult.None)
+    public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
     {
         var closingEventArgs = new ContentDialogClosingEventArgs(ClosingEvent, this) { Result = result };
 
@@ -586,9 +596,14 @@ public class ContentDialog : ContentControl
 
         if (!closingEventArgs.Cancel)
         {
-            // Play closing animation before hiding
-            await PlayCloseAnimationAsync();
-            _ = Tcs?.TrySetResult(result);
+            Dispatcher.BeginInvoke(
+                async () =>
+                {
+                    await PlayCloseAnimationAsync();
+                    _ = Tcs?.TrySetResult(result);
+                },
+                System.Windows.Threading.DispatcherPriority.Background
+            );
         }
     }
 
@@ -799,6 +814,7 @@ public class ContentDialog : ContentControl
 
     protected override Size MeasureOverride(Size availableSize)
     {
+        // Avoid throwing exceptions when visual child elements cannot be obtained (designer or template not applied).
         if (VisualChildrenCount == 0)
         {
             return base.MeasureOverride(availableSize);
@@ -825,6 +841,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     protected virtual void OnLoaded()
     {
+        // Focus is only needed at runtime.
         _ = Focus();
 
         RaiseEvent(new RoutedEventArgs(OpenedEvent));

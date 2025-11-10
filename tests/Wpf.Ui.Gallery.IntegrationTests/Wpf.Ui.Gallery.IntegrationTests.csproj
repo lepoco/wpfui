@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Wpf.Ui.FlaUI\Wpf.Ui.FlaUI.csproj" />
     <ProjectReference Include="..\..\src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj" />
   </ItemGroup>
 

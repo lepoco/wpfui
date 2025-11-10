@@ -519,6 +519,15 @@ internal static class User32
 
         TABLET_DEFBASE = 0x02C0,
 
+        /// <summary>
+        /// The WM_DPICHANGED message is sent when the DPI of the window has changed.
+        /// </summary>
+        /// <remarks>
+        /// <para>**Supported clients:** Windows 8.1+ (Desktop apps)</para>
+        /// <para>**Supported servers:** Windows Server 2012 R2+ (Desktop apps)</para>
+        /// </remarks>
+        DPICHANGED = 0x02E0,
+
         // WM_TABLET_MAXOFFSET = 0x20,
         TABLET_ADDED = TABLET_DEFBASE + 8,
         TABLET_DELETED = TABLET_DEFBASE + 9,
@@ -873,7 +882,7 @@ internal static class User32
     [DllImport(Libraries.User32, CharSet = CharSet.Auto, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool AdjustWindowRectEx(
-        [In] ref Rect lpRect,
+        [In] ref WinDef.RECT lpRect,
         [In] WS dwStyle,
         [In] [MarshalAs(UnmanagedType.Bool)] bool bMenu,
         [In] WS_EX dwExStyle
@@ -1359,7 +1368,7 @@ internal static class User32
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool GetWindowRect([In] IntPtr hWnd, [Out] out Rect lpRect);
+    public static extern bool GetWindowRect([In] IntPtr hWnd, [Out] out WinDef.RECT lpRect);
 
     /// <summary>
     /// Determines the visibility state of the specified window.

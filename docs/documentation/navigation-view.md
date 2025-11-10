@@ -1,225 +1,323 @@
-# Navigation View
+# NavigationView
 
-**WPF UI** implements a variety of navigation related controls. You can use them to conveniently manage the pages of your application.
+`NavigationView` is a top-level navigation control that provides a collapsible navigation pane (the "hamburger menu") and a content area. It is the primary way to implement top-level navigation in your app.
 
-## Basics
+> [!TIP]
+> For a complete implementation example, see the [WPF UI Gallery](https://github.com/lepoco/wpfui/tree/main/src/Wpf.Ui.Gallery) application.
 
-The `Navigation` control stores information about the currently displayed pages and provides methods related to navigation.  
-You can create it in your XAML files or in code.
+## Anatomy
 
-After the navigation is rendered, it will automatically navigate to the first page added to `Items` _(if the SelectedPageIndex is set above -1)_.
+The `NavigationView` control has several key areas:
 
-You can navigate manually using the Navigate method.
+- **Pane**: The area on the left or top that contains navigation items.
+- **Header**: An area at the top of the content area, often used for a page title or a `BreadcrumbBar`.
+- **Content Area**: The main area of the control where page content is displayed.
+- **AutoSuggestBox**: An optional search box integrated into the navigation pane.
+- **MenuItems**: The primary list of navigation items.
+- **FooterMenuItems**: A secondary list of navigation items, typically for settings or about pages.
 
-```csharp
-RootNavigation.Navigate("dashboard");
-RootNavigation.Navigate(typeof(MyDashboardClass));
-```
+## Basic Usage
 
-The Navigate method uses `PageTag` parameter of the `NavigationItem` to detect what page you want to navigate to. If you don't define it, it will be added automatically.  
-If `Content` of the `NavigationItem` is **HomePage** string, the automatically generated tag will be **homepage**.
-
-You can also navigate using an index like an array.  
-`Items` and `Footer` are treated as one array. So if you have two `NavigationItem` in `Items` and another two in the `Footer` then `RootNavigation.Navigate(2)`, will navigate to the third index (counting from zero), which is first item in the `Footer`.
-
-```csharp
-// 2, which is index 2 (third element), which is the third NavigationItem added to Items and Footer
-RootNavigation.Navigate(2);
-```
-
-## NavigationView
+Define `NavigationView` in your XAML and add `NavigationViewItem` objects to the `MenuItems` and `FooterMenuItems` collections.
 
 ```xml
-<ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
-  <ui:NavigationView.AutoSuggestBox>
-    <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
-      <ui:AutoSuggestBox.Icon>
-        <ui:IconSourceElement>
-          <ui:SymbolIconSource Symbol="Search24" />
-        </ui:IconSourceElement>
-      </ui:AutoSuggestBox.Icon>
-    </ui:AutoSuggestBox>
-  </ui:NavigationView.AutoSuggestBox>
-  <ui:NavigationView.Header>
-    <ui:BreadcrumbBar
-      Margin="42,32,0,0"
-      FontSize="28"
-      FontWeight="DemiBold" />
-  </ui:NavigationView.Header>
-  <ui:NavigationView.MenuItems>
-    <ui:NavigationViewItem Content="Dashboard" TargetPageType="{x:Type pages:DashboardPage}">
-      <ui:NavigationViewItem.Icon>
-        <ui:SymbolIcon Symbol="Home24" />
-      </ui:NavigationViewItem.Icon>
-    </ui:NavigationViewItem>
-    <ui:NavigationViewItem Content="Data" TargetPageType="{x:Type pages:DataPage}">
-      <ui:NavigationViewItem.Icon>
-        <ui:SymbolIcon Symbol="DataHistogram24" />
-      </ui:NavigationViewItem.Icon>
-    </ui:NavigationViewItem>
-  </ui:NavigationView.MenuItems>
-  <ui:NavigationView.FooterMenuItems>
-    <ui:NavigationViewItem Content="Settings" TargetPageType="{x:Type pages:SettingsPage}">
-      <ui:NavigationViewItem.Icon>
-        <ui:SymbolIcon Symbol="Settings24" />
-      </ui:NavigationViewItem.Icon>
-    </ui:NavigationViewItem>
-  </ui:NavigationView.FooterMenuItems>
+<ui:NavigationView
+    xmlns:pages="clr-namespace:YourApp.Views.Pages"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    <ui:NavigationView.MenuItems>
+        <ui:NavigationViewItem
+            Content="Home"
+            Icon="{ui:SymbolIcon Home24}"
+            TargetPageType="{x:Type pages:DashboardPage}" />
+        <ui:NavigationViewItem
+            Content="Data"
+            Icon="{ui:SymbolIcon DataHistogram24}"
+            TargetPageType="{x:Type pages:DataPage}" />
+    </ui:NavigationView.MenuItems>
+    <ui:NavigationView.FooterMenuItems>
+        <ui:NavigationViewItem
+            Content="Settings"
+            Icon="{ui:SymbolIcon Settings24}"
+            TargetPageType="{x:Type pages:SettingsPage}" />
+    </ui:NavigationView.FooterMenuItems>
 </ui:NavigationView>
 ```
 
-## Pane display mode
+> [!NOTE]
+> `TargetPageType` is a required property on `NavigationViewItem` that specifies the page to navigate to when the item is selected. The value must be a `System.Type`.
 
-## Set initial page
+## Programmatic Navigation
 
-NavigationPage.xaml
+You can navigate programmatically by calling the `Navigate` method with either the `Type` of the page or its `PageTag`.
+
+```csharp
+// Navigate by Type
+MyNavigationView.Navigate(typeof(SettingsPage));
+
+// Navigate by Tag
+MyNavigationView.Navigate("settings");
+```
+
+To use tags, you must define a `PageTag` on the `NavigationViewItem`. If not defined, a tag is automatically generated from the `Content` property (e.g., "Settings Page" becomes "settingspage").
 
 ```xml
-<ui:NavigationView x:Name="RootNavigation"></ui:NavigationView>
+<ui:NavigationViewItem
+    Content="Settings"
+    PageTag="settings"
+    TargetPageType="{x:Type pages:SettingsPage}" />
 ```
 
-NavigationPage.xaml.cs
+### Back Navigation
+
+`NavigationView` automatically handles back navigation. The back button is shown when `CanGoBack` is `true`. You can also call `GoBack()` programmatically.
 
 ```csharp
-public partial class NavigationPage : Page
+if (MyNavigationView.CanGoBack)
 {
-    public NavigationPage(NavigationPageModel model)
-    {
-        InitializeComponent();
-
-        DataContext = model;
-        Loaded += (_, _) => RootNavigation.Navigate(type(MyDashboardClass));
-    }
+    MyNavigationView.GoBack();
 }
 ```
 
-## Using Navigation in the MVVM
+## Pane Display Mode
 
-Firstly, you need to implement the `IPageService` interface
+Control the visibility and behavior of the navigation pane with the `PaneDisplayMode` property.
 
-```csharp
-// from src/Wpf.Ui.Demo.Mvvm/Services/PageService.cs
-public class PageService : IPageService
-{
-    /// <summary>
-    /// Service which provides the instances of pages.
-    /// </summary>
-    private readonly IServiceProvider _serviceProvider;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PageService"/> class and attaches the <see cref="IServiceProvider"/>.
-    /// </summary>
-    public PageService(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-
-    /// <inheritdoc />
-    public T? GetPage<T>()
-        where T : class
-    {
-        if (!typeof(FrameworkElement).IsAssignableFrom(typeof(T)))
-        {
-            throw new InvalidOperationException("The page should be a WPF control.");
-        }
-
-        return (T?)_serviceProvider.GetService(typeof(T));
-    }
-
-    /// <inheritdoc />
-    public FrameworkElement? GetPage(Type pageType)
-    {
-        if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
-        {
-            throw new InvalidOperationException("The page should be a WPF control.");
-        }
-
-        return _serviceProvider.GetService(pageType) as FrameworkElement;
-    }
-}
-```
-
-Then, inject it into the IoC container.
-
-```csharp
-var services = new ServiceCollection();
-
-services.AddSingleton<MainWindow>();
-services.AddSingleton<MainWindowViewModel>();
-services.AddSingleton<IPageService, PageService>();
-
-// inject View and ViewModel
-services.AddSingleton<MainWindow>();
-services.AddSingleton<MainWindowViewModel>();
-services.AddSingleton<HomePage>();
-services.AddSingleton<HomePageModel>();
-services.AddSingleton<CounterPage>();
-services.AddSingleton<CounterPageModel>();
-```
-
-Lastly, adjust the code for the navigation window.
+- `Left`: The pane is always open on the left.
+- `Top`: The pane is shown as a horizontal bar at the top.
+- `LeftCompact`: The pane is collapsed to show only icons, and expands on hover or when the hamburger button is clicked.
+- `LeftMinimal`: The pane is hidden and can be opened as an overlay.
 
 ```xml
-<Window
-    x:Class="NavigationDemo.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:NavigationDemo"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Navigation Window"
-    Width="800"
-    Height="450"
-    d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
-    mc:Ignorable="d">
-
-    <ui:NavigationView x:Name="RootNavigationView" MenuItemsSource="{Binding NavigationItems}"/>
-</Window>
+<ui:NavigationView PaneDisplayMode="Top" />
 ```
 
+You can also control the pane's open state with the `IsPaneOpen` property.
+
+> [!TIP]
+> To create a responsive layout that changes `PaneDisplayMode` based on window width, bind `PaneDisplayMode` to a property in your ViewModel and update it in the `Window.SizeChanged` event.
+
+## Header
+
+The `Header` property provides a content area above the navigation frame. It is commonly used with a `BreadcrumbBar` to show the user's location.
+
+```xml
+<ui:NavigationView>
+    <ui:NavigationView.Header>
+        <ui:BreadcrumbBar />
+    </ui:NavigationView.Header>
+</ui:NavigationView>
+```
+
+The `BreadcrumbBar` will automatically sync with the `NavigationView`'s navigation history.
+
+## MVVM Integration
+
+For MVVM applications, it is recommended to use `INavigationService` and `IPageService` for navigation and page resolution.
+
+### 1. Service Configuration
+
+First, register the required services and your pages/ViewModels with your dependency injection container.
+
 ```csharp
-using System.Collections.ObjectModel;
-using System.Windows;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Wpf.Ui;
-using Wpf.Ui.Controls;
-
-public partial class MainWindow : Window
-{
-    public MainWindow(IPageService pageService, MainWindowViewModel model)
+// Using Microsoft.Extensions.DependencyInjection
+Host.CreateDefaultBuilder()
+    .ConfigureServices((context, services) =>
     {
-        DataContext = model;
-        InitializeComponent();
-        
-        // Set the page service for the navigation control.
-        RootNavigationView.SetPageService(pageService);
-    }
-}
+        // Main window
+        services.AddScoped<IWindow, MainWindow>();
+        services.AddScoped<MainWindowViewModel>();
 
+        // Services
+        services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton<IPageService, PageService>();
+
+        // Pages and ViewModels
+        services.AddScoped<DashboardPage>();
+        services.AddScoped<DashboardViewModel>();
+        services.AddScoped<SettingsPage>();
+        services.AddScoped<SettingsViewModel>();
+    }).Build();
+```
+
+### 2. ViewModel Setup
+
+In your `MainWindowViewModel`, define collections for your navigation items and bind them to the `NavigationView`.
+
+```csharp
 public partial class MainWindowViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ObservableCollection<object> _navigationItems = [];
+    private ICollection<object> _menuItems = new ObservableCollection<object>();
+
+    [ObservableProperty]
+    private ICollection<object> _footerMenuItems = new ObservableCollection<object>();
 
     public MainWindowViewModel()
     {
-        NavigationItems =
-        [
-            new NavigationViewItem()
-            {
-                Content = "Home",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
-                TargetPageType = typeof(HomePage)
-            },
-            new NavigationViewItem()
-            {
-                Content = "Counter",
-                TargetPageType = typeof(CounterPage)
-            },
-        ];
+        MenuItems = new ObservableCollection<object>
+        {
+            new NavigationViewItem("Home", SymbolRegular.Home24, typeof(DashboardPage)),
+            new NavigationViewItem("Data", SymbolRegular.DataHistogram24, typeof(DataPage))
+        };
+
+        FooterMenuItems = new ObservableCollection<object>
+        {
+            new NavigationViewItem("Settings", SymbolRegular.Settings24, typeof(SettingsPage))
+        };
     }
 }
 ```
 
-Alternatively, you can use the **WPF UI** Visual Studio Extension that includes a project template for MVVM pattern.
+### 3. View Setup
+
+In your `MainWindow.xaml`, bind the `MenuItemsSource` and `FooterMenuItemsSource` properties to the collections in your ViewModel. Then, attach the `INavigationService`.
+
+```xml
+<ui:NavigationView
+    x:Name="RootNavigationView"
+    MenuItemsSource="{Binding MenuItems}"
+    FooterMenuItemsSource="{Binding FooterMenuItems}" />
+```
+
+```csharp
+public partial class MainWindow : IWindow
+{
+    public MainWindow(
+        MainWindowViewModel viewModel,
+        INavigationService navigationService,
+        IPageService pageService
+    )
+    {
+        ViewModel = viewModel;
+        DataContext = this;
+        InitializeComponent();
+
+        // Attach the service to the NavigationView
+        navigationService.SetNavigationControl(RootNavigationView);
+        
+        // You can also set the page service, which is required for some functionalities
+        RootNavigationView.SetPageService(pageService);
+    }
+
+    public MainWindowViewModel ViewModel { get; }
+}
+```
+
+### 4. Navigating from a ViewModel
+
+Inject `INavigationService` into any ViewModel and use it to navigate.
+
+```csharp
+public partial class DashboardViewModel : ObservableObject
+{
+    private readonly INavigationService _navigationService;
+
+    public DashboardViewModel(INavigationService navigationService)
+    {
+        _navigationService = navigationService;
+    }
+
+    [RelayCommand]
+    private void OnGoToSettings()
+    {
+        _navigationService.Navigate(typeof(SettingsPage));
+    }
+}
+```
+
+## Navigation Events
+
+`NavigationView` provides several events to hook into the navigation lifecycle:
+
+- `Navigating`: Occurs before navigation starts. Can be cancelled.
+- `Navigated`: Occurs after navigation is complete.
+- `SelectionChanged`: Occurs when a `NavigationViewItem` is selected.
+
+```csharp
+private void OnNavigating(NavigationView sender, NavigatingCancelEventArgs args)
+{
+    // Don't navigate to settings if the user is not an admin
+    if (args.PageType == typeof(SettingsPage) && !_isAdmin)
+    {
+        args.Cancel = true;
+    }
+}
+```
+
+## Navigation-Aware Pages
+
+Implement `INavigationAware` on your page's code-behind or `INavigableView<T>` on your ViewModel to receive navigation events directly.
+
+### INavigationAware
+
+This interface is ideal for code-behind scenarios.
+
+```csharp
+public partial class MyPage : INavigationAware
+{
+    public void OnNavigatedTo()
+    {
+        // Page was navigated to
+    }
+
+    public void OnNavigatedFrom()
+    {
+        // Page was navigated away from
+    }
+}
+```
+
+### `INavigableView<T>`
+
+This interface is designed for MVVM. Your page must inherit from `INavigableView<T>` where `T` is its ViewModel. The ViewModel will then receive the navigation calls.
+
+**Page:**
+
+```csharp
+[GalleryPage("My Page", SymbolRegular.Page24)]
+public partial class MyPage : INavigableView<MyViewModel>
+{
+    public MyViewModel ViewModel { get; }
+
+    public MyPage(MyViewModel viewModel)
+    {
+        ViewModel = viewModel;
+        DataContext = this;
+        InitializeComponent();
+    }
+}
+```
+
+**ViewModel:**
+
+```csharp
+public partial class MyViewModel : ObservableObject, INavigationAware
+{
+    public void OnNavigatedTo()
+    {
+        // Page was navigated to
+    }
+
+    public void OnNavigatedFrom()
+    {
+        // Page was navigated away from
+    }
+}
+```
+
+> [!IMPORTANT]
+> For `INavigableView<T>` to work, your page must have a public `ViewModel` property that returns an instance of the ViewModel.
+
+## History and Caching
+
+`NavigationView` maintains a navigation history.
+
+- `History`: A collection of `Page` instances that have been visited.
+- `CacheHistory`: The number of pages to keep in memory. The default is `0`. Set to a value greater than 0 to cache pages. When a cached page is navigated to, its previous state is preserved.
+
+```xml
+<ui:NavigationView CacheHistory="5" />
+```
+
+> [!CAUTION]
+> Caching pages increases memory consumption. Use it only for pages that are expensive to create or where preserving state is critical. Avoid caching pages that display frequently changing data.

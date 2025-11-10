@@ -182,9 +182,26 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
     ];
 
     [ObservableProperty]
-    private ObservableCollection<Wpf.Ui.Controls.MenuItem> _trayMenuItems =
+    private ObservableCollection<Control> _trayMenuItems =
     [
-        new Wpf.Ui.Controls.MenuItem { Header = "Home", Tag = "tray_home" },
-        new Wpf.Ui.Controls.MenuItem { Header = "Close", Tag = "tray_close" },
+        new Wpf.Ui.Controls.MenuItem()
+        {
+            Header = "Home",
+            Tag = "tray_home",
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
+        },
+        new Wpf.Ui.Controls.MenuItem()
+        {
+            Header = "Settings",
+            Tag = "tray_settings",
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
+        },
+        new Separator(),
+        new Wpf.Ui.Controls.MenuItem()
+        {
+            Header = "Close",
+            Tag = "tray_close",
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Dismiss24 },
+        },
     ];
 }
