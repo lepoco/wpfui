@@ -12,6 +12,7 @@ using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Dwm;
 using Windows.Win32.UI.Controls;
+using Windows.Win32.UI.Shell;
 using Windows.Win32.UI.WindowsAndMessaging;
 using Microsoft.Win32;
 using Wpf.Ui.Controls;
@@ -451,7 +452,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="hWnd">Window handle.</param>
     /// <param name="taskbarFlag">Taskbar flag.</param>
-    internal static bool SetTaskbarState(IntPtr hWnd, ShObjIdl.TBPFLAG taskbarFlag)
+    internal static bool SetTaskbarState(IntPtr hWnd, TBPFLAG taskbarFlag)
     {
         if (hWnd == IntPtr.Zero)
         {
@@ -462,14 +463,14 @@ public static class UnsafeNativeMethods
         {
             return false;
         }
-
-        if (new ShObjIdl.CTaskbarList() is not ShObjIdl.ITaskbarList4 taskbarList)
+        
+        if (new TaskbarList() is not ITaskbarList4 taskbarList)
         {
             return false;
         }
 
         taskbarList.HrInit();
-        taskbarList.SetProgressState(hWnd, taskbarFlag);
+        taskbarList.SetProgressState(new HWND(hWnd), taskbarFlag);
 
         return true;
     }
@@ -482,7 +483,7 @@ public static class UnsafeNativeMethods
     /// <param name="current">Current progress value.</param>
     /// <param name="total">Maximum progress value.</param>
     /// <returns>True if successful updated, otherwise false.</returns>
-    internal static bool SetTaskbarValue(IntPtr hWnd, ShObjIdl.TBPFLAG taskbarFlag, int current, int total)
+    internal static bool SetTaskbarValue(IntPtr hWnd, TBPFLAG taskbarFlag, int current, int total)
     {
         if (hWnd == IntPtr.Zero)
         {
@@ -496,17 +497,17 @@ public static class UnsafeNativeMethods
 
         /* TODO: Get existing taskbar class */
 
-        if (new ShObjIdl.CTaskbarList() is not ShObjIdl.ITaskbarList4 taskbarList)
+        if (new TaskbarList() is not ITaskbarList4 taskbarList)
         {
             return false;
         }
 
         taskbarList.HrInit();
-        taskbarList.SetProgressState(hWnd, taskbarFlag);
+        taskbarList.SetProgressState(new HWND(hWnd), taskbarFlag);
 
-        if (taskbarFlag is not ShObjIdl.TBPFLAG.TBPF_INDETERMINATE and not ShObjIdl.TBPFLAG.TBPF_NOPROGRESS)
+        if (taskbarFlag is not TBPFLAG.TBPF_INDETERMINATE and not TBPFLAG.TBPF_NOPROGRESS)
         {
-            taskbarList.SetProgressValue(hWnd, Convert.ToUInt64(current), Convert.ToUInt64(total));
+            taskbarList.SetProgressValue(new HWND(hWnd), Convert.ToUInt64(current), Convert.ToUInt64(total));
         }
 
         return true;

@@ -12,6 +12,8 @@ GetSystemMetrics
 IsWindow
 DwmSetWindowAttribute
 DwmGetWindowAttribute
+ITaskbarList4
+TaskbarList
 DWM_SYSTEMBACKDROP_TYPE
 DWM_WINDOW_CORNER_PREFERENCE
 DWMWA_COLOR_DEFAULT

@@ -8,7 +8,7 @@
     <UseWPF>true</UseWPF>
     <LangVersion>preview</LangVersion>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
-    <PolySharpExcludeGeneratedTypes>System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute</PolySharpExcludeGeneratedTypes>    
+    <PolySharpExcludeGeneratedTypes>System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute;System.Diagnostics.CodeAnalysis.UnscopedRefAttribute</PolySharpExcludeGeneratedTypes>    
   </PropertyGroup>
 
   <ItemGroup>

@@ -8,6 +8,7 @@
    This Source Code is partially based on the source code provided by the .NET Foundation. */
 
 using Windows.Win32.Graphics.Dwm;
+using Windows.Win32.UI.Shell;
 using Wpf.Ui.Controls;
 using Wpf.Ui.TaskBar;
 
@@ -19,7 +20,7 @@ namespace Wpf.Ui.Interop;
 internal static class UnsafeReflection
 {
     /// <summary>
-    /// Casts <see cref="WindowBackdropType"/> to <see cref="DWM_SYSTEMBACKDROP_TYPE"/>.
+    /// Casts <see cref="WindowBackdropType" /> to <see cref="DWM_SYSTEMBACKDROP_TYPE" />.
     /// </summary>
     public static DWM_SYSTEMBACKDROP_TYPE Cast(WindowBackdropType backgroundType)
     {
@@ -34,7 +35,7 @@ internal static class UnsafeReflection
     }
 
     /// <summary>
-    /// Casts <see cref="WindowCornerPreference"/> to <see cref="DWM_WINDOW_CORNER_PREFERENCE"/>.
+    /// Casts <see cref="WindowCornerPreference" /> to <see cref="DWM_WINDOW_CORNER_PREFERENCE" />.
     /// </summary>
     public static DWM_WINDOW_CORNER_PREFERENCE Cast(WindowCornerPreference cornerPreference)
     {
@@ -48,17 +49,17 @@ internal static class UnsafeReflection
     }
 
     /// <summary>
-    /// Casts <see cref="TaskBarProgressState"/> to <see cref="ShObjIdl.TBPFLAG"/>.
+    /// Casts <see cref="TaskBarProgressState" /> to <see cref="TBPFLAG" />.
     /// </summary>
-    public static ShObjIdl.TBPFLAG Cast(TaskBarProgressState taskBarProgressState)
+    public static TBPFLAG Cast(TaskBarProgressState taskBarProgressState)
     {
         return taskBarProgressState switch
         {
-            TaskBarProgressState.Indeterminate => ShObjIdl.TBPFLAG.TBPF_INDETERMINATE,
-            TaskBarProgressState.Error => ShObjIdl.TBPFLAG.TBPF_ERROR,
-            TaskBarProgressState.Paused => ShObjIdl.TBPFLAG.TBPF_PAUSED,
-            TaskBarProgressState.Normal => ShObjIdl.TBPFLAG.TBPF_NORMAL,
-            _ => Wpf.Ui.Interop.ShObjIdl.TBPFLAG.TBPF_NOPROGRESS,
+            TaskBarProgressState.Indeterminate => TBPFLAG.TBPF_INDETERMINATE,
+            TaskBarProgressState.Error => TBPFLAG.TBPF_ERROR,
+            TaskBarProgressState.Paused => TBPFLAG.TBPF_PAUSED,
+            TaskBarProgressState.Normal => TBPFLAG.TBPF_NORMAL,
+            _ => TBPFLAG.TBPF_NOPROGRESS,
         };
     }
 }
