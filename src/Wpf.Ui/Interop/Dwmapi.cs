@@ -216,23 +216,6 @@ internal static class Dwmapi
     }
 
     /// <summary>
-    /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It represents a generic ratio and is used for different purposes and units even within a single API.
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct UNSIGNED_RATIO
-    {
-        /// <summary>
-        /// The ratio numerator.
-        /// </summary>
-        public uint uiNumerator;
-
-        /// <summary>
-        /// The ratio denominator.
-        /// </summary>
-        public uint uiDenominator;
-    }
-
-    /// <summary>
     /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
     /// </summary>
     /// <param name="hWnd">The handle to the window for which the attribute value is to be set.</param>
@@ -245,38 +228,6 @@ internal static class Dwmapi
         [In] IntPtr hWnd,
         [In] DWMWINDOWATTRIBUTE dwAttribute,
         [In] ref int pvAttribute,
-        [In] int cbAttribute
-    );
-
-    /// <summary>
-    /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
-    /// </summary>
-    /// <param name="hWnd">The handle to the window for which the attribute value is to be set.</param>
-    /// <param name="dwAttribute">A flag describing which value to set, specified as a value of the DWMWINDOWATTRIBUTE enumeration.</param>
-    /// <param name="pvAttribute">A pointer to an object containing the attribute value to set.</param>
-    /// <param name="cbAttribute">The size, in bytes, of the attribute value being set via the <c>pvAttribute</c> parameter.</param>
-    /// <returns>If the function succeeds, it returns <c>S_OK</c>. Otherwise, it returns an <c>HRESULT</c> error code.</returns>
-    [DllImport(Libraries.Dwmapi)]
-    public static extern int DwmSetWindowAttribute(
-        [In] IntPtr hWnd,
-        [In] DWMWINDOWATTRIBUTE dwAttribute,
-        [In] ref uint pvAttribute,
-        [In] int cbAttribute
-    );
-
-    /// <summary>
-    /// Retrieves the current value of a specified Desktop Window Manager (DWM) attribute applied to a window. For programming guidance, and code examples, see Controlling non-client region rendering.
-    /// </summary>
-    /// <param name="hWnd">The handle to the window from which the attribute value is to be retrieved.</param>
-    /// <param name="dwAttributeToGet">A flag describing which value to retrieve, specified as a value of the <see cref="DWMWINDOWATTRIBUTE"/> enumeration.</param>
-    /// <param name="pvAttributeValue">A pointer to a value which, when this function returns successfully, receives the current value of the attribute. The type of the retrieved value depends on the value of the dwAttribute parameter.</param>
-    /// <param name="cbAttribute">The size, in bytes, of the attribute value being received via the pvAttribute parameter.</param>
-    /// <returns>If the function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.</returns>
-    [DllImport(Libraries.Dwmapi)]
-    public static extern int DwmGetWindowAttribute(
-        [In] IntPtr hWnd,
-        [In] DWMWINDOWATTRIBUTE dwAttributeToGet,
-        [In] ref int pvAttributeValue,
         [In] int cbAttribute
     );
 }

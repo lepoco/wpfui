@@ -10,6 +10,10 @@ SetWindowRgn
 GetWindowRect
 GetSystemMetrics
 IsWindow
+DwmSetWindowAttribute
+DwmGetWindowAttribute
+DWM_SYSTEMBACKDROP_TYPE
+DWMWA_COLOR_DEFAULT
 WINDOW_STYLE
 WTA_OPTIONS
 WTNCA_*

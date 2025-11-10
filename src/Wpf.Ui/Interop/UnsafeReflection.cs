@@ -7,6 +7,7 @@
    and is intended for use on Windows systems only.
    This Source Code is partially based on the source code provided by the .NET Foundation. */
 
+using Windows.Win32.Graphics.Dwm;
 using Wpf.Ui.Controls;
 using Wpf.Ui.TaskBar;
 
@@ -20,15 +21,15 @@ internal static class UnsafeReflection
     /// <summary>
     /// Casts <see cref="WindowBackdropType"/> to <see cref="Dwmapi.DWMSBT"/>.
     /// </summary>
-    public static Dwmapi.DWMSBT Cast(WindowBackdropType backgroundType)
+    public static DWM_SYSTEMBACKDROP_TYPE Cast(WindowBackdropType backgroundType)
     {
         return backgroundType switch
         {
-            WindowBackdropType.Auto => Dwmapi.DWMSBT.DWMSBT_AUTO,
-            WindowBackdropType.Mica => Dwmapi.DWMSBT.DWMSBT_MAINWINDOW,
-            WindowBackdropType.Acrylic => Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW,
-            WindowBackdropType.Tabbed => Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW,
-            _ => Dwmapi.DWMSBT.DWMSBT_DISABLE,
+            WindowBackdropType.Auto => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_AUTO,
+            WindowBackdropType.Mica => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_MAINWINDOW,
+            WindowBackdropType.Acrylic => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TRANSIENTWINDOW,
+            WindowBackdropType.Tabbed => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_TABBEDWINDOW,
+            _ => DWM_SYSTEMBACKDROP_TYPE.DWMSBT_NONE,
         };
     }
 

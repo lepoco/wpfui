@@ -6,6 +6,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32;
 using Windows.Win32.Foundation;
+using Windows.Win32.Graphics.Dwm;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
 using HRESULT = Wpf.Ui.Interop.HRESULT;
@@ -221,7 +222,7 @@ public static class WindowBackdrop
         return true;
     }
 
-    public static bool RemoveTitlebarBackground(Window? window)
+    public static unsafe bool RemoveTitlebarBackground(Window? window)
     {
         if (window is null)
         {
@@ -242,14 +243,13 @@ public static class WindowBackdrop
         {
             // NOTE: https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
             // Specifying DWMWA_COLOR_DEFAULT (value 0xFFFFFFFF) for the color will reset the window back to using the system's default behavior for the caption color.
-            uint titlebarPvAttribute = 0xFFFFFFFE;
+            uint titlebarPvAttribute = PInvoke.DWMWA_COLOR_DEFAULT;
 
-            _ = Dwmapi.DwmSetWindowAttribute(
-                windowSource.Handle,
-                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR,
-                ref titlebarPvAttribute,
-                sizeof(uint)
-            );
+            return PInvoke.DwmSetWindowAttribute(new HWND(windowSource.Handle),
+                                                 DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR,
+                                                 &titlebarPvAttribute,
+                                                 sizeof(uint)) ==
+                   Windows.Win32.Foundation.HRESULT.S_OK;
         }
 
         return true;

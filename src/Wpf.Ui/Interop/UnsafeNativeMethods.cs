@@ -10,6 +10,7 @@
 using System.Runtime.InteropServices;
 using Windows.Win32;
 using Windows.Win32.Foundation;
+using Windows.Win32.Graphics.Dwm;
 using Windows.Win32.UI.Controls;
 using Windows.Win32.UI.WindowsAndMessaging;
 using Microsoft.Win32;
@@ -302,23 +303,21 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="handle">Window handle.</param>
     /// <param name="backdropType">Background backdrop type.</param>
-    public static bool IsWindowHasBackdrop(IntPtr handle, WindowBackdropType backdropType)
+    public static unsafe bool IsWindowHasBackdrop(IntPtr handle, WindowBackdropType backdropType)
     {
         if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
 
-        var pvAttribute = 0x0;
+        DWM_SYSTEMBACKDROP_TYPE systemBackdropType = DWM_SYSTEMBACKDROP_TYPE.DWMSBT_AUTO;
 
-        _ = Dwmapi.DwmGetWindowAttribute(
-            handle,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int))
-        );
+        var result = PInvoke.DwmGetWindowAttribute(new HWND(handle),
+                                                   DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                                                   &systemBackdropType,
+                                                   sizeof(uint));
 
-        return pvAttribute == (int)UnsafeReflection.Cast(backdropType);
+        return result == Windows.Win32.Foundation.HRESULT.S_OK && systemBackdropType == UnsafeReflection.Cast(backdropType);
     }
 
     /// <summary>
@@ -332,23 +331,23 @@ public static class UnsafeNativeMethods
     /// Tries to determine whether the provided handle has applied legacy Mica effect.
     /// </summary>
     /// <param name="handle">Window handle.</param>
-    public static bool IsWindowHasLegacyMica(IntPtr handle)
+    public static unsafe bool IsWindowHasLegacyMica(IntPtr handle)
     {
         if (!PInvoke.IsWindow(new HWND(handle)))
         {
             return false;
         }
 
-        var pvAttribute = 0x0;
+        BOOL pvAttribute = false;
 
-        _ = Dwmapi.DwmGetWindowAttribute(
-            handle,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int))
+        _ = PInvoke.DwmGetWindowAttribute(
+            new HWND(handle),
+            DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
+            &pvAttribute,
+            (uint) sizeof(BOOL)
         );
 
-        return pvAttribute == 0x1;
+        return pvAttribute;
     }
 
     /// <summary>
