@@ -175,7 +175,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     internal bool ReactToHwndHook(uint msg, IntPtr lParam, out IntPtr returnIntPtr)
     {
         returnIntPtr = IntPtr.Zero;
-        
+
         switch (msg)
         {
             case PInvoke.WM_NCHITTEST:
