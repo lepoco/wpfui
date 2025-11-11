@@ -243,11 +243,13 @@
     <SolidColorBrush x:Key="CalendarViewBackground" Color="{StaticResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="CalendarViewBorderBrush" Color="{StaticResource SystemColorWindowTextColor}" />
     <SolidColorBrush x:Key="CalendarViewItemBackgroundPointerOver" Color="{StaticResource SystemColorWindowColor}" />
+    <SolidColorBrush x:Key="CalendarViewItemBackgroundPressed" Color="{StaticResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="CalendarViewSelectedBackground" Color="{StaticResource SystemColorWindowColor}" />
+    <SolidColorBrush x:Key="CalendarViewSelectedBackgroundPointerOver" Color="{DynamicResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="CalendarViewSelectedBorderBrush" Color="{StaticResource SystemColorHighlightColor}" />
     <SolidColorBrush x:Key="CalendarViewTodayBackground" Color="{StaticResource SystemColorHighlightColor}" />
     <SolidColorBrush x:Key="CalendarViewTodayForeground" Color="{StaticResource SystemColorHighlightTextColor}" />
-    <SolidColorBrush x:Key="CalendarViewButtonForeground" Color="{StaticResource SystemColorButtonTextColor}" />
+    <SolidColorBrush x:Key="CalendarViewNavigationButtonForeground" Color="{StaticResource SystemColorButtonTextColor}" />
 
     <!--  Card / CardAction / CardColor / CardExpander  -->
     <SolidColorBrush x:Key="CardBackground" Color="{StaticResource SystemColorWindowColor}" />
