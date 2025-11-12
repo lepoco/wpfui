@@ -350,6 +350,8 @@ dotnet_diagnostic.IDE0073.severity = error
 
 dotnet_diagnostic.IDE0058.severity = silent
 
+dotnet_diagnostic.MC3080.severity = none
+
 # StyleCop Code Analysis
 
 # Closing parenthesis should be spaced correctly: "foo()!"
