@@ -733,11 +733,9 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
                 // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
                 return (IntPtr)PInvoke.HTSYSMENU;
-
             case PInvoke.WM_NCHITTEST when htResult != (IntPtr)PInvoke.HTNOWHERE:
                 handled = true;
                 return htResult;
-
             case PInvoke.WM_NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
                 handled = true;
                 return (IntPtr)PInvoke.HTCAPTION;
