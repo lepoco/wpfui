@@ -67,6 +67,16 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
     );
 
     /// <summary>
+    /// Property for <see cref="CenterContent"/>.
+    /// </summary>
+    public static readonly DependencyProperty CenterContentProperty = DependencyProperty.Register(
+        nameof(CenterContent),
+        typeof(object),
+        typeof(TitleBar),
+        new PropertyMetadata(null)
+    );
+
+    /// <summary>
     /// Property for <see cref="TrailingContent"/>.
     /// </summary>
     public static readonly DependencyProperty TrailingContentProperty = DependencyProperty.Register(
@@ -231,6 +241,15 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the content displayed in the center of the <see cref="TitleBar"/>.
+    /// </summary>
+    public object? CenterContent
+    {
+        get => GetValue(CenterContentProperty);
+        set => SetValue(CenterContentProperty, value);
     }
 
     /// <summary>
@@ -683,37 +702,23 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
         bool isMouseOverHeaderContent = false;
         IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
 
-        if (message == PInvoke.WM_NCHITTEST)
-        {
-            if (TrailingContent is UIElement || Header is UIElement)
-            {
-                UIElement? headerRightUiElement = TrailingContent as UIElement;
+		if (message == PInvoke.WM_NCHITTEST)
+		{
+			if (TrailingContent is UIElement || Header is UIElement || CenterContent is UIElement)
+			{
+				UIElement? headerLeftUIElement = Header as UIElement;
+				UIElement? headerCenterUIElement = CenterContent as UIElement;
+				UIElement? headerRightUiElement = TrailingContent as UIElement;
 
-                if (Header is UIElement headerLeftUIElement && headerLeftUIElement != _titleBlock)
-                {
-                    isMouseOverHeaderContent =
-                        headerLeftUIElement.IsMouseOverElement(lParam)
-                        || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
-                }
-                else
-                {
-                    isMouseOverHeaderContent = headerRightUiElement?.IsMouseOverElement(lParam) ?? false;
-                }
-            }
+				isMouseOverHeaderContent = (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock && headerLeftUIElement.IsMouseOverElement(lParam))
+					|| (headerCenterUIElement?.IsMouseOverElement(lParam) ?? false)
+					|| (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+			}
 
-            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
-        }
+			htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+		}
 
-        var e = new HwndProcEventArgs(hwnd, msg, wParam, lParam, isMouseOverHeaderContent);
-        WndProcInvoked?.Invoke(this, e);
-
-        if (e.ReturnValue != null)
-        {
-            handled = e.Handled;
-            return e.ReturnValue ?? IntPtr.Zero;
-        }
-
-        switch (message)
+		switch (message)
         {
             case PInvoke.WM_NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
                 // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
