@@ -27,7 +27,7 @@
     <PackageVersion Include="ReflectionEventing.DependencyInjection" Version="3.1.0" />
     <PackageVersion Include="ReflectionEventing" Version="3.1.0" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
-    <PackageVersion Include="System.Drawing.Common" Version="9.0.1" />
+    <PackageVersion Include="System.Drawing.Common" Version="10.0.0" />
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
     <PackageVersion Include="WpfAnalyzers" Version="4.1.1" />
