@@ -17,10 +17,10 @@ jobs:
       - uses: nuget/setup-nuget@v2
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-      - name: Setup .NET Core SDK 9.x
+      - name: Setup .NET Core SDK 10.x
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.x
+          dotnet-version: 10.x
 
       - name: Install dependencies
         run: dotnet restore
