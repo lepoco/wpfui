@@ -486,8 +486,8 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
 
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
     {
-        // Menu?.DataContext = e.NewValue;
-        if (Menu != null)
+        // Update ContextMenu DataContext when NotifyIcon DataContext changes
+        if (Menu != null && e.NewValue != null)
         {
             Menu.DataContext = e.NewValue;
         }
