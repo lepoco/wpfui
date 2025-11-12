@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Windows.Win32;
+using Windows.Win32.Foundation;
 using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Hardware;
@@ -34,11 +36,11 @@ internal static class DpiHelper
     /// Gets DPI of the selected <see cref="Window"/>.
     /// </summary>
     /// <param name="window">The window that you want to get information about.</param>
-    public static Hardware.DisplayDpi GetWindowDpi(Window? window)
+    public static DisplayDpi GetWindowDpi(Window? window)
     {
         if (window is null)
         {
-            return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
+            return new DisplayDpi(DefaultDpi, DefaultDpi);
         }
 
         return GetWindowDpi(new WindowInteropHelper(window).Handle);
@@ -48,16 +50,16 @@ internal static class DpiHelper
     /// Gets DPI of the selected <see cref="Window"/> based on it's handle.
     /// </summary>
     /// <param name="windowHandle">Handle of the window that you want to get information about.</param>
-    public static Hardware.DisplayDpi GetWindowDpi(IntPtr windowHandle)
+    public static DisplayDpi GetWindowDpi(IntPtr windowHandle)
     {
         if (windowHandle == IntPtr.Zero || !UnsafeNativeMethods.IsValidWindow(windowHandle))
         {
-            return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
+            return new DisplayDpi(DefaultDpi, DefaultDpi);
         }
 
-        var windowDpi = (int)User32.GetDpiForWindow(windowHandle);
+        var windowDpi = (int)PInvoke.GetDpiForWindow(new HWND(windowHandle));
 
-        return new Hardware.DisplayDpi(windowDpi, windowDpi);
+        return new DisplayDpi(windowDpi, windowDpi);
     }
 
     // TODO: Look into utilizing preprocessor symbols for more functionality
@@ -76,7 +78,7 @@ internal static class DpiHelper
     /// Gets the DPI values from <see cref="SystemParameters"/>.
     /// </summary>
     /// <returns>The DPI values from <see cref="SystemParameters"/>. If the property cannot be accessed, the default value <see langword="96"/> is returned.</returns>
-    public static Hardware.DisplayDpi GetSystemDpi()
+    public static DisplayDpi GetSystemDpi()
     {
         System.Reflection.PropertyInfo? dpiXProperty = typeof(SystemParameters).GetProperty(
             "DpiX",
@@ -85,7 +87,7 @@ internal static class DpiHelper
 
         if (dpiXProperty == null)
         {
-            return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
+            return new DisplayDpi(DefaultDpi, DefaultDpi);
         }
 
         System.Reflection.PropertyInfo? dpiYProperty = typeof(SystemParameters).GetProperty(
@@ -95,10 +97,10 @@ internal static class DpiHelper
 
         if (dpiYProperty == null)
         {
-            return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
+            return new DisplayDpi(DefaultDpi, DefaultDpi);
         }
 
-        return new Hardware.DisplayDpi(
+        return new DisplayDpi(
             (int)dpiXProperty.GetValue(null, null)!,
             (int)dpiYProperty.GetValue(null, null)!
         );

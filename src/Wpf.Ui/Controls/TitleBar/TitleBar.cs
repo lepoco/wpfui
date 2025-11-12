@@ -6,6 +6,7 @@
 using System.Diagnostics;
 using System.Windows.Data;
 using System.Windows.Input;
+using Windows.Win32;
 using Wpf.Ui.Designer;
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
@@ -23,7 +24,7 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = ElementMaximizeButton, Type = typeof(TitleBarButton))]
 [TemplatePart(Name = ElementRestoreButton, Type = typeof(TitleBarButton))]
 [TemplatePart(Name = ElementCloseButton, Type = typeof(TitleBarButton))]
-public class TitleBar : System.Windows.Controls.Control, IThemeControl
+public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 {
     private const string ElementIcon = "PART_Icon";
     private const string ElementMainGrid = "PART_MainGrid";
@@ -36,6 +37,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private static DpiScale? dpiScale;
 
     private DependencyObject? _parentWindow;
+
+    public event EventHandler<HwndProcEventArgs>? WndProcInvoked;
 
     /// <summary>Identifies the <see cref="ApplicationTheme"/> dependency property.</summary>
     public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
@@ -466,8 +469,16 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         _currentWindow =
             System.Windows.Window.GetWindow(this) ?? throw new InvalidOperationException("Window is null");
+        if (_currentWindow.WindowState == WindowState.Maximized)
+        {
+            SetCurrentValue(IsMaximizedProperty, true);
+            _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Maximized);
+        }
+
         _currentWindow.StateChanged += OnParentWindowStateChanged;
         _currentWindow.ContentRendered += OnWindowContentRendered;
+
+        SubscribeToSystemParameters();
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -476,6 +487,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         Unloaded -= OnUnloaded;
 
         Appearance.ApplicationThemeManager.Changed -= OnThemeChanged;
+        UnsubscribeToSystemParameters();
     }
 
     /// <summary>
@@ -591,8 +603,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         switch (buttonType)
         {
-            case TitleBarButtonType.Maximize
-            or TitleBarButtonType.Restore:
+            case TitleBarButtonType.Maximize or TitleBarButtonType.Restore:
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                 MaximizeWindow();
                 break;
@@ -642,15 +653,21 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        var message = (User32.WM)msg;
+        var message = (uint)msg;
+
+        // Invalidate cached border size on DPI change message
+        if (message == PInvoke.WM_DPICHANGED)
+        {
+            InvalidateBorderCache();
+        }
 
         if (
             message
             is not (
-                User32.WM.NCHITTEST
-                or User32.WM.NCMOUSELEAVE
-                or User32.WM.NCLBUTTONDOWN
-                or User32.WM.NCLBUTTONUP
+                PInvoke.WM_NCHITTEST
+                or PInvoke.WM_NCMOUSELEAVE
+                or PInvoke.WM_NCLBUTTONDOWN
+                or PInvoke.WM_NCLBUTTONUP
             )
         )
         {
@@ -683,27 +700,36 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
 
         bool isMouseOverHeaderContent = false;
+        IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
 
-        if (message == User32.WM.NCHITTEST && (TrailingContent is UIElement || Header is UIElement))
+		if (message == PInvoke.WM_NCHITTEST)
+		{
+			if (TrailingContent is UIElement || Header is UIElement || CenterContent is UIElement)
+			{
+				UIElement? headerLeftUIElement = Header as UIElement;
+				UIElement? headerCenterUIElement = CenterContent as UIElement;
+				UIElement? headerRightUiElement = TrailingContent as UIElement;
+
+				isMouseOverHeaderContent = (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock && headerLeftUIElement.IsMouseOverElement(lParam))
+					|| (headerCenterUIElement?.IsMouseOverElement(lParam) ?? false)
+					|| (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+			}
+
+			htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+		}
+
+		switch (message)
         {
-            UIElement? headerLeftUIElement = Header as UIElement;
-            UIElement? headerCenterUIElement = CenterContent as UIElement;
-            UIElement? headerRightUiElement = TrailingContent as UIElement;
-
-            isMouseOverHeaderContent = (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock && headerLeftUIElement.IsMouseOverElement(lParam))
-                || (headerCenterUIElement?.IsMouseOverElement(lParam) ?? false)
-                || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
-        }
-
-        switch (message)
-        {
-            case User32.WM.NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
+            case PInvoke.WM_NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
                 // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
-                return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
-            case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
+                return (IntPtr)PInvoke.HTSYSMENU;
+            case PInvoke.WM_NCHITTEST when htResult != (IntPtr)PInvoke.HTNOWHERE:
                 handled = true;
-                return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
+                return htResult;
+            case PInvoke.WM_NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
+                handled = true;
+                return (IntPtr)PInvoke.HTCAPTION;
             default:
                 return IntPtr.Zero;
         }

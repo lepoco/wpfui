@@ -10,6 +10,7 @@ namespace Wpf.Ui;
 /// </summary>
 public class UiApplication
 {
+    [ThreadStatic]
     private static UiApplication? _uiApplication;
 
     private readonly Application? _application;
