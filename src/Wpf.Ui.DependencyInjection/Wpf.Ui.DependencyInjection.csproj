@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>WPF-UI.DependencyInjection</PackageId>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net472;net6.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net9.0;net8.0;net462;netstandard2.1;netstandard2.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Dependency injection for the WPF UI.</Description>
     <CommonTags>$(CommonTags);dependency;injection;abstractions;standard</CommonTags>
@@ -11,14 +11,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" VersionOverride="3.1.0" />
-    <PackageReference Include="PolySharp">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>build; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

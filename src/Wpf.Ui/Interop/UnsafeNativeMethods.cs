@@ -7,13 +7,13 @@
    and is intended for use on Windows systems only.
    This Source Code is partially based on the source code provided by the .NET Foundation. */
 
+using Microsoft.Win32;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.Graphics.Dwm;
 using Windows.Win32.UI.Controls;
 using Windows.Win32.UI.Shell;
 using Windows.Win32.UI.WindowsAndMessaging;
-using Microsoft.Win32;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Interop;
@@ -29,7 +29,10 @@ internal static class UnsafeNativeMethods
     /// <param name="handle">Selected window handle.</param>
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static unsafe bool ApplyWindowCornerPreference(IntPtr handle, WindowCornerPreference cornerPreference)
+    public static unsafe bool ApplyWindowCornerPreference(
+        IntPtr handle,
+        WindowCornerPreference cornerPreference
+    )
     {
         if (handle == IntPtr.Zero)
         {
@@ -162,11 +165,8 @@ internal static class UnsafeNativeMethods
             dwAttribute = DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        return PInvoke.DwmSetWindowAttribute(new HWND(handle),
-                                             dwAttribute,
-                                             &pvAttribute,
-                                             (uint)sizeof(BOOL)) ==
-               HRESULT.S_OK;
+        return PInvoke.DwmSetWindowAttribute(new HWND(handle), dwAttribute, &pvAttribute, (uint)sizeof(BOOL))
+            == HRESULT.S_OK;
     }
 
     /// <summary>
@@ -202,7 +202,8 @@ internal static class UnsafeNativeMethods
             dwAttribute = DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
         }
 
-        return PInvoke.DwmSetWindowAttribute(new HWND(handle), dwAttribute, &pvAttribute, (uint)sizeof(BOOL)) == HRESULT.S_OK;
+        return PInvoke.DwmSetWindowAttribute(new HWND(handle), dwAttribute, &pvAttribute, (uint)sizeof(BOOL))
+            == HRESULT.S_OK;
     }
 
     /// <summary>
@@ -368,13 +369,19 @@ internal static class UnsafeNativeMethods
         var wtaOptions = new WTA_OPTIONS()
         {
             dwFlags = PInvoke.WTNCA_NODRAWCAPTION,
-            dwMask = PInvoke.WTNCA_NODRAWCAPTION | PInvoke.WTNCA_NODRAWICON | PInvoke.WTNCA_NOMIRRORHELP | PInvoke.WTNCA_NOSYSMENU,
+            dwMask =
+                PInvoke.WTNCA_NODRAWCAPTION
+                | PInvoke.WTNCA_NODRAWICON
+                | PInvoke.WTNCA_NOMIRRORHELP
+                | PInvoke.WTNCA_NOSYSMENU,
         };
 
-        return PInvoke.SetWindowThemeAttribute(new HWND(hWnd),
-                                        WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
-                                        &wtaOptions,
-                                        (uint)sizeof(WTA_OPTIONS)) == HRESULT.S_OK;
+        return PInvoke.SetWindowThemeAttribute(
+                new HWND(hWnd),
+                WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
+                &wtaOptions,
+                (uint)sizeof(WTA_OPTIONS)
+            ) == HRESULT.S_OK;
     }
 
     /// <summary>
@@ -405,8 +412,8 @@ internal static class UnsafeNativeMethods
 
     private static IntPtr SetWindowLong(IntPtr handle, WINDOW_LONG_PTR_INDEX nIndex, long windowStyleLong)
     {
-        return IntPtr.Size == 4 
-            ? new IntPtr(PInvoke.SetWindowLong(new HWND(handle), nIndex, (int)windowStyleLong)) 
+        return IntPtr.Size == 4
+            ? new IntPtr(PInvoke.SetWindowLong(new HWND(handle), nIndex, (int)windowStyleLong))
             : PInvoke.SetWindowLongPtr(new HWND(handle), nIndex, (nint)windowStyleLong);
     }
 }
