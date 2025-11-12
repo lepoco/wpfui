@@ -11,6 +11,9 @@ namespace Windows.Win32;
 
 internal static partial class PInvoke
 {
-    [DllImport("USER32.dll", ExactSpelling = true, EntryPoint = "SetWindowLongPtrW", SetLastError = true), DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    [
+        DllImport("USER32.dll", ExactSpelling = true, EntryPoint = "SetWindowLongPtrW", SetLastError = true),
+        DefaultDllImportSearchPaths(DllImportSearchPath.System32)
+    ]
     internal static extern nint SetWindowLongPtr(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex, nint dwNewLong);
 }

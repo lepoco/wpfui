@@ -19,6 +19,7 @@ internal static class PInvokeExtensions
         /// <summary>
         /// Gets the window attribute used to enable immersive dark mode prior to Windows 11.
         /// </summary>
-        public static DWMWINDOWATTRIBUTE DMWA_USE_IMMERSIVE_DARK_MODE_OLD => DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE - 1;
+        public static DWMWINDOWATTRIBUTE DMWA_USE_IMMERSIVE_DARK_MODE_OLD =>
+            DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE - 1;
     }
 }
