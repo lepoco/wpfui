@@ -5,6 +5,8 @@
 
 namespace Wpf.Ui.Converters;
 
+using System.Windows.Data;
+
 public class CornerRadiusSplitConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
