@@ -739,7 +739,6 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             case PInvoke.WM_NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
                 handled = true;
                 return (IntPtr)PInvoke.HTCAPTION;
-
             default:
                 return IntPtr.Zero;
         }
