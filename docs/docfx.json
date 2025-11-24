@@ -71,5 +71,10 @@
     "keepFileLink": false,
     "cleanupCacheHistory": false,
     "disableGitFeatures": false
+  },
+  "sitemap": {
+    "baseUrl": "https://wpfui.lepo.co",
+    "priority": 0.1,
+    "changefreq": "monthly"
   }
 }
