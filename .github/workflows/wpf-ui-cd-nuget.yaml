@@ -21,10 +21,10 @@ jobs:
       - uses: nuget/setup-nuget@v2
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-      - name: Setup .NET Core SDK 9.x
+      - name: Setup .NET Core SDK 10.x
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.x
+          dotnet-version: 10.x
 
       - name: Fetch the certificate
         run: |
@@ -49,9 +49,11 @@ jobs:
         run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Publish the package to NuGet.org
+        continue-on-error: true
         run: nuget push **\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
 
       - name: Publish the symbols to NuGet.org
+        continue-on-error: true
         run: nuget push **\*.snupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
 
       - name: Upload NuGet packages as artifacts

@@ -3,16 +3,13 @@
 
 # WPF UI
 
-[Created with ❤ in Poland by lepo.co](https://lepo.co/) and [wonderful open-source community](https://github.com/lepoco/wpfui/graphs/contributors)  
+[Created with ❤ in Poland by Leszek Pomianowski](https://lepo.co/) and [wonderful open-source community](https://github.com/lepoco/wpfui/graphs/contributors).  
 WPF UI provides the Fluent experience in your known and loved WPF framework. Intuitive design, themes, navigation and new immersive controls. All natively and effortlessly. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
 
 [![Discord](https://img.shields.io/discord/1071051348348514375?label=discord)](https://discord.gg/AR9ywDUwGq) [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget)](https://www.nuget.org/packages/WPF-UI/)
 
-![ua](https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png)
-
-### Deliver humanitarian aid directly to Ukraine.
-
-https://bank.gov.ua/en/about/humanitarian-aid-to-ukraine
+**Deliver humanitarian aid directly to Ukraine**  
+<https://bank.gov.ua/en/about/humanitarian-aid-to-ukraine>
 
 ![ua](https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png)
 
@@ -33,18 +30,18 @@ Support the development of WPF UI and other innovative projects by becoming a sp
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
 **WPF UI Gallery** is a free application available in the _Microsoft Store_, with which you can test all functionalities.  
-https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM?cid=windows-lp-hero
+<https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM?cid=windows-lp-hero>
 
 ```powershell
-$ winget install 'WPF UI'
+winget install 'WPF UI'
 ```
 
 **WPF UI** is delivered via **NuGet** package manager. You can find the package here:  
-https://www.nuget.org/packages/wpf-ui/
+<https://www.nuget.org/packages/wpf-ui/>
 
 **Visual Studio**  
 The plugin for **Visual Studio 2022** let you easily create new projects using **WPF UI**.  
-https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
+<https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui>
 
 ## 📷 Screenshots
 
@@ -62,13 +59,13 @@ https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 
 ![WPF UI Tray menu in WPF](https://user-images.githubusercontent.com/13592821/166259470-2d48a88e-47ce-4f8f-8f07-c9b110de64a5.png)
 
-## ⚓ Custom Windows 11 SnapLayout available for TitleBar.
+## ⚓ Custom Windows 11 SnapLayout available for TitleBar
 
 ![WPF UI Snap Layout for WPF](https://user-images.githubusercontent.com/13592821/166259869-e60d37e4-ded4-46bf-80d9-f92c47266f34.png)
 
 ## 📖 Documentation
 
-Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](#-getting-started) over there for newcomers.
+Documentation can be found at <https://wpfui.lepo.co/>. We also have a [tutorial](#-getting-started) over there for newcomers.
 
 ## 🚧 Development
 
@@ -85,7 +82,7 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ui:ThemesDictionary Theme="Dark" />
+        <ui:ThemesDictionary Theme="Light" />
         <ui:ControlsDictionary />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
@@ -120,18 +117,6 @@ Now you can create fantastic apps, e.g. with one button:
   </StackPanel>
 </ui:FluentWindow>
 ```
-
-## Special thanks
-
-Crafting apps for .NET without the creators of tools like ReSharper or XAML Styler would never be such a fantastic adventure.
-
-- [🔗 JetBrains ReSharper](https://www.jetbrains.com/resharper/)
-- [🔗 XAML Styler](https://github.com/Xavalon/XamlStyler)
-
-JetBrains was kind enough to lend a license for the open-source **dotUltimate** for WPF UI development. Learn more here:
-
-- https://www.jetbrains.com/dotnet/
-- https://www.jetbrains.com/opensource/
 
 ## Microsoft Property
 

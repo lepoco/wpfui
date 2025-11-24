@@ -4,8 +4,8 @@
     <BuildToolsDirectory>$(RepositoryDirectory)build\</BuildToolsDirectory>
   </PropertyGroup>
   <PropertyGroup>
-    <Version>4.0.3</Version>
-    <AssemblyVersion>4.0.0</AssemblyVersion>
+    <Version>4.1.0</Version>
+    <AssemblyVersion>4.1.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Company>lepo.co</Company>
@@ -38,7 +38,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>13.0</LangVersion>
+    <LangVersion>14.0</LangVersion>
     <Nullable>enable</Nullable>
     <!--
         Suppress ref safety warnings in unsafe contexts (see https://github.com/dotnet/csharplang/issues/6476).
@@ -59,7 +59,10 @@
                  Or '$(TargetFramework)' == 'net481'
                  Or '$(TargetFramework)' == 'net5.0'
                  Or '$(TargetFramework)' == 'net6.0'
-                 Or '$(TargetFramework)' == 'net7.0'"
+                 Or '$(TargetFramework)' == 'net7.0'
+                 Or '$(TargetFramework)' == 'net8.0'
+                 Or '$(TargetFramework)' == 'net9.0'
+                 Or '$(TargetFramework)' == 'net10.0'"
       >True</IsBelowNet8
     >
   </PropertyGroup>

@@ -25,34 +25,36 @@
     <system:Double x:Key="CardExpanderChevronSize">16.0</system:Double>
 
     <ControlTemplate x:Key="DefaultUiCardExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-        <Grid Margin="{TemplateBinding Padding}" Background="Transparent">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ContentPresenter
-                x:Name="ContentPresenter"
-                Grid.Column="0"
-                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                Content="{TemplateBinding Content}" />
-            <Grid
-                x:Name="ChevronGrid"
-                Grid.Column="1"
-                Margin="0"
-                VerticalAlignment="Center"
-                Background="Transparent"
-                RenderTransformOrigin="0.5, 0.5">
-                <Grid.RenderTransform>
-                    <RotateTransform Angle="0" />
-                </Grid.RenderTransform>
-                <controls:SymbolIcon
-                    x:Name="ControlChevronIcon"
-                    FontSize="{StaticResource CardExpanderChevronSize}"
-                    Foreground="{TemplateBinding Foreground}"
-                    Symbol="ChevronDown24" />
+        <Border Padding="{TemplateBinding Padding}" Background="Transparent">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter
+                    x:Name="ContentPresenter"
+                    Grid.Column="0"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Content="{TemplateBinding Content}" />
+                <Grid
+                    x:Name="ChevronGrid"
+                    Grid.Column="1"
+                    Margin="0"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    RenderTransformOrigin="0.5, 0.5">
+                    <Grid.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </Grid.RenderTransform>
+                    <controls:SymbolIcon
+                        x:Name="ControlChevronIcon"
+                        FontSize="{StaticResource CardExpanderChevronSize}"
+                        Foreground="{TemplateBinding Foreground}"
+                        Symbol="ChevronDown24" />
+                </Grid>
             </Grid>
-        </Grid>
+        </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="True">
                 <Trigger.EnterActions>
@@ -106,6 +108,7 @@
                 <ControlTemplate TargetType="{x:Type controls:CardExpander}">
                     <ControlTemplate.Resources>
                         <converters:AnimationFactorToValueConverter x:Key="AnimationFactorToValueConverter" />
+                        <converters:CornerRadiusSplitConverter x:Key="CornerRadiusSplitConverter" />
                     </ControlTemplate.Resources>
 
                     <Grid>
@@ -120,8 +123,13 @@
                             Grid.Row="0"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{TemplateBinding CornerRadius}">
+                            BorderThickness="1">
+                            <Border.CornerRadius>
+                                <MultiBinding Converter="{StaticResource CornerRadiusSplitConverter}" ConverterParameter="Top">
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CornerRadius" />
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsExpanded" />
+                                </MultiBinding>
+                            </Border.CornerRadius>
                             <ToggleButton
                                 x:Name="ExpanderToggleButton"
                                 Margin="0"
@@ -171,8 +179,13 @@
                                 Background="{DynamicResource CardBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="1,0,1,1"
-                                CornerRadius="0,0,4,4"
                                 Visibility="Collapsed">
+                                <Border.CornerRadius>
+                                    <MultiBinding Converter="{StaticResource CornerRadiusSplitConverter}" ConverterParameter="Bottom" >
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CornerRadius" />
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="IsExpanded" />
+                                    </MultiBinding>
+                                </Border.CornerRadius>
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
                                     Margin="{TemplateBinding ContentPadding}"
@@ -195,7 +208,6 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="True">
                             <!--  TODO: Update  -->
-                            <Setter TargetName="ToggleButtonBorder" Property="CornerRadius" Value="4,4,0,0" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

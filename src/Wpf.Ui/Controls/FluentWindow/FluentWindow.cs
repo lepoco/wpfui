@@ -3,8 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Runtime.InteropServices;
 using System.Windows.Shell;
+using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
+using Wpf.Ui.Win32;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -82,6 +85,17 @@ public class FluentWindow : System.Windows.Window
     public FluentWindow()
     {
         SetResourceReference(StyleProperty, typeof(FluentWindow));
+
+        if (Utilities.IsOSWindows11OrNewer)
+        {
+            ApplicationThemeManager.Changed += (_, _) =>
+            {
+                if (IsActive && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
+                {
+                    UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
+                }
+            };
+        }
     }
 
     /// <summary>
@@ -103,10 +117,33 @@ public class FluentWindow : System.Windows.Window
     protected override void OnSourceInitialized(EventArgs e)
     {
         OnCornerPreferenceChanged(default, WindowCornerPreference);
-        OnExtendsContentIntoTitleBarChanged(default, ExtendsContentIntoTitleBar);
+        OnExtendsContentIntoTitleBarChanged(false, ExtendsContentIntoTitleBar);
         OnBackdropTypeChanged(default, WindowBackdropType);
 
         base.OnSourceInitialized(e);
+    }
+
+    /// <inheritdoc />
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+
+        if (Utilities.IsOSWindows11OrNewer && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
+        {
+            UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
+        }
+    }
+
+    /// <inheritdoc />
+    protected override void OnDeactivated(EventArgs e)
+    {
+        base.OnDeactivated(e);
+
+        if (Utilities.IsOSWindows11OrNewer)
+        {
+            // DWMWA_COLOR_DEFAULT.
+            UnsafeNativeMethods.ApplyBorderColor(this, unchecked((int)0xFFFFFFFF));
+        }
     }
 
     /// <summary>
@@ -182,10 +219,11 @@ public class FluentWindow : System.Windows.Window
             return;
         }
 
+        SetWindowChrome();
+
         if (newValue == WindowBackdropType.None)
         {
             _ = WindowBackdrop.RemoveBackdrop(this);
-
             return;
         }
 
@@ -233,20 +271,40 @@ public class FluentWindow : System.Windows.Window
         // AllowsTransparency = true;
         SetCurrentValue(WindowStyleProperty, WindowStyle.SingleBorderWindow);
 
-        WindowChrome.SetWindowChrome(
-            this,
-            new WindowChrome
-            {
-                CaptionHeight = 0,
-                CornerRadius = default,
-                GlassFrameThickness = new Thickness(-1),
-                ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
-                UseAeroCaptionButtons = false,
-            }
-        );
-
         // WindowStyleProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(WindowStyle.SingleBorderWindow));
         // AllowsTransparencyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(false));
         _ = UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
+    }
+
+    /// <summary>
+    /// This virtual method is called when <see cref="WindowBackdropType"/> is changed.
+    /// </summary>
+    protected virtual void SetWindowChrome()
+    {
+        try
+        {
+            if (Utilities.IsCompositionEnabled)
+            {
+                WindowChrome.SetWindowChrome(
+                    this,
+                    new WindowChrome
+                    {
+                        CaptionHeight = 0,
+                        CornerRadius = default,
+                        GlassFrameThickness =
+                            WindowBackdropType == WindowBackdropType.None
+                                ? new Thickness(0.00001)
+                                : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
+                        ResizeBorderThickness =
+                            ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                        UseAeroCaptionButtons = false,
+                    }
+                );
+            }
+        }
+        catch (COMException)
+        {
+            // Ignored.
+        }
     }
 }
