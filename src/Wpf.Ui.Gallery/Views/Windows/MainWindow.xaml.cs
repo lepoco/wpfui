@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Services.Contracts;
@@ -36,11 +37,10 @@ public partial class MainWindow : IWindow
         // Restore saved navigation pane width
         RestoreNavigationPaneWidth();
 
-        SetPageService(serviceProvider.GetService<IPageService>()!);
+        NavigationView.SetPageProviderService(serviceProvider.GetRequiredService<INavigationViewPageProvider>());
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
-        contentDialogService.Set = RootContentDialog;
+        contentDialogService.SetDialogHost(RootContentDialog);
 
-        NavigationView.Set
         NavigationView.SetCurrentValue(NavigationView.MenuItemsSourceProperty, ViewModel.MenuItems);
         NavigationView.SetCurrentValue(NavigationView.FooterMenuItemsSourceProperty, ViewModel.FooterMenuItems);
     }

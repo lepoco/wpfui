@@ -423,15 +423,17 @@
                     </Grid>
                 </Border>
 
-                <!-- Resize handle -->
+                <!--  Resize handle  -->
                 <controls:NavigationViewResizeHandle
                     x:Name="PART_ResizeHandle"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Stretch"
                     MinWidth="{TemplateBinding PaneResizeMinWidth}"
                     MaxWidth="{TemplateBinding PaneResizeMaxWidth}"
+                    Margin="0,0,-6,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Stretch"
                     CurrentWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=OpenPaneLength, Mode=TwoWay}"
-                    Visibility="{TemplateBinding IsPaneResizable, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    Visibility="{TemplateBinding IsPaneResizable,
+                                                 Converter={StaticResource BoolToVisibilityConverter}}" />
             </Grid>
 
             <Border

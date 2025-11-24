@@ -26,7 +26,7 @@ public class NavigationViewResizeHandle : Control
     /// <summary>
     /// Minimum resizable width
     /// </summary>
-    public static readonly DependencyProperty MinWidthProperty = DependencyProperty.Register(
+    public static new readonly DependencyProperty MinWidthProperty = DependencyProperty.Register(
         nameof(MinWidth),
         typeof(double),
         typeof(NavigationViewResizeHandle),
@@ -36,7 +36,7 @@ public class NavigationViewResizeHandle : Control
     /// <summary>
     /// Maximum resizable width
     /// </summary>
-    public static readonly DependencyProperty MaxWidthProperty = DependencyProperty.Register(
+    public static new readonly DependencyProperty MaxWidthProperty = DependencyProperty.Register(
         nameof(MaxWidth),
         typeof(double),
         typeof(NavigationViewResizeHandle),
@@ -56,7 +56,7 @@ public class NavigationViewResizeHandle : Control
     /// <summary>
     /// Gets or sets the minimum resizable width
     /// </summary>
-    public double MinWidth
+    public new double MinWidth
     {
         get => (double)GetValue(MinWidthProperty);
         set => SetValue(MinWidthProperty, value);
@@ -65,7 +65,7 @@ public class NavigationViewResizeHandle : Control
     /// <summary>
     /// Gets or sets the maximum resizable width
     /// </summary>
-    public double MaxWidth
+    public new double MaxWidth
     {
         get => (double)GetValue(MaxWidthProperty);
         set => SetValue(MaxWidthProperty, value);
@@ -107,12 +107,12 @@ public class NavigationViewResizeHandle : Control
         if (e.ButtonState == MouseButtonState.Pressed)
         {
             _isResizing = true;
-            IsPressed = true;
+            SetCurrentValue(IsPressedProperty, true);
             // Get position relative to parent element (NavigationView)
             _startPoint = e.GetPosition(this.Parent as FrameworkElement ?? this);
             _startWidth = CurrentWidth;
             _lastWidth = _startWidth;
-            CaptureMouse();
+            _ = CaptureMouse();
             e.Handled = true;
         }
 
@@ -137,7 +137,7 @@ public class NavigationViewResizeHandle : Control
                 SetCurrentValue(CurrentWidthProperty, newWidth);
                 _lastWidth = newWidth;
             }
-            
+
             e.Handled = true;
         }
         else
@@ -154,7 +154,7 @@ public class NavigationViewResizeHandle : Control
         if (_isResizing)
         {
             _isResizing = false;
-            IsPressed = false;
+            SetCurrentValue(IsPressedProperty, false);
             ReleaseMouseCapture();
             e.Handled = true;
         }
@@ -175,7 +175,7 @@ public class NavigationViewResizeHandle : Control
     protected override void OnLostMouseCapture(MouseEventArgs e)
     {
         _isResizing = false;
-        IsPressed = false;
+        SetCurrentValue(IsPressedProperty, false);
         base.OnLostMouseCapture(e);
     }
 }
