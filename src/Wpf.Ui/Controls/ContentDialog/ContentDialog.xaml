@@ -142,7 +142,10 @@
                                             Icon="{TemplateBinding PrimaryButtonIcon}"
                                             IsDefault="{TemplateBinding DefaultButton,
                                                                         Converter={StaticResource EnumToBoolConverter},
-                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Primary}}" />
+                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Primary}}"
+                                            IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"
+                                            Visibility="{TemplateBinding IsPrimaryButtonEnabled,
+                                                                         Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
                                             Grid.Column="2"
@@ -154,7 +157,10 @@
                                             Icon="{TemplateBinding SecondaryButtonIcon}"
                                             IsDefault="{TemplateBinding DefaultButton,
                                                                         Converter={StaticResource EnumToBoolConverter},
-                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Secondary}}" />
+                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Secondary}}"
+                                            IsEnabled="{TemplateBinding IsSecondaryButtonEnabled}"
+                                            Visibility="{TemplateBinding IsSecondaryButtonEnabled,
+                                                                         Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
                                             Grid.Column="4"

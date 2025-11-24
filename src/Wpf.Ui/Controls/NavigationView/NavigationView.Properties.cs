@@ -87,6 +87,22 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null, OnFooterMenuItemsSourceChanged)
     );
 
+    /// <summary>Identifies the <see cref="IsTopSeparatorVisible"/> dependency property.</summary>
+    public static readonly DependencyProperty IsTopSeparatorVisibleProperty = DependencyProperty.Register(
+        nameof(IsTopSeparatorVisible),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(true)
+    );
+
+    /// <summary>Identifies the <see cref="IsFooterSeparatorVisible"/> dependency property.</summary>
+    public static readonly DependencyProperty IsFooterSeparatorVisibleProperty = DependencyProperty.Register(
+        nameof(IsFooterSeparatorVisible),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(true)
+    );
+
     /// <summary>Identifies the <see cref="ContentOverlay"/> dependency property.</summary>
     public static readonly DependencyProperty ContentOverlayProperty = DependencyProperty.Register(
         nameof(ContentOverlay),
@@ -337,6 +353,20 @@ public partial class NavigationView
                 SetValue(FooterMenuItemsSourceProperty, value);
             }
         }
+    }
+
+    /// <inheritdoc/>
+    public bool IsTopSeparatorVisible
+    {
+        get => (bool)GetValue(IsTopSeparatorVisibleProperty);
+        set => SetValue(IsTopSeparatorVisibleProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public bool IsFooterSeparatorVisible
+    {
+        get => (bool)GetValue(IsFooterSeparatorVisibleProperty);
+        set => SetValue(IsFooterSeparatorVisibleProperty, value);
     }
 
     /// <inheritdoc/>

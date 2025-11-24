@@ -25,34 +25,36 @@
     <system:Double x:Key="CardExpanderChevronSize">16.0</system:Double>
 
     <ControlTemplate x:Key="DefaultUiCardExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-        <Grid Margin="{TemplateBinding Padding}" Background="Transparent">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ContentPresenter
-                x:Name="ContentPresenter"
-                Grid.Column="0"
-                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                Content="{TemplateBinding Content}" />
-            <Grid
-                x:Name="ChevronGrid"
-                Grid.Column="1"
-                Margin="0"
-                VerticalAlignment="Center"
-                Background="Transparent"
-                RenderTransformOrigin="0.5, 0.5">
-                <Grid.RenderTransform>
-                    <RotateTransform Angle="0" />
-                </Grid.RenderTransform>
-                <controls:SymbolIcon
-                    x:Name="ControlChevronIcon"
-                    FontSize="{StaticResource CardExpanderChevronSize}"
-                    Foreground="{TemplateBinding Foreground}"
-                    Symbol="ChevronDown24" />
+        <Border Padding="{TemplateBinding Padding}" Background="Transparent">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter
+                    x:Name="ContentPresenter"
+                    Grid.Column="0"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Content="{TemplateBinding Content}" />
+                <Grid
+                    x:Name="ChevronGrid"
+                    Grid.Column="1"
+                    Margin="0"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    RenderTransformOrigin="0.5, 0.5">
+                    <Grid.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </Grid.RenderTransform>
+                    <controls:SymbolIcon
+                        x:Name="ControlChevronIcon"
+                        FontSize="{StaticResource CardExpanderChevronSize}"
+                        Foreground="{TemplateBinding Foreground}"
+                        Symbol="ChevronDown24" />
+                </Grid>
             </Grid>
-        </Grid>
+        </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="True">
                 <Trigger.EnterActions>
