@@ -23,139 +23,19 @@
             Margin="0"
             HeaderText="Standard TabControl."
             XamlCode="&lt;TabControl /&gt;">
-            <TabControl Margin="0,8,0,0">
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="XboxConsole24" />
-                            <TextBlock Text="Hello" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="World" />
-                    </Grid>
-                </TabItem>
-                <TabItem IsSelected="True">
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="StoreMicrosoft16" />
-                            <TextBlock Text="The cake" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Is a lie." />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="Document24" />
-                            <TextBlock Text="Document" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Document content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="Settings24" />
-                            <TextBlock Text="Settings" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Settings content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="Mail24" />
-                            <TextBlock Text="Mail" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Mail content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="CalendarLtr24" />
-                            <TextBlock Text="Calendar" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Calendar content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="Image24" />
-                            <TextBlock Text="Image" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Image content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="MusicNote124" />
-                            <TextBlock Text="Music" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Music content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="Video24" />
-                            <TextBlock Text="Video" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Video content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="Folder24" />
-                            <TextBlock Text="Folder" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Folder content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="Folder24" />
-                            <TextBlock Text="tab 1" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="tab 1 content" />
-                    </Grid>
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="Folder24" />
-                            <TextBlock Text="tab 2" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="tab 2 content" />
-                    </Grid>
-                </TabItem>
+            <TabControl
+                x:Name="StandardTabControl"
+                Margin="0,8,0,0"
+                AllowDrop="True"
+                Drop="StandardTabControl_Drop"
+                ItemsSource="{Binding ViewModel.StandardTabs}">
+                <TabControl.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource {x:Type TabItem}}" TargetType="TabItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="StandardTabItem_PreviewMouseLeftButtonDown" />
+                        <EventSetter Event="PreviewMouseMove" Handler="StandardTabItem_PreviewMouseMove" />
+                        <EventSetter Event="PreviewMouseLeftButtonUp" Handler="StandardTabItem_PreviewMouseLeftButtonUp" />
+                    </Style>
+                </TabControl.ItemContainerStyle>
             </TabControl>
         </controls:ControlExample>
     </Grid>
