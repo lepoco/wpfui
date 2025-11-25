@@ -24,12 +24,21 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     // Stores the starting point of the drag operation
     private Point _standardStartPoint;
 
+    // Indicates whether a drag operation is currently in progress
+    private bool _isDragging;
+
     public TabControlPage(TabControlViewModel viewModel)
     {
         ViewModel = viewModel;
         DataContext = this;
 
         InitializeComponent();
+
+        // Ensure the first tab is selected and its content is displayed
+        if (ViewModel.StandardTabs.Count > 0 && StandardTabControl != null)
+        {
+            StandardTabControl.SelectedItem = ViewModel.StandardTabs[0];
+        }
     }
 
     /// <summary>
@@ -62,7 +71,7 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     /// </summary>
     private void StandardTabItem_PreviewMouseMove(object sender, MouseEventArgs e)
     {
-        if (e.LeftButton == MouseButtonState.Pressed && _standardDraggedTab != null)
+        if (e.LeftButton == MouseButtonState.Pressed && _standardDraggedTab != null && !_isDragging)
         {
             Point currentPoint = e.GetPosition(null);
 
@@ -70,7 +79,9 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
             if (Math.Abs(currentPoint.X - _standardStartPoint.X) > SystemParameters.MinimumHorizontalDragDistance ||
                 Math.Abs(currentPoint.Y - _standardStartPoint.Y) > SystemParameters.MinimumVerticalDragDistance)
             {
+                _isDragging = true;
                 DragDrop.DoDragDrop(_standardDraggedTab, _standardDraggedTab, DragDropEffects.Move);
+                _isDragging = false;
             }
         }
     }
@@ -82,6 +93,7 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     private void StandardTabItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         _standardDraggedTab = null;
+        _isDragging = false;
     }
 
     /// <summary>
