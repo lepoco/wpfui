@@ -28,6 +28,19 @@ public partial class ListViewViewModel : ViewModel
     [ObservableProperty]
     private ObservableCollection<Person> _basicListViewItems = GeneratePersons();
 
+    [ObservableProperty]
+    private ObservableCollection<string> _bigArray = GenerateBigArray();
+
+    private static ObservableCollection<string> GenerateBigArray()
+    {
+        var result = new ObservableCollection<string>();
+        for (int i = 0; i < 500; i++)
+        {
+            result.Add($"Item {i + 1}");
+        }
+        return result;
+    }
+
     private static ObservableCollection<Person> GeneratePersons()
     {
         var random = new Random();
