@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -121,15 +122,14 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
             return;
         }
 
-        // Reorder tabs: remove from original position and insert at target position
+        // Reorder tabs: move from original position to target position
         ObservableCollection<TabItem> tabs = ViewModel.StandardTabs;
         int draggedIndex = tabs.IndexOf(_standardDraggedTab);
         int targetIndex = tabs.IndexOf(targetTabItem);
 
         if (draggedIndex >= 0 && targetIndex >= 0 && draggedIndex != targetIndex)
         {
-            tabs.RemoveAt(draggedIndex);
-            tabs.Insert(targetIndex, _standardDraggedTab);
+            tabs.Move(draggedIndex, targetIndex);
 
             // Maintain selection state after drop to keep the moved tab selected
             _standardDraggedTab.SetCurrentValue(TabItem.IsSelectedProperty, true);
