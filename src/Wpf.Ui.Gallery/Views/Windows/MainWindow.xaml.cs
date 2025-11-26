@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
@@ -12,6 +14,8 @@ namespace Wpf.Ui.Gallery.Views.Windows;
 
 public partial class MainWindow : IWindow
 {
+    private readonly AppConfigService _configService;
+
     public MainWindow(
         MainWindowViewModel viewModel,
         INavigationService navigationService,
@@ -25,10 +29,16 @@ public partial class MainWindow : IWindow
         ViewModel = viewModel;
         DataContext = this;
 
+        // Initialize configuration service
+        _configService = new AppConfigService();
+
         InitializeComponent();
 
+        // Restore saved navigation pane width
+        RestoreNavigationPaneWidth();
+
+        NavigationView.SetPageProviderService(serviceProvider.GetRequiredService<INavigationViewPageProvider>());
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
-        navigationService.SetNavigationControl(NavigationView);
         contentDialogService.SetDialogHost(RootContentDialog);
         SetupTrayMenuEvents();
     }
@@ -128,6 +138,31 @@ public partial class MainWindow : IWindow
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"NavigateToPage {pageType.Name} Error: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Handles the value change event of the navigation pane width slider
+    /// </summary>
+    private void PaneWidthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+        if (NavigationView != null && e.NewValue > 0)
+        {
+            NavigationView.SetCurrentValue(NavigationView.OpenPaneLengthProperty, e.NewValue);
+            _configService.UpdateNavigationPaneWidth(e.NewValue);
+        }
+    }
+
+    /// <summary>
+    /// Restores the saved navigation pane width
+    /// </summary>
+    private void RestoreNavigationPaneWidth()
+    {
+        var savedWidth = _configService.Config.NavigationPaneWidth;
+        if (savedWidth >= 200 && savedWidth <= 500)
+        {
+            NavigationView.SetCurrentValue(NavigationView.OpenPaneLengthProperty, savedWidth);
+            PaneWidthSlider.SetCurrentValue(System.Windows.Controls.Primitives.RangeBase.ValueProperty, savedWidth);
         }
     }
 
