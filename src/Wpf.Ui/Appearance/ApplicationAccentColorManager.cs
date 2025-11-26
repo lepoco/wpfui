@@ -170,6 +170,7 @@ public static class ApplicationAccentColorManager
             systemAccent = systemAccent.UpdateBrightness(6f);
         }
 
+        bool isSystemAccent = systemAccent == GetColorizationColor();
         Color primaryAccent;
         Color secondaryAccent;
         Color tertiaryAccent;
@@ -191,7 +192,7 @@ public static class ApplicationAccentColorManager
 
         Color GetColor(UIColorType colorType, float brightnessFactor, float saturationFactor = 0.0f)
         {
-            if (GetUiColor(colorType) is { } color)
+            if (isSystemAccent && GetUiColor(colorType) is { } color)
             {
                 return color;
             }
