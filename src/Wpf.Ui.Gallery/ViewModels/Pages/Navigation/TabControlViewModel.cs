@@ -27,9 +27,14 @@ public partial class TabControlViewModel : ViewModel
 
     partial void OnSelectedTabChanged(TabItem? value)
     {
-        foreach (var tab in StandardTabs)
+        // Update IsSelected property only for tabs that need to change
+        foreach (TabItem tab in StandardTabs)
         {
-            tab.SetCurrentValue(TabItem.IsSelectedProperty, tab == value);
+            bool shouldBeSelected = tab == value;
+            if (tab.IsSelected != shouldBeSelected)
+            {
+                tab.SetCurrentValue(TabItem.IsSelectedProperty, shouldBeSelected);
+            }
         }
     }
 
@@ -105,7 +110,8 @@ public partial class TabControlViewModel : ViewModel
     [RelayCommand]
     private void AddTab()
     {
-        var tabNumber = StandardTabs.Count + 1;
+        // Create a new tab with a unique name
+        int tabNumber = StandardTabs.Count + 1;
         var newTab = new TabItem
         {
             Header = CreateTabHeader($"New Tab {tabNumber}", SymbolRegular.Document24),
@@ -116,7 +122,10 @@ public partial class TabControlViewModel : ViewModel
             }
         };
 
+        // Add the new tab to the collection
         StandardTabs.Add(newTab);
+
+        // Select the new tab (this will update IsSelected for all tabs via OnSelectedTabChanged)
         SelectedTab = newTab;
     }
 
@@ -127,37 +136,50 @@ public partial class TabControlViewModel : ViewModel
     [RelayCommand]
     private void CloseTab(object? tabItem)
     {
-        if (tabItem is not TabItem item || StandardTabs.Count <= 1)
+        if (tabItem is not TabItem item)
         {
             return;
         }
 
-        var tabIndex = StandardTabs.IndexOf(item);
+        if (StandardTabs.Count <= 1)
+        {
+            // Don't remove the last tab
+            return;
+        }
+
+        int tabIndex = StandardTabs.IndexOf(item);
         if (tabIndex < 0)
         {
             return;
         }
 
+        // Remove the tab
         StandardTabs.RemoveAt(tabIndex);
 
+        // Select another tab (preferably the one at the same index, or the last one)
         if (StandardTabs.Count > 0)
         {
-            SelectedTab = StandardTabs[Math.Min(tabIndex, StandardTabs.Count - 1)];
+            int newSelectedIndex = Math.Min(tabIndex, StandardTabs.Count - 1);
+            SelectedTab = StandardTabs[newSelectedIndex];
         }
     }
 
     /// <summary>
     /// Selects the specified tab and prepares for potential drag operation.
     /// </summary>
-    /// <param name="parameter">The tab item to select.</param>
+    /// <param name="tabItem">The tab item to select.</param>
+    /// <param name="startPoint">The starting point of the mouse operation.</param>
     [RelayCommand]
     private void SelectTabForDrag(object? parameter)
     {
-        if (parameter is TabItem tabItem)
+        if (parameter is not TabItem tabItem)
         {
-            SelectedTab = tabItem;
-            _draggedTab = tabItem;
+            return;
         }
+
+        // Select the clicked tab
+        SelectedTab = tabItem;
+        _draggedTab = tabItem;
     }
 
     /// <summary>
@@ -172,11 +194,12 @@ public partial class TabControlViewModel : ViewModel
             return false;
         }
 
-        var deltaX = Math.Abs(currentPoint.X - _dragStartPoint.X);
-        var deltaY = Math.Abs(currentPoint.Y - _dragStartPoint.Y);
-        var minDistance = SystemParameters.MinimumHorizontalDragDistance;
+        // Check if the mouse has moved far enough to initiate a drag operation
+        double deltaX = currentPoint.X - _dragStartPoint.X;
+        double deltaY = currentPoint.Y - _dragStartPoint.Y;
+        double minDistance = SystemParameters.MinimumHorizontalDragDistance;
 
-        if (deltaX > minDistance || deltaY > minDistance)
+        if (Math.Abs(deltaX) > minDistance || Math.Abs(deltaY) > minDistance)
         {
             _isDragging = true;
             return true;
@@ -219,14 +242,17 @@ public partial class TabControlViewModel : ViewModel
             return;
         }
 
-        var draggedIndex = StandardTabs.IndexOf(draggedTab);
-        var targetIndex = StandardTabs.IndexOf(targetTab);
+        int draggedIndex = StandardTabs.IndexOf(draggedTab);
+        int targetIndex = StandardTabs.IndexOf(targetTab);
 
-        if (draggedIndex >= 0 && targetIndex >= 0 && draggedIndex != targetIndex)
+        // Early return if indices are invalid or the same
+        if (draggedIndex < 0 || targetIndex < 0 || draggedIndex == targetIndex)
         {
-            StandardTabs.Move(draggedIndex, targetIndex);
-            SelectedTab = draggedTab;
+            return;
         }
+
+        StandardTabs.Move(draggedIndex, targetIndex);
+        SelectedTab = draggedTab;
     }
 
     private static System.Windows.Controls.StackPanel CreateTabHeader(string text, SymbolRegular symbol)
