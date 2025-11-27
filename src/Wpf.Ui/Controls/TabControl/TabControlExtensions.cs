@@ -156,19 +156,21 @@ public static class TabControlExtensions
 
     private static void EnsureBehavior(TabControl tabControl)
     {
-        if (!Behaviors.ContainsKey(tabControl))
+        if (Behaviors.ContainsKey(tabControl))
         {
-            var behavior = new TabControlBehavior(tabControl);
-            Behaviors[tabControl] = behavior;
-            tabControl.Unloaded += (s, e) =>
-            {
-                if (Behaviors.TryGetValue(tabControl, out TabControlBehavior? b))
-                {
-                    b.Dispose();
-                    Behaviors.Remove(tabControl);
-                }
-            };
+            return;
         }
+
+        TabControlBehavior behavior = new TabControlBehavior(tabControl);
+        Behaviors[tabControl] = behavior;
+        tabControl.Unloaded += (s, e) =>
+        {
+            if (Behaviors.TryGetValue(tabControl, out TabControlBehavior? b))
+            {
+                b.Dispose();
+                Behaviors.Remove(tabControl);
+            }
+        };
     }
 
     internal static void OnTabCloseRequested(TabControl tabControl, TabItem tabItem)
@@ -257,7 +259,7 @@ public static class TabControlExtensions
         private readonly TabControl _tabControl;
         private TabItem? _draggedTab;
         private int _draggedTabIndex = -1;
-        private Button? _addButton;
+        private System.Windows.Controls.Button? _addButton;
         private Point _dragStartPoint;
         private bool _isDragging;
 
@@ -284,7 +286,7 @@ public static class TabControlExtensions
         private void SetupAddButton()
         {
             _tabControl.ApplyTemplate();
-            if (_tabControl.Template?.FindName("AddButton", _tabControl) is Button addButton)
+            if (_tabControl.Template?.FindName("AddButton", _tabControl) is System.Windows.Controls.Button addButton)
             {
                 _addButton = addButton;
                 addButton.Click -= OnAddButtonClick;
@@ -299,7 +301,14 @@ public static class TabControlExtensions
 
         private void OnItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            UpdateTabItems();
+            // Only update if items were actually added or removed
+            if (e.Action == NotifyCollectionChangedAction.Add ||
+                e.Action == NotifyCollectionChangedAction.Remove ||
+                e.Action == NotifyCollectionChangedAction.Replace ||
+                e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                UpdateTabItems();
+            }
         }
 
         private void UpdateTabItems()
@@ -343,6 +352,11 @@ public static class TabControlExtensions
                 _tabControl.ItemContainerGenerator.StatusChanged -= OnItemContainerGeneratorStatusChanged;
                 UpdateTabItems();
             }
+            else if (_tabControl.ItemContainerGenerator.Status == System.Windows.Controls.Primitives.GeneratorStatus.Error)
+            {
+                // Unsubscribe on error to avoid memory leaks
+                _tabControl.ItemContainerGenerator.StatusChanged -= OnItemContainerGeneratorStatusChanged;
+            }
         }
 
         private void SetupTabItem(TabItem tabItem)
@@ -365,10 +379,9 @@ public static class TabControlExtensions
             if (tabItem.IsLoaded)
             {
                 // Use Dispatcher to ensure template is fully applied
-                tabItem.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    SetupCloseButton(tabItem);
-                }), System.Windows.Threading.DispatcherPriority.Loaded);
+                tabItem.Dispatcher.BeginInvoke(
+                    () => SetupCloseButton(tabItem),
+                    System.Windows.Threading.DispatcherPriority.Loaded);
             }
         }
 
@@ -377,10 +390,9 @@ public static class TabControlExtensions
             if (sender is TabItem tabItem)
             {
                 // Use Dispatcher to ensure template is fully applied and rendered
-                tabItem.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    SetupCloseButton(tabItem);
-                }), System.Windows.Threading.DispatcherPriority.Loaded);
+                tabItem.Dispatcher.BeginInvoke(
+                    () => SetupCloseButton(tabItem),
+                    System.Windows.Threading.DispatcherPriority.Loaded);
             }
         }
 
@@ -390,21 +402,14 @@ public static class TabControlExtensions
             tabItem.ApplyTemplate();
 
             // Try to find CloseButton - use multiple attempts to ensure it's found
-            System.Windows.Controls.Button? closeButton = null;
+            System.Windows.Controls.Button? closeButton = tabItem.Template?.FindName("CloseButton", tabItem) as System.Windows.Controls.Button;
 
-            // First try: FindName (most reliable for template elements)
-            object? foundElement = tabItem.Template?.FindName("CloseButton", tabItem);
-            closeButton = foundElement as System.Windows.Controls.Button;
-
-            // Second try: Visual tree search by position (Grid.Column="1") if FindName fails
-            if (closeButton == null)
-            {
-                closeButton = FindCloseButtonInVisualTree(tabItem);
-            }
+            // Fallback: Visual tree search by position (Grid.Column="1") if FindName fails
+            closeButton ??= FindCloseButtonInVisualTree(tabItem);
 
             if (closeButton != null)
             {
-                // Remove previous handlers
+                // Remove previous handlers to avoid duplicate subscriptions
                 closeButton.Click -= OnCloseButtonClick;
                 closeButton.PreviewMouseLeftButtonDown -= OnCloseButtonPreviewMouseLeftButtonDown;
 
@@ -452,32 +457,36 @@ public static class TabControlExtensions
             return null;
         }
 
+        private static TabItem? FindTabItemFromButton(System.Windows.Controls.Button button)
+        {
+            // Try to get TabItem from TemplatedParent first
+            if (button.TemplatedParent is TabItem tabItem)
+            {
+                return tabItem;
+            }
+
+            // If TemplatedParent is not available, find the TabItem in the visual tree
+            DependencyObject? current = button;
+            while (current != null)
+            {
+                current = VisualTreeHelper.GetParent(current);
+                if (current is TabItem item)
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
         private void OnCloseButtonPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             // Mark the event as handled to prevent it from bubbling up to the TabItem
-            // and handle the close action directly here since Click event may not fire
             e.Handled = true;
 
             if (sender is System.Windows.Controls.Button button)
             {
-                // Try to get TabItem from TemplatedParent first
-                TabItem? tabItem = button.TemplatedParent as TabItem;
-
-                if (tabItem == null)
-                {
-                    // If TemplatedParent is not available, find the TabItem in the visual tree
-                    DependencyObject? current = button;
-                    while (current != null)
-                    {
-                        current = VisualTreeHelper.GetParent(current);
-                        if (current is TabItem item)
-                        {
-                            tabItem = item;
-                            break;
-                        }
-                    }
-                }
-
+                TabItem? tabItem = FindTabItemFromButton(button);
                 if (tabItem != null)
                 {
                     OnTabCloseRequested(_tabControl, tabItem);
@@ -490,27 +499,9 @@ public static class TabControlExtensions
             // Mark the event as handled to prevent it from bubbling up to the TabItem
             e.Handled = true;
 
-            // sender is System.Windows.Controls.Button
             if (sender is System.Windows.Controls.Button button)
             {
-                // Try to get TabItem from TemplatedParent first
-                TabItem? tabItem = button.TemplatedParent as TabItem;
-
-                if (tabItem == null)
-                {
-                    // If TemplatedParent is not available, find the TabItem in the visual tree
-                    DependencyObject? current = button;
-                    while (current != null)
-                    {
-                        current = VisualTreeHelper.GetParent(current);
-                        if (current is TabItem item)
-                        {
-                            tabItem = item;
-                            break;
-                        }
-                    }
-                }
-
+                TabItem? tabItem = FindTabItemFromButton(button);
                 if (tabItem != null)
                 {
                     OnTabCloseRequested(_tabControl, tabItem);
@@ -548,9 +539,19 @@ public static class TabControlExtensions
             DependencyObject? current = depObj;
             while (current != null)
             {
-                if (current is Button button && button.Name == "CloseButton")
+                if (current is System.Windows.Controls.Button button)
                 {
-                    return true;
+                    // Check by Grid column position (more reliable than Name)
+                    if (Grid.GetColumn(button) == 1)
+                    {
+                        return true;
+                    }
+
+                    // Fallback: check by Name
+                    if (button.Name == "CloseButton")
+                    {
+                        return true;
+                    }
                 }
 
                 current = VisualTreeHelper.GetParent(current);
@@ -599,19 +600,31 @@ public static class TabControlExtensions
 
         private void ReorderTabItem(int oldIndex, int newIndex)
         {
+            // Validate indices
+            if (oldIndex < 0 || newIndex < 0 || oldIndex == newIndex)
+            {
+                return;
+            }
+
             if (_tabControl.ItemsSource is IList itemsSource && !itemsSource.IsReadOnly)
             {
                 // When ItemsSource is set, operate on the bound collection
-                object? item = itemsSource[oldIndex];
-                itemsSource.RemoveAt(oldIndex);
-                itemsSource.Insert(newIndex, item);
+                if (oldIndex < itemsSource.Count && newIndex < itemsSource.Count)
+                {
+                    object? item = itemsSource[oldIndex];
+                    itemsSource.RemoveAt(oldIndex);
+                    itemsSource.Insert(newIndex, item);
+                }
             }
             else if (_tabControl.ItemsSource == null)
             {
                 // When ItemsSource is not set, operate on Items collection
-                object? item = _tabControl.Items[oldIndex];
-                _tabControl.Items.RemoveAt(oldIndex);
-                _tabControl.Items.Insert(newIndex, item);
+                if (oldIndex < _tabControl.Items.Count && newIndex < _tabControl.Items.Count)
+                {
+                    object? item = _tabControl.Items[oldIndex];
+                    _tabControl.Items.RemoveAt(oldIndex);
+                    _tabControl.Items.Insert(newIndex, item);
+                }
             }
         }
 
@@ -648,15 +661,17 @@ public static class TabControlExtensions
 
         public void Dispose()
         {
-            if (_addButton != null)
-            {
-                _addButton.Click -= OnAddButtonClick;
-            }
+            // Clean up event handlers
+            _addButton?.Click -= OnAddButtonClick;
 
             if (_tabControl.Items is INotifyCollectionChanged notifyCollection)
             {
                 notifyCollection.CollectionChanged -= OnItemsCollectionChanged;
             }
+
+            // Clean up dragged tab reference
+            _draggedTab?.ReleaseMouseCapture();
+            _draggedTab = null;
         }
     }
 }
