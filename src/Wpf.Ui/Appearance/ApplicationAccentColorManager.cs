@@ -354,7 +354,7 @@ public static class ApplicationAccentColorManager
         UiApplication.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] =
             systemAccent.ToBrush();
 
-        var themeAccent = applicationTheme == ApplicationTheme.Dark ? secondaryAccent : primaryAccent;
+        Color themeAccent = applicationTheme == ApplicationTheme.Dark ? secondaryAccent : primaryAccent;
         UiApplication.Current.Resources["AccentFillColorDefault"] = themeAccent;
         UiApplication.Current.Resources["AccentFillColorDefaultBrush"] = themeAccent.ToBrush();
         UiApplication.Current.Resources["AccentFillColorSecondary"] = Color.FromArgb(

@@ -39,8 +39,8 @@ public partial class TabControlViewModel : ViewModel
     }
 
     [ObservableProperty]
-    private ObservableCollection<TabItem> _standardTabs = new()
-    {
+    private ObservableCollection<TabItem> _standardTabs =
+    [
         new TabItem
         {
             Header = CreateTabHeader("Hello", SymbolRegular.XboxConsole24),
@@ -102,7 +102,7 @@ public partial class TabControlViewModel : ViewModel
             Header = CreateTabHeader("tab 2", SymbolRegular.Folder24),
             Content = new System.Windows.Controls.TextBlock { Text = "tab 2 content", Margin = new System.Windows.Thickness(12) }
         },
-    };
+    ];
 
     /// <summary>
     /// Adds a new tab to the collection.
@@ -167,8 +167,6 @@ public partial class TabControlViewModel : ViewModel
     /// <summary>
     /// Selects the specified tab and prepares for potential drag operation.
     /// </summary>
-    /// <param name="tabItem">The tab item to select.</param>
-    /// <param name="startPoint">The starting point of the mouse operation.</param>
     [RelayCommand]
     private void SelectTabForDrag(object? parameter)
     {
