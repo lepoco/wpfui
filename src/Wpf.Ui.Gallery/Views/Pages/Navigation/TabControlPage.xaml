@@ -24,6 +24,7 @@
             HeaderText="Standard TabControl."
             XamlCode="&lt;TabControl /&gt;">
                 <TabControl
+                    x:Name="StandardTabControl"
                     Margin="0,8,0,0"
                     AllowDrop="True"
                     Drop="StandardTabControl_Drop"

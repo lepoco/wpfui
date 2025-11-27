@@ -22,9 +22,10 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     {
         ViewModel = viewModel;
         DataContext = viewModel;
+
         InitializeComponent();
 
-        // Ensure the first tab is selected
+        // Ensure the first tab is selected and its content is displayed
         if (ViewModel.StandardTabs.Count > 0)
         {
             ViewModel.SelectedTab = ViewModel.StandardTabs[0];
@@ -37,11 +38,13 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     /// </summary>
     private void StandardTabItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
+        // Don't process if the close button was clicked
         if (IsCloseButton(e.OriginalSource) || sender is not TabItem tabItem)
         {
             return;
         }
 
+        // Use ViewModel to select the tab and prepare for drag
         ViewModel.SetDragStartPoint(e.GetPosition(null));
         ViewModel.SelectTabForDragCommand.Execute(tabItem);
     }
@@ -52,14 +55,18 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     /// </summary>
     private void StandardTabItem_PreviewMouseMove(object sender, MouseEventArgs e)
     {
+        // Don't process if the close button is being hovered or mouse button is not pressed
         if (IsCloseButton(e.OriginalSource) || e.LeftButton != MouseButtonState.Pressed)
         {
             return;
         }
 
-        if (ViewModel.TryStartDrag(e.GetPosition(null)))
+        Point currentPoint = e.GetPosition(null);
+
+        // Use ViewModel to check if drag should start
+        if (ViewModel.TryStartDrag(currentPoint))
         {
-            TabItem? draggedTab = ViewModel.GetDraggedTab();
+            var draggedTab = ViewModel.GetDraggedTab();
             if (draggedTab != null)
             {
                 DragDrop.DoDragDrop(draggedTab, draggedTab, DragDropEffects.Move);
@@ -84,35 +91,41 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     /// </summary>
     private void StandardTabControl_Drop(object sender, DragEventArgs e)
     {
-        TabItem? draggedTab = ViewModel.GetDraggedTab();
+        var draggedTab = ViewModel.GetDraggedTab();
         if (draggedTab == null || sender is not TabControl tabControl)
         {
             return;
         }
 
+        // Find the tab item at the drop position
         HitTestResult hitTestResult = VisualTreeHelper.HitTest(tabControl, e.GetPosition(tabControl));
-        TabItem? targetTabItem = hitTestResult?.VisualHit != null ? FindParent<TabItem>(hitTestResult.VisualHit) : null;
-
-        if (targetTabItem != null)
+        if (hitTestResult?.VisualHit == null)
         {
-            ViewModel.ReorderTabs(draggedTab, targetTabItem);
+            return;
         }
+
+        // Get the target tab item from the visual tree
+        TabItem? targetTabItem = FindParent<TabItem>(hitTestResult.VisualHit);
+        if (targetTabItem == null)
+        {
+            return;
+        }
+
+        // Use ViewModel to reorder tabs
+        ViewModel.ReorderTabs(draggedTab, targetTabItem);
     }
 
-    private static T? FindParent<T>(DependencyObject child)
-        where T : DependencyObject
+    private static T? FindParent<T>(DependencyObject child) where T : DependencyObject
     {
-        DependencyObject current = VisualTreeHelper.GetParent(child);
+        DependencyObject? current = child;
         while (current != null)
         {
+            current = VisualTreeHelper.GetParent(current);
             if (current is T parent)
             {
                 return parent;
             }
-
-            current = VisualTreeHelper.GetParent(current);
         }
-
         return null;
     }
 
@@ -126,17 +139,19 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
             return false;
         }
 
-        DependencyObject current = depObj;
+        DependencyObject? current = depObj;
+        const string closeButtonTag = "CloseButton";
+        
         while (current != null)
         {
-            if (current is System.Windows.Controls.Button { Tag: "CloseButton" })
+            if (current is System.Windows.Controls.Button button && 
+                button.Tag is string tag && 
+                tag == closeButtonTag)
             {
                 return true;
             }
-
             current = VisualTreeHelper.GetParent(current);
         }
-
         return false;
     }
 }
