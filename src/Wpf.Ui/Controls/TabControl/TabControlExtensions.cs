@@ -3,13 +3,13 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -181,59 +181,32 @@ public static class TabControlExtensions
             if (tabControl.ItemsSource is IList itemsSource && !itemsSource.IsReadOnly)
             {
                 // When ItemsSource is set, remove from the bound collection
-                // Find the index of the TabItem container first
-                int containerIndex = -1;
-                for (int i = 0; i < tabControl.Items.Count; i++)
+                // Get the data item from ItemContainerGenerator (for ItemsSource bound to TabItem collection, this returns the TabItem itself)
+                object? item = tabControl.ItemContainerGenerator.ItemFromContainer(tabItem);
+                if (item == null || item == DependencyProperty.UnsetValue)
                 {
-                    DependencyObject? container = tabControl.ItemContainerGenerator.ContainerFromIndex(i);
-                    if (container == tabItem)
-                    {
-                        containerIndex = i;
-                        break;
-                    }
+                    // Fallback: try DataContext
+                    item = tabItem.DataContext;
                 }
 
-                // If container index found, remove from ItemsSource by index
-                if (containerIndex >= 0 && containerIndex < itemsSource.Count)
+                // If still null, the TabItem itself might be in the collection (for ItemsSource bound to TabItem collection)
+                if (item == null)
                 {
-                    itemsSource.RemoveAt(containerIndex);
+                    item = tabItem;
                 }
-                else
+
+                // Remove the item from the collection (similar to TabControlViewModel.CloseTab)
+                if (item != null)
                 {
-                    // Fallback: try to get the item from ItemContainerGenerator
-                    object? item = tabControl.ItemContainerGenerator.ItemFromContainer(tabItem);
-                    if (item == null || item == DependencyProperty.UnsetValue)
+                    int index = itemsSource.IndexOf(item);
+                    if (index >= 0)
                     {
-                        // Fallback to DataContext
-                        item = tabItem.DataContext;
+                        itemsSource.RemoveAt(index);
                     }
-
-                    // If still null, try to find the TabItem itself in the collection
-                    if (item == null)
+                    else
                     {
-                        // For ItemsSource bound to TabItem collection, the TabItem itself might be in the collection
-                        if (itemsSource.Contains(tabItem))
-                        {
-                            item = tabItem;
-                        }
-                    }
-
-                    if (item != null)
-                    {
-                        // Try direct remove first (works for reference types)
-                        if (itemsSource.Contains(item))
-                        {
-                            itemsSource.Remove(item);
-                        }
-                        else
-                        {
-                            // Fallback: try to find by index
-                            int index = itemsSource.IndexOf(item);
-                            if (index >= 0)
-                            {
-                                itemsSource.RemoveAt(index);
-                            }
-                        }
+                        // Fallback: try direct remove
+                        itemsSource.Remove(item);
                     }
                 }
             }
@@ -335,6 +308,14 @@ public static class TabControlExtensions
             // We need to get the TabItem containers from the ItemContainerGenerator
             if (_tabControl.ItemsSource != null)
             {
+                // Wait for containers to be generated
+                if (_tabControl.ItemContainerGenerator.Status != System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
+                {
+                    // If containers are not ready, wait for them
+                    _tabControl.ItemContainerGenerator.StatusChanged += OnItemContainerGeneratorStatusChanged;
+                    return;
+                }
+
                 for (int i = 0; i < _tabControl.Items.Count; i++)
                 {
                     if (_tabControl.ItemContainerGenerator.ContainerFromIndex(i) is TabItem tabItem)
@@ -355,6 +336,15 @@ public static class TabControlExtensions
             }
         }
 
+        private void OnItemContainerGeneratorStatusChanged(object? sender, EventArgs e)
+        {
+            if (_tabControl.ItemContainerGenerator.Status == System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
+            {
+                _tabControl.ItemContainerGenerator.StatusChanged -= OnItemContainerGeneratorStatusChanged;
+                UpdateTabItems();
+            }
+        }
+
         private void SetupTabItem(TabItem tabItem)
         {
             if (GetCanReorderTabs(_tabControl))
@@ -367,11 +357,18 @@ public static class TabControlExtensions
                 tabItem.PreviewMouseLeftButtonUp += OnTabItemPreviewMouseLeftButtonUp;
             }
 
-            // Setup close button
+            // Setup close button - use Loaded event and also try immediately
+            tabItem.Loaded -= OnTabItemLoaded;
             tabItem.Loaded += OnTabItemLoaded;
+
+            // Try to setup immediately if already loaded
             if (tabItem.IsLoaded)
             {
-                OnTabItemLoaded(tabItem, new RoutedEventArgs());
+                // Use Dispatcher to ensure template is fully applied
+                tabItem.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    SetupCloseButton(tabItem);
+                }), System.Windows.Threading.DispatcherPriority.Loaded);
             }
         }
 
@@ -379,36 +376,126 @@ public static class TabControlExtensions
         {
             if (sender is TabItem tabItem)
             {
-                tabItem.ApplyTemplate();
-                if (tabItem.Template?.FindName("CloseButton", tabItem) is Button closeButton)
+                // Use Dispatcher to ensure template is fully applied and rendered
+                tabItem.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    // Remove previous handlers
-                    closeButton.Click -= OnCloseButtonClick;
-                    closeButton.PreviewMouseLeftButtonDown -= OnCloseButtonPreviewMouseLeftButtonDown;
-                    
-                    // Add handlers
-                    closeButton.Click += OnCloseButtonClick;
-                    closeButton.PreviewMouseLeftButtonDown += OnCloseButtonPreviewMouseLeftButtonDown;
+                    SetupCloseButton(tabItem);
+                }), System.Windows.Threading.DispatcherPriority.Loaded);
+            }
+        }
+
+        private void SetupCloseButton(TabItem tabItem)
+        {
+            // Ensure template is applied
+            tabItem.ApplyTemplate();
+
+            // Try to find CloseButton - use multiple attempts to ensure it's found
+            System.Windows.Controls.Button? closeButton = null;
+
+            // First try: FindName (most reliable for template elements)
+            object? foundElement = tabItem.Template?.FindName("CloseButton", tabItem);
+            closeButton = foundElement as System.Windows.Controls.Button;
+
+            // Second try: Visual tree search by position (Grid.Column="1") if FindName fails
+            if (closeButton == null)
+            {
+                closeButton = FindCloseButtonInVisualTree(tabItem);
+            }
+
+            if (closeButton != null)
+            {
+                // Remove previous handlers
+                closeButton.Click -= OnCloseButtonClick;
+                closeButton.PreviewMouseLeftButtonDown -= OnCloseButtonPreviewMouseLeftButtonDown;
+
+                // Add handlers
+                closeButton.Click += OnCloseButtonClick;
+                closeButton.PreviewMouseLeftButtonDown += OnCloseButtonPreviewMouseLeftButtonDown;
+            }
+        }
+
+        private static System.Windows.Controls.Button? FindCloseButtonInVisualTree(DependencyObject parent)
+        {
+            int childCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childCount; i++)
+            {
+                DependencyObject? child = VisualTreeHelper.GetChild(parent, i);
+                if (child is System.Windows.Controls.Button button)
+                {
+                    // Check if it's in the second column of a Grid (CloseButton is in Grid.Column="1")
+                    // This is more reliable than Name property which may not be set
+                    int column = Grid.GetColumn(button);
+                    if (column == 1)
+                    {
+                        // This is likely the CloseButton based on position
+                        return button;
+                    }
+
+                    // Also check Name property as fallback
+                    string? name = button.Name;
+                    if (name == "CloseButton")
+                    {
+                        return button;
+                    }
+                }
+
+                if (child != null)
+                {
+                    System.Windows.Controls.Button? found = FindCloseButtonInVisualTree(child);
+                    if (found != null)
+                    {
+                        return found;
+                    }
                 }
             }
+
+            return null;
         }
 
         private void OnCloseButtonPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             // Mark the event as handled to prevent it from bubbling up to the TabItem
+            // and handle the close action directly here since Click event may not fire
             e.Handled = true;
+
+            if (sender is System.Windows.Controls.Button button)
+            {
+                // Try to get TabItem from TemplatedParent first
+                TabItem? tabItem = button.TemplatedParent as TabItem;
+
+                if (tabItem == null)
+                {
+                    // If TemplatedParent is not available, find the TabItem in the visual tree
+                    DependencyObject? current = button;
+                    while (current != null)
+                    {
+                        current = VisualTreeHelper.GetParent(current);
+                        if (current is TabItem item)
+                        {
+                            tabItem = item;
+                            break;
+                        }
+                    }
+                }
+
+                if (tabItem != null)
+                {
+                    OnTabCloseRequested(_tabControl, tabItem);
+                }
+            }
         }
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
             // Mark the event as handled to prevent it from bubbling up to the TabItem
             e.Handled = true;
-            
-            if (sender is Button button)
+
+            // sender is System.Windows.Controls.Button
+            if (sender is System.Windows.Controls.Button button)
             {
                 // Try to get TabItem from TemplatedParent first
                 TabItem? tabItem = button.TemplatedParent as TabItem;
-                
+
                 if (tabItem == null)
                 {
                     // If TemplatedParent is not available, find the TabItem in the visual tree
@@ -439,7 +526,7 @@ public static class TabControlExtensions
                 if (IsCloseButton(e.OriginalSource))
                 {
                     // Don't start drag operation if clicking on close button
-                    e.Handled = false; // Let the close button handle the event
+                    // Let the close button handle the event
                     return;
                 }
 
