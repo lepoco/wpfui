@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:uiControls="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
     Title="TabControlPage"
     d:DataContext="{d:DesignInstance local:TabControlPage,
                                      IsDesignTimeCreatable=False}"
@@ -23,107 +23,17 @@
             Margin="0"
             HeaderText="Standard TabControl."
             XamlCode="&lt;TabControl /&gt;">
-                <TabControl
-                    x:Name="StandardTabControl"
-                    Margin="0,8,0,0"
-                    AllowDrop="True"
-                    Drop="StandardTabControl_Drop"
-                    ItemsSource="{Binding StandardTabs}"
-                    SelectedItem="{Binding SelectedTab, Mode=TwoWay}">
-                <TabControl.Template>
-                    <ControlTemplate TargetType="TabControl">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <TabPanel
-                                    x:Name="HeaderPanel"
-                                    Grid.Column="0"
-                                    IsItemsHost="True"
-                                    KeyboardNavigation.TabIndex="1" />
-                                <ui:Button
-                                    Grid.Column="1"
-                                    Width="32"
-                                    Height="32"
-                                    Margin="4,2,0,0"
-                                    VerticalAlignment="Top"
-                                    Command="{Binding AddTabCommand}"
-                                    ToolTip="Add tab">
-                                    <ui:Button.Icon>
-                                        <ui:SymbolIcon Symbol="Add24" />
-                                    </ui:Button.Icon>
-                                </ui:Button>
-                            </Grid>
-                            <Border
-                                x:Name="ContentPanel"
-                                Grid.Row="1"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                                <ContentPresenter
-                                    x:Name="PART_SelectedContentHost"
-                                    Margin="{TemplateBinding Padding}"
-                                    ContentSource="SelectedContent" />
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </TabControl.Template>
+            <TabControl
+                Margin="0,8,0,0"
+                ItemsSource="{Binding StandardTabs}"
+                SelectedItem="{Binding SelectedTab, Mode=TwoWay}"
+                uiControls:TabControlExtensions.CanReorderTabs="True"
+                uiControls:TabControlExtensions.CanAddTabs="True"
+                uiControls:TabControlExtensions.TabClosing="OnTabClosing"
+                uiControls:TabControlExtensions.TabAdding="OnTabAdding">
                 <TabControl.ItemContainerStyle>
                     <Style BasedOn="{StaticResource {x:Type TabItem}}" TargetType="TabItem">
-                        <Setter Property="HeaderTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <ContentPresenter
-                                            Grid.Column="0"
-                                            Margin="0,0,8,0"
-                                            VerticalAlignment="Center"
-                                            Content="{Binding}" />
-                                        <Button
-                                            Grid.Column="1"
-                                            Width="18"
-                                            Height="18"
-                                            Margin="4,0,0,0"
-                                            Padding="2"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Background="Transparent"
-                                            BorderThickness="0"
-                                            Command="{Binding DataContext.CloseTabCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=TabItem}}"
-                                            Cursor="Hand"
-                                            Opacity="0.7"
-                                            Tag="CloseButton"
-                                            ToolTip="Close tab">
-                                            <Button.Style>
-                                                <Style TargetType="Button">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Opacity" Value="1.0" />
-                                                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Button.Style>
-                                            <ui:SymbolIcon Symbol="Dismiss24" />
-                                        </Button>
-                                    </Grid>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="StandardTabItem_PreviewMouseLeftButtonDown" />
-                        <EventSetter Event="PreviewMouseMove" Handler="StandardTabItem_PreviewMouseMove" />
-                        <EventSetter Event="PreviewMouseLeftButtonUp" Handler="StandardTabItem_PreviewMouseLeftButtonUp" />
+                        <Setter Property="uiControls:TabControlExtensions.IsClosable" Value="True" />
                     </Style>
                 </TabControl.ItemContainerStyle>
             </TabControl>
