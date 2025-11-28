@@ -296,6 +296,13 @@ public static class TabControlExtensions
 
         internal void SetupAddButton()
         {
+            // Skip if already set up
+            if (_addButton != null)
+            {
+                UpdateAddButtonVisibility();
+                return;
+            }
+
             // Use Dispatcher to ensure template is fully applied
             _tabControl.Dispatcher.BeginInvoke(
                 () =>
@@ -306,8 +313,6 @@ public static class TabControlExtensions
                         _addButton = addButton;
                         addButton.Click -= OnAddButtonClick;
                         addButton.Click += OnAddButtonClick;
-
-                        // Set visibility based on CanAddTabs property
                         UpdateAddButtonVisibility();
                     }
                 },
