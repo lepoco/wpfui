@@ -44,12 +44,38 @@
                                 Margin="4,0,0,0"
                                 Padding="8"
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Background="Transparent"
-                                BorderThickness="0"
+                                VerticalAlignment="Top"
+                                Background="{DynamicResource TabViewItemHeaderBackground}"
+                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                BorderThickness="1"
                                 Cursor="Hand"
                                 Focusable="False"
                                 Visibility="Collapsed">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="Border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="4"
+                                            Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
                                 <controls:SymbolIcon
                                     Symbol="Add24"
                                     FontSize="16"

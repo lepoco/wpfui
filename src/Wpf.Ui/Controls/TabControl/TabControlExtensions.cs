@@ -66,11 +66,13 @@ public static class TabControlExtensions
         if (d is TabControl tabControl)
         {
             EnsureBehavior(tabControl);
+
             // If behavior already exists, update add button visibility
             if (Behaviors.TryGetValue(tabControl, out TabControlBehavior? behavior))
             {
                 // Always try to setup/update the add button
                 behavior.SetupAddButton();
+
                 // Also update visibility immediately if button is already set up
                 behavior.UpdateAddButtonVisibility();
             }
@@ -304,7 +306,7 @@ public static class TabControlExtensions
                         _addButton = addButton;
                         addButton.Click -= OnAddButtonClick;
                         addButton.Click += OnAddButtonClick;
-                        
+
                         // Set visibility based on CanAddTabs property
                         UpdateAddButtonVisibility();
                     }
