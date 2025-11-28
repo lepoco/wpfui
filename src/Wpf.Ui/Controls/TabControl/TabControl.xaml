@@ -37,8 +37,6 @@
                             <Button
                                 x:Name="AddButton"
                                 Grid.Column="1"
-                                MinWidth="36"
-                                MinHeight="36"
                                 Width="36"
                                 Height="36"
                                 Margin="4,0,0,0"
@@ -67,7 +65,6 @@
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
                                                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
-                                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
                                             </Trigger>
                                             <Trigger Property="IsPressed" Value="True">
                                                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
