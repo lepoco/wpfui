@@ -37,9 +37,21 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
 
     private void OnTabAdding(object sender, TabAddingEventArgs e)
     {
-        // Handle tab adding if needed
-        // You can customize the new tab here
-        // e.Header = "New Tab";
-        // e.Content = new TextBlock { Text = "New Content" };
+        // Method 1: Set tab name using TabAddingEventArgs Header property
+        // Get the tab number (get current tab count from ViewModel)
+        int tabNumber = ViewModel.StandardTabs.Count + 1;
+        e.Header = $"New Tab {tabNumber}";
+        e.Content = new System.Windows.Controls.TextBlock
+        {
+            Text = $"New Tab {tabNumber} content",
+            Margin = new System.Windows.Thickness(12)
+        };
+        
+        // Alternatively, you can create a custom TabItem
+        // e.TabItem = new TabItem
+        // {
+        //     Header = $"New Tab {tabNumber}",
+        //     Content = new TextBlock { Text = $"New Tab {tabNumber} content" }
+        // };
     }
 }

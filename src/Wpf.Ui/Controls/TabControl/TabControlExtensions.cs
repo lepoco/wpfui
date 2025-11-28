@@ -66,6 +66,14 @@ public static class TabControlExtensions
         if (d is TabControl tabControl)
         {
             EnsureBehavior(tabControl);
+            // If behavior already exists, update add button visibility
+            if (Behaviors.TryGetValue(tabControl, out TabControlBehavior? behavior))
+            {
+                // Always try to setup/update the add button
+                behavior.SetupAddButton();
+                // Also update visibility immediately if button is already set up
+                behavior.UpdateAddButtonVisibility();
+            }
         }
     }
 
@@ -241,7 +249,8 @@ public static class TabControlExtensions
             if (tabControl.ItemsSource is IList itemsSource)
             {
                 // When ItemsSource is set, add to the bound collection
-                object? itemToAdd = args.Content ?? args.Header ?? newTab;
+                // If TabItem is already provided, use it; otherwise use the newTab we created
+                object? itemToAdd = args.TabItem ?? newTab;
                 itemsSource.Add(itemToAdd);
                 tabControl.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedItemProperty, itemToAdd);
             }
@@ -283,14 +292,32 @@ public static class TabControlExtensions
             }
         }
 
-        private void SetupAddButton()
+        internal void SetupAddButton()
         {
-            _tabControl.ApplyTemplate();
-            if (_tabControl.Template?.FindName("AddButton", _tabControl) is System.Windows.Controls.Button addButton)
+            // Use Dispatcher to ensure template is fully applied
+            _tabControl.Dispatcher.BeginInvoke(
+                () =>
+                {
+                    _tabControl.ApplyTemplate();
+                    if (_tabControl.Template?.FindName("AddButton", _tabControl) is System.Windows.Controls.Button addButton)
+                    {
+                        _addButton = addButton;
+                        addButton.Click -= OnAddButtonClick;
+                        addButton.Click += OnAddButtonClick;
+                        
+                        // Set visibility based on CanAddTabs property
+                        UpdateAddButtonVisibility();
+                    }
+                },
+                System.Windows.Threading.DispatcherPriority.Loaded);
+        }
+
+        internal void UpdateAddButtonVisibility()
+        {
+            if (_addButton != null)
             {
-                _addButton = addButton;
-                addButton.Click -= OnAddButtonClick;
-                addButton.Click += OnAddButtonClick;
+                bool canAddTabs = GetCanAddTabs(_tabControl);
+                _addButton.Visibility = canAddTabs ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             }
         }
 
