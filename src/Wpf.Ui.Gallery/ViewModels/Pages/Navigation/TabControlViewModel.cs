@@ -52,56 +52,6 @@ public partial class TabControlViewModel : ViewModel
             Header = CreateTabHeader("The cake", SymbolRegular.StoreMicrosoft16),
             Content = new System.Windows.Controls.TextBlock { Text = "Is a lie.", Margin = new System.Windows.Thickness(12) }
         },
-        new TabItem
-        {
-            Header = CreateTabHeader("Document", SymbolRegular.Document24),
-            Content = new System.Windows.Controls.TextBlock { Text = "Document content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("Settings", SymbolRegular.Settings24),
-            Content = new System.Windows.Controls.TextBlock { Text = "Settings content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("Mail", SymbolRegular.Mail24),
-            Content = new System.Windows.Controls.TextBlock { Text = "Mail content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("Calendar", SymbolRegular.CalendarLtr24),
-            Content = new System.Windows.Controls.TextBlock { Text = "Calendar content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("Image", SymbolRegular.Image24),
-            Content = new System.Windows.Controls.TextBlock { Text = "Image content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("Music", SymbolRegular.MusicNote124),
-            Content = new System.Windows.Controls.TextBlock { Text = "Music content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("Video", SymbolRegular.Video24),
-            Content = new System.Windows.Controls.TextBlock { Text = "Video content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("Folder", SymbolRegular.Folder24),
-            Content = new System.Windows.Controls.TextBlock { Text = "Folder content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("tab 1", SymbolRegular.Folder24),
-            Content = new System.Windows.Controls.TextBlock { Text = "tab 1 content", Margin = new System.Windows.Thickness(12) }
-        },
-        new TabItem
-        {
-            Header = CreateTabHeader("tab 2", SymbolRegular.Folder24),
-            Content = new System.Windows.Controls.TextBlock { Text = "tab 2 content", Margin = new System.Windows.Thickness(12) }
-        },
     ];
 
     /// <summary>
