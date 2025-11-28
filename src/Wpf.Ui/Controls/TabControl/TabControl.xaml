@@ -37,10 +37,12 @@
                             <Button
                                 x:Name="AddButton"
                                 Grid.Column="1"
+                                MinWidth="36"
+                                MinHeight="36"
                                 Width="36"
                                 Height="36"
                                 Margin="4,0,0,0"
-                                Padding="0"
+                                Padding="8"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Background="Transparent"
@@ -82,6 +84,9 @@
                         <DataTrigger Binding="{Binding Path=(controls:TabControlExtensions.CanAddTabs), RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                             <Setter TargetName="AddButton" Property="Visibility" Value="Visible" />
                         </DataTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="AddButton" Property="IsEnabled" Value="False" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
