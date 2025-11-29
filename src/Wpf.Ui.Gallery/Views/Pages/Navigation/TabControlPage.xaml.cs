@@ -46,7 +46,7 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
             Text = $"New Tab {tabNumber} content",
             Margin = new System.Windows.Thickness(12)
         };
-        
+
         // Alternatively, you can create a custom TabItem
         // e.TabItem = new TabItem
         // {
