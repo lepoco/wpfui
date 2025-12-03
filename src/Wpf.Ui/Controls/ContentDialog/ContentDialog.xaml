@@ -133,6 +133,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <controls:Button
+                                            x:Name="PrimaryButton"
                                             Grid.Column="0"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding PrimaryButtonAppearance}"
@@ -148,6 +149,7 @@
                                                                          Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
+                                            x:Name="SecondaryButton"
                                             Grid.Column="2"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding SecondaryButtonAppearance}"
@@ -163,6 +165,7 @@
                                                                          Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
+                                            x:Name="CloseButton"
                                             Grid.Column="4"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding CloseButtonAppearance}"
@@ -203,6 +206,22 @@
                         <Trigger Property="SecondaryButtonText" Value="">
                             <Setter Property="IsSecondaryButtonEnabled" Value="False" />
                         </Trigger>
+                        <!-- If primary button is disabled and the dialog default is not Close,
+                             make the CloseButton the default button so Enter activates it. -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimaryButtonEnabled" Value="False" />
+                                <Condition Property="DefaultButton" Value="{x:Static controls:ContentDialogButton.Primary}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="CloseButton" Property="IsDefault" Value="True" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimaryButtonEnabled" Value="False" />
+                                <Condition Property="DefaultButton" Value="{x:Static controls:ContentDialogButton.Secondary}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="CloseButton" Property="IsDefault" Value="True" />
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -3,7 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Collections;
+using System.Reflection;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
 using Wpf.Ui.Input;
 
 // ReSharper disable once CheckNamespace
@@ -519,6 +523,8 @@ public class ContentDialog : ContentControl
 
     protected TaskCompletionSource<ContentDialogResult>? Tcs { get; set; }
 
+    private readonly List<(string Key, IInputElement Element)> _accessKeyRemoved = [];
+
     /// <summary>
     /// Shows the dialog
     /// </summary>
@@ -533,6 +539,9 @@ public class ContentDialog : ContentControl
         {
             throw new InvalidOperationException("DialogHost was not set");
         }
+
+        // Before displaying the dialog, clear the Enter and Escape access key registrations of the host window.
+        ClearHostWindowEnterAndEscapeAccessKey(DialogHost);
 
         Tcs = new TaskCompletionSource<ContentDialogResult>();
         CancellationTokenRegistration tokenRegistration = cancellationToken.Register(
@@ -573,6 +582,9 @@ public class ContentDialog : ContentControl
         if (!closingEventArgs.Cancel)
         {
             _ = Tcs?.TrySetResult(result);
+
+            // After closing the dialog, restore any previously removed access keys.
+            RestoreHostWindowAccessKeys();
         }
     }
 
@@ -641,6 +653,9 @@ public class ContentDialog : ContentControl
         // Focus is only needed at runtime.
         _ = Focus();
 
+        // Set focus on the default button to match the default behavior of Windows dialog boxes.
+        TryFocusDefaultButton();
+
         RaiseEvent(new RoutedEventArgs(OpenedEvent));
     }
 
@@ -694,6 +709,240 @@ public class ContentDialog : ContentControl
         {
             SetCurrentValue(DialogMaxWidthProperty, DialogWidth);
             /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");*/
+        }
+    }
+
+    /// <summary>
+    /// Attempts to set keyboard focus to the available default button,
+    /// enabling activation by the Space key in accordance with Windows dialog behavior.
+    /// </summary>
+    /// <remarks>
+    /// While it's generally not recommended to set the secondary button as default with initial focus,
+    /// this implementation respects the user's choice when explicitly configured.
+    /// </remarks>
+    private void TryFocusDefaultButton()
+    {
+        if (Dispatcher is { HasShutdownStarted: false, HasShutdownFinished: false })
+        {
+            Dispatcher.BeginInvoke(
+                DispatcherPriority.Input,
+                new Action(() =>
+                {
+                    try
+                    {
+                        // If primary button is present, visible, enabled and is default, focus it.
+                        if (GetTemplateChild("PrimaryButton") is Button { IsVisible: true, IsEnabled: true, IsDefault: true } primaryButton)
+                        {
+                            primaryButton.Focus();
+                            return;
+                        }
+
+                        // Otherwise, if close button is present, visible, enabled and is default, focus it.
+                        if (GetTemplateChild("CloseButton") is Button { IsVisible: true, IsEnabled: true, IsDefault: true } closeButton)
+                        {
+                            closeButton.Focus();
+                            return;
+                        }
+
+                        // If the user explicitly designates the secondary button as the default, focus on the secondary button (respecting the user's choice).
+                        if (GetTemplateChild("SecondaryButton") is Button { IsVisible: true, IsEnabled: true, IsDefault: true } secondaryButton)
+                        {
+                            secondaryButton.Focus();
+                        }
+                    }
+                    catch
+                    {
+                        // ignore
+                    }
+                })
+            );
+        }
+    }
+
+    /// <summary>
+    /// Removes Enter ("\r") and Escape ("\e") access key registrations associated with the specified host element's window.
+    /// </summary>
+    /// <remarks>This method only affects access keys for Enter ("\r") and Escape ("\e") that are registered
+    /// with the window containing the specified element. If the window or its dispatcher is unavailable or shutting
+    /// down, no action is taken.</remarks>
+    /// <param name="hostElement">The element whose containing window's access keys will be cleared. Must not be null.</param>
+    private void ClearHostWindowEnterAndEscapeAccessKey(DependencyObject hostElement)
+    {
+        try
+        {
+            var window = Window.GetWindow(hostElement);
+            if (window is null)
+            {
+                return;
+            }
+
+            Dispatcher? dispatcher = window.Dispatcher;
+            if (dispatcher is null || dispatcher.HasShutdownStarted || dispatcher.HasShutdownFinished)
+            {
+                return;
+            }
+
+            // Only unregister AccessKeyManager entries for Enter/Escape that belong to this window.
+            List<(string, IInputElement)> removed = AccessKeyManagerHelper.UnregisterAccessKeys(window, ["\r", "\e"]);
+
+            if (removed.Count > 0)
+            {
+                _accessKeyRemoved.AddRange(removed);
+            }
+        }
+        catch
+        {
+            // ignore
+        }
+    }
+
+    /// <summary>
+    /// Restores previously removed access keys by re-registering them and clearing the removal list.
+    /// </summary>
+    /// <remarks>If no access keys have been removed, this method performs no action. Any exceptions that
+    /// occur during the restoration process are suppressed.</remarks>
+    private void RestoreHostWindowAccessKeys()
+    {
+        if (_accessKeyRemoved.Count == 0)
+        {
+            return;
+        }
+
+        try
+        {
+            AccessKeyManagerHelper.RegisterAccessKeys(_accessKeyRemoved);
+            _accessKeyRemoved.Clear();
+        }
+        catch
+        {
+            // ignore
+        }
+    }
+
+    /// <summary>
+    /// Provides helper methods for registering and unregistering access keys associated with input elements in a
+    /// windowed application.
+    /// </summary>
+    private static class AccessKeyManagerHelper
+    {
+        private static readonly object? _akmInstance;
+        private static readonly FieldInfo? _keyToElementsField;
+        private static readonly bool InitSucceeded;
+
+        static AccessKeyManagerHelper()
+        {
+            try
+            {
+                Type akmType = typeof(AccessKeyManager);
+
+                _akmInstance = akmType.GetProperty("Current", BindingFlags.Static | BindingFlags.NonPublic)?.GetValue(null);
+                _keyToElementsField = akmType.GetField("_keyToElements", BindingFlags.Instance | BindingFlags.NonPublic);
+
+                InitSucceeded = _akmInstance != null && _keyToElementsField != null;
+            }
+            catch
+            {
+                InitSucceeded = false;
+            }
+        }
+
+        /// <summary>
+        /// Unregisters the specified access keys for Enter and Escape that are associated with the given window.
+        /// </summary>
+        /// <remarks>This method only affects access keys that are currently registered to the specified
+        /// window. Keys associated with other windows or not registered will be ignored. Individual failures to
+        /// unregister a key do not prevent the method from continuing to process other keys.</remarks>
+        /// <param name="window">The window for which access keys should be unregistered. Only access keys linked to this window will be
+        /// affected.</param>
+        /// <param name="keys">An array of key strings representing the access keys to unregister. Each key is processed for the specified
+        /// window.</param>
+        /// <returns>A list of tuples containing the key and input element for each access key that was successfully
+        /// unregistered. This list can be used to restore the access keys if needed. The list will be empty if no keys
+        /// were unregistered.</returns>
+        public static List<(string Key, IInputElement Element)> UnregisterAccessKeys(Window window, string[] keys)
+        {
+            var removed = new List<(string, IInputElement)>();
+
+            if (!InitSucceeded || _akmInstance == null || _keyToElementsField == null)
+            {
+                return removed;
+            }
+
+            if (_keyToElementsField.GetValue(_akmInstance) is not Hashtable table)
+            {
+                return removed;
+            }
+
+            lock (table)
+            {
+                foreach (var key in keys)
+                {
+                    if (table[key] is not ArrayList arr)
+                    {
+                        continue;
+                    }
+
+                    // Collect targets first
+                    var targets = new List<IInputElement>();
+                    foreach (var t in arr)
+                    {
+                        var wr = t as WeakReference;
+                        var targetObj = wr?.Target;
+
+                        if (targetObj is DependencyObject d && targetObj is IInputElement input)
+                        {
+                            if (Window.GetWindow(d) == window)
+                            {
+                                targets.Add(input);
+                            }
+                        }
+                    }
+
+                    // Unregister collected targets
+                    foreach (IInputElement t in targets)
+                    {
+                        try
+                        {
+                            AccessKeyManager.Unregister(key, t);
+                            removed.Add((key, t));
+                        }
+                        catch
+                        {
+                            // ignore individual failures
+                        }
+                    }
+                }
+            }
+
+            return removed;
+        }
+
+        /// <summary>
+        /// Registers multiple access keys and their associated input elements for use in the application.
+        /// </summary>
+        /// <remarks>If the access key manager is not initialized, the method does not perform any
+        /// registration. Exceptions thrown during individual registrations are ignored, and registration continues for
+        /// remaining entries.</remarks>
+        /// <param name="entries">A collection of tuples, each containing an access key and the corresponding input element to associate with
+        /// that key.</param>
+        public static void RegisterAccessKeys(IEnumerable<(string Key, IInputElement Element)> entries)
+        {
+            if (!InitSucceeded || _akmInstance == null || _keyToElementsField == null)
+            {
+                return;
+            }
+
+            foreach ((string Key, IInputElement Element) e in entries)
+            {
+                try
+                {
+                    AccessKeyManager.Register(e.Key, e.Element);
+                }
+                catch
+                {
+                    // ignore
+                }
+            }
         }
     }
 }
