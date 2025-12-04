@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections;
-using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -14,38 +12,38 @@ using Wpf.Ui.Input;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Dialogue displayed inside the application covering its internals, displaying some content.
-/// </summary>
-/// <example>
-/// <code lang="xml">
-/// &lt;ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" /&gt;
-/// </code>
-/// <code lang="csharp">
-/// var contentDialog = new ContentDialog(RootContentDialogPresenter);
-///
-/// contentDialog.SetCurrentValue(ContentDialog.TitleProperty, "Hello World");
-/// contentDialog.SetCurrentValue(ContentControl.ContentProperty, "This is a message");
-/// contentDialog.SetCurrentValue(ContentDialog.CloseButtonTextProperty, "Close this dialog");
-///
-/// await contentDialog.ShowAsync(cancellationToken);
-/// </code>
-/// <code lang="csharp">
-/// var contentDialogService = new ContentDialogService();
-/// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
-///
-/// await _contentDialogService.ShowSimpleDialogAsync(
-///     new SimpleContentDialogCreateOptions()
-///         {
-///             Title = "The cake?",
-///             Content = "IS A LIE!",
-///             PrimaryButtonText = "Save",
-///             SecondaryButtonText = "Don't Save",
-///             CloseButtonText = "Cancel"
-///         }
-///     );
-/// </code>
-/// </example>
-public class ContentDialog : ContentControl
+    /// Dialogue displayed inside the application covering its internals, displaying some content.
+    /// </summary>
+    /// <example>
+    /// <code lang="xml">
+    /// &lt;ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" /&gt;
+    /// </code>
+    /// <code lang="csharp">
+    /// var contentDialog = new ContentDialog(RootContentDialogPresenter);
+    ///
+    /// contentDialog.SetCurrentValue(ContentDialog.TitleProperty, "Hello World");
+    /// contentDialog.SetCurrentValue(ContentControl.ContentProperty, "This is a message");
+    /// contentDialog.SetCurrentValue(ContentDialog.CloseButtonTextProperty, "Close this dialog");
+    ///
+    /// await contentDialog.ShowAsync(cancellationToken);
+    /// </code>
+    /// <code lang="csharp">
+    /// var contentDialogService = new ContentDialogService();
+    /// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
+    ///
+    /// await _contentDialogService.ShowSimpleDialogAsync(
+    ///     new SimpleContentDialogCreateOptions()
+    ///         {
+    ///             Title = "The cake?",
+    ///             Content = "IS A LIE!",
+    ///             PrimaryButtonText = "Save",
+    ///             SecondaryButtonText = "Don't Save",
+    ///             CloseButtonText = "Cancel"
+    ///         }
+    ///     );
+    /// </code>
+    /// </example>
+    public class ContentDialog : ContentControl
 {
     /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
@@ -476,7 +474,7 @@ public class ContentDialog : ContentControl
 
         // Avoid registering runtime code that triggers designer behavior or throws exceptions
         // at design time (to reduce the possibility of designer crashes/rendering failures).
-        if (!Wpf.Ui.Designer.DesignerHelper.IsInDesignMode)
+        if (!Designer.DesignerHelper.IsInDesignMode)
         {
             Loaded += static (sender, _) =>
             {
@@ -503,7 +501,7 @@ public class ContentDialog : ContentControl
 
         // Avoid registering runtime code that triggers designer behavior or throws exceptions
         // at design time (to reduce the possibility of designer crashes/rendering failures).
-        if (!Wpf.Ui.Designer.DesignerHelper.IsInDesignMode)
+        if (!Designer.DesignerHelper.IsInDesignMode)
         {
             Loaded += static (sender, _) =>
             {
@@ -522,8 +520,6 @@ public class ContentDialog : ContentControl
     public ContentPresenter? ContentPresenter { get; set; } = default;
 
     protected TaskCompletionSource<ContentDialogResult>? Tcs { get; set; }
-
-    private readonly List<(string Key, IInputElement Element)> _accessKeyRemoved = [];
 
     /// <summary>
     /// Shows the dialog
@@ -769,13 +765,6 @@ public class ContentDialog : ContentControl
         }
     }
 
-    /// <summary>
-    /// Removes Enter ("\r") and Escape ("\e") access key registrations associated with the specified host element's window.
-    /// </summary>
-    /// <remarks>This method only affects access keys for Enter ("\r") and Escape ("\e") that are registered
-    /// with the window containing the specified element. If the window or its dispatcher is unavailable or shutting
-    /// down, no action is taken.</remarks>
-    /// <param name="hostElement">The element whose containing window's access keys will be cleared. Must not be null.</param>
     private void ClearHostWindowEnterAndEscapeAccessKey(DependencyObject hostElement)
     {
         try
@@ -792,12 +781,23 @@ public class ContentDialog : ContentControl
                 return;
             }
 
-            // Only unregister AccessKeyManager entries for Enter/Escape that belong to this window.
-            List<(string, IInputElement)> removed = AccessKeyManagerHelper.UnregisterAccessKeys(window, ["\r", "\e"]);
+            // Temporarily register an AccessKey handler to suppress Enter/Esc keys in host window.
+            AccessKeyManager.AddAccessKeyPressedHandler(window, HostAccessKeySuppressHandler);
+        }
+        catch
+        {
+            // Ignore any errors to prevent affecting dialog display.
+        }
+    }
 
-            if (removed.Count > 0)
+    private void RestoreHostWindowAccessKeys()
+    {
+        try
+        {
+            Window? window = DialogHost is null ? null : Window.GetWindow(DialogHost);
+            if (window != null)
             {
-                _accessKeyRemoved.AddRange(removed);
+                AccessKeyManager.RemoveAccessKeyPressedHandler(window, HostAccessKeySuppressHandler);
             }
         }
         catch
@@ -806,153 +806,83 @@ public class ContentDialog : ContentControl
         }
     }
 
-    /// <summary>
-    /// Restores previously removed access keys by re-registering them and clearing the removal list.
-    /// </summary>
-    /// <remarks>If no access keys have been removed, this method performs no action. Any exceptions that
-    /// occur during the restoration process are suppressed.</remarks>
-    private void RestoreHostWindowAccessKeys()
+    private bool IsPartOfThisDialog(DependencyObject d)
     {
-        if (_accessKeyRemoved.Count == 0)
+        if (d == this)
         {
-            return;
+            return true;
         }
 
-        try
+        // If DialogHost is not set, fallback to checking this dialog only.
+        if (DialogHost == null)
         {
-            AccessKeyManagerHelper.RegisterAccessKeys(_accessKeyRemoved);
-            _accessKeyRemoved.Clear();
+            return false;
         }
-        catch
-        {
-            // ignore
-        }
-    }
 
-    /// <summary>
-    /// Provides helper methods for registering and unregistering access keys associated with input elements in a
-    /// windowed application.
-    /// </summary>
-    private static class AccessKeyManagerHelper
-    {
-        private static readonly object? _akmInstance;
-        private static readonly FieldInfo? _keyToElementsField;
-        private static readonly bool InitSucceeded;
-
-        static AccessKeyManagerHelper()
+        // Walk up visual/logical tree and see if we reach DialogHost or this ContentDialog.
+        DependencyObject? current = d;
+        while (current != null)
         {
+            if (current == DialogHost || current == this)
+            {
+                return true;
+            }
+
+            DependencyObject? parent;
             try
             {
-                Type akmType = typeof(AccessKeyManager);
-
-                _akmInstance = akmType.GetProperty("Current", BindingFlags.Static | BindingFlags.NonPublic)?.GetValue(null);
-                _keyToElementsField = akmType.GetField("_keyToElements", BindingFlags.Instance | BindingFlags.NonPublic);
-
-                InitSucceeded = _akmInstance != null && _keyToElementsField != null;
+                parent = VisualTreeHelper.GetParent(current);
             }
             catch
             {
-                InitSucceeded = false;
-            }
-        }
-
-        /// <summary>
-        /// Unregisters the specified access keys for Enter and Escape that are associated with the given window.
-        /// </summary>
-        /// <remarks>This method only affects access keys that are currently registered to the specified
-        /// window. Keys associated with other windows or not registered will be ignored. Individual failures to
-        /// unregister a key do not prevent the method from continuing to process other keys.</remarks>
-        /// <param name="window">The window for which access keys should be unregistered. Only access keys linked to this window will be
-        /// affected.</param>
-        /// <param name="keys">An array of key strings representing the access keys to unregister. Each key is processed for the specified
-        /// window.</param>
-        /// <returns>A list of tuples containing the key and input element for each access key that was successfully
-        /// unregistered. This list can be used to restore the access keys if needed. The list will be empty if no keys
-        /// were unregistered.</returns>
-        public static List<(string Key, IInputElement Element)> UnregisterAccessKeys(Window window, string[] keys)
-        {
-            var removed = new List<(string, IInputElement)>();
-
-            if (!InitSucceeded || _akmInstance == null || _keyToElementsField == null)
-            {
-                return removed;
+                parent = null;
             }
 
-            if (_keyToElementsField.GetValue(_akmInstance) is not Hashtable table)
-            {
-                return removed;
-            }
-
-            lock (table)
-            {
-                foreach (var key in keys)
-                {
-                    if (table[key] is not ArrayList arr)
-                    {
-                        continue;
-                    }
-
-                    // Collect targets first
-                    var targets = new List<IInputElement>();
-                    foreach (var t in arr)
-                    {
-                        var wr = t as WeakReference;
-                        var targetObj = wr?.Target;
-
-                        if (targetObj is DependencyObject d && targetObj is IInputElement input)
-                        {
-                            if (Window.GetWindow(d) == window)
-                            {
-                                targets.Add(input);
-                            }
-                        }
-                    }
-
-                    // Unregister collected targets
-                    foreach (IInputElement t in targets)
-                    {
-                        try
-                        {
-                            AccessKeyManager.Unregister(key, t);
-                            removed.Add((key, t));
-                        }
-                        catch
-                        {
-                            // ignore individual failures
-                        }
-                    }
-                }
-            }
-
-            return removed;
-        }
-
-        /// <summary>
-        /// Registers multiple access keys and their associated input elements for use in the application.
-        /// </summary>
-        /// <remarks>If the access key manager is not initialized, the method does not perform any
-        /// registration. Exceptions thrown during individual registrations are ignored, and registration continues for
-        /// remaining entries.</remarks>
-        /// <param name="entries">A collection of tuples, each containing an access key and the corresponding input element to associate with
-        /// that key.</param>
-        public static void RegisterAccessKeys(IEnumerable<(string Key, IInputElement Element)> entries)
-        {
-            if (!InitSucceeded || _akmInstance == null || _keyToElementsField == null)
-            {
-                return;
-            }
-
-            foreach ((string Key, IInputElement Element) e in entries)
+            if (parent == null)
             {
                 try
                 {
-                    AccessKeyManager.Register(e.Key, e.Element);
+                    parent = LogicalTreeHelper.GetParent(current);
                 }
                 catch
                 {
-                    // ignore
+                    parent = null;
                 }
             }
+
+            current = parent;
+        }
+
+        return false;
+    }
+
+    private void HostAccessKeySuppressHandler(object sender, AccessKeyPressedEventArgs e)
+    {
+        try
+        {
+            var key = e.Key ?? string.Empty;
+
+            if (key is "\r" or "\e")
+            {
+                UIElement? target = e.Target;
+                if (target is null)
+                {
+                    return; // nothing to do
+                }
+
+                // If the target is part of this dialog (or the dialog host), allow it.
+                if (IsPartOfThisDialog(target))
+                {
+                    return;
+                }
+
+                // Otherwise suppress the access key for this window by clearing the Target.
+                e.Target = null;
+            }
+        }
+        catch
+        {
+            // ignore
         }
     }
 }
