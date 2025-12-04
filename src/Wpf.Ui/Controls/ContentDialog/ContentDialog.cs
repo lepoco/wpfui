@@ -722,40 +722,50 @@ public class ContentDialog : ContentControl
     /// </remarks>
     private void TryFocusDefaultButton()
     {
-        if (Dispatcher is { HasShutdownStarted: false, HasShutdownFinished: false })
+        if (Dispatcher is not { HasShutdownStarted: false, HasShutdownFinished: false })
         {
-            Dispatcher.BeginInvoke(
-                DispatcherPriority.Input,
-                new Action(() =>
+            return;
+        }
+
+        try
+        {
+            // The user may have already set focus to a control in the Content before this point.
+            // Here we check whether focus remains on this `ContentDialog`.
+            // If so, the user has not overridden (or intends to defer overriding) the initial focus.
+            // To maintain Windows dialog behavior conventions, we set focus to the default button.
+            if (ReferenceEquals(Keyboard.FocusedElement, this))
+            {
+                // If primary button is present, visible, enabled and is default, focus it.
+                if (GetTemplateChild("PrimaryButton")
+                    is Button { IsVisible: true, IsEnabled: true, IsDefault: true } primaryButton)
                 {
-                    try
-                    {
-                        // If primary button is present, visible, enabled and is default, focus it.
-                        if (GetTemplateChild("PrimaryButton") is Button { IsVisible: true, IsEnabled: true, IsDefault: true } primaryButton)
-                        {
-                            primaryButton.Focus();
-                            return;
-                        }
+                    primaryButton.Focus();
+                    return;
+                }
 
-                        // Otherwise, if close button is present, visible, enabled and is default, focus it.
-                        if (GetTemplateChild("CloseButton") is Button { IsVisible: true, IsEnabled: true, IsDefault: true } closeButton)
-                        {
-                            closeButton.Focus();
-                            return;
-                        }
+                // Otherwise, if close button is present, visible, enabled and is default, focus it.
+                if (GetTemplateChild("CloseButton")
+                    is Button { IsVisible: true, IsEnabled: true, IsDefault: true } closeButton)
+                {
+                    closeButton.Focus();
+                    return;
+                }
 
-                        // If the user explicitly designates the secondary button as the default, focus on the secondary button (respecting the user's choice).
-                        if (GetTemplateChild("SecondaryButton") is Button { IsVisible: true, IsEnabled: true, IsDefault: true } secondaryButton)
-                        {
-                            secondaryButton.Focus();
-                        }
-                    }
-                    catch
-                    {
-                        // ignore
-                    }
-                })
-            );
+                // If the user explicitly designates the secondary button as the default,
+                // set focus to the secondary button (respecting the user's choice).
+                if (GetTemplateChild("SecondaryButton")
+                    is Button { IsVisible: true, IsEnabled: true, IsDefault: true } secondaryButton)
+                {
+                    secondaryButton.Focus();
+                }
+
+                // If the user chooses to defer focus setting (e.g., via Dispatcher with lower priority),
+                // their code will override our focus setting here, so this won't interfere with user's intentions.
+            }
+        }
+        catch
+        {
+            // ignore
         }
     }
 
