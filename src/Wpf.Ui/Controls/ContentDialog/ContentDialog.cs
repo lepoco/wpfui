@@ -12,38 +12,38 @@ using Wpf.Ui.Input;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-    /// Dialogue displayed inside the application covering its internals, displaying some content.
-    /// </summary>
-    /// <example>
-    /// <code lang="xml">
-    /// &lt;ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" /&gt;
-    /// </code>
-    /// <code lang="csharp">
-    /// var contentDialog = new ContentDialog(RootContentDialogPresenter);
-    ///
-    /// contentDialog.SetCurrentValue(ContentDialog.TitleProperty, "Hello World");
-    /// contentDialog.SetCurrentValue(ContentControl.ContentProperty, "This is a message");
-    /// contentDialog.SetCurrentValue(ContentDialog.CloseButtonTextProperty, "Close this dialog");
-    ///
-    /// await contentDialog.ShowAsync(cancellationToken);
-    /// </code>
-    /// <code lang="csharp">
-    /// var contentDialogService = new ContentDialogService();
-    /// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
-    ///
-    /// await _contentDialogService.ShowSimpleDialogAsync(
-    ///     new SimpleContentDialogCreateOptions()
-    ///         {
-    ///             Title = "The cake?",
-    ///             Content = "IS A LIE!",
-    ///             PrimaryButtonText = "Save",
-    ///             SecondaryButtonText = "Don't Save",
-    ///             CloseButtonText = "Cancel"
-    ///         }
-    ///     );
-    /// </code>
-    /// </example>
-    public class ContentDialog : ContentControl
+/// Dialogue displayed inside the application covering its internals, displaying some content.
+/// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" /&gt;
+/// </code>
+/// <code lang="csharp">
+/// var contentDialog = new ContentDialog(RootContentDialogPresenter);
+///
+/// contentDialog.SetCurrentValue(ContentDialog.TitleProperty, "Hello World");
+/// contentDialog.SetCurrentValue(ContentControl.ContentProperty, "This is a message");
+/// contentDialog.SetCurrentValue(ContentDialog.CloseButtonTextProperty, "Close this dialog");
+///
+/// await contentDialog.ShowAsync(cancellationToken);
+/// </code>
+/// <code lang="csharp">
+/// var contentDialogService = new ContentDialogService();
+/// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
+///
+/// await _contentDialogService.ShowSimpleDialogAsync(
+///     new SimpleContentDialogCreateOptions()
+///         {
+///             Title = "The cake?",
+///             Content = "IS A LIE!",
+///             PrimaryButtonText = "Save",
+///             SecondaryButtonText = "Don't Save",
+///             CloseButtonText = "Cancel"
+///         }
+///     );
+/// </code>
+/// </example>
+public class ContentDialog : ContentControl
 {
     /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
