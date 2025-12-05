@@ -131,6 +131,14 @@ public class MessageBox : System.Windows.Window
         new PropertyMetadata(null)
     );
 
+    /// <summary>Identifies the <see cref="DefaultFocusedButton"/> dependency property.</summary>
+    public static readonly DependencyProperty DefaultFocusedButtonProperty = DependencyProperty.Register(
+        nameof(DefaultFocusedButton),
+        typeof(MessageBoxButton?),
+        typeof(MessageBox),
+        new PropertyMetadata(null)
+    );
+
     /// <summary>
     /// Gets or sets a value indicating whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="TitleBar"/>.
     /// </summary>
@@ -252,6 +260,16 @@ public class MessageBox : System.Windows.Window
     /// Gets the command triggered after clicking the button on the Footer.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+
+    /// <summary>
+    /// Gets or sets the button that should receive focus when the MessageBox is displayed.
+    /// If null, focus will be set to the first available button (Primary > Secondary > Close).
+    /// </summary>
+    public MessageBoxButton? DefaultFocusedButton
+    {
+        get => (MessageBoxButton?)GetValue(DefaultFocusedButtonProperty);
+        set => SetValue(DefaultFocusedButtonProperty, value);
+    }
 
 #if !NET8_0_OR_GREATER
     private static readonly PropertyInfo CanCenterOverWPFOwnerPropertyInfo = typeof(Window).GetProperty(
@@ -498,8 +516,9 @@ public class MessageBox : System.Windows.Window
     }
 
     /// <summary>
-    /// Sets focus to the first available button in the MessageBox.
-    /// Priority: Primary > Secondary > Close
+    /// Sets focus to the specified or first available button in the MessageBox.
+    /// If DefaultFocusedButton is set, that button will receive focus (if available).
+    /// Otherwise, focus will be set to the first available button (Primary > Secondary > Close).
     /// </summary>
     private void SetFocusToFirstAvailableButton()
     {
@@ -508,7 +527,7 @@ public class MessageBox : System.Windows.Window
         Button? secondaryButton = null;
         Button? closeButton = null;
 
-        var rootElement = GetVisualChild(0);
+        DependencyObject? rootElement = GetVisualChild(0);
         if (rootElement == null)
         {
             return;
@@ -517,7 +536,37 @@ public class MessageBox : System.Windows.Window
         // Traverse visual tree to find buttons
         FindButtonsInVisualTree(rootElement, ref primaryButton, ref secondaryButton, ref closeButton);
 
-        // Set focus to the first available button
+        // If DefaultFocusedButton is specified, try to set focus to that button
+        if (DefaultFocusedButton.HasValue)
+        {
+            Button? targetButton = DefaultFocusedButton.Value switch
+            {
+                MessageBoxButton.Primary => primaryButton,
+                MessageBoxButton.Secondary => secondaryButton,
+                MessageBoxButton.Close => closeButton,
+                _ => null,
+            };
+
+            if (targetButton != null && targetButton.IsEnabled)
+            {
+                // Check if the button is enabled via the corresponding property
+                bool isButtonEnabled = DefaultFocusedButton.Value switch
+                {
+                    MessageBoxButton.Primary => IsPrimaryButtonEnabled,
+                    MessageBoxButton.Secondary => IsSecondaryButtonEnabled,
+                    MessageBoxButton.Close => IsCloseButtonEnabled,
+                    _ => false,
+                };
+
+                if (isButtonEnabled)
+                {
+                    targetButton.Focus();
+                    return;
+                }
+            }
+        }
+
+        // Fallback to automatic selection: Set focus to the first available button
         if (IsPrimaryButtonEnabled && primaryButton != null && primaryButton.IsEnabled)
         {
             primaryButton.Focus();
@@ -566,7 +615,7 @@ public class MessageBox : System.Windows.Window
         int childrenCount = System.Windows.Media.VisualTreeHelper.GetChildrenCount(element);
         for (int i = 0; i < childrenCount; i++)
         {
-            var child = System.Windows.Media.VisualTreeHelper.GetChild(element, i);
+            DependencyObject child = System.Windows.Media.VisualTreeHelper.GetChild(element, i);
             FindButtonsInVisualTree(child, ref primaryButton, ref secondaryButton, ref closeButton);
         }
     }
