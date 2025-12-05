@@ -367,6 +367,12 @@ public class MessageBox : System.Windows.Window
             default:
                 throw new InvalidOperationException();
         }
+
+        // Set focus to the first available button after the visual tree is fully loaded
+        Dispatcher.BeginInvoke(
+            System.Windows.Threading.DispatcherPriority.Loaded,
+            new System.Action(SetFocusToFirstAvailableButton)
+        );
     }
 
     // CanCenterOverWPFOwner property see https://source.dot.net/#PresentationFramework/System/Windows/Window.cs,e679e433777b21b8
@@ -488,6 +494,80 @@ public class MessageBox : System.Windows.Window
         if (Width > MaxWidth)
         {
             SetCurrentValue(MaxWidthProperty, Width);
+        }
+    }
+
+    /// <summary>
+    /// Sets focus to the first available button in the MessageBox.
+    /// Priority: Primary > Secondary > Close
+    /// </summary>
+    private void SetFocusToFirstAvailableButton()
+    {
+        // Find buttons in visual tree
+        Button? primaryButton = null;
+        Button? secondaryButton = null;
+        Button? closeButton = null;
+
+        var rootElement = GetVisualChild(0);
+        if (rootElement == null)
+        {
+            return;
+        }
+
+        // Traverse visual tree to find buttons
+        FindButtonsInVisualTree(rootElement, ref primaryButton, ref secondaryButton, ref closeButton);
+
+        // Set focus to the first available button
+        if (IsPrimaryButtonEnabled && primaryButton != null && primaryButton.IsEnabled)
+        {
+            primaryButton.Focus();
+        }
+        else if (IsSecondaryButtonEnabled && secondaryButton != null && secondaryButton.IsEnabled)
+        {
+            secondaryButton.Focus();
+        }
+        else if (IsCloseButtonEnabled && closeButton != null && closeButton.IsEnabled)
+        {
+            closeButton.Focus();
+        }
+    }
+
+    /// <summary>
+    /// Recursively finds buttons in the visual tree by checking their CommandParameter.
+    /// </summary>
+    private void FindButtonsInVisualTree(
+        DependencyObject element,
+        ref Button? primaryButton,
+        ref Button? secondaryButton,
+        ref Button? closeButton
+    )
+    {
+        if (element is Button button)
+        {
+            // Check if this button is bound to our command by checking CommandParameter
+            if (button.CommandParameter is MessageBoxButton buttonType)
+            {
+                switch (buttonType)
+                {
+                    case MessageBoxButton.Primary:
+                        primaryButton = button;
+                        break;
+                    case MessageBoxButton.Secondary:
+                        secondaryButton = button;
+                        break;
+                    case MessageBoxButton.Close:
+                        closeButton = button;
+                        break;
+                }
+            }
+        }
+
+        // Recursively search children
+        int childrenCount = System.Windows.Media.VisualTreeHelper.GetChildrenCount(element);
+        for (int i = 0; i < childrenCount; i++)
+        {
+            var child = System.Windows.Media.VisualTreeHelper.GetChild(element, i);
+            FindButtonsInVisualTree(child, ref primaryButton, ref secondaryButton, ref closeButton);
         }
     }
 }
