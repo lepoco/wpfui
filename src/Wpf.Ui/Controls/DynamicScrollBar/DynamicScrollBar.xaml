@@ -36,7 +36,7 @@
                             Filled="True"
                             FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
-                            Symbol="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+                            Symbol="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, TargetNullValue={x:Static controls:SymbolRegular.Empty}}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
