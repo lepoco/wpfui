@@ -536,8 +536,8 @@ public class ContentDialog : ContentControl
             throw new InvalidOperationException("DialogHost was not set");
         }
 
-        // Before displaying the dialog, clear the Enter and Escape access key registrations of the host window.
-        ClearHostWindowEnterAndEscapeAccessKey(DialogHost);
+        // Suppress all access keys of the host window before displaying the dialog.
+        SuppressHostWindowAccessKeys(DialogHost);
 
         Tcs = new TaskCompletionSource<ContentDialogResult>();
         CancellationTokenRegistration tokenRegistration = cancellationToken.Register(
@@ -765,7 +765,7 @@ public class ContentDialog : ContentControl
         }
     }
 
-    private void ClearHostWindowEnterAndEscapeAccessKey(DependencyObject hostElement)
+    private void SuppressHostWindowAccessKeys(DependencyObject hostElement)
     {
         try
         {
@@ -781,7 +781,7 @@ public class ContentDialog : ContentControl
                 return;
             }
 
-            // Temporarily register an AccessKey handler to suppress Enter/Esc keys in host window.
+            // Register an AccessKey handler to suppress all access keys of the host window while this dialog is displayed.
             AccessKeyManager.AddAccessKeyPressedHandler(window, HostAccessKeySuppressHandler);
         }
         catch
@@ -806,6 +806,12 @@ public class ContentDialog : ContentControl
         }
     }
 
+    /// <summary>
+    /// Determines whether the specified dependency object is part of this dialog or its associated dialog host.
+    /// </summary>
+    /// <param name="d">The dependency object to check for membership within this dialog or its dialog host.</param>
+    /// <returns>true if the specified dependency object is contained within this dialog or its dialog host;
+    /// otherwise, false.</returns>
     private bool IsPartOfThisDialog(DependencyObject d)
     {
         if (d == this)
@@ -813,7 +819,6 @@ public class ContentDialog : ContentControl
             return true;
         }
 
-        // If DialogHost is not set, fallback to checking this dialog only.
         if (DialogHost == null)
         {
             return false;
@@ -856,29 +861,29 @@ public class ContentDialog : ContentControl
         return false;
     }
 
+    /// <summary>
+    /// Handles the AccessKeyPressed event to prevent the activation of access keys for controls outside the current dialog.
+    /// </summary>
+    /// <param name="sender">The source of the event, typically the window or control raising the AccessKeyPressed event.</param>
+    /// <param name="e">An AccessKeyPressedEventArgs instance containing event data, including the target element for the access key.</param>
     private void HostAccessKeySuppressHandler(object sender, AccessKeyPressedEventArgs e)
     {
         try
         {
-            var key = e.Key ?? string.Empty;
-
-            if (key is "\r" or "\e")
+            UIElement? target = e.Target;
+            if (target is null)
             {
-                UIElement? target = e.Target;
-                if (target is null)
-                {
-                    return; // nothing to do
-                }
-
-                // If the target is part of this dialog (or the dialog host), allow it.
-                if (IsPartOfThisDialog(target))
-                {
-                    return;
-                }
-
-                // Otherwise suppress the access key for this window by clearing the Target.
-                e.Target = null;
+                return; // nothing to do
             }
+
+            // If the target is part of this dialog (or the dialog host), allow it.
+            if (IsPartOfThisDialog(target))
+            {
+                return;
+            }
+
+            // Otherwise suppress the access key for this window by clearing the Target.
+            e.Target = null;
         }
         catch
         {
