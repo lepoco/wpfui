@@ -25,12 +25,12 @@
             XamlCode="&lt;TabControl /&gt;">
             <TabControl
                 Margin="0,8,0,0"
-                ItemsSource="{Binding StandardTabs}"
-                SelectedItem="{Binding SelectedTab, Mode=TwoWay}"
-                uiControls:TabControlExtensions.CanReorderTabs="True"
                 uiControls:TabControlExtensions.CanAddTabs="True"
+                uiControls:TabControlExtensions.CanReorderTabs="True"
+                uiControls:TabControlExtensions.TabAdding="OnTabAdding"
                 uiControls:TabControlExtensions.TabClosing="OnTabClosing"
-                uiControls:TabControlExtensions.TabAdding="OnTabAdding">
+                ItemsSource="{Binding StandardTabs}"
+                SelectedItem="{Binding SelectedTab, Mode=TwoWay}">
                 <TabControl.ItemContainerStyle>
                     <Style BasedOn="{StaticResource {x:Type TabItem}}" TargetType="TabItem">
                         <Setter Property="uiControls:TabControlExtensions.IsClosable" Value="True" />
