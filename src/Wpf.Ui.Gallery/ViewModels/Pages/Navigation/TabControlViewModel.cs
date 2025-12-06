@@ -55,66 +55,6 @@ public partial class TabControlViewModel : ViewModel
     ];
 
     /// <summary>
-    /// Adds a new tab to the collection.
-    /// </summary>
-    [RelayCommand]
-    private void AddTab()
-    {
-        // Create a new tab with a unique name
-        int tabNumber = StandardTabs.Count + 1;
-        var newTab = new TabItem
-        {
-            Header = CreateTabHeader($"New Tab {tabNumber}", SymbolRegular.Document24),
-            Content = new System.Windows.Controls.TextBlock
-            {
-                Text = $"New Tab {tabNumber} content",
-                Margin = new System.Windows.Thickness(12)
-            }
-        };
-
-        // Add the new tab to the collection
-        StandardTabs.Add(newTab);
-
-        // Select the new tab (this will update IsSelected for all tabs via OnSelectedTabChanged)
-        SelectedTab = newTab;
-    }
-
-    /// <summary>
-    /// Closes the specified tab.
-    /// </summary>
-    /// <param name="tabItem">The tab item to close.</param>
-    [RelayCommand]
-    private void CloseTab(object? tabItem)
-    {
-        if (tabItem is not TabItem item)
-        {
-            return;
-        }
-
-        if (StandardTabs.Count <= 1)
-        {
-            // Don't remove the last tab
-            return;
-        }
-
-        int tabIndex = StandardTabs.IndexOf(item);
-        if (tabIndex < 0)
-        {
-            return;
-        }
-
-        // Remove the tab
-        StandardTabs.RemoveAt(tabIndex);
-
-        // Select another tab (preferably the one at the same index, or the last one)
-        if (StandardTabs.Count > 0)
-        {
-            int newSelectedIndex = Math.Min(tabIndex, StandardTabs.Count - 1);
-            SelectedTab = StandardTabs[newSelectedIndex];
-        }
-    }
-
-    /// <summary>
     /// Selects the specified tab and prepares for potential drag operation.
     /// </summary>
     [RelayCommand]
