@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -71,10 +71,10 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
         // Method 1: Set tab properties using TabAddingEventArgs
         // Get the tab number (get current tab count from ViewModel)
         int tabNumber = ViewModel.StandardTabs.Count + 1;
-        
+
         // Set the header with an icon
         e.Header = CreateTabHeader($"New Tab {tabNumber}", SymbolRegular.Document24);
-        
+
         // Set the content
         e.Content = new System.Windows.Controls.TextBlock
         {
