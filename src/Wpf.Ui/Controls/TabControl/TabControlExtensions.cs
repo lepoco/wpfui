@@ -249,7 +249,7 @@ public static class TabControlExtensions
     /// Use this attached property in XAML to handle the tab closing event:
     /// <code>
     /// &lt;TabControl uiControls:TabControlExtensions.TabClosing="OnTabClosing" /&gt;
-    /// &lt;/code&gt;
+    /// </code>
     /// </remarks>
     public static readonly DependencyProperty TabClosingProperty = DependencyProperty.RegisterAttached(
         "TabClosing",
@@ -302,7 +302,7 @@ public static class TabControlExtensions
     /// Use this attached property in XAML to handle the tab adding event:
     /// <code>
     /// &lt;TabControl uiControls:TabControlExtensions.TabAdding="OnTabAdding" /&gt;
-    /// &lt;/code&gt;
+    /// </code>
     /// </remarks>
     public static readonly DependencyProperty TabAddingProperty = DependencyProperty.RegisterAttached(
         "TabAdding",
