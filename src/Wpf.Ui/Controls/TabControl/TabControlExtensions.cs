@@ -240,6 +240,112 @@ public static class TabControlExtensions
         }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="TabClosingProperty"/> attached property.
+    /// This property allows you to set an event handler for the <see cref="TabClosingEvent"/> routed event in XAML.
+    /// The event is raised when a user attempts to close a tab.
+    /// </summary>
+    /// <remarks>
+    /// Use this attached property in XAML to handle the tab closing event:
+    /// <code>
+    /// &lt;TabControl uiControls:TabControlExtensions.TabClosing="OnTabClosing" /&gt;
+    /// &lt;/code&gt;
+    /// </remarks>
+    public static readonly DependencyProperty TabClosingProperty = DependencyProperty.RegisterAttached(
+        "TabClosing",
+        typeof(TabClosingEventHandler),
+        typeof(TabControlExtensions),
+        new PropertyMetadata(null, OnTabClosingChanged)
+    );
+
+    /// <summary>Helper for getting <see cref="TabClosingProperty"/> from <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="TabControl"/> to read <see cref="TabClosingProperty"/> from.</param>
+    /// <returns>TabClosing property value.</returns>
+    [AttachedPropertyBrowsableForType(typeof(TabControl))]
+    public static TabClosingEventHandler? GetTabClosing(TabControl target) => (TabClosingEventHandler?)target.GetValue(TabClosingProperty);
+
+    /// <summary>Sets the value of the <see cref="TabClosingProperty"/> attached property.</summary>
+    /// <param name="target"><see cref="TabControl"/> to set <see cref="TabClosingProperty"/> on.</param>
+    /// <param name="value">The value to set for the <see cref="TabClosingProperty"/> attached property.</param>
+    public static void SetTabClosing(TabControl target, TabClosingEventHandler? value) => target.SetValue(TabClosingProperty, value);
+
+    /// <summary>
+    /// Called when the <see cref="TabClosingProperty"/> attached property changes.
+    /// Automatically registers or unregisters the event handler with the <see cref="TabClosingEvent"/> routed event.
+    /// </summary>
+    /// <param name="d">The dependency object on which the property changed.</param>
+    /// <param name="e">The event data that contains the old and new values.</param>
+    private static void OnTabClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is TabControl tabControl)
+        {
+            // Remove old handler if it exists
+            if (e.OldValue is TabClosingEventHandler oldHandler)
+            {
+                RemoveTabClosingHandler(tabControl, oldHandler);
+            }
+
+            // Add new handler if it exists
+            if (e.NewValue is TabClosingEventHandler newHandler)
+            {
+                AddTabClosingHandler(tabControl, newHandler);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Identifies the <see cref="TabAddingProperty"/> attached property.
+    /// This property allows you to set an event handler for the <see cref="TabAddingEvent"/> routed event in XAML.
+    /// The event is raised when a user clicks the add button to create a new tab.
+    /// </summary>
+    /// <remarks>
+    /// Use this attached property in XAML to handle the tab adding event:
+    /// <code>
+    /// &lt;TabControl uiControls:TabControlExtensions.TabAdding="OnTabAdding" /&gt;
+    /// &lt;/code&gt;
+    /// </remarks>
+    public static readonly DependencyProperty TabAddingProperty = DependencyProperty.RegisterAttached(
+        "TabAdding",
+        typeof(TabAddingEventHandler),
+        typeof(TabControlExtensions),
+        new PropertyMetadata(null, OnTabAddingChanged)
+    );
+
+    /// <summary>Helper for getting <see cref="TabAddingProperty"/> from <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="TabControl"/> to read <see cref="TabAddingProperty"/> from.</param>
+    /// <returns>TabAdding property value.</returns>
+    [AttachedPropertyBrowsableForType(typeof(TabControl))]
+    public static TabAddingEventHandler? GetTabAdding(TabControl target) => (TabAddingEventHandler?)target.GetValue(TabAddingProperty);
+
+    /// <summary>Sets the value of the <see cref="TabAddingProperty"/> attached property.</summary>
+    /// <param name="target"><see cref="TabControl"/> to set <see cref="TabAddingProperty"/> on.</param>
+    /// <param name="value">The value to set for the <see cref="TabAddingProperty"/> attached property.</param>
+    public static void SetTabAdding(TabControl target, TabAddingEventHandler? value) => target.SetValue(TabAddingProperty, value);
+
+    /// <summary>
+    /// Called when the <see cref="TabAddingProperty"/> attached property changes.
+    /// Automatically registers or unregisters the event handler with the <see cref="TabAddingEvent"/> routed event.
+    /// </summary>
+    /// <param name="d">The dependency object on which the property changed.</param>
+    /// <param name="e">The event data that contains the old and new values.</param>
+    private static void OnTabAddingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is TabControl tabControl)
+        {
+            // Remove old handler if it exists
+            if (e.OldValue is TabAddingEventHandler oldHandler)
+            {
+                RemoveTabAddingHandler(tabControl, oldHandler);
+            }
+
+            // Add new handler if it exists
+            if (e.NewValue is TabAddingEventHandler newHandler)
+            {
+                AddTabAddingHandler(tabControl, newHandler);
+            }
+        }
+    }
+
     private static void EnsureBehavior(TabControl tabControl)
     {
         if (Behaviors.ContainsKey(tabControl))
