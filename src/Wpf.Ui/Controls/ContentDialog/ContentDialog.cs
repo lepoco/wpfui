@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows.Automation;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -783,6 +785,12 @@ public class ContentDialog : ContentControl
 
             // Register an AccessKey handler to suppress all access keys of the host window while this dialog is displayed.
             AccessKeyManager.AddAccessKeyPressedHandler(window, HostAccessKeySuppressHandler);
+
+            // Also suppress command execution and can-execute routing from the host window so that
+            // input bindings / command gestures registered on the window won't trigger host commands
+            // while the dialog is shown. Handlers are removed in RestoreHostWindowAccessKeys.
+            CommandManager.AddPreviewExecutedHandler(window, PreviewExecutedSuppressHandler);
+            CommandManager.AddPreviewCanExecuteHandler(window, PreviewCanExecuteSuppressHandler);
         }
         catch
         {
@@ -798,6 +806,8 @@ public class ContentDialog : ContentControl
             if (window != null)
             {
                 AccessKeyManager.RemoveAccessKeyPressedHandler(window, HostAccessKeySuppressHandler);
+                CommandManager.RemovePreviewExecutedHandler(window, PreviewExecutedSuppressHandler);
+                CommandManager.RemovePreviewCanExecuteHandler(window, PreviewCanExecuteSuppressHandler);
             }
         }
         catch
@@ -884,6 +894,39 @@ public class ContentDialog : ContentControl
 
             // Otherwise suppress the access key for this window by clearing the Target.
             e.Target = null;
+        }
+        catch
+        {
+            // ignore
+        }
+    }
+
+    private void PreviewExecutedSuppressHandler(object sender, ExecutedRoutedEventArgs e)
+    {
+        try
+        {
+            if (e.OriginalSource is DependencyObject d && !IsPartOfThisDialog(d))
+            {
+                // Prevent host-window command execution
+                e.Handled = true;
+            }
+        }
+        catch
+        {
+            // ignore
+        }
+    }
+
+    private void PreviewCanExecuteSuppressHandler(object sender, CanExecuteRoutedEventArgs e)
+    {
+        try
+        {
+            if (e.OriginalSource is DependencyObject d && !IsPartOfThisDialog(d))
+            {
+                // Prevent host-window command from being considered executable
+                e.CanExecute = false;
+                e.Handled = true;
+            }
         }
         catch
         {
