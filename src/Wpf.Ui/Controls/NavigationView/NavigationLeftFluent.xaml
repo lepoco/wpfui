@@ -54,6 +54,7 @@
                             HorizontalAlignment="Center"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True"
                             TextElement.FontSize="{TemplateBinding FontSize}"
                             TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}" />
                     </Grid>
