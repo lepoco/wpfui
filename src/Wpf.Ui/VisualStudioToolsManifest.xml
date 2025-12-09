@@ -37,6 +37,7 @@
       <Item Type="Wpf.Ui.Controls.NavigationViewItemHeader" />
       <Item Type="Wpf.Ui.Controls.NavigationViewItemSeparator" />
       <Item Type="Wpf.Ui.Controls.NumberBox" />
+      <Item Type="Wpf.Ui.Controls.NumericUpDown" />
       <Item Type="Wpf.Ui.Controls.PasswordBox" />
       <Item Type="Wpf.Ui.Controls.ProgressRing" />
       <Item Type="Wpf.Ui.Controls.RatingControl" />
