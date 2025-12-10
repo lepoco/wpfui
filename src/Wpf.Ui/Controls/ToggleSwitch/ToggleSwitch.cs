@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows;
+
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -26,6 +28,17 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
         new PropertyMetadata(null)
     );
 
+    /// <summary>Identifies the <see cref="LabelPosition"/> dependency property.</summary>
+    public static readonly DependencyProperty LabelPositionProperty = DependencyProperty.Register(
+        nameof(LabelPosition),
+        typeof(ElementPlacement),
+        typeof(ToggleSwitch),
+        new FrameworkPropertyMetadata(
+            ElementPlacement.Right,
+            FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure
+        )
+    );
+
     /// <summary>
     /// Gets or sets the content that should be displayed when the <see cref="ToggleSwitch"/> is in the "Off" state.
     /// </summary>
@@ -44,5 +57,16 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
     {
         get => GetValue(OnContentProperty);
         set => SetValue(OnContentProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the position of the label content relative to the toggle switch.
+    /// </summary>
+    [System.ComponentModel.Bindable(true)]
+    [System.ComponentModel.Category("Layout")]
+    public ElementPlacement LabelPosition
+    {
+        get => (ElementPlacement)GetValue(LabelPositionProperty);
+        set => SetValue(LabelPositionProperty, value);
     }
 }

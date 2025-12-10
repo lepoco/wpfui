@@ -32,6 +32,7 @@
         <Setter Property="Padding" Value="{StaticResource ToggleSwitchPadding}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="LabelPosition" Value="Right" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
@@ -43,10 +44,11 @@
                 <ControlTemplate TargetType="{x:Type controls:ToggleSwitch}">
                     <Grid Margin="{TemplateBinding Padding}" Background="Transparent">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition x:Name="ToggleColumn" Width="Auto" />
+                            <ColumnDefinition x:Name="ContentColumn" Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid
+                            x:Name="ToggleGrid"
                             Grid.Column="0"
                             Width="{StaticResource ToggleButtonWidth}"
                             Height="{StaticResource ToggleButtonHeight}">
@@ -114,6 +116,16 @@
                             TextElement.Foreground="{TemplateBinding Foreground}" />
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="LabelPosition" Value="Left">
+                            <Setter TargetName="ToggleGrid" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="ContentPresenter" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="ContentPresenter" Property="Margin" Value="0,0,8,0" />
+                        </Trigger>
+                        <Trigger Property="LabelPosition" Value="Right">
+                            <Setter TargetName="ToggleGrid" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="ContentPresenter" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="ContentPresenter" Property="Margin" Value="8,0,0,0" />
+                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Content" Value="{x:Null}" />
