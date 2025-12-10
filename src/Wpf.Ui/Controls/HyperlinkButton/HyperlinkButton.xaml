@@ -72,6 +72,7 @@
                                 x:Name="ContentPresenter"
                                 Grid.Column="1"
                                 Content="{TemplateBinding Content}"
+                                RecognizesAccessKey="True"
                                 TextElement.Foreground="{TemplateBinding Foreground}" />
                         </Grid>
                     </Border>

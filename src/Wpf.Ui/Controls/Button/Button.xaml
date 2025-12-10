@@ -58,6 +58,7 @@
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True"
                             TextElement.Foreground="{TemplateBinding Foreground}" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -129,6 +130,7 @@
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True"
                             TextElement.Foreground="{TemplateBinding Foreground}" />
 
                         <!--
@@ -279,6 +281,7 @@
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Content}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    RecognizesAccessKey="True"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
