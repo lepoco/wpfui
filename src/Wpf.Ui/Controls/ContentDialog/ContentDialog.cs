@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using Wpf.Ui.Input;
 
 // ReSharper disable once CheckNamespace
@@ -208,6 +209,14 @@ public class ContentDialog : ContentControl
         typeof(IRelayCommand),
         typeof(ContentDialog),
         new PropertyMetadata(null)
+    );
+
+    /// <summary>Identifies the <see cref="AnimationDuration"/> dependency property.</summary>
+    public static readonly DependencyProperty AnimationDurationProperty = DependencyProperty.Register(
+        nameof(AnimationDuration),
+        typeof(TimeSpan),
+        typeof(ContentDialog),
+        new PropertyMetadata(TimeSpan.FromMilliseconds(250))
     );
 
     /// <summary>Identifies the <see cref="Opened"/> routed event.</summary>
@@ -423,6 +432,15 @@ public class ContentDialog : ContentControl
     }
 
     /// <summary>
+    /// Gets or sets the duration of the open/close animation.
+    /// </summary>
+    public TimeSpan AnimationDuration
+    {
+        get => (TimeSpan)GetValue(AnimationDurationProperty);
+        set => SetValue(AnimationDurationProperty, value);
+    }
+
+    /// <summary>
     /// Gets command triggered after clicking the button in the template.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
@@ -520,7 +538,7 @@ public class ContentDialog : ContentControl
     protected TaskCompletionSource<ContentDialogResult>? Tcs { get; set; }
 
     /// <summary>
-    /// Shows the dialog
+    /// Shows the dialog with animation
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "WpfAnalyzers.DependencyProperty",
@@ -545,6 +563,12 @@ public class ContentDialog : ContentControl
         try
         {
             DialogHost.Content = this;
+
+            Visibility = Visibility.Hidden;
+
+            // Play opening animation
+            await PlayOpenAnimationAsync();
+
             result = await Tcs.Task;
 
             return result;
@@ -572,8 +596,187 @@ public class ContentDialog : ContentControl
 
         if (!closingEventArgs.Cancel)
         {
-            _ = Tcs?.TrySetResult(result);
+            Dispatcher.BeginInvoke(
+                async () =>
+                {
+                    await PlayCloseAnimationAsync();
+                    _ = Tcs?.TrySetResult(result);
+                },
+                System.Windows.Threading.DispatcherPriority.Background
+            );
         }
+    }
+
+    /// <summary>
+    /// Plays the opening animation
+    /// </summary>
+    protected virtual async Task PlayOpenAnimationAsync()
+    {
+        // Wait for visual tree to be ready
+        await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Loaded);
+
+        if (VisualChildrenCount == 0)
+        {
+            return;
+        }
+
+        var rootElement = GetVisualChild(0) as FrameworkElement;
+        if (rootElement == null)
+        {
+            return;
+        }
+
+        // Find the dialog content (usually a Border or Grid inside the root)
+        FrameworkElement? dialogContent = FindDialogContent(rootElement);
+        if (dialogContent == null)
+        {
+            return;
+        }
+
+        var tcs = new TaskCompletionSource<bool>();
+
+        // Set initial state for background (fade only)
+        SetCurrentValue(VisibilityProperty, Visibility.Visible);
+        rootElement.Opacity = 0;
+
+        // Set initial state for dialog content (fade + scale)
+        dialogContent.Opacity = 0;
+        dialogContent.RenderTransform = new ScaleTransform(0.9, 0.9);
+        dialogContent.RenderTransformOrigin = new Point(0.5, 0.5);
+
+        var storyboard = new Storyboard();
+
+        // Background fade in animation
+        var bgFadeAnimation = new DoubleAnimation
+        {
+            From = 0,
+            To = 1,
+            Duration = new Duration(AnimationDuration),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+        };
+        Storyboard.SetTarget(bgFadeAnimation, rootElement);
+        Storyboard.SetTargetProperty(bgFadeAnimation, new PropertyPath(OpacityProperty));
+        storyboard.Children.Add(bgFadeAnimation);
+
+        // Dialog content fade in animation
+        var contentFadeAnimation = new DoubleAnimation
+        {
+            From = 0,
+            To = 1,
+            Duration = new Duration(AnimationDuration),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+        };
+        Storyboard.SetTarget(contentFadeAnimation, dialogContent);
+        Storyboard.SetTargetProperty(contentFadeAnimation, new PropertyPath(OpacityProperty));
+        storyboard.Children.Add(contentFadeAnimation);
+
+        // Scale animation for dialog content only
+        var scaleXAnimation = new DoubleAnimation
+        {
+            From = 0.9,
+            To = 1.0,
+            Duration = new Duration(AnimationDuration),
+            EasingFunction = new BackEase { EasingMode = EasingMode.EaseOut, Amplitude = 0.3 }
+        };
+        Storyboard.SetTarget(scaleXAnimation, dialogContent);
+        Storyboard.SetTargetProperty(scaleXAnimation, new PropertyPath("RenderTransform.ScaleX"));
+        storyboard.Children.Add(scaleXAnimation);
+
+        var scaleYAnimation = new DoubleAnimation
+        {
+            From = 0.9,
+            To = 1.0,
+            Duration = new Duration(AnimationDuration),
+            EasingFunction = new BackEase { EasingMode = EasingMode.EaseOut, Amplitude = 0.3 }
+        };
+        Storyboard.SetTarget(scaleYAnimation, dialogContent);
+        Storyboard.SetTargetProperty(scaleYAnimation, new PropertyPath("RenderTransform.ScaleY"));
+        storyboard.Children.Add(scaleYAnimation);
+
+        storyboard.Completed += (s, e) => tcs.SetResult(true);
+        storyboard.Begin();
+
+        _ = await tcs.Task;
+    }
+
+    /// <summary>
+    /// Plays the closing animation
+    /// </summary>
+    protected virtual async Task PlayCloseAnimationAsync()
+    {
+        if (VisualChildrenCount == 0)
+        {
+            return;
+        }
+
+        var rootElement = GetVisualChild(0) as FrameworkElement;
+        if (rootElement == null)
+        {
+            return;
+        }
+
+        // Find the dialog content
+        FrameworkElement? dialogContent = FindDialogContent(rootElement);
+        if (dialogContent == null)
+        {
+            return;
+        }
+
+        var tcs = new TaskCompletionSource<bool>();
+
+        var storyboard = new Storyboard();
+
+        // Background fade out animation
+        var bgFadeAnimation = new DoubleAnimation
+        {
+            From = 1,
+            To = 0,
+            Duration = new Duration(AnimationDuration),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+        };
+        Storyboard.SetTarget(bgFadeAnimation, rootElement);
+        Storyboard.SetTargetProperty(bgFadeAnimation, new PropertyPath(OpacityProperty));
+        storyboard.Children.Add(bgFadeAnimation);
+
+        // Dialog content fade out animation
+        var contentFadeAnimation = new DoubleAnimation
+        {
+            From = 1,
+            To = 0,
+            Duration = new Duration(AnimationDuration),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+        };
+        Storyboard.SetTarget(contentFadeAnimation, dialogContent);
+        Storyboard.SetTargetProperty(contentFadeAnimation, new PropertyPath(OpacityProperty));
+        storyboard.Children.Add(contentFadeAnimation);
+
+        // Scale animation for dialog content only
+        var scaleXAnimation = new DoubleAnimation
+        {
+            From = 1.0,
+            To = 0.9,
+            Duration = new Duration(AnimationDuration),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+        };
+        Storyboard.SetTarget(scaleXAnimation, dialogContent);
+        Storyboard.SetTargetProperty(scaleXAnimation, new PropertyPath("RenderTransform.ScaleX"));
+        storyboard.Children.Add(scaleXAnimation);
+
+        var scaleYAnimation = new DoubleAnimation
+        {
+            From = 1.0,
+            To = 0.9,
+            Duration = new Duration(AnimationDuration),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+        };
+        Storyboard.SetTarget(scaleYAnimation, dialogContent);
+        Storyboard.SetTargetProperty(scaleYAnimation, new PropertyPath("RenderTransform.ScaleY"));
+        storyboard.Children.Add(scaleYAnimation);
+
+        storyboard.Completed += (s, e) => tcs.SetResult(true);
+        storyboard.Begin();
+
+        _ = await tcs.Task;
     }
 
     /// <summary>
@@ -695,5 +898,50 @@ public class ContentDialog : ContentControl
             SetCurrentValue(DialogMaxWidthProperty, DialogWidth);
             /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");*/
         }
+    }
+
+    /// <summary>
+    /// Finds the dialog content element (the actual dialog box, not the background overlay)
+    /// </summary>
+    private FrameworkElement? FindDialogContent(FrameworkElement rootElement)
+    {
+        // Try to find element with specific name or type
+        // Common names: "DialogSpace", "PART_DialogSpace", "ContentDialog", etc.
+        if (rootElement is Panel panel)
+        {
+            foreach (UIElement child in panel.Children)
+            {
+                if (child is FrameworkElement fe)
+                {
+                    // Look for the dialog container (usually has a name containing "Dialog" or "Content")
+                    if (fe.Name?.Contains("Dialog") == true ||
+                        fe.Name?.Contains("Content") == true ||
+                        fe.Name?.Contains("PART") == true)
+                    {
+                        return fe;
+                    }
+
+                    // If it's a Border, ContentControl, or similar container, it's likely the dialog
+                    if (fe is Border || fe is ContentControl)
+                    {
+                        return fe;
+                    }
+                }
+            }
+
+            // If no specific element found, return the last child (usually the dialog is on top)
+            if (panel.Children.Count > 0 && panel.Children[panel.Children.Count - 1] is FrameworkElement lastChild)
+            {
+                return lastChild;
+            }
+        }
+
+        // Fallback: if root is Grid, try to get the child at index 1 (background usually at 0)
+        if (rootElement is Grid grid && grid.Children.Count > 1)
+        {
+            return grid.Children[1] as FrameworkElement;
+        }
+
+        return null;
     }
 }
