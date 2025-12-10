@@ -131,6 +131,14 @@ public class MessageBox : System.Windows.Window
         new PropertyMetadata(null)
     );
 
+    /// <summary>Identifies the <see cref="DefaultFocusedButton"/> dependency property.</summary>
+    public static readonly DependencyProperty DefaultFocusedButtonProperty = DependencyProperty.Register(
+        nameof(DefaultFocusedButton),
+        typeof(MessageBoxButton?),
+        typeof(MessageBox),
+        new PropertyMetadata(null)
+    );
+
     /// <summary>
     /// Gets or sets a value indicating whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="TitleBar"/>.
     /// </summary>
@@ -253,6 +261,16 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
+    /// <summary>
+    /// Gets or sets the button that should receive focus when the MessageBox is displayed.
+    /// If null, focus will be set to the first available button (Primary > Secondary > Close).
+    /// </summary>
+    public MessageBoxButton? DefaultFocusedButton
+    {
+        get => (MessageBoxButton?)GetValue(DefaultFocusedButtonProperty);
+        set => SetValue(DefaultFocusedButtonProperty, value);
+    }
+
 #if !NET8_0_OR_GREATER
     private static readonly PropertyInfo CanCenterOverWPFOwnerPropertyInfo = typeof(Window).GetProperty(
         "CanCenterOverWPFOwner",
@@ -367,6 +385,12 @@ public class MessageBox : System.Windows.Window
             default:
                 throw new InvalidOperationException();
         }
+
+        // Set focus to the first available button after the visual tree is fully loaded
+        Dispatcher.BeginInvoke(
+            System.Windows.Threading.DispatcherPriority.Loaded,
+            new System.Action(SetFocusToFirstAvailableButton)
+        );
     }
 
     // CanCenterOverWPFOwner property see https://source.dot.net/#PresentationFramework/System/Windows/Window.cs,e679e433777b21b8
@@ -488,6 +512,111 @@ public class MessageBox : System.Windows.Window
         if (Width > MaxWidth)
         {
             SetCurrentValue(MaxWidthProperty, Width);
+        }
+    }
+
+    /// <summary>
+    /// Sets focus to the specified or first available button in the MessageBox.
+    /// If DefaultFocusedButton is set, that button will receive focus (if available).
+    /// Otherwise, focus will be set to the first available button (Primary > Secondary > Close).
+    /// </summary>
+    private void SetFocusToFirstAvailableButton()
+    {
+        // Find buttons in visual tree
+        Button? primaryButton = null;
+        Button? secondaryButton = null;
+        Button? closeButton = null;
+
+        DependencyObject? rootElement = GetVisualChild(0);
+        if (rootElement == null)
+        {
+            return;
+        }
+
+        // Traverse visual tree to find buttons
+        FindButtonsInVisualTree(rootElement, ref primaryButton, ref secondaryButton, ref closeButton);
+
+        // If DefaultFocusedButton is specified, try to set focus to that button
+        if (DefaultFocusedButton.HasValue)
+        {
+            Button? targetButton = DefaultFocusedButton.Value switch
+            {
+                MessageBoxButton.Primary => primaryButton,
+                MessageBoxButton.Secondary => secondaryButton,
+                MessageBoxButton.Close => closeButton,
+                _ => null,
+            };
+
+            if (targetButton != null && targetButton.IsEnabled)
+            {
+                // Check if the button is enabled via the corresponding property
+                bool isButtonEnabled = DefaultFocusedButton.Value switch
+                {
+                    MessageBoxButton.Primary => IsPrimaryButtonEnabled,
+                    MessageBoxButton.Secondary => IsSecondaryButtonEnabled,
+                    MessageBoxButton.Close => IsCloseButtonEnabled,
+                    _ => false,
+                };
+
+                if (isButtonEnabled)
+                {
+                    targetButton.Focus();
+                    return;
+                }
+            }
+        }
+
+        // Fallback to automatic selection: Set focus to the first available button
+        if (IsPrimaryButtonEnabled && primaryButton != null && primaryButton.IsEnabled)
+        {
+            primaryButton.Focus();
+        }
+        else if (IsSecondaryButtonEnabled && secondaryButton != null && secondaryButton.IsEnabled)
+        {
+            secondaryButton.Focus();
+        }
+        else if (IsCloseButtonEnabled && closeButton != null && closeButton.IsEnabled)
+        {
+            closeButton.Focus();
+        }
+    }
+
+    /// <summary>
+    /// Recursively finds buttons in the visual tree by checking their CommandParameter.
+    /// </summary>
+    private void FindButtonsInVisualTree(
+        DependencyObject element,
+        ref Button? primaryButton,
+        ref Button? secondaryButton,
+        ref Button? closeButton
+    )
+    {
+        if (element is Button button)
+        {
+            // Check if this button is bound to our command by checking CommandParameter
+            if (button.CommandParameter is MessageBoxButton buttonType)
+            {
+                switch (buttonType)
+                {
+                    case MessageBoxButton.Primary:
+                        primaryButton = button;
+                        break;
+                    case MessageBoxButton.Secondary:
+                        secondaryButton = button;
+                        break;
+                    case MessageBoxButton.Close:
+                        closeButton = button;
+                        break;
+                }
+            }
+        }
+
+        // Recursively search children
+        int childrenCount = System.Windows.Media.VisualTreeHelper.GetChildrenCount(element);
+        for (int i = 0; i < childrenCount; i++)
+        {
+            DependencyObject child = System.Windows.Media.VisualTreeHelper.GetChild(element, i);
+            FindButtonsInVisualTree(child, ref primaryButton, ref secondaryButton, ref closeButton);
         }
     }
 }
