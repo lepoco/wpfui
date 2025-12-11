@@ -7,6 +7,7 @@
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Controls;
 using Wpf.Ui.Abstractions;
 
 // ReSharper disable once CheckNamespace
@@ -382,8 +383,31 @@ public partial class NavigationView
 
         _ = frame.RemoveBackEntry();
 
+        // Update content ScrollViewer based on page's IsScrollable property
+        UpdateContentScrollViewer(e.Content);
+
         /*var replaced = 1;
         ((NavigationViewContentPresenter)sender).JournalOwnership =*/
+    }
+
+    private void UpdateContentScrollViewer(object? content)
+    {
+        if (ContentScrollViewer is null)
+        {
+            return;
+        }
+
+        var isScrollable = true;
+
+        if (content is DependencyObject dependencyObject)
+        {
+            isScrollable = NavigationView.GetIsScrollable(dependencyObject);
+        }
+
+        ContentScrollViewer.SetCurrentValue(
+            ScrollViewer.VerticalScrollBarVisibilityProperty,
+            isScrollable ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled
+        );
     }
 
     private void AddToNavigationStack(
