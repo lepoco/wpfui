@@ -51,6 +51,8 @@ public static class ContentDialogServiceExtensions
             CloseButtonText = options.CloseButtonText,
             PrimaryButtonText = options.PrimaryButtonText,
             SecondaryButtonText = options.SecondaryButtonText,
+            DefaultButton = options.DefaultButton,
+            DisableSiblings = options.DisableSiblings
         };
 
         return dialogService.ShowAsync(dialog, cancellationToken);
