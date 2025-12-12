@@ -7,6 +7,7 @@ using FlaUI.Core;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
+using System.Threading;
 
 namespace Wpf.Ui.Gallery.IntegrationTests.Fixtures;
 
@@ -51,11 +52,14 @@ public abstract class UiTest : IAsyncLifetime
     /// Creates a Task that will complete after a time delay.
     /// </summary>
     /// <param name="seconds">The time delay in seconds.</param>
-    /// <returns>A Task that represents the time delay</returns>
+    /// <param name="cancellationToken">An optional cancellation token to cancel the delay.</param>
+    /// <returns>A Task that represents the time delay.</returns>
     /// <remarks>
-    /// After the specified time delay, the Task is completed in RanToCompletion state.
+    /// After the specified time delay, the Task is completed in RanToCompletion state. If the <paramref name="cancellationToken"/>
+    /// is cancelled, the returned task will be cancelled and an <see cref="OperationCanceledException"/> will be thrown.
     /// </remarks>
-    protected Task Wait(int seconds) => Task.Delay(TimeSpan.FromSeconds(seconds));
+    protected Task Wait(int seconds, CancellationToken cancellationToken = default) =>
+        Task.Delay(TimeSpan.FromSeconds(seconds), cancellationToken);
 
     /// <summary>
     /// Simulate typing in text. This is slower than setting <see cref="P:FlaUI.Core.AutomationElements.TextBox.Text" /> but raises more events.

@@ -4,8 +4,10 @@
 // All Rights Reserved.
 
 using System.Runtime.InteropServices;
+using System.Windows.Automation.Peers;
 using System.Windows.Shell;
 using Wpf.Ui.Appearance;
+using Wpf.Ui.AutomationPeers;
 using Wpf.Ui.Interop;
 using Wpf.Ui.Win32;
 
@@ -18,6 +20,15 @@ namespace Wpf.Ui.Controls;
 public class FluentWindow : System.Windows.Window
 {
     private WindowInteropHelper? _interopHelper = null;
+
+    /// <summary>
+    /// Cached <see cref="FilteringWindowAutomationPeer"/> instance for this window.
+    /// <para/>
+    /// This peer is used by other components (for example <c>ContentDialog</c>) to register
+    /// suppressed elements. It is populated when the created automation peer is a
+    /// <see cref="FilteringWindowAutomationPeer"/>.
+    /// </summary>
+    private FilteringWindowAutomationPeer? _filteringPeer;
 
     /// <summary>
     /// Gets contains helper for accessing this window handle.
@@ -144,6 +155,26 @@ public class FluentWindow : System.Windows.Window
             // DWMWA_COLOR_DEFAULT.
             UnsafeNativeMethods.ApplyBorderColor(this, unchecked((int)0xFFFFFFFF));
         }
+    }
+
+    /// <summary>
+    /// Creates and caches a <see cref="FilteringWindowAutomationPeer"/> for this window.
+    /// </summary>
+    /// <remarks>
+    /// The peer filters immediate child automation peers (used e.g. by <c>ContentDialog</c> to
+    /// suppress background UI). It is cached in <see cref="_filteringPeer"/> so the filtering
+    /// behavior is preserved across multiple calls.
+    ///
+    /// This method is virtual in the WPF hierarchy and remains overridable here to preserve
+    /// backward compatibility for consumers that provide custom automation peers. If you
+    /// override this method and return a non-<see cref="FilteringWindowAutomationPeer"/>,
+    /// consider implementing your own caching to avoid creating new instances repeatedly.
+    /// Automation peer interaction should be performed on the UI (Dispatcher) thread.
+    /// </remarks>
+    protected override AutomationPeer OnCreateAutomationPeer()
+    {
+        _filteringPeer ??= new FilteringWindowAutomationPeer(this);
+        return _filteringPeer;
     }
 
     /// <summary>

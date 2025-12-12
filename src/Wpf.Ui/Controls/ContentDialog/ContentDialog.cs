@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
 using Wpf.Ui.Input;
 
 // ReSharper disable once CheckNamespace
@@ -41,7 +43,7 @@ namespace Wpf.Ui.Controls;
 ///     );
 /// </code>
 /// </example>
-public class ContentDialog : ContentControl
+public partial class ContentDialog : ContentControl
 {
     /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
@@ -472,7 +474,7 @@ public class ContentDialog : ContentControl
 
         // Avoid registering runtime code that triggers designer behavior or throws exceptions
         // at design time (to reduce the possibility of designer crashes/rendering failures).
-        if (!Wpf.Ui.Designer.DesignerHelper.IsInDesignMode)
+        if (!Designer.DesignerHelper.IsInDesignMode)
         {
             Loaded += static (sender, _) =>
             {
@@ -499,7 +501,7 @@ public class ContentDialog : ContentControl
 
         // Avoid registering runtime code that triggers designer behavior or throws exceptions
         // at design time (to reduce the possibility of designer crashes/rendering failures).
-        if (!Wpf.Ui.Designer.DesignerHelper.IsInDesignMode)
+        if (!Designer.DesignerHelper.IsInDesignMode)
         {
             Loaded += static (sender, _) =>
             {
@@ -533,6 +535,9 @@ public class ContentDialog : ContentControl
         {
             throw new InvalidOperationException("DialogHost was not set");
         }
+
+        // Block access keys and host-window commands while the dialog is displayed.
+        BlockHostWindowInput(DialogHost);
 
         Tcs = new TaskCompletionSource<ContentDialogResult>();
         CancellationTokenRegistration tokenRegistration = cancellationToken.Register(
@@ -573,6 +578,9 @@ public class ContentDialog : ContentControl
         if (!closingEventArgs.Cancel)
         {
             _ = Tcs?.TrySetResult(result);
+
+            UnblockHostWindowInput();
+            RestoreDialogHostSiblings();
         }
     }
 
@@ -641,6 +649,13 @@ public class ContentDialog : ContentControl
         // Focus is only needed at runtime.
         _ = Focus();
 
+        // Suppress host window UI automation while the dialog is shown,
+        // and disable peer elements of the dialog host as needed.
+        IsolateDialogHostSiblings();
+
+        // Set focus on the default button to match the default behavior of Windows dialog boxes.
+        TryFocusDefaultButton();
+
         RaiseEvent(new RoutedEventArgs(OpenedEvent));
     }
 
@@ -694,6 +709,188 @@ public class ContentDialog : ContentControl
         {
             SetCurrentValue(DialogMaxWidthProperty, DialogWidth);
             /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");*/
+        }
+    }
+
+    /// <summary>
+    /// Attempts to set keyboard focus to the available default button,
+    /// enabling activation by the Space key in accordance with Windows dialog behavior.
+    /// </summary>
+    /// <remarks>
+    /// While it's generally not recommended to set the secondary button as default with initial focus,
+    /// this implementation respects the user's choice when explicitly configured.
+    /// </remarks>
+    private void TryFocusDefaultButton()
+    {
+        if (Dispatcher is not { HasShutdownStarted: false, HasShutdownFinished: false })
+        {
+            return;
+        }
+
+        // The user may have already set focus to a control in the Content before this point.
+        // Here we check whether focus remains on this `ContentDialog`.
+        // If so, the user has not overridden (or intends to defer overriding) the initial focus.
+        // To maintain Windows dialog behavior conventions, we set focus to the default button.
+        if (ReferenceEquals(Keyboard.FocusedElement, this))
+        {
+            // If primary button is present, visible, enabled and is default, focus it.
+            if (GetTemplateChild("PrimaryButton")
+                is Button { IsVisible: true, IsEnabled: true, IsDefault: true } primaryButton)
+            {
+                primaryButton.Focus();
+                return;
+            }
+
+            // Otherwise, if close button is present, visible, enabled and is default, focus it.
+            if (GetTemplateChild("CloseButton")
+                is Button { IsVisible: true, IsEnabled: true, IsDefault: true } closeButton)
+            {
+                closeButton.Focus();
+                return;
+            }
+
+            // If the user explicitly designates the secondary button as the default,
+            // set focus to the secondary button (respecting the user's choice).
+            if (GetTemplateChild("SecondaryButton")
+                is Button { IsVisible: true, IsEnabled: true, IsDefault: true } secondaryButton)
+            {
+                secondaryButton.Focus();
+            }
+
+            // If the user chooses to defer focus setting (e.g., via Dispatcher with lower priority),
+            // their code will override our focus setting here, so this won't interfere with user's intentions.
+        }
+    }
+
+    private void BlockHostWindowInput(DependencyObject hostElement)
+    {
+        var window = Window.GetWindow(hostElement);
+        if (window is null)
+        {
+            return;
+        }
+
+        Dispatcher? dispatcher = window.Dispatcher;
+        if (dispatcher is null || dispatcher.HasShutdownStarted || dispatcher.HasShutdownFinished)
+        {
+            return;
+        }
+
+        // Register an AccessKey handler to suppress all access keys of the host window while this dialog is displayed.
+        AccessKeyManager.AddAccessKeyPressedHandler(window, HostAccessKeySuppressHandler);
+
+        // Also suppress command execution and can-execute routing from the host window so that
+        // input bindings / command gestures registered on the window won't trigger host commands
+        // while the dialog is shown. Handlers are removed in UnblockHostWindowInput.
+        CommandManager.AddPreviewExecutedHandler(window, PreviewExecutedSuppressHandler);
+        CommandManager.AddPreviewCanExecuteHandler(window, PreviewCanExecuteSuppressHandler);
+    }
+
+    private void UnblockHostWindowInput()
+    {
+        Window? window = DialogHost is null ? null : Window.GetWindow(DialogHost);
+        if (window != null)
+        {
+            AccessKeyManager.RemoveAccessKeyPressedHandler(window, HostAccessKeySuppressHandler);
+            CommandManager.RemovePreviewExecutedHandler(window, PreviewExecutedSuppressHandler);
+            CommandManager.RemovePreviewCanExecuteHandler(window, PreviewCanExecuteSuppressHandler);
+        }
+    }
+
+    /// <summary>
+    /// Determines whether the specified dependency object is part of this dialog or its associated dialog host.
+    /// </summary>
+    /// <param name="d">The dependency object to check for membership within this dialog or its dialog host.</param>
+    /// <returns>true if the specified dependency object is contained within this dialog or its dialog host;
+    /// otherwise, false.</returns>
+    private bool IsPartOfThisDialog(DependencyObject d)
+    {
+        if (d == this)
+        {
+            return true;
+        }
+
+        if (DialogHost == null)
+        {
+            return false;
+        }
+
+        // Walk up visual/logical tree and see if we reach DialogHost or this ContentDialog.
+        DependencyObject? current = d;
+        while (current != null)
+        {
+            if (current == DialogHost || current == this)
+            {
+                return true;
+            }
+
+            DependencyObject? parent;
+            try
+            {
+                parent = VisualTreeHelper.GetParent(current);
+            }
+            catch
+            {
+                parent = null;
+            }
+
+            if (parent == null)
+            {
+                try
+                {
+                    parent = LogicalTreeHelper.GetParent(current);
+                }
+                catch
+                {
+                    parent = null;
+                }
+            }
+
+            current = parent;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Handles the AccessKeyPressed event to prevent the activation of access keys for controls outside the current dialog.
+    /// </summary>
+    /// <param name="sender">The source of the event, typically the window or control raising the AccessKeyPressed event.</param>
+    /// <param name="e">An AccessKeyPressedEventArgs instance containing event data, including the target element for the access key.</param>
+    private void HostAccessKeySuppressHandler(object sender, AccessKeyPressedEventArgs e)
+    {
+        UIElement? target = e.Target;
+        if (target is null)
+        {
+            return; // nothing to do
+        }
+
+        // If the target is part of this dialog (or the dialog host), allow it.
+        if (IsPartOfThisDialog(target))
+        {
+            return;
+        }
+
+        // Otherwise suppress the access key for this window by clearing the Target.
+        e.Target = null;
+    }
+
+    private void PreviewExecutedSuppressHandler(object sender, ExecutedRoutedEventArgs e)
+    {
+        if (e.OriginalSource is DependencyObject d && !IsPartOfThisDialog(d))
+        {
+            // Prevent host-window command execution
+            e.Handled = true;
+        }
+    }
+
+    private void PreviewCanExecuteSuppressHandler(object sender, CanExecuteRoutedEventArgs e)
+    {
+        if (e.OriginalSource is DependencyObject d && !IsPartOfThisDialog(d))
+        {
+            // Prevent host-window command from being considered executable
+            e.CanExecute = false;
+            e.Handled = true;
         }
     }
 }
