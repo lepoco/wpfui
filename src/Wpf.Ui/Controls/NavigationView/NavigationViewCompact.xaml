@@ -282,14 +282,18 @@
     <ControlTemplate x:Key="LeftNavigationViewTemplate" TargetType="{x:Type controls:NavigationView}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition x:Name="PART_PaneColumn" Width="Auto" />
+                <ColumnDefinition
+                    x:Name="SplitterColumn"
+                    Width="Auto"
+                    MinWidth="0" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid
                 x:Name="PaneGrid"
                 Grid.Column="0"
-                Width="{TemplateBinding OpenPaneLength}"
+                HorizontalAlignment="Stretch"
                 Margin="4,0">
                 <Border x:Name="PaneBorder">
                     <Grid>
@@ -436,8 +440,33 @@
                 </Border>
             </Grid>
 
-            <Border
+            <GridSplitter
+                x:Name="PART_GridSplitter"
                 Grid.Column="1"
+                Width="4"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="Transparent"
+                ResizeBehavior="PreviousAndNext"
+                ResizeDirection="Columns"
+                ShowsPreview="False"
+                Visibility="{TemplateBinding IsGridSplitterEnabled,
+                                             Converter={StaticResource BoolToVisibilityConverter}}">
+                <GridSplitter.Style>
+                    <Style TargetType="{x:Type GridSplitter}">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource SystemControlForegroundBaseMediumLowBrush}" />
+                                <Setter Property="Cursor" Value="SizeWE" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </GridSplitter.Style>
+            </GridSplitter>
+
+            <Border
+                Grid.Column="2"
                 Margin="{TemplateBinding FrameMargin}"
                 Background="{DynamicResource NavigationViewContentBackground}"
                 BorderBrush="{DynamicResource NavigationViewContentGridBorderBrush}"
@@ -482,13 +511,6 @@
                             </ObjectAnimationUsingKeyFrames>
                             <DoubleAnimation
                                 AccelerationRatio="0.4"
-                                Storyboard.TargetName="PaneGrid"
-                                Storyboard.TargetProperty="Width"
-                                From="40"
-                                To="{TemplateBinding OpenPaneLength}"
-                                Duration="0:0:.16" />
-                            <DoubleAnimation
-                                AccelerationRatio="0.4"
                                 Storyboard.TargetName="AutoSuggestBoxContentPresenter"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0"
@@ -511,13 +533,6 @@
                                 Storyboard.TargetProperty="Opacity"
                                 From="0"
                                 To="1"
-                                Duration="0:0:.16" />
-                            <DoubleAnimation
-                                AccelerationRatio="0.4"
-                                Storyboard.TargetName="PaneGrid"
-                                Storyboard.TargetProperty="Width"
-                                From="{TemplateBinding OpenPaneLength}"
-                                To="40"
                                 Duration="0:0:.16" />
                             <ObjectAnimationUsingKeyFrames
                                 BeginTime="0:0:0.16"
@@ -558,6 +573,14 @@
             </Trigger>
             <Trigger Property="IsFooterSeparatorVisible" Value="False">
                 <Setter TargetName="PART_FooterSeparator" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsGridSplitterEnabled" Value="False">
+                <Setter TargetName="SplitterColumn" Property="MinWidth" Value="0" />
+                <Setter TargetName="SplitterColumn" Property="Width" Value="0" />
+            </Trigger>
+            <Trigger Property="IsGridSplitterEnabled" Value="True">
+                <Setter TargetName="SplitterColumn" Property="Width" Value="Auto" />
+                <Setter TargetName="SplitterColumn" Property="MinWidth" Value="0" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
