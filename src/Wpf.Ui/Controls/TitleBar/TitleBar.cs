@@ -38,6 +38,13 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private DependencyObject? _parentWindow;
 
+    /// <summary>
+    /// Occurs when a window procedure (WndProc) is invoked, allowing subscribers to inspect or modify the message being
+    /// processed.
+    /// </summary>
+    /// <remarks>
+    /// Subscribers are responsible for catching and handling any exceptions thrown from their event handlers.
+    /// </remarks>
     public event EventHandler<HwndProcEventArgs>? WndProcInvoked;
 
     /// <summary>Identifies the <see cref="ApplicationTheme"/> dependency property.</summary>
@@ -704,13 +711,21 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             htResult = GetWindowBorderHitTestResult(hwnd, lParam);
         }
 
-        var e = new HwndProcEventArgs(hwnd, msg, wParam, lParam, isMouseOverHeaderContent);
-        WndProcInvoked?.Invoke(this, e);
-
-        if (e.ReturnValue != null)
+        // Captures a local copy of the event delegate to prevent race conditions where
+        // another thread may unsubscribe between the null-check and the invocation.
+        EventHandler<HwndProcEventArgs>? wndProcHandler = WndProcInvoked;
+        if (wndProcHandler != null)
         {
-            handled = e.Handled;
-            return e.ReturnValue ?? IntPtr.Zero;
+            // Creates the HwndProcEventArgs object only after confirming
+            // there are subscribers, avoiding unnecessary object allocations.
+            var e = new HwndProcEventArgs(hwnd, msg, wParam, lParam, isMouseOverHeaderContent);
+            wndProcHandler.Invoke(this, e);
+
+            if (e.ReturnValue != null)
+            {
+                handled = e.Handled;
+                return e.ReturnValue ?? IntPtr.Zero;
+            }
         }
 
         switch (message)
