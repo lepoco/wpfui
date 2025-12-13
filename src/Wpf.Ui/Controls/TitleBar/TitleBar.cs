@@ -655,6 +655,51 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             return IntPtr.Zero;
         }
 
+        bool isMouseOverHeaderContent = false;
+        IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
+
+        // For WM_NCHITTEST, perform resize detection first, and skip button hit testing if top-left or top-right corner resize detection succeeds
+        if (message == PInvoke.WM_NCHITTEST)
+        {
+            if (TrailingContent is UIElement || Header is UIElement)
+            {
+                UIElement? headerRightUiElement = TrailingContent as UIElement;
+
+                if (Header is UIElement headerLeftUIElement && headerLeftUIElement != _titleBlock)
+                {
+                    isMouseOverHeaderContent =
+                        headerLeftUIElement.IsMouseOverElement(lParam)
+                        || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+                }
+                else
+                {
+                    isMouseOverHeaderContent = headerRightUiElement?.IsMouseOverElement(lParam) ?? false;
+                }
+            }
+
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+            
+            // Skip button hit testing if top-left or top-right corner resize detection succeeds
+            if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
+            {
+                handled = true;
+                return htResult;
+            }
+        }
+        // For WM_NCLBUTTONDOWN, also skip button hit testing if within top-left or top-right corner resize area
+        // This ensures resize handling works correctly
+        else if (message == PInvoke.WM_NCLBUTTONDOWN)
+        {
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+            if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
+            {
+                // If within top-left or top-right corner resize area, skip button hit testing
+                // and let Windows handle the default resize processing
+                handled = false;
+                return IntPtr.Zero;
+            }
+        }
+
         foreach (TitleBarButton button in _buttons)
         {
             if (!button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
@@ -678,30 +723,6 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 
             handled = true;
             return returnIntPtr;
-        }
-
-        bool isMouseOverHeaderContent = false;
-        IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
-
-        if (message == PInvoke.WM_NCHITTEST)
-        {
-            if (TrailingContent is UIElement || Header is UIElement)
-            {
-                UIElement? headerRightUiElement = TrailingContent as UIElement;
-
-                if (Header is UIElement headerLeftUIElement && headerLeftUIElement != _titleBlock)
-                {
-                    isMouseOverHeaderContent =
-                        headerLeftUIElement.IsMouseOverElement(lParam)
-                        || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
-                }
-                else
-                {
-                    isMouseOverHeaderContent = headerRightUiElement?.IsMouseOverElement(lParam) ?? false;
-                }
-            }
-
-            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
         }
 
         var e = new HwndProcEventArgs(hwnd, msg, wParam, lParam, isMouseOverHeaderContent);

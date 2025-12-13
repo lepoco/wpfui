@@ -285,6 +285,13 @@ public class FluentWindow : System.Windows.Window
         {
             if (Utilities.IsCompositionEnabled)
             {
+                // Get the title bar height and set it as the top resize border
+                // This enables resizing from the top-left and top-right corners of the title bar
+                double captionHeight = SystemParameters.CaptionHeight;
+                Thickness resizeBorderThickness = ResizeMode == ResizeMode.NoResize
+                    ? default
+                    : new Thickness(4, captionHeight, 4, 4);
+
                 WindowChrome.SetWindowChrome(
                     this,
                     new WindowChrome
@@ -295,8 +302,7 @@ public class FluentWindow : System.Windows.Window
                             WindowBackdropType == WindowBackdropType.None
                                 ? new Thickness(0.00001)
                                 : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
-                        ResizeBorderThickness =
-                            ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                        ResizeBorderThickness = resizeBorderThickness,
                         UseAeroCaptionButtons = false,
                     }
                 );
