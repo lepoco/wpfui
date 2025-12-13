@@ -6,6 +6,10 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
+using System;
+using System.ComponentModel;
+using System.Windows;
+
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
@@ -30,6 +34,7 @@ namespace Wpf.Ui.Controls;
     Name = TemplateElementAutoSuggestBoxSymbolButton,
     Type = typeof(System.Windows.Controls.Button)
 )]
+[TemplatePart(Name = TemplateElementPaneColumn, Type = typeof(System.Windows.Controls.ColumnDefinition))]
 public partial class NavigationView
 {
     /// <summary>
@@ -64,6 +69,11 @@ public partial class NavigationView
     private const string TemplateElementAutoSuggestBoxSymbolButton = "PART_AutoSuggestBoxSymbolButton";
 
     /// <summary>
+    /// Template element represented by the <c>PART_PaneColumn</c> name.
+    /// </summary>
+    private const string TemplateElementPaneColumn = "PART_PaneColumn";
+
+    /// <summary>
     /// Gets or sets the control responsible for rendering the content.
     /// </summary>
     protected NavigationViewContentPresenter NavigationViewContentPresenter { get; set; } = null!;
@@ -92,6 +102,14 @@ public partial class NavigationView
     /// Gets or sets the control that is visitable if PaneDisplayMode="Left" and in compact state
     /// </summary>
     protected System.Windows.Controls.Button? AutoSuggestBoxSymbolButton { get; set; }
+
+    /// <summary>
+    /// Gets or sets the pane column definition for GridSplitter support.
+    /// </summary>
+    protected System.Windows.Controls.ColumnDefinition? PaneColumn { get; set; }
+
+    private DependencyPropertyDescriptor? _openPaneLengthDescriptor;
+    private DependencyPropertyDescriptor? _isPaneOpenDescriptor;
 
     /// <inheritdoc />
     public override void OnApplyTemplate()
@@ -148,6 +166,100 @@ public partial class NavigationView
 
             ToggleButton.Click -= OnToggleButtonClick;
             ToggleButton.Click += OnToggleButtonClick;
+        }
+
+        // Clean up previous event handlers
+        if (_openPaneLengthDescriptor != null)
+        {
+            _openPaneLengthDescriptor.RemoveValueChanged(this, OnPanePropertyChanged);
+            _openPaneLengthDescriptor = null;
+        }
+
+        if (_isPaneOpenDescriptor != null)
+        {
+            _isPaneOpenDescriptor.RemoveValueChanged(this, OnPanePropertyChanged);
+            _isPaneOpenDescriptor = null;
+        }
+
+        // Initialize PaneColumn width for GridSplitter support
+        var paneColumn = GetTemplateChild(TemplateElementPaneColumn) as System.Windows.Controls.ColumnDefinition;
+        if (paneColumn != null)
+        {
+            PaneColumn = paneColumn;
+            
+            // Set initial width using OpenPaneLength
+            if (IsPaneOpen && OpenPaneLength > 0)
+            {
+                PaneColumn.Width = new GridLength(OpenPaneLength);
+            }
+            else if (!IsPaneOpen)
+            {
+                PaneColumn.Width = new GridLength(40.0);
+            }
+            
+            // Update on next render pass to avoid issues
+            Dispatcher.BeginInvoke(new Action(UpdatePaneColumnWidth), System.Windows.Threading.DispatcherPriority.Loaded);
+
+            // Listen to OpenPaneLength and IsPaneOpen changes
+            _openPaneLengthDescriptor = DependencyPropertyDescriptor.FromProperty(OpenPaneLengthProperty, typeof(NavigationView));
+            if (_openPaneLengthDescriptor != null)
+            {
+                _openPaneLengthDescriptor.AddValueChanged(this, OnPanePropertyChanged);
+            }
+
+            _isPaneOpenDescriptor = DependencyPropertyDescriptor.FromProperty(IsPaneOpenProperty, typeof(NavigationView));
+            if (_isPaneOpenDescriptor != null)
+            {
+                _isPaneOpenDescriptor.AddValueChanged(this, OnPanePropertyChanged);
+            }
+        }
+        else
+        {
+            PaneColumn = null;
+        }
+    }
+
+    private void OnPanePropertyChanged(object? sender, EventArgs e)
+    {
+        if (Dispatcher.CheckAccess())
+        {
+            UpdatePaneColumnWidth();
+        }
+        else
+        {
+            Dispatcher.BeginInvoke(new Action(UpdatePaneColumnWidth), System.Windows.Threading.DispatcherPriority.Normal);
+        }
+    }
+
+    private void UpdatePaneColumnWidth()
+    {
+        if (PaneColumn is null)
+        {
+            return;
+        }
+
+        try
+        {
+            // Don't update if GridSplitter is enabled and user has manually resized
+            // This allows GridSplitter to control the width
+            var currentWidth = PaneColumn.Width.IsAbsolute ? PaneColumn.Width.Value : (IsPaneOpen ? OpenPaneLength : 40.0);
+            var expectedWidth = IsPaneOpen ? OpenPaneLength : 40.0;
+
+            if (IsGridSplitterEnabled && Math.Abs(currentWidth - expectedWidth) > 1.0)
+            {
+                // User has manually resized, don't override
+                return;
+            }
+
+            var targetWidth = expectedWidth;
+            if (Math.Abs(currentWidth - targetWidth) > 0.1)
+            {
+                PaneColumn.SetCurrentValue(System.Windows.Controls.ColumnDefinition.WidthProperty, new GridLength(targetWidth));
+            }
+        }
+        catch
+        {
+            // Ignore errors during initialization
         }
     }
 

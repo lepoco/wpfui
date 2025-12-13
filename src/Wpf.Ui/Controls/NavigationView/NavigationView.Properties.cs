@@ -259,6 +259,14 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(default(Thickness))
     );
 
+    /// <summary>Identifies the <see cref="IsGridSplitterEnabled"/> dependency property.</summary>
+    public static readonly DependencyProperty IsGridSplitterEnabledProperty = DependencyProperty.Register(
+        nameof(IsGridSplitterEnabled),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(false)
+    );
+
     /// <summary>
     /// Gets or sets a value indicating whether debugging messages for this control are enabled
     /// </summary>
@@ -478,6 +486,13 @@ public partial class NavigationView
     {
         get => (Thickness)GetValue(FrameMarginProperty);
         set => SetValue(FrameMarginProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public bool IsGridSplitterEnabled
+    {
+        get => (bool)GetValue(IsGridSplitterEnabledProperty);
+        set => SetValue(IsGridSplitterEnabledProperty, value);
     }
 
     private void OnMenuItemsSource_CollectionChanged(
