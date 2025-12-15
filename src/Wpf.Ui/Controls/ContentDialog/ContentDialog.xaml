@@ -46,6 +46,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}"
                             Focusable="False"
+                            VerticalAlignment="Center"
                             Opacity="1">
                             <Border.Effect>
                                 <DropShadowEffect
