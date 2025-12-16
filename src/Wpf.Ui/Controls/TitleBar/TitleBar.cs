@@ -486,7 +486,9 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             _parentWindow = VisualTreeHelper.GetParent(_parentWindow);
         }
 
-        MouseRightButtonUp += TitleBar_MouseRightButtonUp;
+        // HwndSourceHook handles the system menu, no additional processing needed.
+        // Temporarily commented out, can be restored if WPF-based processing is needed in the future.
+        // MouseRightButtonUp += TitleBar_MouseRightButtonUp;
 
         /*_mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);*/
         _icon = GetTemplateChild<System.Windows.Controls.ContentPresenter>(ElementIcon);
