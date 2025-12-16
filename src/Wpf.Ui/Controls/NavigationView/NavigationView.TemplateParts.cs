@@ -110,6 +110,7 @@ public partial class NavigationView
 
     private DependencyPropertyDescriptor? _openPaneLengthDescriptor;
     private DependencyPropertyDescriptor? _isPaneOpenDescriptor;
+    private double _lastOpenPaneWidth = double.NaN;
 
     /// <inheritdoc />
     public override void OnApplyTemplate()
@@ -187,10 +188,13 @@ public partial class NavigationView
         {
             PaneColumn = paneColumn;
             
-            // Set initial width using OpenPaneLength
+            // Set initial width using OpenPaneLength or saved width
             if (IsPaneOpen && OpenPaneLength > 0)
             {
-                PaneColumn.Width = new GridLength(OpenPaneLength);
+                var initialWidth = !double.IsNaN(_lastOpenPaneWidth) && _lastOpenPaneWidth > 0
+                    ? _lastOpenPaneWidth
+                    : OpenPaneLength;
+                PaneColumn.Width = new GridLength(initialWidth);
             }
             else if (!IsPaneOpen)
             {
@@ -240,21 +244,88 @@ public partial class NavigationView
 
         try
         {
-            // Don't update if GridSplitter is enabled and user has manually resized
-            // This allows GridSplitter to control the width
-            var currentWidth = PaneColumn.Width.IsAbsolute ? PaneColumn.Width.Value : (IsPaneOpen ? OpenPaneLength : 40.0);
-            var expectedWidth = IsPaneOpen ? OpenPaneLength : 40.0;
-
-            if (IsGridSplitterEnabled && Math.Abs(currentWidth - expectedWidth) > 1.0)
+            // If pane is closed, don't update the width - maintain closed state
+            // This prevents the pane from automatically opening when window size changes
+            if (!IsPaneOpen)
             {
-                // User has manually resized, don't override
+                // Only ensure it's set to 40.0 if it's not already
+                if (!PaneColumn.Width.IsAbsolute || Math.Abs(PaneColumn.Width.Value - 40.0) > 0.1)
+                {
+                    PaneColumn.SetCurrentValue(System.Windows.Controls.ColumnDefinition.WidthProperty, new GridLength(40.0));
+                }
                 return;
             }
 
-            var targetWidth = expectedWidth;
+            // Only update width when pane is open
+            var currentWidth = PaneColumn.Width.IsAbsolute ? PaneColumn.Width.Value : OpenPaneLength;
+            var targetWidth = !double.IsNaN(_lastOpenPaneWidth) && _lastOpenPaneWidth > 0
+                ? _lastOpenPaneWidth
+                : OpenPaneLength;
+
+            // Don't update if GridSplitter is enabled and user has manually resized
+            // This allows GridSplitter to control the width
+            if (IsGridSplitterEnabled && Math.Abs(currentWidth - targetWidth) > 1.0)
+            {
+                // User has manually resized, save the current width
+                if (PaneColumn.Width.IsAbsolute)
+                {
+                    _lastOpenPaneWidth = PaneColumn.Width.Value;
+                }
+                return;
+            }
+
+            // Update to target width
             if (Math.Abs(currentWidth - targetWidth) > 0.1)
             {
                 PaneColumn.SetCurrentValue(System.Windows.Controls.ColumnDefinition.WidthProperty, new GridLength(targetWidth));
+            }
+        }
+        catch
+        {
+            // Ignore errors during initialization
+        }
+    }
+
+    /// <summary>
+    /// Updates PaneColumn width when pane is toggled open/closed.
+    /// This is called from OnPaneOpened/OnPaneClosed to ensure width updates even if user has resized.
+    /// </summary>
+    private void UpdatePaneColumnWidthForToggle()
+    {
+        if (PaneColumn is null)
+        {
+            return;
+        }
+
+        try
+        {
+            if (IsPaneOpen)
+            {
+                // When opening, use the last saved width if available, otherwise use OpenPaneLength
+                var targetWidth = !double.IsNaN(_lastOpenPaneWidth) && _lastOpenPaneWidth > 0
+                    ? _lastOpenPaneWidth
+                    : OpenPaneLength;
+                
+                if (targetWidth > 0)
+                {
+                    PaneColumn.SetCurrentValue(System.Windows.Controls.ColumnDefinition.WidthProperty, new GridLength(targetWidth));
+                }
+            }
+            else
+            {
+                // When closing, save the current width if GridSplitter is enabled and pane was resized
+                if (IsGridSplitterEnabled && PaneColumn.Width.IsAbsolute)
+                {
+                    var currentWidth = PaneColumn.Width.Value;
+                    // Only save if it's different from the default OpenPaneLength (user has resized)
+                    if (Math.Abs(currentWidth - OpenPaneLength) > 1.0)
+                    {
+                        _lastOpenPaneWidth = currentWidth;
+                    }
+                }
+                
+                // Always set to 40.0 when closing
+                PaneColumn.SetCurrentValue(System.Windows.Controls.ColumnDefinition.WidthProperty, new GridLength(40.0));
             }
         }
         catch
