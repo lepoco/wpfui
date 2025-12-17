@@ -36,5 +36,33 @@
                 CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
                 Content="Open custom MessageBox" />
         </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="Three Button MessageBox. (Default Focus: Secondary Button)">
+            <Button
+                Command="{Binding ViewModel.OpenThreeButtonMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Open three button MessageBox" />
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="MessageBox with Focusable Content. (Default Focus: Primary Button)">
+            <Button
+                Command="{Binding ViewModel.OpenMessageBoxWithFocusableContentCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Open MessageBox with TextBox" />
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="MessageBox with Icons. (Default Focus: Secondary Button)">
+            <Button
+                Command="{Binding ViewModel.OpenMessageBoxWithIconsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Open MessageBox with icon" />
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="MessageBox with Auto Focus. (Default Focus: Primary Button - automatically set when no button or non-button control has focus)">
+            <Button
+                Command="{Binding ViewModel.OpenMessageBoxWithAutoFocusCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Open MessageBox with auto focus" />
+        </controls:ControlExample>
     </StackPanel>
 </Page>
