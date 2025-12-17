@@ -48,15 +48,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MessageBox}">
-                    <Grid Background="{TemplateBinding Background}">
-                        <AdornerDecorator>
-                            <Grid>
+                    <Grid Background="{TemplateBinding Background}" Focusable="False">
+                        <AdornerDecorator Focusable="False">
+                            <Grid Focusable="False">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Border Grid.RowSpan="2" Background="{DynamicResource MessageBoxTopOverlay}" />
+                                <Border Grid.RowSpan="2" Background="{DynamicResource MessageBoxTopOverlay}" Focusable="False" />
                                 <TextBlock
                                     x:Name="Title"
                                     Grid.Row="0"
@@ -64,13 +64,15 @@
                                     FontWeight="SemiBold"
                                     Foreground="{TemplateBinding Foreground}"
                                     Text="{TemplateBinding Title}"
-                                    TextWrapping="Wrap" />
+                                    TextWrapping="Wrap"
+                                    Focusable="False" />
 
                                 <controls:TitleBar
                                     Grid.Row="0"
                                     ForceShutdown="False"
                                     ShowMaximize="False"
-                                    ShowMinimize="False" />
+                                    ShowMinimize="False"
+                                    Focusable="False" />
 
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
@@ -78,7 +80,8 @@
                                     Margin="12,10,12,12"
                                     Content="{TemplateBinding Content}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"
-                                    ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
+                                    ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                    Focusable="False">
                                     <ContentPresenter.Resources>
                                         <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
                                             <Setter Property="TextWrapping" Value="WrapWithOverflow" />
@@ -94,8 +97,9 @@
                                     VerticalAlignment="Bottom"
                                     BorderBrush="{DynamicResource MessageBoxSeparatorBorderBrush}"
                                     BorderThickness="0,1,0,0"
-                                    CornerRadius="0">
-                                    <Grid>
+                                    CornerRadius="0"
+                                    Focusable="False">
+                                    <Grid Focusable="False">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition x:Name="PrimaryColumn" Width="*" />
                                             <ColumnDefinition x:Name="FirstSpacer" Width="8" />
@@ -105,6 +109,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <controls:Button
+                                            x:Name="PART_MessageBoxPrimaryButton"
                                             Grid.Column="0"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding PrimaryButtonAppearance}"
@@ -112,12 +117,14 @@
                                             CommandParameter="{x:Static controls:MessageBoxButton.Primary}"
                                             Content="{TemplateBinding PrimaryButtonText}"
                                             Icon="{TemplateBinding PrimaryButtonIcon}"
-                                            IsDefault="True"
                                             IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"
+                                            Focusable="True"
+                                            IsTabStop="True"
                                             Visibility="{TemplateBinding IsPrimaryButtonEnabled,
                                                                          Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
+                                            x:Name="PART_MessageBoxSecondaryButton"
                                             Grid.Column="2"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding SecondaryButtonAppearance}"
@@ -126,10 +133,13 @@
                                             Content="{TemplateBinding SecondaryButtonText}"
                                             Icon="{TemplateBinding SecondaryButtonIcon}"
                                             IsEnabled="{TemplateBinding IsSecondaryButtonEnabled}"
+                                            Focusable="True"
+                                            IsTabStop="True"
                                             Visibility="{TemplateBinding IsSecondaryButtonEnabled,
                                                                          Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
+                                            x:Name="PART_MessageBoxCloseButton"
                                             Grid.Column="4"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding CloseButtonAppearance}"
@@ -137,7 +147,9 @@
                                             CommandParameter="{x:Static controls:MessageBoxButton.Close}"
                                             Content="{TemplateBinding CloseButtonText}"
                                             Icon="{TemplateBinding CloseButtonIcon}"
-                                            IsCancel="True" />
+                                            IsCancel="True"
+                                            Focusable="True"
+                                            IsTabStop="True" />
                                     </Grid>
                                 </Border>
                             </Grid>
