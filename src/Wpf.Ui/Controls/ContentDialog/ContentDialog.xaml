@@ -134,6 +134,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <controls:Button
+                                            x:Name="PART_ContentDialogPrimaryButton"
                                             Grid.Column="0"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding PrimaryButtonAppearance}"
@@ -145,10 +146,13 @@
                                                                         Converter={StaticResource EnumToBoolConverter},
                                                                         ConverterParameter={x:Static controls:ContentDialogButton.Primary}}"
                                             IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"
+                                            Focusable="True"
+                                            IsTabStop="True"
                                             Visibility="{TemplateBinding IsPrimaryButtonEnabled,
                                                                          Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
+                                            x:Name="PART_ContentDialogSecondaryButton"
                                             Grid.Column="2"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding SecondaryButtonAppearance}"
@@ -160,10 +164,13 @@
                                                                         Converter={StaticResource EnumToBoolConverter},
                                                                         ConverterParameter={x:Static controls:ContentDialogButton.Secondary}}"
                                             IsEnabled="{TemplateBinding IsSecondaryButtonEnabled}"
+                                            Focusable="True"
+                                            IsTabStop="True"
                                             Visibility="{TemplateBinding IsSecondaryButtonEnabled,
                                                                          Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
+                                            x:Name="PART_ContentDialogCloseButton"
                                             Grid.Column="4"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding CloseButtonAppearance}"
@@ -174,7 +181,9 @@
                                             IsCancel="True"
                                             IsDefault="{TemplateBinding DefaultButton,
                                                                         Converter={StaticResource EnumToBoolConverter},
-                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Close}}" />
+                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Close}}"
+                                            Focusable="True"
+                                            IsTabStop="True" />
                                     </Grid>
                                 </Border>
                             </Grid>

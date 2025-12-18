@@ -642,6 +642,30 @@ public class ContentDialog : ContentControl
         _ = Focus();
 
         RaiseEvent(new RoutedEventArgs(OpenedEvent));
+
+        // Set focus to the first available button after the visual tree is fully loaded
+        // Loaded event provides the appropriate timing for setting focus, so we call it directly
+        // without delay to avoid interfering with other developers' focus logic
+        // Skip IsFocused check at this point as the dialog may not have focus yet
+        SetFocusToFirstAvailableButton(checkIsFocused: false);
+
+        // After content is rendered, validate focus state
+        // This ensures the dialog is fully displayed before validating focus
+        // At this point, check IsFocused to avoid overriding developer's focus logic
+        Dispatcher.BeginInvoke(new Action(() =>
+        {
+            SetFocusToFirstAvailableButton(checkIsFocused: true);
+        }), System.Windows.Threading.DispatcherPriority.Loaded);
+    }
+
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+        
+        // After template is applied, try to set focus
+        // OnLoaded will also try, but this ensures we try as early as possible
+        // Skip IsFocused check at this point as the dialog may not have focus yet
+        SetFocusToFirstAvailableButton(checkIsFocused: false);
     }
 
     private Size GetNewDialogSize(Size desiredSize)
@@ -695,5 +719,133 @@ public class ContentDialog : ContentControl
             SetCurrentValue(DialogMaxWidthProperty, DialogWidth);
             /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");*/
         }
+    }
+
+    /// <summary>
+    /// Checks if a button is available and enabled for focus.
+    /// </summary>
+    private static bool IsButtonAvailableForFocus(Button? button, bool isEnabled)
+    {
+        return button != null 
+            && isEnabled 
+            && button.IsEnabled 
+            && button.IsVisible 
+            && button.Focusable;
+    }
+
+    /// <summary>
+    /// Attempts to set focus to the specified button using multiple methods.
+    /// </summary>
+    private static bool TrySetFocusToButton(Button button)
+    {
+        // Method 1: Keyboard.Focus (most reliable for modal dialogs)
+        if (System.Windows.Input.Keyboard.Focus(button) == button)
+        {
+            return true;
+        }
+        
+        // Method 2: Focus() method
+        if (button.Focus())
+        {
+            return true;
+        }
+        
+        // Method 3: MoveFocus
+        var request = new System.Windows.Input.TraversalRequest(System.Windows.Input.FocusNavigationDirection.First);
+        return button.MoveFocus(request);
+    }
+
+    /// <summary>
+    /// Sets focus to the first available button in the ContentDialog.
+    /// Focus will be set to the first available button (Primary > Secondary > Close).
+    /// </summary>
+    /// <param name="checkIsFocused">If true, check IsFocused before setting focus. If false, skip the check.</param>
+    /// <returns>True if focus was successfully set, false otherwise.</returns>
+    private bool SetFocusToFirstAvailableButton(bool checkIsFocused = true)
+    {
+        // Get buttons directly from template using GetTemplateChild for efficiency
+        Button? primaryButton = GetTemplateChild("PART_ContentDialogPrimaryButton") as Button;
+        Button? secondaryButton = GetTemplateChild("PART_ContentDialogSecondaryButton") as Button;
+        Button? closeButton = GetTemplateChild("PART_ContentDialogCloseButton") as Button;
+
+        // If template is not applied yet, buttons will be null
+        if (primaryButton == null && secondaryButton == null && closeButton == null)
+        {
+            return false;
+        }
+
+        // Check if focus is already set to a button or to a non-button control
+        // If checkIsFocused is true, we need to verify that:
+        // 1. Focus is not already on any button (if so, don't override)
+        // 2. Focus is not on a non-button control (e.g., TextBox) - developer's focus logic is active
+        // 3. If focus is on ContentDialog itself or nowhere, we should set focus to primaryButton
+        if (checkIsFocused)
+        {
+            var currentFocusedElement = System.Windows.Input.Keyboard.FocusedElement;
+            
+            // Check if focus is already on any button
+            if (currentFocusedElement == primaryButton || 
+                currentFocusedElement == secondaryButton || 
+                currentFocusedElement == closeButton)
+            {
+                // Focus is already on a button, don't override
+                return false;
+            }
+            
+            // Check if focus is on a non-button control within ContentDialog
+            // If IsFocused is false and currentFocusedElement is not the ContentDialog itself,
+            // it means an internal control (e.g., TextBox) has focus
+            if (!IsFocused && currentFocusedElement != this)
+            {
+                // An internal control (not the ContentDialog itself) has focus, avoid overriding
+                return false;
+            }
+            
+            // If we reach here, focus is either on ContentDialog itself or nowhere
+            // In this case, we should set focus to primaryButton
+        }
+
+        // Update layout once for the dialog
+        UpdateLayout();
+
+        // If DefaultButton is specified, try to set focus to that button
+        Button? targetButton = DefaultButton switch
+        {
+            ContentDialogButton.Primary => primaryButton,
+            ContentDialogButton.Secondary => secondaryButton,
+            ContentDialogButton.Close => closeButton,
+            _ => null,
+        };
+
+        bool isButtonEnabled = DefaultButton switch
+        {
+            ContentDialogButton.Primary => IsPrimaryButtonEnabled,
+            ContentDialogButton.Secondary => IsSecondaryButtonEnabled,
+            ContentDialogButton.Close => true, // Close button is always enabled
+            _ => false,
+        };
+
+        if (IsButtonAvailableForFocus(targetButton, isButtonEnabled))
+        {
+            return TrySetFocusToButton(targetButton!);
+        }
+
+        // Fallback to automatic selection: Set focus to the first available button
+        if (IsButtonAvailableForFocus(primaryButton, IsPrimaryButtonEnabled))
+        {
+            return TrySetFocusToButton(primaryButton!);
+        }
+        
+        if (IsButtonAvailableForFocus(secondaryButton, IsSecondaryButtonEnabled))
+        {
+            return TrySetFocusToButton(secondaryButton!);
+        }
+        
+        if (IsButtonAvailableForFocus(closeButton, true)) // Close button is always enabled
+        {
+            return TrySetFocusToButton(closeButton!);
+        }
+
+        return false;
     }
 }

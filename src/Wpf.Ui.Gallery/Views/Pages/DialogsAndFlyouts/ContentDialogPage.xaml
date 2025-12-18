@@ -47,5 +47,61 @@
         <controls:ControlExample Margin="0,36,0,0" HeaderText="Terms of Use ContentDialog example">
             <Button Command="{Binding ShowSignInContentDialogCommand}" Content="Show" />
         </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="Three Button ContentDialog. (Default Focus: Secondary Button)">
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Command="{Binding ShowThreeButtonContentDialogCommand}"
+                    Content="Show" />
+
+                <TextBlock
+                    Margin="15,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding DialogResultText}" />
+            </StackPanel>
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="ContentDialog with Focusable Content. (Default Focus: Primary Button)">
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Command="{Binding ShowContentDialogWithFocusableContentCommand}"
+                    Content="Show" />
+
+                <TextBlock
+                    Margin="15,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding DialogResultText}" />
+            </StackPanel>
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="ContentDialog with Icons. (Default Focus: Secondary Button)">
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Command="{Binding ShowContentDialogWithIconsCommand}"
+                    Content="Show" />
+
+                <TextBlock
+                    Margin="15,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding DialogResultText}" />
+            </StackPanel>
+        </controls:ControlExample>
+
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="ContentDialog with Auto Focus. (Default Focus: Primary Button - automatically set when no button or non-button control has focus)">
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Command="{Binding ShowContentDialogWithAutoFocusCommand}"
+                    Content="Show" />
+
+                <TextBlock
+                    Margin="15,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding DialogResultText}" />
+            </StackPanel>
+        </controls:ControlExample>
     </StackPanel>
 </Page>
