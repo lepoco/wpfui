@@ -693,6 +693,9 @@ public class ContentDialog : ContentControl
         OnUnloaded();
     }
 
+    /// <summary>
+    /// Occurs after Unloaded event
+    /// </summary>
     protected virtual void OnUnloaded()
     {
     }
