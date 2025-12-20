@@ -479,6 +479,12 @@ public class ContentDialog : ContentControl
                 var self = (ContentDialog)sender;
                 self.OnLoaded();
             };
+
+            Unloaded += static (sender, _) =>
+            {
+                var self = (ContentDialog)sender;
+                self.OnUnloadedInternal();
+            };
         }
     }
 
@@ -506,18 +512,31 @@ public class ContentDialog : ContentControl
                 var self = (ContentDialog)sender;
                 self.OnLoaded();
             };
+
+            Unloaded += static (sender, _) =>
+            {
+                var self = (ContentDialog)sender;
+                self.OnUnloadedInternal();
+            };
         }
     }
 
     /// <summary>
     ///  Gets or sets <see cref="DialogHost"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.
     /// </summary>
+    /// <remarks>
+    /// Set this property <strong>before calling <see cref="ShowAsync"/> method</strong>.
+    /// Changes made while the dialog is displayed will not take effect.
+    /// </remarks>
     public ContentPresenter? DialogHost { get; set; } = default;
 
     [Obsolete("ContentPresenter is deprecated. Please use DialogHost instead.")]
     public ContentPresenter? ContentPresenter { get; set; } = default;
 
     protected TaskCompletionSource<ContentDialogResult>? Tcs { get; set; }
+
+    // Captured host assigned during ShowAsync to avoid races when DialogHost property is changed externally.
+    private ContentPresenter? _capturedDialogHost;
 
     /// <summary>
     /// Shows the dialog
@@ -542,9 +561,12 @@ public class ContentDialog : ContentControl
 
         ContentDialogResult result = ContentDialogResult.None;
 
+        // Capture the host to avoid races where DialogHost may be changed by other code
+        _capturedDialogHost = DialogHost;
+
         try
         {
-            DialogHost.Content = this;
+            _capturedDialogHost.Content = this;
             result = await Tcs.Task;
 
             return result;
@@ -556,7 +578,16 @@ public class ContentDialog : ContentControl
 #else
             tokenRegistration.Dispose();
 #endif
-            DialogHost.Content = null;
+
+            // Only clear the DialogHost content if this instance is still the current content.
+            if (ReferenceEquals(_capturedDialogHost.Content, this))
+            {
+                _capturedDialogHost.Content = null;
+            }
+
+            // Clear captured host reference after finishing.
+            _capturedDialogHost = null;
+
             OnClosed(result);
         }
     }
@@ -642,6 +673,28 @@ public class ContentDialog : ContentControl
         _ = Focus();
 
         RaiseEvent(new RoutedEventArgs(OpenedEvent));
+    }
+
+    private void OnUnloadedInternal()
+    {
+        if (!ReferenceEquals(_capturedDialogHost?.Content, this))
+        {
+            // If a new dialog instance is created and shown (e.g., via ShowAsync) while this dialog is still displayed,
+            // this instance will be removed from the visual tree. If the Hide method has not been called to complete the async operation,
+            // the ShowAsync task will be left dangling — waiting indefinitely without returning.
+            // Therefore, when this instance is removed from the visual tree, we must check the async task status:
+            // if not completed, return ContentDialogResult.None to resolve it.
+            if (Tcs is { Task.IsCompleted: false })
+            {
+                _ = Tcs.TrySetResult(ContentDialogResult.None);
+            }
+        }
+
+        OnUnloaded();
+    }
+
+    protected virtual void OnUnloaded()
+    {
     }
 
     private Size GetNewDialogSize(Size desiredSize)
