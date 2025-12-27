@@ -16,17 +16,17 @@ public static class TextBlockFontTypographyExtensions
     ///  Converts the typography type enumeration to the name of the resource that represents it.
     /// </summary>
     /// <returns>Name of the resource matching the <see cref="FontTypography"/>. <see cref="ArgumentOutOfRangeException"/> otherwise.</returns>
-    public static string ToResourceValue(this FontTypography typography)
+    public static string ToResourceKey(this FontTypography typography)
     {
         return typography switch
         {
-            FontTypography.Caption => "CaptionTextBlockStyle",
-            FontTypography.Body => "BodyTextBlockStyle",
-            FontTypography.BodyStrong => "BodyStrongTextBlockStyle",
-            FontTypography.Subtitle => "SubtitleTextBlockStyle",
-            FontTypography.Title => "TitleTextBlockStyle",
-            FontTypography.TitleLarge => "TitleLargeTextBlockStyle",
-            FontTypography.Display => "DisplayTextBlockStyle",
+            FontTypography.Caption => "CaptionFontTypography",
+            FontTypography.Body => "BodyFontTypography",
+            FontTypography.BodyStrong => "BodyStrongFontTypography",
+            FontTypography.Subtitle => "SubtitleFontTypography",
+            FontTypography.Title => "TitleFontTypography",
+            FontTypography.TitleLarge => "TitleLargeFontTypography",
+            FontTypography.Display => "DisplayFontTypography",
             _ => throw new ArgumentOutOfRangeException(nameof(typography), typography, null),
         };
     }

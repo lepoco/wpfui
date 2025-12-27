@@ -16,7 +16,7 @@ public static class TextColorExtensions
     /// Converts the text color type enumeration to the name of the resource that represents it.
     /// </summary>
     /// <returns>Name of the resource matching the <see cref="TextColor"/>. <see cref="ArgumentOutOfRangeException"/> otherwise.</returns>
-    public static string ToResourceValue(this TextColor textColor)
+    public static string ToResourceKey(this TextColor textColor)
     {
         return textColor switch
         {

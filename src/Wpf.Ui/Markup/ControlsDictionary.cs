@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Markup;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Markup;
 
@@ -30,6 +31,12 @@ namespace Wpf.Ui.Markup;
 public class ControlsDictionary : ResourceDictionary
 {
     private const string DictionaryUri = "pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml";
+
+    static ControlsDictionary()
+    {
+        // Ensure framework metadata overrides are applied as early as possible for this type.
+        TextBlockMetadataInitializer.EnsureInitialized();
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ControlsDictionary"/> class.

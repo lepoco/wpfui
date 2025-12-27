@@ -5,21 +5,42 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style TargetType="{x:Type TextBlock}">
+    <Style x:Key="DefaultTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <!--
+            INTERNAL THEMING INFRASTRUCTURE — NOT A PUBLIC USAGE PATTERN
 
-        <!--<Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>-->
+            This setter attaches an internal DynamicResource reference used by WPFUI
+            to provide a themed fallback Foreground for framework TextBlock instances
+            when no explicit Foreground is set.
 
-        <!--  The Display option causes a large aliasing effect  -->
-        <!--<Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />-->
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+            The attached property exists solely as an implementation detail to allow
+            the WPF resource system to resolve and cache the themed brush efficiently,
+            without performing resource lookups (TryFindResource) from dependency
+            property metadata callbacks.
+
+            This is not a general-purpose theming mechanism and is not intended to be
+            used or set directly by applications or custom controls.
+
+            Behavior:
+            - If Foreground is explicitly set (locally or via a Style), that value
+              remains authoritative.
+            - If Foreground is unset, the attached themed brush is used as a dynamic
+              fallback and will update automatically on theme or resource changes.
+
+            Important:
+            If an application replaces this Style and does not include this setter,
+            WPFUI's themed foreground fallback will not apply. In that case, applications
+            should reference the theme brush directly (for example,
+            {DynamicResource TextFillColorPrimaryBrush}).
+        -->
+        <Setter Property="controls:TextBlockTheming.FallbackForeground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
     </Style>
+
+    <Style BasedOn="{StaticResource DefaultTextBlockStyle}" TargetType="{x:Type TextBlock}" />
 
 </ResourceDictionary>
