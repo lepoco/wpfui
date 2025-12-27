@@ -34,12 +34,19 @@
             Padding="12"
             Background="{ui:ThemeResource ControlFillColorDefaultBrush}"
             CornerRadius="8">
+
+            <Border.Resources>
+                <Style TargetType="ui:TextBlock">
+                    <Setter Property="Foreground" Value="ForestGreen" />
+                </Style>
+            </Border.Resources>
             <StackPanel>
                 <ui:TextBlock Text="For UI labels and static text" />
                 <ui:TextBlock
                     Margin="0,12,0,24"
                     HorizontalAlignment="Center"
                     FontSize="42"
+                    FontTypography="Title"
                     FontWeight="SemiBold"
                     Text="Aa" />
             </StackPanel>

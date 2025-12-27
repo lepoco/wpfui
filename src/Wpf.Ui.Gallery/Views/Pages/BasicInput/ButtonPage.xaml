@@ -71,10 +71,14 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ui:Button
+                <Grid.Resources>
+                    <Style TargetType="ui:TextBlock" BasedOn="{StaticResource {x:Type ui:TextBlock}}">
+                        <Setter Property="Foreground" Value="BlueViolet"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <ui:TextBlock
                     Grid.Column="0"
-                    Content="WPF UI button"
-                    Icon="{ui:SymbolIcon Fluent24}"
+                    Text="WPF UI button"
                     IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
                 <CheckBox
                     Grid.Column="1"
