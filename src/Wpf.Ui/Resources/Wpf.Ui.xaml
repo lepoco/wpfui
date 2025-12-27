@@ -81,7 +81,6 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/SplitButton/SplitButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/StatusBar/StatusBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/TabControl/TabControl.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/TextBlock/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/TextBox/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/ThumbRate/ThumbRate.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/TitleBar/TitleBar.xaml" />
