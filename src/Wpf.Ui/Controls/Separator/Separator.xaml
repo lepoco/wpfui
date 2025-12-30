@@ -5,28 +5,47 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style TargetType="{x:Type Separator}">
-        <Setter Property="BorderBrush" Value="{DynamicResource SeparatorBorderBrush}" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="BorderThickness" Value="1,1,0,0" />
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Thickness x:Key="SeparatorHorizontalMargin">0,2,0,2</Thickness>
+    <Thickness x:Key="SeparatorVerticalMargin">2,0,2,0</Thickness>
+
+    <Style x:Key="DefaultSeparatorStyle" TargetType="{x:Type Separator}">
+        <!--
+            Note: Any existing code referencing the "SeparatorBorderBrush" resource key will
+            need to be updated to "SeparatorBackgroundBrush".
+        -->
+        <Setter Property="Background" Value="{DynamicResource SeparatorBackgroundBrush}" />
+        <Setter Property="Margin" Value="{DynamicResource SeparatorHorizontalMargin}" />
+        <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Separator}">
                     <Border
-                        Width="{TemplateBinding Width}"
-                        Margin="{TemplateBinding Margin}"
+                        x:Name="SeparatorBorder"
+                        Height="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}" />
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="true" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="controls:SeparatorAttached.Orientation" Value="Vertical">
+                            <Setter TargetName="SeparatorBorder" Property="Width" Value="1" />
+                            <Setter TargetName="SeparatorBorder" Property="Height" Value="Auto" />
+                            <Setter TargetName="SeparatorBorder" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="SeparatorBorder" Property="VerticalAlignment" Value="Stretch" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource DefaultSeparatorStyle}" TargetType="{x:Type Separator}" />
 
 </ResourceDictionary>

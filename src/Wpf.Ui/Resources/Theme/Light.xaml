@@ -570,7 +570,7 @@
     <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="{DynamicResource SystemAccentColorPrimary}" />
 
     <!--  Separator  -->
-    <SolidColorBrush x:Key="SeparatorBorderBrush" Color="{StaticResource DividerStrokeColorDefault}" />
+    <SolidColorBrush x:Key="SeparatorBackgroundBrush" Color="{StaticResource DividerStrokeColorDefault}" />
 
     <!--  Slider  -->
     <SolidColorBrush x:Key="SliderTrackFill" Color="{StaticResource ControlStrongFillColorDefault}" />
