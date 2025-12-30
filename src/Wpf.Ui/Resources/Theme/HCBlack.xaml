@@ -453,7 +453,7 @@
     <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="{StaticResource SystemColorHighlightColor}" />
 
     <!--  Separator  -->
-    <SolidColorBrush x:Key="SeparatorBorderBrush" Color="{StaticResource SystemColorWindowTextColor}" />
+    <SolidColorBrush x:Key="SeparatorBackgroundBrush" Color="{StaticResource SystemColorWindowTextColor}" />
 
     <!--  Slider  -->
     <SolidColorBrush x:Key="SliderTrackFill" Color="{StaticResource SystemColorWindowTextColor}" />
