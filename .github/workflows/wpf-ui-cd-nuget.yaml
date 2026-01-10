@@ -1,13 +1,6 @@
 name: wpf-ui-cd-nuget
 
 on:
-  push:
-    branches:
-      - main
-      - release/*
-    paths:
-      - 'src/**'
-
   workflow_dispatch:
 
 jobs:
