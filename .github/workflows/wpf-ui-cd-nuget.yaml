@@ -1,6 +1,11 @@
 name: wpf-ui-cd-nuget
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'Directory.Build.props'
+
   workflow_dispatch:
 
 jobs:
