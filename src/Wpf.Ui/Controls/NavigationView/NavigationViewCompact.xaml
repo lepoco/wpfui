@@ -368,7 +368,6 @@
                             Grid.Row="1"
                             Height="1"
                             Margin="0,4,0,4"
-                            BorderThickness=".5"
                             Background="{DynamicResource LeftNavigationViewSeparatorBrush}" />
 
                         <!--  Scrollable Menu Items  -->
@@ -401,7 +400,6 @@
                             Grid.Row="3"
                             Height="1"
                             Margin="0,4,0,4"
-                            BorderThickness=".5"
                             Background="{DynamicResource LeftNavigationViewSeparatorBrush}" />
 
                         <!--  Footer (Fixed)  -->
