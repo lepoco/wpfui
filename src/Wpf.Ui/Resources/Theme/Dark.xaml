@@ -482,6 +482,11 @@
     <SolidColorBrush x:Key="InfoBarBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
     <SolidColorBrush x:Key="InfoBarTitleForeground" Color="{StaticResource TextFillColorPrimary}" />
 
+    <SolidColorBrush x:Key="InfoBarErrorSeverityBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="InfoBarWarningSeverityBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="InfoBarSuccessSeverityBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="InfoBarInformationalSeverityBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    
     <SolidColorBrush x:Key="InfoBarErrorSeverityBackgroundBrush" Color="{StaticResource SystemFillColorCriticalBackground}" />
     <SolidColorBrush x:Key="InfoBarWarningSeverityBackgroundBrush" Color="{StaticResource SystemFillColorCautionBackground}" />
     <SolidColorBrush x:Key="InfoBarSuccessSeverityBackgroundBrush" Color="{StaticResource SystemFillColorSuccessBackground}" />
