@@ -53,9 +53,7 @@ public partial class ContentDialog
             return IsFocusInsideDialogCore(Keyboard.FocusedElement);
         }
 
-        throw new InvalidOperationException(
-            "IsFocusInsideDialog can only be called from the UI thread."
-        );
+        throw new InvalidOperationException("IsFocusInsideDialog can only be called from the UI thread.");
     }
 
     /// <summary>

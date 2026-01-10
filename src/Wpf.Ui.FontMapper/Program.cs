@@ -39,7 +39,8 @@ async Task<string> FetchVersion()
         )
             ?.Last()
             ?.Ref.Replace("refs/tags/", string.Empty)
-            .Trim() ?? throw new Exception("Unable to parse the version string");
+            .Trim()
+        ?? throw new Exception("Unable to parse the version string");
 }
 
 string FormatIconName(string rawIconName)

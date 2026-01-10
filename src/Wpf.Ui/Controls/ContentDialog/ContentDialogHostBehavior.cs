@@ -47,12 +47,13 @@ public static class ContentDialogHostBehavior
     /// Attached property which controls whether sibling elements should be disabled while a dialog is active.
     /// The value is forwarded to the internal controller managed by the behavior.
     /// </summary>
-    public static readonly DependencyProperty IsDisableSiblingsEnabledProperty = DependencyProperty.RegisterAttached(
-        "IsDisableSiblingsEnabled",
-        typeof(bool),
-        typeof(ContentDialogHostBehavior),
-        new PropertyMetadata(false, OnIsDisableSiblingsEnabledChanged)
-    );
+    public static readonly DependencyProperty IsDisableSiblingsEnabledProperty =
+        DependencyProperty.RegisterAttached(
+            "IsDisableSiblingsEnabled",
+            typeof(bool),
+            typeof(ContentDialogHostBehavior),
+            new PropertyMetadata(false, OnIsDisableSiblingsEnabledChanged)
+        );
 
     private static readonly DependencyProperty StateProperty = DependencyProperty.RegisterAttached(
         "State",
@@ -138,7 +139,10 @@ public static class ContentDialogHostBehavior
         }
     }
 
-    private static void OnIsDisableSiblingsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnIsDisableSiblingsEnabledChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is ContentPresenter presenter && presenter.GetValue(StateProperty) is BehaviorState state)
         {

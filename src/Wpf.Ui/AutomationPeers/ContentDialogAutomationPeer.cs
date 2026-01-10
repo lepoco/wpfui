@@ -27,9 +27,7 @@ internal sealed class ContentDialogAutomationPeer : UIElementAutomationPeer, IWi
     /// </summary>
     /// <param name="owner">The associated <see cref="ContentDialog"/>.</param>
     public ContentDialogAutomationPeer(ContentDialog owner)
-        : base(owner)
-    {
-    }
+        : base(owner) { }
 
     /// <summary>
     /// Gets a value indicating whether the window is modal.
@@ -52,7 +50,10 @@ internal sealed class ContentDialogAutomationPeer : UIElementAutomationPeer, IWi
         {
             if (Owner is ContentDialog dialog)
             {
-                if (!dialog.IsLoaded || dialog.Dispatcher is { HasShutdownFinished: true } or { HasShutdownStarted: true })
+                if (
+                    !dialog.IsLoaded
+                    || dialog.Dispatcher is { HasShutdownFinished: true } or { HasShutdownStarted: true }
+                )
                 {
                     return WindowInteractionState.Closing;
                 }

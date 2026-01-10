@@ -20,9 +20,9 @@ namespace Wpf.Ui.Controls;
 /// and temporarily removing window-level input and command bindings while a dialog is active.
 /// </summary>
 /// <remarks>
-    /// This type is internal and intended to be used from the UI thread only. Members are not thread-safe and
-    /// callers should invoke its methods on the host Dispatcher.
-    /// </remarks>
+/// This type is internal and intended to be used from the UI thread only. Members are not thread-safe and
+/// callers should invoke its methods on the host Dispatcher.
+/// </remarks>
 internal sealed class ContentDialogHostController
 {
     private readonly DependencyObject _host;
@@ -152,8 +152,11 @@ internal sealed class ContentDialogHostController
             _ = dispatcherObject.Dispatcher.BeginInvoke(
                 () =>
                 {
-                    if (dispatcherObject.Dispatcher is { HasShutdownStarted: false, HasShutdownFinished: false } &&
-                        IsValidInputElement(_previousFocusedElement))
+                    if (
+                        dispatcherObject.Dispatcher
+                            is { HasShutdownStarted: false, HasShutdownFinished: false }
+                        && IsValidInputElement(_previousFocusedElement)
+                    )
                     {
                         _previousFocusedElement.Focus();
                     }
@@ -226,7 +229,8 @@ internal sealed class ContentDialogHostController
                 break;
             }
 
-            case Visual or Visual3D:
+            case Visual
+            or Visual3D:
             {
                 var count = VisualTreeHelper.GetChildrenCount(parent);
                 for (var i = 0; i < count; i++)
@@ -339,7 +343,10 @@ internal sealed class ContentDialogHostController
 
             foreach (var inputBinding in _hostInputBindings)
             {
-                var commandBinding = BindingOperations.GetBindingBase(inputBinding, InputBinding.CommandProperty);
+                var commandBinding = BindingOperations.GetBindingBase(
+                    inputBinding,
+                    InputBinding.CommandProperty
+                );
                 var commandValue = commandBinding == null ? inputBinding.Command : null;
 
                 if (commandBinding != null)
@@ -347,7 +354,10 @@ internal sealed class ContentDialogHostController
                     BindingOperations.ClearBinding(inputBinding, InputBinding.CommandProperty);
                 }
 
-                _inputBindingCommandStates[inputBinding] = new InputBindingCommandState(commandBinding, commandValue);
+                _inputBindingCommandStates[inputBinding] = new InputBindingCommandState(
+                    commandBinding,
+                    commandValue
+                );
             }
 
             window.InputBindings.Clear();
@@ -492,7 +502,10 @@ internal sealed class ContentDialogHostController
         return null;
     }
 
-    private readonly record struct InputBindingCommandState(BindingBase? CommandBinding, ICommand? CommandValue);
+    private readonly record struct InputBindingCommandState(
+        BindingBase? CommandBinding,
+        ICommand? CommandValue
+    );
 }
 
 #pragma warning restore IDE0008 // Use explicit type instead of 'var'

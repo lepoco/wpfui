@@ -66,7 +66,7 @@ public class ContentDialogHost : ContentControl
     );
 
     // Enforce single host per Window
-    private static readonly ConditionalWeakTable<Window, ContentDialogHost> WindowHosts = new ();
+    private static readonly ConditionalWeakTable<Window, ContentDialogHost> WindowHosts = new();
 
 #if NET9_0_OR_GREATER
     private static readonly Lock WindowHostsLock = new();
@@ -159,7 +159,10 @@ public class ContentDialogHost : ContentControl
         base.OnContentChanged(oldContent, newContent);
     }
 
-    private static void OnIsDisableSiblingsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnIsDisableSiblingsEnabledChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is ContentDialogHost host)
         {
@@ -214,7 +217,9 @@ public class ContentDialogHost : ContentControl
             {
                 if (!ReferenceEquals(existing, this))
                 {
-                    throw new InvalidOperationException("Only one ContentDialogHost instance is allowed per Window.");
+                    throw new InvalidOperationException(
+                        "Only one ContentDialogHost instance is allowed per Window."
+                    );
                 }
 
                 // already registered for this window and it's this instance

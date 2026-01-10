@@ -59,8 +59,8 @@ public class ContentDialogService : IContentDialogService
         if (_dialogHostEx != null)
         {
             throw new InvalidOperationException(
-                "Cannot set ContentPresenter: a ContentDialogHost host has already been set. " +
-                "Only one host type is allowed per instance for compatibility."
+                "Cannot set ContentPresenter: a ContentDialogHost host has already been set. "
+                    + "Only one host type is allowed per instance for compatibility."
             );
         }
 
@@ -101,8 +101,8 @@ public class ContentDialogService : IContentDialogService
         if (_dialogHost != null)
         {
             throw new InvalidOperationException(
-                "Cannot set ContentDialogHost: a legacy ContentPresenter host has already been set. " +
-                "Only one host type is allowed per instance for compatibility."
+                "Cannot set ContentDialogHost: a legacy ContentPresenter host has already been set. "
+                    + "Only one host type is allowed per instance for compatibility."
             );
         }
 

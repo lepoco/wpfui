@@ -42,7 +42,9 @@ public sealed class ContentDialogAutomationTests : UiTest
         await Wait(1, TestContext.Current.CancellationToken);
 
         var showButton = FindFirst(c => c.ByText("Show"));
-        showButton.Should().NotBeNull("because the ContentDialog page must contain a Show button to open the dialog");
+        showButton
+            .Should()
+            .NotBeNull("because the ContentDialog page must contain a Show button to open the dialog");
         showButton.AsButton().Click();
 
         await Wait(1, TestContext.Current.CancellationToken);
@@ -103,16 +105,21 @@ public sealed class ContentDialogAutomationTests : UiTest
         global::FlaUI.Core.Input.Wait.UntilInputIsProcessed();
 
         // "Find the element with keyboard focus within the main window."
-        var focusedElement = MainWindow?
-           .FindAllDescendants()
-           .FirstOrDefault(e => e.Properties.HasKeyboardFocus.ValueOrDefault);
+        var focusedElement = MainWindow
+            ?.FindAllDescendants()
+            .FirstOrDefault(e => e.Properties.HasKeyboardFocus.ValueOrDefault);
 
         // Assert that a focused element is found.
         focusedElement.Should().NotBeNull("there should be a focused element after sending keys");
 
         // Get and assert that the AutomationId is not the background autosuggest's id.
         var focusedAutomationId = focusedElement.Properties.AutomationId.ValueOrDefault as string;
-        focusedAutomationId.Should().NotBe("NavigationAutoSuggestBox", "because Ctrl+F should not focus the background autosuggest while the dialog is open");
+        focusedAutomationId
+            .Should()
+            .NotBe(
+                "NavigationAutoSuggestBox",
+                "because Ctrl+F should not focus the background autosuggest while the dialog is open"
+            );
     }
 
     private Task OpenDialog()
@@ -150,7 +157,9 @@ public sealed class ContentDialogAutomationTests : UiTest
         }
 
         // Final assertion to fail test with clear message if text never appeared
-        FindFirst(c => c.ByText(text)).Should().NotBeNull($"Expected text '{text}' to appear within timeout");
+        FindFirst(c => c.ByText(text))
+            .Should()
+            .NotBeNull($"Expected text '{text}' to appear within timeout");
     }
 
     /// <summary>

@@ -46,7 +46,9 @@ public interface IContentDialogService
     /// DEPRECATED: This method is obsolete.
     /// Use <see cref="SetDialogHost(ContentDialogHost)"/> instead.
     /// </remarks>
-    [Obsolete("SetDialogHost(ContentPresenter) is deprecated. Use SetDialogHost(ContentDialogHost) instead for better modal features.")]
+    [Obsolete(
+        "SetDialogHost(ContentPresenter) is deprecated. Use SetDialogHost(ContentDialogHost) instead for better modal features."
+    )]
     void SetDialogHost(ContentPresenter dialogHost);
 
     /// <summary>

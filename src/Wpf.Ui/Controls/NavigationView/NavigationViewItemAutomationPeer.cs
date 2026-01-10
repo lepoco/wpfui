@@ -31,7 +31,10 @@ internal class NavigationViewItemAutomationPeer : FrameworkElementAutomationPeer
     public override object GetPattern(PatternInterface patternInterface)
     {
         // Only provide expand collapse pattern if we have children! https://github.com/microsoft/microsoft-ui-xaml/blob/50177b54e88e923e24440df679bdf984b0048ab4/src/controls/dev/NavigationView/NavigationViewItemAutomationPeer.cpp#L52
-        if (patternInterface == PatternInterface.SelectionItem || (patternInterface == PatternInterface.ExpandCollapse && _owner is { HasMenuItems: true }))
+        if (
+            patternInterface == PatternInterface.SelectionItem
+            || (patternInterface == PatternInterface.ExpandCollapse && _owner is { HasMenuItems: true })
+        )
         {
             return this;
         }

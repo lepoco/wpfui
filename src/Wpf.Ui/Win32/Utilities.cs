@@ -142,7 +142,7 @@ internal sealed class Utilities
             {
                 Window w => w,
                 DependencyObject rd => Window.GetWindow(rd),
-                _ => null
+                _ => null,
             };
         }
         catch

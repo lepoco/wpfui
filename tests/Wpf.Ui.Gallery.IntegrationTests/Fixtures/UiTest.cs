@@ -3,11 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Threading;
 using FlaUI.Core;
 using FlaUI.Core.Conditions;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
-using System.Threading;
 
 namespace Wpf.Ui.Gallery.IntegrationTests.Fixtures;
 

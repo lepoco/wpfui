@@ -212,15 +212,17 @@ public partial class ContentDialog : ContentControl
         new PropertyMetadata(null)
     );
 
-    private static readonly DependencyPropertyKey IsLegacyHostPropertyKey = DependencyProperty.RegisterReadOnly(
-        nameof(IsLegacyHost),
-        typeof(bool),
-        typeof(ContentDialog),
-        new PropertyMetadata(true)
-    );
+    private static readonly DependencyPropertyKey IsLegacyHostPropertyKey =
+        DependencyProperty.RegisterReadOnly(
+            nameof(IsLegacyHost),
+            typeof(bool),
+            typeof(ContentDialog),
+            new PropertyMetadata(true)
+        );
 
     /// <summary>Identifies the <see cref="IsLegacyHost"/> dependency property.</summary>
-    public static readonly DependencyProperty IsLegacyHostProperty = IsLegacyHostPropertyKey.DependencyProperty;
+    public static readonly DependencyProperty IsLegacyHostProperty =
+        IsLegacyHostPropertyKey.DependencyProperty;
 
     /// <summary>Identifies the <see cref="Opened"/> routed event.</summary>
     public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(
@@ -511,7 +513,10 @@ public partial class ContentDialog : ContentControl
     /// DEPRECATED: This constructor overload is deprecated. Use the constructor that accepts a <see cref="ContentDialogHost"/>
     /// instead for enhanced modal dialog capabilities.
     /// </remarks>
-    [Obsolete("ContentDialog(ContentPresenter? is deprecated. Please use ContentDialog(ContentDialogHost? instead.", false)]
+    [Obsolete(
+        "ContentDialog(ContentPresenter? is deprecated. Please use ContentDialog(ContentDialogHost? instead.",
+        false
+    )]
     public ContentDialog(ContentPresenter? dialogHost)
     {
         // Prefer the legacy DialogHost (ContentPresenter) when both ContentDialogHost
@@ -534,7 +539,8 @@ public partial class ContentDialog : ContentControl
                 Application? app = Application.Current;
                 if (app != null)
                 {
-                    activeWindow = app.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive) ?? app.MainWindow;
+                    activeWindow =
+                        app.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive) ?? app.MainWindow;
                 }
             }
             catch
@@ -617,12 +623,16 @@ public partial class ContentDialog : ContentControl
         {
             if (_dialogHostEx is not null)
             {
-                throw new InvalidOperationException("Cannot set DialogHost when DialogHostEx is already set.");
+                throw new InvalidOperationException(
+                    "Cannot set DialogHost when DialogHostEx is already set."
+                );
             }
 
             if (IsShowing)
             {
-                throw new InvalidOperationException("Cannot change DialogHost while the dialog is being shown.");
+                throw new InvalidOperationException(
+                    "Cannot change DialogHost while the dialog is being shown."
+                );
             }
 
             if (ReferenceEquals(_dialogHost, value))
@@ -659,12 +669,16 @@ public partial class ContentDialog : ContentControl
         {
             if (_dialogHost is not null)
             {
-                throw new InvalidOperationException("Cannot set DialogHostEx when DialogHost is already set.");
+                throw new InvalidOperationException(
+                    "Cannot set DialogHostEx when DialogHost is already set."
+                );
             }
 
             if (IsShowing)
             {
-                throw new InvalidOperationException("Cannot change DialogHostEx while the dialog is being shown.");
+                throw new InvalidOperationException(
+                    "Cannot change DialogHostEx while the dialog is being shown."
+                );
             }
 
             if (!ReferenceEquals(_dialogHostEx, value))
@@ -852,9 +866,7 @@ public partial class ContentDialog : ContentControl
     /// <summary>
     /// Occurs after Loaded event
     /// </summary>
-    protected virtual void OnLoaded()
-    {
-    }
+    protected virtual void OnLoaded() { }
 
     private void OnUnloadedInternal()
     {
@@ -877,9 +889,7 @@ public partial class ContentDialog : ContentControl
     /// <summary>
     /// Occurs after Unloaded event
     /// </summary>
-    protected virtual void OnUnloaded()
-    {
-    }
+    protected virtual void OnUnloaded() { }
 
     private Size GetNewDialogSize(Size desiredSize)
     {
