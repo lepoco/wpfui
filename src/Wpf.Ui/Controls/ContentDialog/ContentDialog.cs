@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using Wpf.Ui.AutomationPeers;
 using Wpf.Ui.Input;
 
 // ReSharper disable once CheckNamespace
@@ -14,10 +16,10 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 /// <example>
 /// <code lang="xml">
-/// &lt;ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" /&gt;
+/// &lt;ContentDialogHost x:Name="RootContentDialogHost" Grid.Row="0" /&gt;
 /// </code>
 /// <code lang="csharp">
-/// var contentDialog = new ContentDialog(RootContentDialogPresenter);
+/// var contentDialog = new ContentDialog(RootContentDialogHost);
 ///
 /// contentDialog.SetCurrentValue(ContentDialog.TitleProperty, "Hello World");
 /// contentDialog.SetCurrentValue(ContentControl.ContentProperty, "This is a message");
@@ -27,7 +29,7 @@ namespace Wpf.Ui.Controls;
 /// </code>
 /// <code lang="csharp">
 /// var contentDialogService = new ContentDialogService();
-/// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
+/// contentDialogService.SetDialogHost(RootContentDialogHost);
 ///
 /// await _contentDialogService.ShowSimpleDialogAsync(
 ///     new SimpleContentDialogCreateOptions()
@@ -41,7 +43,7 @@ namespace Wpf.Ui.Controls;
 ///     );
 /// </code>
 /// </example>
-public class ContentDialog : ContentControl
+public partial class ContentDialog : ContentControl
 {
     /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
@@ -209,6 +211,18 @@ public class ContentDialog : ContentControl
         typeof(ContentDialog),
         new PropertyMetadata(null)
     );
+
+    private static readonly DependencyPropertyKey IsLegacyHostPropertyKey =
+        DependencyProperty.RegisterReadOnly(
+            nameof(IsLegacyHost),
+            typeof(bool),
+            typeof(ContentDialog),
+            new PropertyMetadata(true)
+        );
+
+    /// <summary>Identifies the <see cref="IsLegacyHost"/> dependency property.</summary>
+    public static readonly DependencyProperty IsLegacyHostProperty =
+        IsLegacyHostPropertyKey.DependencyProperty;
 
     /// <summary>Identifies the <see cref="Opened"/> routed event.</summary>
     public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(
@@ -439,6 +453,21 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Occurs after the dialog starts to close, but before it is closed and before the <see cref="Closed"/> event occurs.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This event allows cancellation of the close operation by setting
+    /// <see cref="ContentDialogClosingEventArgs.Cancel"/> to <see langword="true"/>.
+    /// </para>
+    /// <para>
+    /// <strong>Important:</strong> The Closing event is only raised for explicit close operations initiated via the
+    /// <see cref="Hide"/> method. It is <em>not</em> raised when the dialog is passively removed from the visual tree,
+    /// such as when:
+    /// </para>
+    /// <list type="bullet">
+    /// <item>Another dialog replaces this one</item>
+    /// <item>The host control or window is disposed</item>
+    /// </list>
+    /// </remarks>
     public event TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs> Closing
     {
         add => AddHandler(ClosingEvent, value);
@@ -463,6 +492,9 @@ public class ContentDialog : ContentControl
         remove => RemoveHandler(ButtonClickedEvent, value);
     }
 
+    /// <summary>Gets a value indicating whether the dialog is shown in the legacy <see cref="ContentPresenter"/> host.</summary>
+    public bool IsLegacyHost => (bool)GetValue(IsLegacyHostProperty);
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentDialog"/> class.
     /// </summary>
@@ -470,54 +502,206 @@ public class ContentDialog : ContentControl
     {
         SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
 
-        // Avoid registering runtime code that triggers designer behavior or throws exceptions
-        // at design time (to reduce the possibility of designer crashes/rendering failures).
-        if (!Wpf.Ui.Designer.DesignerHelper.IsInDesignMode)
-        {
-            Loaded += static (sender, _) =>
-            {
-                var self = (ContentDialog)sender;
-                self.OnLoaded();
-            };
-        }
+        RegisterRuntimeEventHandlers();
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentDialog"/> class.
     /// </summary>
     /// <param name="dialogHost"><see cref="DialogHost"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.</param>
+    /// <remarks>
+    /// DEPRECATED: This constructor overload is deprecated. Use the constructor that accepts a <see cref="ContentDialogHost"/>
+    /// instead for enhanced modal dialog capabilities.
+    /// </remarks>
+    [Obsolete(
+        "ContentDialog(ContentPresenter? is deprecated. Please use ContentDialog(ContentDialogHost? instead.",
+        false
+    )]
     public ContentDialog(ContentPresenter? dialogHost)
     {
-        if (dialogHost is null)
+        // Prefer the legacy DialogHost (ContentPresenter) when both ContentDialogHost
+        // and the legacy host exist in the same window, and ContentDialogService is
+        // configured to use the legacy host.
+        // This ensures consistency between the host instance used locally and
+        // the actual instance utilized internally by ContentDialogService.
+        if (dialogHost is not null)
         {
-            throw new ArgumentNullException(nameof(dialogHost));
+            DialogHost = dialogHost;
         }
+        else
+        {
+            // Fallback to using ContentDialogHost, which must be obtained from the currently active window.
+            Window? activeWindow = null;
 
-        DialogHost = dialogHost;
+            // try Application.Current windows
+            try
+            {
+                Application? app = Application.Current;
+                if (app != null)
+                {
+                    activeWindow =
+                        app.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive) ?? app.MainWindow;
+                }
+            }
+            catch
+            {
+                // ignore and fallback
+            }
+
+            // fallback: Win32 foreground window -> HwndSource -> Window
+            activeWindow ??= Win32.Utilities.TryGetWindowFromForegroundHwnd();
+
+            var hostEx = ContentDialogHost.GetForWindow(activeWindow);
+            if (hostEx is not null)
+            {
+                DialogHostEx = hostEx;
+            }
+            else
+            {
+                // The legacy constructor immediately throws when the dialogHost parameter is null.
+                // For backward compatibility, we now fall back to using the new ContentDialogHost
+                // when no dialogHost is specified. Only when both are unavailable do we actually
+                // throw the null argument exception.
+                throw new ArgumentNullException(nameof(dialogHost));
+            }
+        }
 
         SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
 
+        RegisterRuntimeEventHandlers();
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ContentDialog"/> class with the specified dialog host.
+    /// </summary>
+    /// <param name="dialogHost">The ContentDialogHost that manages the dialog's display and interaction.</param>
+    /// <exception cref="ArgumentNullException">Thrown if dialogHost is null.</exception>
+    public ContentDialog(ContentDialogHost? dialogHost)
+    {
+        DialogHostEx = dialogHost ?? throw new ArgumentNullException(nameof(dialogHost));
+
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
+
+        RegisterRuntimeEventHandlers();
+    }
+
+    private void RegisterRuntimeEventHandlers()
+    {
         // Avoid registering runtime code that triggers designer behavior or throws exceptions
         // at design time (to reduce the possibility of designer crashes/rendering failures).
-        if (!Wpf.Ui.Designer.DesignerHelper.IsInDesignMode)
+        if (!Designer.DesignerHelper.IsInDesignMode)
         {
             Loaded += static (sender, _) =>
             {
                 var self = (ContentDialog)sender;
-                self.OnLoaded();
+                self.OnLoadedInternal();
+            };
+
+            Unloaded += static (sender, _) =>
+            {
+                var self = (ContentDialog)sender;
+                self.OnUnloadedInternal();
             };
         }
     }
 
+    // Legacy and new host coexist for compatibility during migration.
+    private ContentPresenter? _dialogHost;
+    private ContentDialogHost? _dialogHostEx;
+
     /// <summary>
-    ///  Gets or sets <see cref="DialogHost"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.
+    /// Gets or sets <see cref="DialogHost"/> inside of which the dialogue will be placed.
     /// </summary>
-    public ContentPresenter? DialogHost { get; set; } = default;
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if trying to set DialogHost when DialogHostEx is already set, or if trying to change DialogHost while the dialog is being shown.
+    /// </exception>
+    [Obsolete("DialogHost is deprecated. Please use DialogHostEx instead.")]
+    public ContentPresenter? DialogHost
+    {
+        get => _dialogHost;
+        set
+        {
+            if (_dialogHostEx is not null)
+            {
+                throw new InvalidOperationException(
+                    "Cannot set DialogHost when DialogHostEx is already set."
+                );
+            }
+
+            if (IsShowing)
+            {
+                throw new InvalidOperationException(
+                    "Cannot change DialogHost while the dialog is being shown."
+                );
+            }
+
+            if (ReferenceEquals(_dialogHost, value))
+            {
+                return;
+            }
+
+            if (_dialogHost is not null)
+            {
+                ContentDialogHostBehavior.SetIsEnabled(_dialogHost, false);
+            }
+
+            _dialogHost = value;
+
+            if (_dialogHost is not null)
+            {
+                ContentDialogHostBehavior.SetIsEnabled(_dialogHost, true);
+            }
+
+            UpdateIsLegacyHost();
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets <see cref="DialogHostEx"/> inside of which the dialogue will be placed.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if trying to set DialogHostEx when DialogHost is already set, or if trying to change DialogHostEx while the dialog is being shown.
+    /// </exception>
+    public ContentDialogHost? DialogHostEx
+    {
+        get => _dialogHostEx;
+        set
+        {
+            if (_dialogHost is not null)
+            {
+                throw new InvalidOperationException(
+                    "Cannot set DialogHostEx when DialogHost is already set."
+                );
+            }
+
+            if (IsShowing)
+            {
+                throw new InvalidOperationException(
+                    "Cannot change DialogHostEx while the dialog is being shown."
+                );
+            }
+
+            if (!ReferenceEquals(_dialogHostEx, value))
+            {
+                _dialogHostEx = value;
+            }
+
+            UpdateIsLegacyHost();
+        }
+    }
 
     [Obsolete("ContentPresenter is deprecated. Please use DialogHost instead.")]
     public ContentPresenter? ContentPresenter { get; set; } = default;
 
     protected TaskCompletionSource<ContentDialogResult>? Tcs { get; set; }
+
+    // Helper indicating whether the dialog is currently shown (the async operation hasn't completed yet)
+    private bool IsShowing => Tcs is not null && !Tcs.Task.IsCompleted;
+
+    private void UpdateIsLegacyHost()
+    {
+        SetValue(IsLegacyHostPropertyKey, _dialogHostEx is null);
+    }
 
     /// <summary>
     /// Shows the dialog
@@ -529,12 +713,22 @@ public class ContentDialog : ContentControl
     )]
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
-        if (DialogHost is null)
+        if (_dialogHost is null && _dialogHostEx is null)
         {
             throw new InvalidOperationException("DialogHost was not set");
         }
 
-        Tcs = new TaskCompletionSource<ContentDialogResult>();
+        // Uses `RunContinuationsAsynchronously` to execute continuations asynchronously
+        // rather than synchronously on the caller's stack when TCS completes.
+        //
+        // Benefits:
+        // - Prevents UI-thread reentrancy
+        // - Eliminates deadlock risks
+        // - Ensures predictable continuation scheduling
+        Tcs = new TaskCompletionSource<ContentDialogResult>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+
         CancellationTokenRegistration tokenRegistration = cancellationToken.Register(
             o => Tcs.TrySetCanceled((CancellationToken)o!),
             cancellationToken
@@ -544,7 +738,15 @@ public class ContentDialog : ContentControl
 
         try
         {
-            DialogHost.Content = this;
+            if (_dialogHostEx is not null)
+            {
+                _dialogHostEx.Content = this;
+            }
+            else
+            {
+                _dialogHost!.Content = this;
+            }
+
             result = await Tcs.Task;
 
             return result;
@@ -556,7 +758,19 @@ public class ContentDialog : ContentControl
 #else
             tokenRegistration.Dispose();
 #endif
-            DialogHost.Content = null;
+
+            // DialogHost is a public container. To prevent the new dialog from being closed immediately when
+            // it opens due to the unconditional clearing of the Content upon the closure of the previous dialog,
+            // only clear the DialogHost content if this instance is still the current content.
+            if (_dialogHostEx is not null && ReferenceEquals(_dialogHostEx.Content, this))
+            {
+                _dialogHostEx.Content = null;
+            }
+            else if (_dialogHost is not null && ReferenceEquals(_dialogHost.Content, this))
+            {
+                _dialogHost.Content = null;
+            }
+
             OnClosed(result);
         }
     }
@@ -633,16 +847,49 @@ public class ContentDialog : ContentControl
         return desiredSize;
     }
 
+    protected override AutomationPeer OnCreateAutomationPeer()
+    {
+        return new ContentDialogAutomationPeer(this);
+    }
+
+    private void OnLoadedInternal()
+    {
+        if (!IsFocusInsideDialog())
+        {
+            SetInitialFocus();
+        }
+
+        OnLoaded();
+        RaiseEvent(new RoutedEventArgs(OpenedEvent));
+    }
+
     /// <summary>
     /// Occurs after Loaded event
     /// </summary>
-    protected virtual void OnLoaded()
-    {
-        // Focus is only needed at runtime.
-        _ = Focus();
+    protected virtual void OnLoaded() { }
 
-        RaiseEvent(new RoutedEventArgs(OpenedEvent));
+    private void OnUnloadedInternal()
+    {
+        if (!ReferenceEquals(_dialogHostEx?.Content, this) && !ReferenceEquals(_dialogHost?.Content, this))
+        {
+            // If a new dialog instance is created and shown (e.g., via ShowAsync) while this dialog is still displayed,
+            // this instance will be removed from the visual tree. If the Hide method has not been called to complete the async operation,
+            // the ShowAsync task will be left dangling — waiting indefinitely without returning.
+            // Therefore, when this instance is removed from the visual tree, we must check the async task status:
+            // if not completed, return ContentDialogResult.None to resolve it.
+            if (Tcs is { Task.IsCompleted: false })
+            {
+                _ = Tcs.TrySetResult(ContentDialogResult.None);
+            }
+        }
+
+        OnUnloaded();
     }
+
+    /// <summary>
+    /// Occurs after Unloaded event
+    /// </summary>
+    protected virtual void OnUnloaded() { }
 
     private Size GetNewDialogSize(Size desiredSize)
     {

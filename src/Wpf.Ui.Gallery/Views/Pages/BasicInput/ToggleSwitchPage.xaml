@@ -19,7 +19,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Margin="0,0,0,24">
+    <StackPanel Margin="0,0,0,24">
         <controls:ControlExample
             Margin="0"
             HeaderText="WPF UI toggle switch."
@@ -42,5 +42,17 @@
             </Grid>
         </controls:ControlExample>
 
-    </Grid>
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="ToggleSwitch with LabelPosition property."
+            XamlCode="&lt;ui:ToggleSwitch Content=&quot;Label on Right&quot; LabelPosition=&quot;Right&quot; /&gt;&#10; &lt;ui:ToggleSwitch Content=&quot;Label on Left&quot; LabelPosition=&quot;Left&quot; /&gt;">
+            <StackPanel>
+                <ui:ToggleSwitch
+                    Margin="0,0,0,8"
+                    Content="Label on Right"
+                    LabelPosition="Right" />
+                <ui:ToggleSwitch Content="Label on Left" LabelPosition="Left" />
+            </StackPanel>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

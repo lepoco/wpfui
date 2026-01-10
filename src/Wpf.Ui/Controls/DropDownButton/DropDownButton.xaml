@@ -67,6 +67,7 @@
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Content}"
+                                    RecognizesAccessKey="True"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
 
                                 <Grid Grid.Column="2" Margin="{StaticResource ButtonChevronIconMargin}">
