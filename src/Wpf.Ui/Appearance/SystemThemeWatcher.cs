@@ -151,9 +151,11 @@ public static class SystemThemeWatcher
     /// </summary>
     private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (msg == (int)PInvoke.WM_DWMCOLORIZATIONCOLORCHANGED ||
-            msg == (int)PInvoke.WM_THEMECHANGED ||
-            msg == (int)PInvoke.WM_SYSCOLORCHANGE)
+        if (
+            msg == (int)PInvoke.WM_DWMCOLORIZATIONCOLORCHANGED
+            || msg == (int)PInvoke.WM_THEMECHANGED
+            || msg == (int)PInvoke.WM_SYSCOLORCHANGE
+        )
         {
             UpdateObservedWindow(hWnd);
         }

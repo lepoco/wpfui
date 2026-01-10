@@ -24,9 +24,10 @@
         <Setter Property="DialogMaxWidth" Value="1000" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="Focusable" Value="True" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
         <Setter Property="KeyboardNavigation.DirectionalNavigation" Value="Cycle" />
+        <Setter Property="KeyboardNavigation.ControlTabNavigation" Value="Cycle" />
         <Setter Property="DialogMargin" Value="35" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="{DynamicResource ContentDialogForeground}" />
@@ -35,18 +36,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ContentDialog}">
-                    <Grid Background="{DynamicResource ContentDialogSmokeFill}" Focusable="False">
+                    <Grid
+                        x:Name="DialogRootGrid"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
 
                         <Border
                             MaxWidth="{TemplateBinding DialogWidth}"
                             MaxHeight="{TemplateBinding DialogHeight}"
                             Margin="{TemplateBinding DialogMargin}"
+                            VerticalAlignment="Center"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}"
                             Focusable="False"
-                            VerticalAlignment="Center"
                             Opacity="1">
                             <Border.Effect>
                                 <DropShadowEffect
@@ -121,8 +125,7 @@
                                     BorderThickness="0,1,0,0"
                                     CornerRadius="{DynamicResource DialogFooterCornerRadius}"
                                     Focusable="False"
-                                    Visibility="{TemplateBinding IsFooterVisible,
-                                                                 Converter={StaticResource BoolToVisibilityConverter}}">
+                                    Visibility="{TemplateBinding IsFooterVisible, Converter={StaticResource BoolToVisibilityConverter}}">
 
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -134,6 +137,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <controls:Button
+                                            x:Name="PrimaryButton"
                                             Grid.Column="0"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding PrimaryButtonAppearance}"
@@ -141,14 +145,12 @@
                                             CommandParameter="{x:Static controls:ContentDialogButton.Primary}"
                                             Content="{TemplateBinding PrimaryButtonText}"
                                             Icon="{TemplateBinding PrimaryButtonIcon}"
-                                            IsDefault="{TemplateBinding DefaultButton,
-                                                                        Converter={StaticResource EnumToBoolConverter},
-                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Primary}}"
+                                            IsDefault="{TemplateBinding DefaultButton, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static controls:ContentDialogButton.Primary}}"
                                             IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"
-                                            Visibility="{TemplateBinding IsPrimaryButtonEnabled,
-                                                                         Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            Visibility="{TemplateBinding IsPrimaryButtonEnabled, Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
+                                            x:Name="SecondaryButton"
                                             Grid.Column="2"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding SecondaryButtonAppearance}"
@@ -156,14 +158,12 @@
                                             CommandParameter="{x:Static controls:ContentDialogButton.Secondary}"
                                             Content="{TemplateBinding SecondaryButtonText}"
                                             Icon="{TemplateBinding SecondaryButtonIcon}"
-                                            IsDefault="{TemplateBinding DefaultButton,
-                                                                        Converter={StaticResource EnumToBoolConverter},
-                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Secondary}}"
+                                            IsDefault="{TemplateBinding DefaultButton, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static controls:ContentDialogButton.Secondary}}"
                                             IsEnabled="{TemplateBinding IsSecondaryButtonEnabled}"
-                                            Visibility="{TemplateBinding IsSecondaryButtonEnabled,
-                                                                         Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            Visibility="{TemplateBinding IsSecondaryButtonEnabled, Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                         <controls:Button
+                                            x:Name="CloseButton"
                                             Grid.Column="4"
                                             HorizontalAlignment="Stretch"
                                             Appearance="{TemplateBinding CloseButtonAppearance}"
@@ -172,9 +172,7 @@
                                             Content="{TemplateBinding CloseButtonText}"
                                             Icon="{TemplateBinding CloseButtonIcon}"
                                             IsCancel="True"
-                                            IsDefault="{TemplateBinding DefaultButton,
-                                                                        Converter={StaticResource EnumToBoolConverter},
-                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Close}}" />
+                                            IsDefault="{TemplateBinding DefaultButton, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static controls:ContentDialogButton.Close}}" />
                                     </Grid>
                                 </Border>
                             </Grid>
@@ -203,6 +201,34 @@
                         </Trigger>
                         <Trigger Property="SecondaryButtonText" Value="">
                             <Setter Property="IsSecondaryButtonEnabled" Value="False" />
+                        </Trigger>
+                        <!--
+                            If primary button is disabled and the dialog default is not Close,
+                            make the CloseButton the default button so Enter activates it.
+                        -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimaryButtonEnabled" Value="False" />
+                                <Condition Property="DefaultButton" Value="{x:Static controls:ContentDialogButton.Primary}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="CloseButton" Property="IsDefault" Value="True" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimaryButtonEnabled" Value="False" />
+                                <Condition Property="DefaultButton" Value="{x:Static controls:ContentDialogButton.Secondary}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="CloseButton" Property="IsDefault" Value="True" />
+                        </MultiTrigger>
+                        <!--
+                            When displayed on legacy host, sets the root Grid to legacy style
+                            (Stretch alignment, Background: ContentDialogSmokeFill) to restore
+                            the legacy appearance and behavior.
+                        -->
+                        <Trigger Property="IsLegacyHost" Value="True">
+                            <Setter TargetName="DialogRootGrid" Property="Background" Value="{DynamicResource ContentDialogSmokeFill}" />
+                            <Setter TargetName="DialogRootGrid" Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter TargetName="DialogRootGrid" Property="VerticalAlignment" Value="Stretch" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
