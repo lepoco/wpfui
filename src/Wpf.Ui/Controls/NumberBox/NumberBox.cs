@@ -301,7 +301,14 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
     {
         base.OnLostFocus(e);
 
+        var oldValue = Value;
         ValidateInput();
+
+        // Update binding source if value changed
+        if (!Equals(oldValue, Value))
+        {
+            GetBindingExpression(ValueProperty)?.UpdateSource();
+        }
     }
 
     /*/// <inheritdoc />
@@ -468,8 +475,6 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
         }
 
         SetCurrentValue(ValueProperty, value);
-
-        UpdateTextToValue();
     }
 
     private void MoveCaretToTextEnd()
