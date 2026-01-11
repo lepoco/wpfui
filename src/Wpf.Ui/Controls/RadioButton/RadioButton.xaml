@@ -230,9 +230,6 @@
                             <Setter TargetName="OuterEllipse" Property="Opacity" Value="0.0" />
                             <Setter TargetName="CheckOuterEllipse" Property="Opacity" Value="1.0" />
                         </Trigger>
-                        <Trigger Property="FlowDirection" Value="RightToLeft">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
-                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
