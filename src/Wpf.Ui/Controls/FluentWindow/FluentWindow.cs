@@ -285,12 +285,11 @@ public class FluentWindow : System.Windows.Window
         {
             if (Utilities.IsCompositionEnabled)
             {
-                // Get the title bar height and set it as the top resize border
-                // This enables resizing from the top-left and top-right corners of the title bar
-                double captionHeight = SystemParameters.CaptionHeight;
+                // Keep a small, predictable resize border. Using CaptionHeight makes the resize area
+                // excessively large on some systems (e.g. 22px+), which feels wrong.
                 Thickness resizeBorderThickness = ResizeMode == ResizeMode.NoResize
                     ? default
-                    : new Thickness(4, captionHeight, 4, 4);
+                    : new Thickness(4, 4, 4, 4);
 
                 WindowChrome.SetWindowChrome(
                     this,

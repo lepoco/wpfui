@@ -694,7 +694,7 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
                     || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
             }
 
-            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam, isMouseOverHeaderContent);
             
             // Skip button hit testing if top-left or top-right corner resize detection succeeds
             if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
@@ -707,7 +707,7 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
         // This ensures resize handling works correctly
         else if (message == PInvoke.WM_NCLBUTTONDOWN)
         {
-            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam, false);
             if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
             {
                 // If within top-left or top-right corner resize area, skip button hit testing
