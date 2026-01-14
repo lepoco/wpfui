@@ -26,8 +26,6 @@ namespace Wpf.Ui.Controls;
 /// </example>
 public class Arc : Shape
 {
-    private Viewbox? _rootLayout;
-
     /// <summary>Identifies the <see cref="StartAngle"/> dependency property.</summary>
     public static readonly DependencyProperty StartAngleProperty = DependencyProperty.Register(
         nameof(StartAngle),
@@ -56,6 +54,12 @@ public class Arc : Shape
     {
         // Modify the metadata of the StrokeStartLineCap dependency property.
         StrokeStartLineCapProperty.OverrideMetadata(
+            typeof(Arc),
+            new FrameworkPropertyMetadata(PenLineCap.Round, PropertyChangedCallback)
+        );
+
+        // Modify the metadata of the StrokeEndLineCap dependency property.
+        StrokeEndLineCapProperty.OverrideMetadata(
             typeof(Arc),
             new FrameworkPropertyMetadata(PenLineCap.Round, PropertyChangedCallback)
         );
@@ -92,17 +96,6 @@ public class Arc : Shape
     /// Gets a value indicating whether one of the two larger arc sweeps is chosen; otherwise, if is <see langword="false"/>, one of the smaller arc sweeps is chosen.
     /// </summary>
     public bool IsLargeArc { get; internal set; } = false;
-
-    private void EnsureRootLayout()
-    {
-        if (_rootLayout != null)
-        {
-            return;
-        }
-
-        _rootLayout = new Viewbox { SnapsToDevicePixels = true };
-        AddVisualChild(_rootLayout);
-    }
 
     /// <inheritdoc />
     protected override Geometry DefiningGeometry => DefinedGeometry();
@@ -196,45 +189,12 @@ public class Arc : Shape
         control.InvalidateVisual();
     }
 
-    protected override Visual? GetVisualChild(int index)
-    {
-        if (index != 0)
-        {
-            throw new ArgumentOutOfRangeException(nameof(index), "Arc should have only 1 child");
-        }
-
-        EnsureRootLayout();
-
-        return _rootLayout;
-    }
-
-    protected override Size MeasureOverride(Size availableSize)
-    {
-        EnsureRootLayout();
-
-        _rootLayout!.Measure(availableSize);
-        return _rootLayout.DesiredSize;
-    }
-
     protected override Size ArrangeOverride(Size finalSize)
     {
-        EnsureRootLayout();
+        // Geometry calculations depend on RenderSize, so we need to invalidate visual when size changes.
+        // The base Shape class doesn't do this automatically for custom-sized geometries.
+        InvalidateVisual();
 
-        _rootLayout!.Arrange(new Rect(default, finalSize));
-        return finalSize;
-    }
-
-    /// <summary>Overrides the default OnRender method to draw the <see cref="Arc" /> element.</summary>
-    /// <param name="drawingContext">A <see cref="DrawingContext" /> object that is drawn during the rendering pass of this <see cref="System.Windows.Shapes.Shape" />.</param>
-    protected override void OnRender(DrawingContext drawingContext)
-    {
-        base.OnRender(drawingContext);
-        Pen pen = new(Stroke, StrokeThickness)
-        {
-            StartLineCap = StrokeStartLineCap,
-            EndLineCap = StrokeStartLineCap,
-        };
-
-        drawingContext.DrawGeometry(Stroke, pen, DefinedGeometry());
+        return base.ArrangeOverride(finalSize);
     }
 }
