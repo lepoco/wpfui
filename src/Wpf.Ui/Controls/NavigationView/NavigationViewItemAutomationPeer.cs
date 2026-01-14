@@ -146,7 +146,7 @@ internal class NavigationViewItemAutomationPeer : FrameworkElementAutomationPeer
                 return false;
             }
 
-            return navigationView.SelectedItem == _owner;
+            return Equals(navigationView.SelectedItem, _owner);
         }
     }
 
@@ -175,7 +175,7 @@ internal class NavigationViewItemAutomationPeer : FrameworkElementAutomationPeer
             return;
         }
 
-        if (navigationView.SelectedItem != _owner)
+        if (!Equals(navigationView.SelectedItem, _owner))
         {
             return;
         }
