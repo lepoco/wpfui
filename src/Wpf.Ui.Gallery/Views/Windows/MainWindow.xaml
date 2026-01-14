@@ -77,8 +77,6 @@
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
 
-        <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
-
         <ui:TitleBar
             x:Name="TitleBar"
             Title="{Binding ViewModel.ApplicationTitle}"
@@ -99,5 +97,7 @@
                 <ContextMenu DataContext="{Binding DataContext, Source={x:Reference NavigationView}}" ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
             </tray:NotifyIcon.Menu>
         </tray:NotifyIcon>
+
+        <ui:ContentDialogHost x:Name="RootContentDialog" Grid.Row="0" />
     </Grid>
 </ui:FluentWindow>
