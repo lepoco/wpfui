@@ -158,10 +158,12 @@ public static class ApplicationAccentColorManager
     /// <param name="systemAccent">Primary accent color.</param>
     /// <param name="applicationTheme">If <see cref="ApplicationTheme.Dark"/>, the colors will be different.</param>
     /// <param name="systemGlassColor">If the color is taken from the Glass Color System, its brightness will be increased with the help of the operations on HSV space.</param>
+    /// <param name="systemAccentColor">If the color is the system accent color.</param>
     public static void Apply(
         Color systemAccent,
         ApplicationTheme applicationTheme = ApplicationTheme.Light,
-        bool systemGlassColor = false
+        bool systemGlassColor = false,
+        bool systemAccentColor = false
     )
     {
         if (systemGlassColor)
@@ -170,7 +172,6 @@ public static class ApplicationAccentColorManager
             systemAccent = systemAccent.UpdateBrightness(6f);
         }
 
-        bool isSystemAccent = systemAccent == GetColorizationColor();
         Color primaryAccent;
         Color secondaryAccent;
         Color tertiaryAccent;
@@ -192,7 +193,7 @@ public static class ApplicationAccentColorManager
 
         Color GetColor(UIColorType colorType, float brightnessFactor, float saturationFactor = 0.0f)
         {
-            if (isSystemAccent && GetUiColor(colorType) is { } color)
+            if (systemAccentColor && GetUiColor(colorType) is { } color)
             {
                 return color;
             }
@@ -229,7 +230,7 @@ public static class ApplicationAccentColorManager
     /// </summary>
     public static void ApplySystemAccent()
     {
-        Apply(GetColorizationColor(), ApplicationThemeManager.GetAppTheme());
+        Apply(GetColorizationColor(), ApplicationThemeManager.GetAppTheme(), systemAccentColor: true);
     }
 
     /// <summary>

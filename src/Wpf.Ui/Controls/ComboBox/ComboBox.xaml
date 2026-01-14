@@ -173,6 +173,13 @@
         <!--  WPF doesn't like centering, the animation is ugly and the mouse button sometimes clicks right away.  -->
         <Setter Property="Popup.Placement" Value="Bottom" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
