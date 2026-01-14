@@ -653,13 +653,31 @@ public static class TabControlExtensions
 
             if (closeButton != null)
             {
+                // Check if the tab is closable
+                bool isClosable = GetIsClosable(tabItem);
+
+                // Hide close button if tab is not closable
+                // Note: IsClosable property allows individual tabs to be marked as non-closable
+                if (!isClosable)
+                {
+                    closeButton.SetCurrentValue(UIElement.VisibilityProperty, System.Windows.Visibility.Collapsed);
+                }
+                else
+                {
+                    // Ensure close button is visible if closable
+                    closeButton.SetCurrentValue(UIElement.VisibilityProperty, System.Windows.Visibility.Visible);
+                }
+
                 // Remove previous handlers to avoid duplicate subscriptions
                 closeButton.Click -= OnCloseButtonClick;
                 closeButton.PreviewMouseLeftButtonDown -= OnCloseButtonPreviewMouseLeftButtonDown;
 
-                // Add handlers
-                closeButton.Click += OnCloseButtonClick;
-                closeButton.PreviewMouseLeftButtonDown += OnCloseButtonPreviewMouseLeftButtonDown;
+                // Add handlers only if closable
+                if (isClosable)
+                {
+                    closeButton.Click += OnCloseButtonClick;
+                    closeButton.PreviewMouseLeftButtonDown += OnCloseButtonPreviewMouseLeftButtonDown;
+                }
             }
         }
 
