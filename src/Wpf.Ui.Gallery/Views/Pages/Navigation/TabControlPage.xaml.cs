@@ -15,6 +15,10 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
 {
     public TabControlViewModel ViewModel { get; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TabControlPage"/> class.
+    /// The sample ensures the first tab remains selected and prevents it from being closed.
+    /// </summary>
     public TabControlPage(TabControlViewModel viewModel)
     {
         ViewModel = viewModel;
@@ -26,6 +30,9 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
         if (ViewModel.StandardTabs.Count > 0)
         {
             ViewModel.SelectedTab = ViewModel.StandardTabs[0];
+
+            // Make the first tab non-closable
+            TabControlExtensions.SetIsClosable(ViewModel.StandardTabs[0], false);
         }
     }
 
@@ -34,30 +41,24 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     /// This event is raised when a user attempts to close a tab.
     /// You can cancel the operation by setting e.Cancel = true.
     /// </summary>
+    /// <remarks>
+    /// Examples of usage:
+    /// <list type="bullet">
+    /// <item>Prevent closing the last tab (implemented in this method).</item>
+    /// <item>Show confirmation dialog before closing (commented out, can be uncommented if needed).</item>
+    /// </list>
+    /// The tab will be automatically removed from ItemsSource by OnTabCloseRequested.
+    /// ViewModel's CloseTabCommand is not needed here as the removal is handled automatically.
+    /// </remarks>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event arguments containing the tab item to close.</param>
     private void OnTabClosing(object sender, TabClosingEventArgs e)
     {
-        // Example: Prevent closing the last tab
         if (ViewModel.StandardTabs.Count <= 1)
         {
             e.Cancel = true;
             return;
         }
-
-        // Example: Show confirmation dialog (optional)
-        // You can uncomment this to show a confirmation dialog
-        // var result = MessageBox.Show(
-        //     $"Are you sure you want to close '{e.TabItem.Header}'?",
-        //     "Close Tab",
-        //     MessageBoxButton.YesNo,
-        //     MessageBoxImage.Question);
-        // if (result == MessageBoxResult.No)
-        // {
-        //     e.Cancel = true;
-        //     return;
-        // }
-
-        // The tab will be automatically removed from ItemsSource by OnTabCloseRequested
-        // ViewModel's CloseTabCommand is not needed here as the removal is handled automatically
     }
 
     /// <summary>
@@ -66,42 +67,29 @@ public partial class TabControlPage : INavigableView<TabControlViewModel>
     /// You can customize the new tab by setting e.Header, e.Content, or e.TabItem.
     /// You can cancel the operation by setting e.Cancel = true.
     /// </summary>
+    /// <remarks>
+    /// This implementation uses Method 1: Setting tab properties using TabAddingEventArgs.
+    /// <list type="number">
+    /// <item>Get the tab number from the current tab count.</item>
+    /// <item>Set the header with an icon using CreateTabHeader.</item>
+    /// <item>Set the content to a TextBlock with the tab number.</item>
+    /// </list>
+    /// Alternative Method 2: You can also create a custom TabItem and assign it to e.TabItem for more control over tab creation.
+    /// Example: Cancel adding if maximum tabs reached (commented out, can be uncommented if needed).
+    /// </remarks>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event arguments used to customize the new tab.</param>
     private void OnTabAdding(object sender, TabAddingEventArgs e)
     {
-        // Method 1: Set tab properties using TabAddingEventArgs
-        // Get the tab number (get current tab count from ViewModel)
         int tabNumber = ViewModel.StandardTabs.Count + 1;
 
-        // Set the header with an icon
         e.Header = CreateTabHeader($"New Tab {tabNumber}", SymbolRegular.Document24);
 
-        // Set the content
         e.Content = new System.Windows.Controls.TextBlock
         {
             Text = $"New Tab {tabNumber} content",
             Margin = new System.Windows.Thickness(12)
         };
-
-        // Method 2: Alternatively, you can create a custom TabItem
-        // This gives you more control over the tab creation
-        // e.TabItem = new TabItem
-        // {
-        //     Header = CreateTabHeader($"New Tab {tabNumber}", SymbolRegular.Document24),
-        //     Content = new TextBlock
-        //     {
-        //         Text = $"New Tab {tabNumber} content",
-        //         Margin = new Thickness(12)
-        //     }
-        // };
-
-        // Example: Cancel adding if maximum tabs reached (optional)
-        // const int maxTabs = 10;
-        // if (ViewModel.StandardTabs.Count >= maxTabs)
-        // {
-        //     e.Cancel = true;
-        //     MessageBox.Show($"Maximum {maxTabs} tabs allowed.", "Limit Reached");
-        //     return;
-        // }
     }
 
     /// <summary>
