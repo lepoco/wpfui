@@ -12,35 +12,46 @@ namespace Wpf.Ui.Controls;
 public class TextBlock : System.Windows.Controls.TextBlock
 {
     /// <summary>Identifies the <see cref="FontTypographyStyle" /> dependency property.</summary>
-    internal static readonly DependencyProperty FontTypographyStyleProperty = DependencyProperty.Register(nameof(FontTypographyStyle),
-                                                                                                          typeof(Style),
-                                                                                                          typeof(System.Windows.Controls.TextBlock),
-                                                                                                          new PropertyMetadata(default(Style)));
+    internal static readonly DependencyProperty FontTypographyStyleProperty = DependencyProperty.Register(
+        nameof(FontTypographyStyle),
+        typeof(Style),
+        typeof(System.Windows.Controls.TextBlock),
+        new PropertyMetadata(default(Style))
+    );
 
     /// <summary>Identifies the <see cref="AppearanceForeground" /> dependency property.</summary>
-    internal static readonly DependencyProperty AppearanceForegroundProperty = DependencyProperty.Register(nameof(AppearanceForeground),
-                                                                                                           typeof(Brush),
-                                                                                                           typeof(System.Windows.Controls.TextBlock),
-                                                                                                           new PropertyMetadata(default(Brush)));
+    internal static readonly DependencyProperty AppearanceForegroundProperty = DependencyProperty.Register(
+        nameof(AppearanceForeground),
+        typeof(Brush),
+        typeof(System.Windows.Controls.TextBlock),
+        new PropertyMetadata(default(Brush))
+    );
 
     /// <summary>Identifies the <see cref="FontTypography" /> dependency property.</summary>
-    public static readonly DependencyProperty FontTypographyProperty = DependencyProperty.Register(nameof(FontTypography),
-                                                                                                   typeof(FontTypography?),
-                                                                                                   typeof(System.Windows.Controls.TextBlock),
-                                                                                                   new FrameworkPropertyMetadata(null,
-                                                                                                                                 FrameworkPropertyMetadataOptions.AffectsMeasure |
-                                                                                                                                 FrameworkPropertyMetadataOptions.AffectsRender |
-                                                                                                                                 FrameworkPropertyMetadataOptions.Inherits,
-                                                                                                                                 OnFontTypographyChanged));
+    public static readonly DependencyProperty FontTypographyProperty = DependencyProperty.Register(
+        nameof(FontTypography),
+        typeof(FontTypography?),
+        typeof(System.Windows.Controls.TextBlock),
+        new FrameworkPropertyMetadata(
+            null,
+            FrameworkPropertyMetadataOptions.AffectsMeasure
+                | FrameworkPropertyMetadataOptions.AffectsRender
+                | FrameworkPropertyMetadataOptions.Inherits,
+            OnFontTypographyChanged
+        )
+    );
 
     /// <summary>Identifies the <see cref="Appearance" /> dependency property.</summary>
-    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-                                                                                               typeof(TextColor?),
-                                                                                               typeof(System.Windows.Controls.TextBlock),
-                                                                                               new FrameworkPropertyMetadata(null,
-                                                                                                                             FrameworkPropertyMetadataOptions.AffectsRender |
-                                                                                                                             FrameworkPropertyMetadataOptions.Inherits,
-                                                                                                                             OnAppearanceChanged));
+    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
+        nameof(Appearance),
+        typeof(TextColor?),
+        typeof(System.Windows.Controls.TextBlock),
+        new FrameworkPropertyMetadata(
+            null,
+            FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits,
+            OnAppearanceChanged
+        )
+    );
 
     static TextBlock() => TextBlockMetadata.Initialize();
 
@@ -86,7 +97,10 @@ public class TextBlock : System.Windows.Controls.TextBlock
         {
             if (args.NewValue is FontTypography fontTypography)
             {
-                tb.SetCurrentValue(FontTypographyStyleProperty, tb.TryFindResource(fontTypography.ToResourceValue()));
+                tb.SetCurrentValue(
+                    FontTypographyStyleProperty,
+                    tb.TryFindResource(fontTypography.ToResourceValue())
+                );
             }
             else
             {
@@ -104,7 +118,10 @@ public class TextBlock : System.Windows.Controls.TextBlock
         {
             if (args.NewValue is TextColor textColor)
             {
-                tb.SetCurrentValue(AppearanceForegroundProperty, tb.TryFindResource(textColor.ToResourceValue()));
+                tb.SetCurrentValue(
+                    AppearanceForegroundProperty,
+                    tb.TryFindResource(textColor.ToResourceValue())
+                );
             }
             else
             {
