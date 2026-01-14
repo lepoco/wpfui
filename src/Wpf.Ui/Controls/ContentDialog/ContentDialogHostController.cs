@@ -292,11 +292,13 @@ internal sealed class ContentDialogHostController
         }
 
         var dp = d;
+        DependencyObject? cc = null;
 
         // Special handling for the TitleBar
         if (d is TitleBar titleBar)
         {
             dp = titleBar.TrailingContent as DependencyObject;
+            cc = titleBar.CenterContent as DependencyObject;
         }
 
         try
@@ -311,6 +313,20 @@ internal sealed class ContentDialogHostController
                 case FrameworkContentElement { IsEnabled: true } fce:
                     _disabledElements.Add(dp);
                     fce.SetCurrentValue(ContentElement.IsEnabledProperty, false);
+                    break;
+            }
+
+            // for TitleBar new CenterContent
+            switch (cc)
+            {
+                case UIElement { IsEnabled: true } ccui:
+                    _disabledElements.Add(cc);
+                    ccui.SetCurrentValue(UIElement.IsEnabledProperty, false);
+                    break;
+
+                case FrameworkContentElement { IsEnabled: true } ccfce:
+                    _disabledElements.Add(cc);
+                    ccfce.SetCurrentValue(ContentElement.IsEnabledProperty, false);
                     break;
             }
         }

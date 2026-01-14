@@ -5,10 +5,11 @@
 
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 
 namespace Wpf.Ui.Controls;
 
-internal class NavigationViewItemAutomationPeer : FrameworkElementAutomationPeer
+internal class NavigationViewItemAutomationPeer : FrameworkElementAutomationPeer, IExpandCollapseProvider, ISelectionItemProvider
 {
     private readonly NavigationViewItem _owner;
 
@@ -31,15 +32,71 @@ internal class NavigationViewItemAutomationPeer : FrameworkElementAutomationPeer
     public override object GetPattern(PatternInterface patternInterface)
     {
         // Only provide expand collapse pattern if we have children! https://github.com/microsoft/microsoft-ui-xaml/blob/50177b54e88e923e24440df679bdf984b0048ab4/src/controls/dev/NavigationView/NavigationViewItemAutomationPeer.cpp#L52
-        if (
-            patternInterface == PatternInterface.SelectionItem
-            || (patternInterface == PatternInterface.ExpandCollapse && _owner is { HasMenuItems: true })
-        )
+        if (patternInterface == PatternInterface.SelectionItem || (patternInterface == PatternInterface.ExpandCollapse && _owner is { HasMenuItems: true }))
         {
             return this;
         }
 
         return base.GetPattern(patternInterface);
+    }
+
+    public ExpandCollapseState ExpandCollapseState
+    {
+        get
+        {
+            if (!_owner.HasMenuItems)
+            {
+                return ExpandCollapseState.LeafNode;
+            }
+
+            return _owner.IsExpanded ? ExpandCollapseState.Expanded : ExpandCollapseState.Collapsed;
+        }
+    }
+
+    public void Collapse()
+    {
+        if (!_owner.HasMenuItems)
+        {
+            return;
+        }
+
+        ExpandCollapseState oldState = ExpandCollapseState;
+
+        if (oldState == ExpandCollapseState.Collapsed)
+        {
+            return;
+        }
+
+        _owner.SetCurrentValue(NavigationViewItem.IsExpandedProperty, false);
+
+        RaisePropertyChangedEvent(
+            ExpandCollapsePatternIdentifiers.ExpandCollapseStateProperty,
+            oldState,
+            ExpandCollapseState.Collapsed
+        );
+    }
+
+    public void Expand()
+    {
+        if (!_owner.HasMenuItems)
+        {
+            return;
+        }
+
+        ExpandCollapseState oldState = ExpandCollapseState;
+
+        if (oldState == ExpandCollapseState.Expanded)
+        {
+            return;
+        }
+
+        _owner.SetCurrentValue(NavigationViewItem.IsExpandedProperty, true);
+
+        RaisePropertyChangedEvent(
+            ExpandCollapsePatternIdentifiers.ExpandCollapseStateProperty,
+            oldState,
+            ExpandCollapseState.Expanded
+        );
     }
 
     protected override AutomationPeer GetLabeledByCore()
@@ -54,7 +111,7 @@ internal class NavigationViewItemAutomationPeer : FrameworkElementAutomationPeer
 
     protected override string GetNameCore()
     {
-        var result = base.GetNameCore() ?? string.Empty;
+        string result = base.GetNameCore() ?? string.Empty;
 
         if (result == string.Empty)
         {
@@ -72,5 +129,67 @@ internal class NavigationViewItemAutomationPeer : FrameworkElementAutomationPeer
         }
 
         return result;
+    }
+
+    void ISelectionItemProvider.AddToSelection()
+    {
+        // This is a single select control, so just select the item.
+        ((ISelectionItemProvider)this).Select();
+    }
+
+    bool ISelectionItemProvider.IsSelected
+    {
+        get
+        {
+            if (NavigationView.GetNavigationParent(_owner) is not { } navigationView)
+            {
+                return false;
+            }
+
+            return Equals(navigationView.SelectedItem, _owner);
+        }
+    }
+
+    IRawElementProviderSimple? ISelectionItemProvider.SelectionContainer
+    {
+        get
+        {
+            if (NavigationView.GetNavigationParent(_owner) is not { } navigationView)
+            {
+                return null;
+            }
+
+            if (CreatePeerForElement(navigationView) is { } peer)
+            {
+                return ProviderFromPeer(peer);
+            }
+
+            return null;
+        }
+    }
+
+    void ISelectionItemProvider.RemoveFromSelection()
+    {
+        if (NavigationView.GetNavigationParent(_owner) is not { } navigationView)
+        {
+            return;
+        }
+
+        if (!Equals(navigationView.SelectedItem, _owner))
+        {
+            return;
+        }
+
+        navigationView.ClearSelectedItem();
+    }
+
+    void ISelectionItemProvider.Select()
+    {
+        if (NavigationView.GetNavigationParent(_owner) is not { } navigationView)
+        {
+            return;
+        }
+
+        navigationView.OnNavigationViewItemClick(_owner);
     }
 }
