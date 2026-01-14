@@ -55,8 +55,7 @@
                                             x:Name="Border"
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="4"
+                                            BorderThickness="0"
                                             Padding="{TemplateBinding Padding}">
                                             <ContentPresenter
                                                 HorizontalAlignment="Center"
