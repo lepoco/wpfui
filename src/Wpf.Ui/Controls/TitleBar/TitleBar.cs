@@ -710,19 +710,20 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             }
 
             htResult = GetWindowBorderHitTestResult(hwnd, lParam, isMouseOverHeaderContent);
-            if (isMouseOverButtons)
-            {
-                htResult = (IntPtr)PInvoke.HTNOWHERE;
-            }
-            
+
             // Skip button hit testing if top-left or top-right corner resize detection succeeds
             if (
-                !isMouseOverButtons
-                && (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
+                htResult == (IntPtr)PInvoke.HTTOPLEFT
+                || htResult == (IntPtr)PInvoke.HTTOPRIGHT
             )
             {
                 handled = true;
                 return htResult;
+            }
+
+            if (isMouseOverButtons)
+            {
+                htResult = (IntPtr)PInvoke.HTNOWHERE;
             }
         }
         // For WM_NCLBUTTONDOWN, also skip button hit testing if within top-left or top-right corner resize area
@@ -746,13 +747,18 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             if (!isMouseOverButtons)
             {
                 htResult = GetWindowBorderHitTestResult(hwnd, lParam, false);
-                if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
-                {
-                    // If within top-left or top-right corner resize area, skip button hit testing
-                    // and let Windows handle the default resize processing
-                    handled = false;
-                    return IntPtr.Zero;
-                }
+            }
+            else
+            {
+                htResult = GetWindowBorderHitTestResult(hwnd, lParam, false);
+            }
+
+            if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
+            {
+                // If within top-left or top-right corner resize area, skip button hit testing
+                // and let Windows handle the default resize processing
+                handled = false;
+                return IntPtr.Zero;
             }
         }
 
