@@ -30,11 +30,9 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
                 return false;
             }
 
-            long lp = lParam.ToInt64();
-            int x = (short)(lp & 0xFFFF);
-            int y = (short)(lp >> 16);
-
-            var mousePosition = new Point(x, y);
+            var mousePosition = TryGetCursorPos(out Point cursorPosition)
+                ? cursorPosition
+                : GetLParamPoint(lParam);
 
             // Add a small tolerance to reduce hover flicker at pixel boundaries (rounding/DPI edge cases).
             var hitRect = new Rect(
@@ -76,6 +74,28 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         {
             return false;
         }
+    }
+
+    private static Point GetLParamPoint(IntPtr lParam)
+    {
+        long lp = lParam.ToInt64();
+        int x = (short)(lp & 0xFFFF);
+        int y = (short)(lp >> 16);
+
+        return new Point(x, y);
+    }
+
+    private static bool TryGetCursorPos(out Point mousePosition)
+    {
+        mousePosition = default;
+
+        if (!Windows.Win32.PInvoke.GetCursorPos(out Windows.Win32.POINT point))
+        {
+            return false;
+        }
+
+        mousePosition = new Point(point.X, point.Y);
+        return true;
     }
 
     /// <summary>Identifies the <see cref="ButtonType"/> dependency property.</summary>
