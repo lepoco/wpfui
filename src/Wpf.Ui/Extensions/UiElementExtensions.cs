@@ -30,7 +30,16 @@ internal static class UiElementExtensions
             var mousePosition = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
 
             // If element is Panel, check if children at mousePosition is with IsHitTestVisible false.
-            return new Rect(default, element.RenderSize).Contains(element.PointFromScreen(mousePosition))
+            // Add a small tolerance to reduce hover flicker at pixel boundaries (rounding/DPI edge cases).
+            const double tolerance = 1.0;
+            var hitRect = new Rect(
+                -tolerance,
+                -tolerance,
+                element.RenderSize.Width + (2 * tolerance),
+                element.RenderSize.Height + (2 * tolerance)
+            );
+
+            return hitRect.Contains(element.PointFromScreen(mousePosition))
                 && element.IsHitTestVisible
                 && (
                     element is not System.Windows.Controls.Panel panel
@@ -45,12 +54,14 @@ internal static class UiElementExtensions
 
     private static int Get_X_LParam(IntPtr lParam)
     {
-        return (short)(lParam.ToInt32() & 0xFFFF);
+        long lp = lParam.ToInt64();
+        return (short)(lp & 0xFFFF);
     }
 
     private static int Get_Y_LParam(IntPtr lParam)
     {
-        return (short)(lParam.ToInt32() >> 16);
+        long lp = lParam.ToInt64();
+        return (short)(lp >> 16);
     }
 
     private static bool IsChildHitTestVisibleAtPointFromScreen(
@@ -60,7 +71,15 @@ internal static class UiElementExtensions
     {
         foreach (UIElement child in panel.Children)
         {
-            if (new Rect(default, child.RenderSize).Contains(child.PointFromScreen(mousePosition)))
+            const double tolerance = 1.0;
+            var hitRect = new Rect(
+                -tolerance,
+                -tolerance,
+                child.RenderSize.Width + (2 * tolerance),
+                child.RenderSize.Height + (2 * tolerance)
+            );
+
+            if (hitRect.Contains(child.PointFromScreen(mousePosition)))
             {
                 return child.IsHitTestVisible;
             }
