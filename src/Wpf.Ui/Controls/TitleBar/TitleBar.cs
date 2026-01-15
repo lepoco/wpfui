@@ -690,9 +690,11 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
                 isMouseOverHeaderContent =
                     (headerLeftUIElement is not null
                         && headerLeftUIElement != _titleBlock
-                        && headerLeftUIElement.IsMouseOverElement(lParam))
-                    || (headerCenterUIElement?.IsMouseOverElement(lParam) ?? false)
-                    || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+                        && TitleBarButton.IsMouseOverNonClient(headerLeftUIElement, lParam))
+                    || (headerCenterUIElement is not null
+                        && TitleBarButton.IsMouseOverNonClient(headerCenterUIElement, lParam))
+                    || (headerRightUiElement is not null
+                        && TitleBarButton.IsMouseOverNonClient(headerRightUiElement, lParam));
             }
 
             foreach (TitleBarButton button in _buttons)
@@ -709,13 +711,10 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
                 }
             }
 
-            htResult = GetWindowBorderHitTestResult(hwnd, lParam, isMouseOverHeaderContent);
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
 
-            // Skip button hit testing if top-left or top-right corner resize detection succeeds
-            if (
-                htResult == (IntPtr)PInvoke.HTTOPLEFT
-                || htResult == (IntPtr)PInvoke.HTTOPRIGHT
-            )
+            // If resize hit test succeeds, let Windows handle it
+            if (htResult != (IntPtr)PInvoke.HTNOWHERE)
             {
                 handled = true;
                 return htResult;
@@ -744,18 +743,11 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
                 }
             }
 
-            if (!isMouseOverButtons)
-            {
-                htResult = GetWindowBorderHitTestResult(hwnd, lParam, false);
-            }
-            else
-            {
-                htResult = GetWindowBorderHitTestResult(hwnd, lParam, false);
-            }
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
 
-            if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
+            if (htResult != (IntPtr)PInvoke.HTNOWHERE)
             {
-                // If within top-left or top-right corner resize area, skip button hit testing
+                // If within resize area, skip button hit testing
                 // and let Windows handle the default resize processing
                 handled = false;
                 return IntPtr.Zero;
@@ -785,30 +777,6 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 
             handled = true;
             return returnIntPtr;
-        }
-
-        bool isMouseOverHeaderContent = false;
-        IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
-
-        if (message == PInvoke.WM_NCHITTEST)
-        {
-            if (TrailingContent is UIElement || Header is UIElement || CenterContent is UIElement)
-            {
-                UIElement? headerLeftUIElement = Header as UIElement;
-                UIElement? headerCenterUIElement = CenterContent as UIElement;
-                UIElement? headerRightUiElement = TrailingContent as UIElement;
-
-                isMouseOverHeaderContent =
-                    (headerLeftUIElement is not null
-                        && headerLeftUIElement != _titleBlock
-                        && TitleBarButton.IsMouseOverNonClient(headerLeftUIElement, lParam))
-                    || (headerCenterUIElement is not null
-                        && TitleBarButton.IsMouseOverNonClient(headerCenterUIElement, lParam))
-                    || (headerRightUiElement is not null
-                        && TitleBarButton.IsMouseOverNonClient(headerRightUiElement, lParam));
-            }
-
-            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
         }
 
         var e = new HwndProcEventArgs(hwnd, msg, wParam, lParam, isMouseOverHeaderContent);
