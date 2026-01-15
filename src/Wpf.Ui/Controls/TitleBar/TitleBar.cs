@@ -674,6 +674,49 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             return IntPtr.Zero;
         }
 
+        bool isMouseOverHeaderContent = false;
+        IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
+
+        // For WM_NCHITTEST, perform resize detection first, and skip button hit testing if top-left or top-right corner resize detection succeeds
+        if (message == PInvoke.WM_NCHITTEST)
+        {
+            if (TrailingContent is UIElement || Header is UIElement || CenterContent is UIElement)
+            {
+                UIElement? headerLeftUIElement = Header as UIElement;
+                UIElement? headerCenterUIElement = CenterContent as UIElement;
+                UIElement? headerRightUiElement = TrailingContent as UIElement;
+
+                isMouseOverHeaderContent =
+                    (headerLeftUIElement is not null
+                        && headerLeftUIElement != _titleBlock
+                        && headerLeftUIElement.IsMouseOverElement(lParam))
+                    || (headerCenterUIElement?.IsMouseOverElement(lParam) ?? false)
+                    || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+            }
+
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam, isMouseOverHeaderContent);
+            
+            // Skip button hit testing if top-left or top-right corner resize detection succeeds
+            if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
+            {
+                handled = true;
+                return htResult;
+            }
+        }
+        // For WM_NCLBUTTONDOWN, also skip button hit testing if within top-left or top-right corner resize area
+        // This ensures resize handling works correctly
+        else if (message == PInvoke.WM_NCLBUTTONDOWN)
+        {
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam, false);
+            if (htResult == (IntPtr)PInvoke.HTTOPLEFT || htResult == (IntPtr)PInvoke.HTTOPRIGHT)
+            {
+                // If within top-left or top-right corner resize area, skip button hit testing
+                // and let Windows handle the default resize processing
+                handled = false;
+                return IntPtr.Zero;
+            }
+        }
+
         foreach (TitleBarButton button in _buttons)
         {
             if (!button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
