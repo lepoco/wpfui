@@ -690,10 +690,8 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
                 isMouseOverHeaderContent =
                     (headerLeftUIElement is not null
                         && headerLeftUIElement != _titleBlock
-                        && TitleBarButton.IsMouseOverNonClient(headerLeftUIElement, lParam))
-                    || (headerCenterUIElement is not null
-                        && TitleBarButton.IsMouseOverNonClient(headerCenterUIElement, lParam))
-                    || (headerRightUiElement is not null
+                        && TitleBarButton.IsMouseOverNonClient(headerLeftUIElement, lParam)) || (headerCenterUIElement is not null
+                        && TitleBarButton.IsMouseOverNonClient(headerCenterUIElement, lParam)) || (headerRightUiElement is not null
                         && TitleBarButton.IsMouseOverNonClient(headerRightUiElement, lParam));
             }
 
@@ -725,10 +723,10 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
                 htResult = (IntPtr)PInvoke.HTNOWHERE;
             }
         }
-        // For WM_NCLBUTTONDOWN, also skip button hit testing if within top-left or top-right corner resize area
-        // This ensures resize handling works correctly
         else if (message == PInvoke.WM_NCLBUTTONDOWN)
         {
+            // For WM_NCLBUTTONDOWN, also skip button hit testing if within top-left or top-right corner resize area
+            // This ensures resize handling works correctly
             foreach (TitleBarButton button in _buttons)
             {
                 if (button is null)
