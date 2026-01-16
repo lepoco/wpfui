@@ -75,7 +75,7 @@ public partial class TitleBar
 
         if (hit == 0b0110u)
         {
-            const int cornerWidth = 4;
+            const int cornerWidth = 1;
             if (x < windowRect.right - cornerWidth)
             {
                 hit = 0b0100u;
