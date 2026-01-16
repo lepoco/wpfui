@@ -73,6 +73,15 @@ public partial class TitleBar
             hit |= 0b1000u; // bottom
 #pragma warning restore
 
+        if (hit == 0b0110u)
+        {
+            const int cornerWidth = 4;
+            if (x < windowRect.right - cornerWidth)
+            {
+                hit = 0b0100u;
+            }
+        }
+
         return hit switch
         {
             0b0101u => (IntPtr)PInvoke.HTTOPLEFT, // top    + left  (0b0100 | 0b0001)
