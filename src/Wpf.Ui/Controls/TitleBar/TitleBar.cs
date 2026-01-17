@@ -674,6 +674,134 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             return IntPtr.Zero;
         }
 
+        bool isMouseOverHeaderContent = false;
+        bool isMouseOverButtons = false;
+        IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
+
+        // For WM_NCHITTEST, perform resize detection first, and skip button hit testing if top-left or top-right corner resize detection succeeds
+        if (message == PInvoke.WM_NCHITTEST)
+        {
+            if (TrailingContent is UIElement || Header is UIElement || CenterContent is UIElement)
+            {
+                UIElement? headerLeftUIElement = Header as UIElement;
+                UIElement? headerCenterUIElement = CenterContent as UIElement;
+                UIElement? headerRightUiElement = TrailingContent as UIElement;
+
+                isMouseOverHeaderContent =
+                    (headerLeftUIElement is not null
+                        && headerLeftUIElement != _titleBlock
+                        && TitleBarButton.IsMouseOverNonClient(headerLeftUIElement, lParam)) || (headerCenterUIElement is not null
+                        && TitleBarButton.IsMouseOverNonClient(headerCenterUIElement, lParam)) || (headerRightUiElement is not null
+                        && TitleBarButton.IsMouseOverNonClient(headerRightUiElement, lParam));
+            }
+
+            TitleBarButton? rightmostButton = null;
+            double rightmostRightEdge = double.MinValue;
+
+            foreach (TitleBarButton button in _buttons)
+            {
+                if (button is null)
+                {
+                    continue;
+                }
+
+                try
+                {
+                    if (PresentationSource.FromVisual(button) is not null)
+                    {
+                        Point buttonTopLeft = button.PointToScreen(new Point(0, 0));
+                        double buttonRightEdge = buttonTopLeft.X + button.RenderSize.Width;
+
+                        if (buttonRightEdge > rightmostRightEdge)
+                        {
+                            rightmostRightEdge = buttonRightEdge;
+                            rightmostButton = button;
+                        }
+                    }
+                }
+                catch
+                {
+                    // Ignore visual transform errors and keep searching.
+                }
+
+                if (TitleBarButton.IsMouseOverNonClient(button, lParam))
+                {
+                    isMouseOverButtons = true;
+                }
+            }
+
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+
+            // If resize hit test succeeds, let Windows handle it
+            if (htResult != (IntPtr)PInvoke.HTNOWHERE)
+            {
+                handled = true;
+                return htResult;
+            }
+
+            if (rightmostButton is not null
+                && Windows.Win32.PInvoke.GetCursorPos(out Windows.Win32.POINT cursorPoint))
+            {
+                Point cursorPosition = new(cursorPoint.X, cursorPoint.Y);
+
+                try
+                {
+                    Point rightmostTopLeft = rightmostButton.PointToScreen(new Point(0, 0));
+                    double rightEdge = rightmostTopLeft.X + rightmostButton.RenderSize.Width;
+                    double leftEdge = rightEdge - 1;
+                    double bottomEdge = rightmostTopLeft.Y + rightmostButton.RenderSize.Height;
+
+                    if (
+                        cursorPosition.X >= leftEdge
+                        && cursorPosition.X <= rightEdge
+                        && cursorPosition.Y >= rightmostTopLeft.Y
+                        && cursorPosition.Y <= bottomEdge
+                    )
+                    {
+                        handled = true;
+                        return (IntPtr)PInvoke.HTRIGHT;
+                    }
+                }
+                catch
+                {
+                    // Ignore transform errors and fall back to default hit testing.
+                }
+            }
+
+            if (isMouseOverButtons)
+            {
+                htResult = (IntPtr)PInvoke.HTNOWHERE;
+            }
+        }
+        else if (message == PInvoke.WM_NCLBUTTONDOWN)
+        {
+            // For WM_NCLBUTTONDOWN, also skip button hit testing if within top-left or top-right corner resize area
+            // This ensures resize handling works correctly
+            foreach (TitleBarButton button in _buttons)
+            {
+                if (button is null)
+                {
+                    continue;
+                }
+
+                if (TitleBarButton.IsMouseOverNonClient(button, lParam))
+                {
+                    isMouseOverButtons = true;
+                    break;
+                }
+            }
+
+            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
+
+            if (htResult != (IntPtr)PInvoke.HTNOWHERE)
+            {
+                // If within resize area, skip button hit testing
+                // and let Windows handle the default resize processing
+                handled = false;
+                return IntPtr.Zero;
+            }
+        }
+
         foreach (TitleBarButton button in _buttons)
         {
             if (!button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
@@ -699,25 +827,6 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             return returnIntPtr;
         }
 
-        bool isMouseOverHeaderContent = false;
-        IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
-
-        if (message == PInvoke.WM_NCHITTEST)
-        {
-            if (TrailingContent is UIElement || Header is UIElement || CenterContent is UIElement)
-            {
-                UIElement? headerLeftUIElement = Header as UIElement;
-                UIElement? headerCenterUIElement = CenterContent as UIElement;
-                UIElement? headerRightUiElement = TrailingContent as UIElement;
-
-                isMouseOverHeaderContent = (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock && headerLeftUIElement.IsMouseOverElement(lParam))
-                    || (headerCenterUIElement?.IsMouseOverElement(lParam) ?? false)
-                    || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
-            }
-
-            htResult = GetWindowBorderHitTestResult(hwnd, lParam);
-        }
-
         var e = new HwndProcEventArgs(hwnd, msg, wParam, lParam, isMouseOverHeaderContent);
         WndProcInvoked?.Invoke(this, e);
 
@@ -729,14 +838,14 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         switch (message)
         {
-            case PInvoke.WM_NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
+            case PInvoke.WM_NCHITTEST when CloseWindowByDoubleClickOnIcon && TitleBarButton.IsMouseOverNonClient(_icon, lParam):
                 // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
                 return (IntPtr)PInvoke.HTSYSMENU;
             case PInvoke.WM_NCHITTEST when htResult != (IntPtr)PInvoke.HTNOWHERE:
                 handled = true;
                 return htResult;
-            case PInvoke.WM_NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
+            case PInvoke.WM_NCHITTEST when TitleBarButton.IsMouseOverNonClient(this, lParam) && !isMouseOverHeaderContent:
                 handled = true;
                 return (IntPtr)PInvoke.HTCAPTION;
             default:

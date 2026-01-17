@@ -12,6 +12,92 @@ namespace Wpf.Ui.Controls;
 
 public class TitleBarButton : Wpf.Ui.Controls.Button
 {
+    // We intentionally keep this logic local to TitleBar components to avoid changing
+    // global hit-testing behavior for other controls.
+    internal static bool IsMouseOverNonClient(UIElement element, IntPtr lParam, double tolerance = 1.0)
+    {
+        // This will be invoked very often and must be as simple as possible.
+        if (lParam == IntPtr.Zero)
+        {
+            return false;
+        }
+
+        try
+        {
+            // Ensure the visual is connected to a presentation source (needed for PointFromScreen).
+            if (PresentationSource.FromVisual(element) == null)
+            {
+                return false;
+            }
+
+            var mousePosition = TryGetCursorPos(out Point cursorPosition)
+                ? cursorPosition
+                : GetLParamPoint(lParam);
+
+            // Add a small tolerance to reduce hover flicker at pixel boundaries (rounding/DPI edge cases).
+            var hitRect = new Rect(
+                -tolerance,
+                -tolerance,
+                element.RenderSize.Width + (2 * tolerance),
+                element.RenderSize.Height + (2 * tolerance)
+            );
+
+            if (!hitRect.Contains(element.PointFromScreen(mousePosition)) || !element.IsHitTestVisible)
+            {
+                return false;
+            }
+
+            // If element is Panel, check if children at mousePosition is with IsHitTestVisible false.
+            if (element is System.Windows.Controls.Panel panel)
+            {
+                foreach (UIElement child in panel.Children)
+                {
+                    var childHitRect = new Rect(
+                        -tolerance,
+                        -tolerance,
+                        child.RenderSize.Width + (2 * tolerance),
+                        child.RenderSize.Height + (2 * tolerance)
+                    );
+
+                    if (childHitRect.Contains(child.PointFromScreen(mousePosition)))
+                    {
+                        return child.IsHitTestVisible;
+                    }
+                }
+
+                return false;
+            }
+
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private static Point GetLParamPoint(IntPtr lParam)
+    {
+        long lp = lParam.ToInt64();
+        int x = (short)(lp & 0xFFFF);
+        int y = (short)(lp >> 16);
+
+        return new Point(x, y);
+    }
+
+    private static bool TryGetCursorPos(out Point mousePosition)
+    {
+        mousePosition = default;
+
+        if (!Windows.Win32.PInvoke.GetCursorPos(out Windows.Win32.POINT point))
+        {
+            return false;
+        }
+
+        mousePosition = new Point(point.X, point.Y);
+        return true;
+    }
+
     /// <summary>Identifies the <see cref="ButtonType"/> dependency property.</summary>
     public static readonly DependencyProperty ButtonTypeProperty = DependencyProperty.Register(
         nameof(ButtonType),
@@ -179,7 +265,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         switch (msg)
         {
             case PInvoke.WM_NCHITTEST:
-                if (this.IsMouseOverElement(lParam))
+                if (IsMouseOverNonClient(this, lParam))
                 {
                     /*Debug.WriteLine($"Hitting {ButtonType} | return code {_returnValue}");*/
                     Hover();
@@ -192,10 +278,10 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             case PInvoke.WM_NCMOUSELEAVE: // Mouse leaves the window
                 RemoveHover();
                 return false;
-            case PInvoke.WM_NCLBUTTONDOWN when this.IsMouseOverElement(lParam): // Left button clicked down
+            case PInvoke.WM_NCLBUTTONDOWN when IsMouseOverNonClient(this, lParam): // Left button clicked down
                 _isClickedDown = true;
                 return true;
-            case PInvoke.WM_NCLBUTTONUP when _isClickedDown && this.IsMouseOverElement(lParam): // Left button clicked up
+            case PInvoke.WM_NCLBUTTONUP when _isClickedDown && IsMouseOverNonClient(this, lParam): // Left button clicked up
                 InvokeClick();
                 return true;
             default:
