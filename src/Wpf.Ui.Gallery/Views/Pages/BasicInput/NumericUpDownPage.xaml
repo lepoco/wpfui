@@ -1,0 +1,67 @@
+<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.NumericUpDownPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="RatingPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:NumericUpDown}"
+    d:DataContext="{d:DesignInstance local:NumericUpDownPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample Margin="0" HeaderText="WPF UI NumericUpDown">
+            <controls:ControlExample.XamlCode>
+                &lt;ui:NumericUpDown
+                BorderThickness=&quot;1&quot;
+                ButtonAlignment=&quot;Vertical&quot;
+                ButtonWidth=&quot;22&quot;
+                CornerRadius=&quot;4&quot;
+                Decimals=&quot;0&quot;
+                Format=&quot;N0&quot;
+                IsEnabled=&quot;True&quot;
+                IsReadOnly=&quot;False&quot;
+                MaxValue=&quot;1000000&quot;
+                MinValue=&quot;0&quot;
+                Step=&quot;1&quot;
+                Wrap=&quot;True&quot;
+                Value=&quot;999999&quot; /&gt;
+            </controls:ControlExample.XamlCode>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:NumericUpDown
+                    Width="150"
+                    Padding="4"
+                    HorizontalAlignment="Left"
+                    BorderThickness="1"
+                    ButtonAlignment="Vertical"
+                    ButtonWidth="22"
+                    CornerRadius="4"
+                    Decimals="0"
+                    Format="N0"
+                    IsEnabled="True"
+                    IsReadOnly="False"
+                    MaxValue="1000000"
+                    MinValue="0"
+                    Step="1"
+                    Wrap="True"
+                    Value="999999" />
+            </Grid>
+        </controls:ControlExample>
+
+    </StackPanel>
+</Page>

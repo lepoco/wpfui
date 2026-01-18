@@ -546,6 +546,20 @@
     <SolidColorBrush x:Key="NavigationViewItemForegroundLeftFluent" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOverLeftFluent" Color="{StaticResource TextFillColorPrimary}" />
 
+    <!--  NumericUpDown  -->
+    <SolidColorBrush x:Key="NumericUpDownForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="NumericUpDownForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="NumericUpDownBackground" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="NumericUpDownBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
+    <!--<SolidColorBrush x:Key="NumericUpDownBorder" Color="{StaticResource ControlStrongStrokeColorDefault}" />-->
+    <SolidColorBrush x:Key="NumericUpDownButtonBackground" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="NumericUpDownButtonBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
+    <SolidColorBrush x:Key="NumericUpDownButtonBackgroundPressed" Color="{StaticResource ControlFillColorTertiary}" />
+    <SolidColorBrush x:Key="NumericUpDownButtonBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
+    <SolidColorBrush x:Key="NumericUpDownButtonForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="NumericUpDownButtonForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="NumericUpDownButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+
     <!--  ProgressBar  -->
     <SolidColorBrush x:Key="ProgressBarForeground" Color="{DynamicResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ProgressBarBackground" Color="{StaticResource ControlStrongStrokeColorDefault}" />
