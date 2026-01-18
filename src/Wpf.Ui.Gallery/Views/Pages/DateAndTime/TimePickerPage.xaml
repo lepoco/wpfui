@@ -26,8 +26,10 @@
             XamlCode="&lt;ui:TimePicker ClockIdentifier=&quot;Clock24Hour&quot; /&gt;">
             <ui:TimePicker
                 Width="300"
+                AcceptButtonText="OK"
+                DismissButtonText="Cancle"
                 HorizontalAlignment="Left"
-                ClockIdentifier="Clock12Hour" />
+                ClockIdentifier="Clock24Hour" />
         </controls:ControlExample>
     </Grid>
 </Page>
