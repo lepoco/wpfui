@@ -124,7 +124,7 @@ public partial class NavigationView
         nameof(IsBackButtonVisible),
         typeof(NavigationViewBackButtonVisible),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(NavigationViewBackButtonVisible.Auto)
+        new FrameworkPropertyMetadata(NavigationViewBackButtonVisible.Auto, OnIsBackButtonVisibleChanged)
     );
 
     /// <summary>Identifies the <see cref="IsPaneToggleVisible"/> dependency property.</summary>
@@ -132,7 +132,7 @@ public partial class NavigationView
         nameof(IsPaneToggleVisible),
         typeof(bool),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(true)
+        new FrameworkPropertyMetadata(true, OnIsPaneToggleVisibleChanged)
     );
 
     /// <summary>Identifies the <see cref="IsPaneOpen"/> dependency property.</summary>
@@ -644,6 +644,26 @@ public partial class NavigationView
         navigationView.OnItemTemplateChanged();
     }
 
+    private static void OnIsBackButtonVisibleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+        {
+            return;
+        }
+
+        navigationView.UpdateTitleBarMargin();
+    }
+
+    private static void OnIsPaneToggleVisibleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+        {
+            return;
+        }
+
+        navigationView.UpdateTitleBarMargin();
+    }
+
     private static void OnIsPaneOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
@@ -667,10 +687,7 @@ public partial class NavigationView
 
         navigationView.CloseNavigationViewItemMenus();
 
-        navigationView.TitleBar?.SetCurrentValue(
-            MarginProperty,
-            navigationView.IsPaneOpen ? TitleBarPaneOpenMarginDefault : TitleBarPaneCompactMarginDefault
-        );
+        navigationView.UpdateTitleBarMargin();
 
         UpdateVisualState(navigationView);
     }
@@ -700,13 +717,14 @@ public partial class NavigationView
             return;
         }
 
-        navigationView.FrameMargin = FrameMarginDefault;
-        titleBar.Margin = TitleBarPaneOpenMarginDefault;
+        navigationView.FrameMargin = new Thickness(0, titleBar.ActualHeight, 0, 0);
 
         if (navigationView.AutoSuggestBox?.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
         {
             navigationView.AutoSuggestBox.SetCurrentValue(MarginProperty, AutoSuggestBoxMarginDefault);
         }
+
+        navigationView.UpdateTitleBarMargin();
     }
 
     private static void OnAutoSuggestBoxChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
