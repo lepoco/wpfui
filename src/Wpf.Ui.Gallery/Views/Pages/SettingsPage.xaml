@@ -41,7 +41,6 @@
             <ComboBox
                 Grid.Column="1"
                 MinWidth="200"
-                
                 SelectedIndex="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource ThemeToIndexConverter}, Mode=TwoWay}">
                 <ComboBoxItem Content="Light" />
                 <ComboBoxItem Content="Dark" />
@@ -60,8 +59,9 @@
                 Grid.Column="1"
                 MinWidth="200"
                 SelectedIndex="{Binding ViewModel.CurrentApplicationNavigationStyle, Converter={StaticResource PaneDisplayModeToIndexConverter}, Mode=TwoWay}">
-                <ComboBoxItem Content="Left compact" />
-                <ComboBoxItem Content="Fluent" />
+                <ComboBoxItem Content="Left" />
+                <ComboBoxItem Content="LeftMinimal" />
+                <ComboBoxItem Content="LeftFluent" />
                 <ComboBoxItem Content="Top" />
                 <ComboBoxItem Content="Bottom" />
             </ComboBox>
