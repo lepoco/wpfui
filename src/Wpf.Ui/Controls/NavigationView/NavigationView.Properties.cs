@@ -505,14 +505,11 @@ public partial class NavigationView
                 break;
 
             case NotifyCollectionChangedAction.Remove:
-                if (e.OldItems is not null && e.NewItems is not null)
+                if (e.OldItems is not null)
                 {
                     foreach (var item in e.OldItems)
                     {
-                        if (!e.NewItems.Contains(item))
-                        {
-                            collection.Remove(item);
-                        }
+                        collection.Remove(item);
                     }
                 }
 
