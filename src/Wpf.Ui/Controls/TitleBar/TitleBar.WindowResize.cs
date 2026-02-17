@@ -35,6 +35,24 @@ namespace Wpf.Ui.Controls;
 /// </remarks>
 public partial class TitleBar
 {
+    /// <summary>
+    /// Bit flags that represent which window border edges the cursor is currently over.
+    /// </summary>
+    [Flags]
+    private enum BorderHitEdges : uint
+    {
+        /// <summary>No border edge is hit.</summary>
+        None = 0,
+        /// <summary>The left border edge is hit.</summary>
+        Left = 1 << 0,
+        /// <summary>The right border edge is hit.</summary>
+        Right = 1 << 1,
+        /// <summary>The top border edge is hit.</summary>
+        Top = 1 << 2,
+        /// <summary>The bottom border edge is hit.</summary>
+        Bottom = 1 << 3,
+    }
+
     private int _borderX;
     private int _borderY;
 
@@ -60,38 +78,36 @@ public partial class TitleBar
         int x = (short)(lp & 0xFFFF);
         int y = (short)((lp >> 16) & 0xFFFF);
 
-        uint hit = 0u;
+        BorderHitEdges hit = BorderHitEdges.None;
 
-#pragma warning disable
         if (x < windowRect.left + _borderX)
-            hit |= 0b0001u; // left
+            hit |= BorderHitEdges.Left;
         if (x >= windowRect.right - _borderX)
-            hit |= 0b0010u; // right
+            hit |= BorderHitEdges.Right;
         if (y < windowRect.top + _borderY)
-            hit |= 0b0100u; // top
+            hit |= BorderHitEdges.Top;
         if (y >= windowRect.bottom - _borderY)
-            hit |= 0b1000u; // bottom
-#pragma warning restore
+            hit |= BorderHitEdges.Bottom;
 
-        if (hit == 0b0110u)
+        if (hit == (BorderHitEdges.Top | BorderHitEdges.Right))
         {
             const int cornerWidth = 1;
             if (x < windowRect.right - cornerWidth)
             {
-                hit = 0b0100u;
+                hit = BorderHitEdges.Top;
             }
         }
 
         return hit switch
         {
-            0b0101u => (IntPtr)PInvoke.HTTOPLEFT, // top    + left  (0b0100 | 0b0001)
-            0b0110u => (IntPtr)PInvoke.HTTOPRIGHT, // top    + right (0b0100 | 0b0010)
-            0b1001u => (IntPtr)PInvoke.HTBOTTOMLEFT, // bottom + left  (0b1000 | 0b0001)
-            0b1010u => (IntPtr)PInvoke.HTBOTTOMRIGHT, // bottom + right (0b1000 | 0b0010)
-            0b0100u => (IntPtr)PInvoke.HTTOP, // top
-            0b0001u => (IntPtr)PInvoke.HTLEFT, // left
-            0b1000u => (IntPtr)PInvoke.HTBOTTOM, // bottom
-            0b0010u => (IntPtr)PInvoke.HTRIGHT, // right
+            BorderHitEdges.Top | BorderHitEdges.Left => (IntPtr)PInvoke.HTTOPLEFT,
+            BorderHitEdges.Top | BorderHitEdges.Right => (IntPtr)PInvoke.HTTOPRIGHT,
+            BorderHitEdges.Bottom | BorderHitEdges.Left => (IntPtr)PInvoke.HTBOTTOMLEFT,
+            BorderHitEdges.Bottom | BorderHitEdges.Right => (IntPtr)PInvoke.HTBOTTOMRIGHT,
+            BorderHitEdges.Top => (IntPtr)PInvoke.HTTOP,
+            BorderHitEdges.Left => (IntPtr)PInvoke.HTLEFT,
+            BorderHitEdges.Bottom => (IntPtr)PInvoke.HTBOTTOM,
+            BorderHitEdges.Right => (IntPtr)PInvoke.HTRIGHT,
 
             // no match = HTNOWHERE (stop processing)
             _ => (IntPtr)PInvoke.HTNOWHERE,
