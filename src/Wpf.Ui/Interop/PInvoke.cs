@@ -15,17 +15,4 @@ internal static partial class PInvoke
         DefaultDllImportSearchPaths(DllImportSearchPath.System32)
     ]
     internal static extern nint SetWindowLongPtr(Windows.Win32.Foundation.HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex, nint dwNewLong);
-
-    [
-        DllImport("USER32.dll", ExactSpelling = true, EntryPoint = "GetCursorPos", SetLastError = true),
-        DefaultDllImportSearchPaths(DllImportSearchPath.System32)
-    ]
-    internal static extern bool GetCursorPos(out POINT lpPoint);
-}
-
-[StructLayout(LayoutKind.Sequential)]
-internal struct POINT
-{
-    public int X;
-    public int Y;
 }

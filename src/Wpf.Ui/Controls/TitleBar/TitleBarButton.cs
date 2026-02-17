@@ -89,7 +89,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     {
         mousePosition = default;
 
-        if (!Windows.Win32.PInvoke.GetCursorPos(out Windows.Win32.POINT point))
+        if (!Windows.Win32.PInvoke.GetCursorPos(out System.Drawing.Point point))
         {
             return false;
         }

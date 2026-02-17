@@ -740,7 +740,7 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             }
 
             if (rightmostButton is not null
-                && Windows.Win32.PInvoke.GetCursorPos(out Windows.Win32.POINT cursorPoint))
+                && Windows.Win32.PInvoke.GetCursorPos(out System.Drawing.Point cursorPoint))
             {
                 Point cursorPosition = new(cursorPoint.X, cursorPoint.Y);
 
