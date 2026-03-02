@@ -42,7 +42,7 @@
 
     <TranslateTransform x:Key="RollLeftTransform">
         <TranslateTransform.X>
-            <MultiBinding Converter="{StaticResource AnimationFactorToValueConverter}" ConverterParameter="negative">
+            <MultiBinding Converter="{StaticResource AnimationFactorToValueConverter}" ConverterParameter="positive">
                 <Binding ElementName="ContentPresenterBorder" Path="ActualHeight" />
                 <Binding ElementName="ContentPresenterBorder" Path="(animations:AnimationProperties.AnimationTagValue)" />
             </MultiBinding>
@@ -51,7 +51,7 @@
 
     <TranslateTransform x:Key="RollRightTransform">
         <TranslateTransform.X>
-            <MultiBinding Converter="{StaticResource AnimationFactorToValueConverter}" ConverterParameter="positive">
+            <MultiBinding Converter="{StaticResource AnimationFactorToValueConverter}" ConverterParameter="negative">
                 <Binding ElementName="ContentPresenterBorder" Path="ActualHeight" />
                 <Binding ElementName="ContentPresenterBorder" Path="(animations:AnimationProperties.AnimationTagValue)" />
             </MultiBinding>
@@ -86,10 +86,36 @@
                     x:Name="ControlChevronIcon"
                     FontSize="{StaticResource ExpanderChevronSize}"
                     Foreground="{TemplateBinding Foreground}"
-                    Symbol="ChevronDown24" />
+                    RenderTransformOrigin="0.5, 0.5"
+                    Symbol="ChevronDown24">
+                    <controls:SymbolIcon.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </controls:SymbolIcon.RenderTransform>
+                </controls:SymbolIcon>
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Expander}, Path=ExpandDirection}" Value="Left">
+                <Setter TargetName="ControlChevronIcon" Property="RenderTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="90" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Expander}, Path=ExpandDirection}" Value="Up">
+                <Setter TargetName="ControlChevronIcon" Property="RenderTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="180" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Expander}, Path=ExpandDirection}" Value="Right">
+                <Setter TargetName="ControlChevronIcon" Property="RenderTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="270" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
             <Trigger Property="IsChecked" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
@@ -220,7 +246,7 @@
                                 <Condition Property="ExpandDirection" Value="Left" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ToggleButtonBorder" Property="CornerRadius" Value="0,4,4,0" />
-                            <Setter TargetName="ContentPresenterBorder" Property="BorderThickness" Value="0,1,1,1" />
+                            <Setter TargetName="ContentPresenterBorder" Property="BorderThickness" Value="1,1,0,1" />
                             <Setter TargetName="ContentPresenterBorder" Property="CornerRadius" Value="4,0,0,4" />
                         </MultiTrigger>
                         <MultiTrigger>
@@ -238,11 +264,10 @@
                                 <Condition Property="ExpandDirection" Value="Right" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ToggleButtonBorder" Property="CornerRadius" Value="4,0,0,4" />
-                            <Setter TargetName="ContentPresenterBorder" Property="BorderThickness" Value="1,1,0,1" />
+                            <Setter TargetName="ContentPresenterBorder" Property="BorderThickness" Value="0,1,1,1" />
                             <Setter TargetName="ContentPresenterBorder" Property="CornerRadius" Value="0,4,4,0" />
                         </MultiTrigger>
                         <Trigger Property="IsExpanded" Value="True">
-                            <Setter TargetName="ToggleButtonBorder" Property="CornerRadius" Value="4,4,0,0" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
