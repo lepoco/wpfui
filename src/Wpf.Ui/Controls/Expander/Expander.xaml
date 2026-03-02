@@ -140,49 +140,47 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Expander}">
                     <DockPanel x:Name="DockPanel">
-                        <Grid>
 
-                            <!--  Top level controls always visible  -->
+                        <!--  Top level controls always visible  -->
+                        <Border
+                            x:Name="ToggleButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{TemplateBinding Border.CornerRadius}">
+                            <ToggleButton
+                                x:Name="ExpanderToggleButton"
+                                Margin="0"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                Content="{TemplateBinding Header}"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{TemplateBinding Foreground}"
+                                IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                IsEnabled="{TemplateBinding IsEnabled}"
+                                OverridesDefaultStyle="True"
+                                Template="{StaticResource DefaultExpanderToggleButtonStyle}" />
+                        </Border>
+
+                        <!--  Collapsed content to expand  -->
+                        <Grid x:Name="ContentGrid" ClipToBounds="True">
                             <Border
-                                x:Name="ToggleButtonBorder"
-                                Background="{TemplateBinding Background}"
+                                x:Name="ContentPresenterBorder"
+                                Background="{DynamicResource ExpanderContentBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="{TemplateBinding Border.CornerRadius}">
-                                <ToggleButton
-                                    x:Name="ExpanderToggleButton"
-                                    Margin="0"
-                                    Padding="{TemplateBinding Padding}"
-                                    HorizontalAlignment="Stretch"
+                                BorderThickness="1,0,1,1"
+                                CornerRadius="0,0,4,4"
+                                Visibility="Collapsed">
+                                <ContentPresenter
+                                    x:Name="ContentPresenter"
+                                    Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    HorizontalContentAlignment="Stretch"
-                                    VerticalContentAlignment="Center"
-                                    Content="{TemplateBinding Header}"
-                                    FontSize="{TemplateBinding FontSize}"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                    IsEnabled="{TemplateBinding IsEnabled}"
-                                    OverridesDefaultStyle="True"
-                                    Template="{StaticResource DefaultExpanderToggleButtonStyle}" />
+                                    Content="{TemplateBinding Content}" />
                             </Border>
-
-                            <!--  Collapsed content to expand  -->
-                            <Grid x:Name="ContentGrid" ClipToBounds="True">
-                                <Border
-                                    x:Name="ContentPresenterBorder"
-                                    Background="{DynamicResource ExpanderContentBackground}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="1,0,1,1"
-                                    CornerRadius="0,0,4,4"
-                                    Visibility="Collapsed">
-                                    <ContentPresenter
-                                        x:Name="ContentPresenter"
-                                        Margin="{TemplateBinding Padding}"
-                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Content="{TemplateBinding Content}" />
-                                </Border>
-                            </Grid>
                         </Grid>
                     </DockPanel>
 
