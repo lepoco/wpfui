@@ -18,19 +18,36 @@
 
     <StackPanel Margin="0,0,0,24">
         <controls:ControlExample
+            x:Name="ControlExample1"
             Margin="0"
-            HeaderText="An Expander with text in the header and content areas"
-            XamlCode="&lt;Expander Header=&quot;This text is in the header&quot; Content=&quot;This is in the content&quot; /&gt;">
+            HeaderText="An Expander with text in the header and content areas">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Expander
+                    x:Name="Expander1"
                     Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    d:IsExpanded="True"
                     Content="This is in the content"
+                    ExpandDirection="Down"
                     Header="This text is in the header" />
-                <!--  TODO: ExpandDirection  -->
+                <StackPanel Grid.Column="2" Margin="16">
+                    <TextBlock Margin="0,0,0,8" Text="ExpandDirection" />
+                    <ComboBox
+                        VerticalAlignment="Center"
+                        SelectedIndex="0"
+                        SelectionChanged="ComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Down" />
+                        <ComboBoxItem Content="Up" />
+                        <ComboBoxItem Content="Left" />
+                        <ComboBoxItem Content="Right" />
+                    </ComboBox>
+                </StackPanel>
             </Grid>
         </controls:ControlExample>
 
