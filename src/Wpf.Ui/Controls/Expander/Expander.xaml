@@ -43,7 +43,7 @@
     <TranslateTransform x:Key="RollLeftTransform">
         <TranslateTransform.X>
             <MultiBinding Converter="{StaticResource AnimationFactorToValueConverter}" ConverterParameter="positive">
-                <Binding ElementName="ContentPresenterBorder" Path="ActualHeight" />
+                <Binding ElementName="ContentPresenterBorder" Path="ActualWidth" />
                 <Binding ElementName="ContentPresenterBorder" Path="(animations:AnimationProperties.AnimationTagValue)" />
             </MultiBinding>
         </TranslateTransform.X>
@@ -52,7 +52,7 @@
     <TranslateTransform x:Key="RollRightTransform">
         <TranslateTransform.X>
             <MultiBinding Converter="{StaticResource AnimationFactorToValueConverter}" ConverterParameter="negative">
-                <Binding ElementName="ContentPresenterBorder" Path="ActualHeight" />
+                <Binding ElementName="ContentPresenterBorder" Path="ActualWidth" />
                 <Binding ElementName="ContentPresenterBorder" Path="(animations:AnimationProperties.AnimationTagValue)" />
             </MultiBinding>
         </TranslateTransform.X>
