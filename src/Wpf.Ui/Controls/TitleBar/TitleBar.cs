@@ -676,7 +676,7 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         foreach (TitleBarButton button in _buttons)
         {
-            if (!button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
+            if (button == null || !button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
             {
                 continue;
             }
