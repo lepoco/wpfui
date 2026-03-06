@@ -676,6 +676,7 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         foreach (TitleBarButton button in _buttons)
         {
+            // Check if button is null to avoid potential NullReferenceException if OnApplyTemplate hasn't been called yet, e.g. when TitleBar has Visibility == Collapsed.
             if (button == null || !button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
             {
                 continue;
