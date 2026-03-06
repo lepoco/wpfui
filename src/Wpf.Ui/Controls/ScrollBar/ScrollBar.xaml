@@ -95,7 +95,7 @@
     <Style x:Key="UiScrollBarThumb" TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="{DynamicResource ScrollBarThumbFill}" />
         <Setter Property="Border.CornerRadius" Value="4" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="False" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Focusable" Value="False" />
