@@ -65,51 +65,42 @@
                                 </controls:Arc>
                             </Grid>
                             <ControlTemplate.Triggers>
+                                <EventTrigger SourceName="Arc" RoutedEvent="Loaded">
+                                    <BeginStoryboard Name="RotateStoryboard">
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetName="Arc"
+                                                Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
+                                                To="360"
+                                                Duration="0:0:2" />
+                                            <DoubleAnimation
+                                                AutoReverse="True"
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetName="Arc"
+                                                Storyboard.TargetProperty="EndAngle"
+                                                From="100"
+                                                To="320"
+                                                Duration="0:0:5" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
                                 <Trigger Property="IsEnabled" Value="True">
                                     <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    RepeatBehavior="Forever"
-                                                    Storyboard.TargetName="Arc"
-                                                    Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
-                                                    To="360"
-                                                    Duration="0:0:2" />
-
-                                                <DoubleAnimation
-                                                    AutoReverse="True"
-                                                    RepeatBehavior="Forever"
-                                                    Storyboard.TargetName="Arc"
-                                                    Storyboard.TargetProperty="EndAngle"
-                                                    From="100"
-                                                    To="320"
-                                                    Duration="0:0:5" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
+                                        <ResumeStoryboard BeginStoryboardName="RotateStoryboard" />
                                     </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <PauseStoryboard BeginStoryboardName="RotateStoryboard" />
+                                    </Trigger.ExitActions>
                                 </Trigger>
                                 <Trigger Property="IsVisible" Value="True">
                                     <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    RepeatBehavior="Forever"
-                                                    Storyboard.TargetName="Arc"
-                                                    Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
-                                                    To="360"
-                                                    Duration="0:0:2" />
-
-                                                <DoubleAnimation
-                                                    AutoReverse="True"
-                                                    RepeatBehavior="Forever"
-                                                    Storyboard.TargetName="Arc"
-                                                    Storyboard.TargetProperty="EndAngle"
-                                                    From="100"
-                                                    To="320"
-                                                    Duration="0:0:5" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
+                                        <ResumeStoryboard BeginStoryboardName="RotateStoryboard" />
                                     </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <PauseStoryboard BeginStoryboardName="RotateStoryboard" />
+                                        <SeekStoryboard BeginStoryboardName="RotateStoryboard" Offset="0" />
+                                    </Trigger.ExitActions>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
