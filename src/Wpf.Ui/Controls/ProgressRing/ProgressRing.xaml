@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -87,11 +87,29 @@
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
+                                </Trigger>
+                                <Trigger Property="IsVisible" Value="True">
+                                    <Trigger.EnterActions>
                                         <BeginStoryboard>
-                                            <Storyboard />
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    RepeatBehavior="Forever"
+                                                    Storyboard.TargetName="Arc"
+                                                    Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
+                                                    To="360"
+                                                    Duration="0:0:2" />
+
+                                                <DoubleAnimation
+                                                    AutoReverse="True"
+                                                    RepeatBehavior="Forever"
+                                                    Storyboard.TargetName="Arc"
+                                                    Storyboard.TargetProperty="EndAngle"
+                                                    From="100"
+                                                    To="320"
+                                                    Duration="0:0:5" />
+                                            </Storyboard>
                                         </BeginStoryboard>
-                                    </Trigger.ExitActions>
+                                    </Trigger.EnterActions>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
