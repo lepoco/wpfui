@@ -27,9 +27,7 @@ public class CornerRadiusSplitConverter : IMultiValueConverter
 
         if (string.Equals(side, "Top", StringComparison.OrdinalIgnoreCase))
         {
-            return isExpanded
-                ? new CornerRadius(original.TopLeft, original.TopRight, 0, 0)
-                : original;
+            return isExpanded ? new CornerRadius(original.TopLeft, original.TopRight, 0, 0) : original;
         }
         else
         {
@@ -39,6 +37,6 @@ public class CornerRadiusSplitConverter : IMultiValueConverter
         }
     }
 
-    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        => throw new NotSupportedException();
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
 }

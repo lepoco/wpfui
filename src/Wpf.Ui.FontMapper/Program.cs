@@ -27,19 +27,21 @@ var filledIcons = new FontSource(
     "generated\\SymbolFilled.cs"
 );
 
-async Task<string> FetchVersion()
+Task<string> FetchVersion()
 {
-    using var httpClient = new HttpClient();
-    httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
-
-    return (
-            await httpClient.GetFromJsonAsync<IEnumerable<GitTag>>(
-                @"https://api.github.com/repos/microsoft/fluentui-system-icons/git/refs/tags"
-            )
-        )
-            ?.Last()
-            ?.Ref.Replace("refs/tags/", string.Empty)
-            .Trim() ?? throw new Exception("Unable to parse the version string");
+    // using var httpClient = new HttpClient();
+    // httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
+    //
+    // return (
+    //         await httpClient.GetFromJsonAsync<IEnumerable<GitTag>>(
+    //             @"https://api.github.com/repos/microsoft/fluentui-system-icons/git/refs/tags"
+    //         )
+    //     )
+    //         ?.Last()
+    //         ?.Ref.Replace("refs/tags/", string.Empty)
+    //         .Trim()
+    //     ?? throw new Exception("Unable to parse the version string");
+    return Task.FromResult("1.1.316");
 }
 
 string FormatIconName(string rawIconName)

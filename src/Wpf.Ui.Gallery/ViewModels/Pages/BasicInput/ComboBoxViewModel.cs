@@ -34,4 +34,44 @@ public partial class ComboBoxViewModel : ViewModel
         48,
         72,
     ];
+
+    [ObservableProperty]
+    private ObservableCollection<GroupedComboBoxItem> _groupedItems =
+    [
+        new("Fruits", "Apple"),
+        new("Fruits", "Banana"),
+        new("Fruits", "Orange"),
+        new("Fruits", "Mango"),
+        new("Fruits", "Pineapple"),
+        new("Fruits", "Strawberry"),
+        new("Fruits", "Grapes"),
+        new("Fruits", "Watermelon"),
+        new("Vegetables", "Carrot"),
+        new("Vegetables", "Broccoli"),
+        new("Vegetables", "Spinach"),
+        new("Vegetables", "Tomato"),
+        new("Vegetables", "Cucumber"),
+        new("Vegetables", "Lettuce"),
+        new("Vegetables", "Pepper"),
+        new("Vegetables", "Onion"),
+        new("Dairy", "Milk"),
+        new("Dairy", "Cheese"),
+        new("Dairy", "Yogurt"),
+        new("Dairy", "Butter"),
+        new("Dairy", "Cream"),
+        new("Dairy", "Ice Cream"),
+        new("Meat", "Chicken"),
+        new("Meat", "Beef"),
+        new("Meat", "Pork"),
+        new("Meat", "Fish"),
+        new("Meat", "Turkey"),
+        new("Meat", "Lamb"),
+        new("Grains", "Rice"),
+        new("Grains", "Bread"),
+        new("Grains", "Pasta"),
+        new("Grains", "Oats"),
+        new("Grains", "Quinoa"),
+    ];
 }
+
+public record GroupedComboBoxItem(string Category, string Name);

@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Markup;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Markup;
 
@@ -38,5 +39,6 @@ public class ControlsDictionary : ResourceDictionary
     public ControlsDictionary()
     {
         Source = new Uri(DictionaryUri, UriKind.Absolute);
+        TextBlockMetadata.Initialize();
     }
 }

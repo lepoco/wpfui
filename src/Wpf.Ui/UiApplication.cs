@@ -78,6 +78,12 @@ public class UiApplication
     }
 
     /// <summary>
+    /// Gets or sets a value indicating whether <see cref="UiApplication" /> applies
+    /// system accent color when first accessing <see cref="Resources" /> property
+    /// </summary>
+    public bool ApplySystemAccentColor { get; set; } = true;
+
+    /// <summary>
     /// Gets or sets the application's resources.
     /// </summary>
     public ResourceDictionary Resources
@@ -90,7 +96,11 @@ public class UiApplication
 
                 try
                 {
-                    Wpf.Ui.Appearance.ApplicationAccentColorManager.ApplySystemAccent();
+                    if (ApplySystemAccentColor)
+                    {
+                        Wpf.Ui.Appearance.ApplicationAccentColorManager.ApplySystemAccent();
+                    }
+
                     var themesDictionary = new Markup.ThemesDictionary();
                     var controlsDictionary = new Markup.ControlsDictionary();
                     _resources.MergedDictionaries.Add(themesDictionary);
@@ -101,13 +111,10 @@ public class UiApplication
 
             return _application?.Resources ?? _resources;
         }
+
         set
         {
-            if (_application is not null)
-            {
-                _application.Resources = value;
-            }
-
+            _application?.Resources = value;
             _resources = value;
         }
     }

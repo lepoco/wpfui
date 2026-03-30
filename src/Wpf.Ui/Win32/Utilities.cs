@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Windows.Win32;
 using Windows.Win32.Foundation;
+using static Wpf.Ui.Appearance.UISettingsRCW;
 
 namespace Wpf.Ui.Win32;
 
@@ -120,6 +121,34 @@ internal sealed class Utilities
 
         Debug.Assert(Marshal.IsComObject(t), "Object is not a COM object.");
         _ = Marshal.ReleaseComObject(t);
+    }
+
+    /// <summary>
+    /// Tries to get the currently active window from the foreground HWND.
+    /// </summary>
+    /// <returns>The active <see cref="Window"/> or <see langword="null"/> if it cannot be determined.</returns>
+    internal static Window? TryGetWindowFromForegroundHwnd()
+    {
+        try
+        {
+            HWND hwnd = PInvoke.GetForegroundWindow();
+            if (hwnd == IntPtr.Zero)
+            {
+                return null;
+            }
+
+            var src = HwndSource.FromHwnd(hwnd);
+            return src?.RootVisual switch
+            {
+                Window w => w,
+                DependencyObject rd => Window.GetWindow(rd),
+                _ => null,
+            };
+        }
+        catch
+        {
+            return null;
+        }
     }
 
 #if !NET5_0_OR_GREATER

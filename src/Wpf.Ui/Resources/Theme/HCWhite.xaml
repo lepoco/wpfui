@@ -366,6 +366,11 @@
     <SolidColorBrush x:Key="InfoBarBorderBrush" Color="{StaticResource SystemColorButtonTextColor}" />
     <SolidColorBrush x:Key="InfoBarTitleForeground" Color="{StaticResource SystemColorButtonTextColor}" />
 
+    <SolidColorBrush x:Key="InfoBarErrorSeverityBorderBrush" Color="{StaticResource SystemColorButtonTextColor}" />
+    <SolidColorBrush x:Key="InfoBarWarningSeverityBorderBrush" Color="{StaticResource SystemColorButtonTextColor}" />
+    <SolidColorBrush x:Key="InfoBarSuccessSeverityBorderBrush" Color="{StaticResource SystemColorButtonTextColor}" />
+    <SolidColorBrush x:Key="InfoBarInformationalSeverityBorderBrush" Color="{StaticResource SystemColorButtonTextColor}" />
+    
     <SolidColorBrush x:Key="InfoBarErrorSeverityBackgroundBrush" Color="{StaticResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="InfoBarWarningSeverityBackgroundBrush" Color="{StaticResource SystemColorWindowColor}" />
     <SolidColorBrush x:Key="InfoBarSuccessSeverityBackgroundBrush" Color="{StaticResource SystemColorWindowColor}" />

@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Controls;
+
 namespace Wpf.Ui;
 
 /// <summary>
@@ -36,4 +38,11 @@ public class SimpleContentDialogCreateOptions
     /// <para>If not added, or <see cref="string.Empty"/>, it will not be displayed.</para>
     /// </summary>
     public string SecondaryButtonText { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the button that is activated by default when the user presses the Enter key in the dialog.
+    /// </summary>
+    /// <remarks>Use this property to specify which button receives keyboard focus and is triggered by default
+    /// when the dialog is shown. This can improve usability by guiding users toward the recommended action.</remarks>
+    public ContentDialogButton DefaultButton { get; set; } = ContentDialogButton.Primary;
 }

@@ -236,6 +236,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         // TODO: When shift clicked on navigationviewitem
     }
 
+    /// <summary>
+    /// Clears the currently selected item.
+    /// </summary>
+    internal void ClearSelectedItem()
+    {
+        SelectedItem = null;
+        OnSelectionChanged();
+    }
+
     internal void OnNavigationViewItemClick(NavigationViewItem navigationViewItem)
     {
         OnItemInvoked();
