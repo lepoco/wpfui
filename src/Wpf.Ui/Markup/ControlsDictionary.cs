@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Markup;
+using Wpf.Ui.Animations;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Markup;
@@ -32,13 +33,54 @@ public class ControlsDictionary : ResourceDictionary
 {
     private const string DictionaryUri = "pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml";
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ControlsDictionary"/> class.
-    /// Default constructor defining <see cref="ResourceDictionary.Source"/> of the <c>WPF UI</c> controls dictionary.
-    /// </summary>
     public ControlsDictionary()
     {
         Source = new Uri(DictionaryUri, UriKind.Absolute);
         TextBlockMetadata.Initialize();
+    }
+
+    /// <summary>
+    /// Gets or sets the duration used by animations marked as <see cref="AnimationDuration.SlowDuration"/>.
+    /// The default value is 333 ms. Set this before the dictionary is loaded to override the default.
+    /// </summary>
+    /// <example>
+    /// <code lang="xml">
+    /// &lt;ui:ControlsDictionary SlowDuration="0:0:0.9" /&gt;
+    /// </code>
+    /// </example>
+    public TimeSpan SlowDuration
+    {
+        get => AnimationDurationsDictionary.Get(AnimationDuration.SlowDuration).TimeSpan;
+        set => AnimationDurationsDictionary.Set(AnimationDuration.SlowDuration, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the duration used by animations marked as <see cref="AnimationDuration.NormalDuration"/>.
+    /// The default value is 167 ms. Set this before the dictionary is loaded to override the default.
+    /// </summary>
+    /// <example>
+    /// <code lang="xml">
+    /// &lt;ui:ControlsDictionary SlowDuration="0:0:0.9" /&gt;
+    /// </code>
+    /// </example>
+    public TimeSpan NormalDuration
+    {
+        get => AnimationDurationsDictionary.Get(AnimationDuration.NormalDuration).TimeSpan;
+        set => AnimationDurationsDictionary.Set(AnimationDuration.NormalDuration, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the duration used by animations marked as <see cref="AnimationDuration.FastDuration"/>.
+    /// The default value is 80 ms. Set this before the dictionary is loaded to override the default.
+    /// </summary>
+    /// <example>
+    /// <code lang="xml">
+    /// &lt;ui:ControlsDictionary SlowDuration="0:0:0.9" /&gt;
+    /// </code>
+    /// </example>
+    public TimeSpan FastDuration
+    {
+        get => AnimationDurationsDictionary.Get(AnimationDuration.FastDuration).TimeSpan;
+        set => AnimationDurationsDictionary.Set(AnimationDuration.FastDuration, value);
     }
 }

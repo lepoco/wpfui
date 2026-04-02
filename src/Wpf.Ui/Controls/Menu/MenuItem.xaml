@@ -8,7 +8,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:animations="clr-namespace:Wpf.Ui.Animations">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/DefaultFocusVisualStyle.xaml" />
@@ -164,7 +165,7 @@
                                 Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
                                 From="-90"
                                 To="0"
-                                Duration="00:00:00.167">
+                                Duration="{animations:AnimationDuration NormalDuration}">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
@@ -478,7 +479,7 @@
                                 Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
                                 From="-90"
                                 To="0"
-                                Duration="00:00:00.167">
+                                Duration="{animations:AnimationDuration NormalDuration}">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
@@ -649,7 +650,7 @@
                                 Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
                                 From="-90"
                                 To="0"
-                                Duration="00:00:00.167">
+                                Duration="{animations:AnimationDuration NormalDuration}">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
@@ -976,7 +977,7 @@
                                 Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
                                 From="-90"
                                 To="0"
-                                Duration="00:00:00.167">
+                                Duration="{animations:AnimationDuration NormalDuration}">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>

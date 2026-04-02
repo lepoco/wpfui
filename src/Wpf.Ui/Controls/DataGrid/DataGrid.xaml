@@ -19,6 +19,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:animations="clr-namespace:Wpf.Ui.Animations"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <ResourceDictionary.MergedDictionaries>
@@ -645,7 +646,7 @@
                                             Storyboard.TargetProperty="(controls:SymbolIcon.RenderTransform).(RotateTransform.Angle)"
                                             From="0"
                                             To="180"
-                                            Duration="00:00:00.333" />
+                                            Duration="{animations:AnimationDuration SlowDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -657,7 +658,7 @@
                                             Storyboard.TargetProperty="(controls:SymbolIcon.RenderTransform).(RotateTransform.Angle)"
                                             From="180"
                                             To="0"
-                                            Duration="00:00:00.333" />
+                                            Duration="{animations:AnimationDuration SlowDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
