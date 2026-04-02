@@ -86,14 +86,12 @@ public enum AnimationDuration
 /// </summary>
 public static class AnimationDurationsDictionary
 {
-    private static readonly Dictionary<AnimationDuration, Duration> Defaults = new()
+    private static readonly Dictionary<AnimationDuration, Duration> Durations = new()
     {
         [AnimationDuration.SlowDuration] = new Duration(TimeSpan.FromMilliseconds(333)),
         [AnimationDuration.NormalDuration] = new Duration(TimeSpan.FromMilliseconds(167)),
         [AnimationDuration.FastDuration] = new Duration(TimeSpan.FromMilliseconds(80)),
     };
-
-    private static readonly Dictionary<AnimationDuration, Duration> Overrides = [];
 
     /// <summary>
     /// Returns the <see cref="Duration"/> for the specified <paramref name="key"/>,
@@ -102,9 +100,7 @@ public static class AnimationDurationsDictionary
     /// <param name="key">The animation speed category to look up.</param>
     public static Duration Get(AnimationDuration key)
     {
-        return Overrides.TryGetValue(key, out Duration value)
-            ? value
-            : Defaults[key];
+        return Durations[key];
     }
 
     /// <summary>
@@ -115,6 +111,6 @@ public static class AnimationDurationsDictionary
     /// <param name="value">The desired duration.</param>
     public static void Set(AnimationDuration key, TimeSpan value)
     {
-        Overrides[key] = new Duration(value);
+        Durations[key] = new Duration(value);
     }
 }
