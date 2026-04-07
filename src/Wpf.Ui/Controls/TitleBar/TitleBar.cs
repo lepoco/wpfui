@@ -415,7 +415,7 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public Action<TitleBar, System.Windows.Window>? MinimizeActionOverride { get; set; }
 
-    private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
+    private readonly TitleBarButton?[] _buttons = new TitleBarButton[4];
     private readonly TextBlock _titleBlock;
     private System.Windows.Window _currentWindow = null!;
 
@@ -674,18 +674,18 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
             return IntPtr.Zero;
         }
 
-        foreach (TitleBarButton button in _buttons)
+        foreach (TitleBarButton? button in _buttons)
         {
             // Check if button is null to avoid potential NullReferenceException if OnApplyTemplate hasn't been called yet, e.g. when TitleBar has Visibility == Collapsed.
-            if (button == null || !button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
+            if (button is null || !button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
             {
                 continue;
             }
 
             // Fix for when sometimes, button hover backgrounds aren't cleared correctly, causing multiple buttons to appear as if hovered.
-            foreach (TitleBarButton anotherButton in _buttons)
+            foreach (TitleBarButton? anotherButton in _buttons)
             {
-                if (anotherButton == button)
+                if (anotherButton is null || anotherButton == button)
                 {
                     continue;
                 }
