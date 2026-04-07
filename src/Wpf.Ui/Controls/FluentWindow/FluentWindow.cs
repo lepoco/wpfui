@@ -88,13 +88,7 @@ public class FluentWindow : System.Windows.Window
 
         if (Utilities.IsOSWindows11OrNewer)
         {
-            ApplicationThemeManager.Changed += (_, _) =>
-            {
-                if (IsActive && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
-                {
-                    UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
-                }
-            };
+            ApplicationThemeManager.Changed += OnApplicationThemeManager_Changed;
         }
     }
 
@@ -111,6 +105,21 @@ public class FluentWindow : System.Windows.Window
             typeof(FluentWindow),
             new FrameworkPropertyMetadata(typeof(FluentWindow))
         );
+    }
+
+    private void OnApplicationThemeManager_Changed(ApplicationTheme currentApplicationTheme, Color systemAccent)
+    {
+        if (IsActive && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
+        {
+            UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
+        }
+    }
+
+    /// <inheritdoc />
+    protected override void OnClosed(EventArgs e)
+    {
+        ApplicationThemeManager.Changed -= OnApplicationThemeManager_Changed;
+        base.OnClosed(e);
     }
 
     /// <inheritdoc />
