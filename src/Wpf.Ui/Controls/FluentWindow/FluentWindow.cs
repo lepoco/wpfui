@@ -88,7 +88,7 @@ public class FluentWindow : System.Windows.Window
 
         if (Utilities.IsOSWindows11OrNewer)
         {
-            ApplicationThemeManager.Changed += OnApplicationThemeManager_Changed;
+            ApplicationThemeManager.Changed += OnApplicationThemeManagerChanged;
         }
     }
 
@@ -107,7 +107,7 @@ public class FluentWindow : System.Windows.Window
         );
     }
 
-    private void OnApplicationThemeManager_Changed(ApplicationTheme currentApplicationTheme, Color systemAccent)
+    private void OnApplicationThemeManagerChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
         if (IsActive && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
         {
@@ -118,7 +118,7 @@ public class FluentWindow : System.Windows.Window
     /// <inheritdoc />
     protected override void OnClosed(EventArgs e)
     {
-        ApplicationThemeManager.Changed -= OnApplicationThemeManager_Changed;
+        ApplicationThemeManager.Changed -= OnApplicationThemeManagerChanged;
         base.OnClosed(e);
     }
 
