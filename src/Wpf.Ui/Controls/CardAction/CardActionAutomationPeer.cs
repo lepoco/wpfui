@@ -3,25 +3,18 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
+using System.Windows.Threading;
 
 namespace Wpf.Ui.Controls;
 
-internal class CardActionAutomationPeer : FrameworkElementAutomationPeer
+internal class CardActionAutomationPeer : FrameworkElementAutomationPeer, IInvokeProvider
 {
-    private readonly CardAction _owner;
-
     public CardActionAutomationPeer(CardAction owner)
         : base(owner)
-    {
-        _owner = owner;
-    }
+    { }
 
     protected override string GetClassNameCore()
     {
@@ -35,7 +28,7 @@ internal class CardActionAutomationPeer : FrameworkElementAutomationPeer
 
     public override object GetPattern(PatternInterface patternInterface)
     {
-        if (patternInterface == PatternInterface.ItemContainer)
+        if (patternInterface == PatternInterface.Invoke)
         {
             return this;
         }
@@ -43,35 +36,19 @@ internal class CardActionAutomationPeer : FrameworkElementAutomationPeer
         return base.GetPattern(patternInterface);
     }
 
-    protected override AutomationPeer GetLabeledByCore()
+    void IInvokeProvider.Invoke()
     {
-        if (_owner.Content is UIElement element)
+        if (!IsEnabled())
         {
-            return CreatePeerForElement(element);
+            throw new ElementNotEnabledException();
         }
 
-        return base.GetLabeledByCore();
-    }
-
-    protected override string GetNameCore()
-    {
-        var result = base.GetNameCore() ?? string.Empty;
-
-        if (result == string.Empty)
+        // Async call of click event
+        // In ClickHandler opens a dialog and suspend the execution we don't want to block this thread
+        Dispatcher.BeginInvoke(DispatcherPriority.Input, new DispatcherOperationCallback(_ =>
         {
-            result = AutomationProperties.GetName(_owner);
-        }
-
-        if (result == string.Empty && _owner.Content is DependencyObject d)
-        {
-            result = AutomationProperties.GetName(d);
-        }
-
-        if (result == string.Empty && _owner.Content is string s)
-        {
-            result = s;
-        }
-
-        return result;
+            ((CardAction)Owner).AutomationClick();
+            return null;
+        }), null);
     }
 }
