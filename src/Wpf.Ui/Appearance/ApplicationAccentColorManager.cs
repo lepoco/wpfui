@@ -258,6 +258,13 @@ public static class ApplicationAccentColorManager
         Color tertiaryAccent
     )
     {
+        // If the application is shut down (Application.Current becomes null), we cannot change resources, so return immediately.
+        var app = Application.Current;
+        if (app == null)
+        {
+            return;
+        }
+
         System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColor: " + systemAccent, "Wpf.Ui.Accent");
         System.Diagnostics.Debug.WriteLine(
             "INFO | SystemAccentColorPrimary: " + primaryAccent,
