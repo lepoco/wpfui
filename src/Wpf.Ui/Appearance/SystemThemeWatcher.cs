@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Runtime.InteropServices;
 using Windows.Win32;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Interop;
@@ -155,6 +156,9 @@ public static class SystemThemeWatcher
             msg == (int)PInvoke.WM_DWMCOLORIZATIONCOLORCHANGED
             || msg == (int)PInvoke.WM_THEMECHANGED
             || msg == (int)PInvoke.WM_SYSCOLORCHANGE
+            || (msg == (int)PInvoke.WM_SETTINGCHANGE &&
+                lParam != IntPtr.Zero &&
+                string.Equals(Marshal.PtrToStringUni(lParam), "ImmersiveColorSet", StringComparison.Ordinal))
         )
         {
             UpdateObservedWindow(hWnd);
