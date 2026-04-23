@@ -213,7 +213,8 @@ public class NavigationViewContentPresenter : Frame
     {
         return NotifyContentAboutNavigating(
             content,
-            navigationAware => navigationAware.OnNavigatedToAsync(cancellationToken)
+            cancellationToken,
+            static (aware, ct) => aware.OnNavigatedToAsync(ct)
         );
     }
 
@@ -224,7 +225,8 @@ public class NavigationViewContentPresenter : Frame
     {
         return NotifyContentAboutNavigating(
             content,
-            navigationAware => navigationAware.OnNavigatedFromAsync(cancellationToken)
+            cancellationToken,
+            static (aware, ct) => aware.OnNavigatedFromAsync(ct)
         );
     }
 
@@ -235,7 +237,8 @@ public class NavigationViewContentPresenter : Frame
     )]
     private static ValueTask NotifyContentAboutNavigating(
         object content,
-        Func<INavigationAware, ValueTask> function
+        CancellationToken cancellationToken,
+        Func<INavigationAware, CancellationToken, ValueTask> function
     )
     {
         switch (content)
@@ -246,20 +249,20 @@ public class NavigationViewContentPresenter : Frame
                     && !ReferenceEquals(viewModel, navigationAware)
                 )
                 {
-                    ValueTask first = function(navigationAware);
+                    ValueTask first = function(navigationAware, cancellationToken);
 
                     return first.IsCompletedSuccessfully
-                        ? function(viewModel)
-                        : AwaitBoth(first, function, viewModel);
+                        ? function(viewModel, cancellationToken)
+                        : AwaitBoth(first, function, viewModel, cancellationToken);
                 }
 
-                return function(navigationAware);
+                return function(navigationAware, cancellationToken);
 
             case INavigableView<object> { ViewModel: INavigationAware vm }:
-                return function(vm);
+                return function(vm, cancellationToken);
 
             case FrameworkElement { DataContext: INavigationAware vm }:
-                return function(vm);
+                return function(vm, cancellationToken);
         }
 
         return default;
@@ -267,13 +270,14 @@ public class NavigationViewContentPresenter : Frame
 
     private static async ValueTask AwaitBoth(
         ValueTask first,
-        Func<INavigationAware, ValueTask> function,
-        INavigationAware second
+        Func<INavigationAware, CancellationToken, ValueTask> function,
+        INavigationAware second,
+        CancellationToken cancellationToken
     )
     {
-        // NOTE .ConfigureAwait(false)? What if we loose synchronization, is it criticall?
+        // SynchronizationContext is preserved intentionally — callers may update UI state.
         await first;
-        await function(second);
+        await function(second, cancellationToken);
     }
 
     /// <summary>

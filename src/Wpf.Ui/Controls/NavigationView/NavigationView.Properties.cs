@@ -92,7 +92,7 @@ public partial class NavigationView
         nameof(IsTopSeparatorVisible),
         typeof(bool),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(true)
+        new FrameworkPropertyMetadata(false)
     );
 
     /// <summary>Identifies the <see cref="IsFooterSeparatorVisible"/> dependency property.</summary>
@@ -100,7 +100,7 @@ public partial class NavigationView
         nameof(IsFooterSeparatorVisible),
         typeof(bool),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(true)
+        new FrameworkPropertyMetadata(false)
     );
 
     /// <summary>Identifies the <see cref="ContentOverlay"/> dependency property.</summary>

@@ -38,6 +38,8 @@
     <ui:NavigationView
       x:Name="RootNavigation"
       Grid.Row="1"
+      IsFooterSeparatorVisible="False"
+      IsTopSeparatorVisible="False"
       FooterMenuItemsSource="{Binding ViewModel.NavigationFooter, Mode=OneWay}"
       MenuItemsSource="{Binding ViewModel.NavigationItems, Mode=OneWay}"
     >

@@ -34,7 +34,10 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
+    <ui:NavigationView 
+        x:Name="RootNavigation" Grid.Row="1"
+        IsFooterSeparatorVisible="False"
+        IsTopSeparatorVisible="False">
       <ui:NavigationView.AutoSuggestBox>
         <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
           <ui:AutoSuggestBox.Icon>

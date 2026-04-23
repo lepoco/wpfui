@@ -10,9 +10,9 @@ namespace Wpf.Ui.Demo.Mvvm.ViewModels;
 public abstract class ViewModel : ObservableObject, INavigationAware
 {
     /// <inheritdoc />
-    public virtual ValueTask OnNavigatedToAsync()
+    public virtual ValueTask OnNavigatedToAsync(CancellationToken cancellationToken = default)
     {
-        OnNavigatedTo();
+        OnNavigatedTo(cancellationToken);
 
         return default;
     }
@@ -21,12 +21,12 @@ public abstract class ViewModel : ObservableObject, INavigationAware
     /// Handles the event that is fired after the component is navigated to.
     /// </summary>
     // ReSharper disable once MemberCanBeProtected.Global
-    public virtual void OnNavigatedTo() { }
+    public virtual void OnNavigatedTo(CancellationToken cancellationToken = default) { }
 
     /// <inheritdoc />
-    public virtual ValueTask OnNavigatedFromAsync()
+    public virtual ValueTask OnNavigatedFromAsync(CancellationToken cancellationToken = default)
     {
-        OnNavigatedFrom();
+        OnNavigatedFrom(cancellationToken);
 
         return default;
     }
@@ -35,5 +35,5 @@ public abstract class ViewModel : ObservableObject, INavigationAware
     /// Handles the event that is fired before the component is navigated from.
     /// </summary>
     // ReSharper disable once MemberCanBeProtected.Global
-    public virtual void OnNavigatedFrom() { }
+    public virtual void OnNavigatedFrom(CancellationToken cancellationToken = default) { }
 }
