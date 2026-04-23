@@ -13,7 +13,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:animations="clr-namespace:Wpf.Ui.Animations">
 
     <!--
         I don't see that CheckBox had combined states. Without it,
@@ -95,7 +96,7 @@
                                                 <MultiBinding.Bindings>
                                                     <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
                                                     <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
-                                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                                    <Binding Path="(animations:AnimationProperties.AnimationTagValue)" RelativeSource="{RelativeSource Self}" />
                                                 </MultiBinding.Bindings>
                                             </MultiBinding>
                                         </controls:SymbolIcon.Clip>
@@ -137,7 +138,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ControlIcon"
-                                            Storyboard.TargetProperty="Tag"
+                                            Storyboard.TargetProperty="(animations:AnimationProperties.AnimationTagValue)"
                                             From="0"
                                             To="1"
                                             Duration="{StaticResource CheckBoxAnimationDuration}">
