@@ -122,6 +122,7 @@
                         Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="Transparent"
                         BorderBrush="Transparent"
                         BorderThickness="0"
                         SnapsToDevicePixels="True">
@@ -157,6 +158,7 @@
     <Style x:Key="DefaultDataGridRowStyle" TargetType="{x:Type DataGridRow}">
         <Setter Property="Margin" Value="0,2" />
         <Setter Property="Padding" Value="4" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -181,6 +183,7 @@
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
                     <Border
                         x:Name="DGR_Border"
+                        Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{DynamicResource ControlCornerRadius}"
@@ -883,6 +886,8 @@
         BasedOn="{StaticResource DefaultCheckBoxStyle}"
         TargetType="{x:Type CheckBox}">
         <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Focusable" Value="False" />
     </Style>
 
     <Style
@@ -896,11 +901,10 @@
         x:Key="DefaultDataGridComboBoxElementStyle"
         BasedOn="{StaticResource DefaultComboBoxStyle}"
         TargetType="{x:Type ComboBox}">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Margin" Value="0,0,10,0" />
-        <Setter Property="Padding" Value="12,8,0,8" />
-        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="IsSynchronizedWithCurrentItem" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -926,7 +930,8 @@
                                 Content="{TemplateBinding SelectionBoxItem}"
                                 ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                 ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                                TextElement.Foreground="{TemplateBinding Foreground}"
+                                IsHitTestVisible="False" />
                             <controls:SymbolIcon
                                 Grid.Column="1"
                                 Visibility="Hidden"
@@ -944,8 +949,8 @@
         x:Key="DefaultDataGridComboBoxEditingElementStyle"
         BasedOn="{StaticResource DefaultComboBoxStyle}"
         TargetType="{x:Type ComboBox}">
+        <Setter Property="IsSynchronizedWithCurrentItem" Value="False" />
         <Setter Property="IsDropDownOpen" Value="True" />
-        <Setter Property="Margin" Value="2,0,0,0" />
     </Style>
 
     <Style

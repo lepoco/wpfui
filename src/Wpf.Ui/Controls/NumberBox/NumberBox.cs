@@ -421,7 +421,11 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
             newValue += change ?? 0d;
         }
 
-        SetCurrentValue(ValueProperty, newValue);
+        // After adding step value, validate new value is between Minimum and Maximum
+        if (newValue >= Minimum && newValue <= Maximum)
+        {
+            SetCurrentValue(ValueProperty, newValue);
+        }
 
         MoveCaretToTextEnd();
     }

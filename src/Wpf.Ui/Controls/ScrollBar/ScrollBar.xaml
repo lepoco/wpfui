@@ -282,6 +282,10 @@
                 Style="{StaticResource UiScrollBarLineButton}" />
         </Grid>
         <ControlTemplate.Triggers>
+            <Trigger Property="FlowDirection" Value="RightToLeft">
+                <Setter TargetName="PART_ButtonScrollLeft" Property="Content" Value="{x:Static controls:SymbolRegular.CaretRight24}" />
+                <Setter TargetName="PART_ButtonScrollRight" Property="Content" Value="{x:Static controls:SymbolRegular.CaretLeft24}" />
+            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
