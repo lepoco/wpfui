@@ -1,0 +1,90 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="arm64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Samples/">
+    <Project Path="samples/Wpf.Ui.Demo.Console/Wpf.Ui.Demo.Console.csproj" />
+    <Project Path="samples/Wpf.Ui.Demo.Dialogs/Wpf.Ui.Demo.Dialogs.csproj" />
+    <Project Path="samples/Wpf.Ui.Demo.Mvvm/Wpf.Ui.Demo.Mvvm.csproj" />
+    <Project Path="samples/Wpf.Ui.Demo.SetResources.Simple/Wpf.Ui.Demo.SetResources.Simple.csproj" />
+    <Project Path="samples/Wpf.Ui.Demo.Simple/Wpf.Ui.Demo.Simple.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="LICENSE" />
+    <File Path="LICENSE.md" />
+    <File Path="nuget.config" />
+    <File Path="README.md" />
+    <File Path="Settings.XamlStyler" />
+    <File Path="ThirdPartyNotices.txt" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/Wpf.Ui.Gallery.IntegrationTests/Wpf.Ui.Gallery.IntegrationTests.csproj" />
+    <Project Path="tests/Wpf.Ui.UnitTests/Wpf.Ui.UnitTests.csproj" />
+  </Folder>
+  <Project Path="src/Wpf.Ui.Abstractions/Wpf.Ui.Abstractions.csproj" />
+  <Project Path="src/Wpf.Ui.DependencyInjection/Wpf.Ui.DependencyInjection.csproj" />
+  <Project Path="src/Wpf.Ui.Extension.Template.Blank/Wpf.Ui.Extension.Template.Blank.csproj">
+    <Platform Solution="*|arm64" Project="arm64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Build Solution="*|x86" Project="false" />
+    <Build Solution="Debug|Any CPU" Project="false" />
+    <Build Solution="Debug|arm64" Project="false" />
+    <Build Solution="Debug|x64" Project="false" />
+  </Project>
+  <Project Path="src/Wpf.Ui.Extension.Template.Compact/Wpf.Ui.Extension.Template.Compact.csproj">
+    <Platform Solution="*|arm64" Project="arm64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Build Solution="*|x86" Project="false" />
+    <Build Solution="Debug|Any CPU" Project="false" />
+    <Build Solution="Debug|arm64" Project="false" />
+    <Build Solution="Debug|x64" Project="false" />
+  </Project>
+  <Project Path="src/Wpf.Ui.Extension.Template.Fluent/Wpf.Ui.Extension.Template.Fluent.csproj">
+    <Platform Solution="*|arm64" Project="arm64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Build Solution="*|x86" Project="false" />
+    <Build Solution="Debug|Any CPU" Project="false" />
+    <Build Solution="Debug|arm64" Project="false" />
+    <Build Solution="Debug|x64" Project="false" />
+  </Project>
+  <Project Path="src/Wpf.Ui.Extension/Wpf.Ui.Extension.csproj">
+    <Platform Solution="*|arm64" Project="arm64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Build Solution="*|x86" Project="false" />
+    <Build Solution="Debug|Any CPU" Project="false" />
+    <Build Solution="Debug|arm64" Project="false" />
+    <Build Solution="Debug|x64" Project="false" />
+  </Project>
+  <Project Path="src/Wpf.Ui.FlaUI/Wpf.Ui.FlaUI.csproj" />
+  <Project Path="src/Wpf.Ui.FontMapper/Wpf.Ui.FontMapper.csproj" />
+  <Project Path="src/Wpf.Ui.Gallery.Package/Wpf.Ui.Gallery.Package.wapproj" Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5">
+    <Platform Solution="*|arm64" Project="ARM64" />
+    <Build Solution="*|Any CPU" Project="false" />
+    <Build Solution="Debug|arm64" Project="false" />
+    <Build Solution="Debug|x64" Project="false" />
+    <Build Solution="Debug|x86" Project="false" />
+    <Deploy Solution="Release|arm64" />
+    <Deploy Solution="Release|x64" />
+    <Deploy Solution="Release|x86" />
+  </Project>
+  <Project Path="src/Wpf.Ui.Gallery/Wpf.Ui.Gallery.csproj">
+    <Platform Solution="*|arm64" Project="arm64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
+  <Project Path="src/Wpf.Ui.SyntaxHighlight/Wpf.Ui.SyntaxHighlight.csproj" />
+  <Project Path="src/Wpf.Ui.ToastNotifications/Wpf.Ui.ToastNotifications.csproj" />
+  <Project Path="src/Wpf.Ui.Tray/Wpf.Ui.Tray.csproj" />
+  <Project Path="src/Wpf.Ui/Wpf.Ui.csproj" />
+</Solution>

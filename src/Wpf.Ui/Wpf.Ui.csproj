@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <PackageReference Include="System.ValueTuple" />
+    <PackageReference Include="System.ValueTuple" VersionOverride="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
