@@ -116,7 +116,7 @@ public class ContentDialogService : IContentDialogService
     }
 
     /// <inheritdoc/>
-    public Task<ContentDialogResult> ShowAsync(ContentDialog dialog, CancellationToken cancellationToken)
+    public ValueTask<ContentDialogResult> ShowAsync(ContentDialog dialog, CancellationToken cancellationToken)
     {
 #pragma warning disable CS0618 // (Warning: Obsolete) To maintain compatibility
 

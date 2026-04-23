@@ -14,7 +14,7 @@ public static class ContentDialogServiceExtensions
     /// Shows the simple alert-like dialog.
     /// </summary>
     /// <returns>Result of the life cycle of the <see cref="ContentDialog"/>.</returns>
-    public static Task<ContentDialogResult> ShowAlertAsync(
+    public static ValueTask<ContentDialogResult> ShowAlertAsync(
         this IContentDialogService dialogService,
         string title,
         string message,
@@ -38,13 +38,13 @@ public static class ContentDialogServiceExtensions
     /// <param name="options">Set of parameters of the basic dialog box.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>Result of the life cycle of the <see cref="ContentDialog"/>.</returns>
-    public static Task<ContentDialogResult> ShowSimpleDialogAsync(
+    public static ValueTask<ContentDialogResult> ShowSimpleDialogAsync(
         this IContentDialogService dialogService,
         SimpleContentDialogCreateOptions options,
         CancellationToken cancellationToken = default
     )
     {
-        var dialog = new ContentDialog()
+        var dialog = new ContentDialog
         {
             Title = options.Title,
             Content = options.Content,

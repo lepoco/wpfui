@@ -711,7 +711,7 @@ public partial class ContentDialog : ContentControl
         "WPF0041:Set mutable dependency properties using SetCurrentValue",
         Justification = "SetCurrentValue(ContentProperty, ...) will not work"
     )]
-    public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
+    public async ValueTask<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
         if (_dialogHost is null && _dialogHostEx is null)
         {
