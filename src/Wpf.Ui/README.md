@@ -25,7 +25,7 @@ To ensure you receive the expert guidance you need, we offer a variety of suppor
 
 Support the development of WPF UI and other innovative projects by becoming a sponsor on GitHub! Your monthly or one-time contributions help us continue to deliver high-quality, open-source solutions that empower developers worldwide.
 
-[Sponsor WPF UI on GitHub](https://github.com/sponsors/lepoco)
+[Sponsor WPF UI on GitHub](https://github.com/sponsors/pomianowski)
 
 ![Demo App Sample](https://user-images.githubusercontent.com/13592821/166259110-0fb98120-fe34-4e6d-ab92-9f72ad7113c3.png)
 
