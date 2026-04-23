@@ -68,6 +68,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private readonly ObservableCollection<string> _autoSuggestBoxItems = [];
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = [];
 
+    /// <summary>
+    /// Saved values to allow reverting values previously set with SetCurrentValue
+    /// </summary>
+    private NavigationViewBackButtonVisible? _savedBackButtonVisible;
+    private bool? _savedIsPaneToggleVisible;
+
     private static readonly Thickness TitleBarPaneOpenMarginDefault = new(35, 0, 0, 0);
     private static readonly Thickness TitleBarPaneCompactMarginDefault = new(35, 0, 0, 0);
     private static readonly Thickness AutoSuggestBoxMarginDefault = new(8, 0, 8, 0);
@@ -217,10 +223,40 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         switch (PaneDisplayMode)
         {
             case NavigationViewPaneDisplayMode.LeftFluent:
+                // Save current values so we can restore them when leaving LeftFluent
+                if (!_savedBackButtonVisible.HasValue)
+                {
+                    _savedBackButtonVisible = IsBackButtonVisible;
+                }
+
+                if (!_savedIsPaneToggleVisible.HasValue)
+                {
+                    _savedIsPaneToggleVisible = IsPaneToggleVisible;
+                }
+
                 SetCurrentValue(IsBackButtonVisibleProperty, NavigationViewBackButtonVisible.Collapsed);
                 SetCurrentValue(IsPaneToggleVisibleProperty, false);
                 break;
+
+            case NavigationViewPaneDisplayMode.Left:
+            case NavigationViewPaneDisplayMode.LeftMinimal:
+                // Restore previously saved values that were overridden by SetCurrentValue
+                if (_savedBackButtonVisible.HasValue)
+                {
+                    SetCurrentValue(IsBackButtonVisibleProperty, _savedBackButtonVisible.Value);
+                    _savedBackButtonVisible = null;
+                }
+
+                if (_savedIsPaneToggleVisible.HasValue)
+                {
+                    SetCurrentValue(IsPaneToggleVisibleProperty, _savedIsPaneToggleVisible.Value);
+                    _savedIsPaneToggleVisible = null;
+                }
+
+                break;
         }
+
+        UpdateTitleBarMargin();
     }
 
     /// <summary>
@@ -535,5 +571,48 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         {
             breadcrumbItem.UpdateFromSource();
         }
+    }
+
+    protected virtual void UpdateTitleBarMargin()
+    {
+        if (TitleBar is null)
+        {
+            return;
+        }
+
+        if (PaneDisplayMode
+            is NavigationViewPaneDisplayMode.Top
+                or NavigationViewPaneDisplayMode.Bottom
+        )
+        {
+            TitleBar.SetCurrentValue(MarginProperty, new Thickness(0));
+            return;
+        }
+
+        if (IsBackButtonVisible != NavigationViewBackButtonVisible.Collapsed || IsPaneToggleVisible)
+        {
+            TitleBar.SetCurrentValue(MarginProperty, TitleBarPaneCompactMarginDefault);
+            return;
+        }
+
+        if (IsPaneOpen)
+        {
+            TitleBar.SetCurrentValue(MarginProperty, new Thickness(OpenPaneLength, 0, 0, 0));
+            return;
+        }
+
+        if (AutoSuggestBox is not null)
+        {
+            var v_from_AutoSuggestBox = AutoSuggestBox.Margin.Left + AutoSuggestBox.ActualWidth + AutoSuggestBox.Margin.Right;
+            if (!IsPaneOpen)
+            {
+                var margin_left = Math.Min(v_from_AutoSuggestBox, TitleBarPaneCompactMarginDefault.Left);
+                TitleBar.SetCurrentValue(MarginProperty, new Thickness(margin_left, 0, 0, 0));
+                return;
+            }
+            TitleBar.SetCurrentValue(MarginProperty, new Thickness(v_from_AutoSuggestBox, 0, 0, 0));
+        }
+
+        TitleBar.SetCurrentValue(MarginProperty, TitleBarPaneCompactMarginDefault);
     }
 }
