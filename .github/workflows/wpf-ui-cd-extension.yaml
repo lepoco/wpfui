@@ -26,7 +26,7 @@ jobs:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
 
       - name: Restore dependencies
-        run: nuget restore Wpf.Ui.slnx
+        run: dotnet restore src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj
 
       - name: Build the solution
         run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj /t:Rebuild
