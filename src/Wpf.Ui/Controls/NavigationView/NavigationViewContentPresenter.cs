@@ -163,19 +163,25 @@ public class NavigationViewContentPresenter : Frame
         base.OnPreviewKeyDown(e);
     }
 
-    protected virtual void OnNavigating(System.Windows.Navigation.NavigatingCancelEventArgs eventArgs)
+    protected virtual void OnNavigating(
+        System.Windows.Navigation.NavigatingCancelEventArgs eventArgs,
+        CancellationToken cancellationToken = default
+    )
     {
-        ObserveValueTask(NotifyContentAboutNavigatingTo(eventArgs.Content));
+        ObserveValueTask(NotifyContentAboutNavigatingTo(eventArgs.Content, cancellationToken));
 
         if (eventArgs.Navigator is not NavigationViewContentPresenter navigator)
         {
             return;
         }
 
-        ObserveValueTask(NotifyContentAboutNavigatingFrom(navigator.Content));
+        ObserveValueTask(NotifyContentAboutNavigatingFrom(navigator.Content, cancellationToken));
     }
 
-    protected virtual void OnNavigated(NavigationEventArgs eventArgs)
+    protected virtual void OnNavigated(
+        NavigationEventArgs eventArgs,
+        CancellationToken cancellationToken = default
+    )
     {
         ApplyTransitionEffectToNavigatedPage(eventArgs.Content);
 
@@ -200,16 +206,25 @@ public class NavigationViewContentPresenter : Frame
         _ = TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
     }
 
-    private static ValueTask NotifyContentAboutNavigatingTo(object content)
-    {
-        return NotifyContentAboutNavigating(content, navigationAware => navigationAware.OnNavigatedToAsync());
-    }
-
-    private static ValueTask NotifyContentAboutNavigatingFrom(object content)
+    private static ValueTask NotifyContentAboutNavigatingTo(
+        object content,
+        CancellationToken cancellationToken = default
+    )
     {
         return NotifyContentAboutNavigating(
             content,
-            navigationAware => navigationAware.OnNavigatedFromAsync()
+            navigationAware => navigationAware.OnNavigatedToAsync(cancellationToken)
+        );
+    }
+
+    private static ValueTask NotifyContentAboutNavigatingFrom(
+        object content,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return NotifyContentAboutNavigating(
+            content,
+            navigationAware => navigationAware.OnNavigatedFromAsync(cancellationToken)
         );
     }
 
@@ -256,8 +271,9 @@ public class NavigationViewContentPresenter : Frame
         INavigationAware second
     )
     {
-        await first.ConfigureAwait(false);
-        await function(second).ConfigureAwait(false);
+        // NOTE .ConfigureAwait(false)? What if we loose synchronization, is it criticall?
+        await first;
+        await function(second);
     }
 
     /// <summary>

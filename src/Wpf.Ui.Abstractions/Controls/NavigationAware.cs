@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Threading;
+
 namespace Wpf.Ui.Abstractions.Controls;
 
 /// <summary>
@@ -11,9 +13,14 @@ namespace Wpf.Ui.Abstractions.Controls;
 public abstract class NavigationAware : INavigationAware
 {
     /// <inheritdoc />
-    public virtual ValueTask OnNavigatedToAsync()
+    public virtual ValueTask OnNavigatedToAsync(CancellationToken cancellationToken = default)
     {
-        OnNavigatedTo();
+        if (cancellationToken.IsCancellationRequested)
+        {
+            return default;
+        }
+
+        OnNavigatedTo(cancellationToken);
 
         return default;
     }
@@ -22,12 +29,17 @@ public abstract class NavigationAware : INavigationAware
     /// Handles the event that is fired after the component is navigated to.
     /// </summary>
     // ReSharper disable once MemberCanBeProtected.Global
-    public virtual void OnNavigatedTo() { }
+    public virtual void OnNavigatedTo(CancellationToken cancellationToken = default) { }
 
     /// <inheritdoc />
-    public virtual ValueTask OnNavigatedFromAsync()
+    public virtual ValueTask OnNavigatedFromAsync(CancellationToken cancellationToken = default)
     {
-        OnNavigatedFrom();
+        if (cancellationToken.IsCancellationRequested)
+        {
+            return default;
+        }
+
+        OnNavigatedFrom(cancellationToken);
 
         return default;
     }
@@ -36,5 +48,5 @@ public abstract class NavigationAware : INavigationAware
     /// Handles the event that is fired before the component is navigated from.
     /// </summary>
     // ReSharper disable once MemberCanBeProtected.Global
-    public virtual void OnNavigatedFrom() { }
+    public virtual void OnNavigatedFrom(CancellationToken cancellationToken = default) { }
 }
