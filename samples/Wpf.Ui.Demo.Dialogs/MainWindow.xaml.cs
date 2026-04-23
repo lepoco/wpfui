@@ -24,10 +24,10 @@ public partial class MainWindow
         await Application.Current.Dispatcher.InvokeAsync(ShowSampleDialogAsync);
     }
 
-    private ValueTask<ContentDialogResult> ShowSampleDialogAsync()
+    private Task<ContentDialogResult> ShowSampleDialogAsync()
     {
         // Defining dialog object
-        ContentDialog myDialog = new()
+        var myDialog = new ContentDialog
         {
             Title = "My sample dialog",
             Content = "Content of the dialog",

@@ -81,15 +81,14 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         }
     }
 
-    public virtual async Task ImmediatelyDisplay(Snackbar snackbar)
+    public virtual async ValueTask ImmediatelyDisplay(Snackbar snackbar)
     {
         await HideCurrent();
         await ShowSnackbar(snackbar);
-
         await ShowQueuedSnackbarsAsync();
     }
 
-    public virtual async Task HideCurrent()
+    public virtual async ValueTask HideCurrent()
     {
         if (Content is null)
         {
@@ -101,7 +100,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         ResetCancellationTokenSource();
     }
 
-    private async Task ShowQueuedSnackbarsAsync()
+    private async ValueTask ShowQueuedSnackbarsAsync()
     {
         while (Queue.Count > 0 && !CancellationTokenSource.IsCancellationRequested)
         {
@@ -116,7 +115,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         "WPF0041:Set mutable dependency properties using SetCurrentValue",
         Justification = "SetCurrentValue(ContentProperty, ...) will not work"
     )]
-    private async Task ShowSnackbar(Snackbar snackbar)
+    private async ValueTask ShowSnackbar(Snackbar snackbar)
     {
         Content = snackbar;
 
@@ -139,7 +138,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         "WPF0041:Set mutable dependency properties using SetCurrentValue",
         Justification = "SetCurrentValue(ContentProperty, ...) will not work"
     )]
-    private async Task HidSnackbar(Snackbar snackbar)
+    private async ValueTask HidSnackbar(Snackbar snackbar)
     {
         snackbar.SetCurrentValue(Snackbar.IsShownProperty, false);
 

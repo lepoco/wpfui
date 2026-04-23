@@ -85,5 +85,5 @@ public interface IContentDialogService
     /// <param name="dialog">The dialog to be displayed.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the dialog result.</returns>
-    ValueTask<ContentDialogResult> ShowAsync(ContentDialog dialog, CancellationToken cancellationToken);
+    Task<ContentDialogResult> ShowAsync(ContentDialog dialog, CancellationToken cancellationToken);
 }
