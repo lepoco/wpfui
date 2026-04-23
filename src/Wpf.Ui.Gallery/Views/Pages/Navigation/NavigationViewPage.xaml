@@ -30,6 +30,8 @@
                 Margin="0"
                 IsBackButtonVisible="Auto"
                 IsPaneToggleVisible="True"
+                IsFooterSeparatorVisible="False"
+                IsTopSeparatorVisible="False"
                 PaneDisplayMode="Left"
                 PaneTitle="Pane Title">
                 <ui:NavigationView.AutoSuggestBox>
@@ -109,6 +111,8 @@
                 Margin="0"
                 IsBackButtonVisible="Collapsed"
                 IsPaneToggleVisible="False"
+                IsFooterSeparatorVisible="False"
+                IsTopSeparatorVisible="False"
                 PaneDisplayMode="LeftFluent">
                 <ui:NavigationView.MenuItems>
                     <ui:NavigationViewItem
@@ -192,6 +196,8 @@
                 Margin="0"
                 IsBackButtonVisible="Auto"
                 IsPaneToggleVisible="False"
+                IsFooterSeparatorVisible="False"
+                IsTopSeparatorVisible="False"
                 PaneDisplayMode="Top">
                 <ui:NavigationView.MenuItems>
                     <ui:NavigationViewItem
@@ -285,6 +291,8 @@
                 Margin="0"
                 IsBackButtonVisible="Auto"
                 IsPaneToggleVisible="False"
+                IsFooterSeparatorVisible="False"
+                IsTopSeparatorVisible="False"
                 PaneDisplayMode="Bottom">
                 <ui:NavigationView.MenuItems>
                     <ui:NavigationViewItem

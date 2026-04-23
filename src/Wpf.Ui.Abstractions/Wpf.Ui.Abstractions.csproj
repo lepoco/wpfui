@@ -9,6 +9,14 @@
     <_SilenceIsAotCompatibleUnsupportedWarning>true</_SilenceIsAotCompatibleUnsupportedWarning>
   </PropertyGroup>
 
+  <ItemGroup
+    Condition="'$(TargetFramework)' == 'netstandard2.0'
+                 Or '$(TargetFramework)' == 'net462'
+                 Or '$(TargetFramework)' == 'net472'
+                 Or '$(TargetFramework)' == 'net481'">
+    <PackageReference Include="System.Threading.Tasks.Extensions" VersionOverride="4.5.0" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(GeneratePackageOnBuild)' == 'true'">
     <None Include="$(RepositoryDirectory)\src\Wpf.Ui.Abstractions\README.md" Pack="true" PackagePath="\README.md" Visible="False" />
   </ItemGroup>

@@ -10,22 +10,15 @@ using Wpf.Ui.Gallery.Models.Monaco;
 
 namespace Wpf.Ui.Gallery.Controllers;
 
-public class MonacoController
+public class MonacoController(WebView2 webView)
 {
     private const string EditorContainerSelector = "#root";
 
     private const string EditorObject = "wpfUiMonacoEditor";
 
-    private readonly WebView2 _webView;
-
-    public MonacoController(WebView2 webView)
+    public Task CreateAsync()
     {
-        _webView = webView;
-    }
-
-    public async Task CreateAsync()
-    {
-        _ = await _webView.ExecuteScriptAsync(
+        return webView.ExecuteScriptAsync(
             $$"""
             const {{EditorObject}} = monaco.editor.create(document.querySelector('{{EditorContainerSelector}}'));
             window.onresize = () => {{{EditorObject}}.layout();}
@@ -33,13 +26,13 @@ public class MonacoController
         );
     }
 
-    public async Task SetThemeAsync(ApplicationTheme appApplicationTheme)
+    public Task SetThemeAsync(ApplicationTheme appApplicationTheme)
     {
         // TODO: Parse theme from object
         const string uiThemeName = "wpf-ui-app-theme";
         var baseMonacoTheme = appApplicationTheme == ApplicationTheme.Light ? "vs" : "vs-dark";
 
-        _ = await _webView.ExecuteScriptAsync(
+        return webView.ExecuteScriptAsync(
             $$$"""
             monaco.editor.defineTheme('{{{uiThemeName}}}', {
                 base: '{{{baseMonacoTheme}}}',
@@ -51,32 +44,30 @@ public class MonacoController
         );
     }
 
-    public async Task SetLanguageAsync(MonacoLanguage monacoLanguage)
+    public Task SetLanguageAsync(MonacoLanguage monacoLanguage)
     {
         var languageId =
             monacoLanguage == MonacoLanguage.ObjectiveC ? "objective-c" : monacoLanguage.ToString().ToLower();
 
-        _ = await _webView.ExecuteScriptAsync(
+        return webView.ExecuteScriptAsync(
             "monaco.editor.setModelLanguage(" + EditorObject + $".getModel(), \"{languageId}\");"
         );
     }
 
-    public async Task SetContentAsync(string contents)
+    public Task SetContentAsync(string contents)
     {
         var literalContents = SymbolDisplay.FormatLiteral(contents, false);
 
-        _ = await _webView.ExecuteScriptAsync(EditorObject + $".setValue(\"{literalContents}\");");
+        return webView.ExecuteScriptAsync(EditorObject + $".setValue(\"{literalContents}\");");
     }
 
     public void DispatchScript(string script)
     {
-        if (_webView == null)
+        if (webView == null)
         {
             return;
         }
 
-        _ = Application.Current.Dispatcher.InvokeAsync(async () =>
-            await _webView!.ExecuteScriptAsync(script)
-        );
+        _ = Application.Current.Dispatcher.InvokeAsync(async () => await webView!.ExecuteScriptAsync(script));
     }
 }

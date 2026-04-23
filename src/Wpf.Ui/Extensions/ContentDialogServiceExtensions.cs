@@ -44,7 +44,7 @@ public static class ContentDialogServiceExtensions
         CancellationToken cancellationToken = default
     )
     {
-        var dialog = new ContentDialog()
+        var dialog = new ContentDialog
         {
             Title = options.Title,
             Content = options.Content,

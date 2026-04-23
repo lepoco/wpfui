@@ -115,7 +115,7 @@ To ensure you receive the expert guidance you need, we offer a variety of suppor
         <a class="btn btn-block btn-outline-light" href="https://github.com/sponsors/pomianowski">Sponsor WPF UI on GitHub</a>
     </div>
 </div>
-  
+
 ![Demo App Sample](https://user-images.githubusercontent.com/13592821/166259110-0fb98120-fe34-4e6d-ab92-9f72ad7113c3.png)
 
 ![Monaco Editor](https://user-images.githubusercontent.com/13592821/258610583-7d71f69d-45b3-4be6-bcb8-8cf6cd60a2ff.png)

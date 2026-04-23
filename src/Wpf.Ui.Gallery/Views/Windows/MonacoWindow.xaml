@@ -189,7 +189,7 @@
                 <ui:SymbolIcon Foreground="{DynamicResource TextFillColorSecondaryBrush}" Symbol="Fire24" />
             </StatusBarItem>
             <StatusBarItem Grid.Column="4" Margin="4,0,4,0">
-                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Wpf.Ui.sln" />
+                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Wpf.Ui.slnx" />
             </StatusBarItem>
             <StatusBarItem Grid.Column="6">
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Ln 45, Col 30  Spaces: 2 UTF8 with BOM C#" />

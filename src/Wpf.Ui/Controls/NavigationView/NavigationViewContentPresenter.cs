@@ -136,7 +136,7 @@ public class NavigationViewContentPresenter : Frame
         {
             if (sender is NavigationViewContentPresenter navigator)
             {
-                NotifyContentAboutNavigatingFrom(navigator.Content);
+                ObserveValueTask(NotifyContentAboutNavigatingFrom(navigator.Content));
             }
         };
     }
@@ -163,19 +163,25 @@ public class NavigationViewContentPresenter : Frame
         base.OnPreviewKeyDown(e);
     }
 
-    protected virtual void OnNavigating(System.Windows.Navigation.NavigatingCancelEventArgs eventArgs)
+    protected virtual void OnNavigating(
+        System.Windows.Navigation.NavigatingCancelEventArgs eventArgs,
+        CancellationToken cancellationToken = default
+    )
     {
-        NotifyContentAboutNavigatingTo(eventArgs.Content);
+        ObserveValueTask(NotifyContentAboutNavigatingTo(eventArgs.Content, cancellationToken));
 
         if (eventArgs.Navigator is not NavigationViewContentPresenter navigator)
         {
             return;
         }
 
-        NotifyContentAboutNavigatingFrom(navigator.Content);
+        ObserveValueTask(NotifyContentAboutNavigatingFrom(navigator.Content, cancellationToken));
     }
 
-    protected virtual void OnNavigated(NavigationEventArgs eventArgs)
+    protected virtual void OnNavigated(
+        NavigationEventArgs eventArgs,
+        CancellationToken cancellationToken = default
+    )
     {
         ApplyTransitionEffectToNavigatedPage(eventArgs.Content);
 
@@ -200,14 +206,28 @@ public class NavigationViewContentPresenter : Frame
         _ = TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
     }
 
-    private static void NotifyContentAboutNavigatingTo(object content)
+    private static ValueTask NotifyContentAboutNavigatingTo(
+        object content,
+        CancellationToken cancellationToken = default
+    )
     {
-        NotifyContentAboutNavigating(content, navigationAware => navigationAware.OnNavigatedToAsync());
+        return NotifyContentAboutNavigating(
+            content,
+            cancellationToken,
+            static (aware, ct) => aware.OnNavigatedToAsync(ct)
+        );
     }
 
-    private static void NotifyContentAboutNavigatingFrom(object content)
+    private static ValueTask NotifyContentAboutNavigatingFrom(
+        object content,
+        CancellationToken cancellationToken = default
+    )
     {
-        NotifyContentAboutNavigating(content, navigationAware => navigationAware.OnNavigatedFromAsync());
+        return NotifyContentAboutNavigating(
+            content,
+            cancellationToken,
+            static (aware, ct) => aware.OnNavigatedFromAsync(ct)
+        );
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -215,35 +235,75 @@ public class NavigationViewContentPresenter : Frame
         "SuspiciousTypeConversion.Global",
         Justification = "The library user might make a class inherit from both FrameworkElement and INavigationAware at the same time."
     )]
-    private static void NotifyContentAboutNavigating(object content, Func<INavigationAware, Task> function)
+    private static ValueTask NotifyContentAboutNavigating(
+        object content,
+        CancellationToken cancellationToken,
+        Func<INavigationAware, CancellationToken, ValueTask> function
+    )
     {
-        async void PerformNotify(INavigationAware navigationAware)
-        {
-            await function(navigationAware).ConfigureAwait(false);
-        }
-
         switch (content)
         {
-            // The order in which the OnNavigatedToAsync/OnNavigatedFromAsync methods of View and ViewModel are called
-            // is not guaranteed
-            case INavigationAware navigationAwareNavigationContent:
-                PerformNotify(navigationAwareNavigationContent);
+            case INavigationAware navigationAware:
                 if (
-                    navigationAwareNavigationContent
-                        is FrameworkElement { DataContext: INavigationAware viewModel }
-                    && !ReferenceEquals(viewModel, navigationAwareNavigationContent)
+                    navigationAware is FrameworkElement { DataContext: INavigationAware viewModel }
+                    && !ReferenceEquals(viewModel, navigationAware)
                 )
                 {
-                    PerformNotify(viewModel);
+                    ValueTask first = function(navigationAware, cancellationToken);
+
+                    return first.IsCompletedSuccessfully
+                        ? function(viewModel, cancellationToken)
+                        : AwaitBoth(first, function, viewModel, cancellationToken);
                 }
 
-                break;
-            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
-                PerformNotify(navigationAwareNavigableViewViewModel);
-                break;
-            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
-                PerformNotify(navigationAwareCurrentContent);
-                break;
+                return function(navigationAware, cancellationToken);
+
+            case INavigableView<object> { ViewModel: INavigationAware vm }:
+                return function(vm, cancellationToken);
+
+            case FrameworkElement { DataContext: INavigationAware vm }:
+                return function(vm, cancellationToken);
+        }
+
+        return default;
+    }
+
+    private static async ValueTask AwaitBoth(
+        ValueTask first,
+        Func<INavigationAware, CancellationToken, ValueTask> function,
+        INavigationAware second,
+        CancellationToken cancellationToken
+    )
+    {
+        // SynchronizationContext is preserved intentionally — callers may update UI state.
+        await first;
+        await function(second, cancellationToken);
+    }
+
+    /// <summary>
+    /// Properly consumes a <see cref="ValueTask"/> in a fire-and-forget context.
+    /// If the task completed synchronously, no allocation occurs.
+    /// </summary>
+    private static void ObserveValueTask(ValueTask task)
+    {
+        if (task.IsCompletedSuccessfully)
+        {
+            return;
+        }
+
+        AwaitObserved(task);
+
+        static async void AwaitObserved(ValueTask pending)
+        {
+            try
+            {
+                await pending.ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                // Navigation notification is best-effort from the presenter's perspective.
+                // The INavigationAware implementation is responsible for its own error handling.
+            }
         }
     }
 }
