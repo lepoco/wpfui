@@ -84,6 +84,7 @@
                 Maximum="{TemplateBinding ScrollViewer.ScrollableWidth}"
                 Minimum="0"
                 Orientation="Horizontal"
+                ViewportSize="{TemplateBinding ViewportWidth}"
                 Visibility="{TemplateBinding ScrollViewer.ComputedHorizontalScrollBarVisibility}"
                 Value="{Binding Path=HorizontalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
             <ScrollBar
@@ -93,6 +94,7 @@
                 Maximum="{TemplateBinding ScrollViewer.ScrollableHeight}"
                 Minimum="0"
                 Orientation="Vertical"
+                ViewportSize="{TemplateBinding ViewportHeight}"
                 Visibility="{TemplateBinding ScrollViewer.ComputedVerticalScrollBarVisibility}"
                 Value="{Binding Path=VerticalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
             <DockPanel
