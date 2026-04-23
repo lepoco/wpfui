@@ -11,11 +11,11 @@ namespace Wpf.Ui.Abstractions.Controls;
 public abstract class NavigationAware : INavigationAware
 {
     /// <inheritdoc />
-    public virtual Task OnNavigatedToAsync()
+    public virtual ValueTask OnNavigatedToAsync()
     {
         OnNavigatedTo();
 
-        return Task.CompletedTask;
+        return default;
     }
 
     /// <summary>
@@ -25,11 +25,11 @@ public abstract class NavigationAware : INavigationAware
     public virtual void OnNavigatedTo() { }
 
     /// <inheritdoc />
-    public virtual Task OnNavigatedFromAsync()
+    public virtual ValueTask OnNavigatedFromAsync()
     {
         OnNavigatedFrom();
 
-        return Task.CompletedTask;
+        return default;
     }
 
     /// <summary>

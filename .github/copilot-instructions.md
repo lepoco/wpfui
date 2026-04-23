@@ -15,10 +15,6 @@ Central Package Management: Directory.Packages.props - NEVER add package version
 Build library:
 dotnet build src/Wpf.Ui/Wpf.Ui.csproj
 
-Solution filters:
-- Wpf.Ui.Library.slnf - Library projects only
-- Wpf.Ui.Gallery.slnf - Gallery demo app
-
 Testing:
 - XUnit v3 for unit tests (tests/Wpf.Ui.UnitTests/)
 - AwesomeAssertions for assertions (FluentAssertions successor)

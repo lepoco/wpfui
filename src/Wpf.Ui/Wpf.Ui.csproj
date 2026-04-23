@@ -24,6 +24,14 @@
     <PackageReference Include="System.ValueTuple" VersionOverride="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup
+    Condition="'$(TargetFramework)' == 'netstandard2.0'
+                 Or '$(TargetFramework)' == 'net462'
+                 Or '$(TargetFramework)' == 'net472'
+                 Or '$(TargetFramework)' == 'net481'">
+    <PackageReference Include="System.Threading.Tasks.Extensions" VersionOverride="4.5.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="Controls\Anchor\Anchor.bmp" />
     <EmbeddedResource Include="Controls\Arc\Arc.bmp" />

@@ -10,7 +10,7 @@ namespace Wpf.Ui.Demo.Mvvm.ViewModels;
 public abstract class ViewModel : ObservableObject, INavigationAware
 {
     /// <inheritdoc />
-    public virtual Task OnNavigatedToAsync()
+    public virtual ValueTask OnNavigatedToAsync()
     {
         OnNavigatedTo();
 
@@ -24,7 +24,7 @@ public abstract class ViewModel : ObservableObject, INavigationAware
     public virtual void OnNavigatedTo() { }
 
     /// <inheritdoc />
-    public virtual Task OnNavigatedFromAsync()
+    public virtual ValueTask OnNavigatedFromAsync()
     {
         OnNavigatedFrom();
 

@@ -2,9 +2,9 @@ name: wpf-ui-cd-extension
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
     paths:
-      - 'src/Wpf.Ui.Extension**'
+      - "src/Wpf.Ui.Extension**"
 
   workflow_dispatch:
 
@@ -26,13 +26,19 @@ jobs:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
 
       - name: Restore dependencies
-        run: nuget restore Wpf.Ui.sln
+        run: nuget restore Wpf.Ui.slnx
 
       - name: Build the solution
-        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj /t:Rebuild -p:Configuration=Release -p:RestorePackages=false -p:Platform="x64"  -p:ProductArchitecture="amd64" -p:GITHUB_ACTIONS=True -p:LangVersion=8.0
+        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj /t:Rebuild
+          -p:Configuration=Release -p:RestorePackages=false
+          -p:Platform="x64"  -p:ProductArchitecture="amd64"
+          -p:GITHUB_ACTIONS=True -p:LangVersion=8.0
 
       - name: Build the solution
-        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj /t:Rebuild -p:Configuration=Release -p:RestorePackages=false -p:Platform="arm64" -p:ProductArchitecture="arm64" -p:GITHUB_ACTIONS=True -p:LangVersion=8.0
+        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj /t:Rebuild
+          -p:Configuration=Release -p:RestorePackages=false -p:Platform="arm64"
+          -p:ProductArchitecture="arm64" -p:GITHUB_ACTIONS=True
+          -p:LangVersion=8.0
 
       - uses: actions/upload-artifact@v4
         with:

@@ -8,11 +8,11 @@ namespace Wpf.Ui.Gallery.ViewModels;
 public abstract partial class ViewModel : ObservableObject, INavigationAware
 {
     /// <inheritdoc />
-    public virtual Task OnNavigatedToAsync()
+    public virtual ValueTask OnNavigatedToAsync()
     {
         OnNavigatedTo();
 
-        return Task.CompletedTask;
+        return default;
     }
 
     /// <summary>
@@ -22,11 +22,11 @@ public abstract partial class ViewModel : ObservableObject, INavigationAware
     public virtual void OnNavigatedTo() { }
 
     /// <inheritdoc />
-    public virtual Task OnNavigatedFromAsync()
+    public virtual ValueTask OnNavigatedFromAsync()
     {
         OnNavigatedFrom();
 
-        return Task.CompletedTask;
+        return default;
     }
 
     /// <summary>

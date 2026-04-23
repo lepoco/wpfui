@@ -36,6 +36,8 @@
     <PackageVersion Include="System.Drawing.Common" Version="10.0.7" />
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
+    <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
+    <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
     <PackageVersion Include="WpfAnalyzers" Version="4.1.1" />
     <PackageVersion Include="xunit.v3" Version="3.2.2" />
   </ItemGroup>
