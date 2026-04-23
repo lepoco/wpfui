@@ -13,19 +13,14 @@ WPF UI provides the Fluent experience in your known and loved WPF framework. Int
 
 ![ua](https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png)
 
-## 🛟 Support plans
+## Support
 
 To ensure you receive the expert guidance you need, we offer a variety of support plans designed to meet the diverse needs of our community. Whether you are looking to modernize your WPF applications or need assistance with our other libraries, our tailored support solutions are here to help. From priority email support to 24/7 dedicated assistance, we provide flexible plans to suit your project requirements.
 
-[Take a look at the lepo.co support plans](https://lepo.co/support)
-
-## 🤝 Help us keep working on this project
-
-Support the development of WPF UI and other innovative projects by becoming a sponsor on GitHub! Your monthly or one-time contributions help us continue to deliver high-quality, open-source solutions that empower developers worldwide.
-
+[Take a look at the lepo.co support plans](https://lepo.co/support)  
 [Sponsor WPF UI on GitHub](https://github.com/sponsors/lepoco)
 
-## 🚀 Getting started
+## Getting started
 
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
@@ -43,7 +38,7 @@ winget install 'WPF UI'
 The plugin for **Visual Studio 2022** let you easily create new projects using **WPF UI**.  
 <https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui>
 
-## 📷 Screenshots
+## Screenshots
 
 ![Demo App Sample](https://user-images.githubusercontent.com/13592821/166259110-0fb98120-fe34-4e6d-ab92-9f72ad7113c3.png)
 
@@ -51,27 +46,23 @@ The plugin for **Visual Studio 2022** let you easily create new projects using *
 
 ![Store App Sample](https://user-images.githubusercontent.com/13592821/165918914-6948fb42-1ee1-4c36-870e-65bb8ffe3c8a.png)
 
-## 🏗️ Works with Visual Studio Designer
+## Works with Visual Studio Designer
 
 ![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/165919228-0aa3a36c-fb37-4198-835e-53488845226c.png)
 
-## ❤️ Custom Tray icon and menu in pure WPF
+## Custom Tray icon and menu in pure WPF
 
 ![WPF UI Tray menu in WPF](https://user-images.githubusercontent.com/13592821/166259470-2d48a88e-47ce-4f8f-8f07-c9b110de64a5.png)
 
-## ⚓ Custom Windows 11 SnapLayout available for TitleBar
+## Custom Windows 11 SnapLayout available for TitleBar
 
 ![WPF UI Snap Layout for WPF](https://user-images.githubusercontent.com/13592821/166259869-e60d37e4-ded4-46bf-80d9-f92c47266f34.png)
 
-## 📖 Documentation
-
-Documentation can be found at <https://wpfui.lepo.co/>. We also have a [tutorial](#-getting-started) over there for newcomers.
-
-## 🚧 Development
+## Development
 
 If you want to propose a new functionality or submit a bugfix, create a [Pull Request](https://github.com/lepoco/wpfui/compare/main...main) for the branch [main](https://github.com/lepoco/wpfui/tree/main).
 
-## 📐 How to use?
+## How to use?
 
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
 

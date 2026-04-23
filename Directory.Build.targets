@@ -20,7 +20,6 @@
     <None Include="$(BuildToolsDirectory)nuget.png" Pack="true" PackagePath="\Icon.png" Visible="False" />
     <None Include="$(RepositoryDirectory)ThirdPartyNotices.txt" Pack="true" PackagePath="\" Visible="False" />
     <None Include="$(RepositoryDirectory)LICENSE.md" Pack="true" PackagePath="\LICENSE.md" Visible="False" />
-    <None Include="$(RepositoryDirectory)README.md" Pack="true" PackagePath="\README.md" Visible="False" />
   </ItemGroup>
   <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj' and '$(MSBuildProjectExtension)' != '.sfproj' and '$(VisualStudioTemplateProject)' != 'true' and '$(VisualStudioExtensionProject)' != 'true'">
     <PackageReference Include="AsyncFixer">

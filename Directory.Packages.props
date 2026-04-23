@@ -1,4 +1,10 @@
 <Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditLevel>moderate</NuGetAuditLevel>
+  </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
     <PackageVersion Include="AwesomeAssertions" Version="9.3.0" />
@@ -13,7 +19,6 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="Microsoft.VisualStudio.CoreUtility" Version="17.2.3194" />
     <PackageVersion Include="Microsoft.VisualStudio.SDK" Version="17.12.4039" ExcludeAssets="runtime" />
@@ -31,8 +36,6 @@
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
     <PackageVersion Include="WpfAnalyzers" Version="4.1.1" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="xunit.v3" Version="3.2.0" />
-    <PackageVersion Include="xunit" Version="2.9.3" />
   </ItemGroup>
 </Project>
