@@ -14,7 +14,7 @@ public abstract class ViewModel : ObservableObject, INavigationAware
     {
         OnNavigatedTo();
 
-        return Task.CompletedTask;
+        return default;
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public abstract class ViewModel : ObservableObject, INavigationAware
     {
         OnNavigatedFrom();
 
-        return Task.CompletedTask;
+        return default;
     }
 
     /// <summary>

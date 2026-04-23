@@ -215,9 +215,13 @@ public class NavigationViewContentPresenter : Frame
         "SuspiciousTypeConversion.Global",
         Justification = "The library user might make a class inherit from both FrameworkElement and INavigationAware at the same time."
     )]
-    private static void NotifyContentAboutNavigating(object content, Func<INavigationAware, Task> function)
+    private static void NotifyContentAboutNavigating(
+        object content,
+        Func<INavigationAware, ValueTask> function
+    )
     {
-        async void PerformNotify(INavigationAware navigationAware)
+        // TODO: Synchronize? Dispatch?
+        async ValueTask PerformNotify(INavigationAware navigationAware)
         {
             await function(navigationAware).ConfigureAwait(false);
         }
