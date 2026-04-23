@@ -265,6 +265,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     {
         if (immediately)
         {
+            // NOTE: Fire & forget
             _ = Presenter.ImmediatelyDisplay(this);
         }
         else
@@ -276,7 +277,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Shows the <see cref="Snackbar"/>.
     /// </summary>
-    public virtual ValueTask ShowAsync()
+    public virtual Task ShowAsync()
     {
         return ShowAsync(false);
     }
@@ -284,7 +285,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Shows the <see cref="Snackbar"/>.
     /// </summary>
-    public virtual ValueTask ShowAsync(bool immediately)
+    public virtual Task ShowAsync(bool immediately)
     {
         if (immediately)
         {
@@ -293,7 +294,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
 
         Presenter.AddToQue(this);
 
-        return default;
+        return Task.CompletedTask;
     }
 
     /// <summary>

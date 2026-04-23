@@ -136,7 +136,7 @@ public class NavigationViewContentPresenter : Frame
         {
             if (sender is NavigationViewContentPresenter navigator)
             {
-                NotifyContentAboutNavigatingFrom(navigator.Content);
+                ObserveValueTask(NotifyContentAboutNavigatingFrom(navigator.Content));
             }
         };
     }
@@ -165,14 +165,14 @@ public class NavigationViewContentPresenter : Frame
 
     protected virtual void OnNavigating(System.Windows.Navigation.NavigatingCancelEventArgs eventArgs)
     {
-        NotifyContentAboutNavigatingTo(eventArgs.Content);
+        ObserveValueTask(NotifyContentAboutNavigatingTo(eventArgs.Content));
 
         if (eventArgs.Navigator is not NavigationViewContentPresenter navigator)
         {
             return;
         }
 
-        NotifyContentAboutNavigatingFrom(navigator.Content);
+        ObserveValueTask(NotifyContentAboutNavigatingFrom(navigator.Content));
     }
 
     protected virtual void OnNavigated(NavigationEventArgs eventArgs)
@@ -225,28 +225,65 @@ public class NavigationViewContentPresenter : Frame
     {
         switch (content)
         {
-            // The order in which the OnNavigatedToAsync/OnNavigatedFromAsync methods of View and ViewModel are called
-            // is not guaranteed
-            case INavigationAware navigationAwareNavigationContent:
+            case INavigationAware navigationAware:
                 if (
-                    navigationAwareNavigationContent
-                        is FrameworkElement { DataContext: INavigationAware viewModel }
-                    && !ReferenceEquals(viewModel, navigationAwareNavigationContent)
+                    navigationAware is FrameworkElement { DataContext: INavigationAware viewModel }
+                    && !ReferenceEquals(viewModel, navigationAware)
                 )
                 {
-                    // TODO: Do we want to notify both?
-                    return function(viewModel);
+                    ValueTask first = function(navigationAware);
+
+                    return first.IsCompletedSuccessfully
+                        ? function(viewModel)
+                        : AwaitBoth(first, function, viewModel);
                 }
 
-                return function(navigationAwareNavigationContent);
+                return function(navigationAware);
 
-            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
-                return function(navigationAwareNavigableViewViewModel);
+            case INavigableView<object> { ViewModel: INavigationAware vm }:
+                return function(vm);
 
-            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
-                return function(navigationAwareCurrentContent);
+            case FrameworkElement { DataContext: INavigationAware vm }:
+                return function(vm);
         }
 
         return default;
+    }
+
+    private static async ValueTask AwaitBoth(
+        ValueTask first,
+        Func<INavigationAware, ValueTask> function,
+        INavigationAware second
+    )
+    {
+        await first.ConfigureAwait(false);
+        await function(second).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Properly consumes a <see cref="ValueTask"/> in a fire-and-forget context.
+    /// If the task completed synchronously, no allocation occurs.
+    /// </summary>
+    private static void ObserveValueTask(ValueTask task)
+    {
+        if (task.IsCompletedSuccessfully)
+        {
+            return;
+        }
+
+        AwaitObserved(task);
+
+        static async void AwaitObserved(ValueTask pending)
+        {
+            try
+            {
+                await pending.ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                // Navigation notification is best-effort from the presenter's perspective.
+                // The INavigationAware implementation is responsible for its own error handling.
+            }
+        }
     }
 }

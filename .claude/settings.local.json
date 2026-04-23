@@ -7,7 +7,8 @@
       "mcp__microsoft_docs__microsoft_code_sample_search",
       "mcp__context7__resolve-library-id",
       "mcp__context7__query-docs",
-      "WebFetch(domain:devblogs.microsoft.com)"
+      "WebFetch(domain:devblogs.microsoft.com)",
+      "Bash(dotnet build *)"
     ]
   }
 }

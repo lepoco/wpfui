@@ -30,7 +30,10 @@
   </Folder>
   <Project Path="src/Wpf.Ui.Abstractions/Wpf.Ui.Abstractions.csproj" />
   <Project Path="src/Wpf.Ui.DependencyInjection/Wpf.Ui.DependencyInjection.csproj" />
-  <Project Path="src/Wpf.Ui.Extension.Template.Blank/Wpf.Ui.Extension.Template.Blank.csproj" Id="ab3d44b5-9491-487e-a134-9ac5bed2b981">
+  <Project
+    Path="src/Wpf.Ui.Extension.Template.Blank/Wpf.Ui.Extension.Template.Blank.csproj"
+    Id="ab3d44b5-9491-487e-a134-9ac5bed2b981"
+  >
     <Platform Solution="*|arm64" Project="arm64" />
     <Platform Solution="*|x64" Project="x64" />
     <Platform Solution="*|x86" Project="x86" />
@@ -39,7 +42,10 @@
     <Build Solution="Debug|arm64" Project="false" />
     <Build Solution="Debug|x64" Project="false" />
   </Project>
-  <Project Path="src/Wpf.Ui.Extension.Template.Compact/Wpf.Ui.Extension.Template.Compact.csproj" Id="14d7431c-6cff-4191-bb88-2b8d5f323a30">
+  <Project
+    Path="src/Wpf.Ui.Extension.Template.Compact/Wpf.Ui.Extension.Template.Compact.csproj"
+    Id="14d7431c-6cff-4191-bb88-2b8d5f323a30"
+  >
     <Platform Solution="*|arm64" Project="arm64" />
     <Platform Solution="*|x64" Project="x64" />
     <Platform Solution="*|x86" Project="x86" />
@@ -48,7 +54,10 @@
     <Build Solution="Debug|arm64" Project="false" />
     <Build Solution="Debug|x64" Project="false" />
   </Project>
-  <Project Path="src/Wpf.Ui.Extension.Template.Fluent/Wpf.Ui.Extension.Template.Fluent.csproj" Id="4d2706b5-27a9-4542-bd4d-8c22d12d0628">
+  <Project
+    Path="src/Wpf.Ui.Extension.Template.Fluent/Wpf.Ui.Extension.Template.Fluent.csproj"
+    Id="4d2706b5-27a9-4542-bd4d-8c22d12d0628"
+  >
     <Platform Solution="*|arm64" Project="arm64" />
     <Platform Solution="*|x64" Project="x64" />
     <Platform Solution="*|x86" Project="x86" />
@@ -68,7 +77,10 @@
   </Project>
   <Project Path="src/Wpf.Ui.FlaUI/Wpf.Ui.FlaUI.csproj" />
   <Project Path="src/Wpf.Ui.FontMapper/Wpf.Ui.FontMapper.csproj" />
-  <Project Path="src/Wpf.Ui.Gallery.Package/Wpf.Ui.Gallery.Package.wapproj" Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5">
+  <Project
+    Path="src/Wpf.Ui.Gallery.Package/Wpf.Ui.Gallery.Package.wapproj"
+    Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5"
+  >
     <Platform Solution="*|arm64" Project="ARM64" />
     <Build Solution="*|Any CPU" Project="false" />
     <Build Solution="Debug|arm64" Project="false" />
