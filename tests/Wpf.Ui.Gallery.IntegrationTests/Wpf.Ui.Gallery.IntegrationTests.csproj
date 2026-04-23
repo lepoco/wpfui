@@ -14,11 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="NSubstitute" />
     <PackageReference Include="FlaUI.UIA3" />
     <PackageReference Include="xunit.v3" />
   </ItemGroup>
@@ -26,6 +23,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wpf.Ui.FlaUI\Wpf.Ui.FlaUI.csproj" />
     <ProjectReference Include="..\..\src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="AwesomeAssertions" />
+    <Using Include="NSubstitute" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

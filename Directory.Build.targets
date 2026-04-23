@@ -22,6 +22,10 @@
     <None Include="$(RepositoryDirectory)LICENSE.md" Pack="true" PackagePath="\LICENSE.md" Visible="False" />
   </ItemGroup>
   <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj' and '$(MSBuildProjectExtension)' != '.sfproj' and '$(VisualStudioTemplateProject)' != 'true' and '$(VisualStudioExtensionProject)' != 'true'">
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>build; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="AsyncFixer">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -54,6 +58,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>build; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj' and '$(MSBuildProjectExtension)' != '.sfproj'">
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)BannedSymbols.txt" />
   </ItemGroup>
   <Target Name="AddCommitHashToAssemblyAttributes" BeforeTargets="GetAssemblyAttributes">
     <ItemGroup>

@@ -107,10 +107,15 @@
 
 To ensure you receive the expert guidance you need, we offer a variety of support plans designed to meet the diverse needs of our community. Whether you are looking to modernize your WPF applications or need assistance with our other libraries, our tailored support solutions are here to help. From priority email support to 24/7 dedicated assistance, we provide flexible plans to suit your project requirements.
 
-<a class="btn btn-outline-primary mr-05" href="https://lepo.co/support">Take a look at the lepo.co support plans</a>  
-
-<a class="btn btn-outline-light" href="https://github.com/sponsors/pomianowski">Sponsor WPF UI on GitHub</a>
-
+<div class="row">
+    <div class="col-12 col-sm-6 col-lg-6 d-flex justify-content-center">
+        <a class="btn btn-block btn-outline-primary mr-05" href="https://lepo.co/support">Take a look at the lepo.co support plans</a>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-6 d-flex justify-content-center">
+        <a class="btn btn-block btn-outline-light" href="https://github.com/sponsors/pomianowski">Sponsor WPF UI on GitHub</a>
+    </div>
+</div>
+  
 ![Demo App Sample](https://user-images.githubusercontent.com/13592821/166259110-0fb98120-fe34-4e6d-ab92-9f72ad7113c3.png)
 
 ![Monaco Editor](https://user-images.githubusercontent.com/13592821/258610583-7d71f69d-45b3-4be6-bcb8-8cf6cd60a2ff.png)

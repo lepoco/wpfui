@@ -156,9 +156,15 @@ public static class SystemThemeWatcher
             msg == (int)PInvoke.WM_DWMCOLORIZATIONCOLORCHANGED
             || msg == (int)PInvoke.WM_THEMECHANGED
             || msg == (int)PInvoke.WM_SYSCOLORCHANGE
-            || (msg == (int)PInvoke.WM_SETTINGCHANGE &&
-                lParam != IntPtr.Zero &&
-                string.Equals(Marshal.PtrToStringUni(lParam), "ImmersiveColorSet", StringComparison.Ordinal))
+            || (
+                msg == (int)PInvoke.WM_SETTINGCHANGE
+                && lParam != IntPtr.Zero
+                && string.Equals(
+                    Marshal.PtrToStringUni(lParam),
+                    "ImmersiveColorSet",
+                    StringComparison.Ordinal
+                )
+            )
         )
         {
             UpdateObservedWindow(hWnd);
