@@ -13,6 +13,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
+    xmlns:animations="clr-namespace:Wpf.Ui.Animations"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!--
@@ -33,7 +34,6 @@
     <system:Double x:Key="CheckBoxHeight">20</system:Double>
     <system:Double x:Key="CheckBoxWidth">20</system:Double>
     <system:TimeSpan x:Key="CheckBoxAnimationOffset">00:00:00.250</system:TimeSpan>
-    <Duration x:Key="CheckBoxAnimationDuration">00:00:00.250</Duration>
     <converters:ClipConverter x:Key="ClipConverter" />
 
     <Style x:Key="DefaultCheckBoxStyle" TargetType="{x:Type CheckBox}">
@@ -140,7 +140,7 @@
                                             Storyboard.TargetProperty="Tag"
                                             From="0"
                                             To="1"
-                                            Duration="{StaticResource CheckBoxAnimationDuration}">
+                                            Duration="{animations:AnimationDuration NormalDuration}">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
