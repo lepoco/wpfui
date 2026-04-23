@@ -86,27 +86,30 @@
 </div>
 
 <div class="row">
-    <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+    <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
         <div class="stats">
-            <strong id="wpfui-downloads" class="display-4">650K</strong>Downloads
+            <strong id="wpfui-downloads" class="display-4">850K</strong>Downloads
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+    <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
         <div class="stats">
             <strong id="wpfui-stars" class="display-4">9K</strong>GitHub Stars
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+    <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
         <div class="stats">
             <strong id="wpfui-forks" class="display-4">900</strong>Forks
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
-        <div class="stats">
-            <strong id="wpfui-sponsors" class="display-4">2</strong>Sponsors
-        </div>
-    </div>
 </div>
+
+## Support
+
+To ensure you receive the expert guidance you need, we offer a variety of support plans designed to meet the diverse needs of our community. Whether you are looking to modernize your WPF applications or need assistance with our other libraries, our tailored support solutions are here to help. From priority email support to 24/7 dedicated assistance, we provide flexible plans to suit your project requirements.
+
+<a class="btn btn-outline-primary mr-05" href="https://lepo.co/support">Take a look at the lepo.co support plans</a>  
+
+<a class="btn btn-outline-light" href="https://github.com/sponsors/pomianowski">Sponsor WPF UI on GitHub</a>
 
 ![Demo App Sample](https://user-images.githubusercontent.com/13592821/166259110-0fb98120-fe34-4e6d-ab92-9f72ad7113c3.png)
 
@@ -117,6 +120,6 @@
 [Created with ❤ in Poland by lepo.co](https://lepo.co/)  
 A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
 
-[![Discord](https://img.shields.io/discord/1071051348348514375?label=discord)](https://discord.gg/AR9ywDUwGq) [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget)](https://www.nuget.org/packages/WPF-UI/) [![VS 2022 Downloads](https://img.shields.io/visual-studio-marketplace/i/lepo.WPF-UI?label=vs-2022)](https://marketplace.visualstudio.com/items?itemName=lepo.WPF-UI) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
+[![Discord](https://img.shields.io/discord/1071051348348514375?label=discord)](https://discord.gg/AR9ywDUwGq) [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget)](https://www.nuget.org/packages/WPF-UI/)
 
 [Getting Started](/documentation/getting-started.html)

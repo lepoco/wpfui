@@ -4,20 +4,22 @@
       "src": [
         {
           "files": [
-            "src/Wpf.Ui/*.csproj",
-            "src/Wpf.Ui.Tray/*.csproj",
-            "src/Wpf.Ui.Abstractions/*.csproj",
-            "src/Wpf.Ui.DependencyInjection/*.csproj"
+            "Wpf.Ui/*.csproj",
+            "Wpf.Ui.Tray/*.csproj",
+            "Wpf.Ui.Abstractions/*.csproj",
+            "Wpf.Ui.DependencyInjection/*.csproj"
           ],
-          "src": "../"
+          "src": "../src"
         }
       ],
       "dest": "api",
-      "properties": {
-        "TargetFramework": "net472"
-      },
+      "includePrivateMembers": false,
       "disableGitFeatures": false,
-      "disableDefaultFilter": false
+      "disableDefaultFilter": false,
+      "noRestore": false,
+      "namespaceLayout": "flattened",
+      "memberLayout": "samePage",
+      "allowCompilationErrors": false
     }
   ],
   "build": {
@@ -28,7 +30,8 @@
         ],
         "exclude": [
           "_site/**",
-          "obj/**"
+          "obj/**",
+          "architecture/**"
         ]
       }
     ],
@@ -46,6 +49,7 @@
         ]
       }
     ],
+    "xref": [],
     "xrefService": [
       "https://xref.docs.microsoft.com/query?uid={uid}"
     ],
@@ -57,7 +61,7 @@
       "_appName": "WPF UI",
       "_appFaviconPath": "images/favicon.ico",
       "_appLogoPath": "images/wpfui.png",
-      "_appFooter": "<span>Made with <a href=\"https://dotnet.github.io/docfx\" rel=\"noreferrer\">docfx</a>, <a href=\"https://chat.openai.com/\" rel=\"noreferrer\">ChatGPT</a> and <a href=\"https://www.deepl.com/\" rel=\"noreferrer\">DeepL</a> | Copyright © 2025 <a href=\"https://lepo.co/\">lepo.co</a></span>"
+      "_appFooter": "<span>Made with <a href=\"https://dotnet.github.io/docfx\" rel=\"noreferrer\">docfx</a>, <a href=\"https://chat.openai.com/\" rel=\"noreferrer\">ChatGPT</a> | Copyright © 2026 <a href=\"https://lepo.co/\">lepo.co</a></span>"
     },
     "dest": "_site",
     "template": [

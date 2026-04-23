@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "mcp__microsoft_docs__microsoft_docs_search"
+      "mcp__microsoft_docs__microsoft_docs_search",
+      "Bash(dotnet tool *)",
+      "Bash(docfx docs/docfx.json)"
     ]
   }
 }

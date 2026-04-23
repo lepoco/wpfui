@@ -18,7 +18,7 @@ WPF UI provides the Fluent experience in your known and loved WPF framework. Int
 To ensure you receive the expert guidance you need, we offer a variety of support plans designed to meet the diverse needs of our community. Whether you are looking to modernize your WPF applications or need assistance with our other libraries, our tailored support solutions are here to help. From priority email support to 24/7 dedicated assistance, we provide flexible plans to suit your project requirements.
 
 [Take a look at the lepo.co support plans](https://lepo.co/support)  
-[Sponsor WPF UI on GitHub](https://github.com/sponsors/lepoco)
+[Sponsor WPF UI on GitHub](https://github.com/sponsors/pomianowski)
 
 ## Getting started
 
