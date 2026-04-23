@@ -107,7 +107,10 @@ public class FluentWindow : System.Windows.Window
         );
     }
 
-    private void OnApplicationThemeManagerChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
+    private void OnApplicationThemeManagerChanged(
+        ApplicationTheme currentApplicationTheme,
+        Color systemAccent
+    )
     {
         if (IsActive && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
         {

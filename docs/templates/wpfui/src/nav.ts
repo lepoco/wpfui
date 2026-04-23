@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-import { render, html, TemplateResult } from 'lit-html'
-import { breakWordLit, meta, isExternalHref } from './helper'
+import { html, render, TemplateResult } from 'lit-html'
+import { breakWordLit, isExternalHref, meta } from './helper'
 import { themePicker } from './theme'
 import { TocNode } from './toc'
 
@@ -55,8 +55,9 @@ export async function renderNavbar(): Promise<NavItem[]> {
     const icons = html`
       <form class="icons">
         ${window.docfx.iconLinks?.map(i => html`<a href="${i.href}" title="${i.title}" class="btn border-0"><i class="bi bi-${i.icon}"></i></a>`)}
+        <a href="https://github.com/lepoco/wpfui" target="_blank" rel="noopener noreferrer" title="WPF UI on GitHub" class="btn border-0"><i class="bi bi-github"></i></a>
         ${themePicker(renderCore)}
-        <a class="btn btn-border-0 btn-colorful mr-05" rel="noopener noreferrer" href="https://github.com/sponsors/lepoco">Sponsor</a>
+        <a class="btn btn-border-0 btn-colorful mr-05" target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/pomianowski">Sponsor</a>
       </form>`
 
     render(html`${menu} ${icons}`, navbar)

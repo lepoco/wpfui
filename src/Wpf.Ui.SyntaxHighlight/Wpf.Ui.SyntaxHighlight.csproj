@@ -40,4 +40,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup Condition="'$(GeneratePackageOnBuild)' == 'true'">
+    <None Include="$(RepositoryDirectory)\src\Wpf.Ui.FlaUI\README.md" Pack="true" PackagePath="\README.md" Visible="False" />
+  </ItemGroup>
+  
 </Project>

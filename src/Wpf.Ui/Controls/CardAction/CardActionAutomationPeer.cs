@@ -13,8 +13,7 @@ namespace Wpf.Ui.Controls;
 internal class CardActionAutomationPeer : FrameworkElementAutomationPeer, IInvokeProvider
 {
     public CardActionAutomationPeer(CardAction owner)
-        : base(owner)
-    { }
+        : base(owner) { }
 
     protected override string GetClassNameCore()
     {
@@ -45,10 +44,14 @@ internal class CardActionAutomationPeer : FrameworkElementAutomationPeer, IInvok
 
         // Async call of click event
         // In ClickHandler opens a dialog and suspend the execution we don't want to block this thread
-        Dispatcher.BeginInvoke(DispatcherPriority.Input, new DispatcherOperationCallback(_ =>
-        {
-            ((CardAction)Owner).AutomationClick();
-            return null;
-        }), null);
+        Dispatcher.BeginInvoke(
+            DispatcherPriority.Input,
+            new DispatcherOperationCallback(_ =>
+            {
+                ((CardAction)Owner).AutomationClick();
+                return null;
+            }),
+            null
+        );
     }
 }

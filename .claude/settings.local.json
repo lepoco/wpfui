@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__microsoft_docs__microsoft_docs_search",
+      "Bash(dotnet tool *)",
+      "Bash(docfx docs/docfx.json)",
+      "mcp__microsoft_docs__microsoft_code_sample_search",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs"
+    ]
+  }
+}

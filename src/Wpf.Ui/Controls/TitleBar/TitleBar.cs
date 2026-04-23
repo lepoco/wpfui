@@ -711,7 +711,12 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
                 UIElement? headerCenterUIElement = CenterContent as UIElement;
                 UIElement? headerRightUiElement = TrailingContent as UIElement;
 
-                isMouseOverHeaderContent = (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock && headerLeftUIElement.IsMouseOverElement(lParam))
+                isMouseOverHeaderContent =
+                    (
+                        headerLeftUIElement is not null
+                        && headerLeftUIElement != _titleBlock
+                        && headerLeftUIElement.IsMouseOverElement(lParam)
+                    )
                     || (headerCenterUIElement?.IsMouseOverElement(lParam) ?? false)
                     || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
             }

@@ -14,8 +14,7 @@ namespace Wpf.Ui.AutomationPeers;
 internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
 {
     public CardControlAutomationPeer(CardControl owner)
-        : base(owner)
-    { }
+        : base(owner) { }
 
     protected override string GetClassNameCore()
     {
