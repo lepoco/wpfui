@@ -478,6 +478,11 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
                 <Setter Property="MouseOverBorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}" />
             </Trigger>
+
+            <!--  DISABLED - must be last to override Appearance trigger foreground  -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 
