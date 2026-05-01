@@ -175,9 +175,9 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel />
-                </ItemsPanelTemplate>
+              <ItemsPanelTemplate>
+                  <VirtualizingStackPanel />
+              </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="OverridesDefaultStyle" Value="True" />
