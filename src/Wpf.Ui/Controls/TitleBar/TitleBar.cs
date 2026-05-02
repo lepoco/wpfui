@@ -415,7 +415,7 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public Action<TitleBar, Window>? MinimizeActionOverride { get; set; }
 
-    private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
+    private readonly TitleBarButton?[] _buttons = new TitleBarButton[4];
     private readonly TextBlock _titleBlock;
     private Window _currentWindow = null!;
 
