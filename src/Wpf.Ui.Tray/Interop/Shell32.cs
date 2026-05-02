@@ -69,7 +69,7 @@ internal static class Shell32
         VISTA_MASK = XP_MASK | REALTIME | SHOWTIP,
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public class NOTIFYICONDATA
     {
         /// <summary>
@@ -153,7 +153,7 @@ internal static class Shell32
         [Out, MarshalAs(UnmanagedType.Interface)] out object ppv
     );
 
-    [DllImport(Libraries.Shell32)]
+    [DllImport(Libraries.Shell32, CharSet = CharSet.Unicode)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool Shell_NotifyIcon([In] NIM dwMessage, [In] NOTIFYICONDATA lpdata);
 
