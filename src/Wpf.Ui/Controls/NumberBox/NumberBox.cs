@@ -27,9 +27,13 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
 {
     // Template part names
     private const string PART_ClearButton = nameof(PART_ClearButton);
+    private const string PART_CompactIncrementDecrementButton = nameof(PART_CompactIncrementDecrementButton);
+    private const string PART_CompactIncrementDecrementFlyout = nameof(PART_CompactIncrementDecrementFlyout);
+    private const string PART_CompactIncrementButton = nameof(PART_CompactIncrementButton);
+    private const string PART_CompactDecrementButton = nameof(PART_CompactDecrementButton);
     private const string PART_InlineIncrementButton = nameof(PART_InlineIncrementButton);
     private const string PART_InlineDecrementButton = nameof(PART_InlineDecrementButton);
-
+    
     private bool _valueUpdating;
 
     /// <summary>Identifies the <see cref="Value"/> dependency property.</summary>
@@ -330,6 +334,9 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
             PART_ClearButton,
             () => OnClearButtonClick()
         );
+        SubscribeToButtonClickEvent<System.Windows.Controls.Button>(PART_CompactIncrementDecrementButton, () => OnCompactIncrementDecrementButtonClick());
+        SubscribeToButtonClickEvent<System.Windows.Controls.Button>(PART_CompactIncrementButton, () => StepValue(SmallChange));
+        SubscribeToButtonClickEvent<System.Windows.Controls.Button>(PART_CompactDecrementButton, () => StepValue(-SmallChange));
         SubscribeToButtonClickEvent<RepeatButton>(PART_InlineIncrementButton, () => StepValue(SmallChange));
         SubscribeToButtonClickEvent<RepeatButton>(PART_InlineDecrementButton, () => StepValue(-SmallChange));
 
@@ -344,6 +351,14 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
         }
 
         base.OnApplyTemplate();
+    }
+
+    private void OnCompactIncrementDecrementButtonClick()
+    {
+        if (GetTemplateChild(PART_CompactIncrementDecrementFlyout) is Flyout flyout)
+        {
+            flyout.IsOpen = true;
+        }
     }
 
     private void SubscribeToButtonClickEvent<TButton>(string elementName, Action action)

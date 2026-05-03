@@ -124,6 +124,7 @@
                                         IsTabStop="False">
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="Dismiss24" />
                                     </Button>
+
                                     <Button
                                         x:Name="PART_CompactIncrementDecrementButton"
                                         Width="{StaticResource NumberBoxButtonHeight}"
@@ -141,6 +142,23 @@
                                         Visibility="Collapsed">
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronUpDown24" />
                                     </Button>
+
+                                    <controls:Flyout x:Name="PART_CompactIncrementDecrementFlyout" Placement="Center">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <Button x:Name="PART_CompactIncrementButton">
+                                                <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronUp24" />
+                                            </Button>
+                                            <Button x:Name="PART_CompactDecrementButton" Grid.Row="1">
+                                                <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronDown24" />
+                                            </Button>
+                                        </Grid>
+                                    </controls:Flyout>
+
                                     <RepeatButton
                                         x:Name="PART_InlineIncrementButton"
                                         Width="{StaticResource NumberBoxButtonHeight}"
@@ -198,6 +216,7 @@
                             BorderThickness="{StaticResource NumberBoxAccentBorderThemeThickness}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}" />
                     </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="CurrentPlaceholderEnabled" Value="False">
                             <Setter TargetName="PlaceholderTextBox" Property="Visibility" Value="Collapsed" />
