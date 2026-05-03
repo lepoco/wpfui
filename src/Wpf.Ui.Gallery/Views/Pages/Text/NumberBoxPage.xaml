@@ -28,7 +28,7 @@
 
         <controls:ControlExample
             Margin="0,36,0,0"
-            HeaderText="A NumberBox with spin buttons."
+            HeaderText="A NumberBox with a spin button."
             XamlCode="&lt;ui:NumberBox PlaceholderText=&quot;Enter your age&quot; /&gt;">
             <Grid>
                 <Grid.ColumnDefinitions>
