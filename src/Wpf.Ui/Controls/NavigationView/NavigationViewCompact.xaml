@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:animations="clr-namespace:Wpf.Ui.Animations">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewItemDefaultStyle.xaml" />
@@ -229,12 +230,12 @@
                                 Storyboard.TargetProperty="(ItemsControl.Opacity)"
                                 From="0.0"
                                 To="1.0"
-                                Duration="00:00:00.167" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="ChevronIcon"
                                 Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
                                 To="-180"
-                                Duration="00:00:00.167" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -246,12 +247,12 @@
                                 Storyboard.TargetProperty="(ItemsControl.Opacity)"
                                 From="1.0"
                                 To="0.0"
-                                Duration="00:00:00.167" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="ChevronIcon"
                                 Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
                                 To="0"
-                                Duration="00:00:00.167" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -486,14 +487,14 @@
                                 Storyboard.TargetProperty="Width"
                                 From="40"
                                 To="{TemplateBinding OpenPaneLength}"
-                                Duration="0:0:.16" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 AccelerationRatio="0.4"
                                 Storyboard.TargetName="AutoSuggestBoxContentPresenter"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0"
                                 To="1"
-                                Duration="0:0:.16" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </VisualState>
                     <VisualState Name="PaneCompact">
@@ -504,21 +505,21 @@
                                 Storyboard.TargetProperty="Opacity"
                                 From="1"
                                 To="0"
-                                Duration="0:0:.16" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 AccelerationRatio="0.4"
                                 Storyboard.TargetName="PART_AutoSuggestBoxSymbolButton"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0"
                                 To="1"
-                                Duration="0:0:.16" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 AccelerationRatio="0.4"
                                 Storyboard.TargetName="PaneGrid"
                                 Storyboard.TargetProperty="Width"
                                 From="{TemplateBinding OpenPaneLength}"
                                 To="40"
-                                Duration="0:0:.16" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <ObjectAnimationUsingKeyFrames
                                 BeginTime="0:0:0.16"
                                 Storyboard.TargetName="AutoSuggestBoxContentPresenter"
