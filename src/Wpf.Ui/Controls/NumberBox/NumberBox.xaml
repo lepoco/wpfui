@@ -124,6 +124,41 @@
                                         IsTabStop="False">
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="Dismiss24" />
                                     </Button>
+
+                                    <Button
+                                        x:Name="PART_CompactIncrementDecrementButton"
+                                        Width="{StaticResource NumberBoxButtonHeight}"
+                                        Height="{StaticResource NumberBoxButtonHeight}"
+                                        Margin="{StaticResource NumberBoxButtonMargin}"
+                                        Padding="{StaticResource NumberBoxButtonPadding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="{DynamicResource TextControlButtonForeground}"
+                                        IsTabStop="False"
+                                        Visibility="Collapsed">
+                                        <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronUpDown24" />
+                                    </Button>
+
+                                    <controls:Flyout x:Name="PART_CompactIncrementDecrementFlyout" Placement="Center">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <Button x:Name="PART_CompactIncrementButton">
+                                                <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronUp24" />
+                                            </Button>
+                                            <Button x:Name="PART_CompactDecrementButton" Grid.Row="1">
+                                                <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronDown24" />
+                                            </Button>
+                                        </Grid>
+                                    </controls:Flyout>
+
                                     <RepeatButton
                                         x:Name="PART_InlineIncrementButton"
                                         Width="{StaticResource NumberBoxButtonHeight}"
@@ -181,6 +216,7 @@
                             BorderThickness="{StaticResource NumberBoxAccentBorderThemeThickness}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}" />
                     </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="CurrentPlaceholderEnabled" Value="False">
                             <Setter TargetName="PlaceholderTextBox" Property="Visibility" Value="Collapsed" />
@@ -196,8 +232,15 @@
                         <Trigger Property="SpinButtonPlacementMode" Value="Hidden">
                             <Setter TargetName="PART_InlineIncrementButton" Property="Margin" Value="0" />
                             <Setter TargetName="PART_InlineDecrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_CompactIncrementDecrementButton" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="SpinButtonPlacementMode" Value="Compact">
+                            <Setter TargetName="PART_InlineIncrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_InlineDecrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_CompactIncrementDecrementButton" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="SpinButtonPlacementMode" Value="Inline">
+                            <Setter TargetName="PART_CompactIncrementDecrementButton" Property="Margin" Value="0" />
                             <Setter TargetName="PART_InlineIncrementButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_InlineDecrementButton" Property="Visibility" Value="Visible" />
                         </Trigger>
