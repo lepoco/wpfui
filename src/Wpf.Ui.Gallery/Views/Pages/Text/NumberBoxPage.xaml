@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Text"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="NumberBoxPage"
     controls:PageControlDocumentation.DocumentationType="{x:Type ui:NumberBox}"
@@ -25,6 +24,41 @@
             HeaderText="WPF UI NumberBox."
             XamlCode="&lt;ui:NumberBox PlaceholderText=&quot;Enter your age&quot; /&gt;">
             <ui:NumberBox PlaceholderText="Enter your age" />
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,36,0,0"
+            HeaderText="A NumberBox with a spin button."
+            XamlCode="&lt;ui:NumberBox PlaceholderText=&quot;Enter your age&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ui:NumberBox
+                    Margin="0,23,0,0"
+                    Icon="{ui:SymbolIcon NumberSymbolSquare24}"
+                    LargeChange="2.25"
+                    Maximum="10"
+                    Minimum="-10"
+                    PlaceholderText="Enter your age"
+                    SmallChange="0.25"
+                    SpinButtonPlacementMode="{Binding ViewModel.SpinButtonPlacementMode}"
+                    Value="1.50" />
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="12,0,0,0"
+                    VerticalAlignment="Top">
+                    <Label Content="Spin button placement mode" Target="{Binding ElementName=SpinButtonPlacementModeComboBox}" />
+                    <ComboBox x:Name="SpinButtonPlacementModeComboBox" SelectedIndex="{Binding ViewModel.NumberBoxSpinButtonPlacementModeSelectedIndex, Mode=TwoWay}">
+                        <ComboBoxItem Content="Hidden" />
+                        <ComboBoxItem Content="Compact" />
+                        <ComboBoxItem Content="Inline" />
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
         </controls:ControlExample>
 
         <controls:ControlExample
