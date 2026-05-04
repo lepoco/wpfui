@@ -37,6 +37,7 @@
                 </Grid.ColumnDefinitions>
 
                 <ui:NumberBox
+                    Margin="0,23,0,0"
                     Icon="{ui:SymbolIcon NumberSymbolSquare24}"
                     LargeChange="2.25"
                     Maximum="10"
