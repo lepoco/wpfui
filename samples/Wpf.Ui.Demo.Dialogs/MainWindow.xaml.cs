@@ -24,10 +24,10 @@ public partial class MainWindow
         await Application.Current.Dispatcher.InvokeAsync(ShowSampleDialogAsync);
     }
 
-    private async Task ShowSampleDialogAsync()
+    private Task<ContentDialogResult> ShowSampleDialogAsync()
     {
         // Defining dialog object
-        ContentDialog myDialog = new()
+        var myDialog = new ContentDialog
         {
             Title = "My sample dialog",
             Content = "Content of the dialog",
@@ -40,6 +40,6 @@ public partial class MainWindow
         myDialog.DialogHost = ContentPresenterForDialogs;
 
         // Showing the dialog
-        await myDialog.ShowAsync(CancellationToken.None);
+        return myDialog.ShowAsync(CancellationToken.None);
     }
 }

@@ -23,7 +23,7 @@ public sealed partial class SettingsViewModel(INavigationService navigationServi
     private NavigationViewPaneDisplayMode _currentApplicationNavigationStyle =
         NavigationViewPaneDisplayMode.Left;
 
-    public override void OnNavigatedTo()
+    public override void OnNavigatedTo(CancellationToken cancellationToken = default)
     {
         if (!_isInitialized)
         {

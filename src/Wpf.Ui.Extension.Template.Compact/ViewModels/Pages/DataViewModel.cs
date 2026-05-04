@@ -11,7 +11,7 @@ namespace $safeprojectname$.ViewModels.Pages
         [ObservableProperty]
         private IEnumerable<DataColor> _colors;
 
-        public Task OnNavigatedToAsync()
+        public ValueTask OnNavigatedToAsync()
         {
             if (!_isInitialized)
                 InitializeViewModel();
@@ -19,7 +19,7 @@ namespace $safeprojectname$.ViewModels.Pages
             return Task.CompletedTask;
         }
 
-        public Task OnNavigatedFromAsync() => Task.CompletedTask;
+        public ValueTask OnNavigatedFromAsync() => Task.CompletedTask;
 
         private void InitializeViewModel()
         {

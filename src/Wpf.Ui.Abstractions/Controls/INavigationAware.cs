@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Threading;
+
 namespace Wpf.Ui.Abstractions.Controls;
 
 /// <summary>
@@ -14,11 +16,11 @@ public interface INavigationAware
     /// Asynchronously handles the event that is fired after the component is navigated to.
     /// </summary>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task OnNavigatedToAsync();
+    ValueTask OnNavigatedToAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Asynchronously handles the event that is fired before the component is navigated from.
     /// </summary>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task OnNavigatedFromAsync();
+    ValueTask OnNavigatedFromAsync(CancellationToken cancellationToken = default);
 }

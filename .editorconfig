@@ -21,13 +21,13 @@ insert_final_newline = false
 #### Build files ####
 
 # Solution files
-[*.{sln,slnx}]
+[*.{sln}]
 tab_width = 4
 indent_size = 4
 indent_style = tab
 
 # Configuration files
-[*.{json,xml,yml,config,runsettings}]
+[*.{json,xml,yml,config,runsettings,slnx}]
 indent_size = 2
 
 # MSBuild files

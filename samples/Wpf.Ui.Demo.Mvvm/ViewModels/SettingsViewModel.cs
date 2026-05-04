@@ -18,7 +18,7 @@ public partial class SettingsViewModel : ViewModel
         .ApplicationTheme
         .Unknown;
 
-    public override void OnNavigatedTo()
+    public override void OnNavigatedTo(CancellationToken cancellationToken = default)
     {
         if (!_isInitialized)
         {
