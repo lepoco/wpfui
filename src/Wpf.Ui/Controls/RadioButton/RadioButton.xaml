@@ -11,7 +11,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:animations="clr-namespace:Wpf.Ui.Animations">
 
     <system:Double x:Key="RadioButtonCheckGlyphSize">11</system:Double>
     <system:Double x:Key="RadioButtonOuterEllipseSize">20</system:Double>
@@ -119,12 +120,12 @@
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
                                             To="1.2"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
                                             To="1.2"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
@@ -169,13 +170,13 @@
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
                                             From="0.7"
                                             To="1.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
                                             From="0.7"
                                             To="1.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
@@ -197,13 +198,13 @@
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
                                             From="1.2"
                                             To=".95"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
                                             From="1.2"
                                             To=".95"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
@@ -214,12 +215,12 @@
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleY)"
                                             To="1.2"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="CheckGlyph"
                                             Storyboard.TargetProperty="(Ellipse.LayoutTransform).(ScaleTransform.ScaleX)"
                                             To="1.2"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.ExitActions>

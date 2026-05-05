@@ -2,10 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:animations="clr-namespace:Wpf.Ui.Animations"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
-
-    <Duration x:Key="DynamicScrollAnimationDuration">0:0:0.16</Duration>
-    <Duration x:Key="DynamicButtonHoverAnimationDuration">0:0:0.16</Duration>
 
     <sys:Double x:Key="DynamicLineButtonHeight">12</sys:Double>
     <sys:Double x:Key="DynamicLineButtonWidth">12</sys:Double>
@@ -48,7 +46,7 @@
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
                                             From="0.0"
                                             To="1.0"
-                                            Duration="{StaticResource DynamicButtonHoverAnimationDuration}" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -60,7 +58,7 @@
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
                                             From="1.0"
                                             To="0.0"
-                                            Duration="{StaticResource DynamicButtonHoverAnimationDuration}" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -167,25 +165,25 @@
                                 Storyboard.TargetProperty="Width"
                                 From="6"
                                 To="8"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_ButtonScrollUp"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_ButtonScrollDown"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -197,25 +195,25 @@
                                 Storyboard.TargetProperty="Width"
                                 From="8"
                                 To="6"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_ButtonScrollUp"
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_ButtonScrollDown"
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -229,7 +227,7 @@
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -241,7 +239,7 @@
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -314,25 +312,25 @@
                                 Storyboard.TargetProperty="Height"
                                 From="6"
                                 To="8"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_ButtonScrollLeft"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_ButtonScrollRight"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -344,25 +342,25 @@
                                 Storyboard.TargetProperty="Height"
                                 From="8"
                                 To="6"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_ButtonScrollLeft"
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_ButtonScrollRight"
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -376,7 +374,7 @@
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -388,7 +386,7 @@
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
-                                Duration="{StaticResource DynamicScrollAnimationDuration}" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>

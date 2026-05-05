@@ -5,7 +5,9 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:animations="clr-namespace:Wpf.Ui.Animations">
 
     <Style TargetType="{x:Type TabControl}">
         <Setter Property="Foreground" Value="{DynamicResource TabViewForeground}" />
@@ -108,7 +110,7 @@
                                             Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)"
                                             From="0.0"
                                             To="0.5"
-                                            Duration="0:0:.16" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>

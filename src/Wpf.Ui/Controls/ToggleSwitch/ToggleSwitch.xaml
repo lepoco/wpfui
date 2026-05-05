@@ -12,7 +12,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:animations="clr-namespace:Wpf.Ui.Animations">
 
     <system:Double x:Key="RadioButtonBorderThemeThickness">1</system:Double>
     <system:Double x:Key="ToggleButtonWidth">40</system:Double>
@@ -153,37 +154,37 @@
                                             Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="1.0"
                                             To="0.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ActiveToggleRectangle"
                                             Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="0.0"
                                             To="1.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="1.0"
                                             To="0.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ActiveToggleEllipse"
                                             Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="0.0"
                                             To="1.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Rectangle.RenderTransform).(TranslateTransform.X)"
                                             From="-9"
                                             To="9"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ActiveToggleEllipse"
                                             Storyboard.TargetProperty="(Rectangle.RenderTransform).(TranslateTransform.X)"
                                             From="-9"
                                             To="9"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -195,37 +196,37 @@
                                             Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="0.0"
                                             To="1.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ActiveToggleRectangle"
                                             Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="1.0"
                                             To="0.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="0.0"
                                             To="1.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ActiveToggleEllipse"
                                             Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="1.0"
                                             To="0.0"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Rectangle.RenderTransform).(TranslateTransform.X)"
                                             From="9"
                                             To="-9"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ActiveToggleEllipse"
                                             Storyboard.TargetProperty="(Rectangle.RenderTransform).(TranslateTransform.X)"
                                             From="9"
                                             To="-9"
-                                            Duration="00:00:00.167" />
+                                            Duration="{animations:AnimationDuration NormalDuration}" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
