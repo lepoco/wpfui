@@ -383,9 +383,11 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     /// </param>
     /// <param name="title">
     /// The title text displayed in the balloon notification.
+    /// Text exceeding 63 characters will be truncated by the shell.
     /// </param>
     /// <param name="message">
     /// The main content text displayed in the balloon notification.
+    /// Text exceeding 255 characters will be truncated by the shell.
     /// </param>
     /// <param name="icon">
     /// The icon type displayed in the balloon notification.

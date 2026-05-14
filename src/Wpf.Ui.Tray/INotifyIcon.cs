@@ -37,11 +37,13 @@ internal interface INotifyIcon
 
     /// <summary>
     /// Gets or sets the title displayed in the notification balloon tip.
+    /// Text exceeding 63 characters will be truncated by the shell.
     /// </summary>
     string BalloonTipTitle { get; set; }
 
     /// <summary>
     /// Gets or sets the message text displayed in the notification balloon tip.
+    /// Text exceeding 255 characters will be truncated by the shell.
     /// </summary>
     string BalloonTipText { get; set; }
 
