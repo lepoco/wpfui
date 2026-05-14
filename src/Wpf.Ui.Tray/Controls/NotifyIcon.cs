@@ -6,7 +6,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Wpf.Ui.Tray.Internal;
 
 namespace Wpf.Ui.Tray.Controls;
 
@@ -55,7 +54,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         new PropertyMetadata(string.Empty, OnTooltipTextChanged)
     );
 
-    /// <summary>Identifies the <see cref="BalloonTipTitle"/> dependency property.</summary>
+    /// <summary>Identifies the <see cref="BalloonTipTitle"/> dependency property. Title text exceeding 63 characters will be truncated by the shell.</summary>
     public static readonly DependencyProperty BalloonTipTitleProperty = DependencyProperty.Register(
         nameof(BalloonTipTitle),
         typeof(string),
@@ -63,7 +62,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         new PropertyMetadata(string.Empty, OnBalloonTipTitleChanged)
     );
 
-    /// <summary>Identifies the <see cref="BalloonTipText"/> dependency property.</summary>
+    /// <summary>Identifies the <see cref="BalloonTipText"/> dependency property. Message text exceeding 255 characters will be truncated by the shell.</summary>
     public static readonly DependencyProperty BalloonTipTextProperty = DependencyProperty.Register(
         nameof(BalloonTipText),
         typeof(string),
