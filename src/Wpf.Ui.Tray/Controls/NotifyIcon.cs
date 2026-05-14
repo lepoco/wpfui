@@ -6,6 +6,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Wpf.Ui.Tray.Internal;
 
 namespace Wpf.Ui.Tray.Controls;
 
@@ -54,6 +55,30 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         new PropertyMetadata(string.Empty, OnTooltipTextChanged)
     );
 
+    /// <summary>Identifies the <see cref="BalloonTipTitle"/> dependency property.</summary>
+    public static readonly DependencyProperty BalloonTipTitleProperty = DependencyProperty.Register(
+        nameof(BalloonTipTitle),
+        typeof(string),
+        typeof(NotifyIcon),
+        new PropertyMetadata(string.Empty, OnBalloonTipTitleChanged)
+    );
+
+    /// <summary>Identifies the <see cref="BalloonTipText"/> dependency property.</summary>
+    public static readonly DependencyProperty BalloonTipTextProperty = DependencyProperty.Register(
+        nameof(BalloonTipText),
+        typeof(string),
+        typeof(NotifyIcon),
+        new PropertyMetadata(string.Empty, OnBalloonTipTextChanged)
+    );
+
+    /// <summary>Identifies the <see cref="BalloonTipIcon"/> dependency property.</summary>
+    public static readonly DependencyProperty BalloonTipIconProperty = DependencyProperty.Register(
+        nameof(BalloonTipIcon),
+        typeof(ToolTipIcon),
+        typeof(NotifyIcon),
+        new PropertyMetadata(ToolTipIcon.None, OnBalloonTipIconChanged)
+    );
+
     /// <summary>Identifies the <see cref="FocusOnLeftClick"/> dependency property.</summary>
     public static readonly DependencyProperty FocusOnLeftClickProperty = DependencyProperty.Register(
         nameof(FocusOnLeftClick),
@@ -98,6 +123,24 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     {
         get => (string)GetValue(TooltipTextProperty);
         set => SetValue(TooltipTextProperty, value);
+    }
+
+    public string BalloonTipTitle
+    {
+        get => (string)GetValue(BalloonTipTitleProperty);
+        set => SetValue(BalloonTipTitleProperty, value);
+    }
+
+    public string BalloonTipText
+    {
+        get => (string)GetValue(BalloonTipTextProperty);
+        set => SetValue(BalloonTipTextProperty, value);
+    }
+
+    public ToolTipIcon BalloonTipIcon
+    {
+        get => (ToolTipIcon)GetValue(BalloonTipIconProperty);
+        set => SetValue(BalloonTipIconProperty, value);
     }
 
     /// <summary>
@@ -187,6 +230,30 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         typeof(NotifyIcon)
     );
 
+    /// <summary>Identifies the <see cref="BalloonTipClick"/> routed event.</summary>
+    public static readonly RoutedEvent BalloonTipClickEvent = EventManager.RegisterRoutedEvent(
+        nameof(BalloonTipClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
+
+    /// <summary>Identifies the <see cref="BalloonTipShown"/> routed event.</summary>
+    public static readonly RoutedEvent BalloonTipShownEvent = EventManager.RegisterRoutedEvent(
+        nameof(BalloonTipShown),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
+
+    /// <summary>Identifies the <see cref="BalloonTipClose"/> routed event.</summary>
+    public static readonly RoutedEvent BalloonTipCloseEvent = EventManager.RegisterRoutedEvent(
+        nameof(BalloonTipClose),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
+
     /// <summary>
     /// Triggered when the user left-clicks on the <see cref="INotifyIcon"/>.
     /// </summary>
@@ -241,6 +308,33 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         remove => RemoveHandler(MiddleDoubleClickEvent, value);
     }
 
+    /// <summary>
+    /// Triggered when the user clicks the balloon tip notification associated with the <see cref="INotifyIcon"/>.
+    /// </summary>
+    public event RoutedNotifyIconEvent BalloonTipClick
+    {
+        add => AddHandler(BalloonTipClickEvent, value);
+        remove => RemoveHandler(BalloonTipClickEvent, value);
+    }
+
+    /// <summary>
+    /// Triggered when the balloon tip notification associated with the <see cref="INotifyIcon"/> is displayed.
+    /// </summary>
+    public event RoutedNotifyIconEvent BalloonTipShown
+    {
+        add => AddHandler(BalloonTipShownEvent, value);
+        remove => RemoveHandler(BalloonTipShownEvent, value);
+    }
+
+    /// <summary>
+    /// Triggered when the balloon tip notification associated with the <see cref="INotifyIcon"/> is closed or dismissed.
+    /// </summary>
+    public event RoutedNotifyIconEvent BalloonTipClose
+    {
+        add => AddHandler(BalloonTipCloseEvent, value);
+        remove => RemoveHandler(BalloonTipCloseEvent, value);
+    }
+
     public NotifyIcon()
     {
         internalNotifyIconManager = new Wpf.Ui.Tray.Internal.InternalNotifyIconManager();
@@ -265,6 +359,49 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     /// Tries to unregister the <see cref="NotifyIcon"/> from the shell.
     /// </summary>
     public void Unregister() => internalNotifyIconManager.Unregister();
+
+    /// <summary>
+    /// Displays a balloon tip notification from the system tray icon.
+    /// </summary>
+    /// <param name="timeout">
+    /// The duration, in milliseconds, that the balloon tip should be displayed.
+    /// Actual display time may be controlled by the operating system.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the balloon tip was successfully shown; otherwise, <see langword="false"/>.
+    /// </returns>
+    public bool ShowBalloonTip(int timeout)
+    {
+        return internalNotifyIconManager.ShowBalloonTip(timeout);
+    }
+
+    /// <summary>
+    /// Displays a balloon tip notification from the system tray icon with a custom title, message, and icon.
+    /// </summary>
+    /// <param name="timeout">
+    /// The duration, in milliseconds, that the balloon tip should be displayed.
+    /// Actual display time may be controlled by the operating system.
+    /// </param>
+    /// <param name="title">
+    /// The title text displayed in the balloon notification.
+    /// </param>
+    /// <param name="message">
+    /// The main content text displayed in the balloon notification.
+    /// </param>
+    /// <param name="icon">
+    /// The icon type displayed in the balloon notification.
+    /// Defaults to <see cref="ToolTipIcon.Info"/>.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the balloon tip was successfully shown; otherwise, <see langword="false"/>.
+    /// </returns>
+    public bool ShowBalloonTip(int timeout, string title, string message, ToolTipIcon icon = ToolTipIcon.Info)
+    {
+        internalNotifyIconManager.BalloonTipTitle = title;
+        internalNotifyIconManager.BalloonTipText = message;
+        internalNotifyIconManager.BalloonTipIcon = icon;
+        return internalNotifyIconManager.ShowBalloonTip(timeout);
+    }
 
     public void Dispose()
     {
@@ -343,6 +480,33 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     }
 
     /// <summary>
+    /// This virtual method is called when the user clicks the balloon tip associated with the <see cref="NotifyIcon"/> and it raises the <see cref="BalloonTipClick"/> <see langword="event"/>.
+    /// </summary>
+    protected virtual void OnBalloonTipClick()
+    {
+        var newEvent = new RoutedEventArgs(BalloonTipClickEvent, this);
+        RaiseEvent(newEvent);
+    }
+
+    /// <summary>
+    /// This virtual method is called when the balloon tip associated with the <see cref="NotifyIcon"/> is displayed and it raises the <see cref="BalloonTipShown"/> <see langword="event"/>.
+    /// </summary>
+    protected virtual void OnBalloonTipShown()
+        {
+            var newEvent = new RoutedEventArgs(BalloonTipShownEvent, this);
+            RaiseEvent(newEvent);
+    }
+
+    /// <summary>
+    /// This virtual method is called when the balloon tip associated with the <see cref="NotifyIcon"/> is closed or dismissed and it raises the <see cref="BalloonTipClose"/> <see langword="event"/>.
+    /// </summary>
+    protected virtual void OnBalloonTipClose()
+    {
+        var newEvent = new RoutedEventArgs(BalloonTipCloseEvent, this);
+        RaiseEvent(newEvent);
+    }
+
+    /// <summary>
     /// If disposing equals <see langword="true"/>, the method has been called directly or indirectly
     /// by a user's code. Managed and unmanaged resources can be disposed. If disposing equals <see langword="false"/>,
     /// the method has been called by the runtime from inside the finalizer and you should not
@@ -400,6 +564,36 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
 
         notifyIcon.internalNotifyIconManager.TooltipText = notifyIcon.TooltipText;
         _ = notifyIcon.internalNotifyIconManager.ModifyToolTip();
+    }
+
+    private static void OnBalloonTipTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NotifyIcon notifyIcon)
+        {
+            return;
+        }
+
+        notifyIcon.internalNotifyIconManager.BalloonTipTitle = notifyIcon.BalloonTipTitle;
+    }
+
+    private static void OnBalloonTipTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NotifyIcon notifyIcon)
+        {
+            return;
+        }
+
+        notifyIcon.internalNotifyIconManager.BalloonTipText = notifyIcon.BalloonTipText;
+    }
+
+    private static void OnBalloonTipIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NotifyIcon notifyIcon)
+        {
+            return;
+        }
+
+        notifyIcon.internalNotifyIconManager.BalloonTipIcon = notifyIcon.BalloonTipIcon;
     }
 
     private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -482,6 +676,9 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
         internalNotifyIconManager.MiddleClick += OnMiddleClick;
         internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
+        internalNotifyIconManager.BalloonTipClick += OnBalloonTipClick;
+        internalNotifyIconManager.BalloonTipShown += OnBalloonTipShown;
+        internalNotifyIconManager.BalloonTipClose += OnBalloonTipClose;
     }
 
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

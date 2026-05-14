@@ -488,6 +488,11 @@ internal static class User32
         MOUSEHWHEEL = 0x020E,
         PARENTNOTIFY = 0x0210,
 
+        NIIF_SHOW = 0x0402,
+        NIIF_HIDDEN = 0x0403,
+        NIIF_TIMEOUT = 0x0404,
+        NIIF_SELECTED = 0x0405,
+
         CAPTURECHANGED = 0x0215,
         POWERBROADCAST = 0x0218,
         DEVICECHANGE = 0x0219,
