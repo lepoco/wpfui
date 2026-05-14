@@ -76,7 +76,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         nameof(BalloonTipIcon),
         typeof(ToolTipIcon),
         typeof(NotifyIcon),
-        new PropertyMetadata(ToolTipIcon.None, OnBalloonTipIconChanged)
+        new PropertyMetadata(ToolTipIcon.Info, OnBalloonTipIconChanged)
     );
 
     /// <summary>Identifies the <see cref="FocusOnLeftClick"/> dependency property.</summary>

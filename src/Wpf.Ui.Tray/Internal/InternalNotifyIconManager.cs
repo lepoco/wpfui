@@ -293,7 +293,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
         string message = this.BalloonTipText ?? string.Empty;
         ToolTipIcon icon = this.BalloonTipIcon;
 
-        Interop.Shell32.NOTIFYICONDATA data = ShellIconData;
+        Interop.Shell32.NOTIFYICONDATA data = ShellIconData.Clone();
         data.uFlags = Interop.Shell32.NIF.INFO;
         data.szInfo = message.Length > 255 ? message[..255] : message;
         data.szInfoTitle = title.Length > 63 ? title[..63] : title;
