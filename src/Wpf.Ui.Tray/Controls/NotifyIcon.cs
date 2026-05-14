@@ -398,9 +398,9 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     /// </returns>
     public bool ShowBalloonTip(int timeout, string title, string message, ToolTipIcon icon = ToolTipIcon.Info)
     {
-        internalNotifyIconManager.BalloonTipTitle = title;
-        internalNotifyIconManager.BalloonTipText = message;
-        internalNotifyIconManager.BalloonTipIcon = icon;
+        SetCurrentValue(BalloonTipTitleProperty, title);
+        SetCurrentValue(BalloonTipTextProperty, message);
+        SetCurrentValue(BalloonTipIconProperty, icon);
         return internalNotifyIconManager.ShowBalloonTip(timeout);
     }
 
