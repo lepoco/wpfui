@@ -282,12 +282,13 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     /// Displays a balloon tip notification in the system tray using the current balloon tip properties.
     /// </summary>
     /// <param name="timeout">
-    /// The timeout value, in milliseconds, for displaying the balloon tip notification.
+    /// The duration for displaying the balloon tip notification.
+    /// Actual display time may be controlled by the operating system.
     /// </param>
     /// <returns>
     /// <see langword="true"/> if the balloon tip notification was successfully displayed; otherwise, <see langword="false"/>.
     /// </returns>
-    public bool ShowBalloonTip(int timeout)
+    public bool ShowBalloonTip(TimeSpan timeout)
     {
         string title = this.BalloonTipTitle ?? string.Empty;
         string message = this.BalloonTipText ?? string.Empty;
@@ -297,7 +298,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
         data.uFlags = Interop.Shell32.NIF.INFO;
         data.szInfo = message.Length > 255 ? message[..255] : message;
         data.szInfoTitle = title.Length > 63 ? title[..63] : title;
-        data.uVersion = (uint)timeout;
+        data.uVersion = (uint)timeout.TotalMilliseconds;
         data.dwInfoFlags = icon switch
         {
             ToolTipIcon.Info => 0x00000001u,

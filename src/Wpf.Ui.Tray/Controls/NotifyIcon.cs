@@ -54,7 +54,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         new PropertyMetadata(string.Empty, OnTooltipTextChanged)
     );
 
-    /// <summary>Identifies the <see cref="BalloonTipTitle"/> dependency property. Title text exceeding 63 characters will be truncated by the shell.</summary>
+    /// <summary>Identifies the <see cref="BalloonTipTitle"/> dependency property.</summary>
     public static readonly DependencyProperty BalloonTipTitleProperty = DependencyProperty.Register(
         nameof(BalloonTipTitle),
         typeof(string),
@@ -62,7 +62,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         new PropertyMetadata(string.Empty, OnBalloonTipTitleChanged)
     );
 
-    /// <summary>Identifies the <see cref="BalloonTipText"/> dependency property. Message text exceeding 255 characters will be truncated by the shell.</summary>
+    /// <summary>Identifies the <see cref="BalloonTipText"/> dependency property.</summary>
     public static readonly DependencyProperty BalloonTipTextProperty = DependencyProperty.Register(
         nameof(BalloonTipText),
         typeof(string),
@@ -124,18 +124,29 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         set => SetValue(TooltipTextProperty, value);
     }
 
+    /// <summary>
+    /// Gets or sets the title displayed in the notification balloon tip.
+    /// Text exceeding 63 characters will be truncated by the shell.
+    /// </summary>
     public string BalloonTipTitle
     {
         get => (string)GetValue(BalloonTipTitleProperty);
         set => SetValue(BalloonTipTitleProperty, value);
     }
 
+    /// <summary>
+    /// Gets or sets the message text displayed in the notification balloon tip.
+    /// Text exceeding 255 characters will be truncated by the shell.
+    /// </summary>
     public string BalloonTipText
     {
         get => (string)GetValue(BalloonTipTextProperty);
         set => SetValue(BalloonTipTextProperty, value);
     }
 
+    /// <summary>
+    /// Gets or sets the icon displayed in the notification balloon tip.
+    /// </summary>
     public ToolTipIcon BalloonTipIcon
     {
         get => (ToolTipIcon)GetValue(BalloonTipIconProperty);
@@ -363,13 +374,13 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     /// Displays a balloon tip notification from the system tray icon.
     /// </summary>
     /// <param name="timeout">
-    /// The duration, in milliseconds, that the balloon tip should be displayed.
+    /// The duration that the balloon tip should be displayed.
     /// Actual display time may be controlled by the operating system.
     /// </param>
     /// <returns>
     /// <see langword="true"/> if the balloon tip was successfully shown; otherwise, <see langword="false"/>.
     /// </returns>
-    public bool ShowBalloonTip(int timeout)
+    public bool ShowBalloonTip(TimeSpan timeout)
     {
         return internalNotifyIconManager.ShowBalloonTip(timeout);
     }
@@ -378,7 +389,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     /// Displays a balloon tip notification from the system tray icon with a custom title, message, and icon.
     /// </summary>
     /// <param name="timeout">
-    /// The duration, in milliseconds, that the balloon tip should be displayed.
+    /// The duration that the balloon tip should be displayed.
     /// Actual display time may be controlled by the operating system.
     /// </param>
     /// <param name="title">
@@ -390,13 +401,13 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     /// Text exceeding 255 characters will be truncated by the shell.
     /// </param>
     /// <param name="icon">
-    /// The icon type displayed in the balloon notification.
+    /// The icon displayed in the balloon notification.
     /// Defaults to <see cref="ToolTipIcon.Info"/>.
     /// </param>
     /// <returns>
     /// <see langword="true"/> if the balloon tip was successfully shown; otherwise, <see langword="false"/>.
     /// </returns>
-    public bool ShowBalloonTip(int timeout, string title, string message, ToolTipIcon icon = ToolTipIcon.Info)
+    public bool ShowBalloonTip(TimeSpan timeout, string title, string message, ToolTipIcon icon = ToolTipIcon.Info)
     {
         SetCurrentValue(BalloonTipTitleProperty, title);
         SetCurrentValue(BalloonTipTextProperty, message);
