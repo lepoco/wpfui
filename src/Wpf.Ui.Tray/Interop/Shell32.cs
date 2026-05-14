@@ -204,6 +204,22 @@ internal static class Shell32
     public static extern int GetCurrentProcessExplicitAppUserModelID(
         [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID
     );
+
+    /// <summary>Destroys an icon and frees any memory the icon occupied.</summary>
+    /// <param name="hIcon">
+    /// <para>Type: <b>HICON</b> A handle to the icon to be destroyed. The icon must not be in use.</para>
+    /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-destroyicon#parameters">Read more on learn.microsoft.com</see>.</para>
+    /// </param>
+    /// <returns>
+    /// <para>Type: <b>BOOL</b> If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+    /// </returns>
+    /// <remarks>
+    /// <para>It is only necessary to call <b>DestroyIcon</b> for icons and cursors created with the following functions: <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createiconfromresourceex">CreateIconFromResourceEx</a> (if called without the <b>LR_SHARED</b> flag), <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createiconindirect">CreateIconIndirect</a>, and <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-copyicon">CopyIcon</a>. Do not use this function to destroy a shared icon. A shared icon is valid as long as the module from which it was loaded remains in memory. The following functions obtain a shared icon. </para>
+    /// <para>This doc was truncated.</para>
+    /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-destroyicon#">Read more on learn.microsoft.com</see>.</para>
+    /// </remarks>
+    [DllImport(Libraries.User32, SetLastError = true)]
+    public static extern bool DestroyIcon(IntPtr hIcon);
 }
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
