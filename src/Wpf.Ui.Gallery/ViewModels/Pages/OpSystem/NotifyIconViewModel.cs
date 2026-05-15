@@ -11,19 +11,17 @@ namespace Wpf.Ui.Gallery.ViewModels.Pages.OpSystem;
 
 public partial class NotifyIconViewModel : ViewModel
 {
-    private readonly INotifyIconService _notifyIconService;
+    private readonly NotifyIcon _notifyIcon;
 
     public NotifyIconViewModel(INotifyIconService notifyIconService)
     {
-        _notifyIconService = notifyIconService;
-        TooltipText = _notifyIconService.TooltipText;
+        _notifyIcon = notifyIconService.GetNotifyIcon() ?? throw new InvalidOperationException("NotifyIcon was never set.");
 
-        NotifyIcon notifyIcon = _notifyIconService.GetNotifyIcon()
-            ?? throw new InvalidOperationException("NotifyIcon was never set.");
+        TooltipText = _notifyIcon.TooltipText;
 
-        notifyIcon.BalloonTipShown += NotifyIcon_BalloonTipShown;
-        notifyIcon.BalloonTipClose += NotifyIcon_BalloonTipClose;
-        notifyIcon.BalloonTipClick += NotifyIcon_BalloonTipClick;
+        _notifyIcon.BalloonTipShown += NotifyIcon_BalloonTipShown;
+        _notifyIcon.BalloonTipClose += NotifyIcon_BalloonTipClose;
+        _notifyIcon.BalloonTipClick += NotifyIcon_BalloonTipClick;
     }
 
     private void NotifyIcon_BalloonTipShown([System.Diagnostics.CodeAnalysis.NotNull] NotifyIcon sender, RoutedEventArgs e)
@@ -62,10 +60,11 @@ public partial class NotifyIconViewModel : ViewModel
     [RelayCommand]
     private void OnShowBalloonTip()
     {
-        NotifyIcon icon = _notifyIconService.GetNotifyIcon()
-            ?? throw new InvalidOperationException("NotifyIcon was never set.");
-
-        icon.ShowBalloonTip(
+        // _notifyIcon.SetCurrentValue(NotifyIcon.BalloonTipTitleProperty, BalloonTipTitle);
+        // _notifyIcon.SetCurrentValue(NotifyIcon.BalloonTipTextProperty, BalloonTipMessage);
+        // _notifyIcon.SetCurrentValue(NotifyIcon.BalloonTipIconProperty, SelectedBalloonTipIcon);
+        // _notifyIcon.ShowBalloonTip(TimeSpan.FromSeconds(3));
+        _notifyIcon.ShowBalloonTip(
             TimeSpan.FromSeconds(3),
             BalloonTipTitle,
             BalloonTipMessage,
@@ -76,9 +75,6 @@ public partial class NotifyIconViewModel : ViewModel
     [RelayCommand]
     private void OnUpdateTooltip()
     {
-        NotifyIcon icon = _notifyIconService.GetNotifyIcon()
-            ?? throw new InvalidOperationException("NotifyIcon was never set.");
-
-        icon.TooltipText = TooltipText;
+        _notifyIcon.SetCurrentValue(NotifyIcon.TooltipTextProperty, TooltipText);
     }
 }
