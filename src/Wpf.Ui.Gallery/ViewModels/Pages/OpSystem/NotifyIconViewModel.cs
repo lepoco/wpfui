@@ -20,8 +20,8 @@ public partial class NotifyIconViewModel : ViewModel
         TooltipText = _notifyIcon.TooltipText;
 
         _notifyIcon.BalloonTipShown += NotifyIcon_BalloonTipShown;
-        _notifyIcon.BalloonTipClose += NotifyIcon_BalloonTipClose;
-        _notifyIcon.BalloonTipClick += NotifyIcon_BalloonTipClick;
+        _notifyIcon.BalloonTipClosed += NotifyIcon_BalloonTipClosed;
+        _notifyIcon.BalloonTipClicked += NotifyIcon_BalloonTipClicked;
     }
 
     private void NotifyIcon_BalloonTipShown([System.Diagnostics.CodeAnalysis.NotNull] NotifyIcon sender, RoutedEventArgs e)
@@ -29,12 +29,12 @@ public partial class NotifyIconViewModel : ViewModel
         BalloonTipStatus = "Shown";
     }
 
-    private void NotifyIcon_BalloonTipClose([System.Diagnostics.CodeAnalysis.NotNull] NotifyIcon sender, RoutedEventArgs e)
+    private void NotifyIcon_BalloonTipClosed([System.Diagnostics.CodeAnalysis.NotNull] NotifyIcon sender, RoutedEventArgs e)
     {
         BalloonTipStatus = "Closed";
     }
 
-    private void NotifyIcon_BalloonTipClick([System.Diagnostics.CodeAnalysis.NotNull] NotifyIcon sender, RoutedEventArgs e)
+    private void NotifyIcon_BalloonTipClicked([System.Diagnostics.CodeAnalysis.NotNull] NotifyIcon sender, RoutedEventArgs e)
     {
         BalloonTipStatus = "Clicked";
     }

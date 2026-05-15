@@ -151,9 +151,9 @@ public class NotifyIconService : INotifyIconService
         internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
         internalNotifyIconManager.MiddleClick += OnMiddleClick;
         internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
-        internalNotifyIconManager.BalloonTipClick += OnBalloonTipClick;
+        internalNotifyIconManager.BalloonTipClicked += OnBalloonTipClick;
         internalNotifyIconManager.BalloonTipShown += OnBalloonTipShown;
-        internalNotifyIconManager.BalloonTipClose += OnBalloonTipClose;
+        internalNotifyIconManager.BalloonTipClosed += OnBalloonTipClose;
     }
 }
 

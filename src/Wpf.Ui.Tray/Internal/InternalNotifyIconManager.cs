@@ -67,11 +67,11 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 
     public event NotifyIconEventHandler? MiddleDoubleClick;
 
-    public event NotifyIconEventHandler? BalloonTipClick;
+    public event NotifyIconEventHandler? BalloonTipClicked;
 
     public event NotifyIconEventHandler? BalloonTipShown;
 
-    public event NotifyIconEventHandler? BalloonTipClose;
+    public event NotifyIconEventHandler? BalloonTipClosed;
 
     /// <summary>
     /// Gets or sets a set of information for Shell32 to manipulate the icon.
@@ -264,18 +264,18 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     /// This virtual method is called when the balloon tip associated with the tray icon is closed or dismissed
     /// and it raises the balloon tip close <see langword="event"/>.
     /// </summary>
-    protected virtual void OnBalloonTipClose()
+    protected virtual void OnBalloonTipClosed()
     {
-        BalloonTipClose?.Invoke();
+        BalloonTipClosed?.Invoke();
     }
 
     /// <summary>
     /// This virtual method is called when the user clicks the balloon tip associated with the tray icon
     /// and it raises the balloon tip click <see langword="event"/>.
     /// </summary>
-    protected virtual void OnBalloonTipClick()
+    protected virtual void OnBalloonTipClicked()
     {
-        BalloonTipClick?.Invoke();
+        BalloonTipClicked?.Invoke();
     }
 
     /// <summary>
@@ -430,11 +430,11 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 
             case Interop.User32.WM.NIIF_HIDDEN:
             case Interop.User32.WM.NIIF_TIMEOUT:
-                OnBalloonTipClose();
+                OnBalloonTipClosed();
                 break;
 
             case Interop.User32.WM.NIIF_SELECTED:
-                OnBalloonTipClick();
+                OnBalloonTipClicked();
                 break;
         }
 

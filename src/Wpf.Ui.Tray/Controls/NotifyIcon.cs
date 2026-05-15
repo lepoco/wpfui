@@ -240,9 +240,9 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         typeof(NotifyIcon)
     );
 
-    /// <summary>Identifies the <see cref="BalloonTipClick"/> routed event.</summary>
-    public static readonly RoutedEvent BalloonTipClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(BalloonTipClick),
+    /// <summary>Identifies the <see cref="BalloonTipClicked"/> routed event.</summary>
+    public static readonly RoutedEvent BalloonTipClickedEvent = EventManager.RegisterRoutedEvent(
+        nameof(BalloonTipClicked),
         RoutingStrategy.Bubble,
         typeof(RoutedNotifyIconEvent),
         typeof(NotifyIcon)
@@ -256,9 +256,9 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         typeof(NotifyIcon)
     );
 
-    /// <summary>Identifies the <see cref="BalloonTipClose"/> routed event.</summary>
-    public static readonly RoutedEvent BalloonTipCloseEvent = EventManager.RegisterRoutedEvent(
-        nameof(BalloonTipClose),
+    /// <summary>Identifies the <see cref="BalloonTipClosed"/> routed event.</summary>
+    public static readonly RoutedEvent BalloonTipClosedEvent = EventManager.RegisterRoutedEvent(
+        nameof(BalloonTipClosed),
         RoutingStrategy.Bubble,
         typeof(RoutedNotifyIconEvent),
         typeof(NotifyIcon)
@@ -321,10 +321,10 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     /// <summary>
     /// Triggered when the user clicks the balloon tip notification associated with the <see cref="INotifyIcon"/>.
     /// </summary>
-    public event RoutedNotifyIconEvent BalloonTipClick
+    public event RoutedNotifyIconEvent BalloonTipClicked
     {
-        add => AddHandler(BalloonTipClickEvent, value);
-        remove => RemoveHandler(BalloonTipClickEvent, value);
+        add => AddHandler(BalloonTipClickedEvent, value);
+        remove => RemoveHandler(BalloonTipClickedEvent, value);
     }
 
     /// <summary>
@@ -339,10 +339,10 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     /// <summary>
     /// Triggered when the balloon tip notification associated with the <see cref="INotifyIcon"/> is closed or dismissed.
     /// </summary>
-    public event RoutedNotifyIconEvent BalloonTipClose
+    public event RoutedNotifyIconEvent BalloonTipClosed
     {
-        add => AddHandler(BalloonTipCloseEvent, value);
-        remove => RemoveHandler(BalloonTipCloseEvent, value);
+        add => AddHandler(BalloonTipClosedEvent, value);
+        remove => RemoveHandler(BalloonTipClosedEvent, value);
     }
 
     public NotifyIcon()
@@ -501,11 +501,11 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     }
 
     /// <summary>
-    /// This virtual method is called when the user clicks the balloon tip associated with the <see cref="NotifyIcon"/> and it raises the <see cref="BalloonTipClick"/> <see langword="event"/>.
+    /// This virtual method is called when the user clicks the balloon tip associated with the <see cref="NotifyIcon"/> and it raises the <see cref="BalloonTipClicked"/> <see langword="event"/>.
     /// </summary>
-    protected virtual void OnBalloonTipClick()
+    protected virtual void OnBalloonTipClicked()
     {
-        var newEvent = new RoutedEventArgs(BalloonTipClickEvent, this);
+        var newEvent = new RoutedEventArgs(BalloonTipClickedEvent, this);
         RaiseEvent(newEvent);
     }
 
@@ -519,11 +519,11 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     }
 
     /// <summary>
-    /// This virtual method is called when the balloon tip associated with the <see cref="NotifyIcon"/> is closed or dismissed and it raises the <see cref="BalloonTipClose"/> <see langword="event"/>.
+    /// This virtual method is called when the balloon tip associated with the <see cref="NotifyIcon"/> is closed or dismissed and it raises the <see cref="BalloonTipClosed"/> <see langword="event"/>.
     /// </summary>
-    protected virtual void OnBalloonTipClose()
+    protected virtual void OnBalloonTipClosed()
     {
-        var newEvent = new RoutedEventArgs(BalloonTipCloseEvent, this);
+        var newEvent = new RoutedEventArgs(BalloonTipClosedEvent, this);
         RaiseEvent(newEvent);
     }
 
@@ -697,9 +697,9 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
         internalNotifyIconManager.MiddleClick += OnMiddleClick;
         internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
-        internalNotifyIconManager.BalloonTipClick += OnBalloonTipClick;
+        internalNotifyIconManager.BalloonTipClicked += OnBalloonTipClicked;
         internalNotifyIconManager.BalloonTipShown += OnBalloonTipShown;
-        internalNotifyIconManager.BalloonTipClose += OnBalloonTipClose;
+        internalNotifyIconManager.BalloonTipClosed += OnBalloonTipClosed;
     }
 
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
