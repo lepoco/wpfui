@@ -53,6 +53,12 @@ public partial class NotifyIconViewModel : ViewModel
     [ObservableProperty]
     private string _balloonTipStatus = "No notification sent yet.";
 
+    [ObservableProperty]
+    private ToolTipIcon _selectedBalloonTipIcon = ToolTipIcon.Info;
+
+    [ObservableProperty]
+    private IEnumerable<ToolTipIcon> _balloonTipIcons = Enum.GetValues<ToolTipIcon>();
+
     [RelayCommand]
     private void OnShowBalloonTip()
     {
@@ -63,7 +69,7 @@ public partial class NotifyIconViewModel : ViewModel
             TimeSpan.FromSeconds(3),
             BalloonTipTitle,
             BalloonTipMessage,
-            ToolTipIcon.Info
+            SelectedBalloonTipIcon
         );
     }
 

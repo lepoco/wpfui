@@ -27,21 +27,27 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <ui:TextBox
                     Grid.Row="0"
                     Margin="0,0,0,8"
                     PlaceholderText="Balloon tip title"
-                    Text="{Binding ViewModel.BalloonTipTitle}" />
+                    Text="{Binding ViewModel.BalloonTipTitle, Mode=TwoWay}" />
                 <ui:TextBox
                     Grid.Row="1"
-                    Margin="0,0,0,16"
+                    Margin="0,0,0,8"
                     MinLines="3"
                     PlaceholderText="Balloon tip message"
-                    Text="{Binding ViewModel.BalloonTipMessage}" />
-                <ui:Button
+                    Text="{Binding ViewModel.BalloonTipMessage, Mode=TwoWay}" />
+                <ComboBox
                     Grid.Row="2"
-                    Command="{Binding ViewModel.ShowBalloonTipCommand}"
+                    Margin="0,0,0,16"
+                    ItemsSource="{Binding ViewModel.BalloonTipIcons, Mode=OneWay}"
+                    SelectedItem="{Binding ViewModel.SelectedBalloonTipIcon, Mode=TwoWay}" />
+                <ui:Button
+                    Grid.Row="3"
+                    Command="{Binding ViewModel.ShowBalloonTipCommand, Mode=OneWay}"
                     Content="Show Balloon Tip"
                     Icon="{ui:SymbolIcon Alert24}" />
             </Grid>
@@ -60,10 +66,10 @@
                     Grid.Row="0"
                     Margin="0,0,0,16"
                     PlaceholderText="New tooltip text"
-                    Text="{Binding ViewModel.TooltipText}" />
+                    Text="{Binding ViewModel.TooltipText, Mode=TwoWay}" />
                 <ui:Button
                     Grid.Row="1"
-                    Command="{Binding ViewModel.UpdateTooltipCommand}"
+                    Command="{Binding ViewModel.UpdateTooltipCommand, Mode=OneWay}"
                     Content="Update Tooltip"
                     Icon="{ui:SymbolIcon Edit24}" />
             </Grid>
@@ -85,7 +91,7 @@
                 <ui:TextBlock
                     Grid.Row="1"
                     Margin="0,4,0,0"
-                    Text="{Binding ViewModel.BalloonTipStatus}" />
+                    Text="{Binding ViewModel.BalloonTipStatus, Mode=OneWay}" />
             </Grid>
         </controls:ControlExample>
     </StackPanel>
