@@ -356,6 +356,15 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
     }
 
     /// <summary>
+    /// Gets the <see cref="Internal.InternalNotifyIconManager"/> used by this <see cref="NotifyIcon"/> instance.
+    /// </summary>
+    /// <returns>The internal notify icon manager.</returns>
+    internal Wpf.Ui.Tray.Internal.InternalNotifyIconManager GetInternalManager()
+    {
+        return internalNotifyIconManager;
+    }
+
+    /// <summary>
     /// Finalizes an instance of the <see cref="NotifyIcon"/> class.
     /// </summary>
     ~NotifyIcon() => Dispose(false);
