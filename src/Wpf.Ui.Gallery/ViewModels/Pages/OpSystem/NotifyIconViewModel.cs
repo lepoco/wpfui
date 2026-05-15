@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Drawing;
 using Wpf.Ui.Tray;
 using Wpf.Ui.Tray.Controls;
 
@@ -60,10 +59,6 @@ public partial class NotifyIconViewModel : ViewModel
     [RelayCommand]
     private void OnShowBalloonTip()
     {
-        // _notifyIcon.SetCurrentValue(NotifyIcon.BalloonTipTitleProperty, BalloonTipTitle);
-        // _notifyIcon.SetCurrentValue(NotifyIcon.BalloonTipTextProperty, BalloonTipMessage);
-        // _notifyIcon.SetCurrentValue(NotifyIcon.BalloonTipIconProperty, SelectedBalloonTipIcon);
-        // _notifyIcon.ShowBalloonTip(TimeSpan.FromSeconds(3));
         _notifyIcon.ShowBalloonTip(
             TimeSpan.FromSeconds(3),
             BalloonTipTitle,
