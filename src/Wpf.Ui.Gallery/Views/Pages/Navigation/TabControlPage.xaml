@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:uiControls="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
     Title="TabControlPage"
     d:DataContext="{d:DesignInstance local:TabControlPage,
                                      IsDesignTimeCreatable=False}"
@@ -23,29 +23,19 @@
             Margin="0"
             HeaderText="Standard TabControl."
             XamlCode="&lt;TabControl /&gt;">
-            <TabControl Margin="0,8,0,0">
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="XboxConsole24" />
-                            <TextBlock Text="Hello" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="World" />
-                    </Grid>
-                </TabItem>
-                <TabItem IsSelected="True">
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="StoreMicrosoft16" />
-                            <TextBlock Text="The cake" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Is a lie." />
-                    </Grid>
-                </TabItem>
+            <TabControl
+                Margin="0,8,0,0"
+                uiControls:TabControlExtensions.CanAddTabs="True"
+                uiControls:TabControlExtensions.CanReorderTabs="True"
+                uiControls:TabControlExtensions.TabAdding="OnTabAdding"
+                uiControls:TabControlExtensions.TabClosing="OnTabClosing"
+                ItemsSource="{Binding StandardTabs}"
+                SelectedItem="{Binding SelectedTab, Mode=TwoWay}">
+                <TabControl.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource {x:Type TabItem}}" TargetType="TabItem">
+                        <Setter Property="uiControls:TabControlExtensions.IsClosable" Value="True" />
+                    </Style>
+                </TabControl.ItemContainerStyle>
             </TabControl>
         </controls:ControlExample>
     </Grid>
