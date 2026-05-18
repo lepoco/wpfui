@@ -89,6 +89,7 @@
         </ui:TitleBar>
 
         <tray:NotifyIcon
+            x:Name="TrayNotifyIcon"
             Grid.Row="0"
             FocusOnLeftClick="True"
             Icon="pack://application:,,,/Assets/wpfui.png"

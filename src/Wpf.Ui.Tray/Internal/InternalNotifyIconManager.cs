@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
+using Wpf.Ui.Tray.Controls;
 
 namespace Wpf.Ui.Tray.Internal;
 
@@ -29,6 +30,15 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 
     /// <inheritdoc />
     public string TooltipText { get; set; } = string.Empty;
+
+    /// <inheritdoc />
+    public string BalloonTipTitle { get; set; } = string.Empty;
+
+    /// <inheritdoc />
+    public string BalloonTipText { get; set; } = string.Empty;
+
+    /// <inheritdoc />
+    public ToolTipIcon BalloonTipIcon { get; set; } = ToolTipIcon.Info;
 
     /// <inheritdoc />
     public ImageSource? Icon { get; set; } = default!;
@@ -56,6 +66,12 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     public event NotifyIconEventHandler? MiddleClick;
 
     public event NotifyIconEventHandler? MiddleDoubleClick;
+
+    public event NotifyIconEventHandler? BalloonTipClicked;
+
+    public event NotifyIconEventHandler? BalloonTipShown;
+
+    public event NotifyIconEventHandler? BalloonTipClosed;
 
     /// <summary>
     /// Gets or sets a set of information for Shell32 to manipulate the icon.
@@ -236,6 +252,65 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     }
 
     /// <summary>
+    /// This virtual method is called when the balloon tip associated with the tray icon is displayed
+    /// and it raises the balloon tip shown <see langword="event"/>.
+    /// </summary>
+    protected virtual void OnBalloonTipShown()
+    {
+        BalloonTipShown?.Invoke();
+    }
+
+    /// <summary>
+    /// This virtual method is called when the balloon tip associated with the tray icon is closed or dismissed
+    /// and it raises the balloon tip close <see langword="event"/>.
+    /// </summary>
+    protected virtual void OnBalloonTipClosed()
+    {
+        BalloonTipClosed?.Invoke();
+    }
+
+    /// <summary>
+    /// This virtual method is called when the user clicks the balloon tip associated with the tray icon
+    /// and it raises the balloon tip click <see langword="event"/>.
+    /// </summary>
+    protected virtual void OnBalloonTipClicked()
+    {
+        BalloonTipClicked?.Invoke();
+    }
+
+    /// <summary>
+    /// Displays a balloon tip notification in the system tray using the current balloon tip properties.
+    /// </summary>
+    /// <param name="timeout">
+    /// The duration for displaying the balloon tip notification.
+    /// Actual display time may be controlled by the operating system.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the balloon tip notification was successfully displayed; otherwise, <see langword="false"/>.
+    /// </returns>
+    public bool ShowBalloonTip(TimeSpan timeout)
+    {
+        string title = this.BalloonTipTitle ?? string.Empty;
+        string message = this.BalloonTipText ?? string.Empty;
+        ToolTipIcon icon = this.BalloonTipIcon;
+
+        Interop.Shell32.NOTIFYICONDATA data = ShellIconData.Clone();
+        data.uFlags = Interop.Shell32.NIF.INFO;
+        data.szInfo = message.Length > 255 ? message[..255] : message;
+        data.szInfoTitle = title.Length > 63 ? title[..63] : title;
+        data.uVersion = (uint)timeout.TotalMilliseconds;
+        data.dwInfoFlags = icon switch
+        {
+            ToolTipIcon.Info => 0x00000001u,
+            ToolTipIcon.Warning => 0x00000002u,
+            ToolTipIcon.Error => 0x00000003u,
+            _ => 0x00000000u,
+        };
+
+        return Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.MODIFY, data);
+    }
+
+    /// <summary>
     /// If disposing equals <see langword="true"/>, the method has been called directly or indirectly
     /// by a user's code. Managed and unmanaged resources can be disposed. If disposing equals <see langword="false"/>,
     /// the method has been called by the runtime from inside the finalizer and you should not
@@ -347,6 +422,19 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 
             case Interop.User32.WM.MBUTTONDBLCLK:
                 OnMiddleDoubleClick();
+                break;
+
+            case Interop.User32.WM.NIIF_SHOW:
+                OnBalloonTipShown();
+                break;
+
+            case Interop.User32.WM.NIIF_HIDDEN:
+            case Interop.User32.WM.NIIF_TIMEOUT:
+                OnBalloonTipClosed();
+                break;
+
+            case Interop.User32.WM.NIIF_SELECTED:
+                OnBalloonTipClicked();
                 break;
         }
 

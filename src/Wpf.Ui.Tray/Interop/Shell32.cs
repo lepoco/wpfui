@@ -73,6 +73,16 @@ internal static class Shell32
     public class NOTIFYICONDATA
     {
         /// <summary>
+        /// Creates a shallow copy of the current <see cref="NOTIFYICONDATA"/> instance.
+        /// This prevents modifications to temporary shell notification data from mutating
+        /// the shared instance used by other notify icon operations.
+        /// </summary>
+        public NOTIFYICONDATA Clone()
+        {
+            return (NOTIFYICONDATA)MemberwiseClone();
+        }
+
+        /// <summary>
         /// <para>Type: <b>DWORD</b> The size of this structure, in bytes.</para>
         /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
         /// </summary>
