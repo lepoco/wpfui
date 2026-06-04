@@ -143,7 +143,11 @@
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronUpDown24" />
                                     </Button>
 
-                                    <controls:Flyout x:Name="PART_CompactIncrementDecrementFlyout" Placement="Center">
+                                    <controls:Flyout
+                                        x:Name="PART_CompactIncrementDecrementFlyout"
+                                        MinWidth="0"
+                                        MinHeight="0"
+                                        Placement="Center">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />

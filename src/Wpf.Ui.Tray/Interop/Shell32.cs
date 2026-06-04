@@ -73,18 +73,20 @@ internal static class Shell32
     public class NOTIFYICONDATA
     {
         /// <summary>
-        /// The size of this structure, in bytes.
+        /// <para>Type: <b>DWORD</b> The size of this structure, in bytes.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
         /// </summary>
         public int cbSize = Marshal.SizeOf(typeof(NOTIFYICONDATA));
 
         /// <summary>
-        /// A handle to the window that receives notifications associated with an icon in the notification area.
+        /// <para>Type: <b>HWND</b> A handle to the window that receives notifications associated with an icon in the notification area.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
         /// </summary>
         public IntPtr hWnd;
 
         /// <summary>
-        /// The application-defined identifier of the taskbar icon. The Shell uses either (hWnd plus uID) or guidItem to identify which icon to operate on when Shell_NotifyIcon is invoked.
-        /// You can have multiple icons associated with a single hWnd by assigning each a different uID. If guidItem is specified, uID is ignored.
+        /// <para>Type: <b>UINT</b> The application-defined identifier of the taskbar icon. The Shell uses either (<b>hWnd</b> plus <b>uID</b>) or <b>guidItem</b> to identify which icon to operate on when <a href="https://docs.microsoft.com/windows/desktop/api/shellapi/nf-shellapi-shell_notifyicona">Shell_NotifyIcon</a> is invoked. You can have multiple icons associated with a single <b>hWnd</b> by assigning each a different <b>uID</b>. If <b>guidItem</b> is specified, <b>uID</b> is ignored.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
         /// </summary>
         public int uID;
 
@@ -94,17 +96,23 @@ internal static class Shell32
         public NIF uFlags;
 
         /// <summary>
-        /// 0x00000001. The uCallbackMessage member is valid.
+        /// <para>Type: <b>UINT</b> An application-defined message identifier. The system uses this identifier to send notification messages to the window identified in <b>hWnd</b>. These notification messages are sent when a mouse event or hover occurs in the bounding rectangle of the icon, when the icon is selected or activated with the keyboard, or when those actions occur in the balloon notification.</para>
+        /// <para>When the <b>uVersion</b> member is either 0 or NOTIFYICON_VERSION, the <i>wParam</i> parameter of the message contains the identifier of the taskbar icon in which the event occurred. This identifier can be 32 bits in length. The <i>lParam</i> parameter holds the mouse or keyboard message associated with the event. For example, when the pointer moves over a taskbar icon, <i>lParam</i> is set to <a href="https://docs.microsoft.com/windows/desktop/inputdev/wm-mousemove">WM_MOUSEMOVE</a>. When the <b>uVersion</b> member is NOTIFYICON_VERSION_4, applications continue to receive notification events in the form of application-defined messages through the <b>uCallbackMessage</b> member, but the interpretation of the <i>lParam</i> and <i>wParam</i> parameters of that message is changed as follows: </para>
+        /// <para>This doc was truncated.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
         /// </summary>
         public int uCallbackMessage;
 
         /// <summary>
-        /// 0x00000002. The hIcon member is valid.
+        /// <para>Type: <b>HICON</b> A handle to the icon to be added, modified, or deleted. Windows XP and later support icons of up to 32 BPP. If only a 16x16 pixel icon is provided, it is scaled to a larger size in a system set to a high dpi value. This can lead to an unattractive result. It is recommended that you provide both a 16x16 pixel icon and a 32x32 icon in your resource file. Use <a href="https://docs.microsoft.com/windows/desktop/api/commctrl/nf-commctrl-loadiconmetric">LoadIconMetric</a> to ensure that the correct icon is loaded and scaled appropriately. See Remarks for a code example.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
         /// </summary>
         public IntPtr hIcon;
 
         /// <summary>
-        /// 0x00000004. The szTip member is valid.
+        /// <para>Type: <b>TCHAR[64]</b> A null-terminated string that specifies the text for a standard tooltip. It can have a maximum of 64 characters, including the terminating null character.</para>
+        /// <para>For Windows 2000 and later, <b>szTip</b> can have a maximum of 128 characters, including the terminating null character.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x80)] // 128
         public string? szTip;
@@ -118,6 +126,10 @@ internal static class Shell32
 
         public uint dwStateMask;
 
+        /// <summary>
+        /// <para>Type: <b>TCHAR[256]</b> <b>Windows 2000 and later</b>. A null-terminated string that specifies the text to display in a balloon notification. It can have a maximum of 256 characters, including the terminating null character, but should be restricted to 200 characters in English to accommodate localization. To remove the balloon notification from the UI, either delete the icon (with <a href="https://docs.microsoft.com/windows/desktop/api/shellapi/nf-shellapi-shell_notifyicona">NIM_DELETE</a>) or set the <b>NIF_INFO</b> flag in <b>uFlags</b> and set <b>szInfo</b> to an empty string.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
+        /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x100)] // 256
         public string? szInfo;
 
@@ -126,14 +138,31 @@ internal static class Shell32
         /// </summary>
         public uint uVersion; // Used with Shell_NotifyIcon flag NIM_SETVERSION.
 
+        /// <summary>
+        /// <para>Type: <b>TCHAR[64]</b> <b>Windows 2000 and later</b>. A null-terminated string that specifies a title for a balloon notification. This title appears in a larger font immediately above the text. It can have a maximum of 64 characters, including the terminating null character, but should be restricted to 48 characters in English to accommodate localization.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
+        /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x40)] // 64
         public string? szInfoTitle;
 
+        /// <summary>
+        /// <para>Type: <b>DWORD</b> <b>Windows 2000 and later</b>. Flags that can be set to modify the behavior and appearance of a balloon notification. The icon is placed to the left of the title. If the <b>szInfoTitle</b> member is zero-length, the icon is not shown.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
+        /// </summary>
         public uint dwInfoFlags;
 
+        /// <summary>
+        /// <para>Type: <b>GUID</b> <b>Windows XP and later</b>.</para>
+        /// <para></para>
+        /// <para>This doc was truncated.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
+        /// </summary>
         public Guid guidItem;
 
-        // Vista only
+        /// <summary>
+        /// <para>Type: <b>HICON</b> <b>Windows Vista and later</b>. The handle of a customized notification icon provided by the application that should be used independently of the notification area icon. If this member is non-NULL and the NIIF_USER flag is set in the <b>dwInfoFlags</b> member, this icon is used as the notification icon. If this member is <b>NULL</b>, the legacy behavior is carried out.</para>
+        /// <para><see href="https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-notifyicondataw#members">Read more on learn.microsoft.com</see>.</para>
+        /// </summary>
         public IntPtr hBalloonIcon;
     }
 
@@ -175,6 +204,22 @@ internal static class Shell32
     public static extern int GetCurrentProcessExplicitAppUserModelID(
         [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID
     );
+
+    /// <summary>Destroys an icon and frees any memory the icon occupied.</summary>
+    /// <param name="hIcon">
+    /// <para>Type: <b>HICON</b> A handle to the icon to be destroyed. The icon must not be in use.</para>
+    /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-destroyicon#parameters">Read more on learn.microsoft.com</see>.</para>
+    /// </param>
+    /// <returns>
+    /// <para>Type: <b>BOOL</b> If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call <a href="https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror">GetLastError</a>.</para>
+    /// </returns>
+    /// <remarks>
+    /// <para>It is only necessary to call <b>DestroyIcon</b> for icons and cursors created with the following functions: <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createiconfromresourceex">CreateIconFromResourceEx</a> (if called without the <b>LR_SHARED</b> flag), <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createiconindirect">CreateIconIndirect</a>, and <a href="https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-copyicon">CopyIcon</a>. Do not use this function to destroy a shared icon. A shared icon is valid as long as the module from which it was loaded remains in memory. The following functions obtain a shared icon. </para>
+    /// <para>This doc was truncated.</para>
+    /// <para><see href="https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-destroyicon#">Read more on learn.microsoft.com</see>.</para>
+    /// </remarks>
+    [DllImport(Libraries.User32, SetLastError = true)]
+    public static extern bool DestroyIcon(IntPtr hIcon);
 }
 
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
