@@ -50,7 +50,7 @@
     <Color x:Key="ControlSolidFillColorDefault">#FFFFFF</Color>
 
     <Color x:Key="SubtleFillColorTransparent">#00FFFFFF</Color>
-    <Color x:Key="SubtleFillColorSecondary">#09000000</Color>
+    <Color x:Key="SubtleFillColorSecondary">#0F000000</Color>
     <Color x:Key="SubtleFillColorTertiary">#06000000</Color>
     <Color x:Key="SubtleFillColorDisabled">#00FFFFFF</Color>
 
@@ -543,7 +543,7 @@
     <SolidColorBrush x:Key="NavigationViewContentBackground" Color="{StaticResource LayerFillColorDefault}" />
     <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
 
-    <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedLeftFluent" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedLeftFluent" Color="{StaticResource SubtleFillColorSecondary}" />
     <SolidColorBrush x:Key="NavigationViewItemForegroundLeftFluent" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOverLeftFluent" Color="{StaticResource TextFillColorPrimary}" />
 
