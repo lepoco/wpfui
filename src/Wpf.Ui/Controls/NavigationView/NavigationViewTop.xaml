@@ -125,7 +125,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Border x:Name="MainBorder">
+            <Border x:Name="MainBorder" Background="Transparent">
                 <Grid>
                     <Grid
                         Margin="8,8,8,8"
@@ -153,6 +153,7 @@
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True"
                             TextElement.FontSize="14"
                             TextElement.Foreground="{TemplateBinding Foreground}" />
                         <Grid
@@ -280,6 +281,7 @@
                                                         VerticalAlignment="Center"
                                                         Content="{TemplateBinding Content}"
                                                         ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                        RecognizesAccessKey="True"
                                                         TextElement.FontSize="14"
                                                         TextElement.Foreground="{DynamicResource NavigationViewItemForeground}" />
                                                 </Grid>

@@ -19,7 +19,7 @@
                 MinHeight="40"
                 Margin="0"
                 Padding="0"
-                Background="Transparent"
+                Background="{DynamicResource NavigationViewItemBackground}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="1"
                 CornerRadius="{TemplateBinding Border.CornerRadius}">
@@ -61,6 +61,7 @@
                         VerticalAlignment="Center"
                         Content="{TemplateBinding Content}"
                         ContentTemplate="{TemplateBinding ContentTemplate}"
+                        RecognizesAccessKey="True"
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
@@ -142,6 +143,7 @@
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Content}"
                                                 ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                RecognizesAccessKey="True"
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 

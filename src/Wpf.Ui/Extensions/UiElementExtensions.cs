@@ -30,9 +30,12 @@ internal static class UiElementExtensions
             var mousePosition = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
 
             // If element is Panel, check if children at mousePosition is with IsHitTestVisible false.
-            return new Rect(default, element.RenderSize).Contains(element.PointFromScreen(mousePosition)) &&
-                   element.IsHitTestVisible &&
-                   (element is not System.Windows.Controls.Panel panel || IsChildHitTestVisibleAtPointFromScreen(panel, mousePosition));
+            return new Rect(default, element.RenderSize).Contains(element.PointFromScreen(mousePosition))
+                && element.IsHitTestVisible
+                && (
+                    element is not System.Windows.Controls.Panel panel
+                    || IsChildHitTestVisibleAtPointFromScreen(panel, mousePosition)
+                );
         }
         catch
         {
@@ -50,7 +53,10 @@ internal static class UiElementExtensions
         return (short)(lParam.ToInt32() >> 16);
     }
 
-    private static bool IsChildHitTestVisibleAtPointFromScreen(System.Windows.Controls.Panel panel, Point mousePosition)
+    private static bool IsChildHitTestVisibleAtPointFromScreen(
+        System.Windows.Controls.Panel panel,
+        Point mousePosition
+    )
     {
         foreach (UIElement child in panel.Children)
         {

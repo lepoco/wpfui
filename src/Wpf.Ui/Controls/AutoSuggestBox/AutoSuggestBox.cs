@@ -7,8 +7,8 @@ using System.Collections;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using Windows.Win32;
 using Wpf.Ui.Input;
-using Wpf.Ui.Interop;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -534,9 +534,9 @@ public class AutoSuggestBox : ItemsControl, IIconControl
             return IntPtr.Zero;
         }
 
-        var message = (User32.WM)msg;
+        var message = (uint)msg;
 
-        if (message is User32.WM.NCACTIVATE or User32.WM.WINDOWPOSCHANGED)
+        if (message is PInvoke.WM_NCACTIVATE or PInvoke.WM_WINDOWPOSCHANGED)
         {
             SetCurrentValue(IsSuggestionListOpenProperty, false);
         }

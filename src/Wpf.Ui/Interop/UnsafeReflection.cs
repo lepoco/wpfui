@@ -7,6 +7,8 @@
    and is intended for use on Windows systems only.
    This Source Code is partially based on the source code provided by the .NET Foundation. */
 
+using Windows.Win32.Graphics.Dwm;
+using Windows.Win32.UI.Shell;
 using Wpf.Ui.Controls;
 using Wpf.Ui.TaskBar;
 
@@ -18,61 +20,31 @@ namespace Wpf.Ui.Interop;
 internal static class UnsafeReflection
 {
     /// <summary>
-    /// Casts <see cref="WindowBackdropType"/> to <see cref="Dwmapi.DWMSBT"/>.
+    /// Casts <see cref="WindowCornerPreference" /> to <see cref="DWM_WINDOW_CORNER_PREFERENCE" />.
     /// </summary>
-    public static Dwmapi.DWMSBT Cast(WindowBackdropType backgroundType)
-    {
-        return backgroundType switch
-        {
-            WindowBackdropType.Auto => Dwmapi.DWMSBT.DWMSBT_AUTO,
-            WindowBackdropType.Mica => Dwmapi.DWMSBT.DWMSBT_MAINWINDOW,
-            WindowBackdropType.Acrylic => Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW,
-            WindowBackdropType.Tabbed => Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW,
-            _ => Dwmapi.DWMSBT.DWMSBT_DISABLE,
-        };
-    }
-
-    /// <summary>
-    /// Casts <see cref="WindowCornerPreference"/> to <see cref="Dwmapi.DWM_WINDOW_CORNER_PREFERENCE"/>.
-    /// </summary>
-    public static Dwmapi.DWM_WINDOW_CORNER_PREFERENCE Cast(WindowCornerPreference cornerPreference)
+    public static DWM_WINDOW_CORNER_PREFERENCE Cast(WindowCornerPreference cornerPreference)
     {
         return cornerPreference switch
         {
-            WindowCornerPreference.Round => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.ROUND,
-            WindowCornerPreference.RoundSmall => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.ROUNDSMALL,
-            WindowCornerPreference.DoNotRound => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DONOTROUND,
-            _ => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DEFAULT,
+            WindowCornerPreference.Round => DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND,
+            WindowCornerPreference.RoundSmall => DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL,
+            WindowCornerPreference.DoNotRound => DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_DONOTROUND,
+            _ => DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_DEFAULT,
         };
     }
 
     /// <summary>
-    /// Casts <see cref="TaskBarProgressState"/> to <see cref="ShObjIdl.TBPFLAG"/>.
+    /// Casts <see cref="TaskBarProgressState" /> to <see cref="TBPFLAG" />.
     /// </summary>
-    public static ShObjIdl.TBPFLAG Cast(TaskBarProgressState taskBarProgressState)
+    public static TBPFLAG Cast(TaskBarProgressState taskBarProgressState)
     {
         return taskBarProgressState switch
         {
-            TaskBarProgressState.Indeterminate => ShObjIdl.TBPFLAG.TBPF_INDETERMINATE,
-            TaskBarProgressState.Error => ShObjIdl.TBPFLAG.TBPF_ERROR,
-            TaskBarProgressState.Paused => ShObjIdl.TBPFLAG.TBPF_PAUSED,
-            TaskBarProgressState.Normal => ShObjIdl.TBPFLAG.TBPF_NORMAL,
-            _ => Wpf.Ui.Interop.ShObjIdl.TBPFLAG.TBPF_NOPROGRESS,
-        };
-    }
-
-    /// <summary>
-    /// Casts <see cref="ShObjIdl.TBPFLAG"/> to <see cref="TaskBarProgressState"/>.
-    /// </summary>
-    public static TaskBarProgressState Cast(ShObjIdl.TBPFLAG progressState)
-    {
-        return progressState switch
-        {
-            ShObjIdl.TBPFLAG.TBPF_INDETERMINATE => TaskBarProgressState.Indeterminate,
-            ShObjIdl.TBPFLAG.TBPF_ERROR => TaskBarProgressState.Error,
-            ShObjIdl.TBPFLAG.TBPF_PAUSED => TaskBarProgressState.Paused,
-            ShObjIdl.TBPFLAG.TBPF_NORMAL => TaskBarProgressState.Normal,
-            _ => TaskBarProgressState.None,
+            TaskBarProgressState.Indeterminate => TBPFLAG.TBPF_INDETERMINATE,
+            TaskBarProgressState.Error => TBPFLAG.TBPF_ERROR,
+            TaskBarProgressState.Paused => TBPFLAG.TBPF_PAUSED,
+            TaskBarProgressState.Normal => TBPFLAG.TBPF_NORMAL,
+            _ => TBPFLAG.TBPF_NOPROGRESS,
         };
     }
 }

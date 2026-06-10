@@ -63,6 +63,7 @@
 
                                 <WrapPanel Grid.Column="1" VerticalAlignment="Top">
                                     <TextBlock
+                                        x:Name="TitleText"
                                         Margin="0,0,14,0"
                                         ScrollViewer.CanContentScroll="False"
                                         Text="{TemplateBinding Title}"
@@ -103,10 +104,18 @@
                         </Trigger>
 
                         <Trigger Property="IsOpen" Value="True">
-                            <Setter TargetName="InfoBarRoot" Property="Visibility" Value="Visible" />
+                            <Setter Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsOpen" Value="False">
-                            <Setter TargetName="InfoBarRoot" Property="Visibility" Value="Collapsed" />
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <!-- Collapse TitleText when Title is null or empty to release layout space -->
+                        <Trigger Property="Title" Value="{x:Null}">
+                            <Setter TargetName="TitleText" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Title" Value="">
+                            <Setter TargetName="TitleText" Property="Visibility" Value="Collapsed" />
                         </Trigger>
 
                         <Trigger Property="Severity" Value="Informational">
@@ -117,21 +126,25 @@
                             </Setter>
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="Info24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBarInformationalSeverityBackgroundBrush}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource InfoBarInformationalSeverityBorderBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Success">
                             <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource InfoBarSuccessSeverityIconBackground}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="CheckmarkCircle24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBarSuccessSeverityBackgroundBrush}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource InfoBarSuccessSeverityBorderBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Warning">
                             <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource InfoBarWarningSeverityIconBackground}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="ErrorCircle24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBarWarningSeverityBackgroundBrush}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource InfoBarWarningSeverityBorderBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Error">
                             <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource InfoBarErrorSeverityIconBackground}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="DismissCircle24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBarErrorSeverityBackgroundBrush}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource InfoBarErrorSeverityBorderBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -6,6 +6,7 @@
 using System.Diagnostics;
 using System.Windows.Data;
 using System.Windows.Input;
+using Windows.Win32;
 using Wpf.Ui.Designer;
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
@@ -37,6 +38,8 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private DependencyObject? _parentWindow;
 
+    public event EventHandler<HwndProcEventArgs>? WndProcInvoked;
+
     /// <summary>Identifies the <see cref="ApplicationTheme"/> dependency property.</summary>
     public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
         nameof(ApplicationTheme),
@@ -58,6 +61,16 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
         nameof(Header),
+        typeof(object),
+        typeof(TitleBar),
+        new PropertyMetadata(null)
+    );
+
+    /// <summary>
+    /// Property for <see cref="CenterContent"/>.
+    /// </summary>
+    public static readonly DependencyProperty CenterContentProperty = DependencyProperty.Register(
+        nameof(CenterContent),
         typeof(object),
         typeof(TitleBar),
         new PropertyMetadata(null)
@@ -231,6 +244,15 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
+    /// Gets or sets the content displayed in the center of the <see cref="TitleBar"/>.
+    /// </summary>
+    public object? CenterContent
+    {
+        get => GetValue(CenterContentProperty);
+        set => SetValue(CenterContentProperty, value);
+    }
+
+    /// <summary>
     /// Gets or sets the content displayed in right side of the <see cref="TitleBar"/>.
     /// </summary>
     public object? TrailingContent
@@ -393,7 +415,7 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public Action<TitleBar, System.Windows.Window>? MinimizeActionOverride { get; set; }
 
-    private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
+    private readonly TitleBarButton?[] _buttons = new TitleBarButton[4];
     private readonly TextBlock _titleBlock;
     private System.Windows.Window _currentWindow = null!;
 
@@ -631,10 +653,10 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        var message = (User32.WM)msg;
+        var message = (uint)msg;
 
         // Invalidate cached border size on DPI change message
-        if (message == User32.WM.DPICHANGED)
+        if (message == PInvoke.WM_DPICHANGED)
         {
             InvalidateBorderCache();
         }
@@ -642,27 +664,28 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (
             message
             is not (
-                User32.WM.NCHITTEST
-                or User32.WM.NCMOUSELEAVE
-                or User32.WM.NCLBUTTONDOWN
-                or User32.WM.NCLBUTTONUP
+                PInvoke.WM_NCHITTEST
+                or PInvoke.WM_NCMOUSELEAVE
+                or PInvoke.WM_NCLBUTTONDOWN
+                or PInvoke.WM_NCLBUTTONUP
             )
         )
         {
             return IntPtr.Zero;
         }
 
-        foreach (TitleBarButton button in _buttons)
+        foreach (TitleBarButton? button in _buttons)
         {
-            if (!button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
+            // Check if button is null to avoid potential NullReferenceException if OnApplyTemplate hasn't been called yet, e.g. when TitleBar has Visibility == Collapsed.
+            if (button is null || !button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
             {
                 continue;
             }
 
             // Fix for when sometimes, button hover backgrounds aren't cleared correctly, causing multiple buttons to appear as if hovered.
-            foreach (TitleBarButton anotherButton in _buttons)
+            foreach (TitleBarButton? anotherButton in _buttons)
             {
-                if (anotherButton == button)
+                if (anotherButton is null || anotherButton == button)
                 {
                     continue;
                 }
@@ -678,42 +701,50 @@ public partial class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
 
         bool isMouseOverHeaderContent = false;
-        IntPtr htResult = (IntPtr)User32.WM_NCHITTEST.HTNOWHERE;
+        IntPtr htResult = (IntPtr)PInvoke.HTNOWHERE;
 
-        if (message == User32.WM.NCHITTEST)
+        if (message == PInvoke.WM_NCHITTEST)
         {
-            if (TrailingContent is UIElement || Header is UIElement)
+            if (TrailingContent is UIElement || Header is UIElement || CenterContent is UIElement)
             {
                 UIElement? headerLeftUIElement = Header as UIElement;
+                UIElement? headerCenterUIElement = CenterContent as UIElement;
                 UIElement? headerRightUiElement = TrailingContent as UIElement;
 
-                if (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock)
-                {
-                    isMouseOverHeaderContent =
-                        headerLeftUIElement.IsMouseOverElement(lParam)
-                        || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
-                }
-                else
-                {
-                    isMouseOverHeaderContent = headerRightUiElement?.IsMouseOverElement(lParam) ?? false;
-                }
+                isMouseOverHeaderContent =
+                    (
+                        headerLeftUIElement is not null
+                        && headerLeftUIElement != _titleBlock
+                        && headerLeftUIElement.IsMouseOverElement(lParam)
+                    )
+                    || (headerCenterUIElement?.IsMouseOverElement(lParam) ?? false)
+                    || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
             }
 
             htResult = GetWindowBorderHitTestResult(hwnd, lParam);
         }
 
+        var e = new HwndProcEventArgs(hwnd, msg, wParam, lParam, isMouseOverHeaderContent);
+        WndProcInvoked?.Invoke(this, e);
+
+        if (e.ReturnValue != null)
+        {
+            handled = e.Handled;
+            return e.ReturnValue ?? IntPtr.Zero;
+        }
+
         switch (message)
         {
-            case User32.WM.NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
+            case PInvoke.WM_NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
                 // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
-                return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
-            case User32.WM.NCHITTEST when htResult != (IntPtr)User32.WM_NCHITTEST.HTNOWHERE:
+                return (IntPtr)PInvoke.HTSYSMENU;
+            case PInvoke.WM_NCHITTEST when htResult != (IntPtr)PInvoke.HTNOWHERE:
                 handled = true;
                 return htResult;
-            case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
+            case PInvoke.WM_NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
                 handled = true;
-                return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
+                return (IntPtr)PInvoke.HTCAPTION;
             default:
                 return IntPtr.Zero;
         }

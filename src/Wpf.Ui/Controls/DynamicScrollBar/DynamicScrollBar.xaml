@@ -36,7 +36,7 @@
                             Filled="True"
                             FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
-                            Symbol="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+                            Symbol="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, TargetNullValue={x:Static controls:SymbolRegular.Empty}}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -106,7 +106,7 @@
     </Style>
 
     <ControlTemplate x:Key="DynamicVerticalScrollBar" TargetType="{x:Type controls:DynamicScrollBar}">
-        <Grid>
+        <Grid HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="14" />
                 <RowDefinition Height="0.00001*" />
@@ -250,7 +250,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="DynamicHorizontalScrollBar" TargetType="{x:Type controls:DynamicScrollBar}">
-        <Grid>
+        <Grid VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="18" />
                 <ColumnDefinition Width="0.00001*" />

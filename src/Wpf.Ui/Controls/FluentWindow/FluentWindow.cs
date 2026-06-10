@@ -88,13 +88,7 @@ public class FluentWindow : System.Windows.Window
 
         if (Utilities.IsOSWindows11OrNewer)
         {
-            ApplicationThemeManager.Changed += (_, _) =>
-            {
-                if (IsActive)
-                {
-                    UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
-                }
-            };
+            ApplicationThemeManager.Changed += OnApplicationThemeManagerChanged;
         }
     }
 
@@ -113,6 +107,24 @@ public class FluentWindow : System.Windows.Window
         );
     }
 
+    private void OnApplicationThemeManagerChanged(
+        ApplicationTheme currentApplicationTheme,
+        Color systemAccent
+    )
+    {
+        if (IsActive && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
+        {
+            UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
+        }
+    }
+
+    /// <inheritdoc />
+    protected override void OnClosed(EventArgs e)
+    {
+        ApplicationThemeManager.Changed -= OnApplicationThemeManagerChanged;
+        base.OnClosed(e);
+    }
+
     /// <inheritdoc />
     protected override void OnSourceInitialized(EventArgs e)
     {
@@ -128,7 +140,7 @@ public class FluentWindow : System.Windows.Window
     {
         base.OnActivated(e);
 
-        if (Utilities.IsOSWindows11OrNewer)
+        if (Utilities.IsOSWindows11OrNewer && ApplicationAccentColorManager.IsAccentColorOnTitleBarsEnabled)
         {
             UnsafeNativeMethods.ApplyBorderColor(this, ApplicationAccentColorManager.SystemAccent);
         }
@@ -286,16 +298,20 @@ public class FluentWindow : System.Windows.Window
             if (Utilities.IsCompositionEnabled)
             {
                 WindowChrome.SetWindowChrome(
-                                          this,
-                                          new WindowChrome
-                                          {
-                                              CaptionHeight = 0,
-                                              CornerRadius = default,
-                                              GlassFrameThickness = WindowBackdropType == WindowBackdropType.None ? new Thickness(0.00001) : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
-                                              ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
-                                              UseAeroCaptionButtons = false,
-                                          }
-                                         );
+                    this,
+                    new WindowChrome
+                    {
+                        CaptionHeight = 0,
+                        CornerRadius = default,
+                        GlassFrameThickness =
+                            WindowBackdropType == WindowBackdropType.None
+                                ? new Thickness(0.00001)
+                                : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
+                        ResizeBorderThickness =
+                            ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                        UseAeroCaptionButtons = false,
+                    }
+                );
             }
         }
         catch (COMException)

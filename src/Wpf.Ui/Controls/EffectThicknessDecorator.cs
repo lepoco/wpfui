@@ -10,14 +10,26 @@ namespace Wpf.Ui.Controls;
 
 public class EffectThicknessDecorator : Decorator
 {
-    public static readonly DependencyProperty ThicknessProperty =
-        DependencyProperty.Register(nameof(Thickness), typeof(Thickness), typeof(EffectThicknessDecorator), new PropertyMetadata(new Thickness(35), OnThicknessChanged));
+    public static readonly DependencyProperty ThicknessProperty = DependencyProperty.Register(
+        nameof(Thickness),
+        typeof(Thickness),
+        typeof(EffectThicknessDecorator),
+        new PropertyMetadata(new Thickness(35), OnThicknessChanged)
+    );
 
-    public static readonly DependencyProperty AnimationDelayProperty =
-        DependencyProperty.Register(nameof(AnimationDelay), typeof(TimeSpan), typeof(EffectThicknessDecorator), new PropertyMetadata(TimeSpan.Zero));
+    public static readonly DependencyProperty AnimationDelayProperty = DependencyProperty.Register(
+        nameof(AnimationDelay),
+        typeof(TimeSpan),
+        typeof(EffectThicknessDecorator),
+        new PropertyMetadata(TimeSpan.Zero)
+    );
 
-    public static readonly DependencyProperty AnimationElementProperty =
-        DependencyProperty.Register(nameof(AnimationElement), typeof(UIElement), typeof(EffectThicknessDecorator), new PropertyMetadata(default(UIElement)));
+    public static readonly DependencyProperty AnimationElementProperty = DependencyProperty.Register(
+        nameof(AnimationElement),
+        typeof(UIElement),
+        typeof(EffectThicknessDecorator),
+        new PropertyMetadata(default(UIElement))
+    );
 
     private PopupContainer? _popupContainer;
 
@@ -108,7 +120,8 @@ public class EffectThicknessDecorator : Decorator
             {
                 animationElement.Effect = null;
 
-                Task.Delay(AnimationDelay).ContinueWith(_ => Dispatcher.Invoke(() => animationElement.Effect = effect));
+                Task.Delay(AnimationDelay)
+                    .ContinueWith(_ => Dispatcher.Invoke(() => animationElement.Effect = effect));
             }
         };
 
@@ -178,7 +191,8 @@ public class EffectThicknessDecorator : Decorator
 
         public event EventHandler Opened;
 
-        public FrameworkElement? FrameworkElement => _contextMenu ?? _toolTip ?? _popup?.Child as FrameworkElement;
+        public FrameworkElement? FrameworkElement =>
+            _contextMenu ?? _toolTip ?? _popup?.Child as FrameworkElement;
 
         public void SetMargin(Thickness margin)
         {

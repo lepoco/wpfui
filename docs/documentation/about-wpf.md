@@ -1,17 +1,19 @@
 # What is WPF
 
-WPF, which stands for **Windows Presentation Foundation**, is a graphical subsystem in the Microsoft .NET Framework for building Windows desktop applications with a rich user interface. It provides a wide range of features and controls, including advanced graphics, multimedia, data binding, animation, and layout capabilities. WPF also supports modern UI design principles such as vector-based graphics, flexible layout, and resolution independence. It has been used to build a variety of applications, including desktop productivity tools, multimedia applications, games, and line-of-business applications.
+WPF (Windows Presentation Foundation) is a resolution-independent UI framework for building Windows desktop applications. It provides vector-based graphics, advanced layout, data binding, multimedia, animation, and extensive styling and templating capabilities.
 
-## Is WPF .NET Framework only?
+## .NET Framework vs Modern .NET
 
-WPF is designed to provide a consistent programming model for building rich, interactive applications that can run on multiple platforms.
+WPF has two implementations:
 
-WPF supports both .NET Core and .NET Framework for a few reasons:
+**Modern .NET** (.NET 6+): Open-source implementation hosted on GitHub. Provides improved performance, new APIs, side-by-side deployment, and modern tooling. Despite .NET being cross-platform, WPF only runs on Windows.
 
-- Compatibility: .NET Framework is the traditional Windows development platform, while .NET Core is a cross-platform alternative. Supporting both frameworks allows developers to target a wider range of platforms and operating systems, while still maintaining compatibility with existing applications and infrastructure.
+**.NET Framework 4**: Legacy Windows-only implementation. Maintained for compatibility with existing applications but receives minimal new features.
 
-- Flexibility: By supporting both frameworks, WPF gives developers the flexibility to choose the platform that best suits their needs. For example, if an application needs to run on a specific version of Windows, developers can use .NET Framework. On the other hand, if an application needs to run on multiple platforms, developers can use .NET Core.
+New WPF applications should target modern .NET (.NET 6 or later) to benefit from:
 
-- Future-proofing: As Microsoft continues to invest in .NET Core, it is likely that more and more developers will transition away from .NET Framework. By supporting both frameworks, WPF ensures that it will remain relevant and useful to developers for years to come.
-
-Overall, supporting both .NET Core and .NET Framework allows WPF to provide a flexible, future-proof development platform for building rich, interactive applications.
+- Better performance and reduced memory usage
+- Regular updates and new features
+- Modern C# language versions
+- Improved debugging and diagnostics
+- Side-by-side deployment without machine-wide installations

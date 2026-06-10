@@ -121,7 +121,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="BottomCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
-        <Border x:Name="MainBorder">
+        <Border x:Name="MainBorder" Background="Transparent">
             <Grid>
                 <Grid
                     Margin="12,8,12,8"
@@ -149,6 +149,7 @@
                         VerticalAlignment="Center"
                         Content="{TemplateBinding Content}"
                         ContentTemplate="{TemplateBinding ContentTemplate}"
+                        RecognizesAccessKey="True"
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 

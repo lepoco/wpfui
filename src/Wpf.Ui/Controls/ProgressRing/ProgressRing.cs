@@ -103,7 +103,7 @@ public class ProgressRing : System.Windows.Controls.Control
     public double IndeterminateAngle
     {
         get => (double)GetValue(IndeterminateAngleProperty);
-        internal set => SetValue(IndeterminateAngleProperty, value);
+        set => SetValue(IndeterminateAngleProperty, value);
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public class ProgressRing : System.Windows.Controls.Control
     public Brush CoverRingStroke
     {
         get => (Brush)GetValue(CoverRingStrokeProperty);
-        internal set => SetValue(CoverRingStrokeProperty, value);
+        set => SetValue(CoverRingStrokeProperty, value);
     }
 
     /// <summary>
@@ -121,7 +121,7 @@ public class ProgressRing : System.Windows.Controls.Control
     public System.Windows.Visibility CoverRingVisibility
     {
         get => (System.Windows.Visibility)GetValue(CoverRingVisibilityProperty);
-        internal set => SetValue(CoverRingVisibilityProperty, value);
+        set => SetValue(CoverRingVisibilityProperty, value);
     }
 
     /// <summary>

@@ -5,7 +5,7 @@
 
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
-using Wpf.Ui.Interop;
+using Windows.Win32;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -87,7 +87,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     public bool IsHovered { get; private set; }
 
     private readonly Brush _defaultBackgroundBrush = Brushes.Transparent; // REVIEW: Should it be transparent?
-    private User32.WM_NCHITTEST _returnValue;
+    private uint _returnValue;
 
     private bool _isClickedDown;
 
@@ -172,13 +172,13 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         _isClickedDown = false;
     }
 
-    internal bool ReactToHwndHook(User32.WM msg, IntPtr lParam, out IntPtr returnIntPtr)
+    internal bool ReactToHwndHook(uint msg, IntPtr lParam, out IntPtr returnIntPtr)
     {
         returnIntPtr = IntPtr.Zero;
 
         switch (msg)
         {
-            case User32.WM.NCHITTEST:
+            case PInvoke.WM_NCHITTEST:
                 if (this.IsMouseOverElement(lParam))
                 {
                     /*Debug.WriteLine($"Hitting {ButtonType} | return code {_returnValue}");*/
@@ -189,13 +189,13 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
                 RemoveHover();
                 return false;
-            case User32.WM.NCMOUSELEAVE: // Mouse leaves the window
+            case PInvoke.WM_NCMOUSELEAVE: // Mouse leaves the window
                 RemoveHover();
                 return false;
-            case User32.WM.NCLBUTTONDOWN when this.IsMouseOverElement(lParam): // Left button clicked down
+            case PInvoke.WM_NCLBUTTONDOWN when this.IsMouseOverElement(lParam): // Left button clicked down
                 _isClickedDown = true;
                 return true;
-            case User32.WM.NCLBUTTONUP when _isClickedDown && this.IsMouseOverElement(lParam): // Left button clicked up
+            case PInvoke.WM_NCLBUTTONUP when _isClickedDown && this.IsMouseOverElement(lParam): // Left button clicked up
                 InvokeClick();
                 return true;
             default:
@@ -219,12 +219,12 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
         _returnValue = buttonType switch
         {
-            TitleBarButtonType.Unknown => User32.WM_NCHITTEST.HTNOWHERE,
-            TitleBarButtonType.Help => User32.WM_NCHITTEST.HTHELP,
-            TitleBarButtonType.Minimize => User32.WM_NCHITTEST.HTMINBUTTON,
-            TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
-            TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
-            TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
+            TitleBarButtonType.Unknown => PInvoke.HTNOWHERE,
+            TitleBarButtonType.Help => PInvoke.HTHELP,
+            TitleBarButtonType.Minimize => PInvoke.HTMINBUTTON,
+            TitleBarButtonType.Close => PInvoke.HTCLOSE,
+            TitleBarButtonType.Restore => PInvoke.HTMAXBUTTON,
+            TitleBarButtonType.Maximize => PInvoke.HTMAXBUTTON,
             _ => throw new ArgumentOutOfRangeException(
                 "e.NewValue",
                 buttonType,

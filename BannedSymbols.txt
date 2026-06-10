@@ -1,0 +1,5 @@
+// https://github.com/dotnet/roslyn-analyzers/blob/main/src/Microsoft.CodeAnalysis.BannedApiAnalyzers/BannedApiAnalyzers.Help.md
+// RS0030: Do not use banned APIs
+T:System.DateTime;Don't use DateTime. Use DateTimeOffset instead.
+P:System.DateTime.Now; Use System.DateTime.UtcNow instead.
+M:System.DateTimeOffset.op_Implicit(System.DateTime); Do not implicitly cast DateTime to DateTimeOffset.

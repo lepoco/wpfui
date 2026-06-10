@@ -9,7 +9,7 @@
     <ControlTemplate x:Key="LeftFluentNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
         <Border
             x:Name="MainBorder"
-            Width="{StaticResource PaneFluentButtonWidth}"
+            MinWidth="{StaticResource PaneFluentButtonWidth}"
             Height="{StaticResource PaneFluentButtonHeight}"
             Padding="4"
             HorizontalAlignment="Stretch"
@@ -54,6 +54,7 @@
                             HorizontalAlignment="Center"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True"
                             TextElement.FontSize="{TemplateBinding FontSize}"
                             TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}" />
                     </Grid>

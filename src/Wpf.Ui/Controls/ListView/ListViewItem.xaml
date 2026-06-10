@@ -15,7 +15,7 @@
             x:Name="Border"
             Margin="0"
             Padding="0"
-            Background="Transparent"
+            Background="{TemplateBinding Background}"
             BorderThickness="1"
             CornerRadius="{TemplateBinding Border.CornerRadius}">
             <Grid>
@@ -53,7 +53,7 @@
             x:Name="Border"
             Margin="0"
             Padding="0"
-            Background="Transparent"
+            Background="{TemplateBinding Background}"
             BorderBrush="{TemplateBinding Border.BorderBrush}"
             BorderThickness="{TemplateBinding Border.BorderThickness}"
             CornerRadius="{TemplateBinding Border.CornerRadius}">
