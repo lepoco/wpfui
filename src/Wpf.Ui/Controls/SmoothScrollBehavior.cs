@@ -5,9 +5,7 @@
 
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Wpf.Ui.Controls;
@@ -24,6 +22,8 @@ public static class SmoothScrollBehavior
         public double LastHorizontalOffset { get; set; }
 
         public bool IsAnimating { get; set; }
+
+        public FrameworkElement? SourceElement { get; set; }
     }
 
     private static readonly ConditionalWeakTable<ScrollViewer, ScrollData> _scrollDataTable = new();
@@ -39,7 +39,7 @@ public static class SmoothScrollBehavior
         "Duration",
         typeof(double),
         typeof(SmoothScrollBehavior),
-        new PropertyMetadata(250.0)
+        new PropertyMetadata(300.0)
     );
 
     public static readonly DependencyProperty MultiplierProperty = DependencyProperty.RegisterAttached(
@@ -112,21 +112,46 @@ public static class SmoothScrollBehavior
             else
             {
                 element.Loaded -= OnElementLoaded;
+
+                ScrollViewer? sv = FindScrollViewer(element);
+                if (sv != null)
+                {
+                    DetachScrollViewer(sv);
+                }
             }
         }
     }
 
     private static void OnElementLoaded(object sender, RoutedEventArgs e)
     {
-        if (sender is FrameworkElement element)
+        if (sender is not FrameworkElement element)
+        {
+            return;
+        }
+
+        VirtualizingPanel.SetScrollUnit(element, ScrollUnit.Pixel);
+
+        element.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, () =>
         {
             ScrollViewer? scrollViewer = FindScrollViewer(element);
-
-            if (scrollViewer != null)
+            if (scrollViewer == null)
             {
-                AttachScrollViewer(scrollViewer);
+                return;
             }
-        }
+
+            VirtualizingPanel.SetScrollUnit(scrollViewer, ScrollUnit.Pixel);
+
+            VirtualizingPanel? panel = FindVisualChild<VirtualizingPanel>(scrollViewer);
+            if (panel != null)
+            {
+                VirtualizingPanel.SetScrollUnit(panel, ScrollUnit.Pixel);
+            }
+
+            ScrollData data = _scrollDataTable.GetOrCreateValue(scrollViewer);
+            data.SourceElement = element;
+
+            AttachScrollViewer(scrollViewer);
+        });
     }
 
     private static void AttachScrollViewer(ScrollViewer scrollViewer)
@@ -145,6 +170,22 @@ public static class SmoothScrollBehavior
         scrollViewer.PreviewMouseWheel -= ScrollViewer_PreviewMouseWheel;
         scrollViewer.ScrollChanged -= ScrollViewer_ScrollChanged;
 
+        if (_scrollDataTable.TryGetValue(scrollViewer, out ScrollData? data))
+        {
+            if (data.SourceElement != null)
+            {
+                VirtualizingPanel.SetScrollUnit(data.SourceElement, ScrollUnit.Item);
+            }
+
+            VirtualizingPanel.SetScrollUnit(scrollViewer, ScrollUnit.Item);
+
+            VirtualizingPanel? panel = FindVisualChild<VirtualizingPanel>(scrollViewer);
+            if (panel != null)
+            {
+                VirtualizingPanel.SetScrollUnit(panel, ScrollUnit.Item);
+            }
+        }
+
         _ = _scrollDataTable.Remove(scrollViewer);
     }
 
@@ -160,7 +201,6 @@ public static class SmoothScrollBehavior
             return;
         }
 
-        // Check if scrolling inside nested scrollviewer
         if (IsNestedScrollViewer(e.OriginalSource as DependencyObject, scrollViewer))
         {
             return;
@@ -187,7 +227,6 @@ public static class SmoothScrollBehavior
                 return;
             }
 
-            scrollViewer.ScrollToHorizontalOffset(data.LastHorizontalOffset);
             AnimateScroll(scrollViewer, newOffset, false);
             data.LastHorizontalOffset = newOffset;
         }
@@ -201,7 +240,6 @@ public static class SmoothScrollBehavior
             double wheelChange = e.Delta * multiplier;
             double newOffset = data.LastVerticalOffset - wheelChange;
 
-            // Check boundary for parent scrolling
             if ((newOffset < 0 && wheelChange < 0) || (newOffset > scrollViewer.ScrollableHeight && wheelChange > 0))
             {
                 return;
@@ -216,7 +254,6 @@ public static class SmoothScrollBehavior
                 return;
             }
 
-            scrollViewer.ScrollToVerticalOffset(data.LastVerticalOffset);
             AnimateScroll(scrollViewer, newOffset, true);
             data.LastVerticalOffset = newOffset;
         }
@@ -251,11 +288,17 @@ public static class SmoothScrollBehavior
 
         data.IsAnimating = true;
 
-        double duration = GetDuration(scrollViewer);
+        double duration = GetDuration(scrollViewer); // giữ default 250ms, hoặc set XAML Duration="220"
 
         DependencyProperty property = isVertical ? AnimatedVerticalOffsetProperty : AnimatedHorizontalOffsetProperty;
 
-        double fromValue = isVertical ? scrollViewer.VerticalOffset : scrollViewer.HorizontalOffset;
+        double currentAnimatedValue = isVertical
+            ? GetAnimatedVerticalOffset(scrollViewer)
+            : GetAnimatedHorizontalOffset(scrollViewer);
+
+        double fromValue = data.IsAnimating && currentAnimatedValue > 0
+            ? currentAnimatedValue
+            : (isVertical ? scrollViewer.VerticalOffset : scrollViewer.HorizontalOffset);
 
         scrollViewer.BeginAnimation(property, null);
 
@@ -264,7 +307,7 @@ public static class SmoothScrollBehavior
             From = fromValue,
             To = toValue,
             Duration = TimeSpan.FromMilliseconds(duration),
-            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            EasingFunction = new ExponentialEase { EasingMode = EasingMode.EaseOut, Exponent = 2.5 }
         };
 
         animation.Completed += (s, e) => { data.IsAnimating = false; };
@@ -302,7 +345,15 @@ public static class SmoothScrollBehavior
                 return sv.ScrollableHeight > 0 || sv.ScrollableWidth > 0;
             }
 
-            element = VisualTreeHelper.GetParent(element);
+            DependencyObject? parent = null;
+            if (element is Visual or System.Windows.Media.Media3D.Visual3D)
+            {
+                parent = VisualTreeHelper.GetParent(element);
+            }
+
+            parent ??= LogicalTreeHelper.GetParent(element);
+
+            element = parent;
         }
 
         return false;
@@ -319,6 +370,28 @@ public static class SmoothScrollBehavior
         {
             DependencyObject child = VisualTreeHelper.GetChild(element, i);
             ScrollViewer? result = FindScrollViewer(child);
+            if (result != null)
+            {
+                return result;
+            }
+        }
+
+        return null;
+    }
+
+    private static T? FindVisualChild<T>(DependencyObject parent)
+        where T : DependencyObject
+    {
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+
+            if (child is T t)
+            {
+                return t;
+            }
+
+            T? result = FindVisualChild<T>(child);
             if (result != null)
             {
                 return result;
