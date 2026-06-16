@@ -26,7 +26,7 @@
 
         <Border
             Grid.Row="0"
-            Height="200"
+            Height="300"
             CornerRadius="8">
             <Border.Background>
                 <ImageBrush

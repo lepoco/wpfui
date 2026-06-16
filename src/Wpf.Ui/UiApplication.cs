@@ -111,7 +111,6 @@ public class UiApplication
 
             return _application?.Resources ?? _resources;
         }
-
         set
         {
             _application?.Resources = value;
@@ -137,14 +136,12 @@ public class UiApplication
 
     private static bool ApplicationHasResources(Application application)
     {
-        return application
-            .Resources.MergedDictionaries.Where(e => e.Source is not null)
-            .Any(e =>
-                e.Source.ToString()
-                    .Contains(
-                        Appearance.ApplicationThemeManager.LibraryNamespace,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-            );
+        return application.Resources.MergedDictionaries.Any(e =>
+            e.Source?.ToString()
+                .Contains(
+                    Appearance.ApplicationThemeManager.LibraryNamespace,
+                    StringComparison.OrdinalIgnoreCase
+                ) == true
+        );
     }
 }
