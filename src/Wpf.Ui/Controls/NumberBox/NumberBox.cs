@@ -56,7 +56,7 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(MaxDecimalPlaces),
         typeof(int),
         typeof(NumberBox),
-        new PropertyMetadata(6)
+        new PropertyMetadata(6, OnMaxDecimalPlacesChanged)
     );
 
     /// <summary>Identifies the <see cref="SmallChange"/> dependency property.</summary>
@@ -521,6 +521,14 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
             throw new InvalidOperationException(
                 $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}"
             );
+        }
+    }
+
+    private static void OnMaxDecimalPlacesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is NumberBox numberBox)
+        {
+            numberBox.UpdateTextToValue();
         }
     }
 
