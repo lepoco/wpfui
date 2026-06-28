@@ -2,6 +2,7 @@ S_OK
 DwmIsCompositionEnabled
 DwmExtendFrameIntoClientArea
 SetWindowThemeAttribute
+GetCursorPos
 GetDpiForWindow
 GetForegroundWindow
 IsWindowVisible
