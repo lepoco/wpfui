@@ -5,7 +5,7 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style TargetType="{x:Type TabControl}">
         <Setter Property="Foreground" Value="{DynamicResource TabViewForeground}" />
@@ -21,14 +21,63 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <TabPanel
-                            x:Name="HeaderPanel"
-                            Grid.Row="0"
-                            Margin="0"
-                            Panel.ZIndex="1"
-                            Background="Transparent"
-                            IsItemsHost="True"
-                            KeyboardNavigation.TabIndex="1" />
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TabPanel
+                                x:Name="HeaderPanel"
+                                Grid.Column="0"
+                                Margin="0"
+                                Panel.ZIndex="1"
+                                Background="Transparent"
+                                IsItemsHost="True"
+                                KeyboardNavigation.TabIndex="1" />
+                            <Button
+                                x:Name="AddButton"
+                                Grid.Column="1"
+                                Width="36"
+                                Height="36"
+                                Margin="4,0,0,0"
+                                Padding="8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Background="{DynamicResource TabViewItemHeaderBackground}"
+                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                BorderThickness="1"
+                                Cursor="Hand"
+                                Focusable="False"
+                                Visibility="Collapsed">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="Border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="0"
+                                            Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <controls:SymbolIcon
+                                    Symbol="Add24"
+                                    FontSize="16"
+                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </Button>
+                        </Grid>
                         <Border
                             x:Name="Border"
                             Grid.Row="1"
@@ -53,6 +102,14 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=(controls:TabControlExtensions.CanAddTabs), RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                            <Setter TargetName="AddButton" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="AddButton" Property="IsEnabled" Value="False" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -78,29 +135,71 @@
                             x:Name="Border"
                             MinHeight="36"
                             Margin="0"
-                            Padding="6"
+                            Padding="6,6,2,6"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1,1,1,0"
                             CornerRadius="8,8,0,0">
-                            <ContentPresenter
-                                x:Name="ContentSite"
-                                Margin="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                ContentSource="Header"
-                                RecognizesAccessKey="True" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="24" />
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter
+                                    x:Name="ContentSite"
+                                    Grid.Column="0"
+                                    Margin="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    ContentSource="Header"
+                                    RecognizesAccessKey="True" />
+                                <Button
+                                    x:Name="CloseButton"
+                                    Grid.Column="1"
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0"
+                                    Padding="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Focusable="False"
+                                    Opacity="0"
+                                    Visibility="Visible">
+                                    <controls:SymbolIcon
+                                        Symbol="Dismiss24"
+                                        FontSize="12"
+                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </Button>
+                            </Grid>
                         </Border>
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="SelectionStates">
                                 <VisualState x:Name="Unselected" />
                                 <VisualState x:Name="Selected" />
-
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CloseButton"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CloseButton"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="1.0"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <DoubleAnimation
@@ -121,10 +220,14 @@
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource TabViewSelectedItemBorderBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource TabViewItemForegroundSelected}" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding Path=(controls:TabControlExtensions.IsClosable), RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 
 </ResourceDictionary>
