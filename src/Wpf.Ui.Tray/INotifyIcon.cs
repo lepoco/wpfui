@@ -6,6 +6,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Wpf.Ui.Tray.Controls;
 
 namespace Wpf.Ui.Tray;
 
@@ -33,6 +34,21 @@ internal interface INotifyIcon
     /// Gets or sets the ToolTip text displayed when the mouse pointer rests on a notification area icon.
     /// </summary>
     string TooltipText { get; set; }
+
+    /// <summary>
+    /// Gets or sets the title displayed in the notification balloon tip.
+    /// </summary>
+    string BalloonTipTitle { get; set; }
+
+    /// <summary>
+    /// Gets or sets the message text displayed in the notification balloon tip.
+    /// </summary>
+    string BalloonTipText { get; set; }
+
+    /// <summary>
+    /// Gets or sets the icon type displayed in the notification balloon tip.
+    /// </summary>
+    ToolTipIcon BalloonTipIcon { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="System.Windows.Media.Imaging.BitmapSource"/> of the tray icon.

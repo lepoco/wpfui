@@ -170,6 +170,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
             {
                 new NavigationViewItem("Clipboard", typeof(ClipboardPage)),
                 new NavigationViewItem("FilePicker", typeof(FilePickerPage)),
+                new NavigationViewItem("NotifyIcon", typeof(NotifyIconPage)),
             },
         },
         new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage)),
