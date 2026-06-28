@@ -2,108 +2,38 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    xmlns:converters="clr-namespace:Wpf.Ui.Converters">
 
-    <Thickness x:Key="TimePickerBorderThemeThickness">1,1,1,1</Thickness>
+    <!-- Converters (Unchanged) -->
+    <converters:TimeSpanToMinuteStringConverter x:Key="TimeSpanToMinuteStringConverter" />
+    <converters:TimeSpanToAmPmStringConverter x:Key="TimeSpanToAmPmStringConverter" />
+    <converters:TimeSpanToHourMultiConverter x:Key="TimeSpanToHourMultiConverter" />
 
-    <Style x:Key="DefaultUiTimePickerStyle" TargetType="{x:Type controls:TimePicker}">
-        <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
-        <!--  Universal WPF UI focus  -->
-        <!--  Universal WPF UI ContextMenu  -->
-        <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
-        <!--  Universal WPF UI ContextMenu  -->
-        <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundDefault}" />
-        <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        <Setter Property="BorderThickness" Value="{StaticResource TimePickerBorderThemeThickness}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
-        <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
-        <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}" />
-        <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+    <!-- Thickness (Unchanged) -->
+    <Thickness x:Key="TimePickerBorderThemeThickness">1</Thickness>
+
+
+    <Style x:Key="TimePickerPopupListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5,8"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:TimePicker}">
-                    <Grid
-                        Width="{TemplateBinding Width}"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border
-                            x:Name="ContentBorder"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"
-                            Padding="0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Grid x:Name="GridColumnHour" Grid.Column="0">
-                                    <TextBlock
-                                        Margin="6"
-                                        HorizontalAlignment="Center"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Text="hour" />
-                                </Grid>
-                                <Border
-                                    x:Name="GridColumnMinute"
-                                    Grid.Column="1"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="1,0,1,0">
-                                    <TextBlock
-                                        Margin="6"
-                                        HorizontalAlignment="Center"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Text="minute" />
-                                </Border>
-                                <Grid x:Name="GridColumnType" Grid.Column="2">
-                                    <TextBlock
-                                        Margin="6"
-                                        HorizontalAlignment="Center"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Text="AM" />
-                                </Grid>
-                            </Grid>
-                        </Border>
-
-                        <Popup x:Name="TimePickerPopup">
-                            <Border>
-                                <TextBlock Text="Todo" />
-                            </Border>
-                        </Popup>
-                    </Grid>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="Bd" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
                     <ControlTemplate.Triggers>
+                        <!-- On selection, only the foreground changes to be vibrant. -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
+                        </Trigger>
+                        <!-- A subtle hover effect for discoverability. -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundPointerOver}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundPointerOver}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundDisabled}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource TimePickerButtonBorderBrushDisabled}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundDisabled}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundPressed}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource TimePickerButtonBorderBrushPressed}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundPressed}" />
-                        </Trigger>
-                        <Trigger Property="ClockIdentifier" Value="Clock24Hour">
-                            <Setter TargetName="GridColumnType" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -111,6 +41,170 @@
         </Setter>
     </Style>
 
+    <!--
+    STYLE 2: ListBox Style
+    NEW: This style is crucial. It re-templates the ListBox to gain control over its internal ScrollViewer.
+    Here we hide the scrollbar and enable panning for touch/mouse dragging.
+    -->
+    <Style x:Key="TimePickerPopupListBoxStyle" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource TimePickerPopupListBoxItemStyle}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                        <!-- 
+                        The ScrollViewer is the key.
+                        - VerticalScrollBarVisibility="Hidden": Hides the ugly scrollbar.
+                        - PanningMode="VerticalOnly": Enables the user to click/touch and drag to scroll.
+                        -->
+                        <ScrollViewer Focusable="false"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      PanningMode="VerticalOnly">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+    STYLE 3: The Main TimePicker Style
+    REVISED: Major visual overhaul to match WinUI standards.
+    -->
+    <Style x:Key="DefaultUiTimePickerStyle" TargetType="{x:Type controls:TimePicker}">
+        <!-- Core properties from Wpf.Ui -->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{StaticResource TimePickerBorderThemeThickness}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
+        <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}" />
+        <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:TimePicker}">
+                    <Grid>
+                        <!-- Main button area that the user clicks -->
+                        <Border x:Name="ContentBorder"
+                                Background="{DynamicResource SubtleFillColorTransparentBrush}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{DynamicResource ControlCornerRadius}">
+                            <!-- Using a simple StackPanel for horizontal layout is cleaner -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Margin="12,0,0,0">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource TimeSpanToHourMultiConverter}">
+                                            <Binding Path="Time" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            <Binding Path="ClockIdentifier" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Margin="6,0" Text=":" />
+                                <TextBlock Text="{Binding Time, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TimeSpanToMinuteStringConverter}}"/>
+                                <TextBlock x:Name="AmPmTextBlock" Margin="6,0,12,0" Text="{Binding Time, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TimeSpanToAmPmStringConverter}}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- The Popup containing the selection lists -->
+                        <Popup x:Name="PART_Popup"
+                               PlacementTarget="{Binding ElementName=ContentBorder}"
+                               Placement="Bottom"
+                               AllowsTransparency="True"
+                               StaysOpen="False">
+                            <!-- StaysOpen=False is generally better for usability -->
+                            <Border Margin="0,4,0,0"
+                                    Background="{DynamicResource LayerFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource SurfaceStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CornerRadius="{DynamicResource OverlayCornerRadius}">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="2" BlurRadius="10" Color="{DynamicResource SystemShadowColor}" Opacity="0.1" />
+                                </Border.Effect>
+
+                                <Grid Margin="4" MinWidth="240">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Main selection area -->
+                                    <Grid Grid.Row="0" Margin="0,12,0,12" Height="120">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition x:Name="PopupAmPmColumn" Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- The ListBoxes now use the new style -->
+                                        <ListBox x:Name="PART_HoursList" Grid.Column="0" Style="{StaticResource TimePickerPopupListBoxStyle}"/>
+                                        <TextBlock Grid.Column="1" Text=":" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="4,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" IsHitTestVisible="False"/>
+                                        <ListBox x:Name="PART_MinutesList" Grid.Column="2" Style="{StaticResource TimePickerPopupListBoxStyle}"/>
+                                        <ListBox x:Name="PART_AmPmList" Grid.Column="3" Style="{StaticResource TimePickerPopupListBoxStyle}"/>
+
+                                        <!-- 
+                                        THIS IS THE WINUI-STYLE SELECTION HIGHLIGHT 
+                                        It's an overlay that sits on top of the ListBoxes.
+                                        IsHitTestVisible="False" is critical so it doesn't block mouse/touch input to the lists below.
+                                        -->
+                                        <Border Grid.Column="0" Grid.ColumnSpan="4"
+                                                Height="40"
+                                                VerticalAlignment="Center"
+                                                Background="{DynamicResource SubtleFillColorSecondaryBrush}"
+                                                BorderBrush="{DynamicResource ControlStrongStrokeColorDefaultBrush}"
+                                                BorderThickness="0,1,0,1"
+                                                IsHitTestVisible="False"/>
+                                    </Grid>
+
+                                    <!-- Accept/Dismiss buttons -->
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="8">
+                                        <Button x:Name="PART_AcceptButton"  Content="{Binding AcceptButtonText, RelativeSource={RelativeSource TemplatedParent}}" Style="{DynamicResource AccentButtonStyle}" MinWidth="80"/>
+                                        <Button x:Name="PART_DismissButton" Content="{Binding DismissButtonText, RelativeSource={RelativeSource TemplatedParent}}" Style="{DynamicResource DefaultButtonStyle}" MinWidth="80"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Standard Wpf.Ui state triggers -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                        </Trigger>
+                        <!-- Trigger to hide AM/PM elements in 24-hour mode -->
+                        <Trigger Property="ClockIdentifier" Value="Clock24Hour">
+                            <Setter TargetName="AmPmTextBlock" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PopupAmPmColumn" Property="Width" Value="0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Final style definition -->
     <Style BasedOn="{StaticResource DefaultUiTimePickerStyle}" TargetType="{x:Type controls:TimePicker}" />
 
 </ResourceDictionary>
