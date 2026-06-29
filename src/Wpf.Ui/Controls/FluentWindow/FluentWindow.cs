@@ -308,7 +308,9 @@ public class FluentWindow : System.Windows.Window
                                 ? new Thickness(0.00001)
                                 : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
                         ResizeBorderThickness =
-                            ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                            (ResizeMode == ResizeMode.CanResize || ResizeMode == ResizeMode.CanResizeWithGrip)
+                                ? new Thickness(4)
+                                : default, // only CanResize or CanResizeWithGrip should set Thickness
                         UseAeroCaptionButtons = false,
                     }
                 );
