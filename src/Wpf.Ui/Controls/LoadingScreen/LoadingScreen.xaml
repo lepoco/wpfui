@@ -11,10 +11,15 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style TargetType="{x:Type controls:LoadingScreen}">
-        <Setter Property="Background" Value="{DynamicResource LoadingScreenForeground}" />
+        
         <Setter Property="Background" Value="{DynamicResource LoadingScreenBackground}" />
+
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+
         <Setter Property="SnapsToDevicePixels" Value="True" />
+
         <Setter Property="OverridesDefaultStyle" Value="True" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LoadingScreen}">
@@ -22,13 +27,16 @@
                         Width="{TemplateBinding Width}"
                         Height="{TemplateBinding Height}"
                         Background="{TemplateBinding Background}">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <controls:ProgressRing IsIndeterminate="True" />
+                            <controls:ProgressRing 
+                                IsIndeterminate="True"
+                                Foreground="{TemplateBinding Foreground}" />
                         </Grid>
 
                         <Grid Grid.Column="1" VerticalAlignment="Center">
@@ -39,5 +47,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
