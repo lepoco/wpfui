@@ -91,6 +91,31 @@ public class SelectorBar : System.Windows.Controls.ListBox
     }
 
     /// <inheritdoc/>
+    protected override void OnGotFocus(RoutedEventArgs e)
+    {
+        base.OnGotFocus(e);
+
+        // Mirror WinUI 3 SelectorBar::OnGotFocus: when focus arrives with no
+        // selection (or a non-focusable selected item), select the first
+        // focusable item so the pill appears and SelectionChanged fires.
+        // Without this, Tab-focusing an uninitialized SelectorBar
+        // (SelectedIndex == -1) leaves no selection and raises no event.
+        if (SelectedIndex >= 0 && IsSelectableIndex(SelectedIndex))
+        {
+            return;
+        }
+
+        for (int i = 0; i < Items.Count; i++)
+        {
+            if (IsSelectableIndex(i))
+            {
+                SetCurrentValue(SelectedIndexProperty, i);
+                break;
+            }
+        }
+    }
+
+    /// <inheritdoc/>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         bool handled = e.Key switch
