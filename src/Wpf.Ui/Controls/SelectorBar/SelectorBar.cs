@@ -118,6 +118,7 @@ public class SelectorBar : System.Windows.Controls.ListBox
     /// <inheritdoc/>
     protected override void OnKeyDown(KeyEventArgs e)
     {
+        // Left/Right pass a visual direction; MoveSelection inverts it for RightToLeft.
         bool handled = e.Key switch
         {
             Key.Left => MoveSelection(-1),
@@ -146,10 +147,15 @@ public class SelectorBar : System.Windows.Controls.ListBox
             return false;
         }
 
+        // `step` is the visual direction (+1 = right, -1 = left). In RightToLeft
+        // the items are visually reversed, so the index delta is inverted while
+        // the no-selection fallback stays anchored to the visual start/end.
+        int indexDelta = FlowDirection == FlowDirection.RightToLeft ? -step : step;
+
         int startIndex = SelectedIndex;
         int candidateIndex = startIndex < 0
             ? (step > 0 ? 0 : Items.Count - 1)
-            : startIndex + step;
+            : startIndex + indexDelta;
 
         while (candidateIndex >= 0 && candidateIndex < Items.Count)
         {
@@ -158,7 +164,7 @@ public class SelectorBar : System.Windows.Controls.ListBox
                 return true;
             }
 
-            candidateIndex += step;
+            candidateIndex += indexDelta;
         }
 
         return false;
