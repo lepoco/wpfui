@@ -1,0 +1,215 @@
+<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+
+    Based on Microsoft XAML for Win UI
+    Copyright (c) Microsoft Corporation. All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+
+    <!--
+        WinUI 3 SelectorBar theme resources.
+        In WinUI, all backgrounds are transparent in every state.
+        Hover/Pressed only change foreground (icon + text) color.
+        The selection pill stretches to the full content width.
+    -->
+
+    <Thickness x:Key="SelectorBarPadding">0,4</Thickness>
+    <Thickness x:Key="SelectorBarItemPadding">12,10,12,7</Thickness>
+    <Thickness x:Key="SelectorBarItemIconMargin">0,0,8,0</Thickness>
+    <sys:Double x:Key="SelectorBarItemPillHeight" xmlns:sys="clr-namespace:System;assembly=mscorlib">3</sys:Double>
+    <!--
+        WinUI pill: Width=4, ScaleX animates 1→4 on select → final 16px.
+        In WPF we skip the ScaleX animation and set the final width directly.
+    -->
+    <sys:Double x:Key="SelectorBarItemPillWidth" xmlns:sys="clr-namespace:System;assembly=mscorlib">16</sys:Double>
+
+    <!--  SelectorBarItem Style  -->
+    <Style x:Key="DefaultSelectorBarItemStyle" TargetType="{x:Type controls:SelectorBarItem}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="Padding" Value="{StaticResource SelectorBarItemPadding}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="IconMargin" Value="{StaticResource SelectorBarItemIconMargin}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:SelectorBarItem}">
+                    <Grid
+                        x:Name="PART_ContainerRoot"
+                        Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel
+                            Grid.Row="0"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Orientation="Horizontal">
+                            <ContentControl
+                                x:Name="IconPresenter"
+                                Margin="{Binding IconMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                                VerticalAlignment="Center"
+                                Content="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}"
+                                Focusable="False"
+                                Foreground="{TemplateBinding Foreground}" />
+                            <TextBlock
+                                x:Name="TextPresenter"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+                                TextTrimming="CharacterEllipsis" />
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                RecognizesAccessKey="True"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+
+                        <!--
+                            Selection indicator pill.
+                            WinUI source: Width=4, HorizontalAlignment=Stretch,
+                            with PillTransform ScaleX animating 1→4 on select.
+                            The pill is a small centered rectangle, NOT full-width.
+                            In WPF we use the final computed width (4*4=16) directly.
+                        -->
+                        <!--
+                            WinUI uses Opacity (not Visibility) so the pill
+                            always occupies layout space and content never shifts.
+                        -->
+                        <Border
+                            x:Name="SelectionIndicator"
+                            Grid.Row="1"
+                            Width="{StaticResource SelectorBarItemPillWidth}"
+                            Height="{StaticResource SelectorBarItemPillHeight}"
+                            HorizontalAlignment="Center"
+                            Background="{DynamicResource AccentFillColorDefaultBrush}"
+                            CornerRadius="1.5"
+                            IsHitTestVisible="False"
+                            Opacity="0" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <!--  Collapse icon when null  -->
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="IconPresenter" Property="Margin" Value="0" />
+                        </Trigger>
+
+                        <!--  Collapse text and show ContentPresenter when Text is null or empty  -->
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter TargetName="TextPresenter" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ContentPresenter" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="TextPresenter" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ContentPresenter" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <!--  Hover: only foreground changes, background stays transparent  -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </Trigger>
+
+                        <!--  Selected: show pill, foreground stays primary  -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="SelectionIndicator" Property="Opacity" Value="1" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                        </Trigger>
+
+                        <!--  Selected + Hover: foreground goes secondary, pill still visible  -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </MultiTrigger>
+
+                        <!--  Disabled  -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="SelectionIndicator" Property="Background" Value="{DynamicResource AccentFillColorDisabledBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SelectorBar Style  -->
+    <Style x:Key="DefaultSelectorBarStyle" TargetType="{x:Type controls:SelectorBar}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="{StaticResource SelectorBarPadding}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel IsItemsHost="True" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:SelectorBar}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <controls:PassiveScrollViewer
+                            Padding="{TemplateBinding Padding}"
+                            CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                            Focusable="False"
+                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                            <ItemsPresenter />
+                        </controls:PassiveScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Implicit styles  -->
+    <Style BasedOn="{StaticResource DefaultSelectorBarItemStyle}" TargetType="{x:Type controls:SelectorBarItem}" />
+    <Style BasedOn="{StaticResource DefaultSelectorBarStyle}" TargetType="{x:Type controls:SelectorBar}" />
+
+</ResourceDictionary>
