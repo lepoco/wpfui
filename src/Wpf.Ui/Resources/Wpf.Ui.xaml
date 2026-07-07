@@ -76,6 +76,7 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/RichTextBox/RichTextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/ScrollBar/ScrollBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/ScrollViewer/ScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/SelectorBar/SelectorBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Separator/Separator.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Slider/Slider.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Snackbar/Snackbar.xaml" />
