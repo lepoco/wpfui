@@ -17,7 +17,8 @@
         WinUI 3 SelectorBar theme resources.
         In WinUI, all backgrounds are transparent in every state.
         Hover/Pressed only change foreground (icon + text) color.
-        The selection pill stretches to the full content width.
+        The selection pill is a small centered Rectangle (4px base, scaled
+        to 16px on select), not a full-width underline.
     -->
 
     <Thickness x:Key="SelectorBarPadding">0,4</Thickness>
@@ -25,10 +26,10 @@
     <Thickness x:Key="SelectorBarItemIconMargin">0,0,8,0</Thickness>
     <sys:Double x:Key="SelectorBarItemPillHeight" xmlns:sys="clr-namespace:System;assembly=mscorlib">3</sys:Double>
     <!--
-        WinUI pill: Width=4, ScaleX animates 1→4 on select → final 16px.
-        In WPF we skip the ScaleX animation and set the final width directly.
+        WinUI pill: Width=4 base; PillTransform ScaleX animates 1→4 on select → final 16px.
+        RenderTransform (visual-only) keeps layout at 4px so siblings never shift.
     -->
-    <sys:Double x:Key="SelectorBarItemPillWidth" xmlns:sys="clr-namespace:System;assembly=mscorlib">16</sys:Double>
+    <sys:Double x:Key="SelectorBarItemPillWidth" xmlns:sys="clr-namespace:System;assembly=mscorlib">4</sys:Double>
 
     <!--  SelectorBarItem Style  -->
     <Style x:Key="DefaultSelectorBarItemStyle" TargetType="{x:Type controls:SelectorBarItem}">
@@ -88,26 +89,33 @@
                         </StackPanel>
 
                         <!--
-                            Selection indicator pill.
-                            WinUI source: Width=4, HorizontalAlignment=Stretch,
-                            with PillTransform ScaleX animating 1→4 on select.
-                            The pill is a small centered rectangle, NOT full-width.
-                            In WPF we use the final computed width (4*4=16) directly.
+                            Selection indicator pill (mirrors WinUI 3 PART_SelectionVisual).
+                            Rectangle (not Border) with RadiusX/RadiusY to match WinUI.
+                            Width=4 base; a ScaleTransform animates ScaleX 1→4 on select
+                            (167ms, KeySpline 0,0,0,1) → final visual 16px, centered.
+                            RenderTransformOrigin 0.5,0.5 scales from center so layout
+                            stays 4px and siblings never shift.
                         -->
                         <!--
-                            WinUI uses Opacity (not Visibility) so the pill
-                            always occupies layout space and content never shifts.
+                            Opacity (not Visibility) so the pill always occupies layout
+                            space and content never shifts; animated 0→1 with the scale.
                         -->
-                        <Border
+                        <Rectangle
                             x:Name="SelectionIndicator"
                             Grid.Row="1"
                             Width="{StaticResource SelectorBarItemPillWidth}"
                             Height="{StaticResource SelectorBarItemPillHeight}"
                             HorizontalAlignment="Center"
-                            Background="{DynamicResource AccentFillColorDefaultBrush}"
-                            CornerRadius="1.5"
+                            Fill="{DynamicResource AccentFillColorDefaultBrush}"
+                            RadiusX="0.5"
+                            RadiusY="1"
+                            RenderTransformOrigin="0.5,0.5"
                             IsHitTestVisible="False"
-                            Opacity="0" />
+                            Opacity="0">
+                            <Rectangle.RenderTransform>
+                                <ScaleTransform x:Name="SelectionIndicatorScale" ScaleX="1" ScaleY="1" />
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -134,12 +142,40 @@
                             <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                         </Trigger>
 
-                        <!--  Selected: show pill, foreground stays primary  -->
+                        <!--  Selected: animate pill in (ScaleX 1→4, Opacity 0→1); deselect snaps back instantly — WinUI 3 has no exit animation  -->
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="SelectionIndicator" Property="Opacity" Value="1" />
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
                             <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
                             <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Name="SelectionIndicatorShown">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SelectionIndicator" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)">
+                                            <SplineDoubleKeyFrame KeyTime="0:0:0.167" Value="4" KeySpline="0,0,0,1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SelectionIndicator" Storyboard.TargetProperty="Opacity">
+                                            <SplineDoubleKeyFrame KeyTime="0:0:0.167" Value="1" KeySpline="0,0,0,1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <!--  Instant snap back to base (ScaleX=1, Opacity=0) on deselect  -->
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Name="SelectionIndicatorHidden">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="SelectionIndicator"
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                            To="1"
+                                            Duration="0" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="SelectionIndicator"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
 
                         <!--  Selected + Hover: foreground goes secondary, pill still visible  -->
@@ -158,7 +194,7 @@
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="SelectionIndicator" Property="Background" Value="{DynamicResource AccentFillColorDisabledBrush}" />
+                            <Setter TargetName="SelectionIndicator" Property="Fill" Value="{DynamicResource AccentFillColorDisabledBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
