@@ -24,7 +24,7 @@ public class SelectorBarItem : System.Windows.Controls.ListBoxItem
         nameof(Text),
         typeof(string),
         typeof(SelectorBarItem),
-        new PropertyMetadata(null)
+        new PropertyMetadata(string.Empty)
     );
 
     /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
@@ -54,9 +54,9 @@ public class SelectorBarItem : System.Windows.Controls.ListBoxItem
     /// <summary>
     /// Gets or sets the text label for this item.
     /// </summary>
-    public string? Text
+    public string Text
     {
-        get => (string?)GetValue(TextProperty);
+        get => (string)GetValue(TextProperty);
         set => SetValue(TextProperty, value);
     }
 

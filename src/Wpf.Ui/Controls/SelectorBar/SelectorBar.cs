@@ -38,14 +38,6 @@ namespace Wpf.Ui.Controls;
 [StyleTypedProperty(Property = nameof(ItemContainerStyle), StyleTargetType = typeof(SelectorBarItem))]
 public class SelectorBar : System.Windows.Controls.ListBox
 {
-    /// <summary>Identifies the <see cref="SelectionChanged"/> routed event.</summary>
-    public static new readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
-        nameof(SelectionChanged),
-        RoutingStrategy.Bubble,
-        typeof(TypedEventHandler<SelectorBar, SelectorBarSelectionChangedEventArgs>),
-        typeof(SelectorBar)
-    );
-
     static SelectorBar()
     {
         DefaultStyleKeyProperty.OverrideMetadata(
@@ -59,23 +51,6 @@ public class SelectorBar : System.Windows.Controls.ListBox
         );
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SelectorBar"/> class.
-    /// </summary>
-    public SelectorBar()
-    {
-        SelectionMode = SelectionMode.Single;
-    }
-
-    /// <summary>
-    /// Occurs when the currently selected item changes.
-    /// </summary>
-    public new event TypedEventHandler<SelectorBar, SelectorBarSelectionChangedEventArgs> SelectionChanged
-    {
-        add => AddHandler(SelectionChangedEvent, value);
-        remove => RemoveHandler(SelectionChangedEvent, value);
-    }
-
     /// <inheritdoc/>
     protected override DependencyObject GetContainerForItemOverride() => new SelectorBarItem();
 
@@ -83,24 +58,11 @@ public class SelectorBar : System.Windows.Controls.ListBox
     protected override bool IsItemItsOwnContainerOverride(object item) => item is SelectorBarItem;
 
     /// <inheritdoc/>
-    protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+    protected override void OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs e)
     {
-        base.OnSelectionChanged(e);
+        base.OnIsKeyboardFocusWithinChanged(e);
 
-        RaiseEvent(new SelectorBarSelectionChangedEventArgs(SelectionChangedEvent, this));
-    }
-
-    /// <inheritdoc/>
-    protected override void OnGotFocus(RoutedEventArgs e)
-    {
-        base.OnGotFocus(e);
-
-        // Mirror WinUI 3 SelectorBar::OnGotFocus: when focus arrives with no
-        // selection (or a non-focusable selected item), select the first
-        // focusable item so the pill appears and SelectionChanged fires.
-        // Without this, Tab-focusing an uninitialized SelectorBar
-        // (SelectedIndex == -1) leaves no selection and raises no event.
-        if (SelectedIndex >= 0 && IsSelectableIndex(SelectedIndex))
+        if (e.NewValue is not true || (SelectedIndex >= 0 && IsSelectableIndex(SelectedIndex)))
         {
             return;
         }
@@ -118,7 +80,6 @@ public class SelectorBar : System.Windows.Controls.ListBox
     /// <inheritdoc/>
     protected override void OnKeyDown(KeyEventArgs e)
     {
-        // Left/Right pass a visual direction; MoveSelection inverts it for RightToLeft.
         bool handled = e.Key switch
         {
             Key.Left => MoveSelection(-1),
@@ -137,7 +98,7 @@ public class SelectorBar : System.Windows.Controls.ListBox
         base.OnKeyDown(e);
     }
 
-    private static object CoerceSelectionMode(DependencyObject d, object? baseValue) =>
+    private static object CoerceSelectionMode(DependencyObject _, object? __) =>
         SelectionMode.Single;
 
     private bool MoveSelection(int step)
@@ -147,9 +108,6 @@ public class SelectorBar : System.Windows.Controls.ListBox
             return false;
         }
 
-        // `step` is the visual direction (+1 = right, -1 = left). In RightToLeft
-        // the items are visually reversed, so the index delta is inverted while
-        // the no-selection fallback stays anchored to the visual start/end.
         int indexDelta = FlowDirection == FlowDirection.RightToLeft ? -step : step;
 
         int startIndex = SelectedIndex;
@@ -223,20 +181,15 @@ public class SelectorBar : System.Windows.Controls.ListBox
 
         var container = ItemContainerGenerator.ContainerFromIndex(index) as SelectorBarItem;
 
-        // An ungenerated container (e.g. before layout) is treated as selectable
-        // so first-focus selection isn't blocked while items are still realizing.
         return container is null || IsFocusable(container);
     }
 
-    // Mirrors WinUI's focusability criteria (Visibility + IsEnabled + IsTabStop).
-    // In WPF, Focusable is the focus gate (WinUI's IsTabStop equivalent); WPF's
-    // own IsTabStop only governs tab order, so it is intentionally not required.
-    private static bool IsFocusable(SelectorBarItem? item)
+    private static bool IsFocusable(SelectorBarItem item)
     {
-        return item is not null
-            && item.IsEnabled
+        return item.IsEnabled
             && item.Focusable
-            && item.IsVisible;
+            && item.IsTabStop
+            && item.Visibility == Visibility.Visible;
     }
 
     private void FocusContainer(int index)

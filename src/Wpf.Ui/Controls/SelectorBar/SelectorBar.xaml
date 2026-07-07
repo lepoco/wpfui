@@ -11,25 +11,14 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
-
-    <!--
-        WinUI 3 SelectorBar theme resources.
-        In WinUI, all backgrounds are transparent in every state.
-        Hover/Pressed only change foreground (icon + text) color.
-        The selection pill is a small centered Rectangle (4px base, scaled
-        to 16px on select), not a full-width underline.
-    -->
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <Thickness x:Key="SelectorBarPadding">0,4</Thickness>
     <Thickness x:Key="SelectorBarItemPadding">12,10,12,7</Thickness>
     <Thickness x:Key="SelectorBarItemIconMargin">0,0,8,0</Thickness>
-    <sys:Double x:Key="SelectorBarItemPillHeight" xmlns:sys="clr-namespace:System;assembly=mscorlib">3</sys:Double>
-    <!--
-        WinUI pill: Width=4 base; PillTransform ScaleX animates 1→4 on select → final 16px.
-        RenderTransform (visual-only) keeps layout at 4px so siblings never shift.
-    -->
-    <sys:Double x:Key="SelectorBarItemPillWidth" xmlns:sys="clr-namespace:System;assembly=mscorlib">4</sys:Double>
+    <sys:Double x:Key="SelectorBarItemPillHeight">3</sys:Double>
+    <sys:Double x:Key="SelectorBarItemPillWidth">4</sys:Double>
 
     <!--  SelectorBarItem Style  -->
     <Style x:Key="DefaultSelectorBarItemStyle" TargetType="{x:Type controls:SelectorBarItem}">
@@ -88,18 +77,6 @@
                                 Visibility="Collapsed" />
                         </StackPanel>
 
-                        <!--
-                            Selection indicator pill (mirrors WinUI 3 PART_SelectionVisual).
-                            Rectangle (not Border) with RadiusX/RadiusY to match WinUI.
-                            Width=4 base; a ScaleTransform animates ScaleX 1→4 on select
-                            (167ms, KeySpline 0,0,0,1) → final visual 16px, centered.
-                            RenderTransformOrigin 0.5,0.5 scales from center so layout
-                            stays 4px and siblings never shift.
-                        -->
-                        <!--
-                            Opacity (not Visibility) so the pill always occupies layout
-                            space and content never shifts; animated 0→1 with the scale.
-                        -->
                         <Rectangle
                             x:Name="SelectionIndicator"
                             Grid.Row="1"
@@ -119,13 +96,11 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <!--  Collapse icon when null  -->
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="IconPresenter" Property="Margin" Value="0" />
                         </Trigger>
 
-                        <!--  Collapse text and show ContentPresenter when Text is null or empty  -->
                         <Trigger Property="Text" Value="{x:Null}">
                             <Setter TargetName="TextPresenter" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ContentPresenter" Property="Visibility" Value="Visible" />
@@ -135,18 +110,12 @@
                             <Setter TargetName="ContentPresenter" Property="Visibility" Value="Visible" />
                         </Trigger>
 
-                        <!--  Hover: only foreground changes, background stays transparent  -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                         </Trigger>
 
-                        <!--  Selected: animate pill in (ScaleX 1→4, Opacity 0→1); deselect snaps back instantly — WinUI 3 has no exit animation  -->
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                            <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard Name="SelectionIndicatorShown">
                                     <Storyboard>
@@ -159,7 +128,6 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
-                            <!--  Instant snap back to base (ScaleX=1, Opacity=0) on deselect  -->
                             <Trigger.ExitActions>
                                 <BeginStoryboard Name="SelectionIndicatorHidden">
                                     <Storyboard>
@@ -178,22 +146,16 @@
                             </Trigger.ExitActions>
                         </Trigger>
 
-                        <!--  Selected + Hover: foreground goes secondary, pill still visible  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                         </MultiTrigger>
 
-                        <!--  Disabled  -->
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="TextPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter TargetName="SelectionIndicator" Property="Fill" Value="{DynamicResource AccentFillColorDisabledBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>

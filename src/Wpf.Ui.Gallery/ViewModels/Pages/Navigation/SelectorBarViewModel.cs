@@ -7,7 +7,7 @@ namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
 public partial class SelectorBarViewModel : ViewModel
 {
-    private readonly string[] _contents =
+    private static readonly string[] Contents =
     [
         "Files you've viewed or modified recently.",
         "Files and folders others have shared with you.",
@@ -18,17 +18,12 @@ public partial class SelectorBarViewModel : ViewModel
     private int _selectedIndex;
 
     [ObservableProperty]
-    private string? _selectedContent = "Files you've viewed or modified recently.";
+    private string? _selectedContent = Contents[0];
 
-    /// <summary>
-    /// Updates the displayed content whenever the selection changes.
-    /// The initial value is set by the field initializer above, so this
-    /// only runs for subsequent changes driven by the two-way binding.
-    /// </summary>
     partial void OnSelectedIndexChanged(int value)
     {
-        SelectedContent = value >= 0 && value < _contents.Length
-            ? _contents[value]
+        SelectedContent = value >= 0 && value < Contents.Length
+            ? Contents[value]
             : null;
     }
 }
