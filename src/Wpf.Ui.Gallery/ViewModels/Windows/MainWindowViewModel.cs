@@ -133,6 +133,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem("NavigationView", typeof(NavigationViewPage)),
                 new NavigationViewItem("Menu", typeof(MenuPage)),
                 new NavigationViewItem("Multilevel navigation", typeof(MultilevelNavigationPage)),
+                new NavigationViewItem("SelectorBar", typeof(SelectorBarPage)),
                 new NavigationViewItem("TabControl", typeof(TabControlPage)),
             },
         },
