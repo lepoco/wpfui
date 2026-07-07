@@ -218,12 +218,25 @@ public class SelectorBar : System.Windows.Controls.ListBox
     {
         if (Items[index] is SelectorBarItem directItem)
         {
-            return directItem.IsEnabled;
+            return IsFocusable(directItem);
         }
 
         var container = ItemContainerGenerator.ContainerFromIndex(index) as SelectorBarItem;
 
-        return container?.IsEnabled ?? true;
+        // An ungenerated container (e.g. before layout) is treated as selectable
+        // so first-focus selection isn't blocked while items are still realizing.
+        return container is null || IsFocusable(container);
+    }
+
+    // Mirrors WinUI's focusability criteria (Visibility + IsEnabled + IsTabStop).
+    // In WPF, Focusable is the focus gate (WinUI's IsTabStop equivalent); WPF's
+    // own IsTabStop only governs tab order, so it is intentionally not required.
+    private static bool IsFocusable(SelectorBarItem? item)
+    {
+        return item is not null
+            && item.IsEnabled
+            && item.Focusable
+            && item.IsVisible;
     }
 
     private void FocusContainer(int index)
