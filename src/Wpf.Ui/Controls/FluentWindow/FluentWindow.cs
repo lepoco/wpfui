@@ -295,26 +295,23 @@ public class FluentWindow : System.Windows.Window
     {
         try
         {
-            if (Utilities.IsCompositionEnabled)
-            {
-                WindowChrome.SetWindowChrome(
-                    this,
-                    new WindowChrome
-                    {
-                        CaptionHeight = 0,
-                        CornerRadius = default,
-                        GlassFrameThickness =
-                            WindowBackdropType == WindowBackdropType.None
-                                ? new Thickness(0.00001)
-                                : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
-                        ResizeBorderThickness =
-                            ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
-                        UseAeroCaptionButtons = false,
-                    }
-                );
-            }
+            WindowChrome.SetWindowChrome(
+                                         this,
+                                         new WindowChrome
+                                         {
+                                             CaptionHeight = 0,
+                                             CornerRadius = default,
+                                             GlassFrameThickness =
+                                                 WindowBackdropType == WindowBackdropType.None
+                                                     ? new Thickness(0.00001)
+                                                     : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
+                                             ResizeBorderThickness =
+                                                 ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                                             UseAeroCaptionButtons = false,
+                                         }
+                                        );
         }
-        catch (COMException)
+        catch
         {
             // Ignored.
         }
