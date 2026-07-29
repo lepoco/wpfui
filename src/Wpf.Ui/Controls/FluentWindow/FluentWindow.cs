@@ -305,8 +305,8 @@ public class FluentWindow : System.Windows.Window
                         CornerRadius = default,
                         GlassFrameThickness =
                             WindowBackdropType == WindowBackdropType.None
-                                ? new Thickness(0.00001)
-                                : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
+                                ? new Thickness(1)
+                                : new Thickness(-1),
                         ResizeBorderThickness =
                             ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
                         UseAeroCaptionButtons = false,
