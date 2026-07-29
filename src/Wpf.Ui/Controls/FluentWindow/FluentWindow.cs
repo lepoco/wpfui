@@ -3,8 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Runtime.InteropServices;
 using System.Windows.Shell;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.Graphics.Dwm;
+using Windows.Win32.UI.WindowsAndMessaging;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
 using Wpf.Ui.Win32;
@@ -295,28 +298,57 @@ public class FluentWindow : System.Windows.Window
     {
         try
         {
-            if (Utilities.IsCompositionEnabled)
+            bool canSetBorderMargins = Utilities.IsOSWindows11_24H2OrNewer;
+
+            Thickness glassFrameThickness = WindowBackdropType switch
             {
-                WindowChrome.SetWindowChrome(
-                    this,
-                    new WindowChrome
-                    {
-                        CaptionHeight = 0,
-                        CornerRadius = default,
-                        GlassFrameThickness =
-                            WindowBackdropType == WindowBackdropType.None
-                                ? new Thickness(1)
-                                : new Thickness(-1),
-                        ResizeBorderThickness =
-                            ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
-                        UseAeroCaptionButtons = false,
-                    }
-                );
+                WindowBackdropType.None when canSetBorderMargins => new Thickness(0),
+                WindowBackdropType.None => new Thickness(1),
+                _ => new Thickness(-1)
+            };
+
+            WindowChrome.SetWindowChrome(
+                                         this,
+                                         new WindowChrome
+                                         {
+                                             CaptionHeight = 0,
+                                             CornerRadius = default,
+                                             GlassFrameThickness = glassFrameThickness,
+                                             ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                                             UseAeroCaptionButtons = false
+                                         }
+                                        );
+
+            if (canSetBorderMargins && WindowBackdropType == WindowBackdropType.None)
+            {
+                SetBorderMargins(new Thickness(1));
             }
         }
-        catch (COMException)
+        catch
         {
             // Ignored.
+        }
+    }
+
+    private void SetBorderMargins(Thickness thickness)
+    {
+        IntPtr windowHandle = new WindowInteropHelper(this).Handle;
+
+        FRAME_MARGIN frameMargin = new()
+        {
+            bottom = (short)thickness.Bottom,
+            left = (short)thickness.Left,
+            top = (short)thickness.Top,
+            right = (short)thickness.Right
+        };
+
+        unsafe
+        {
+            PInvoke.DwmSetWindowAttribute(
+                                          new HWND(windowHandle),
+                                          DWMWINDOWATTRIBUTE.DWMWA_BORDER_MARGINS,
+                                          &frameMargin,
+                                          (uint)sizeof(FRAME_MARGIN));
         }
     }
 }
