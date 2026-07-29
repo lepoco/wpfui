@@ -47,6 +47,7 @@
                             Focusable="False"
                             IsOpen="{TemplateBinding IsOpen}"
                             Placement="{TemplateBinding Placement}"
+                            PlacementTarget="{TemplateBinding PlacementTarget}"
                             PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
                             StaysOpen="{TemplateBinding Popup.StaysOpen}"
                             VerticalOffset="1">
