@@ -11,12 +11,12 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a control that creates a pop-up window that displays information for an element in the interface.
 /// </summary>
-[TemplatePart(Name = "PART_Popup", Type = typeof(System.Windows.Controls.Primitives.Popup))]
+[TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
 public class Flyout : System.Windows.Controls.ContentControl
 {
     private const string ElementPopup = "PART_Popup";
 
-    private System.Windows.Controls.Primitives.Popup? _popup = default;
+    private Popup? _popup;
 
     /// <summary>Identifies the <see cref="IsOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
@@ -32,6 +32,14 @@ public class Flyout : System.Windows.Controls.ContentControl
         typeof(PlacementMode),
         typeof(Flyout),
         new PropertyMetadata(PlacementMode.Top)
+    );
+
+    /// <summary>Identifies the <see cref="PlacementTarget"/> dependency property.</summary>
+    public static readonly DependencyProperty PlacementTargetProperty = DependencyProperty.Register(
+        nameof(PlacementTarget),
+        typeof(UIElement),
+        typeof(Flyout),
+        new PropertyMetadata(null)
     );
 
     /// <summary>Identifies the <see cref="Opened"/> routed event.</summary>
@@ -91,6 +99,17 @@ public class Flyout : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
+    /// Gets or sets the target for the <see cref="Flyout" /> control when the control opens.
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public UIElement? PlacementTarget
+    {
+        get => (UIElement?)GetValue(PlacementTargetProperty);
+        set => SetValue(PlacementTargetProperty, value);
+    }
+
+    /// <summary>
     /// Invoked whenever application code or an internal process,
     /// such as a rebuilding layout pass, calls the ApplyTemplate method.
     /// </summary>
@@ -98,7 +117,7 @@ public class Flyout : System.Windows.Controls.ContentControl
     {
         base.OnApplyTemplate();
 
-        _popup = GetTemplateChild(ElementPopup) as System.Windows.Controls.Primitives.Popup;
+        _popup = GetTemplateChild(ElementPopup) as Popup;
 
         if (_popup is null)
         {
