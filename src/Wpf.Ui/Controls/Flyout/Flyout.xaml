@@ -45,11 +45,14 @@
                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             AllowsTransparency="{TemplateBinding Popup.AllowsTransparency}"
                             Focusable="False"
+                            HorizontalOffset="{TemplateBinding HorizontalOffset}"
                             IsOpen="{TemplateBinding IsOpen}"
                             Placement="{TemplateBinding Placement}"
+                            PlacementRectangle="{TemplateBinding PlacementRectangle}"
+                            PlacementTarget="{TemplateBinding PlacementTarget}"
                             PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
                             StaysOpen="{TemplateBinding Popup.StaysOpen}"
-                            VerticalOffset="1">
+                            VerticalOffset="{TemplateBinding VerticalOffset}">
                             <Border
                                 x:Name="PopupBorder"
                                 Margin="{TemplateBinding Margin}"

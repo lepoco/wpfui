@@ -11,12 +11,12 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a control that creates a pop-up window that displays information for an element in the interface.
 /// </summary>
-[TemplatePart(Name = "PART_Popup", Type = typeof(System.Windows.Controls.Primitives.Popup))]
+[TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
 public class Flyout : System.Windows.Controls.ContentControl
 {
     private const string ElementPopup = "PART_Popup";
 
-    private System.Windows.Controls.Primitives.Popup? _popup = default;
+    private Popup? _popup;
 
     /// <summary>Identifies the <see cref="IsOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
@@ -32,6 +32,38 @@ public class Flyout : System.Windows.Controls.ContentControl
         typeof(PlacementMode),
         typeof(Flyout),
         new PropertyMetadata(PlacementMode.Top)
+    );
+
+    /// <summary>Identifies the <see cref="PlacementTarget"/> dependency property.</summary>
+    public static readonly DependencyProperty PlacementTargetProperty = DependencyProperty.Register(
+        nameof(PlacementTarget),
+        typeof(UIElement),
+        typeof(Flyout),
+        new PropertyMetadata(defaultValue: null)
+    );
+
+    /// <summary>Identifies the <see cref="PlacementRectangle"/> dependency property.</summary>
+    public static readonly DependencyProperty PlacementRectangleProperty = DependencyProperty.Register(
+        nameof(PlacementRectangle),
+        typeof(Rect),
+        typeof(Flyout),
+        new PropertyMetadata(Rect.Empty)
+    );
+
+    /// <summary>Identifies the <see cref="HorizontalOffset"/> dependency property.</summary>
+    public static readonly DependencyProperty HorizontalOffsetProperty = DependencyProperty.Register(
+        nameof(HorizontalOffset),
+        typeof(double),
+        typeof(Flyout),
+        new PropertyMetadata(0.0)
+    );
+
+    /// <summary>Identifies the <see cref="VerticalOffset"/> dependency property.</summary>
+    public static readonly DependencyProperty VerticalOffsetProperty = DependencyProperty.Register(
+        nameof(VerticalOffset),
+        typeof(double),
+        typeof(Flyout),
+        new PropertyMetadata(0.0)
     );
 
     /// <summary>Identifies the <see cref="Opened"/> routed event.</summary>
@@ -91,6 +123,50 @@ public class Flyout : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
+    /// Gets or sets the target for the <see cref="Flyout" /> control when the control opens.
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public UIElement? PlacementTarget
+    {
+        get => (UIElement?)GetValue(PlacementTargetProperty);
+        set => SetValue(PlacementTargetProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the PlacementRectangle property of the Flyout
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public Rect PlacementRectangle
+    {
+        get { return (Rect)GetValue(PlacementRectangleProperty); }
+        set { SetValue(PlacementRectangleProperty, value); }
+    }
+
+    /// <summary>
+    /// Gets or sets the horizontal offset of the <see cref="Flyout" /> control when the control opens.
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public double HorizontalOffset
+    {
+        get { return (double)GetValue(HorizontalOffsetProperty); }
+        set { SetValue(HorizontalOffsetProperty, value); }
+    }
+
+    /// <summary>
+    /// Gets or sets the vertical offset of the <see cref="Flyout" /> control when the control opens.
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public double VerticalOffset
+    {
+        get { return (double)GetValue(VerticalOffsetProperty); }
+        set { SetValue(VerticalOffsetProperty, value); }
+    }
+
+    /// <summary>
     /// Invoked whenever application code or an internal process,
     /// such as a rebuilding layout pass, calls the ApplyTemplate method.
     /// </summary>
@@ -98,7 +174,7 @@ public class Flyout : System.Windows.Controls.ContentControl
     {
         base.OnApplyTemplate();
 
-        _popup = GetTemplateChild(ElementPopup) as System.Windows.Controls.Primitives.Popup;
+        _popup = GetTemplateChild(ElementPopup) as Popup;
 
         if (_popup is null)
         {
