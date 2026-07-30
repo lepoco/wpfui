@@ -42,6 +42,30 @@ public class Flyout : System.Windows.Controls.ContentControl
         new PropertyMetadata(null)
     );
 
+    /// <summary>Identifies the <see cref="PlacementRectangle"/> dependency property.</summary>
+    public static readonly DependencyProperty PlacementRectangleProperty = DependencyProperty.Register(
+        nameof(PlacementRectangle),
+        typeof(Rect),
+        typeof(Flyout),
+        new PropertyMetadata(default(Rect))
+    );
+
+    /// <summary>Identifies the <see cref="HorizontalOffset"/> dependency property.</summary>
+    public static readonly DependencyProperty HorizontalOffsetProperty = DependencyProperty.Register(
+        nameof(HorizontalOffset),
+        typeof(double),
+        typeof(Flyout),
+        new PropertyMetadata(0.0)
+    );
+
+    /// <summary>Identifies the <see cref="VerticalOffset"/> dependency property.</summary>
+    public static readonly DependencyProperty VerticalOffsetProperty = DependencyProperty.Register(
+        nameof(VerticalOffset),
+        typeof(double),
+        typeof(Flyout),
+        new PropertyMetadata(0.0)
+    );
+
     /// <summary>Identifies the <see cref="Opened"/> routed event.</summary>
     public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(
         nameof(Opened),
@@ -107,6 +131,39 @@ public class Flyout : System.Windows.Controls.ContentControl
     {
         get => (UIElement?)GetValue(PlacementTargetProperty);
         set => SetValue(PlacementTargetProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the PlacementRectangle property of the Flyout
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public Rect PlacementRectangle
+    {
+        get { return (Rect)GetValue(PlacementRectangleProperty); }
+        set { SetValue(PlacementRectangleProperty, value); }
+    }
+
+    /// <summary>
+    /// Gets or sets the horizontal offset of the <see cref="Flyout" /> control when the control opens.
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public double HorizontalOffset
+    {
+        get { return (double)GetValue(HorizontalOffsetProperty); }
+        set { SetValue(HorizontalOffsetProperty, value); }
+    }
+
+    /// <summary>
+    /// Gets or sets the vertical offset of the <see cref="Flyout" /> control when the control opens.
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public double VerticalOffset
+    {
+        get { return (double)GetValue(VerticalOffsetProperty); }
+        set { SetValue(VerticalOffsetProperty, value); }
     }
 
     /// <summary>
