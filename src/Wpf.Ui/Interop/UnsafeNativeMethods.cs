@@ -257,6 +257,29 @@ internal static class UnsafeNativeMethods
         return result.ToInt64() > 0;
     }
 
+    public static void SetBorderMargins(Window window, Thickness thickness)
+    {
+        if (GetHandle(window, out IntPtr windowHandle))
+        {
+            FRAME_MARGIN frameMargin = new()
+            {
+                bottom = (short)thickness.Bottom,
+                left = (short)thickness.Left,
+                top = (short)thickness.Top,
+                right = (short)thickness.Right
+            };
+
+            unsafe
+            {
+                PInvoke.DwmSetWindowAttribute(
+                                              new HWND(windowHandle),
+                                              DWMWINDOWATTRIBUTE.DWMWA_BORDER_MARGINS,
+                                              &frameMargin,
+                                              (uint)sizeof(FRAME_MARGIN));
+            }
+        }
+    }
+
     /// <summary>
     /// Tries to get currently selected Window accent color.
     /// </summary>
