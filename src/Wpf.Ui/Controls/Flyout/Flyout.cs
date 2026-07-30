@@ -39,7 +39,7 @@ public class Flyout : System.Windows.Controls.ContentControl
         nameof(PlacementTarget),
         typeof(UIElement),
         typeof(Flyout),
-        new PropertyMetadata(null)
+        new PropertyMetadata(defaultValue: null)
     );
 
     /// <summary>Identifies the <see cref="PlacementRectangle"/> dependency property.</summary>
@@ -47,7 +47,7 @@ public class Flyout : System.Windows.Controls.ContentControl
         nameof(PlacementRectangle),
         typeof(Rect),
         typeof(Flyout),
-        new PropertyMetadata(default(Rect))
+        new PropertyMetadata(Rect.Empty)
     );
 
     /// <summary>Identifies the <see cref="HorizontalOffset"/> dependency property.</summary>
