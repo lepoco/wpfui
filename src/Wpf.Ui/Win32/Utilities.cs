@@ -60,22 +60,22 @@ internal sealed class Utilities
     /// <summary>
     /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 10240).
     /// </summary>
-    public static bool IsOSWindows10OrNewer => _osVersion.Build >= 10240;
+    public static bool IsOSWindows10OrNewer => _osVersion is { Major: >= 10, Build: >= 10240 };
 
     /// <summary>
     /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 22000).
     /// </summary>
-    public static bool IsOSWindows11OrNewer => _osVersion.Build >= 22000;
+    public static bool IsOSWindows11OrNewer => _osVersion is { Major: >= 10, Build: >= 22000 };
+
+    /// <summary>
+    /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 26100).
+    /// </summary>
+    public static bool IsOSWindows11_24H2OrNewer => _osVersion is { Major: >= 10, Build: >= 26100 };
 
     /// <summary>
     /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 22523).
     /// </summary>
-    public static bool IsOSWindows11Insider1OrNewer => _osVersion.Build >= 22523;
-
-    /// <summary>
-    /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 22557).
-    /// </summary>
-    public static bool IsOSWindows11Insider2OrNewer => _osVersion.Build >= 22557;
+    public static bool IsOSWindows11Insider1OrNewer => _osVersion is { Major: >= 10, Build: >= 22523 };
 
     /// <summary>
     /// Gets a value indicating whether Desktop Window Manager (DWM) composition is enabled.

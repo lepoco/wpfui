@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Runtime.InteropServices;
 using System.Windows.Shell;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
@@ -295,26 +294,33 @@ public class FluentWindow : System.Windows.Window
     {
         try
         {
-            if (Utilities.IsCompositionEnabled)
+            bool canSetBorderMargins = Utilities.IsOSWindows11_24H2OrNewer;
+
+            Thickness glassFrameThickness = WindowBackdropType switch
             {
-                WindowChrome.SetWindowChrome(
-                    this,
-                    new WindowChrome
-                    {
-                        CaptionHeight = 0,
-                        CornerRadius = default,
-                        GlassFrameThickness =
-                            WindowBackdropType == WindowBackdropType.None
-                                ? new Thickness(0.00001)
-                                : new Thickness(-1), // 0.00001 so there's no glass frame drawn around the window, but the border is still drawn.
-                        ResizeBorderThickness =
-                            ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
-                        UseAeroCaptionButtons = false,
-                    }
-                );
+                WindowBackdropType.None when canSetBorderMargins => new Thickness(0),
+                WindowBackdropType.None => new Thickness(1),
+                _ => new Thickness(-1)
+            };
+
+            WindowChrome.SetWindowChrome(
+                                         this,
+                                         new WindowChrome
+                                         {
+                                             CaptionHeight = 0,
+                                             CornerRadius = default,
+                                             GlassFrameThickness = glassFrameThickness,
+                                             ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
+                                             UseAeroCaptionButtons = false
+                                         }
+                                        );
+
+            if (canSetBorderMargins && WindowBackdropType == WindowBackdropType.None)
+            {
+                UnsafeNativeMethods.SetBorderMargins(this, new Thickness(1));
             }
         }
-        catch (COMException)
+        catch
         {
             // Ignored.
         }
