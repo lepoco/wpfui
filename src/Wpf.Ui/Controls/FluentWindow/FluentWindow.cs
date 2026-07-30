@@ -4,10 +4,6 @@
 // All Rights Reserved.
 
 using System.Windows.Shell;
-using Windows.Win32;
-using Windows.Win32.Foundation;
-using Windows.Win32.Graphics.Dwm;
-using Windows.Win32.UI.WindowsAndMessaging;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
 using Wpf.Ui.Win32;
@@ -321,34 +317,12 @@ public class FluentWindow : System.Windows.Window
 
             if (canSetBorderMargins && WindowBackdropType == WindowBackdropType.None)
             {
-                SetBorderMargins(new Thickness(1));
+                UnsafeNativeMethods.SetBorderMargins(this, new Thickness(1));
             }
         }
         catch
         {
             // Ignored.
-        }
-    }
-
-    private void SetBorderMargins(Thickness thickness)
-    {
-        IntPtr windowHandle = new WindowInteropHelper(this).Handle;
-
-        FRAME_MARGIN frameMargin = new()
-        {
-            bottom = (short)thickness.Bottom,
-            left = (short)thickness.Left,
-            top = (short)thickness.Top,
-            right = (short)thickness.Right
-        };
-
-        unsafe
-        {
-            PInvoke.DwmSetWindowAttribute(
-                                          new HWND(windowHandle),
-                                          DWMWINDOWATTRIBUTE.DWMWA_BORDER_MARGINS,
-                                          &frameMargin,
-                                          (uint)sizeof(FRAME_MARGIN));
         }
     }
 }
