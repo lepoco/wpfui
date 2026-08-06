@@ -264,11 +264,11 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
                 e.Handled = true;
                 break;
             case Key.Up:
-                StepValue(SmallChange);
+                StepValue(Keyboard.Modifiers.HasFlag(ModifierKeys.Control) ? LargeChange : SmallChange);
                 e.Handled = true;
                 break;
             case Key.Down:
-                StepValue(-SmallChange);
+                StepValue(Keyboard.Modifiers.HasFlag(ModifierKeys.Control) ? -LargeChange : -SmallChange);
                 e.Handled = true;
                 break;
         }
@@ -285,7 +285,7 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
                 if (TextWrapping != TextWrapping.Wrap)
                 {
                     ValidateInput();
-                    MoveCaretToTextEnd();
+                    SelectAll();
                 }
 
                 e.Handled = true;
@@ -301,6 +301,44 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <inheritdoc />
+    protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+    {
+        if (!e.Handled && !IsKeyboardFocusWithin)
+        {
+            e.Handled = true;
+            Focus();
+            SelectAll();
+            return;
+        }
+
+        base.OnPreviewMouseLeftButtonDown(e);
+    }
+
+    /// <inheritdoc />
+    protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
+    {
+        base.OnPreviewMouseWheel(e);
+
+        if (e.Handled || IsReadOnly || !IsEnabled || !IsKeyboardFocusWithin)
+        {
+            return;
+        }
+
+        var change = Keyboard.Modifiers.HasFlag(ModifierKeys.Control) ? LargeChange : SmallChange;
+        StepValue(e.Delta > 0 ? change : -change);
+        e.Handled = true;
+    }
+
+    /// <inheritdoc />
+    protected override void OnGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
+    {
+        base.OnGotKeyboardFocus(e);
+
+        UpdateTextToValue(false);
+        SelectAll();
+    }
+
+    /// <inheritdoc />
     protected override void OnLostFocus(RoutedEventArgs e)
     {
         base.OnLostFocus(e);
@@ -308,11 +346,10 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
         var oldValue = Value;
         ValidateInput();
 
-        // Update binding source if value changed
         if (!Equals(oldValue, Value))
-        {
             GetBindingExpression(ValueProperty)?.UpdateSource();
-        }
+
+        UpdateTextToValue();
     }
 
     /*/// <inheritdoc />
@@ -445,13 +482,21 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
         MoveCaretToTextEnd();
     }
 
-    private void UpdateTextToValue()
+    private void UpdateTextToValue(bool applyStringFormat = true)
     {
         var newText = string.Empty;
 
         if (Value is not null && NumberFormatter is not null)
-        {
             newText = NumberFormatter.FormatDouble(Math.Round((double)Value, MaxDecimalPlaces));
+
+        if (
+            applyStringFormat
+            && !IsKeyboardFocusWithin
+            && Value is not null
+            && BindingOperations.GetBindingBase(this, ValueProperty)?.StringFormat is string stringFormat
+        )
+        {
+            newText = string.Format(CultureInfo.CurrentCulture, stringFormat, Value);
         }
 
         SetCurrentValue(TextProperty, newText);
