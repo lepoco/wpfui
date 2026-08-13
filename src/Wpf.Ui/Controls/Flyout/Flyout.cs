@@ -132,11 +132,17 @@ public class Flyout : System.Windows.Controls.ContentControl
     {
         RaiseEvent(new RoutedEventArgs(OpenedEvent, this));
 
-        // The "Focus" method doesn't work, use WinAPI to directly set focus to the popup child.
-        if (_popup?.Child is { } child && PresentationSource.FromVisual(child) is HwndSource source)
+        if (_popup?.Child is { } child)
         {
-            IntPtr handle = source.Handle;
-            PInvoke.SetFocus((HWND)handle);
+            if (!child.Focusable)
+            {
+                // EffectThicknessDecorator is not focusable by default.
+                child.Focusable = true;
+                KeyboardNavigation.SetIsTabStop(child, false);
+            }
+
+            child.Focus();
+            Keyboard.Focus(child);
         }
     }
 
