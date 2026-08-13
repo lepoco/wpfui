@@ -131,6 +131,13 @@ public class Flyout : System.Windows.Controls.ContentControl
     protected virtual void OnPopupOpened(object? sender, EventArgs e)
     {
         RaiseEvent(new RoutedEventArgs(OpenedEvent, this));
+
+        // The "Focus" method doesn't work, use WinAPI to directly set focus to the popup child.
+        if (_popup?.Child is { } child && PresentationSource.FromVisual(child) is HwndSource source)
+        {
+            IntPtr handle = source.Handle;
+            PInvoke.SetFocus((HWND)handle);
+        }
     }
 
     protected virtual void OnPopupClosed(object? sender, EventArgs e)
