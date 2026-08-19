@@ -6,6 +6,7 @@
 using System.Reflection;
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
+using System.Runtime.InteropServices;
 using Size = System.Windows.Size;
 #if NET8_0_OR_GREATER
 using System.Runtime.CompilerServices;
@@ -416,20 +417,92 @@ public class MessageBox : System.Windows.Window
 
     protected virtual void CenterWindowOnScreen()
     {
-        double screenWidth = SystemParameters.PrimaryScreenWidth;
-        double screenHeight = SystemParameters.PrimaryScreenHeight;
+        nint monitor;
 
-        SetCurrentValue(LeftProperty, (screenWidth / 2) - (Width / 2));
-        SetCurrentValue(TopProperty, (screenHeight / 2) - (Height / 2));
+        if (Owner is not null)
+        {
+            nint ownerHandle = new WindowInteropHelper(Owner).Handle;
+
+            monitor = MonitorFromWindow(
+                ownerHandle,
+                MonitorOptions.MONITOR_DEFAULTTONEAREST
+            );
+        }
+        else if (GetCursorPos(out POINT cursorPosition))
+        {
+            monitor = MonitorFromPoint(
+                cursorPosition,
+                MonitorOptions.MONITOR_DEFAULTTONEAREST
+            );
+        }
+        else
+        {
+            return;
+        }
+
+        var monitorInfo = new MONITORINFO
+        {
+            CbSize = (uint)Marshal.SizeOf<MONITORINFO>()
+        };
+
+        if (!GetMonitorInfo(monitor, ref monitorInfo))
+        {
+            return;
+        }
+
+        var source = PresentationSource.FromVisual(this);
+        if (source?.CompositionTarget is null)
+        {
+            return;
+        }
+
+        Point topLeft = source.CompositionTarget.TransformFromDevice.Transform(
+            new Point(monitorInfo.RcWork.Left, monitorInfo.RcWork.Top)
+        );
+
+        Point bottomRight = source.CompositionTarget.TransformFromDevice.Transform(
+            new Point(monitorInfo.RcWork.Right, monitorInfo.RcWork.Bottom)
+        );
+
+        double workAreaWidth = bottomRight.X - topLeft.X;
+        double workAreaHeight = bottomRight.Y - topLeft.Y;
+
+        SetCurrentValue(LeftProperty, topLeft.X + ((workAreaWidth - Width) / 2));
+        SetCurrentValue(TopProperty, topLeft.Y + ((workAreaHeight - Height) / 2));
     }
 
     private void CenterWindowOnOwner()
     {
-        double left = Owner.Left + ((Owner.Width - Width) / 2);
-        double top = Owner.Top + ((Owner.Height - Height) / 2);
+        if (Owner is null)
+        {
+            return;
+        }
 
-        SetCurrentValue(LeftProperty, left);
-        SetCurrentValue(TopProperty, top);
+        nint ownerHandle = new WindowInteropHelper(Owner).Handle;
+        if (ownerHandle == IntPtr.Zero || !GetWindowRect(ownerHandle, out RECT rect))
+        {
+            return;
+        }
+
+        var source = PresentationSource.FromVisual(Owner);
+        if (source?.CompositionTarget is null)
+        {
+            return;
+        }
+
+        Point topLeft = source.CompositionTarget.TransformFromDevice.Transform(
+            new Point(rect.Left, rect.Top)
+        );
+
+        Point bottomRight = source.CompositionTarget.TransformFromDevice.Transform(
+            new Point(rect.Right, rect.Bottom)
+        );
+
+        double ownerWidth = bottomRight.X - topLeft.X;
+        double ownerHeight = bottomRight.Y - topLeft.Y;
+
+        SetCurrentValue(LeftProperty, topLeft.X + ((ownerWidth - Width) / 2));
+        SetCurrentValue(TopProperty, topLeft.Y + ((ownerHeight - Height) / 2));
     }
 
     /// <summary>
@@ -489,5 +562,55 @@ public class MessageBox : System.Windows.Window
         {
             SetCurrentValue(MaxWidthProperty, Width);
         }
+    }
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct RECT
+    {
+        public int Left;
+        public int Top;
+        public int Right;
+        public int Bottom;
+    }
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool GetCursorPos(out POINT lpPoint);
+
+    [DllImport("user32.dll")]
+    internal static extern nint MonitorFromWindow(nint hwnd, MonitorOptions dwFlags);
+
+    [DllImport("user32.dll")]
+    private static extern nint MonitorFromPoint(POINT pt, MonitorOptions dwFlags);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool GetMonitorInfo(nint hMonitor, ref MONITORINFO lpmi);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct POINT
+    {
+        public int X;
+        public int Y;
+    }
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    private struct MONITORINFO
+    {
+        public uint CbSize;
+        public RECT RcMonitor;
+        public RECT RcWork;
+        public uint DwFlags;
+    }
+
+    internal enum MonitorOptions : uint
+    {
+        MONITOR_DEFAULTTONULL = 0x00000000,
+        MONITOR_DEFAULTTOPRIMARY = 0x00000001,
+        MONITOR_DEFAULTTONEAREST = 0x00000002
     }
 }
