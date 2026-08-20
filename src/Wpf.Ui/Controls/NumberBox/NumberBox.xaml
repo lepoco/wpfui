@@ -18,7 +18,8 @@
     <Thickness x:Key="NumberBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
     <Thickness x:Key="NumberBoxLeftIconMargin">10,8,0,0</Thickness>
     <Thickness x:Key="NumberBoxRightIconMargin">0,8,10,0</Thickness>
-    <Thickness x:Key="NumberBoxButtonMargin">0,5,4,0</Thickness>
+    <Thickness x:Key="NumberBoxButtonMargin">0,0,4,0</Thickness>
+    <Thickness x:Key="NumberBoxButtonMarginCompact">0,0,0,0</Thickness>
     <Thickness x:Key="NumberBoxButtonPadding">0,0,0,0</Thickness>
     <system:Double x:Key="NumberBoxButtonHeight">24</system:Double>
     <system:Double x:Key="NumberBoxButtonIconSize">14</system:Double>
@@ -114,7 +115,7 @@
                                         Margin="{StaticResource NumberBoxButtonMargin}"
                                         Padding="{StaticResource NumberBoxButtonPadding}"
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Top"
+                                        VerticalAlignment="Center"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         Background="Transparent"
@@ -129,10 +130,10 @@
                                         x:Name="PART_CompactIncrementDecrementButton"
                                         Width="{StaticResource NumberBoxButtonHeight}"
                                         Height="{StaticResource NumberBoxButtonHeight}"
-                                        Margin="{StaticResource NumberBoxButtonMargin}"
+                                        Margin="{StaticResource NumberBoxButtonMarginCompact}"
                                         Padding="{StaticResource NumberBoxButtonPadding}"
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Top"
+                                        VerticalAlignment="Center"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         Background="Transparent"
@@ -170,7 +171,7 @@
                                         Margin="{StaticResource NumberBoxButtonMargin}"
                                         Padding="{StaticResource NumberBoxButtonPadding}"
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Top"
+                                        VerticalAlignment="Center"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         Background="Transparent"
@@ -187,7 +188,7 @@
                                         Margin="{StaticResource NumberBoxButtonMargin}"
                                         Padding="{StaticResource NumberBoxButtonPadding}"
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Top"
+                                        VerticalAlignment="Center"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         Background="Transparent"
