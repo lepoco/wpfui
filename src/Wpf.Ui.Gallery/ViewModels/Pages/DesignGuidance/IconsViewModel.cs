@@ -5,6 +5,7 @@
 
 using System.Windows.Controls;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Extensions;
 using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DesignGuidance;
@@ -72,7 +73,7 @@ public partial class IconsViewModel : ViewModel
                         Id = id++,
                         Name = iconName,
                         Icon = icon,
-                        Symbol = ((char)icon).ToString(),
+                        Symbol = icon.GetString(),
                         Code = ((int)icon).ToString("X4"),
                     }
                 );
