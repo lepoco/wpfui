@@ -138,6 +138,10 @@
                     <ui:Button Appearance="Success"   Content="Success"   Margin="4" />
                     <ui:Button Appearance="Caution"   Content="Caution"   Margin="4" />
                     <ui:Button Appearance="Danger"    Content="Danger"    Margin="4" />
+                    <ui:Button Appearance="Info"      Content="Info"      Margin="4" />
+                    <ui:Button Appearance="Light"     Content="Light"     Margin="4" />
+                    <ui:Button Appearance="Dark"      Content="Dark"      Margin="4" />
+                    <ui:Button Appearance="Transparent" Content="Transparent" Margin="4" />
                 </WrapPanel>
 
                 <TextBlock Text="Disabled" />
@@ -147,6 +151,10 @@
                     <ui:Button Appearance="Success"   Content="Success"   IsEnabled="False" Margin="4" />
                     <ui:Button Appearance="Caution"   Content="Caution"   IsEnabled="False" Margin="4" />
                     <ui:Button Appearance="Danger"    Content="Danger"    IsEnabled="False" Margin="4" />
+                    <ui:Button Appearance="Info"      Content="Info"      IsEnabled="False" Margin="4" />
+                    <ui:Button Appearance="Light"     Content="Light"     IsEnabled="False" Margin="4" />
+                    <ui:Button Appearance="Dark"      Content="Dark"      IsEnabled="False" Margin="4" />
+                    <ui:Button Appearance="Transparent" Content="Transparent" IsEnabled="False" Margin="4" />
                 </WrapPanel>
             </StackPanel>
         </controls:ControlExample>
