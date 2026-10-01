@@ -313,6 +313,9 @@
                 <Setter TargetName="PART_ChevronGrid" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_ChevronGrid" Property="Width" Value="20" />
             </Trigger>
+            <Trigger Property="ExpandDirection" Value="Up">
+                <Setter TargetName="SubMenuPopup" Property="Placement" Value="Top" />
+            </Trigger>
             <Trigger Property="IsExpanded" Value="True">
 
                 <Trigger.EnterActions>
