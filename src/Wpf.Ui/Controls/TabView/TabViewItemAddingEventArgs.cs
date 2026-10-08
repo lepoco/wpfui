@@ -3,9 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-using System.Windows.Input;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
@@ -15,12 +12,20 @@ namespace Wpf.Ui.Controls;
 public class TabViewItemAddingEventArgs : EventArgs
 {
     /// <summary>
-    /// Gets or sets the tab item to be added. If null, a new TabViewItem will be created.
+    /// Gets or sets the tab item to be added. With unbound Items, a new TabViewItem is
+    /// created when neither this property nor Item is supplied.
     /// </summary>
     public TabViewItem? TabItem { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the add operation should be canceled.
+    /// Gets or sets the data item to add to ItemsSource. A bound model collection requires
+    /// an item of its element type; the control does not create models automatically.
+    /// </summary>
+    public object? Item { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the default add operation should be canceled.
+    /// Set this to true when the handler updates the collection itself.
     /// </summary>
     public bool Cancel { get; set; }
 }

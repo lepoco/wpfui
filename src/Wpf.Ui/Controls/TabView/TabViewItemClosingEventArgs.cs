@@ -3,9 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-using System.Windows.Input;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
@@ -19,8 +16,12 @@ public class TabViewItemClosingEventArgs : EventArgs
     /// </summary>
     public TabViewItem TabItem { get; }
 
+    /// <summary>Gets the data item represented by <see cref="TabItem"/>.</summary>
+    public object? Item { get; internal set; }
+
     /// <summary>
-    /// Gets or sets a value indicating whether the close operation should be canceled.
+    /// Gets or sets a value indicating whether the default close operation should be canceled.
+    /// Set this to true when the handler updates the collection itself.
     /// </summary>
     public bool Cancel { get; set; }
 
@@ -30,5 +31,6 @@ public class TabViewItemClosingEventArgs : EventArgs
     public TabViewItemClosingEventArgs(TabViewItem tabItem)
     {
         TabItem = tabItem;
+        Item = tabItem;
     }
 }

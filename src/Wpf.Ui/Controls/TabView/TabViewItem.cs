@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Windows;
-using System.Windows.Input;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -15,6 +14,8 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = "PART_CloseButton", Type = typeof(System.Windows.Controls.Button))]
 public class TabViewItem : System.Windows.Controls.TabItem
 {
+    private System.Windows.Controls.Button? _closeButton;
+
     /// <summary>Identifies the <see cref="IsClosable"/> dependency property.</summary>
     public static readonly DependencyProperty IsClosableProperty = DependencyProperty.Register(
         nameof(IsClosable),
@@ -42,22 +43,33 @@ public class TabViewItem : System.Windows.Controls.TabItem
     /// </summary>
     internal void OnCloseRequested()
     {
-        CloseRequested?.Invoke(this, new RoutedEventArgs());
+        if (IsClosable)
+        {
+            CloseRequested?.Invoke(this, new RoutedEventArgs());
+        }
     }
 
     static TabViewItem()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(TabViewItem), new FrameworkPropertyMetadata(typeof(TabViewItem)));
+        DefaultStyleKeyProperty.OverrideMetadata(
+            typeof(TabViewItem),
+            new FrameworkPropertyMetadata(typeof(TabViewItem))
+        );
     }
 
     public override void OnApplyTemplate()
     {
+        if (_closeButton != null)
+        {
+            _closeButton.Click -= OnCloseButtonClick;
+        }
+
         base.OnApplyTemplate();
 
-        if (GetTemplateChild("PART_CloseButton") is System.Windows.Controls.Button closeButton)
+        _closeButton = GetTemplateChild("PART_CloseButton") as System.Windows.Controls.Button;
+        if (_closeButton != null)
         {
-            closeButton.Click -= OnCloseButtonClick;
-            closeButton.Click += OnCloseButtonClick;
+            _closeButton.Click += OnCloseButtonClick;
         }
     }
 
