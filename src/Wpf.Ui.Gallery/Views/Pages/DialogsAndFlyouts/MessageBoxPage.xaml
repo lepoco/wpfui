@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:syntax="http://schemas.lepo.co/wpfui/2022/xaml/syntax"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="MessageBoxPage"
@@ -19,6 +20,34 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style x:Key="MessageBoxExampleStyle"
+               TargetType="{x:Type controls:ControlExample}"
+               BasedOn="{StaticResource {x:Type controls:ControlExample}}">
+            <Style.Resources>
+                <Style TargetType="{x:Type syntax:CodeBlock}"
+                       BasedOn="{StaticResource {x:Type syntax:CodeBlock}}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type syntax:CodeBlock}">
+                                <TextBox
+                                    Padding="0"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    FontFamily="Consolas"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    HorizontalScrollBarVisibility="Auto"
+                                    IsReadOnly="True"
+                                    Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                    TextWrapping="NoWrap" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Page.Resources>
     <StackPanel Margin="0,0,0,24">
         <controls:ControlExample
             Margin="0"
@@ -30,35 +59,145 @@
                 Content="Open standard MessageBox" />
         </controls:ControlExample>
 
-        <controls:ControlExample Margin="0,36,0,0" HeaderText="WPF UI MessageBox.">
+        <controls:ControlExample Style="{StaticResource MessageBoxExampleStyle}" Margin="0,36,0,0" HeaderText="WPF UI MessageBox.">
+            <controls:ControlExample.CsharpCode>
+                <system:String xml:space="preserve"><![CDATA[var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+{
+    // Owner centering is opt-in. sender is the Button that opens this MessageBox.
+    Owner = System.Windows.Window.GetWindow((System.Windows.DependencyObject)sender),
+    WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner,
+    Title = "WPF UI Message Box",
+    Content =
+        "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",
+};
+
+_ = await uiMessageBox.ShowDialogAsync();]]></system:String>
+            </controls:ControlExample.CsharpCode>
             <Button
                 Command="{Binding ViewModel.OpenCustomMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
                 Content="Open custom MessageBox" />
         </controls:ControlExample>
 
-        <controls:ControlExample Margin="0,36,0,0" HeaderText="Three Button MessageBox. (Default Focus: Secondary Button)">
+        <controls:ControlExample Style="{StaticResource MessageBoxExampleStyle}" Margin="0,36,0,0" HeaderText="Three Button MessageBox. (Default Focus: Secondary Button)">
+            <controls:ControlExample.CsharpCode>
+                <system:String xml:space="preserve"><![CDATA[var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+{
+    // Owner centering is opt-in. sender is the Button that opens this MessageBox.
+    Owner = System.Windows.Window.GetWindow((System.Windows.DependencyObject)sender),
+    WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner,
+    Title = "Confirmation",
+    Content = "Do you want to save your changes before closing?",
+    PrimaryButtonText = "Save",
+    SecondaryButtonText = "Don't Save",
+    CloseButtonText = "Cancel",
+    // Primary appearance and initial keyboard focus are independent.
+    // Space or Enter on the focused Secondary button selects Secondary.
+    DefaultFocusedButton = Wpf.Ui.Controls.MessageBoxButton.Secondary,
+};
+
+Wpf.Ui.Controls.MessageBoxResult result = await uiMessageBox.ShowDialogAsync();
+_ = System.Windows.MessageBox.Show($"You selected: {result}", "Result");]]></system:String>
+            </controls:ControlExample.CsharpCode>
             <Button
                 Command="{Binding ViewModel.OpenThreeButtonMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
                 Content="Open three button MessageBox" />
         </controls:ControlExample>
 
-        <controls:ControlExample Margin="0,36,0,0" HeaderText="MessageBox with Focusable Content. (Default Focus: Primary Button)">
+        <controls:ControlExample Style="{StaticResource MessageBoxExampleStyle}" Margin="0,36,0,0" HeaderText="MessageBox with Explicit TextBox Focus">
+            <controls:ControlExample.CsharpCode>
+                <system:String xml:space="preserve"><![CDATA[var textBox = new System.Windows.Controls.TextBox
+{
+    Text = "Type something here...",
+    Margin = new System.Windows.Thickness(0, 8, 0, 0),
+};
+
+var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+{
+    // Owner centering is opt-in. sender is the Button that opens this MessageBox.
+    Owner = System.Windows.Window.GetWindow((System.Windows.DependencyObject)sender),
+    WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner,
+    Title = "Input Required",
+    Content = new System.Windows.Controls.StackPanel
+    {
+        Children =
+        {
+            new System.Windows.Controls.TextBlock
+            {
+                Text = "Please enter your name:",
+                TextWrapping = System.Windows.TextWrapping.Wrap,
+            },
+            textBox,
+        },
+    },
+    PrimaryButtonText = "OK",
+    SecondaryButtonText = "Cancel",
+    DefaultFocusedButton = Wpf.Ui.Controls.MessageBoxButton.Primary,
+};
+
+// Explicit TextBox focus takes priority over DefaultFocusedButton.
+uiMessageBox.Loaded += (_, _) => textBox.Focus();
+
+Wpf.Ui.Controls.MessageBoxResult result = await uiMessageBox.ShowDialogAsync();
+if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+{
+    _ = System.Windows.MessageBox.Show($"Hello, {textBox.Text}!", "Greeting");
+}]]></system:String>
+            </controls:ControlExample.CsharpCode>
             <Button
                 Command="{Binding ViewModel.OpenMessageBoxWithFocusableContentCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
                 Content="Open MessageBox with TextBox" />
         </controls:ControlExample>
 
-        <controls:ControlExample Margin="0,36,0,0" HeaderText="MessageBox with Icons. (Default Focus: Secondary Button)">
+        <controls:ControlExample Style="{StaticResource MessageBoxExampleStyle}" Margin="0,36,0,0" HeaderText="MessageBox with Icons. (Default Focus: Secondary Button)">
+            <controls:ControlExample.CsharpCode>
+                <system:String xml:space="preserve"><![CDATA[var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+{
+    // Owner centering is opt-in. sender is the Button that opens this MessageBox.
+    Owner = System.Windows.Window.GetWindow((System.Windows.DependencyObject)sender),
+    WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner,
+    Title = "Warning",
+    Content = "This action cannot be undone. Are you sure you want to continue?",
+    PrimaryButtonText = "Yes, Continue",
+    SecondaryButtonText = "No, Cancel",
+    PrimaryButtonIcon = new Wpf.Ui.Controls.SymbolIcon
+    {
+        Symbol = Wpf.Ui.Controls.SymbolRegular.Warning24,
+    },
+    // Primary appearance and initial keyboard focus are independent.
+    // Space or Enter on the focused Secondary button selects Secondary.
+    DefaultFocusedButton = Wpf.Ui.Controls.MessageBoxButton.Secondary,
+};
+
+_ = await uiMessageBox.ShowDialogAsync();]]></system:String>
+            </controls:ControlExample.CsharpCode>
             <Button
                 Command="{Binding ViewModel.OpenMessageBoxWithIconsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
                 Content="Open MessageBox with icon" />
         </controls:ControlExample>
 
-        <controls:ControlExample Margin="0,36,0,0" HeaderText="MessageBox with Auto Focus. (Default Focus: Primary Button - automatically set when no button or non-button control has focus)">
+        <controls:ControlExample Style="{StaticResource MessageBoxExampleStyle}" Margin="0,36,0,0" HeaderText="MessageBox with Auto Focus. (Default Focus: Primary Button - automatically set when no button or non-button control has focus)">
+            <controls:ControlExample.CsharpCode>
+                <system:String xml:space="preserve"><![CDATA[// DefaultFocusedButton is not set, so focus will automatically be set to primaryButton
+// when no button has focus and no non-button control has focus
+var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+{
+    // Owner centering is opt-in. sender is the Button that opens this MessageBox.
+    Owner = System.Windows.Window.GetWindow((System.Windows.DependencyObject)sender),
+    WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner,
+    Title = "Auto Focus",
+    Content =
+        "This MessageBox will automatically set focus to the primary button when no button or non-button control has focus.",
+    PrimaryButtonText = "OK",
+    SecondaryButtonText = "Cancel",
+};
+
+Wpf.Ui.Controls.MessageBoxResult result = await uiMessageBox.ShowDialogAsync();
+_ = System.Windows.MessageBox.Show($"You selected: {result}", "Result");]]></system:String>
+            </controls:ControlExample.CsharpCode>
             <Button
                 Command="{Binding ViewModel.OpenMessageBoxWithAutoFocusCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"

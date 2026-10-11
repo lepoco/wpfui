@@ -22,6 +22,8 @@ public partial class MessageBoxViewModel : ViewModel
     {
         var uiMessageBox = new Wpf.Ui.Controls.MessageBox
         {
+            Owner = Window.GetWindow((DependencyObject)sender),
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Title = "WPF UI Message Box",
             Content =
                 "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",
@@ -36,6 +38,8 @@ public partial class MessageBoxViewModel : ViewModel
     {
         var uiMessageBox = new Wpf.Ui.Controls.MessageBox
         {
+            Owner = Window.GetWindow((DependencyObject)sender),
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Title = "Confirmation",
             Content = "Do you want to save your changes before closing?",
             PrimaryButtonText = "Save",
@@ -44,7 +48,7 @@ public partial class MessageBoxViewModel : ViewModel
             DefaultFocusedButton = Wpf.Ui.Controls.MessageBoxButton.Secondary,
         };
 
-        var result = await uiMessageBox.ShowDialogAsync();
+        Wpf.Ui.Controls.MessageBoxResult result = await uiMessageBox.ShowDialogAsync();
         _ = MessageBox.Show($"You selected: {result}", "Result");
     }
 
@@ -60,6 +64,8 @@ public partial class MessageBoxViewModel : ViewModel
 
         var uiMessageBox = new Wpf.Ui.Controls.MessageBox
         {
+            Owner = Window.GetWindow((DependencyObject)sender),
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Title = "Input Required",
             Content = new System.Windows.Controls.StackPanel
             {
@@ -78,7 +84,9 @@ public partial class MessageBoxViewModel : ViewModel
             DefaultFocusedButton = Wpf.Ui.Controls.MessageBoxButton.Primary,
         };
 
-        var result = await uiMessageBox.ShowDialogAsync();
+        uiMessageBox.Loaded += (_, _) => textBox.Focus();
+
+        Wpf.Ui.Controls.MessageBoxResult result = await uiMessageBox.ShowDialogAsync();
         if (result == Wpf.Ui.Controls.MessageBoxResult.Primary)
         {
             _ = MessageBox.Show($"Hello, {textBox.Text}!", "Greeting");
@@ -91,6 +99,8 @@ public partial class MessageBoxViewModel : ViewModel
     {
         var uiMessageBox = new Wpf.Ui.Controls.MessageBox
         {
+            Owner = Window.GetWindow((DependencyObject)sender),
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Title = "Warning",
             Content = "This action cannot be undone. Are you sure you want to continue?",
             PrimaryButtonText = "Yes, Continue",
@@ -113,14 +123,16 @@ public partial class MessageBoxViewModel : ViewModel
         // when no button has focus and no non-button control has focus
         var uiMessageBox = new Wpf.Ui.Controls.MessageBox
         {
+            Owner = Window.GetWindow((DependencyObject)sender),
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Title = "Auto Focus",
-            Content = "This MessageBox will automatically set focus to the primary button when no button or non-button control has focus.",
+            Content =
+                "This MessageBox will automatically set focus to the primary button when no button or non-button control has focus.",
             PrimaryButtonText = "OK",
             SecondaryButtonText = "Cancel",
-            // DefaultFocusedButton is intentionally not set
         };
 
-        var result = await uiMessageBox.ShowDialogAsync();
+        Wpf.Ui.Controls.MessageBoxResult result = await uiMessageBox.ShowDialogAsync();
         _ = MessageBox.Show($"You selected: {result}", "Result");
     }
 }

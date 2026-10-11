@@ -3,8 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Linq;
 using System.Reflection;
+using System.Windows.Input;
+using System.Windows.Threading;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 using Size = System.Windows.Size;
@@ -279,6 +282,9 @@ public class MessageBox : System.Windows.Window
     )!;
 #endif
 
+    private DispatcherOperation? _initialFocusOperation;
+    private bool _centerOnScreenWhenLoaded;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageBox"/> class.
     /// </summary>
@@ -291,16 +297,15 @@ public class MessageBox : System.Windows.Window
 
         Loaded += static (sender, _) =>
         {
-            var self = (MessageBox)sender;
+            var self = (MessageBox)sender!;
             self.OnLoaded();
         };
 
         ContentRendered += static (sender, _) =>
         {
-            var self = (MessageBox)sender;
+            var self = (MessageBox)sender!;
             self.OnContentRendered();
         };
-
     }
 
     protected TaskCompletionSource<MessageBoxResult>? Tcs { get; set; }
@@ -343,26 +348,11 @@ public class MessageBox : System.Windows.Window
         {
             RemoveTitleBarAndApplyMica();
 
-            // If Owner is not set, try to set it to the active window
-            if (Owner == null)
-            {
-                var activeWindow = System.Windows.Application.Current?.Windows
-                    .OfType<System.Windows.Window>()
-                    .FirstOrDefault(w => w.IsActive);
-                
-                if (activeWindow != null)
-                {
-                    Owner = activeWindow;
-                }
-            }
-
-            // Set WindowStartupLocation to CenterOwner if not explicitly set
-            if (WindowStartupLocation == WindowStartupLocation.Manual)
-            {
-                WindowStartupLocation = Owner != null 
-                    ? WindowStartupLocation.CenterOwner 
-                    : WindowStartupLocation.CenterScreen;
-            }
+            // Remember unspecified coordinates before WPF supplies the initial window position.
+            _centerOnScreenWhenLoaded =
+                WindowStartupLocation == WindowStartupLocation.Manual
+                && double.IsNaN(Left)
+                && double.IsNaN(Top);
 
             if (showAsDialog)
             {
@@ -397,6 +387,12 @@ public class MessageBox : System.Windows.Window
         switch (WindowStartupLocation)
         {
             case WindowStartupLocation.Manual:
+                if (_centerOnScreenWhenLoaded || (double.IsNaN(Left) && double.IsNaN(Top)))
+                {
+                    CenterWindowOnScreen();
+                }
+
+                break;
             case WindowStartupLocation.CenterScreen:
                 CenterWindowOnScreen();
                 break;
@@ -415,13 +411,8 @@ public class MessageBox : System.Windows.Window
                 throw new InvalidOperationException();
         }
 
-        // Set focus to the first available button after the visual tree is fully loaded
-        // Loaded event provides the appropriate timing for setting focus, so we call it directly
-        // without delay to avoid interfering with other developers' focus logic
-        // Skip IsFocused check at this point as the window may not have focus yet
-        SetFocusToFirstAvailableButton(checkIsFocused: false);
+        QueueInitialFocus();
     }
-
 
     // CanCenterOverWPFOwner property see https://source.dot.net/#PresentationFramework/System/Windows/Window.cs,e679e433777b21b8
     private bool CanCenterOverWPFOwner()
@@ -459,22 +450,29 @@ public class MessageBox : System.Windows.Window
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
-        
-        // After template is applied, try to set focus
-        // OnLoaded will also try, but this ensures we try as early as possible
-        // Skip IsFocused check at this point as the window may not have focus yet
-        SetFocusToFirstAvailableButton(checkIsFocused: false);
+
+        if (IsLoaded)
+        {
+            QueueInitialFocus();
+        }
     }
 
     /// <summary>
-    /// Occurs after ContentRendered event
+    /// Occurs after the content is rendered.
     /// </summary>
     protected virtual void OnContentRendered()
     {
-        // Set focus after content is rendered
-        // This ensures the window is fully displayed before setting focus
-        // At this point, check IsFocused to avoid overriding developer's focus logic
-        SetFocusToFirstAvailableButton(checkIsFocused: true);
+        QueueInitialFocus();
+    }
+
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+
+        if (IsLoaded)
+        {
+            QueueInitialFocus();
+        }
     }
 
     protected override void OnClosing(CancelEventArgs e)
@@ -489,6 +487,15 @@ public class MessageBox : System.Windows.Window
         _ = Tcs?.TrySetResult(MessageBoxResult.None);
     }
 
+    protected override void OnClosed(EventArgs e)
+    {
+        // Closing is not raised when an owner closes its non-modal owned windows.
+        _initialFocusOperation?.Abort();
+        _initialFocusOperation = null;
+        _ = Tcs?.TrySetResult(MessageBoxResult.None);
+        base.OnClosed(e);
+    }
+
     protected virtual void CenterWindowOnScreen()
     {
         double screenWidth = SystemParameters.PrimaryScreenWidth;
@@ -500,8 +507,27 @@ public class MessageBox : System.Windows.Window
 
     private void CenterWindowOnOwner()
     {
-        double left = Owner.Left + ((Owner.Width - Width) / 2);
-        double top = Owner.Top + ((Owner.Height - Height) / 2);
+        if (
+            PresentationSource.FromVisual(this)?.CompositionTarget is not { } compositionTarget
+            || !PInvoke.GetWindowRect(new HWND(new WindowInteropHelper(Owner).Handle), out RECT ownerRect)
+            || !PInvoke.GetWindowRect(new HWND(new WindowInteropHelper(this).Handle), out RECT messageBoxRect)
+        )
+        {
+            return;
+        }
+
+        // Use the displayed bounds, including maximized owners, in the MessageBox's DPI coordinate space.
+        Point ownerCenter = compositionTarget.TransformFromDevice.Transform(
+            new Point(
+                ownerRect.left + ((ownerRect.right - ownerRect.left) / 2.0),
+                ownerRect.top + ((ownerRect.bottom - ownerRect.top) / 2.0)
+            )
+        );
+        Vector windowSize = compositionTarget.TransformFromDevice.Transform(
+            new Vector(messageBoxRect.right - messageBoxRect.left, messageBoxRect.bottom - messageBoxRect.top)
+        );
+        double left = ownerCenter.X - (windowSize.X / 2);
+        double top = ownerCenter.Y - (windowSize.Y / 2);
 
         SetCurrentValue(LeftProperty, left);
         SetCurrentValue(TopProperty, top);
@@ -566,140 +592,112 @@ public class MessageBox : System.Windows.Window
         }
     }
 
-    /// <summary>
-    /// Checks if a button is available and enabled for focus.
-    /// </summary>
-    private static bool IsButtonAvailableForFocus(Button? button, bool isEnabled)
+    private void QueueInitialFocus()
     {
-        return button != null 
-            && isEnabled 
-            && button.IsEnabled 
-            && button.IsVisible 
-            && button.Focusable;
+        if (_initialFocusOperation is { Status: DispatcherOperationStatus.Pending })
+        {
+            return;
+        }
+
+        // Allow Loaded and ContentRendered handlers to supply their own focus first.
+        _initialFocusOperation = Dispatcher.BeginInvoke(
+            DispatcherPriority.Input,
+            new Action(() =>
+            {
+                _initialFocusOperation = null;
+                SetFocusToFirstAvailableButton();
+            })
+        );
     }
 
-    /// <summary>
-    /// Attempts to set focus to the specified button using multiple methods.
-    /// </summary>
-    private static bool TrySetFocusToButton(Button button)
+    private bool IsValidContentFocus(IInputElement? element)
     {
-        // Method 1: Keyboard.Focus (most reliable for modal dialogs)
-        if (System.Windows.Input.Keyboard.Focus(button) == button)
-        {
-            return true;
-        }
-        
-        // Method 2: Focus() method
-        if (button.Focus())
-        {
-            return true;
-        }
-        
-        // Method 3: MoveFocus
-        var request = new System.Windows.Input.TraversalRequest(System.Windows.Input.FocusNavigationDirection.First);
-        return button.MoveFocus(request);
-    }
-
-    /// <summary>
-    /// Sets focus to the first available button in the MessageBox.
-    /// Focus will be set to the first available button (Primary > Secondary > Close).
-    /// </summary>
-    /// <param name="checkIsFocused">If true, check IsFocused before setting focus. If false, skip the check.</param>
-    /// <returns>True if focus was successfully set, false otherwise.</returns>
-    private bool SetFocusToFirstAvailableButton(bool checkIsFocused = true)
-    {
-        // Get buttons directly from template using GetTemplateChild for efficiency
-        Button? primaryButton = GetTemplateChild("PART_MessageBoxPrimaryButton") as Button;
-        Button? secondaryButton = GetTemplateChild("PART_MessageBoxSecondaryButton") as Button;
-        Button? closeButton = GetTemplateChild("PART_MessageBoxCloseButton") as Button;
-
-        // If template is not applied yet, buttons will be null
-        if (primaryButton == null && secondaryButton == null && closeButton == null)
+        if (
+            element is not DependencyObject dependencyObject
+            || element == this
+            || GetWindow(dependencyObject) != this
+        )
         {
             return false;
         }
 
-        // Check if focus is already set to a button or to a non-button control
-        // If checkIsFocused is true, we need to verify that:
-        // 1. Focus is not already on any button (if so, don't override)
-        // 2. Focus is not on a non-button control (e.g., TextBox) - developer's focus logic is active
-        // 3. If focus is on MessageBox itself or nowhere, we should set focus to primaryButton
-        if (checkIsFocused)
+        if (element is UIElement uiElement)
         {
-            var currentFocusedElement = System.Windows.Input.Keyboard.FocusedElement;
-            
-            // Check if focus is already on any button
-            if (currentFocusedElement == primaryButton || 
-                currentFocusedElement == secondaryButton || 
-                currentFocusedElement == closeButton)
+            if (
+                (element == GetTemplateChild("PART_MessageBoxPrimaryButton") && !IsPrimaryButtonEnabled)
+                || (
+                    element == GetTemplateChild("PART_MessageBoxSecondaryButton") && !IsSecondaryButtonEnabled
+                )
+                || (element == GetTemplateChild("PART_MessageBoxCloseButton") && !IsCloseButtonEnabled)
+            )
             {
-                // Focus is already on a button, don't override
                 return false;
             }
-            
-            // Check if focus is on a non-button control within MessageBox
-            // If IsFocused is false and currentFocusedElement is not the MessageBox itself,
-            // it means an internal control (e.g., TextBox) has focus
-            if (!IsFocused && currentFocusedElement != this)
+
+            return uiElement.Focusable && uiElement.IsEnabled && uiElement.IsVisible;
+        }
+
+        if (element is ContentElement contentElement && contentElement.Focusable && contentElement.IsEnabled)
+        {
+            DependencyObject? parent = contentElement;
+            while (parent is ContentElement current)
             {
-                // An internal control (not the MessageBox itself) has focus, avoid overriding
-                return false;
+                parent = ContentOperations.GetParent(current) ?? (current as FrameworkContentElement)?.Parent;
             }
-            
-            // If we reach here, focus is either on MessageBox itself or nowhere
-            // In this case, we should set focus to primaryButton
-        }
 
-        // Ensure the window is active and can receive focus
-        if (!IsActive)
-        {
-            Activate();
-        }
-
-        // Update layout once for the window
-        UpdateLayout();
-
-        // If DefaultFocusedButton is specified, try to set focus to that button
-        if (DefaultFocusedButton.HasValue)
-        {
-            Button? targetButton = DefaultFocusedButton.Value switch
-            {
-                MessageBoxButton.Primary => primaryButton,
-                MessageBoxButton.Secondary => secondaryButton,
-                MessageBoxButton.Close => closeButton,
-                _ => null,
-            };
-
-            bool isButtonEnabled = DefaultFocusedButton.Value switch
-            {
-                MessageBoxButton.Primary => IsPrimaryButtonEnabled,
-                MessageBoxButton.Secondary => IsSecondaryButtonEnabled,
-                MessageBoxButton.Close => IsCloseButtonEnabled,
-                _ => false,
-            };
-
-            if (IsButtonAvailableForFocus(targetButton, isButtonEnabled))
-            {
-                return TrySetFocusToButton(targetButton!);
-            }
-        }
-
-        // Fallback to automatic selection: Set focus to the first available button
-        if (IsButtonAvailableForFocus(primaryButton, IsPrimaryButtonEnabled))
-        {
-            return TrySetFocusToButton(primaryButton!);
-        }
-        
-        if (IsButtonAvailableForFocus(secondaryButton, IsSecondaryButtonEnabled))
-        {
-            return TrySetFocusToButton(secondaryButton!);
-        }
-        
-        if (IsButtonAvailableForFocus(closeButton, IsCloseButtonEnabled))
-        {
-            return TrySetFocusToButton(closeButton!);
+            return parent is UIElement { IsVisible: true, IsEnabled: true };
         }
 
         return false;
+    }
+
+    private static bool TrySetFocusToButton(Button? button, bool isEnabled)
+    {
+        return isEnabled
+            && button is { IsEnabled: true, IsVisible: true, Focusable: true }
+            && Keyboard.Focus(button) == button;
+    }
+
+    private void SetFocusToFirstAvailableButton()
+    {
+        // Never activate an inactive non-modal window or focus an unapplied template.
+        if (!IsLoaded || !IsVisible || !IsActive || IsValidContentFocus(Keyboard.FocusedElement))
+        {
+            return;
+        }
+
+        IInputElement? logicalFocus = FocusManager.GetFocusedElement(this);
+        if (!IsValidContentFocus(logicalFocus) && Content is DependencyObject content)
+        {
+            logicalFocus = FocusManager.GetFocusedElement(content);
+        }
+
+        if (IsValidContentFocus(logicalFocus))
+        {
+            _ = logicalFocus!.Focus();
+            return;
+        }
+
+        Button? primaryButton = GetTemplateChild("PART_MessageBoxPrimaryButton") as Button;
+        Button? secondaryButton = GetTemplateChild("PART_MessageBoxSecondaryButton") as Button;
+        Button? closeButton = GetTemplateChild("PART_MessageBoxCloseButton") as Button;
+
+        bool focusedDefault = DefaultFocusedButton switch
+        {
+            MessageBoxButton.Primary => TrySetFocusToButton(primaryButton, IsPrimaryButtonEnabled),
+            MessageBoxButton.Secondary => TrySetFocusToButton(secondaryButton, IsSecondaryButtonEnabled),
+            MessageBoxButton.Close => TrySetFocusToButton(closeButton, IsCloseButtonEnabled),
+            _ => false,
+        };
+
+        if (focusedDefault || TrySetFocusToButton(primaryButton, IsPrimaryButtonEnabled))
+        {
+            return;
+        }
+
+        if (!TrySetFocusToButton(secondaryButton, IsSecondaryButtonEnabled))
+        {
+            _ = TrySetFocusToButton(closeButton, IsCloseButtonEnabled);
+        }
     }
 }

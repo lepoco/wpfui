@@ -117,6 +117,7 @@
                                             CommandParameter="{x:Static controls:MessageBoxButton.Primary}"
                                             Content="{TemplateBinding PrimaryButtonText}"
                                             Icon="{TemplateBinding PrimaryButtonIcon}"
+                                            IsDefault="True"
                                             IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"
                                             Focusable="True"
                                             IsTabStop="True"
