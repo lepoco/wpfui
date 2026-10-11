@@ -43,6 +43,7 @@
             FrameMargin="0"
             IsBackButtonVisible="Visible"
             IsFooterSeparatorVisible="False"
+            IsGridSplitterEnabled="True"
             IsPaneToggleVisible="True"
             IsTopSeparatorVisible="False"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"

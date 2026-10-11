@@ -86,6 +86,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             return;
         }
 
+        navigationView.PreparePaneWidthAnimation();
+
         _ = VisualStateManager.GoToState(
             navigationView,
             navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact",
