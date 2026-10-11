@@ -125,7 +125,6 @@ public partial class NavigationView
     protected virtual void OnPaneOpened()
     {
         RaiseEvent(new RoutedEventArgs(PaneOpenedEvent, this));
-        UpdatePaneColumnWidthForToggle();
     }
 
     /// <summary>
@@ -134,7 +133,6 @@ public partial class NavigationView
     protected virtual void OnPaneClosed()
     {
         RaiseEvent(new RoutedEventArgs(PaneClosedEvent, this));
-        UpdatePaneColumnWidthForToggle();
     }
 
     /// <summary>

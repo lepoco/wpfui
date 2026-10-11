@@ -156,7 +156,7 @@ public partial class NavigationView
         nameof(OpenPaneLength),
         typeof(double),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(0D)
+        new FrameworkPropertyMetadata(0D, OnOpenPaneLengthChanged)
     );
 
     /// <summary>Identifies the <see cref="CompactPaneLength"/> dependency property.</summary>
@@ -264,7 +264,7 @@ public partial class NavigationView
         nameof(IsGridSplitterEnabled),
         typeof(bool),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(false)
+        new FrameworkPropertyMetadata(false, OnIsGridSplitterEnabledChanged)
     );
 
     /// <summary>
@@ -645,6 +645,7 @@ public partial class NavigationView
         }
 
         navigationView.OnPaneDisplayModeChanged();
+        navigationView.UpdatePaneWidthForDisplayMode();
     }
 
     private static void OnItemTemplateChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)

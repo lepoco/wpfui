@@ -293,7 +293,6 @@
             <Grid
                 x:Name="PaneGrid"
                 Grid.Column="0"
-                HorizontalAlignment="Stretch"
                 Margin="4,0">
                 <Border x:Name="PaneBorder">
                     <Grid>
@@ -443,6 +442,7 @@
             <GridSplitter
                 x:Name="PART_GridSplitter"
                 Grid.Column="1"
+                Panel.ZIndex="1"
                 Width="4"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
@@ -452,6 +452,13 @@
                 ShowsPreview="False"
                 Visibility="{TemplateBinding IsGridSplitterEnabled,
                                              Converter={StaticResource BoolToVisibilityConverter}}">
+                <GridSplitter.RenderTransform>
+                    <!--  Center the hit area on the content border without changing the resize columns.  -->
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding FrameMargin.Left, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <TranslateTransform X="2.5" />
+                    </TransformGroup>
+                </GridSplitter.RenderTransform>
                 <GridSplitter.Style>
                     <Style TargetType="{x:Type GridSplitter}">
                         <Setter Property="Background" Value="Transparent" />
@@ -506,6 +513,13 @@
                 <VisualStateGroup Name="PaneStates">
                     <VisualState Name="PaneOpen">
                         <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                FillBehavior="Stop"
+                                Storyboard.TargetName="PaneGrid"
+                                Storyboard.TargetProperty="Width"
+                                To="{TemplateBinding OpenPaneLength}"
+                                Duration="0:0:.16" />
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AutoSuggestBoxContentPresenter" Storyboard.TargetProperty="Visibility">
                                 <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
                             </ObjectAnimationUsingKeyFrames>
@@ -520,6 +534,13 @@
                     </VisualState>
                     <VisualState Name="PaneCompact">
                         <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                FillBehavior="Stop"
+                                Storyboard.TargetName="PaneGrid"
+                                Storyboard.TargetProperty="Width"
+                                To="40"
+                                Duration="0:0:.16" />
                             <DoubleAnimation
                                 AccelerationRatio="0.4"
                                 Storyboard.TargetName="AutoSuggestBoxContentPresenter"
@@ -579,6 +600,7 @@
                 <Setter TargetName="SplitterColumn" Property="Width" Value="0" />
             </Trigger>
             <Trigger Property="IsGridSplitterEnabled" Value="True">
+                <Setter TargetName="PART_PaneColumn" Property="MinWidth" Value="48" />
                 <Setter TargetName="SplitterColumn" Property="Width" Value="Auto" />
                 <Setter TargetName="SplitterColumn" Property="MinWidth" Value="0" />
             </Trigger>
