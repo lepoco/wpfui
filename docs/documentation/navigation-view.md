@@ -139,7 +139,7 @@ Use Tab to move focus, Enter or Space to invoke an item, Up and Down to move bet
 
 The hamburger button switches between the icon rail and the expanded pane with inline child items. The selected item is retained when the pane is toggled. Changing `PaneDisplayMode` at runtime closes an open flyout and preserves the selected item and displayed page.
 
-The Gallery's **Navigation → NavigationView → Hierarchical NavigationView (LeftCompact)** sample includes multiple levels and a selector for switching between `LeftCompact`, `Left`, `LeftMinimal`, and `Top`.
+The Gallery's **Navigation → NavigationView → Hierarchical NavigationView (LeftCompact)** sample demonstrates multiple levels in `LeftCompact` mode. It is grouped with the other left-pane samples.
 
 ## Header
 
