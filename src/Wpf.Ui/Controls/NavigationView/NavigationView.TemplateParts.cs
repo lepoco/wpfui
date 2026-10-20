@@ -96,6 +96,19 @@ public partial class NavigationView
     /// <inheritdoc />
     public override void OnApplyTemplate()
     {
+        CloseCompactFlyout();
+        // Release self-container items before a replacement template uses the same collection.
+        MenuItemsItemsControl?.ClearValue(System.Windows.Controls.ItemsControl.ItemsSourceProperty);
+        FooterMenuItemsItemsControl?.ClearValue(System.Windows.Controls.ItemsControl.ItemsSourceProperty);
+        object? previousContent = NavigationViewContentPresenter?.Content;
+        if (NavigationViewContentPresenter is not null)
+        {
+            NavigationViewContentPresenter.Navigated -= OnNavigationViewContentPresenterNavigated;
+            NavigationViewContentPresenter.SetCurrentValue(
+                System.Windows.Controls.ContentControl.ContentProperty,
+                null
+            );
+        }
         base.OnApplyTemplate();
 
         NavigationViewContentPresenter = GetTemplateChild<NavigationViewContentPresenter>(
@@ -121,6 +134,10 @@ public partial class NavigationView
         {
             NavigationViewContentPresenter.Navigated -= OnNavigationViewContentPresenterNavigated;
             NavigationViewContentPresenter.Navigated += OnNavigationViewContentPresenterNavigated;
+            if (previousContent is not null)
+            {
+                _ = NavigationViewContentPresenter.Navigate(previousContent);
+            }
         }
 
         if (
@@ -148,6 +165,11 @@ public partial class NavigationView
 
             ToggleButton.Click -= OnToggleButtonClick;
             ToggleButton.Click += OnToggleButtonClick;
+        }
+
+        if (PaneDisplayMode == NavigationViewPaneDisplayMode.LeftCompact)
+        {
+            UpdateVisualState(this);
         }
     }
 

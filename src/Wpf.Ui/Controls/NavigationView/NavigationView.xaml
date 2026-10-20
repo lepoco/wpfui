@@ -11,6 +11,7 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewCompact.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewLeftCompact.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewLeftMinimalCompact.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationLeftFluent.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewTop.xaml" />
@@ -33,6 +34,10 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Style.Triggers>
+            <Trigger Property="PaneDisplayMode" Value="LeftCompact">
+                <Setter Property="Template" Value="{StaticResource LeftCompactNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource LeftCompactHierarchicalNavigationViewItemTemplate}" />
+            </Trigger>
             <Trigger Property="PaneDisplayMode" Value="Left">
                 <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource LeftCompactNavigationViewItemTemplate}" />

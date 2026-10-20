@@ -120,6 +120,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
     {
+        CloseCompactFlyout();
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
         SizeChanged -= OnSizeChanged;
@@ -176,6 +177,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
+        CloseCompactFlyout();
         // TODO: Update reveal
     }
 
@@ -214,6 +216,14 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnPaneDisplayModeChanged()
     {
+        CloseCompactFlyout();
+        if (PaneDisplayMode == NavigationViewPaneDisplayMode.LeftCompact)
+        {
+            SetCurrentValue(IsPaneOpenProperty, false);
+        }
+
+        UpdateCompactItemPresentation(MenuItems);
+        UpdateCompactItemPresentation(FooterMenuItems);
         switch (PaneDisplayMode)
         {
             case NavigationViewPaneDisplayMode.LeftFluent:
@@ -250,6 +260,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         OnItemInvoked();
 
         _ = NavigateInternal(navigationViewItem);
+        CloseCompactFlyout(true);
     }
 
     protected virtual void BreadcrumbBarOnItemClicked(
