@@ -3,16 +3,16 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Automation.Peers;
-using System.Windows.Automation.Provider;
 using System.Runtime.ExceptionServices;
 using System.Threading;
-using System.Windows.Interop;
-using System.Windows.Threading;
-using System.Windows.Data;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Threading;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Markup;
@@ -34,6 +34,23 @@ public class NavigationViewLeftCompactTests
         Assert.Equal(4, (int)NavigationViewPaneDisplayMode.Bottom);
         Assert.Equal(5, (int)NavigationViewPaneDisplayMode.LeftCompact);
     }
+
+    [Theory]
+    [InlineData(NavigationViewPaneDisplayMode.Left)]
+    [InlineData(NavigationViewPaneDisplayMode.LeftMinimal)]
+    public void ExistingLeftModes_PreserveOpenAndClosedPaneWidths(NavigationViewPaneDisplayMode mode) =>
+        RunInSta(() =>
+        {
+            var view = CreateView();
+            view.PaneDisplayMode = mode;
+            view.ApplyTemplate();
+            view.IsPaneOpen = false;
+            Pump(250);
+            Assert.Equal(40, Part<Grid>(view, "PaneGrid").Width, 1);
+            view.IsPaneOpen = true;
+            Pump(250);
+            Assert.Equal(320, Part<Grid>(view, "PaneGrid").Width, 1);
+        });
 
     [Fact]
     public void LeftCompact_OpenPaneOverlaysContent() =>
@@ -265,15 +282,27 @@ public class NavigationViewLeftCompactTests
             Pump(50);
             leaf.Invoke();
             Pump(50);
+            object content = Part<NavigationViewContentPresenter>(
+                view,
+                "PART_NavigationViewContentPresenter"
+            ).Content;
             view.PaneDisplayMode = mode;
             view.ApplyTemplate();
             Pump(50);
             Assert.Same(leaf, view.SelectedItem);
             Assert.True(leaf.IsActive);
+            Assert.Same(
+                content,
+                Part<NavigationViewContentPresenter>(view, "PART_NavigationViewContentPresenter").Content
+            );
             view.PaneDisplayMode = NavigationViewPaneDisplayMode.LeftCompact;
             view.ApplyTemplate();
             Pump(50);
             Assert.Same(leaf, view.SelectedItem);
+            Assert.Same(
+                content,
+                Part<NavigationViewContentPresenter>(view, "PART_NavigationViewContentPresenter").Content
+            );
             root.Invoke();
             Pump(50);
             Assert.True(Flyout(root).IsOpen);
@@ -434,12 +463,10 @@ public class NavigationViewLeftCompactTests
                 }
             );
     }
+
     private static TestNavigationView CreateView()
     {
-        var view = new TestNavigationView
-        {
-            AutoSuggestBox = new AutoSuggestBox(),
-        };
+        var view = new TestNavigationView { AutoSuggestBox = new AutoSuggestBox() };
         view.Resources.MergedDictionaries.Add(new ThemesDictionary());
         view.Resources.MergedDictionaries.Add(new ControlsDictionary());
         view.Style = (Style)view.FindResource("DefaultNavigationViewStyle");
