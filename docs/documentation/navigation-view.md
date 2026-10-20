@@ -44,7 +44,7 @@ Define `NavigationView` in your XAML and add `NavigationViewItem` objects to the
 ```
 
 > [!NOTE]
-> `TargetPageType` is a required property on `NavigationViewItem` that specifies the page to navigate to when the item is selected. The value must be a `System.Type`.
+> Set `TargetPageType` to the `System.Type` of the page to navigate to when an item is selected. A parent item that only groups child items can omit `TargetPageType`.
 
 ## Programmatic Navigation
 
@@ -84,7 +84,7 @@ Control the visibility and behavior of the navigation pane with the `PaneDisplay
 
 - `Left`: The pane is always open on the left.
 - `Top`: The pane is shown as a horizontal bar at the top.
-- `LeftCompact`: The pane is collapsed to show only icons, and expands on hover or when the hamburger button is clicked.
+- `LeftCompact`: The closed pane shows only icons on the left. The hamburger button opens the pane over the content without changing the content area's width.
 - `LeftMinimal`: The pane is hidden and can be opened as an overlay.
 
 ```xml
@@ -95,6 +95,51 @@ You can also control the pane's open state with the `IsPaneOpen` property.
 
 > [!TIP]
 > To create a responsive layout that changes `PaneDisplayMode` based on window width, bind `PaneDisplayMode` to a property in your ViewModel and update it in the `Window.SizeChanged` event.
+
+### LeftCompact and Hierarchical Navigation
+
+Use `LeftCompact` to keep navigation icons visible while reserving more space for page content. Switching to this mode closes the pane. Set `IsPaneOpen` to control its open state, `CompactPaneLength` to set the icon rail width, and `OpenPaneLength` to set the expanded pane width. Hovering over an item does not open the pane.
+
+Define child items in `NavigationViewItem.MenuItems`. When the pane is closed, clicking a parent opens its children in a flyout beside that item, without opening the entire pane. Children show their icons and text, and deeper levels expand within the same flyout.
+
+```xml
+<ui:NavigationView
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pages="clr-namespace:YourApp.Views.Pages"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    PaneDisplayMode="LeftCompact"
+    IsPaneOpen="False"
+    IsPaneToggleVisible="True"
+    CompactPaneLength="40"
+    OpenPaneLength="320">
+    <ui:NavigationView.MenuItems>
+        <ui:NavigationViewItem Content="Documents" Icon="{ui:SymbolIcon Document24}">
+            <ui:NavigationViewItem.MenuItems>
+                <ui:NavigationViewItem Content="Projects" Icon="{ui:SymbolIcon Folder24}">
+                    <ui:NavigationViewItem.MenuItems>
+                        <ui:NavigationViewItem
+                            Content="Project A"
+                            Icon="{ui:SymbolIcon Document24}"
+                            TargetPageType="{x:Type pages:ProjectPage}" />
+                    </ui:NavigationViewItem.MenuItems>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem
+                    Content="Archives"
+                    Icon="{ui:SymbolIcon Library24}"
+                    TargetPageType="{x:Type pages:ArchivesPage}" />
+            </ui:NavigationViewItem.MenuItems>
+        </ui:NavigationViewItem>
+    </ui:NavigationView.MenuItems>
+</ui:NavigationView>
+```
+
+Selecting a page item uses the existing navigation and selection events, then closes the flyout. Clicking outside it or pressing Escape also closes it. Opening another parent switches to that parent's children. Long menus can scroll.
+
+Use Tab to move focus, Enter or Space to invoke an item, Up and Down to move between items, and Right and Left to expand or collapse a level. Escape closes the flyout and returns focus to its parent item.
+
+The hamburger button switches between the icon rail and the expanded pane with inline child items. The selected item is retained when the pane is toggled. Changing `PaneDisplayMode` at runtime closes an open flyout and preserves the selected item and displayed page.
+
+The Gallery's **Navigation → NavigationView → Hierarchical NavigationView (LeftCompact)** sample includes multiple levels and a selector for switching between `LeftCompact`, `Left`, `LeftMinimal`, and `Top`.
 
 ## Header
 
