@@ -96,6 +96,7 @@ public partial class NavigationView
     /// <inheritdoc />
     public override void OnApplyTemplate()
     {
+        CloseCompactFlyout();
         base.OnApplyTemplate();
 
         NavigationViewContentPresenter = GetTemplateChild<NavigationViewContentPresenter>(
@@ -148,6 +149,11 @@ public partial class NavigationView
 
             ToggleButton.Click -= OnToggleButtonClick;
             ToggleButton.Click += OnToggleButtonClick;
+        }
+
+        if (PaneDisplayMode == NavigationViewPaneDisplayMode.LeftCompact)
+        {
+            UpdateVisualState(this);
         }
     }
 
