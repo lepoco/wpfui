@@ -335,6 +335,74 @@ public class NavigationViewPaneInputTests
             Assert.True(view.IsPaneOpen);
         });
 
+    [Theory]
+    [InlineData(NavigationViewPaneDisplayMode.Top, true, false)]
+    [InlineData(NavigationViewPaneDisplayMode.Top, false, false)]
+    [InlineData(NavigationViewPaneDisplayMode.Bottom, true, false)]
+    [InlineData(NavigationViewPaneDisplayMode.Bottom, false, false)]
+    [InlineData(NavigationViewPaneDisplayMode.LeftFluent, true, false)]
+    [InlineData(NavigationViewPaneDisplayMode.LeftFluent, false, false)]
+    [InlineData(NavigationViewPaneDisplayMode.Top, true, true)]
+    [InlineData(NavigationViewPaneDisplayMode.Top, false, true)]
+    [InlineData(NavigationViewPaneDisplayMode.Bottom, true, true)]
+    [InlineData(NavigationViewPaneDisplayMode.Bottom, false, true)]
+    [InlineData(NavigationViewPaneDisplayMode.LeftFluent, true, true)]
+    [InlineData(NavigationViewPaneDisplayMode.LeftFluent, false, true)]
+    public void DisplayModeChange_InLoadedWindow_DoesNotLeaveInvalidAnimations(
+        NavigationViewPaneDisplayMode mode,
+        bool isPaneOpen,
+        bool duringAnimation
+    ) =>
+        RunSta(() =>
+        {
+            NavigationView view = CreateView(mode: NavigationViewPaneDisplayMode.LeftMinimal);
+            view.IsPaneToggleOnEmptySpaceEnabled = true;
+            view.IsPaneOpen = isPaneOpen;
+            view.MenuItems.Add(
+                new NavigationViewItem { Content = "Dashboard", Icon = new SymbolIcon(SymbolRegular.Home24) }
+            );
+            view.FooterMenuItems.Add(
+                new NavigationViewItem
+                {
+                    Content = "Settings",
+                    Icon = new SymbolIcon(SymbolRegular.Settings24),
+                }
+            );
+            Window window = new Window
+            {
+                Content = view,
+                Width = 900,
+                Height = 500,
+                ShowActivated = false,
+                ShowInTaskbar = false,
+            };
+            try
+            {
+                window.Show();
+                CompletePaneAnimation();
+                if (duringAnimation)
+                {
+                    view.IsPaneOpen = !isPaneOpen;
+                    CompletePaneAnimation();
+                    view.IsPaneOpen = isPaneOpen;
+                }
+
+                view.PaneDisplayMode = mode;
+                CompletePaneAnimation();
+                window.UpdateLayout();
+                Assert.Equal(isPaneOpen, view.IsPaneOpen);
+                view.PaneDisplayMode = NavigationViewPaneDisplayMode.Left;
+                CompletePaneAnimation();
+                window.UpdateLayout();
+                FrameworkElement pane = Part(view, "PaneGrid");
+                Assert.Equal(isPaneOpen ? view.OpenPaneLength : 40, pane.ActualWidth, 1);
+            }
+            finally
+            {
+                window.Close();
+            }
+        });
+
     private static NavigationView CreateView(
         string theme = "Light",
         NavigationViewPaneDisplayMode mode = NavigationViewPaneDisplayMode.Left
@@ -423,6 +491,10 @@ public class NavigationViewPaneInputTests
             catch (Exception e)
             {
                 failure = e;
+            }
+            finally
+            {
+                System.Windows.Threading.Dispatcher.CurrentDispatcher.InvokeShutdown();
             }
         });
         thread.SetApartmentState(ApartmentState.STA);

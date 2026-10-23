@@ -169,6 +169,10 @@
                     Margin="12"
                     AutomationProperties.AutomationId="EmptySpaceState"
                     Text="{Binding IsPaneOpen, ElementName=EmptySpaceNavigation, StringFormat='IsPaneOpen: {0}'}" />
+                <TextBlock
+                    Margin="12,0,12,12"
+                    AutomationProperties.AutomationId="EmptySpaceModeState"
+                    Text="{Binding PaneDisplayMode, ElementName=EmptySpaceNavigation, StringFormat='PaneDisplayMode: {0}'}" />
             </StackPanel>
             <controls:ControlExample.XamlCode>
                 &lt;ui:NavigationView IsPaneToggleOnEmptySpaceEnabled=&quot;True&quot; PaneDisplayMode=&quot;Left&quot; /&gt;

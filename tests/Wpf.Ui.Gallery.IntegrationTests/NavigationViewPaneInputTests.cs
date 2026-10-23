@@ -58,21 +58,13 @@ public sealed class NavigationViewPaneInputTests : UiTest
         Mouse.Drag(middle, new Point(middle.X, middle.Y + 30));
         await AssertPaneOpen(true);
 
-        ComboBox mode = FindFirst("EmptySpacePaneMode")!.AsComboBox();
-        mode.Select(1); // LeftMinimal
-        mode.Collapse();
-        await Wait(1, TestContext.Current.CancellationToken);
-        mode.SelectedItem!.Text.Should().Be("LeftMinimal");
+        await SelectMode(1, "LeftMinimal");
         ClickMiddleSpace();
         await AssertPaneOpen(false);
-        mode.Select(3); // Top
-        mode.Collapse();
-        await Wait(1, TestContext.Current.CancellationToken);
+        await SelectMode(3, "Top");
         FindFirst("EmptySpaceContent")!.Click();
         await AssertPaneOpen(false);
-        mode.Select(0); // Left, template reapplied
-        mode.Collapse();
-        await Wait(1, TestContext.Current.CancellationToken);
+        await SelectMode(0, "Left");
         ClickMiddleSpace();
         await AssertPaneOpen(true);
         FindFirst("EmptySpaceToggleEnabled")!.AsCheckBox().IsChecked = false;
@@ -91,6 +83,45 @@ public sealed class NavigationViewPaneInputTests : UiTest
 
     private void ClickMiddleSpace() => Mouse.Click(MiddleSpace());
 
+    [Theory]
+    [InlineData(3, "Top", true)]
+    [InlineData(3, "Top", false)]
+    [InlineData(4, "Bottom", true)]
+    [InlineData(4, "Bottom", false)]
+    public async Task DisplayModeSelection_WithMouse_DoesNotCrash(int index, string name, bool isPaneOpen)
+    {
+        await Wait(2, TestContext.Current.CancellationToken);
+        FindFirst(c => c.ByText("Navigation"))!.Click();
+        await Wait(1, TestContext.Current.CancellationToken);
+        FindFirst(c => c.ByText("NavigationView"))!.Click();
+        await Wait(1, TestContext.Current.CancellationToken);
+        await ScrollSampleIntoView();
+        FindFirst("EmptySpaceToggleEnabled")!.AsCheckBox().IsChecked = true;
+        await SelectMode(1, "LeftMinimal");
+        if (!isPaneOpen)
+        {
+            ClickMiddleSpace();
+        }
+
+        await AssertPaneOpen(isPaneOpen);
+        await SelectMode(index, name);
+        await AssertPaneOpen(isPaneOpen);
+        await SelectMode(0, "Left");
+        await AssertPaneOpen(isPaneOpen);
+        ClickMiddleSpace();
+        await AssertPaneOpen(!isPaneOpen);
+    }
+
+    private async Task SelectMode(int index, string name)
+    {
+        ComboBox mode = FindFirst("EmptySpacePaneMode")!.AsComboBox();
+        mode.Expand();
+        await Task.Delay(200, TestContext.Current.CancellationToken);
+        mode.Items[index].Click();
+        await Wait(1, TestContext.Current.CancellationToken);
+        FindFirst("EmptySpaceModeState")!.Name.Should().Be($"PaneDisplayMode: {name}");
+    }
+
     private async Task ScrollSampleIntoView()
     {
         Rectangle window = MainWindow!.BoundingRectangle;
@@ -99,8 +130,8 @@ public sealed class NavigationViewPaneInputTests : UiTest
             int i = 0;
             i < 16
                 && (
-                    FindFirst("EmptySpaceState")!.IsOffscreen
-                    || FindFirst("EmptySpaceState")!.BoundingRectangle.Bottom > window.Bottom - 30
+                    FindFirst("EmptySpaceModeState")!.IsOffscreen
+                    || FindFirst("EmptySpaceModeState")!.BoundingRectangle.Bottom > window.Bottom - 30
                 );
             i++
         )

@@ -116,3 +116,33 @@ not include the separate LeftCompact feature or any Fast Explorer changes.
 - The additional release-review matrix above, including multiple physical DPI
   configurations and monitors, remains manual coverage rather than a claim of
   exhaustive verification on this machine.
+
+## Follow-up: display-mode animation teardown
+
+A real-window test reproduced the reported `DoubleAnimation` exception on Top
+and Bottom selection: removing the left template reset `PaneGrid.Width` to Auto
+(`NaN`) while its old width animation was still attached. The earlier disconnected
+mode test did not exercise template teardown with running animation clocks.
+
+Before template removal or entry into a mode without pane animation,
+NavigationView now selects the empty `PaneAuto` state and immediately detaches
+the old width animation. Storyboard removal alone is deferred until an animation
+tick and does not prevent a synchronous template invalidation exception. Left
+pane state is restored after style triggers have restored `OpenPaneLength`, and
+after a new template is applied.
+
+The regression cases cover open/compact panes, Top, Bottom and LeftFluent,
+completed/in-progress animation, and return to Left with the expected pane width.
+The Gallery UI tests select actual popup items with the mouse and assert the
+bound `PaneDisplayMode` readout, in addition to the pane's open state. Separate
+cases cover Top and Bottom from both open and compact LeftMinimal panes.
+
+Follow-up verification: the complete unit suite passes 43 cases with no failures
+or skips. The library builds for all six target frameworks; the compatibility
+build used `-p:RunAnalyzers=false -p:GeneratePackageOnBuild=false`. STA test
+dispatchers are explicitly shut down after each case so window/animation resources
+do not leave foreground threads running at test-process exit.
+The complete Gallery UI suite passes 13 cases with no failures or skips (3m 58s),
+including all four Top/Bottom mouse-selection cases and the existing pane input,
+navigation, search, dialog and window tests. Gallery and integration test output
+assemblies were checked to contain the same updated Wpf.Ui library as the build.

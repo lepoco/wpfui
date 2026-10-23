@@ -94,6 +94,38 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     }
 
     /// <inheritdoc />
+    protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+    {
+        if (
+            e.Property == TemplateProperty
+            || (
+                e.Property == PaneDisplayModeProperty
+                && e.NewValue
+                    is not (NavigationViewPaneDisplayMode.Left or NavigationViewPaneDisplayMode.LeftMinimal)
+            )
+        )
+        {
+            // Stop the old pane storyboards before template bindings are detached or
+            // OpenPaneLength becomes Auto. DoubleAnimation cannot interpolate NaN.
+            _ = VisualStateManager.GoToState(this, "PaneAuto", false);
+            if (GetTemplateChild(TemplateElementPaneGrid) is FrameworkElement paneGrid)
+            {
+                // Storyboard removal is processed on the next animation tick. Detach
+                // the width clock now, before clearing the template resets Width to NaN.
+                paneGrid.BeginAnimation(WidthProperty, null);
+            }
+        }
+
+        base.OnPropertyChanged(e);
+
+        if (e.Property == PaneDisplayModeProperty)
+        {
+            // Style triggers must restore OpenPaneLength before starting left pane animations.
+            UpdateVisualState(this);
+        }
+    }
+
+    /// <inheritdoc />
     protected override void OnInitialized(EventArgs e)
     {
         base.OnInitialized(e);

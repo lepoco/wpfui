@@ -481,6 +481,8 @@
 
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup Name="PaneStates">
+                    <!-- End pane animations before switching to a template or mode with Auto width. -->
+                    <VisualState Name="PaneAuto" />
                     <VisualState Name="PaneOpen">
                         <Storyboard>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AutoSuggestBoxContentPresenter" Storyboard.TargetProperty="Visibility">

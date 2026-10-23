@@ -28,12 +28,18 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(System.Windows.Controls.Button))]
 [TemplatePart(Name = TemplateElementPaneToggleSpace, Type = typeof(System.Windows.Controls.Grid))]
 [TemplatePart(Name = TemplateElementPaneMenuSpace, Type = typeof(System.Windows.Controls.Grid))]
+[TemplatePart(Name = TemplateElementPaneGrid, Type = typeof(System.Windows.Controls.Grid))]
 [TemplatePart(
     Name = TemplateElementAutoSuggestBoxSymbolButton,
     Type = typeof(System.Windows.Controls.Button)
 )]
 public partial class NavigationView
 {
+    /// <summary>
+    /// Template element whose width is animated in the left pane modes.
+    /// </summary>
+    private const string TemplateElementPaneGrid = "PaneGrid";
+
     /// <summary>
     /// Template background beside the pane toggle button.
     /// </summary>
@@ -165,6 +171,8 @@ public partial class NavigationView
             ToggleButton.Click -= OnToggleButtonClick;
             ToggleButton.Click += OnToggleButtonClick;
         }
+
+        UpdateVisualState(this);
     }
 
     protected T GetTemplateChild<T>(string name)
