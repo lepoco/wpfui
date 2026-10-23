@@ -248,13 +248,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected virtual void OnPaneDisplayModeChanged()
     {
         _pressedPaneSpace = null;
-        switch (PaneDisplayMode)
-        {
-            case NavigationViewPaneDisplayMode.LeftFluent:
-                SetCurrentValue(IsBackButtonVisibleProperty, NavigationViewBackButtonVisible.Collapsed);
-                SetCurrentValue(IsPaneToggleVisibleProperty, false);
-                break;
-        }
+        // LeftFluent hides pane buttons without overwriting their configured values.
+        CoerceValue(IsBackButtonVisibleProperty);
+        CoerceValue(IsPaneToggleVisibleProperty);
     }
 
     /// <summary>

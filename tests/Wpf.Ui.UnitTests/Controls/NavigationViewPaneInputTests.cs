@@ -403,6 +403,69 @@ public class NavigationViewPaneInputTests
             }
         });
 
+    [Theory]
+    [InlineData(NavigationViewPaneDisplayMode.Left, true)]
+    [InlineData(NavigationViewPaneDisplayMode.LeftMinimal, true)]
+    [InlineData(NavigationViewPaneDisplayMode.Left, false)]
+    [InlineData(NavigationViewPaneDisplayMode.LeftMinimal, false)]
+    public void LeavingLeftFluent_RestoresConfiguredButtonVisibility(
+        NavigationViewPaneDisplayMode mode,
+        bool visible
+    ) =>
+        RunSta(() =>
+        {
+            NavigationView view = CreateView();
+            view.IsPaneToggleVisible = visible;
+            view.IsBackButtonVisible = NavigationViewBackButtonVisible.Visible;
+            for (int i = 0; i < 2; i++)
+            {
+                view.PaneDisplayMode = NavigationViewPaneDisplayMode.LeftFluent;
+                Assert.False(view.IsPaneToggleVisible);
+                Assert.Equal(NavigationViewBackButtonVisible.Collapsed, view.IsBackButtonVisible);
+                view.PaneDisplayMode = mode;
+                Assert.Equal(visible, view.IsPaneToggleVisible);
+                Assert.Equal(NavigationViewBackButtonVisible.Visible, view.IsBackButtonVisible);
+            }
+        });
+
+    [Fact]
+    public void LeftFluentButtonVisibility_PreservesBindingsAndLatestSourceValues() =>
+        RunSta(() =>
+        {
+            NavigationView view = CreateView();
+            NavigationView source = new NavigationView();
+            view.SetBinding(
+                NavigationView.IsPaneToggleVisibleProperty,
+                new Binding(nameof(NavigationView.IsPaneToggleVisible))
+                {
+                    Source = source,
+                    Mode = BindingMode.TwoWay,
+                }
+            );
+            view.SetBinding(
+                NavigationView.IsBackButtonVisibleProperty,
+                new Binding(nameof(NavigationView.IsBackButtonVisible))
+                {
+                    Source = source,
+                    Mode = BindingMode.TwoWay,
+                }
+            );
+            view.PaneDisplayMode = NavigationViewPaneDisplayMode.LeftFluent;
+            Assert.False(view.IsPaneToggleVisible);
+            Assert.True(source.IsPaneToggleVisible);
+            Assert.Equal(NavigationViewBackButtonVisible.Auto, source.IsBackButtonVisible);
+            source.IsPaneToggleVisible = false;
+            source.IsPaneToggleVisible = true;
+            source.IsBackButtonVisible = NavigationViewBackButtonVisible.Visible;
+            Assert.False(view.IsPaneToggleVisible);
+            Assert.Equal(NavigationViewBackButtonVisible.Collapsed, view.IsBackButtonVisible);
+            view.PaneDisplayMode = NavigationViewPaneDisplayMode.Left;
+            Assert.True(view.IsPaneToggleVisible);
+            Assert.Equal(NavigationViewBackButtonVisible.Visible, view.IsBackButtonVisible);
+            Assert.True(BindingOperations.IsDataBound(view, NavigationView.IsPaneToggleVisibleProperty));
+            Assert.True(BindingOperations.IsDataBound(view, NavigationView.IsBackButtonVisibleProperty));
+        });
+
     private static NavigationView CreateView(
         string theme = "Light",
         NavigationViewPaneDisplayMode mode = NavigationViewPaneDisplayMode.Left

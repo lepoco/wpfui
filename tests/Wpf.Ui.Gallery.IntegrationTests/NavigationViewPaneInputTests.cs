@@ -112,6 +112,38 @@ public sealed class NavigationViewPaneInputTests : UiTest
         await AssertPaneOpen(!isPaneOpen);
     }
 
+    [Theory]
+    [InlineData(0, "Left")]
+    [InlineData(1, "LeftMinimal")]
+    public async Task LeavingLeftFluent_RestoresWorkingHamburger(int index, string name)
+    {
+        await Wait(2, TestContext.Current.CancellationToken);
+        FindFirst(c => c.ByText("Navigation"))!.Click();
+        await Wait(1, TestContext.Current.CancellationToken);
+        FindFirst(c => c.ByText("NavigationView"))!.Click();
+        await Wait(1, TestContext.Current.CancellationToken);
+        await ScrollSampleIntoView();
+        await SelectMode(2, "LeftFluent");
+        await SelectMode(index, name);
+
+        // Keep the empty-space option off: only a real, visible hamburger can toggle here.
+        Rectangle mode = FindFirst("EmptySpacePaneMode")!.BoundingRectangle;
+        Rectangle item = FindFirst("EmptySpaceDashboard")!.BoundingRectangle;
+        AutomationElement[] buttons = MainWindow!
+            .FindAllDescendants(c => c.ByAutomationId("NavigationToggleButton"))
+            .Where(button =>
+                !button.IsOffscreen
+                && button.BoundingRectangle.Top > mode.Bottom
+                && button.BoundingRectangle.Bottom < item.Top
+            )
+            .ToArray();
+        buttons.Should().ContainSingle();
+        buttons[0].Click();
+        await AssertPaneOpen(false);
+        buttons[0].Click();
+        await AssertPaneOpen(true);
+    }
+
     private async Task SelectMode(int index, string name)
     {
         ComboBox mode = FindFirst("EmptySpacePaneMode")!.AsComboBox();

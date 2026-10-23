@@ -124,7 +124,7 @@ public partial class NavigationView
         nameof(IsBackButtonVisible),
         typeof(NavigationViewBackButtonVisible),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(NavigationViewBackButtonVisible.Auto)
+        new FrameworkPropertyMetadata(NavigationViewBackButtonVisible.Auto, null, CoerceIsBackButtonVisible)
     );
 
     /// <summary>Identifies the <see cref="IsPaneToggleVisible"/> dependency property.</summary>
@@ -132,7 +132,7 @@ public partial class NavigationView
         nameof(IsPaneToggleVisible),
         typeof(bool),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(true)
+        new FrameworkPropertyMetadata(true, null, CoerceIsPaneToggleVisible)
     );
 
     /// <summary>Identifies the <see cref="IsPaneToggleOnEmptySpaceEnabled"/> dependency property.</summary>
@@ -660,6 +660,20 @@ public partial class NavigationView
         }
 
         navigationView.OnItemTemplateChanged();
+    }
+
+    private static object CoerceIsBackButtonVisible(DependencyObject d, object baseValue)
+    {
+        return ((NavigationView)d).PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent
+            ? NavigationViewBackButtonVisible.Collapsed
+            : baseValue;
+    }
+
+    private static object CoerceIsPaneToggleVisible(DependencyObject d, object baseValue)
+    {
+        return ((NavigationView)d).PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent
+            ? false
+            : baseValue;
     }
 
     private static void OnIsPaneToggleOnEmptySpaceEnabledChanged(

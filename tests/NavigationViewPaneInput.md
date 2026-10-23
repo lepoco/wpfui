@@ -153,3 +153,21 @@ and the integration test project were rebuilt successfully. The targeted
 0 skipped), including scrolling to the example in its new location. All five
 example contents were compared with the previous revision and remain identical;
 only their order changed.
+
+## Follow-up: restoring pane buttons after LeftFluent
+
+LeftFluent previously overwrote `IsPaneToggleVisible` and `IsBackButtonVisible`
+with hidden values. Those values remained after selecting another mode. The
+properties now coerce their effective values while in LeftFluent, preserving the
+configured base values and bindings. Changing modes re-evaluates coercion, so the
+latest configured values are restored. Explicitly hidden buttons remain hidden.
+
+Regression cases cover repeated returns to Left and LeftMinimal, explicitly
+visible/hidden settings, two-way bindings and source updates while in LeftFluent.
+Gallery UI tests leave the empty-space option off, select LeftFluent and return
+with real mouse input, then locate the visible hamburger and use it to close and
+reopen the pane. This prevents an empty-space click from masking a missing button.
+
+Verification: the complete unit suite passes 48 cases (0 failed, 0 skipped).
+Both targeted Gallery UI cases pass (2 passed, 0 failed, 0 skipped; 1m 48s).
+Gallery and test projects were rebuilt successfully for net10.0-windows.
