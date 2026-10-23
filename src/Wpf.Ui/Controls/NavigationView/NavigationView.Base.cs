@@ -120,6 +120,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
     {
+        _pressedPaneSpace = null;
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
         SizeChanged -= OnSizeChanged;
@@ -214,6 +215,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnPaneDisplayModeChanged()
     {
+        _pressedPaneSpace = null;
         switch (PaneDisplayMode)
         {
             case NavigationViewPaneDisplayMode.LeftFluent:

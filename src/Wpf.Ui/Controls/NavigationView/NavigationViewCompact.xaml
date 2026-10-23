@@ -310,6 +310,9 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
+                            <!-- Background only: child controls retain their own hit targets. -->
+                            <Grid x:Name="PART_PaneToggleSpace" Grid.Row="1" />
+
                             <controls:Button
                                 x:Name="PART_BackButton"
                                 Grid.Row="0"
@@ -381,19 +384,22 @@
                             CanContentScroll="True"
                             HorizontalScrollBarVisibility="Disabled"
                             VerticalScrollBarVisibility="Auto">
-                            <ItemsControl
-                                x:Name="PART_MenuItemsItemsControl"
-                                AutomationProperties.AutomationId="NavigationItems"
-                                Focusable="False"
-                                KeyboardNavigation.DirectionalNavigation="Contained"
-                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Margin="0" IsItemsHost="True" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
+                            <Grid x:Name="PART_PaneMenuSpace">
+                                <ItemsControl
+                                    x:Name="PART_MenuItemsItemsControl"
+                                    VerticalAlignment="Top"
+                                    AutomationProperties.AutomationId="NavigationItems"
+                                    Focusable="False"
+                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Margin="0" IsItemsHost="True" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </Grid>
                         </controls:DynamicScrollViewer>
 
                         <!--  Separator/Shadow for Footer  -->
@@ -532,6 +538,10 @@
         </Grid>
 
         <ControlTemplate.Triggers>
+            <Trigger Property="IsPaneToggleOnEmptySpaceEnabled" Value="True">
+                <Setter TargetName="PART_PaneToggleSpace" Property="Background" Value="Transparent" />
+                <Setter TargetName="PART_PaneMenuSpace" Property="Background" Value="Transparent" />
+            </Trigger>
             <Trigger Property="IsPaneOpen" Value="False">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />

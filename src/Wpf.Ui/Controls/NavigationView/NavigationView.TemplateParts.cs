@@ -26,12 +26,24 @@ namespace Wpf.Ui.Controls;
 )]
 [TemplatePart(Name = TemplateElementBackButton, Type = typeof(System.Windows.Controls.Button))]
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(System.Windows.Controls.Button))]
+[TemplatePart(Name = TemplateElementPaneToggleSpace, Type = typeof(System.Windows.Controls.Grid))]
+[TemplatePart(Name = TemplateElementPaneMenuSpace, Type = typeof(System.Windows.Controls.Grid))]
 [TemplatePart(
     Name = TemplateElementAutoSuggestBoxSymbolButton,
     Type = typeof(System.Windows.Controls.Button)
 )]
 public partial class NavigationView
 {
+    /// <summary>
+    /// Template background beside the pane toggle button.
+    /// </summary>
+    private const string TemplateElementPaneToggleSpace = "PART_PaneToggleSpace";
+
+    /// <summary>
+    /// Template background below the menu items in the pane scroll viewer.
+    /// </summary>
+    private const string TemplateElementPaneMenuSpace = "PART_PaneMenuSpace";
+
     /// <summary>
     /// Template element represented by the <c>PART_MenuItemsItemsControl</c> name.
     /// </summary>
@@ -96,7 +108,11 @@ public partial class NavigationView
     /// <inheritdoc />
     public override void OnApplyTemplate()
     {
+        _pressedPaneSpace = null;
         base.OnApplyTemplate();
+
+        _paneToggleSpace = GetTemplateChild(TemplateElementPaneToggleSpace);
+        _paneMenuSpace = GetTemplateChild(TemplateElementPaneMenuSpace);
 
         NavigationViewContentPresenter = GetTemplateChild<NavigationViewContentPresenter>(
             TemplateElementNavigationViewContentPresenter
