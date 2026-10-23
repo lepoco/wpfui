@@ -126,9 +126,10 @@ public sealed class NavigationViewPaneInputTests : UiTest
     {
         Rectangle window = MainWindow!.BoundingRectangle;
         Mouse.MoveTo(new Point(window.Right - 100, window.Bottom - 100));
+        // The optional example follows all four built-in examples at the end of the page.
         for (
             int i = 0;
-            i < 16
+            i < 64
                 && (
                     FindFirst("EmptySpaceModeState")!.IsOffscreen
                     || FindFirst("EmptySpaceModeState")!.BoundingRectangle.Bottom > window.Bottom - 30

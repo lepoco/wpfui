@@ -67,8 +67,8 @@ to cover A/B/C, opt-in/off, controls, drag, scrolling and mode changes.
 ## Gallery verification
 
 Open **Navigation > NavigationView**. The optional feature example follows the
-existing basic example. Scroll until its checkbox, pane and `IsPaneOpen` readout
-are visible. The checkbox starts unchecked.
+existing Bottom example at the end of the page. Scroll until its checkbox, pane,
+`IsPaneOpen` and `PaneDisplayMode` readouts are visible. The checkbox starts unchecked.
 
 1. Click beside the hamburger and below the menu with the checkbox off: no change.
 2. Enable the checkbox. Click A (beside hamburger): open to compact, once.
@@ -106,8 +106,8 @@ not include the separate LeftCompact feature or any Fast Explorer changes.
   feature and 6 are existing regression cases.
 - Complete Gallery UI suite: 9 passed, 0 failed, 0 skipped (2m 19s).
 - A/B/C were also clicked directly in the running Gallery. The added UI test
-  subsequently passed against the example in its final position after the basic
-  NavigationView example.
+  The example is placed after the existing Bottom example. UI tests scroll to
+  this section before exercising the feature.
 - During test development, hit tests initially ran before the pane animation
   completed. The UI mode test also needed to close the ComboBox popup after UIA
   selection, so its next click reached the pane. These were test setup issues.
@@ -146,3 +146,10 @@ The complete Gallery UI suite passes 13 cases with no failures or skips (3m 58s)
 including all four Top/Bottom mouse-selection cases and the existing pane input,
 navigation, search, dialog and window tests. Gallery and integration test output
 assemblies were checked to contain the same updated Wpf.Ui library as the build.
+
+After placing the optional example after Bottom at the end of the page, Gallery
+and the integration test project were rebuilt successfully. The targeted
+`EmptySpaceClicks_RespectControlsAndDisplayMode` UI test passed (1 passed, 0 failed,
+0 skipped), including scrolling to the example in its new location. All five
+example contents were compared with the previous revision and remain identical;
+only their order changed.
