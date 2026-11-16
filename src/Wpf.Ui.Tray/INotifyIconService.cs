@@ -53,4 +53,14 @@ public interface INotifyIconService
     /// Sets parent window of the tray icon.
     /// </summary>
     public void SetParentWindow(Window window);
+
+    /// <summary>
+    /// Sets the <see cref="Wpf.Ui.Tray.Controls.NotifyIcon"/> control to be used by the service.
+    /// </summary>
+    public void SetNotifyIcon(Wpf.Ui.Tray.Controls.NotifyIcon notifyIcon);
+
+    /// <summary>
+    /// Gets the <see cref="Wpf.Ui.Tray.Controls.NotifyIcon"/> control used by the service.
+    /// </summary>
+    public Wpf.Ui.Tray.Controls.NotifyIcon? GetNotifyIcon();
 }
