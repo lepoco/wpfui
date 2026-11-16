@@ -125,5 +125,31 @@
                 </Canvas>
             </ui:Button>
         </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI button disabled/enabled"
+            XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; IsEnabled=&quot;False&quot; /&gt;">
+            <StackPanel>
+                <TextBlock Text="Enabled" />
+                <WrapPanel>
+                    <ui:Button Appearance="Primary"   Content="Primary"   Margin="4" />
+                    <ui:Button Appearance="Secondary" Content="Secondary" Margin="4" />
+                    <ui:Button Appearance="Success"   Content="Success"   Margin="4" />
+                    <ui:Button Appearance="Caution"   Content="Caution"   Margin="4" />
+                    <ui:Button Appearance="Danger"    Content="Danger"    Margin="4" />
+                </WrapPanel>
+
+                <TextBlock Text="Disabled" />
+                <WrapPanel>
+                    <ui:Button Appearance="Primary"   Content="Primary"   IsEnabled="False" Margin="4" />
+                    <ui:Button Appearance="Secondary" Content="Secondary" IsEnabled="False" Margin="4" />
+                    <ui:Button Appearance="Success"   Content="Success"   IsEnabled="False" Margin="4" />
+                    <ui:Button Appearance="Caution"   Content="Caution"   IsEnabled="False" Margin="4" />
+                    <ui:Button Appearance="Danger"    Content="Danger"    IsEnabled="False" Margin="4" />
+                </WrapPanel>
+            </StackPanel>
+        </controls:ControlExample>
+
     </StackPanel>
 </Page>

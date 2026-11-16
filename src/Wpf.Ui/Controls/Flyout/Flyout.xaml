@@ -50,19 +50,29 @@
                             PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
                             StaysOpen="{TemplateBinding Popup.StaysOpen}"
                             VerticalOffset="1">
-                            <Border
-                                x:Name="PopupBorder"
-                                Margin="{TemplateBinding Margin}"
-                                Padding="{TemplateBinding Padding}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="{DynamicResource PopupCornerRadius}"
-                                SnapsToDevicePixels="True">
-                                <ContentPresenter Content="{TemplateBinding Content}" />
-                            </Border>
+                            <controls:EffectThicknessDecorator Thickness="30">
+                                <Border
+                                    x:Name="PopupBorder"
+                                    Margin="{TemplateBinding Margin}"
+                                    Padding="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{DynamicResource PopupCornerRadius}"
+                                    SnapsToDevicePixels="True">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="20"
+                                            Direction="270"
+                                            Opacity="0.135"
+                                            ShadowDepth="10"
+                                            Color="#202020" />
+                                    </Border.Effect>
+                                    <ContentPresenter Content="{TemplateBinding Content}" />
+                                </Border>
+                            </controls:EffectThicknessDecorator>
                         </Popup>
                     </Grid>
                 </ControlTemplate>

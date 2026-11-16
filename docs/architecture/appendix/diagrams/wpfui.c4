@@ -1,0 +1,145 @@
+specification {
+  element actor {
+    style {
+      shape person
+    }
+  }
+  element system
+  element external {
+    style {
+      color muted
+    }
+  }
+  element container
+  element component
+}
+
+model {
+  actor developer = 'WPF Developer' {
+    description 'Builds WPF apps using WPF UI'
+  }
+  actor enduser = 'End User' {
+    description 'Uses WPF desktop applications'
+  }
+
+  system wpfui = 'WPF UI Library' {
+    description 'Fluent Design System for WPF. 77+ controls, theming, Win32 interop.'
+
+    container core = 'Wpf.Ui' {
+      description 'Core library - controls, theming, services, interop'
+
+      component controls = 'Controls' {
+        description '77+ Fluent Design controls including NavigationView, TitleBar, FluentWindow, ContentDialog, NumberBox, ToggleSwitch'
+      }
+      component appearance = 'Appearance' {
+        description 'Theme and accent color management via ApplicationThemeManager and ApplicationAccentColorManager'
+      }
+      component services = 'Services' {
+        description 'NavigationService, ContentDialogService, SnackbarService, TaskBarService'
+      }
+      component interop = 'Win32 Interop' {
+        description 'DWM, User32, Shell32 wrappers via CsWin32 P/Invoke'
+      }
+      component resources = 'Resources' {
+        description 'ThemesDictionary, ControlsDictionary, embedded Fluent System Icons fonts'
+      }
+      component converters = 'Converters' {
+        description 'XAML value converters for theme-aware data binding'
+      }
+      component automationPeers = 'AutomationPeers' {
+        description 'UI Automation and accessibility support for custom controls'
+      }
+    }
+
+    container abstractions = 'Wpf.Ui.Abstractions' {
+      description 'Contract interfaces for services and navigation. Multi-targets netstandard2.0/2.1.'
+    }
+    container di = 'Wpf.Ui.DependencyInjection' {
+      description 'Microsoft.Extensions.DependencyInjection integration for services and navigation'
+    }
+    container tray = 'Wpf.Ui.Tray' {
+      description 'System tray icon and context menu support'
+    }
+    container syntaxHighlight = 'Wpf.Ui.SyntaxHighlight' {
+      description 'Code syntax highlighting display control'
+    }
+    container gallery = 'Wpf.Ui.Gallery' {
+      description 'Demo application showcasing all controls and patterns'
+    }
+    container flaui = 'Wpf.Ui.FlaUI' {
+      description 'FlaUI-based test automation helpers for integration testing'
+    }
+    container fontMapper = 'Wpf.Ui.FontMapper' {
+      description 'Build-time tool generating icon enum from Fluent System Icons font'
+    }
+  }
+
+  external nuget = 'NuGet.org' {
+    description 'Package distribution for WPF-UI and satellite packages'
+  }
+  external windows = 'Windows OS' {
+    description 'Win32 APIs, Desktop Window Manager, WinRT notifications'
+  }
+  external github = 'GitHub' {
+    description 'Source hosting, CI/CD via GitHub Actions, documentation'
+  }
+  external fluentIcons = 'Fluent System Icons' {
+    description 'Microsoft open-source icon font (Filled + Regular variants)'
+  }
+  external wpfFramework = 'WPF Framework' {
+    description '.NET WPF runtime and base controls'
+  }
+
+  // Actor relationships
+  developer -> wpfui.core 'Uses controls, theming, and services via NuGet'
+  developer -> wpfui.di 'Registers services in DI container'
+  developer -> nuget 'Installs WPF-UI packages'
+  enduser -> wpfui.gallery 'Explores demo application'
+
+  // Internal container relationships
+  wpfui.core -> abstractions 'Implements service interfaces'
+  wpfui.di -> abstractions 'References contract interfaces'
+  wpfui.di -> wpfui.core 'Registers concrete service implementations'
+  wpfui.tray -> wpfui.core 'Extends with system tray functionality'
+  wpfui.syntaxHighlight -> wpfui.core 'Extends with syntax highlighting control'
+  wpfui.gallery -> wpfui.core 'Demonstrates all controls and services'
+  wpfui.gallery -> wpfui.di 'Uses DI for service registration'
+  wpfui.gallery -> wpfui.tray 'Demonstrates tray integration'
+  wpfui.gallery -> wpfui.syntaxHighlight 'Demonstrates code display'
+  wpfui.flaui -> wpfui.core 'Provides automation wrappers for controls'
+
+  // Internal component relationships
+  wpfui.core.controls -> wpfui.core.appearance 'Reacts to theme changes'
+  wpfui.core.controls -> wpfui.core.resources 'Consumes styles and templates'
+  wpfui.core.controls -> wpfui.core.interop 'Uses Win32 for TitleBar, snap layouts'
+  wpfui.core.controls -> wpfui.core.converters 'Uses value converters in templates'
+  wpfui.core.controls -> wpfui.core.automationPeers 'Exposes automation support'
+  wpfui.core.services -> wpfui.core.controls 'Manages NavigationView, ContentDialog, Snackbar'
+  wpfui.core.appearance -> wpfui.core.interop 'Detects system theme via Win32'
+  wpfui.core.appearance -> wpfui.core.resources 'Switches theme dictionaries at runtime'
+
+  // External relationships
+  wpfui.core.interop -> windows 'P/Invoke calls to DWM, User32, Shell32'
+  wpfui.core -> wpfFramework 'Extends WPF base classes (Control, Window, etc.)'
+  wpfui.core.resources -> fluentIcons 'Bundles icon font files'
+  wpfui.core -> nuget 'Published as WPF-UI package'
+  wpfui.core -> github 'Source hosted, CI/CD pipeline'
+  wpfui.fontMapper -> fluentIcons 'Parses icon font to generate enums'
+}
+
+views {
+  view context of wpfui {
+    title 'WPF UI - System Context (C4 Level 1)'
+    include *, developer, enduser, nuget, windows, github, fluentIcons, wpfFramework
+  }
+
+  view containers of wpfui {
+    title 'WPF UI - Container View (C4 Level 2)'
+    include wpfui, wpfui.*, developer, windows, nuget, wpfFramework
+  }
+
+  view components of wpfui.core {
+    title 'Wpf.Ui Core - Component View (C4 Level 3)'
+    include wpfui.core, wpfui.core.*, windows, wpfFramework, fluentIcons
+  }
+}
