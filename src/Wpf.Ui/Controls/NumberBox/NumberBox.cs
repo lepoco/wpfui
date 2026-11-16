@@ -493,6 +493,7 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
             value = Minimum;
         }
 
+        UpdateTextToValue();
         SetCurrentValue(ValueProperty, value);
     }
 

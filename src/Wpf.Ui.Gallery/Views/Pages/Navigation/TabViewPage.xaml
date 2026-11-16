@@ -6,47 +6,44 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="TabViewPage"
-    d:DataContext="{d:DesignInstance local:TabViewPage,
-                                     IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DataContext="{d:DesignInstance local:TabViewPage, IsDesignTimeCreatable=False}"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-
-    <Grid Margin="0,0,0,24">
-        <controls:ControlExample
-            Margin="0"
-            HeaderText="Standard TabView."
-            XamlCode="&lt;ui:TabView /&gt;">
-            <ui:TabView Margin="0,8,0,0">
-                <ui:TabViewItem>
-                    <ui:TabViewItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="XboxConsole24" />
-                            <TextBlock Text="Hello" />
-                        </StackPanel>
-                    </ui:TabViewItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="World" />
-                    </Grid>
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample HeaderText="Document tabs." XamlCode="&lt;ui:TabView&gt;&#10;    &lt;ui:TabViewItem Header=&quot;Welcome&quot; IsClosable=&quot;False&quot; /&gt;&#10;&lt;/ui:TabView&gt;">
+            <ui:TabView Margin="0,8,0,0" TabAdding="OnTabAdding">
+                <ui:TabViewItem Header="Welcome" IsClosable="False" IsSelected="True">
+                    <TextBlock Margin="12" Text="Use + to add a document. Drag a header to reorder tabs." />
                 </ui:TabViewItem>
-                <ui:TabViewItem IsSelected="True">
-                    <ui:TabViewItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="StoreMicrosoft16" />
-                            <TextBlock Text="The cake" />
-                        </StackPanel>
-                    </ui:TabViewItem.Header>
-                    <Grid>
-                        <TextBlock Margin="12" Text="Is a lie." />
-                    </Grid>
+                <ui:TabViewItem Header="Document 2">
+                    <TextBlock Margin="12" Text="Use the close button to close this document." />
                 </ui:TabViewItem>
             </ui:TabView>
         </controls:ControlExample>
-    </Grid>
+        <controls:ControlExample Margin="0,24,0,0" HeaderText="MVVM: ObservableCollection of document models." XamlCode="&lt;ui:TabView ItemsSource=&quot;{Binding Documents}&quot;&#10;    SelectedItem=&quot;{Binding SelectedDocument, Mode=TwoWay}&quot;&#10;    TabAdding=&quot;OnModelTabAdding&quot; /&gt;">
+            <ui:TabView Margin="0,8,0,0"
+                        ItemsSource="{Binding Documents}"
+                        SelectedItem="{Binding SelectedDocument, Mode=TwoWay}"
+                        TabAdding="OnModelTabAdding"
+                        TabClosing="OnModelTabClosing">
+                <ui:TabView.ItemContainerStyle>
+                    <Style TargetType="ui:TabViewItem" BasedOn="{StaticResource {x:Type ui:TabViewItem}}">
+                        <Setter Property="Header" Value="{Binding Header}" />
+                        <Setter Property="IsClosable" Value="{Binding IsClosable}" />
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock Margin="12" Text="{Binding Content}" />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ui:TabView.ItemContainerStyle>
+            </ui:TabView>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

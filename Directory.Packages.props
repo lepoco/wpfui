@@ -20,7 +20,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.4" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.203" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.402" />
     <PackageVersion Include="Microsoft.VisualStudio.CoreUtility" Version="17.2.3194" />
     <PackageVersion Include="Microsoft.VisualStudio.SDK" Version="17.12.4039" ExcludeAssets="runtime" />
     <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.12.2069" />

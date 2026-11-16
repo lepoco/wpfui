@@ -4,6 +4,10 @@
 // All Rights Reserved.
 
 using System.Reflection;
+using System.Windows.Input;
+using System.Windows.Threading;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 using Size = System.Windows.Size;
@@ -131,6 +135,14 @@ public class MessageBox : System.Windows.Window
         new PropertyMetadata(null)
     );
 
+    /// <summary>Identifies the <see cref="DefaultFocusedButton"/> dependency property.</summary>
+    public static readonly DependencyProperty DefaultFocusedButtonProperty = DependencyProperty.Register(
+        nameof(DefaultFocusedButton),
+        typeof(MessageBoxButton?),
+        typeof(MessageBox),
+        new PropertyMetadata(null)
+    );
+
     /// <summary>
     /// Gets or sets a value indicating whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="TitleBar"/>.
     /// </summary>
@@ -253,12 +265,25 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
+    /// <summary>
+    /// Gets or sets the button that should receive focus when the MessageBox is displayed.
+    /// If null, focus will be set to the first available button (Primary > Secondary > Close).
+    /// </summary>
+    public MessageBoxButton? DefaultFocusedButton
+    {
+        get => (MessageBoxButton?)GetValue(DefaultFocusedButtonProperty);
+        set => SetValue(DefaultFocusedButtonProperty, value);
+    }
+
 #if !NET8_0_OR_GREATER
     private static readonly PropertyInfo CanCenterOverWPFOwnerPropertyInfo = typeof(Window).GetProperty(
         "CanCenterOverWPFOwner",
         BindingFlags.NonPublic | BindingFlags.Instance
     )!;
 #endif
+
+    private DispatcherOperation? _initialFocusOperation;
+    private bool _centerOnScreenWhenLoaded;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageBox"/> class.
@@ -272,8 +297,14 @@ public class MessageBox : System.Windows.Window
 
         Loaded += static (sender, _) =>
         {
-            var self = (MessageBox)sender;
+            var self = (MessageBox)sender!;
             self.OnLoaded();
+        };
+
+        ContentRendered += static (sender, _) =>
+        {
+            var self = (MessageBox)sender!;
+            self.OnContentRendered();
         };
     }
 
@@ -317,6 +348,12 @@ public class MessageBox : System.Windows.Window
         {
             RemoveTitleBarAndApplyMica();
 
+            // Remember unspecified coordinates before WPF supplies the initial window position.
+            _centerOnScreenWhenLoaded =
+                WindowStartupLocation == WindowStartupLocation.Manual
+                && double.IsNaN(Left)
+                && double.IsNaN(Top);
+
             if (showAsDialog)
             {
                 base.ShowDialog();
@@ -350,11 +387,17 @@ public class MessageBox : System.Windows.Window
         switch (WindowStartupLocation)
         {
             case WindowStartupLocation.Manual:
+                if (_centerOnScreenWhenLoaded || (double.IsNaN(Left) && double.IsNaN(Top)))
+                {
+                    CenterWindowOnScreen();
+                }
+
+                break;
             case WindowStartupLocation.CenterScreen:
                 CenterWindowOnScreen();
                 break;
             case WindowStartupLocation.CenterOwner:
-                if (!CanCenterOverWPFOwner() || Owner.WindowState is WindowState.Minimized)
+                if (Owner == null || !CanCenterOverWPFOwner() || Owner.WindowState is WindowState.Minimized)
                 {
                     CenterWindowOnScreen();
                 }
@@ -367,6 +410,8 @@ public class MessageBox : System.Windows.Window
             default:
                 throw new InvalidOperationException();
         }
+
+        QueueInitialFocus();
     }
 
     // CanCenterOverWPFOwner property see https://source.dot.net/#PresentationFramework/System/Windows/Window.cs,e679e433777b21b8
@@ -402,6 +447,34 @@ public class MessageBox : System.Windows.Window
         ResizeHeight(rootElement);
     }
 
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+
+        if (IsLoaded)
+        {
+            QueueInitialFocus();
+        }
+    }
+
+    /// <summary>
+    /// Occurs after the content is rendered.
+    /// </summary>
+    protected virtual void OnContentRendered()
+    {
+        QueueInitialFocus();
+    }
+
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+
+        if (IsLoaded)
+        {
+            QueueInitialFocus();
+        }
+    }
+
     protected override void OnClosing(CancelEventArgs e)
     {
         base.OnClosing(e);
@@ -412,6 +485,15 @@ public class MessageBox : System.Windows.Window
         }
 
         _ = Tcs?.TrySetResult(MessageBoxResult.None);
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        // Closing is not raised when an owner closes its non-modal owned windows.
+        _initialFocusOperation?.Abort();
+        _initialFocusOperation = null;
+        _ = Tcs?.TrySetResult(MessageBoxResult.None);
+        base.OnClosed(e);
     }
 
     protected virtual void CenterWindowOnScreen()
@@ -425,8 +507,27 @@ public class MessageBox : System.Windows.Window
 
     private void CenterWindowOnOwner()
     {
-        double left = Owner.Left + ((Owner.Width - Width) / 2);
-        double top = Owner.Top + ((Owner.Height - Height) / 2);
+        if (
+            PresentationSource.FromVisual(this)?.CompositionTarget is not { } compositionTarget
+            || !PInvoke.GetWindowRect(new HWND(new WindowInteropHelper(Owner).Handle), out RECT ownerRect)
+            || !PInvoke.GetWindowRect(new HWND(new WindowInteropHelper(this).Handle), out RECT messageBoxRect)
+        )
+        {
+            return;
+        }
+
+        // Use the displayed bounds, including maximized owners, in the MessageBox's DPI coordinate space.
+        Point ownerCenter = compositionTarget.TransformFromDevice.Transform(
+            new Point(
+                ownerRect.left + ((ownerRect.right - ownerRect.left) / 2.0),
+                ownerRect.top + ((ownerRect.bottom - ownerRect.top) / 2.0)
+            )
+        );
+        Vector windowSize = compositionTarget.TransformFromDevice.Transform(
+            new Vector(messageBoxRect.right - messageBoxRect.left, messageBoxRect.bottom - messageBoxRect.top)
+        );
+        double left = ownerCenter.X - (windowSize.X / 2);
+        double top = ownerCenter.Y - (windowSize.Y / 2);
 
         SetCurrentValue(LeftProperty, left);
         SetCurrentValue(TopProperty, top);
@@ -488,6 +589,115 @@ public class MessageBox : System.Windows.Window
         if (Width > MaxWidth)
         {
             SetCurrentValue(MaxWidthProperty, Width);
+        }
+    }
+
+    private void QueueInitialFocus()
+    {
+        if (_initialFocusOperation is { Status: DispatcherOperationStatus.Pending })
+        {
+            return;
+        }
+
+        // Allow Loaded and ContentRendered handlers to supply their own focus first.
+        _initialFocusOperation = Dispatcher.BeginInvoke(
+            DispatcherPriority.Input,
+            new Action(() =>
+            {
+                _initialFocusOperation = null;
+                SetFocusToFirstAvailableButton();
+            })
+        );
+    }
+
+    private bool IsValidContentFocus(IInputElement? element)
+    {
+        if (
+            element is not DependencyObject dependencyObject
+            || element == this
+            || GetWindow(dependencyObject) != this
+        )
+        {
+            return false;
+        }
+
+        if (element is UIElement uiElement)
+        {
+            if (
+                (element == GetTemplateChild("PART_MessageBoxPrimaryButton") && !IsPrimaryButtonEnabled)
+                || (
+                    element == GetTemplateChild("PART_MessageBoxSecondaryButton") && !IsSecondaryButtonEnabled
+                )
+                || (element == GetTemplateChild("PART_MessageBoxCloseButton") && !IsCloseButtonEnabled)
+            )
+            {
+                return false;
+            }
+
+            return uiElement.Focusable && uiElement.IsEnabled && uiElement.IsVisible;
+        }
+
+        if (element is ContentElement contentElement && contentElement.Focusable && contentElement.IsEnabled)
+        {
+            DependencyObject? parent = contentElement;
+            while (parent is ContentElement current)
+            {
+                parent = ContentOperations.GetParent(current) ?? (current as FrameworkContentElement)?.Parent;
+            }
+
+            return parent is UIElement { IsVisible: true, IsEnabled: true };
+        }
+
+        return false;
+    }
+
+    private static bool TrySetFocusToButton(Button? button, bool isEnabled)
+    {
+        return isEnabled
+            && button is { IsEnabled: true, IsVisible: true, Focusable: true }
+            && Keyboard.Focus(button) == button;
+    }
+
+    private void SetFocusToFirstAvailableButton()
+    {
+        // Never activate an inactive non-modal window or focus an unapplied template.
+        if (!IsLoaded || !IsVisible || !IsActive || IsValidContentFocus(Keyboard.FocusedElement))
+        {
+            return;
+        }
+
+        IInputElement? logicalFocus = FocusManager.GetFocusedElement(this);
+        if (!IsValidContentFocus(logicalFocus) && Content is DependencyObject content)
+        {
+            logicalFocus = FocusManager.GetFocusedElement(content);
+        }
+
+        if (IsValidContentFocus(logicalFocus))
+        {
+            _ = logicalFocus!.Focus();
+            return;
+        }
+
+        Button? primaryButton = GetTemplateChild("PART_MessageBoxPrimaryButton") as Button;
+        Button? secondaryButton = GetTemplateChild("PART_MessageBoxSecondaryButton") as Button;
+        Button? closeButton = GetTemplateChild("PART_MessageBoxCloseButton") as Button;
+
+        bool focusedDefault = DefaultFocusedButton switch
+        {
+            MessageBoxButton.Primary => TrySetFocusToButton(primaryButton, IsPrimaryButtonEnabled),
+            MessageBoxButton.Secondary => TrySetFocusToButton(secondaryButton, IsSecondaryButtonEnabled),
+            MessageBoxButton.Close => TrySetFocusToButton(closeButton, IsCloseButtonEnabled),
+            _ => false,
+        };
+
+        if (focusedDefault || TrySetFocusToButton(primaryButton, IsPrimaryButtonEnabled))
+        {
+            return;
+        }
+
+        if (!TrySetFocusToButton(secondaryButton, IsSecondaryButtonEnabled))
+        {
+            _ = TrySetFocusToButton(closeButton, IsCloseButtonEnabled);
         }
     }
 }

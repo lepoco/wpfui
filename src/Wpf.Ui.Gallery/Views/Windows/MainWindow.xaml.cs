@@ -7,6 +7,7 @@ using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
+using Wpf.Ui.Tray;
 
 namespace Wpf.Ui.Gallery.Views.Windows;
 
@@ -17,7 +18,8 @@ public partial class MainWindow : IWindow
         INavigationService navigationService,
         IServiceProvider serviceProvider,
         ISnackbarService snackbarService,
-        IContentDialogService contentDialogService
+        IContentDialogService contentDialogService,
+        INotifyIconService notifyIconService
     )
     {
         Appearance.SystemThemeWatcher.Watch(this);
@@ -30,6 +32,7 @@ public partial class MainWindow : IWindow
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         navigationService.SetNavigationControl(NavigationView);
         contentDialogService.SetDialogHost(RootContentDialog);
+        notifyIconService.SetNotifyIcon(TrayNotifyIcon);
         SetupTrayMenuEvents();
     }
 

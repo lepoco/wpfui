@@ -6,6 +6,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Wpf.Ui.Tray.Controls;
 
 #pragma warning disable CA1001 // Types that own disposable fields should be disposable
 
@@ -16,7 +17,9 @@ namespace Wpf.Ui.Tray;
 /// </summary>
 public class NotifyIconService : INotifyIconService
 {
-    private readonly Internal.InternalNotifyIconManager internalNotifyIconManager;
+    private Internal.InternalNotifyIconManager internalNotifyIconManager;
+
+    private NotifyIcon? _notifyIcon;
 
     public Window ParentWindow { get; internal set; } = null!;
 
@@ -76,6 +79,20 @@ public class NotifyIconService : INotifyIconService
         ParentWindow.Closing += OnParentWindowClosing;
     }
 
+    /// <inheritdoc />
+    public void SetNotifyIcon(NotifyIcon notifyIcon)
+    {
+        _notifyIcon = notifyIcon;
+        internalNotifyIconManager?.Dispose();
+        internalNotifyIconManager = notifyIcon.GetInternalManager();
+    }
+
+    /// <inheritdoc />
+    public NotifyIcon? GetNotifyIcon()
+    {
+        return _notifyIcon;
+    }
+
     /// <summary>
     /// This virtual method is called when the user clicks the left mouse button on the tray icon.
     /// </summary>
@@ -106,6 +123,21 @@ public class NotifyIconService : INotifyIconService
     /// </summary>
     protected virtual void OnMiddleDoubleClick() { }
 
+    /// <summary>
+    /// This virtual method is called when the user clicks the balloon tip notification.
+    /// </summary>
+    protected virtual void OnBalloonTipClick() { }
+
+    /// <summary>
+    /// This virtual method is called when the balloon tip notification is shown.
+    /// </summary>
+    protected virtual void OnBalloonTipShown() { }
+
+    /// <summary>
+    /// This virtual method is called when the balloon tip notification is closed or dismissed.
+    /// </summary>
+    protected virtual void OnBalloonTipClose() { }
+
     private void OnParentWindowClosing(object? sender, CancelEventArgs e)
     {
         internalNotifyIconManager.Dispose();
@@ -119,6 +151,9 @@ public class NotifyIconService : INotifyIconService
         internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
         internalNotifyIconManager.MiddleClick += OnMiddleClick;
         internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
+        internalNotifyIconManager.BalloonTipClicked += OnBalloonTipClick;
+        internalNotifyIconManager.BalloonTipShown += OnBalloonTipShown;
+        internalNotifyIconManager.BalloonTipClosed += OnBalloonTipClose;
     }
 }
 

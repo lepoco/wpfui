@@ -13,6 +13,7 @@ using Wpf.Ui.Gallery.ViewModels.Pages;
 using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Windows;
+using Wpf.Ui.Tray;
 
 namespace Wpf.Ui.Gallery;
 
@@ -51,6 +52,7 @@ public partial class App
                 _ = services.AddSingleton<AllControlsViewModel>();
                 _ = services.AddSingleton<SettingsPage>();
                 _ = services.AddSingleton<SettingsViewModel>();
+                _ = services.AddSingleton<INotifyIconService, NotifyIconService>();
 
                 // All other pages and view models
                 _ = services.AddTransientFromNamespace("Wpf.Ui.Gallery.Views", GalleryAssembly.Asssembly);

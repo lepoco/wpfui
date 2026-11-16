@@ -134,6 +134,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
                 new NavigationViewItem("Menu", typeof(MenuPage)),
                 new NavigationViewItem("Multilevel navigation", typeof(MultilevelNavigationPage)),
                 new NavigationViewItem("TabControl", typeof(TabControlPage)),
+                new NavigationViewItem("TabView", typeof(TabViewPage)),
             },
         },
         new NavigationViewItem(
@@ -170,6 +171,7 @@ public partial class MainWindowViewModel(IStringLocalizer<Translations> localize
             {
                 new NavigationViewItem("Clipboard", typeof(ClipboardPage)),
                 new NavigationViewItem("FilePicker", typeof(FilePickerPage)),
+                new NavigationViewItem("NotifyIcon", typeof(NotifyIconPage)),
             },
         },
         new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage)),
