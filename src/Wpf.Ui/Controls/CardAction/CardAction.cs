@@ -5,13 +5,14 @@
 
 // ReSharper disable once CheckNamespace
 using System.Windows.Automation.Peers;
+using System.Windows.Controls.Primitives;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Inherited from the <see cref="System.Windows.Controls.Primitives.ButtonBase"/> interactive card styled according to Fluent Design.
 /// </summary>
-public class CardAction : System.Windows.Controls.Primitives.ButtonBase
+public class CardAction : ButtonBase
 {
     /// <summary>Identifies the <see cref="IsChevronVisible"/> dependency property.</summary>
     public static readonly DependencyProperty IsChevronVisibleProperty = DependencyProperty.Register(
@@ -55,4 +56,6 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase
     {
         return new CardActionAutomationPeer(this);
     }
+
+    internal void AutomationClick() => this.OnClick();
 }

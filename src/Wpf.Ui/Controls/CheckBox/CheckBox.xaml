@@ -34,7 +34,6 @@
     <system:Double x:Key="CheckBoxWidth">20</system:Double>
     <system:TimeSpan x:Key="CheckBoxAnimationOffset">00:00:00.250</system:TimeSpan>
     <Duration x:Key="CheckBoxAnimationDuration">00:00:00.250</Duration>
-    <converters:AnimationFactorToValueConverter x:Key="CheckBoxAnimationFactorToValueConverter" />
     <converters:ClipConverter x:Key="ClipConverter" />
 
     <Style x:Key="DefaultCheckBoxStyle" TargetType="{x:Type CheckBox}">

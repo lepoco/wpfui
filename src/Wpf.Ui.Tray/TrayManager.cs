@@ -181,6 +181,11 @@ internal static class TrayManager
             hIcon = Hicon.FromApp();
         }
 
+        if (notifyIcon.ShellIconData.hIcon != IntPtr.Zero)
+        {
+            Interop.Shell32.DestroyIcon(notifyIcon.ShellIconData.hIcon);
+        }
+
         if (hIcon != IntPtr.Zero)
         {
             notifyIcon.ShellIconData.hIcon = hIcon;
