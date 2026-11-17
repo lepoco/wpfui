@@ -69,7 +69,7 @@ public class Flyout : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Event triggered when <see cref="Flyout" /> is opened.
+    /// Event triggered when <see cref="Flyout" /> is closed.
     /// </summary>
     public event TypedEventHandler<Flyout, RoutedEventArgs> Closed
     {
