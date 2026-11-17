@@ -40,7 +40,6 @@
             BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
             EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
-            FrameMargin="0"
             IsBackButtonVisible="Visible"
             IsFooterSeparatorVisible="False"
             IsPaneToggleVisible="True"
