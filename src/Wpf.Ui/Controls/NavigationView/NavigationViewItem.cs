@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -440,6 +441,23 @@ public class NavigationViewItem
     }
 
     protected override AutomationPeer OnCreateAutomationPeer()
+    {
+        try
+        {
+            return CreateNavigationViewItemAutomationPeer();
+        }
+        catch (MissingMethodException)
+        {
+            // An app built for .NET Framework 4.8.1 but running on 4.8 cannot bind
+            // ISelectionItemProvider.SelectionContainer, so the peer type fails to load.
+            return new FrameworkElementAutomationPeer(this);
+        }
+    }
+
+    // Kept out of OnCreateAutomationPeer so the peer type is loaded when this method is
+    // compiled, inside the try block above, rather than before it runs.
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private AutomationPeer CreateNavigationViewItemAutomationPeer()
     {
         return new NavigationViewItemAutomationPeer(this);
     }
