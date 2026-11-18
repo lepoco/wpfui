@@ -42,7 +42,7 @@
     <Color x:Key="ControlFillColorTertiary">#08FFFFFF</Color>
     <Color x:Key="ControlFillColorDisabled">#0BFFFFFF</Color>
     <Color x:Key="ControlFillColorTransparent">#00FFFFFF</Color>
-    <Color x:Key="ControlFillColorInputActive">#B31E1E1E</Color>
+    <Color x:Key="ControlFillColorInputActive">#FF1E1E1E</Color>
 
     <Color x:Key="ControlStrongFillColorDefault">#8BFFFFFF</Color>
     <Color x:Key="ControlStrongFillColorDisabled">#3FFFFFFF</Color>
