@@ -167,6 +167,11 @@ public interface INavigationView
     Thickness FrameMargin { get; set; }
 
     /// <summary>
+    /// Gets or sets a value indicating whether the GridSplitter is enabled in the LeftNavigationViewTemplate.
+    /// </summary>
+    bool IsGridSplitterEnabled { get; set; }
+
+    /// <summary>
     /// Occurs when the NavigationView pane is opened.
     /// </summary>
     event TypedEventHandler<NavigationView, RoutedEventArgs> PaneOpened;

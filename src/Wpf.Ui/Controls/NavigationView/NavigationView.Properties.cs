@@ -156,7 +156,7 @@ public partial class NavigationView
         nameof(OpenPaneLength),
         typeof(double),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(0D)
+        new FrameworkPropertyMetadata(0D, OnOpenPaneLengthChanged)
     );
 
     /// <summary>Identifies the <see cref="CompactPaneLength"/> dependency property.</summary>
@@ -257,6 +257,14 @@ public partial class NavigationView
         typeof(Thickness),
         typeof(NavigationView),
         new FrameworkPropertyMetadata(default(Thickness))
+    );
+
+    /// <summary>Identifies the <see cref="IsGridSplitterEnabled"/> dependency property.</summary>
+    public static readonly DependencyProperty IsGridSplitterEnabledProperty = DependencyProperty.Register(
+        nameof(IsGridSplitterEnabled),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(false, OnIsGridSplitterEnabledChanged)
     );
 
     /// <summary>
@@ -480,6 +488,13 @@ public partial class NavigationView
         set => SetValue(FrameMarginProperty, value);
     }
 
+    /// <inheritdoc/>
+    public bool IsGridSplitterEnabled
+    {
+        get => (bool)GetValue(IsGridSplitterEnabledProperty);
+        set => SetValue(IsGridSplitterEnabledProperty, value);
+    }
+
     private void OnMenuItemsSource_CollectionChanged(
         object? sender,
         IList collection,
@@ -630,6 +645,7 @@ public partial class NavigationView
         }
 
         navigationView.OnPaneDisplayModeChanged();
+        navigationView.UpdatePaneWidthForDisplayMode();
     }
 
     private static void OnItemTemplateChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
