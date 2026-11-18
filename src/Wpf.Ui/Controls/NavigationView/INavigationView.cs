@@ -132,6 +132,11 @@ public interface INavigationView
     NavigationViewPaneDisplayMode PaneDisplayMode { get; set; }
 
     /// <summary>
+    /// Gets or sets the direction in which the menu items expand.
+    /// </summary>
+    ExpandDirection ExpandDirection { get; set; }
+
+    /// <summary>
     /// Gets or sets an TitleBar to be displayed in the NavigationView.
     /// </summary>
     TitleBar? TitleBar { get; set; }

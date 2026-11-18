@@ -49,7 +49,16 @@
                     <ui:NavigationViewItem
                         Content="Settings"
                         Icon="{ui:SymbolIcon Settings24}"
-                        TargetPageType="{x:Type samples:SamplePage3}" />
+                        ExpandDirection="Up">
+                        <ui:NavigationViewItem.MenuItems>
+                            <ui:NavigationViewItem
+                                Content="Preferences"
+                                TargetPageType="{x:Type samples:SamplePage3}" />
+                            <ui:NavigationViewItem
+                                Content="About"
+                                TargetPageType="{x:Type samples:SamplePage1}" />
+                        </ui:NavigationViewItem.MenuItems>
+                    </ui:NavigationViewItem>
                 </ui:NavigationView.FooterMenuItems>
                 <ui:NavigationView.Header>
                     <Border
@@ -96,6 +105,12 @@
                 \t&lt;ui:NavigationView.MenuItems&gt;\n
                 \t\t&lt;ui:NavigationViewItem Content=&quot;Home&quot; Icon=&quot;Home24&quot; /&gt;\n
                 \t&lt;/ui:NavigationView.MenuItems&gt;\n
+                \t&lt;ui:NavigationView.FooterMenuItems&gt;\n
+                \t\t&lt;ui:NavigationViewItem Content=&quot;Settings&quot; Icon=&quot;Settings24&quot; ExpandDirection=&quot;Up&quot;&gt;\n
+                \t\t\t&lt;ui:NavigationViewItem Content=&quot;Preferences&quot; /&gt;\n
+                \t\t\t&lt;ui:NavigationViewItem Content=&quot;About&quot; /&gt;\n
+                \t\t&lt;/ui:NavigationViewItem&gt;\n
+                \t&lt;/ui:NavigationView.FooterMenuItems&gt;\n
                 &lt;/ui:NavigationView&gt;
             </controls:ControlExample.XamlCode>
         </controls:ControlExample>

@@ -259,6 +259,16 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(default(Thickness))
     );
 
+    /// <summary>Identifies the <see cref="ExpandDirection"/> dependency property.</summary>
+    public static readonly DependencyProperty ExpandDirectionProperty =
+        NavigationViewItem.ExpandDirectionProperty.AddOwner(
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(
+                ExpandDirection.Down,
+                FrameworkPropertyMetadataOptions.Inherits
+            )
+        );
+
     /// <summary>
     /// Gets or sets a value indicating whether debugging messages for this control are enabled
     /// </summary>
@@ -427,6 +437,15 @@ public partial class NavigationView
     {
         get => (NavigationViewPaneDisplayMode)GetValue(PaneDisplayModeProperty);
         set => SetValue(PaneDisplayModeProperty, value);
+    }
+
+    /// <inheritdoc/>
+    [Bindable(true)]
+    [Category("Layout")]
+    public ExpandDirection ExpandDirection
+    {
+        get => (ExpandDirection)GetValue(ExpandDirectionProperty);
+        set => SetValue(ExpandDirectionProperty, value);
     }
 
     /// <inheritdoc/>

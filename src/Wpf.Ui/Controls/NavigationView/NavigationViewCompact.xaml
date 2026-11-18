@@ -219,6 +219,11 @@
                 <Setter TargetName="PART_ChevronGrid" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_ChevronGrid" Property="Width" Value="40" />
             </Trigger>
+            <Trigger Property="ExpandDirection" Value="Up">
+                <Setter TargetName="MainBorder" Property="Grid.Row" Value="1" />
+                <Setter TargetName="MenuItemsPresenter" Property="Grid.Row" Value="0" />
+                <Setter TargetName="ChevronIcon" Property="Symbol" Value="ChevronUp24" />
+            </Trigger>
             <Trigger Property="IsExpanded" Value="True">
                 <Setter TargetName="MenuItemsPresenter" Property="Visibility" Value="Visible" />
                 <Trigger.EnterActions>

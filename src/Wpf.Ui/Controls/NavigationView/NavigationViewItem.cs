@@ -82,6 +82,17 @@ public class NavigationViewItem
         new PropertyMetadata(false)
     );
 
+    /// <summary>Identifies the <see cref="ExpandDirection"/> dependency property.</summary>
+    public static readonly DependencyProperty ExpandDirectionProperty = DependencyProperty.RegisterAttached(
+        nameof(ExpandDirection),
+        typeof(ExpandDirection),
+        typeof(NavigationViewItem),
+        new FrameworkPropertyMetadata(
+            ExpandDirection.Down,
+            FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
+
     /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
@@ -170,6 +181,28 @@ public class NavigationViewItem
         get => (bool)GetValue(IsExpandedProperty);
         set => SetValue(IsExpandedProperty, value);
     }
+
+    /// <inheritdoc />
+    [Bindable(true)]
+    [Category("Layout")]
+    public ExpandDirection ExpandDirection
+    {
+        get => (ExpandDirection)GetValue(ExpandDirectionProperty);
+        set => SetValue(ExpandDirectionProperty, value);
+    }
+
+    /// <summary>Helper for getting <see cref="ExpandDirectionProperty"/> from <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="DependencyObject"/> to read <see cref="ExpandDirectionProperty"/> from.</param>
+    /// <returns>ExpandDirection property value.</returns>
+    [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
+    public static ExpandDirection GetExpandDirection(DependencyObject target) =>
+        (ExpandDirection)target.GetValue(ExpandDirectionProperty);
+
+    /// <summary>Helper for setting <see cref="ExpandDirectionProperty"/> on <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="DependencyObject"/> to set <see cref="ExpandDirectionProperty"/> on.</param>
+    /// <param name="value">ExpandDirection property value.</param>
+    public static void SetExpandDirection(DependencyObject target, ExpandDirection value) =>
+        target.SetValue(ExpandDirectionProperty, value);
 
     [Browsable(false)]
     [ReadOnly(true)]
@@ -406,7 +439,20 @@ public class NavigationViewItem
             return;
         }
 
-        var mouseOverChevron = ActualWidth < e.GetPosition(this).X + ChevronGrid.ActualWidth;
+        Point chevronPosition = e.GetPosition(ChevronGrid);
+        var mouseOverChevron =
+            ChevronGrid.IsMouseOver
+            || (
+                chevronPosition.X >= 0
+                && chevronPosition.X <= ChevronGrid.ActualWidth
+                && chevronPosition.Y >= 0
+                && chevronPosition.Y <= ChevronGrid.ActualHeight
+            )
+            || (
+                ActualWidth < e.GetPosition(this).X + ChevronGrid.ActualWidth
+                && chevronPosition.Y >= 0
+                && chevronPosition.Y <= ChevronGrid.ActualHeight
+            );
         if (!mouseOverChevron)
         {
             base.OnMouseDown(e);
