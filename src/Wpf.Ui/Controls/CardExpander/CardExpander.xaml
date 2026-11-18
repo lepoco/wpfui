@@ -64,7 +64,7 @@
                                 Storyboard.TargetName="ChevronGrid"
                                 Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
                                 To="180"
-                                Duration="00:00:00.167" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -75,7 +75,7 @@
                                 Storyboard.TargetName="ChevronGrid"
                                 Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
                                 To="0"
-                                Duration="00:00:00.167" />
+                                Duration="{animations:AnimationDuration NormalDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
