@@ -131,6 +131,19 @@ public class Flyout : System.Windows.Controls.ContentControl
     protected virtual void OnPopupOpened(object? sender, EventArgs e)
     {
         RaiseEvent(new RoutedEventArgs(OpenedEvent, this));
+
+        if (_popup?.Child is { } child)
+        {
+            if (!child.Focusable)
+            {
+                // EffectThicknessDecorator is not focusable by default.
+                child.Focusable = true;
+                KeyboardNavigation.SetIsTabStop(child, false);
+            }
+
+            child.Focus();
+            Keyboard.Focus(child);
+        }
     }
 
     protected virtual void OnPopupClosed(object? sender, EventArgs e)
