@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Text;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Extensions;
@@ -36,7 +35,7 @@ public static class SymbolExtensions
     /// </summary>
     public static string GetString(this SymbolRegular icon)
     {
-        return Encoding.Unicode.GetString(BitConverter.GetBytes((int)icon)).TrimEnd('\0');
+        return ToGlyph((int)icon);
     }
 
     /// <summary>
@@ -44,6 +43,11 @@ public static class SymbolExtensions
     /// </summary>
     public static string GetString(this SymbolFilled icon)
     {
-        return Encoding.Unicode.GetString(BitConverter.GetBytes((int)icon)).TrimEnd('\0');
+        return ToGlyph((int)icon);
+    }
+
+    private static string ToGlyph(int codePoint)
+    {
+        return codePoint == 0 ? string.Empty : char.ConvertFromUtf32(codePoint);
     }
 }
