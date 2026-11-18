@@ -94,6 +94,38 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     }
 
     /// <inheritdoc />
+    protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+    {
+        if (
+            e.Property == TemplateProperty
+            || (
+                e.Property == PaneDisplayModeProperty
+                && e.NewValue
+                    is not (NavigationViewPaneDisplayMode.Left or NavigationViewPaneDisplayMode.LeftMinimal)
+            )
+        )
+        {
+            // Stop the old pane storyboards before template bindings are detached or
+            // OpenPaneLength becomes Auto. DoubleAnimation cannot interpolate NaN.
+            _ = VisualStateManager.GoToState(this, "PaneAuto", false);
+            if (GetTemplateChild(TemplateElementPaneGrid) is FrameworkElement paneGrid)
+            {
+                // Storyboard removal is processed on the next animation tick. Detach
+                // the width clock now, before clearing the template resets Width to NaN.
+                paneGrid.BeginAnimation(WidthProperty, null);
+            }
+        }
+
+        base.OnPropertyChanged(e);
+
+        if (e.Property == PaneDisplayModeProperty)
+        {
+            // Style triggers must restore OpenPaneLength before starting left pane animations.
+            UpdateVisualState(this);
+        }
+    }
+
+    /// <inheritdoc />
     protected override void OnInitialized(EventArgs e)
     {
         base.OnInitialized(e);
@@ -120,6 +152,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
     {
+        _pressedPaneSpace = null;
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
         SizeChanged -= OnSizeChanged;
@@ -214,13 +247,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnPaneDisplayModeChanged()
     {
-        switch (PaneDisplayMode)
-        {
-            case NavigationViewPaneDisplayMode.LeftFluent:
-                SetCurrentValue(IsBackButtonVisibleProperty, NavigationViewBackButtonVisible.Collapsed);
-                SetCurrentValue(IsPaneToggleVisibleProperty, false);
-                break;
-        }
+        _pressedPaneSpace = null;
+        // LeftFluent hides pane buttons without overwriting their configured values.
+        CoerceValue(IsBackButtonVisibleProperty);
+        CoerceValue(IsPaneToggleVisibleProperty);
     }
 
     /// <summary>

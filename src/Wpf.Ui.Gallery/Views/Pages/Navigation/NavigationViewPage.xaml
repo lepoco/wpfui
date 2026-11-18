@@ -363,5 +363,84 @@
                 &lt;/ui:NavigationView&gt;
             </controls:ControlExample.XamlCode>
         </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,0,0,42"
+            Padding="0"
+            HeaderText="Toggle the pane by clicking empty space">
+            <StackPanel>
+                <CheckBox
+                    x:Name="EmptySpaceToggleEnabled"
+                    Margin="12"
+                    AutomationProperties.AutomationId="EmptySpaceToggleEnabled"
+                    Content="Enable pane toggle on empty space" />
+                <ComboBox
+                    x:Name="EmptySpacePaneMode"
+                    Margin="12,0,12,12"
+                    HorizontalAlignment="Left"
+                    AutomationProperties.AutomationId="EmptySpacePaneMode"
+                    SelectedIndex="0">
+                    <ComboBoxItem Content="Left" />
+                    <ComboBoxItem Content="LeftMinimal" />
+                    <ComboBoxItem Content="LeftFluent" />
+                    <ComboBoxItem Content="Top" />
+                    <ComboBoxItem Content="Bottom" />
+                </ComboBox>
+                <TextBlock
+                    Margin="12,0,12,12"
+                    Text="In Left or LeftMinimal mode, click beside the hamburger or below the menu items. Menu items, search and footer controls keep their usual behavior."
+                    TextWrapping="Wrap" />
+                <ui:NavigationView
+                    x:Name="EmptySpaceNavigation"
+                    Height="380"
+                    AutomationProperties.AutomationId="EmptySpaceNavigation"
+                    IsBackButtonVisible="Collapsed"
+                    IsPaneToggleOnEmptySpaceEnabled="{Binding IsChecked, ElementName=EmptySpaceToggleEnabled}"
+                    PaneDisplayMode="{Binding SelectedItem.Content, ElementName=EmptySpacePaneMode}">
+                    <ui:NavigationView.AutoSuggestBox>
+                        <ui:AutoSuggestBox PlaceholderText="Search" />
+                    </ui:NavigationView.AutoSuggestBox>
+                    <ui:NavigationView.MenuItems>
+                        <ui:NavigationViewItem
+                            AutomationProperties.AutomationId="EmptySpaceDashboard"
+                            Content="Dashboard"
+                            Icon="{ui:SymbolIcon Home24}"
+                            TargetPageType="{x:Type samples:SamplePage1}" />
+                        <ui:NavigationViewItem
+                            AutomationProperties.AutomationId="EmptySpaceItems"
+                            Content="Items"
+                            Icon="{ui:SymbolIcon Library24}"
+                            TargetPageType="{x:Type samples:SamplePage2}" />
+                    </ui:NavigationView.MenuItems>
+                    <ui:NavigationView.FooterMenuItems>
+                        <ui:NavigationViewItem
+                            AutomationProperties.AutomationId="EmptySpaceSettings"
+                            Content="Settings"
+                            Icon="{ui:SymbolIcon Settings24}"
+                            TargetPageType="{x:Type samples:SamplePage3}" />
+                    </ui:NavigationView.FooterMenuItems>
+                    <ui:NavigationView.PaneFooter>
+                        <Button AutomationProperties.AutomationId="EmptySpaceFooter" Content="Footer action" />
+                    </ui:NavigationView.PaneFooter>
+                    <ui:NavigationView.Header>
+                        <TextBlock
+                            Margin="12"
+                            AutomationProperties.AutomationId="EmptySpaceContent"
+                            Text="Main content" />
+                    </ui:NavigationView.Header>
+                </ui:NavigationView>
+                <TextBlock
+                    Margin="12"
+                    AutomationProperties.AutomationId="EmptySpaceState"
+                    Text="{Binding IsPaneOpen, ElementName=EmptySpaceNavigation, StringFormat='IsPaneOpen: {0}'}" />
+                <TextBlock
+                    Margin="12,0,12,12"
+                    AutomationProperties.AutomationId="EmptySpaceModeState"
+                    Text="{Binding PaneDisplayMode, ElementName=EmptySpaceNavigation, StringFormat='PaneDisplayMode: {0}'}" />
+            </StackPanel>
+            <controls:ControlExample.XamlCode>
+                &lt;ui:NavigationView IsPaneToggleOnEmptySpaceEnabled=&quot;True&quot; PaneDisplayMode=&quot;Left&quot; /&gt;
+            </controls:ControlExample.XamlCode>
+        </controls:ControlExample>
     </StackPanel>
 </Page>
