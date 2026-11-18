@@ -12,7 +12,7 @@ In any case, if you want to download a plugin and install it manually, or leave 
 https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 
 > [!NOTE]
-> The source code for **WPF UI** _Visual Studio 2022_ extension is public and you can [check it out here](https://github.com/lepoco/wpfui/tree/development/src/Wpf.Ui.Extension/Wpf.Ui.Extension).
+> The source code for **WPF UI** _Visual Studio 2022_ extension is public and you can [check it out here](https://github.com/lepoco/wpfui/tree/main/src/Wpf.Ui.Extension).
 
 ## How to?
 
