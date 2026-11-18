@@ -39,4 +39,10 @@ public enum NavigationViewPaneDisplayMode
     /// The pane is shown at the bottom of the control.
     /// </summary>
     Bottom,
+
+    /// <summary>
+    /// Shows an icon rail on the left. The open pane overlays the content, and collapsed
+    /// hierarchical items show their children in a flyout.
+    /// </summary>
+    LeftCompact,
 }

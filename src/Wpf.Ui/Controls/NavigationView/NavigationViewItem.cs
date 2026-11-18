@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 // ReSharper disable once CheckNamespace
@@ -20,6 +21,7 @@ namespace Wpf.Ui.Controls;
 /// When needed, it can be used as a normal button with a <see cref="System.Windows.Controls.Primitives.ButtonBase.Click"/> action.
 /// </summary>
 [TemplatePart(Name = TemplateElementChevronGrid, Type = typeof(Grid))]
+[TemplatePart(Name = "PART_CompactFlyout", Type = typeof(Popup))]
 public class NavigationViewItem
     : System.Windows.Controls.Primitives.ButtonBase,
         INavigationViewItem,
@@ -226,6 +228,15 @@ public class NavigationViewItem
 
     protected Grid? ChevronGrid { get; set; }
 
+    private readonly HashSet<INavigationViewItem> _menuItemChildren = [];
+    private NavigationView? _subscribedNavigationView;
+    private Popup? _compactFlyout;
+
+    private bool UsesCompactFlyout =>
+        NavigationView.GetNavigationParent(this)
+            is { PaneDisplayMode: NavigationViewPaneDisplayMode.LeftCompact, IsPaneOpen: false }
+        && NavigationViewItemParent is null;
+
     static NavigationViewItem()
     {
         DefaultStyleKeyProperty.OverrideMetadata(
@@ -238,9 +249,14 @@ public class NavigationViewItem
     {
         Id = Guid.NewGuid().ToString("n");
 
-        Unloaded += static (sender, _) =>
+        Unloaded += (_, _) =>
         {
-            ((NavigationViewItem)sender).NavigationViewItemParent = null;
+            if (_compactFlyout is { IsOpen: true })
+            {
+                _subscribedNavigationView?.CloseCompactFlyout();
+            }
+
+            DetachNavigationViewEvents();
         };
 
         Loaded += (_, _) => InitializeNavigationViewEvents();
@@ -337,7 +353,21 @@ public class NavigationViewItem
     /// <inheritdoc />
     public override void OnApplyTemplate()
     {
+        if (_compactFlyout is not null)
+        {
+            _compactFlyout.SetCurrentValue(Popup.IsOpenProperty, false);
+            _compactFlyout.Opened -= OnCompactFlyoutOpened;
+            _compactFlyout.Closed -= OnCompactFlyoutClosed;
+        }
+
         base.OnApplyTemplate();
+
+        _compactFlyout = GetTemplateChild("PART_CompactFlyout") as Popup;
+        if (_compactFlyout is not null)
+        {
+            _compactFlyout.Opened += OnCompactFlyoutOpened;
+            _compactFlyout.Closed += OnCompactFlyoutClosed;
+        }
 
         if (GetTemplateChild(TemplateElementChevronGrid) is Grid chevronGrid)
         {
@@ -367,7 +397,24 @@ public class NavigationViewItem
             return;
         }
 
-        if (HasMenuItems && navigationView.IsPaneOpen)
+        if (UsesCompactFlyout && HasMenuItems)
+        {
+            bool wasExpanded = IsExpanded;
+            if (TargetPageType is not null)
+            {
+                navigationView.OnNavigationViewItemClick(this);
+            }
+
+            if (TargetPageType is null || !wasExpanded)
+            {
+                navigationView.ToggleCompactFlyout(this);
+            }
+
+            base.OnClick();
+            return;
+        }
+
+        if (HasMenuItems && (navigationView.IsPaneOpen || IsPaneOpen))
         {
             SetCurrentValue(IsExpandedProperty, !IsExpanded);
         }
@@ -398,7 +445,8 @@ public class NavigationViewItem
 
         if (
             !navigationView.IsPaneOpen
-            || navigationView.PaneDisplayMode != NavigationViewPaneDisplayMode.Left
+            || navigationView.PaneDisplayMode
+                is not (NavigationViewPaneDisplayMode.Left or NavigationViewPaneDisplayMode.LeftCompact)
             || ChevronGrid is null
         )
         {
@@ -448,9 +496,22 @@ public class NavigationViewItem
     {
         SetValue(HasMenuItemsPropertyKey, MenuItems.Count > 0);
 
+        // Unloading a presenter does not remove an item from the hierarchy. Only collection
+        // changes detach parent links, including Reset notifications from MenuItemsSource.
+        foreach (INavigationViewItem child in _menuItemChildren)
+        {
+            if (child.NavigationViewItemParent == this)
+            {
+                child.NavigationViewItemParent = null;
+            }
+        }
+
+        _menuItemChildren.Clear();
+
         foreach (INavigationViewItem item in MenuItems.OfType<INavigationViewItem>())
         {
             item.NavigationViewItemParent = this;
+            _ = _menuItemChildren.Add(item);
         }
     }
 
@@ -478,12 +539,147 @@ public class NavigationViewItem
 
     private void InitializeNavigationViewEvents()
     {
+        DetachNavigationViewEvents();
         if (NavigationView.GetNavigationParent(this) is { } navigationView)
         {
-            SetCurrentValue(IsPaneOpenProperty, navigationView.IsPaneOpen);
-
-            navigationView.PaneOpened += (_, _) => SetCurrentValue(IsPaneOpenProperty, true);
-            navigationView.PaneClosed += (_, _) => SetCurrentValue(IsPaneOpenProperty, false);
+            _subscribedNavigationView = navigationView;
+            UpdatePanePresentation();
+            navigationView.PaneOpened += OnNavigationPaneChanged;
+            navigationView.PaneClosed += OnNavigationPaneChanged;
         }
+    }
+
+    private void DetachNavigationViewEvents()
+    {
+        if (_subscribedNavigationView is { } view)
+        {
+            view.PaneOpened -= OnNavigationPaneChanged;
+            view.PaneClosed -= OnNavigationPaneChanged;
+            _subscribedNavigationView = null;
+        }
+    }
+
+    private void OnNavigationPaneChanged(object sender, RoutedEventArgs e) => UpdatePanePresentation();
+
+    internal void UpdatePanePresentation()
+    {
+        if (NavigationView.GetNavigationParent(this) is { } view)
+        {
+            SetCurrentValue(
+                IsPaneOpenProperty,
+                view.IsPaneOpen
+                    || (
+                        view.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftCompact
+                        && NavigationViewItemParent is not null
+                    )
+            );
+        }
+    }
+
+    private void OnCompactFlyoutOpened(object? sender, EventArgs e)
+    {
+        NavigationView.GetNavigationParent(this)?.RegisterCompactFlyout(this);
+        if (_compactFlyout?.Child is FrameworkElement child)
+        {
+            // Popup has a separate visual tree; preserve navigation and data binding ownership.
+            child.SetValue(NavigationView.NavigationParentProperty, NavigationView.GetNavigationParent(this));
+            child.DataContext = DataContext;
+            _ = child.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+        }
+    }
+
+    private void OnCompactFlyoutClosed(object? sender, EventArgs e)
+    {
+        bool restoreFocus = _compactFlyout?.Child is UIElement { IsKeyboardFocusWithin: true };
+        SetCurrentValue(IsExpandedProperty, false);
+        NavigationView.GetNavigationParent(this)?.OnCompactFlyoutClosed(this, restoreFocus);
+        if (_compactFlyout?.Child is FrameworkElement child)
+        {
+            child.ClearValue(NavigationView.NavigationParentProperty);
+            child.ClearValue(DataContextProperty);
+        }
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        if (
+            NavigationView.GetNavigationParent(this)
+            is not { PaneDisplayMode: NavigationViewPaneDisplayMode.LeftCompact } view
+        )
+        {
+            base.OnKeyDown(e);
+            return;
+        }
+
+        // A descendant's key event must only be processed by that descendant.
+        if (e.OriginalSource is NavigationViewItem source && source != this)
+        {
+            return;
+        }
+
+        switch (e.Key)
+        {
+            case Key.Enter:
+            case Key.Space:
+                if (!e.IsRepeat)
+                {
+                    OnClick();
+                }
+
+                e.Handled = true;
+                return;
+            case Key.Escape:
+                view.CloseCompactFlyout(true);
+                e.Handled = true;
+                break;
+            case Key.Up:
+            case Key.Down:
+                view.MoveCompactItemFocus(this, e.Key == Key.Up ? -1 : 1);
+                e.Handled = true;
+                break;
+            case Key.Right when HasMenuItems:
+                if (UsesCompactFlyout)
+                {
+                    if (!IsExpanded)
+                    {
+                        view.ToggleCompactFlyout(this);
+                    }
+                }
+                else
+                {
+                    SetCurrentValue(IsExpandedProperty, true);
+                    _ = Dispatcher.BeginInvoke(
+                        () =>
+                        {
+                            if (IsExpanded && IsKeyboardFocusWithin)
+                            {
+                                _ = MenuItems
+                                    .OfType<NavigationViewItem>()
+                                    .FirstOrDefault(item => item.IsVisible && item.IsEnabled)
+                                    ?.Focus();
+                            }
+                        },
+                        System.Windows.Threading.DispatcherPriority.Input
+                    );
+                }
+
+                e.Handled = true;
+                break;
+            case Key.Left:
+                if (IsExpanded)
+                {
+                    SetCurrentValue(IsExpandedProperty, false);
+                }
+                else if (NavigationViewItemParent is NavigationViewItem parent)
+                {
+                    parent.SetCurrentValue(IsExpandedProperty, false);
+                    _ = parent.Focus();
+                }
+
+                e.Handled = true;
+                break;
+        }
+
+        base.OnKeyDown(e);
     }
 }

@@ -654,6 +654,8 @@ public partial class NavigationView
             return;
         }
 
+        navigationView.CloseCompactFlyout();
+
         if (navigationView.IsPaneOpen)
         {
             navigationView.OnPaneOpened();
